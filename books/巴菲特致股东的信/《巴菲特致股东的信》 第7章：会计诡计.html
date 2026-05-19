@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第7章：会计诡计 · 巴菲特致股东的信</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title.current-chapter:hover {
+      color: var(--text);
+      background: rgba(201,168,76,.06);
+    }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* ===== Code Block ===== */
+    .code-block {
+      background: #2d2d2d;
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: .82rem;
+      line-height: 1.7;
+      color: #e6e6e6;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+    }
+    .code-block .comment { color: #6a9955; font-style: italic; }
+    .code-block .keyword { color: #569cd6; }
+    .code-block .string { color: #ce9178; }
+    .code-block .number { color: #b5cea8; }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="index.html">巴菲特致股东的信</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title">第1章 公司治理</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第2章：财务与投资.html" class="toc-chapter-title">第2章 财务与投资</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title">第3章 投资替代品</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第4章：普通股投资.html" class="toc-chapter-title">第4章 普通股投资</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title">第5章 兼并与收购</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title">第6章 估值与会计</a>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第7章 会计诡计</span>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第8章：会计政策.html" class="toc-chapter-title">第8章 会计政策</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第9章：税务问题.html" class="toc-chapter-title">第9章 税务问题</a>
+        </li>
+      </ul>
+
+      <!-- 本章目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-a">A. 会计把戏的讽刺</a></li>
+        <li><a href="#section-a1" class="sub">一、背景概述</a></li>
+        <li><a href="#section-a2" class="sub">二、六大技巧总览</a></li>
+        <li><a href="#section-a3" class="sub">三、六大技巧详解</a></li>
+        <li><a href="#section-a4" class="sub">四、财务影响对比</a></li>
+        <li><a href="#section-a5" class="sub">五、投资者警示与反思</a></li>
+        <li><a href="#section-b">B. 标准的设定</a></li>
+        <li><a href="#section-b1" class="sub">一、安达信的立场转变</a></li>
+        <li><a href="#section-b2" class="sub">二、FASB的抗争与妥协</a></li>
+        <li><a href="#section-b3" class="sub">三、"荣誉系统"的败局</a></li>
+        <li><a href="#section-b4" class="sub">四、影响与后果</a></li>
+        <li><a href="#section-c">C. 股票期权</a></li>
+        <li><a href="#section-c1" class="sub">一、核心争议</a></li>
+        <li><a href="#section-c2" class="sub">二、通用再保险收购案</a></li>
+        <li><a href="#section-c3" class="sub">三、期权成本的估值逻辑</a></li>
+        <li><a href="#section-c4" class="sub">四、员工期权 vs. 市场期权</a></li>
+        <li><a href="#section-c5" class="sub">五、三个未被回答的问题</a></li>
+        <li><a href="#section-c6" class="sub">六、政治博弈与监管历程</a></li>
+        <li><a href="#section-c7" class="sub">七、合理的期权设计原则</a></li>
+        <li><a href="#section-c8" class="sub">八、结论</a></li>
+        <li><a href="#section-d">D. "重组"费用</a></li>
+        <li><a href="#section-d1" class="sub">一、会计诚信的历史演变</a></li>
+        <li><a href="#section-d2" class="sub">二、"重组费用"的运作机制</a></li>
+        <li><a href="#section-d3" class="sub">三、高尔夫比喻</a></li>
+        <li><a href="#section-d4" class="sub">四、并购领域的"重组艺术"</a></li>
+        <li><a href="#section-d5" class="sub">五、数据：问题的规模</a></li>
+        <li><a href="#section-d6" class="sub">六、伯克希尔的立场</a></li>
+        <li><a href="#section-d7" class="sub">七、监管层的回应</a></li>
+        <li><a href="#section-d8" class="sub">八、审计师的失职</a></li>
+        <li><a href="#section-e">E. 退休福利估计</a></li>
+        <li><a href="#section-e1" class="sub">一、问题的核心</a></li>
+        <li><a href="#section-e2" class="sub">二、8%假设回报率分析</a></li>
+        <li><a href="#section-e3" class="sub">三、"帮忙的人"的数学悖论</a></li>
+        <li><a href="#section-e4" class="sub">四、对投资顾问的警示</a></li>
+        <li><a href="#section-e5" class="sub">五、美国与非美国假设的矛盾</a></li>
+        <li><a href="#section-f">F. 账面盈利的实现问题</a></li>
+        <li><a href="#section-f1" class="sub">一、核心观点</a></li>
+        <li><a href="#section-f2" class="sub">二、伯克希尔的原则立场</a></li>
+        <li><a href="#section-f3" class="sub">三、推荐关注指标</a></li>
+        <li><a href="#section-f4" class="sub">四、总结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">巴菲特致股东的信 · 第7章</div>
+        <h1 class="article-title">会计诡计</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>沃伦·巴菲特</span>
+          <span><strong>主题</strong>会计操纵、股票期权、重组费用、退休福利、盈利管理</span>
+        </div>
+      </header>
+
+      <!-- ===== A. 会计把戏的讽刺 ===== -->
+      <section id="section-a">
+        <h2>A. 会计把戏的讽刺</h2>
+
+        <h3 id="section-a1">一、背景概述</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>公司名称</td><td>美国钢铁公司（U.S. Steel）</td></tr>
+            <tr><td>宣布时间</td><td>1930年代（案例设定）</td></tr>
+            <tr><td>董事长</td><td>迈伦·C·泰勒（Myron C. Taylor）</td></tr>
+            <tr><td>顾问机构</td><td>Price, Bacon, Guthrie &amp; Colpitts 会计事务所</td></tr>
+            <tr><td>核心主张</td><td>通过会计系统变革"提升"盈利能力，无需改变实际运营</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">核心讽刺主题</div>
+            <p>该方案<strong>未涉及任何生产制造或营销政策的改进</strong>，仅通过会计簿记系统的"创新"，声称可在经营状况不佳的1935年实现<strong>每股近50美元</strong>的财报盈利。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <h3 id="section-a2">二、六大"现代化"会计技巧总览</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th style="text-align:center;">序号</th><th>技巧名称</th><th>核心操作</th><th>声称的年度收益提升</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="text-align:center;">1</td><td>固定资产负值化</td><td>厂房设备账户减值至 <strong>-10亿美元</strong></td><td>+$9,700万</td></tr>
+            <tr><td style="text-align:center;">2</td><td>股票面值微型化</td><td>普通股面值降至 <strong>$0.01</strong></td><td>间接收益</td></tr>
+            <tr><td style="text-align:center;">3</td><td>薪酬期权化</td><td>全员薪酬以股票期权支付</td><td>+$2.5亿（工资节省）+ 资本盈余</td></tr>
+            <tr><td style="text-align:center;">4</td><td>存货象征化</td><td>全部存货以 <strong>$1</strong> 入账</td><td>+$1.5亿</td></tr>
+            <tr><td style="text-align:center;">5</td><td>债务置换术</td><td>优先股→50%折扣赎回的零息债券</td><td>+$7,900万</td></tr>
+            <tr><td style="text-align:center;">6</td><td>储备金缓冲</td><td>建立 <strong>$10亿</strong> 应急储备金</td><td>亏损"对冲"</td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <h3 id="section-a3">三、六大技巧详解</h3>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">技巧一：固定资产记减至负10亿美元</h4>
+        <div class="code-block">
+          <span class="comment">// 操作逻辑</span>
+          - 传统做法：厂房设备减值至$1 → 降低折旧费用
+          - "创新"做法：减值至 -$10亿 → 折旧变"增值"
+
+          <span class="comment">// 计算示例</span>
+          - 原折旧费用：$4,700万/年
+          - 新"增值"收益：5% × $10亿 = $5,000万/年
+          - 净提升：$4,700万 + $5,000万 = <span class="number">$9,700万/年</span>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">逻辑漏洞</div>
+            <p>资产为负值违背会计基本准则，"增值"实为账面游戏。</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">技巧二：普通股面值减少到$0.01</h4>
+        <p><strong>目的</strong>：为股票期权薪酬方案提供操作空间。</p>
+        <p><strong>法律备注</strong>：因在弗吉尼亚州重新注册，"声明价值"≠"面值"。</p>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">技巧三：用股票期权支付所有薪酬</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>优势维度</th><th>具体效果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>成本消除</td><td>工资账单归零，年节省 <strong>$2.5亿</strong></td></tr>
+            <tr><td>员工激励</td><td>每股盈利"提升"→股价&gt;行权价$50→期权价值远超现金薪酬</td></tr>
+            <tr><td>账面利润</td><td>行权时每股产生$49.99所得，计入<strong>资本盈余</strong>（非损益表）</td></tr>
+            <tr><td>现金流逆转</td><td>从年流出$2.5亿工资 → 年流入$2.5亿行权资金</td></tr>
+          </tbody>
+        </table>
+
+        <div class="code-block">
+          <span class="comment"># 期权行权现金流模拟（伪代码）</span>
+          <span class="keyword">def</span> cash_flow_impact(shares_exercised, exercise_price, par_value):
+              cash_inflow = shares_exercised * exercise_price
+              capital_surplus = shares_exercised * (exercise_price - par_value)
+              <span class="keyword">return</span> {
+                  <span class="string">"现金流入"</span>: cash_inflow,
+                  <span class="string">"资本盈余增加"</span>: capital_surplus,
+                  <span class="string">"损益表影响"</span>: <span class="string">"无"</span>  <span class="comment"># 关键：利润不体现在当期收益</span>
+              }
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">讽刺点</div>
+            <p>通过会计分类将真实现金流包装为"额外利润"。</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">技巧四：将存货记为$1</h4>
+        <div class="code-block">
+          <span class="comment">// 操作流程</span>
+          1. 期初存货估值：$1（无论实际价值）
+          2. 年内销售：按市场价确认收入 → 产生"超高毛利"
+          3. 年末调整：从应急储备金中提取资金"补平"存货减值
+
+          <span class="comment">// 声称效果</span>
+          - 规避存货跌价损失
+          - 年度盈利提升 ≥ $1.5亿
+          - 储备金支出 ≈ 盈利提升额 → 账面"自洽"
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">审计备注</div>
+            <p>应收账款与现金未同步"象征化"，因审计规则要求回收款计入资本盈余而非当期收益。</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">技巧五：零息债券置换优先股</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>置换要素</th><th>原方案（优先股）</th><th>新方案（零息债券）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>面值</td><td>每股优先股</td><td>$300/张债券</td></tr>
+            <tr><td>赎回方式</td><td>—</td><td>抽签+50%面值+10年期等额赎回</td></tr>
+            <tr><td>年度赎回额</td><td>—</td><td>$1.08亿面值 → 实际支付$0.54亿</td></tr>
+            <tr><td>年度"利润"</td><td>—</td><td><strong>$0.54亿</strong>（赎回差价）</td></tr>
+            <tr><td>股息/利息支出</td><td>$2,500万/年</td><td>$0（零息）</td></tr>
+            <tr><td>净收益提升</td><td>—</td><td><strong>$7,900万/年</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">技巧六：建立$10亿应急储备金</h4>
+
+        <div class="code-block">
+          <span class="comment">// 功能定位</span>
+          ✅ 吸收存货$1入账产生的年度减值
+          ✅ "覆盖"任何潜在经营亏损
+          ✅ 维持方案表面可持续性
+
+          <span class="comment">// 补充机制</span>
+          - 来源：股票期权行权产生的资本盈余（≥$2.5亿/年）
+          - 流向：应急储备金
+          - 效果：储备金"永不枯竭"的账面幻觉
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">本质</div>
+            <p>用资产负债表科目间的转移掩盖真实盈利能力。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <h3 id="section-a4">四、财务影响对比</h3>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">1935年简明损益表（模拟）</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>传统会计方法</th><th>"现代化"方案</th><th>差异</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>折旧费用</td><td>+$4,700万</td><td><strong>-$5,000万</strong>（增值）</td><td>+$9,700万</td></tr>
+            <tr><td>薪酬成本</td><td>+$2.5亿</td><td>$0（期权替代）</td><td>+$2.5亿</td></tr>
+            <tr><td>存货销售毛利</td><td>正常水平</td><td><strong>+$1.5亿</strong>（$1成本效应）</td><td>+$1.5亿</td></tr>
+            <tr><td>债务赎回收益</td><td>$0</td><td><strong>+$5,400万</strong></td><td>+$5,400万</td></tr>
+            <tr><td>优先股股息</td><td>+$2,500万</td><td>$0</td><td>+$2,500万</td></tr>
+            <tr><td><strong>合计盈利提升</strong></td><td>—</td><td>—</td><td><strong>≈$6.2亿</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">资产负债表关键调整</h4>
+
+        <div class="code-block">
+          <span class="comment">// 资产端</span>
+          - 固定资产：$13.39亿 → <strong>-$10亿</strong>
+          - 存货：实际价值 → <strong>$1</strong>
+          - 现金/应收：保持原值（审计限制）
+
+          <span class="comment">// 权益与负债端</span>
+          - 普通股面值：原值 → <strong>$0.01</strong>
+          - 优先股：原值 → 零息债券$10.8亿
+          - 新增：应急储备金 <strong>+$10亿</strong>
+          - 资本盈余：期权行权持续注入
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键洞察</div>
+            <p>资产"缩水"与负债"重构"共同服务于利润表美化。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <h3 id="section-a5">五、投资者警示与反思</h3>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">方案"成功"的三大前提（讽刺性假设）</h4>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">前提 01</span>
+            <h4>审计妥协</h4>
+            <p>接受负资产、$1存货等违背准则的处理</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">前提 02</span>
+            <h4>市场盲从</h4>
+            <p>投资者仅关注EPS，忽视现金流与资产质量</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">前提 03</span>
+            <h4>监管缺位</h4>
+            <p>允许资产负债表科目间无限制转移</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">真实世界中的识别信号</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>危险信号</th><th>对应本案例的"创新"</th><th>投资者应对</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>折旧政策异常变更</td><td>固定资产负值化</td><td>核查资产实际使用年限与残值</td></tr>
+            <tr><td>薪酬结构突变</td><td>全员期权替代现金</td><td>分析稀释效应与行权条件</td></tr>
+            <tr><td>存货计价方法调整</td><td>$1象征性入账</td><td>对比行业惯例与周转率</td></tr>
+            <tr><td>债务重组收益计入利润</td><td>债券折价赎回"盈利"</td><td>区分经营性收益与一次性利得</td></tr>
+            <tr><td>大额准备金频繁变动</td><td>$10亿应急储备金</td><td>追踪准备金计提/转回的合理性</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          会计是商业的语言，但语言可以被操纵。<br/>
+          投资者应穿透报表数字，关注<strong>自由现金流</strong>与<strong>经济实质</strong>。
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 行动 01</span>
+            <h4>关注自由现金流与经济实质</h4>
+            <p>穿透报表数字，识别企业真实盈利能力</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 行动 02</span>
+            <h4>对比多年数据与同业标准</h4>
+            <p>识别异常波动，发现潜在操纵迹象</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 行动 03</span>
+            <h4>警惕奇迹叙事</h4>
+            <p>对"无需现金投入即可提升盈利"的宣称保持高度警惕</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== B. 标准的设定 ===== -->
+      <section id="section-b">
+        <h2>B. 标准的设定</h2>
+
+        <h3 id="section-b1">一、安达信的立场转变</h3>
+
+        <p><strong>安达信会计事务所</strong>（Arthur Andersen）曾是审计行业的权威标杆。其内部由行业精英组成的<strong>专业标准小组（PSG）</strong>长期坚持财务报表必须如实编制。</p>
+
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="remedy-card">
+            <span class="remedy-num">1992年 PSG 立场</span>
+            <h4>坚持原则</h4>
+            <p>坚持将<strong>股票期权成本列为费用</strong><br/>不向客户压力妥协</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">立场转变</span>
+            <h4>180° 大转弯</h4>
+            <p>受另一批"呼风唤雨"合伙人的推动——这些合伙人深知客户真正想要的是更高的账面盈利</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">背后的动机</div>
+            <p>众多 CEO 同样反对期权费用化，原因在于：一旦落实，他们渴望已久的大额期权授予将大幅缩水。</p>
+          </div>
+        </div>
+
+        <h3 id="section-b2">二、FASB 的抗争与妥协</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>事件</th><th>结果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>FASB 以 <strong>7:0</strong> 投票通过期权费用化</td><td>独立标准确立</td></tr>
+            <tr><td>大型会计事务所与众多 CEO 涌入华盛顿游说</td><td>向参议院施压，试图废除 FASB</td></tr>
+            <tr><td>参议院以 <strong>88:9</strong> 投票反对期权费用化</td><td>⚠️ 标准独立性严重受损</td></tr>
+            <tr><td>证监会主席阿瑟·莱维特迫于压力妥协</td><td>事后坦承为任内最大遗憾</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">延伸阅读</div>
+            <p>相关细节可参考莱维特著作《<strong>挑战华尔街</strong>》。游说资金本属于被欺诈公司的股东，却被用于政治献金——这不应是文明社会应有的现象。</p>
+          </div>
+        </div>
+
+        <h3 id="section-b3">三、"荣誉系统"的败局</h3>
+
+        <p>面对参议院威胁，FASB 最终退缩，转而推行<strong>"荣誉系统"</strong>：</p>
+        <ul style="font-size:.95rem; line-height:1.85; color:var(--text); margin-bottom:1rem; padding-left:1.5rem;">
+          <li>声明期权费用化为<strong>优先建议</strong></li>
+          <li>但允许公司依自身情况<strong>选择忽略</strong>此成本</li>
+        </ul>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>标普500大公司</th><th>选择</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>498家</strong></td><td>采用较不理想的方法，美化账面盈余</td></tr>
+            <tr><td><strong>2家</strong></td><td>遵循费用化原则</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          FASB 得到了"荣誉"，而 CEO 们赢得了整个系统。
+        </div>
+
+        <h3 id="section-b4">四、影响与后果</h3>
+
+        <p>参议院被收买、证监会失守之后，美国企业界意识到：<strong>在会计处理上可以为所欲为</strong>。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">后果 01</span>
+            <h4>"盈利报告至上"的新时代</h4>
+            <p>一个以盈利报告至上为核心的新时代由此开启</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">后果 02</span>
+            <h4>审计师推波助澜</h4>
+            <p>部分著名审计师在背后推波助澜</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">后果 03</span>
+            <h4>大泡沫时代的助燃剂</h4>
+            <p>放肆的财务行为迅速成为大泡沫时代的助燃剂</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== C. 股票期权 ===== -->
+      <section id="section-c">
+        <h2>C. 股票期权</h2>
+
+        <h3 id="section-c1">一、核心争议：期权是否应计为成本？</h3>
+
+        <p>在公司管理层和会计师的种种失真行为中，<strong>股票期权的会计处理</strong>是最令人震惊的问题。数十年来，众多企业持续与会计规则制定者博弈，试图避免将期权成本反映在公司账面上。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>借口</th><th>反驳</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>期权难以估值，成本应忽略</td><td>不精确不等于不存在，折旧、坏账同样无法精确量化</td></tr>
+            <tr><td>费用化会伤害初创公司</td><td>成本客观存在，不记录只是转嫁给股东</td></tr>
+            <tr><td>"价外"期权发行时没有价值</td><td>巴菲特表示愿意收购任何管理层的"无价值"期权</td></tr>
+            <tr><td>期权"不来自公司金库"，非现金即非成本</td><td>以期权支付广告费，难道广告成本就消失了？</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特的逻辑武器</div>
+            <p>若"无现金即无成本"成立，盖可保险可用伯克希尔期权支付1.9亿美元广告费——没有人会认为这笔广告成本不存在。</p>
+          </div>
+        </div>
+
+        <h3 id="section-c2">二、通用再保险收购案：会计缺陷的实证</h3>
+
+        <p>伯克希尔收购<strong>通用再保险</strong>一案，清晰暴露了现行会计准则的缺陷。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">关键数据（股东委托书第60页）</div>
+            <p>收入预测表中，报酬成本一项上升 <strong>6300万美元</strong>。原因：将原有<strong>期权激励计划</strong>改为<strong>现金激励计划</strong>。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>对比维度</th><th>期权激励计划</th><th>现金激励计划</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>激励基础</td><td>公司股票价格</td><td>个人工作业绩</td></tr>
+            <tr><td>经济效果</td><td>相同</td><td>相同</td></tr>
+            <tr><td>会计处理</td><td><strong>不计入成本</strong></td><td><strong>计入成本</strong></td></tr>
+            <tr><td>账面盈利影响</td><td>虚高</td><td>真实反映</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">"爱丽丝漫游仙境"式的会计失真</div>
+            <p>两种计划经济效果完全相同，却产生截然不同的会计结果。</p>
+          </div>
+        </div>
+
+        <h3 id="section-c3">三、期权成本的估值逻辑</h3>
+
+        <p><strong>期权并非难以估值</strong>，巴菲特的核心论点：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">论点 01</span>
+            <h4>不精确 ≠ 不应确认</h4>
+            <p>折旧率、坏账准备同样不精确，但从未被忽略</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">论点 02</span>
+            <h4>限制条件不消除估值可能性</h4>
+            <p>带限制条件的期权增加了估值难度，但不消除估值的可能性</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">论点 03</span>
+            <h4>把握比折旧更大</h4>
+            <p>相比估算747飞机折旧率，给期权定价的把握更大</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          如果某位 CEO 声称新发期权"几乎没有价值"，巴菲特的回应是：<strong>请把它们发给伯克希尔。</strong>
+        </div>
+
+        <h3 id="section-c4">四、员工期权 vs. 公开市场期权</h3>
+
+        <p>针对"员工期权价值低于市场期权"的说法，巴菲特的分析：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>论点</th><th>事实</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>员工期权可能失效，损害较小</td><td>员工期权经常被<strong>重新定价</strong>，实际成本更高</td></tr>
+            <tr><td>公司可获得员工行权时的免税额度</td><td>重新定价的对冲使整体成本不减反增</td></tr>
+            <tr><td>不可转让期权对员工价值更低</td><td>对员工价值低 ≠ 对公司成本低（如专用公务车）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特的调整实践</div>
+            <p>近年来，期权盈利调整常将每股盈利减少 <strong>5%～10%</strong>。调整幅度有时大到影响投资决策，进而调整买卖价格。</p>
+          </div>
+        </div>
+
+        <h3 id="section-c5">五、三个至今未被回答的问题</h3>
+
+        <div class="pull-quote large">
+          "如果期权不是一种<strong>报酬形式</strong>，那么它是什么？"<br/><br/>
+          "如果这种报酬不是一种<strong>费用</strong>，那么它是什么？"<br/><br/>
+          "如果公司在计算盈利时不包括这种费用，那么它应该放在<strong>什么地方</strong>？"
+        </div>
+
+        <h3 id="section-c6">六、政治博弈与监管历程</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间</th><th>事件</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1993年</td><td>CEO 们首次向国会施压，推动期权会计豁免立法</td></tr>
+            <tr><td>2003～2005年</td><td>SEC 主席比尔·唐纳森顶住政治压力，坚持投资者立场</td></tr>
+            <tr><td>2005年6月15日</td><td><strong>期权计入成本强制生效</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">政治干预的讽刺</div>
+            <p>国会中的帮凶蔑视四大会计师事务所、FASB 全体成员及所有投资专业人士的质疑，游说所用资金本质上属于股东。</p>
+          </div>
+        </div>
+
+        <h3 id="section-c7">七、合理的期权设计原则</h3>
+
+        <p>巴菲特与芒格并不反对使用期权，而是主张<strong>合理设计</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">原则 01</span>
+            <h4>合理的行权价格</h4>
+            <p>期权应当以合理的价格授予</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则 02</span>
+            <h4>随留存利润调整</h4>
+            <p>行权价格应随公司留存利润进行相应调整</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则 03</span>
+            <h4>禁止立即抛售</h4>
+            <p>获得期权后不得立刻抛售股票</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特的立场</div>
+            <p>对于能够激励经理人的奖励措施，无论现金还是期权，均举双手赞成。关键在于：<strong>如实记录成本，而非掩盖成本。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="section-c8">八、结论</h3>
+
+        <div class="pull-quote large">
+          将股票期权处理为无成本，是 CEO 们夸大盈利最重要的会计手法。
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">本质 01</span>
+            <h4>会计原则给了管理层选择权</h4>
+            <p>支付报酬且计成本，或支付报酬但忽略成本</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">本质 02</span>
+            <h4>理性压缩的自我利益</h4>
+            <p>CEO 们深知，一旦如实记录，其薪酬将被理性压缩，行权套现价格也将下降</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">本质 03</span>
+            <h4>资金的归属</h4>
+            <p>用于游说的资金，按理说属于股东，而非管理层</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== D. "重组"费用 ===== -->
+      <section id="section-d">
+        <h2>D. "重组"费用</h2>
+
+        <p>FASB 试图以真实数据取代虚妄的期权估值，却遭到公司 CEO 与审计师的联合抵制——他们以"令人苦恼的数字"与 FASB 周旋，甚至将战火烧至国会，声称夸大的数字"符合国家利益"。</p>
+
+        <div class="pull-quote">
+          "所谓丑闻，并不在于非法的勾当，而是在于合法的勾当。"<cite>— 迈克尔·金斯利（Michael Kinsley）</cite>
+        </div>
+
+        <h3 id="section-d1">一、会计诚信的历史演变</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时期</th><th>特征</th><th>结果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>20 世纪 60 年代后期</td><td>流行"大胆、想象丰富的会计"风潮</td><td>投资者能识别谁在玩游戏；最受尊敬的公司普遍回避欺骗</td></tr>
+            <tr><td>近年来</td><td>正直诚信受到侵蚀，操纵利润被视为"正常行为"</td><td>部分高管甚至认为操纵利润是其<strong>职责所在</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">高管行为的根本动机</h4>
+        <p>核心前提：<strong>将股票价格在任何时候维持在尽可能高的水平</strong>。路径一（可接受）：努力取得杰出运营结果以提升股价。路径二（不可接受）：当运营无法达标，转而使用<strong>会计诡计</strong>制造理想"盈利"或为将来造假创造条件。</p>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">常见的自我合理化逻辑</h4>
+
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="remedy-card">
+            <span class="remedy-num">借口 01</span>
+            <h4>"股票未被充分定价"</h4>
+            <p>股东利益受损，所以需要会计手段"纠正"</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">借口 02</span>
+            <h4>"每个人都这么做"</h4>
+            <p>一旦成为心安理得的事实，道德疑虑便会消失殆尽</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">格雷欣法则的子规则</div>
+            <p><strong>劣会计驱逐良会计。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="section-d2">二、"重组费用"的运作机制</h3>
+
+        <p><strong>重组费用</strong>是一个合法的会计条目，但经常被用作操纵盈利的工具：将本应合理分配到数年期间的大额成本，<strong>集中倾泻到单一季度</strong>——通常是那些已注定令投资者失望的季度。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>用途</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>清理过去的错误</td><td>将历史亏损一次性出清，为未来"轻装上阵"</td></tr>
+            <tr><td>为未来错误留余地</td><td>提前计提，日后释放准备金充当"利润"</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键信号</div>
+            <p>无论哪种情形，费用发生的<strong>规模与时间</strong>背后，都有令人质疑的支配力量。</p>
+          </div>
+        </div>
+
+        <h3 id="section-d3">三、高尔夫比喻：两种造假策略</h3>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">策略一：先"大洗澡"，后持续超预期</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>轮次</th><th>实际得分</th><th>造假得分</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>第 1 轮</td><td>91</td><td><strong>140</strong>（集中倾泻所有"坏洞"）</td></tr>
+            <tr><td>第 2 轮</td><td>94</td><td>80</td></tr>
+            <tr><td>第 3 轮</td><td>89</td><td>80</td></tr>
+            <tr><td>第 4 轮</td><td>94</td><td>80</td></tr>
+            <tr><td>第 5 轮</td><td>92</td><td>80</td></tr>
+          </tbody>
+        </table>
+
+        <p>华尔街的反应：忽视开头的 140 杆（"不持续"），将其归类为<strong>永远不会令人失望的"80 分稳定型球手"</strong>。</p>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">策略二：先虚报佳绩，后集中"纠错"</h4>
+
+        <p>先连续四场报告 80 杆的好成绩，赢得掌声后，再亮出第五场 140 杆的"大洗澡"记分卡——之前舞弊所得的不义之财，绝不退还。</p>
+
+        <div class="pull-quote">
+          "一次是哲学家，两次是变态。"<cite>— 伏尔泰（Voltaire）</cite>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">上瘾的 CEO</div>
+            <p>喜欢篡改记分卡的 CEO 往往会上瘾——毕竟，<strong>篡改记分卡比苦练容易得多</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-d4">四、并购领域的"重组艺术"</h3>
+
+        <p>管理层利用合并机会，对资产和负债进行不诚实的包装，目的是<strong>平滑并增厚未来利润</strong>。</p>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">财险公司收购案例</h4>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 1</span>
+            <h4>收购完成</h4>
+            <p>买家立即大幅提高损失准备金</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 2</span>
+            <h4>声称"反映之前准备金不足"</h4>
+            <p>为高额准备金提供合理化解释</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 3</span>
+            <h4>释放准备金为"利润"</h4>
+            <p>待收购完成一段时间后，将准备金释放为利润流入利润表</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">精算的"启示"</div>
+            <p>在收购合约墨迹未干时就出现如此精准的精算"启示"，多少令人不可思议。</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">真实对话实录</h4>
+
+        <div class="pull-quote">
+          两位大型银行 CEO 讨论一项并购案，其中一位问："你不认为这项并购会发生巨额费用吗？也许会达到 10 亿美元？"<br/><br/>
+          经验丰富的老手答道："<strong>我们可以将费用做得更大，这就是我们要做这种并购生意的原因。</strong>"
+        </div>
+
+        <h3 id="section-d5">五、数据：问题的规模</h3>
+
+        <p>根据巴尔的摩 R.G 协会初步统计：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>统计项目</th><th>数据（1998 年）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>特殊费用事件总数</td><td><strong>不少于 1,369 起</strong></td></tr>
+            <tr><td>涉及金额</td><td><strong>721 亿美元</strong></td></tr>
+            <tr><td>参照：1997 年《财富》500 强盈利总和</td><td>3,240 亿美元</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">触目惊心</div>
+            <p>特殊费用规模相当于《财富》500 强年度盈利总和的 <strong>22%</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-d6">六、伯克希尔的立场</h3>
+
+        <div class="pull-quote large">
+          "如果我们让你失望，我们宁愿你是对我们的盈利失望，而不是对我们的会计失望。"
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">原则 01</span>
+            <h4>精确处理损失</h4>
+            <p>所有收购活动中，对发现的损失进行精确处理</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则 02</span>
+            <h4>与优秀经理人合作</h4>
+            <p>与精通保险知识、忠于财报的经理人合作</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则 03</span>
+            <h4>警惕负债骤然上升</h4>
+            <p>若交易完成时负债即刻大幅上升，逻辑上至少说明两点之一存在问题：准备金不足，或买家在为未来注入"盈利"做铺垫</p>
+          </div>
+        </div>
+
+        <h3 id="section-d7">七、监管层的回应</h3>
+
+        <p><strong>SEC 主席亚瑟·莱维特（Arthur Levitt）</strong>于 1998 年 9 月发表演说，呼吁终结"盈利管理"：</p>
+
+        <div class="pull-quote">
+          "太多的公司高管、审计师、分析师正在参与一场<strong>点头和递眼色的游戏</strong>。"<br/>
+          "管理者或许正在向操纵妥协，<strong>诚信或许正在向假象让步</strong>。"
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">延伸阅读</div>
+            <p>演说全文可在 SEC 官网查阅。</p>
+          </div>
+        </div>
+
+        <h3 id="section-d8">八、审计师的失职</h3>
+
+        <p>审计师本应视<strong>投资大众</strong>为其客户，却常常对公司管理层卑躬屈膝——因为管理层决定将业务交给哪家会计事务所。</p>
+
+        <div class="pull-quote">
+          "吃谁的饭，唱谁的歌。"
+        </div>
+
+        <p>大型审计机构或许会指出会计把戏的存在，但来自高层的推动力，常常使一流人才屈从于三流战略。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== E. 退休福利估计 ===== -->
+      <section id="section-e">
+        <h2>E. 退休福利估计</h2>
+
+        <h3 id="section-e1">一、问题的核心：回报假设虚高</h3>
+
+        <p>在计算退休金费用时，<strong>回报假设</strong>是最关键的变量。标普 500 成分股中有退休金计划的公司，普遍选择了脱离现实的高假设回报率。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>统计项目</th><th>数据</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>标普 500 中拥有退休金计划的公司数量</td><td>363 家</td></tr>
+            <tr><td>2006 年平均假设回报率</td><td><strong>8%</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-e2">二、8% 假设回报率的可行性分析</h3>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">资产配置现状</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>资产类别</th><th>占比</th><th>预期回报率</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>债券与现金</td><td>28%</td><td>≤ 5%</td></tr>
+            <tr><td>股票（含对冲基金、私募基金）</td><td>72%</td><td>需达到 <strong>9.2%</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">现实与假设的差距</div>
+            <p>要使整体达到 8% 的假设回报，权益类资产必须取得 <strong>9.2% 的净回报</strong>（扣除所有费用后）。9.2% 的要求远超这些资产过去的历史成绩。</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">历史数据的现实检验</h4>
+
+        <p><strong>20 世纪道琼斯指数表现：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>数值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>起点（1900 年）</td><td>66 点</td></tr>
+            <tr><td>终点（1999 年）</td><td>11,497 点</td></tr>
+            <tr><td>折合年化回报率</td><td><strong>5.3%</strong></td></tr>
+            <tr><td>末期股息率</td><td>约 2%</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>21 世纪若要复制 5.3% 年化回报，道琼斯指数需达到：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间节点</th><th>所需点位</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2099 年 12 月 31 日</td><td><strong>2,000,000 点</strong></td></tr>
+            <tr><td>当前（已入 21 世纪 8 年）</td><td>约 13,000 点，涨幅不足 2,000 点</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">10% 回报的荒谬性</div>
+            <p>若有人预测 21 世纪年化回报达 10%（2% 分红 + 8% 股价上涨），则意味着道琼斯指数到 2100 年需达到 <strong>2,400 万点</strong>。</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">权益资产的实际回报上限估算</h4>
+
+        <p>即便维持 20 世纪的历史水平，退休基金中权益资产部分的回报也难以达标：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>收益来源</th><th>贡献率</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>股价年化上涨（历史水平）</td><td>5.3%</td></tr>
+            <tr><td>股息率</td><td>~2.0%</td></tr>
+            <tr><td>合计毛回报</td><td>~7.3%</td></tr>
+            <tr><td>减：成本费用（保守估计）</td><td>-0.5%</td></tr>
+            <tr><td><strong>净回报上限</strong></td><td><strong>≈ 7%</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">成本估算说明</div>
+            <p>0.5% 的成本已属保守估计，实际顾问与投资经理费用往往更高。</p>
+          </div>
+        </div>
+
+        <h3 id="section-e3">三、"帮忙的人"的数学悖论</h3>
+
+        <p>所有投资者都希望获得超出平均的回报，而"帮忙的人"（顾问、投资经理）也乐于鼓励这种期望。但逻辑上，这是不可能的：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">公理</span>
+            <h4>投资者整体</h4>
+            <p>只能获得市场平均回报，减去总成本</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">推论 1</span>
+            <h4>被动/指数投资者</h4>
+            <p>获得平均回报，减去极低成本 → <strong>净回报较高</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">推论 2</span>
+            <h4>积极投资者</h4>
+            <p>承担高额交易费、管理费、顾问费 → <strong>净回报必然低于被动投资者</strong></p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          结论：<strong>"什么都不知道"的被动投资者，一定会胜出。</strong>
+        </div>
+
+        <h3 id="section-e4">四、对投资顾问的警示</h3>
+
+        <div class="pull-quote">
+          "为什么，有时在早饭之前，我已经相信了六件不可能的事情？"<cite>— 《绿野仙踪》皇后</cite>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警惕承诺两位数回报的顾问</div>
+            <p>他们在往你脑子里灌输幻象的同时，也在往自己口袋里装佣金。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">检验方法</div>
+            <p>若投资顾问声称可取得年化 10% 回报，请告知他道琼斯指数届时需达到 <strong>2,400 万点</strong>，观察其反应。</p>
+          </div>
+        </div>
+
+        <h3 id="section-e5">五、美国与非美国退休金假设的矛盾</h3>
+
+        <p>部分公司在欧洲等地区同样设有退休金计划，但其回报假设却与美国存在明显差异：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>地区</th><th>假设回报率</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>美国计划</td><td>普遍较高</td></tr>
+            <tr><td>非美国计划</td><td>普遍较低</td></tr>
+          </tbody>
+        </table>
+
+        <p>这种不一致从未得到合理解释，而负责审核这些假设的<strong>审计师与精算师</strong>，也从未对此提出异议。</p>
+
+        <div class="pull-quote">
+          若美国的高回报假设是合理的，为何不将美国经理人派往海外，将那些资产的回报也"提高"呢？
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== F. 账面盈利的实现问题 ===== -->
+      <section id="section-f">
+        <h2>F. 账面盈利的实现问题</h2>
+
+        <h3 id="section-f1">一、核心观点：净利润指标的局限性</h3>
+
+        <p><strong>净利润</strong>是媒体最为关注的财务指标，但在伯克希尔，这一指标<strong>几乎毫无意义</strong>。</p>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">为何净利润可被"操控"？</h4>
+
+        <p>巴菲特与芒格拥有合法调节净利润的灵活度，原因在于：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>处理方式</th><th>是否进入损益表</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>已实现</strong>账面盈亏（买卖变现）</td><td>主动选择变现时机</td><td>✅ 计入净利润</td></tr>
+            <tr><td><strong>未实现</strong>账面盈亏（持仓浮盈/浮亏）</td><td>大多数情况为亏损</td><td>❌ 不计入净利润</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">典型场景举例</h4>
+
+        <div class="code-block">
+          <span class="comment">// 假设某年度伯克希尔同时存在以下两项：</span>
+          - 未变现账面所得：<span class="number">100亿美元</span>
+          - 已实现亏损：<span class="number">100亿美元</span>
+
+          <span class="comment">// 结果</span>
+          净利润仅反映亏损，低于运营利润，但企业真实状况可能已大幅改善。
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">媒体误导</div>
+            <p>若同时在上一年度变现所得，媒体标题可能是：<strong>"利润下降了X%"</strong>——而这与企业实际经营毫无关联。</p>
+          </div>
+        </div>
+
+        <h3 id="section-f2">二、伯克希尔的原则立场</h3>
+
+        <p>尽管伯克希尔账面上存在<strong>巨大的未变现所得</strong>可供利用，巴菲特与芒格明确承诺：</p>
+
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 承诺</span>
+            <h4>从不"数字游戏"</h4>
+            <p>从不因临近财报公布期而大幅出售证券以美化账面</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">❌ 拒绝</span>
+            <h4>厌恶"数字游戏"</h4>
+            <p>此类行为在20世纪90年代极为猖獗，现虽减少但依然存在</p>
+          </div>
+        </div>
+
+        <h3 id="section-f3">三、推荐关注指标：运营利润</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>推荐程度</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>运营利润</strong></td><td>⭐ 强烈推荐</td><td>整体而言较合理地反映企业运营状况</td></tr>
+            <tr><td>净利润</td><td>❌ 可忽略</td><td>受实现/未实现盈亏影响，易被误导；监管要求披露</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">账面价值的完整性</div>
+            <p>无论是<strong>已实现</strong>还是<strong>未实现</strong>的账面盈亏，均会<strong>完整反映</strong>在伯克希尔的<strong>账面价值</strong>计算中。</p>
+          </div>
+        </div>
+
+        <p><strong>正确的分析路径</strong>：持续关注<strong>运营利润的构成与变化</strong>，而非净利润数字本身。</p>
+
+        <h3 id="section-f4">四、总结</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>关键结论</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>净利润可被合法调节</td><td>通过控制买卖时机影响已实现盈亏</td></tr>
+            <tr><td>伯克希尔不玩数字游戏</td><td>芒格与巴菲特的明确承诺</td></tr>
+            <tr><td>运营利润更具参考价值</td><td>更真实反映企业经营状况</td></tr>
+            <tr><td>媒体关注净利润是误导</td><td>更多说明媒体的局限，而非企业表现</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          如果你发现记者们非常关注净利润这个指标，<strong>这更多说明的是他们的表现，而非我们的表现。</strong><cite>— 沃伦·巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>投资智慧 · 读书笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '巴菲特致股东的信';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
