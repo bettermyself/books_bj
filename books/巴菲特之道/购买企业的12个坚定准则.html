@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>购买企业的12个坚定准则 · 巴菲特之道</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    a.toc-chapter-title { text-decoration: none; }
+    a.toc-chapter-title:hover { color: var(--gold); background: rgba(201,168,76,.08); }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">巴菲特之道</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="五西格玛事件：世界上最伟大的投资家.html" class="toc-chapter-title">第1章 五西格玛事件：世界上最伟大的投资家</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="沃伦·巴菲特的教育.html" class="toc-chapter-title">第2章 沃伦·巴菲特的教育</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title current-chapter">第3章 购买企业的12个坚定准则</span>
+        </li>
+        <li class="toc-chapter">
+          <a href="普通股投资9个案例.html" class="toc-chapter-title">第4章 普通股投资9个案例</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资组合管理：投资数学.html" class="toc-chapter-title">第5章 投资组合管理：投资数学</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资心理学.html" class="toc-chapter-title">第6章 投资心理学</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="耐心的价值.html" class="toc-chapter-title">第7章 耐心的价值</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特之道》第8章：最伟大的投资家.html" class="toc-chapter-title">第8章 最伟大的投资家</a>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、核心理念</a></li>
+        <li><a href="#section-2">二、12个坚定准则总览</a></li>
+        <li><a href="#section-3">三、企业准则</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 简单易懂</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 持续稳定的经营历史</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 良好的长期前景</a></li>
+        <li><a href="#section-4">四、管理准则</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 管理层是否理性</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 管理层是否坦诚</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 能否抗拒惯性驱使</a></li>
+        <li><a href="#section-5">五、财务准则</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 重视ROE而非EPS</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 计算真正的股东盈余</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 寻找高利润率企业</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 一美元原则</a></li>
+        <li><a href="#section-6">六、市场准则</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 确定企业市场价值</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 以折扣价格买入</a></li>
+        <li><a href="#section-7">七、投资错误的可能来源</a></li>
+        <li><a href="#section-8">八、长期股价剖析</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">巴菲特之道 · 第三章 · 购买企业的12个坚定准则</div>
+        <h1 class="article-title">购买企业的12个坚定准则</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>罗伯特·哈格斯特朗</span>
+          <span><strong>主题</strong>企业准则 · 管理准则 · 财务准则 · 市场准则</span>
+        </div>
+      </header>
+
+      <!-- 一 -->
+      <section id="section-1">
+        <h2>一、核心理念</h2>
+
+        <p>巴菲特认为，<strong>买下整个企业和以购买股票的形式买一部分企业，本质上没有根本性区别</strong>。他倾向于直接拥有整个企业，以便对企业的资本配置拥有决定权；但购买部分股票也有其优势——投资选择更多，且更容易发现价格低估的机会。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资视角</div>
+            <p>投资时应以<strong>企业分析师</strong>的眼光审视企业，而非市场分析师、宏观经济分析师或股票分析师的眼光。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          我是一个好的投资者，因为我是一个企业家；我是一个好的企业家，因为我是一个投资者。
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二 -->
+      <section id="section-2">
+        <h2>二、12个坚定准则总览</h2>
+
+        <p>巴菲特将评估企业的标准归纳为四大类别、共<strong>12个坚定准则</strong>。这些准则同时也是他管理伯克希尔公司的原则——他希望每天走进公司时，看到自己的公司也能达到同样的标准。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>准则类别</th>
+              <th>数量</th>
+              <th>核心关注点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>企业准则</strong></td>
+              <td>3 条</td>
+              <td>企业基本特点——是否简单易懂、经营历史是否稳定、长期前景是否良好</td>
+            </tr>
+            <tr>
+              <td><strong>管理准则</strong></td>
+              <td>3 条</td>
+              <td>高管核心素质——是否理性、是否坦诚、能否抗拒惯性驱使</td>
+            </tr>
+            <tr>
+              <td><strong>财务准则</strong></td>
+              <td>4 条</td>
+              <td>关键财务标准——ROE、股东盈余、利润率、一美元原则</td>
+            </tr>
+            <tr>
+              <td><strong>市场准则</strong></td>
+              <td>2 条</td>
+              <td>成本指导原则——企业价值评估与安全边际买入</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三 -->
+      <section id="section-3">
+        <h2>三、企业准则（Business Tenets）</h2>
+
+        <h3 id="section-3-1">3.1 企业是否简单易懂？</h3>
+
+        <p>巴菲特认为，<strong>投资回报与投资者对企业的理解程度成正比</strong>。只投资自己能完全理解的企业，包括营收、成本、现金流、劳资关系、价格弹性及资本配置需求等。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">能力圈原则</span>
+            <h4>只投资自己能完全理解的企业</h4>
+            <p>优秀企业的显著特点是<strong>专注主业</strong>，多元化和复杂往往导致恶化。"投资成功并不是靠你懂多少，而是认清自己不懂多少。"</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">实践建议</span>
+            <h4>消费、医药类企业较容易理解</h4>
+            <p>消费、医药类企业和生活息息相关，较容易理解；科技类企业技术迭代快，不易长期持有。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-2">3.2 企业是否有持续稳定的经营历史？</h3>
+
+        <p>巴菲特的核心策略是<strong>规避复杂，规避陷入麻烦的企业</strong>。经历重大变化的企业会增加犯错的可能，最好的回报来自那些<strong>多年稳定经营、提供同样产品或服务</strong>的公司。</p>
+
+        <div class="pull-quote">
+          "一个伟大企业的定义至少是'伟大'期间能持续<strong>25–30年</strong>。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <h3 id="section-3-3">3.3 企业是否有良好的长期前景？</h3>
+
+        <p>巴菲特将经济世界分为不等的两部分——<strong>少数伟大的企业（特许经营权）</strong>和<strong>平庸的企业</strong>。特许经营权企业具有三大特征：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>特征</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>被需要或渴望</strong></td>
+              <td>产品或服务具有稳定消费需求</td>
+            </tr>
+            <tr>
+              <td><strong>无可替代</strong></td>
+              <td>没有替代产品或竞争对手</td>
+            </tr>
+            <tr>
+              <td><strong>没有管制</strong></td>
+              <td>可以自主定价，不受价格管制</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这类企业可以保持售价或偶尔提高售价，不用担心失去市场份额和销量，从而获得<strong>超出平均的资本回报</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">普通商品型企业的困境</div>
+            <p>提供普通型商品的企业（如石油、化学品、电脑、汽车、航空服务、银行等）<strong>无法与竞争者区分</strong>，只能在价格上竞争，不断损害利润。这类企业应尽量回避。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四 -->
+      <section id="section-4">
+        <h2>四、管理准则（Management Tenets）</h2>
+
+        <h3 id="section-4-1">4.1 管理层是否理性？</h3>
+
+        <p><strong>配置公司资本的能力是管理层最重要的能力</strong>，长期而言将决定股东价值。理性的管理层在找不到超越平均回报率的投资项目时，应选择分红或回购股票。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">理性选择一</span>
+            <h4>分红或提高分红</h4>
+            <p>当找不到超越平均回报率的投资项目时，将利润归还股东，让股东自行配置。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">理性选择二</span>
+            <h4>回购股票</h4>
+            <p>当股票被低估时，回购股票能增加剩余股东的每股价值，是最直接的回报方式。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">非理性表现</div>
+            <p>将留存利润投资于<strong>低回报项目</strong>，仅仅为了填满时间或满足扩张欲望。这是管理层最大的价值杀手。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 管理层对股东是否坦诚？</h3>
+
+        <p>坦诚的管理层会<strong>承认错误、分享成功</strong>，全面真实反映公司状况。坦诚管理的三大价值在于帮助股东回答三个核心问题：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">问题一</span>
+            <h4>公司的大致估值是多少？</h4>
+            <p>坦诚的财务披露让股东能够对企业的内在价值做出合理估计。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题二</span>
+            <h4>公司有多大可能性达到未来的目标？</h4>
+            <p>管理层对未来展望的真实描述，帮助股东判断企业的发展前景。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题三</span>
+            <h4>鉴于过去的表现，管理层干得如何？</h4>
+            <p>诚实的业绩回顾让股东能够评估管理层的能力和资本配置水平。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "在公众场合误导他人的CEO，在私底下也会误导自己。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <h3 id="section-4-3">4.3 管理层能否抗拒惯性驱使？</h3>
+
+        <p>惯性驱使是管理层最常见的行为陷阱，其<strong>根本原因在于人性</strong>——大多数管理层不想被看起来愚蠢，不断与同业比较，高估自己的能力。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>来源</th>
+              <th>具体表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>组织拒绝改变</strong></td>
+              <td>拒绝改变当前方向，即使需要转型</td>
+            </tr>
+            <tr>
+              <td><strong>闲不住</strong></td>
+              <td>仅仅为了填满时间，通过新项目或并购消化现金</td>
+            </tr>
+            <tr>
+              <td><strong>满足领导愿望</strong></td>
+              <td>无论项目多么愚蠢，下属都会准备好可行性报告</td>
+            </tr>
+            <tr>
+              <td><strong>盲目模仿同行</strong></td>
+              <td>同行的扩张、收购、薪酬计划都会引起没头脑的模仿</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">伯克希尔原则</div>
+            <p>正确与否<strong>不仅仅因为大家都这么做</strong>。真正优秀的管理层能够独立思考，抵抗从众心理。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五 -->
+      <section id="section-5">
+        <h2>五、财务准则（Financial Tenets）</h2>
+
+        <h3 id="section-5-1">5.1 重视净资产回报率（ROE），而不是每股盈利（EPS）</h3>
+
+        <p>每股盈利保留了以往留存下来的利润，随着企业运营不断增加，因此<strong>ROE（盈利÷股东权益）</strong>能更真实反映企业的盈利能力，因为它考虑了逐年增加的资本额。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">黄金标准</div>
+            <p>不少价值投资者首先排除长期ROE &lt; 15%的企业。巴菲特要求在<strong>无负债或极少负债</strong>的情况下产生高回报。</p>
+          </div>
+        </div>
+
+        <p>计算ROE时需要做三个关键调整：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">调整一</span>
+            <h4>按成本计算证券价值</h4>
+            <p>所持有的证券以<strong>成本计算</strong>而非市价计算，避免市场波动对ROE的干扰。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">调整二</span>
+            <h4>剔除非经常性项目</h4>
+            <p>排除资本损益、特别年度表现等<strong>非经常性项目</strong>，关注核心经营盈利能力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">调整三</span>
+            <h4>关注无负债情况下的回报</h4>
+            <p>警惕通过提高资产负债率来提高ROE的做法，巴菲特<strong>不喜欢</strong>这种做法。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">5.2 计算真正的"股东盈余"</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">利润表利润常常是"虚的"</div>
+            <p>重资产型企业会被通货膨胀悄悄侵蚀。现金流也不完美——对于持续需要资本支出的制造业，现金流会误导投资者。巴菲特引用凯恩斯："宁要模糊的正确，不要精确的错误。"</p>
+          </div>
+        </div>
+
+        <p><strong>股东盈余公式</strong>：</p>
+
+        <div class="pull-quote">
+          股东盈余 = 净利润 + 折旧 + 损耗 + 摊销 − 资本支出 − 其他必需的营运资本
+          <cite>— 巴菲特的"股东盈余"定义</cite>
+        </div>
+
+        <p>轻资产行业更受巴菲特青睐——重资产行业会不断吞噬企业利润，都是<strong>"纸面财富"</strong>。</p>
+
+        <h3 id="section-5-3">5.3 寻找具有高利润率的企业</h3>
+
+        <p>高利润率反映企业具有<strong>经济特许权</strong>。提升盈利能力没有大秘密：<strong>控制成本</strong>。优秀经理人把控制成本像呼吸一样自然必需。</p>
+
+        <div class="pull-quote large">
+          真正优秀的经理人不会在早上醒来说：我今天要削减成本。就像他醒来后不会专门想着需要呼吸一样。
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <h3 id="section-5-4">5.4 每一美元的留存利润，至少创造一美元的市值</h3>
+
+        <p>巴菲特的<strong>"一美元原则"</strong>：公司每留存一美元的利润，至少应该创造<strong>一美元的市场价值</strong>。如果市值提升超过留存数字，则更好。长期而言，股票市场会反映企业的合理价值。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">检验方法</div>
+            <p>将净收入减去股利得出保留盈余，对比公司现在与10年前（或4–5年平均值）的市价差价。如果市值增长大于留存利润，说明管理层有效地将利润转化为股东价值。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六 -->
+      <section id="section-6">
+        <h2>六、市场准则（Market Tenets）</h2>
+
+        <h3 id="section-6-1">6.1 必须确定企业的市场价值</h3>
+
+        <p>巴菲特采用<strong>现金流折现法（DCF）</strong>来评估企业价值，这一方法源自约翰·伯尔·威廉姆斯的《投资价值理论》。</p>
+
+        <div class="pull-quote">
+          一个公司的价值决定于在其生存期间，预期产生的所有现金流，在一个合理的利率上的折现。
+          <cite>— 约翰·伯尔·威廉姆斯《投资价值理论》</cite>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>变量</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>现金流</strong></td>
+              <td>企业未来股东盈余现金流</td>
+            </tr>
+            <tr>
+              <td><strong>贴现率</strong></td>
+              <td>巴菲特使用<strong>美国政府长期国债利率</strong>（无风险收益率），不加风险溢价</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">原则一</span>
+            <h4>只选择简单稳定的企业</h4>
+            <p>保证数据高度确定性——巴菲特只对那些<strong>简单稳定</strong>的企业进行估值，保证预测的可信度。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则二</span>
+            <h4>用最保守的方法估计</h4>
+            <p>以降低风险为出发点，投资者应买入以现金流贴现方法计算后<strong>最便宜的股票</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-2">6.2 相对于企业的市场价值，能否以折扣价格买到？</h3>
+
+        <p><strong>安全边际理论</strong>是巴菲特买入决策的最终关口。在购进价格和企业价值之间要有足够的"安全边际"，缓冲效果可保证不受公司未来现金流量变动影响。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">保护一</span>
+            <h4>为股价下跌提供保护</h4>
+            <p>即使企业价值意外地减少，原始买入价仍能产生足够回报——安全边际是<strong>容错的缓冲器</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">保护二</span>
+            <h4>确保本金安全</h4>
+            <p>在确保本金安全的情况下，取得令人满意的回报。大企业暂时出现危机或股市下跌时是<strong>大量买进</strong>的时机。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特的警告</div>
+            <p>即便是<strong>伟大的企业</strong>，以过高的价格买入也会导致收益的平庸。价格与价值之间的差距，决定了投资的安全度和回报率。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七 -->
+      <section id="section-7">
+        <h2>七、投资错误的可能来源</h2>
+
+        <p>巴菲特指出，如果投资犯错，可能源于以下三方面：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>错误来源</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>支付的价格</strong></td>
+              <td>买入价格过高，安全边际不足——为优秀企业支付了过高的溢价</td>
+            </tr>
+            <tr>
+              <td><strong>管理层</strong></td>
+              <td>管理层不够理性、坦诚或独立思考——企业的内在价值被管理层行为侵蚀</td>
+            </tr>
+            <tr>
+              <td><strong>企业未来的经营状况</strong></td>
+              <td>对企业未来现金流或竞争优势判断失误——对未来的预测过于乐观</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">最常见错误</div>
+            <p>第三类错误——<strong>对企业未来经营状况的估算失误</strong>。这也是为什么巴菲特反复强调只投资简单、稳定、可理解的企业。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八 -->
+      <section id="section-8">
+        <h2>八、长期股价剖析</h2>
+
+        <p>巴菲特的<strong>核心公式</strong>：</p>
+
+        <div class="pull-quote large">
+          长期股价表现 = 优秀的企业 + 合理的价格 + 良好的管理
+          <cite>— 巴菲特的股价决定公式</cite>
+        </div>
+
+        <p>一个伟大的企业，如果买在有利价格并由稳健管理经营，将产生<strong>持续上升的股东价值</strong>。短期而言，股价可能因某些原因上下波动背离其价值；但长期而言，股票市场会<strong>纠正错误，回归正常</strong>，反映企业的合理价值。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">12个准则的本质</div>
+            <p>巴菲特的12个准则从<strong>企业品质</strong>、<strong>管理能力</strong>、<strong>财务健康</strong>、<strong>市场定价</strong>四个维度构建了一套完整的投资决策框架。它们不是孤立的指标，而是相互关联的整体——优秀的企业让管理层更容易做出理性决策，健康的财务让企业更有韧性，而安全边际则为一切提供了最终保障。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '巴菲特之道';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

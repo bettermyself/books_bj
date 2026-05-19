@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>普通股投资9个案例 · 巴菲特之道</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    a.toc-chapter-title { text-decoration: none; }
+    a.toc-chapter-title:hover { color: var(--gold); background: rgba(201,168,76,.08); }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* ===== Formula Block ===== */
+    .formula-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      color: var(--text);
+      text-align: center;
+      line-height: 2;
+    }
+    .formula-block .var {
+      color: var(--gold-dk);
+      font-weight: 600;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">巴菲特之道</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="五西格玛事件：世界上最伟大的投资家.html" class="toc-chapter-title">第1章 五西格玛事件：世界上最伟大的投资家</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="沃伦·巴菲特的教育.html" class="toc-chapter-title">第2章 沃伦·巴菲特的教育</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="购买企业的12个坚定准则.html" class="toc-chapter-title">第3章 购买企业的12个坚定准则</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title current-chapter">第4章 普通股投资9个案例</span>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资组合管理：投资数学.html" class="toc-chapter-title">第5章 投资组合管理：投资数学</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资心理学.html" class="toc-chapter-title">第6章 投资心理学</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="耐心的价值.html" class="toc-chapter-title">第7章 耐心的价值</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特之道》第8章：最伟大的投资家.html" class="toc-chapter-title">第8章 最伟大的投资家</a>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、核心框架</a></li>
+        <li><a href="#section-2">二、九大投资案例</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 华盛顿邮报</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 盖可保险</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 大都会/ABC</a></li>
+        <li><a href="#section-2-4" class="sub">2.4 可口可乐</a></li>
+        <li><a href="#section-2-5" class="sub">2.5 通用动力</a></li>
+        <li><a href="#section-2-6" class="sub">2.6 富国银行</a></li>
+        <li><a href="#section-2-7" class="sub">2.7 美国运通</a></li>
+        <li><a href="#section-2-8" class="sub">2.8 IBM</a></li>
+        <li><a href="#section-2-9" class="sub">2.9 亨氏食品</a></li>
+        <li><a href="#section-3">三、共同规律</a></li>
+        <li><a href="#section-4">四、现金流贴现与估值</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 核心框架</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 DCF模型</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 股东盈余÷无风险利率</a></li>
+        <li><a href="#section-4-4" class="sub">4.4 两种方法对比</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">巴菲特之道 · 第四章 · 普通股投资9个案例</div>
+        <h1 class="article-title">普通股投资9个案例</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>罗伯特·哈格斯特朗</span>
+          <span><strong>主题</strong>华盛顿邮报 · 盖可保险 · 可口可乐 · 富国银行 · 美国运通</span>
+        </div>
+      </header>
+
+      <!-- 一 -->
+      <section id="section-1">
+        <h2>一、核心框架</h2>
+
+        <p>巴菲特的普通股投资逻辑：以<strong>企业所有者</strong>的视角，寻找具备<strong>持久竞争优势（护城河）</strong>、<strong>优秀管理层</strong>和<strong>合理估值</strong>的公司，长期持有并分享企业成长。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>核心维度</th>
+              <th>关键标准</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>商业模式</strong></td>
+              <td>简单易懂，能在5分钟内解释清楚盈利方式</td>
+            </tr>
+            <tr>
+              <td><strong>经济护城河</strong></td>
+              <td>品牌、成本优势、网络效应、牌照壁垒、转换成本</td>
+            </tr>
+            <tr>
+              <td><strong>财务指标</strong></td>
+              <td>高ROE（≥15%）、低负债、充裕现金流</td>
+            </tr>
+            <tr>
+              <td><strong>管理层品质</strong></td>
+              <td>理性、诚信、资本配置能力卓越</td>
+            </tr>
+            <tr>
+              <td><strong>估值原则</strong></td>
+              <td>留有安全边际，价格低于内在价值</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二 -->
+      <section id="section-2">
+        <h2>二、九大投资案例详解</h2>
+
+        <!-- 2.1 -->
+        <h3 id="section-2-1">2.1 华盛顿邮报公司（The Washington Post Company）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>首次投资时间</strong></td>
+              <td>1973年</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>水门事件引发报业危机，市场恐慌性抛售</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>拥有垄断性地方报纸 + 电视台广播牌照，具备定价权</td>
+            </tr>
+            <tr>
+              <td><strong>关键数据</strong></td>
+              <td>市值约8,000万美元，巴菲特估算内在价值4–5亿美元</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>持有数十年，收益率超百倍</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">逆向投资</span>
+            <h4>市场情绪极端悲观时，往往是最佳买入时机</h4>
+            <p>华盛顿邮报的困境是行业性的，而非公司自身护城河被破坏。市场恐慌中，<strong>区分系统性风险与企业特有风险</strong>至关重要。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">无形资产价值</span>
+            <h4>品牌声誉与特许经营权带来的定价能力</h4>
+            <p>报纸的垄断地位和电视台牌照构成了天然的竞争壁垒，这种<strong>无形资产</strong>在财务报表之外创造了巨大价值。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">管理层品质</span>
+            <h4>凯瑟琳·格雷厄姆的卓越资本配置</h4>
+            <p>她展现了卓越的资本配置能力和对股东的坦诚态度，是巴菲特最信赖的管理者之一。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <!-- 2.2 -->
+        <h3 id="section-2-2">2.2 盖可保险公司（GEICO Corporation）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>首次研究时间</strong></td>
+              <td>1951年（巴菲特21岁时深入调研）</td>
+            </tr>
+            <tr>
+              <td><strong>大规模买入时间</strong></td>
+              <td>1976年、1980年</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>公司因激进扩张濒临破产，股价暴跌</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>直销模式的<strong>成本优势</strong>未被破坏；保险浮存金的投资价值</td>
+            </tr>
+            <tr>
+              <td><strong>关键数据</strong></td>
+              <td>1976年投入约410万美元，1980年追加至2,370万美元</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>1995年伯克希尔全资收购，累计回报数千倍</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">关键区分</span>
+            <h4>区分暂时性困难与结构性破坏</h4>
+            <p>GEICO的危机是扩张过快，而非核心商业模式失效。直销模式的成本优势依然完好——这是判断<strong>是否逆势加仓</strong>的关键。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">浮存金价值</span>
+            <h4>保险业的本质是用别人的钱进行投资获利</h4>
+            <p>保险公司收取保费后，在赔付前可以自由运用这笔资金（浮存金）。低成本浮存金是巴菲特投资帝国的<strong>核心杠杆</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">终极护城河</span>
+            <h4>低成本运营是保险业的终极护城河</h4>
+            <p>GEICO的直销模式省去了代理人佣金，使其成本远低于竞争对手，能够以更低的价格吸引客户。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <!-- 2.3 -->
+        <h3 id="section-2-3">2.3 大都会/ABC公司（Capital Cities/ABC）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资时间</strong></td>
+              <td>1985年</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>托马斯·墨菲收购ABC，邀请巴菲特参与投资</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>电视广播牌照的稀缺性；管理层极度优秀</td>
+            </tr>
+            <tr>
+              <td><strong>关键数据</strong></td>
+              <td>伯克希尔投入5.17亿美元，占18.5%股权</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>1995年与迪士尼合并，获得丰厚回报</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">与卓越者为伍</span>
+            <h4>墨菲是巴菲特最欣赏的CEO之一</h4>
+            <p>托马斯·墨菲以节俭、理性著称。管理层品质是投资决策中<strong>不可量化但至关重要</strong>的因素。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">天然垄断</span>
+            <h4>媒体行业的护城河：频道资源有限</h4>
+            <p>广告商选择受限，形成天然垄断。电视广播牌照是<strong>稀缺资源</strong>，具有不可替代的竞争壁垒。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <!-- 2.4 -->
+        <h3 id="section-2-4">2.4 可口可乐公司（The Coca-Cola Company）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资时间</strong></td>
+              <td>1988–1989年</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>1987年股灾后市场恐慌，优质资产被低估</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>全球最强大品牌；全球化扩张空间；轻资产、高现金流模式</td>
+            </tr>
+            <tr>
+              <td><strong>关键数据</strong></td>
+              <td>投入约10亿美元，市盈率约15倍，买入约7%股份</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>数十年分红再投资，成为伯克希尔最赚钱的持仓之一</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">品牌护城河的经典范例</div>
+            <p>可口可乐在消费者心智中占据<strong>不可替代</strong>的位置。品牌护城河是巴菲特从"格雷厄姆式烟蒂股"转向"优质成长股"的关键认知。</p>
+          </div>
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">全球化可复制性</span>
+            <h4>同一产品可在190个国家销售，边际成本递减</h4>
+            <p>可口可乐的商业模式具有极强的<strong>可复制性</strong>——浓缩液运往全球各地的装瓶厂，同一种产品在全世界销售，边际成本不断递减。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">喜诗糖果的启示</span>
+            <h4>品牌溢价的力量</h4>
+            <p>喜诗糖果（See's Candies）的投资经验教会巴菲特<strong>品牌溢价</strong>的力量——消费者愿意为信任的品牌支付更高价格，而不需要企业增加成本。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <!-- 2.5 -->
+        <h3 id="section-2-5">2.5 通用动力公司（General Dynamics）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资时间</strong></td>
+              <td>1992年</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>冷战结束，国防预算大幅削减，军工股遭市场抛弃</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>管理层比尔·安德斯展现卓越的资本配置能力</td>
+            </tr>
+            <tr>
+              <td><strong>关键数据</strong></td>
+              <td>伯克希尔买入约4.6%股份，投资约2.5亿美元</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>短期内通过回购和分红获得高额回报</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">管理层资本配置</span>
+            <h4>安德斯的卓越资本配置能力</h4>
+            <p>安德斯通过激进回购、剥离非核心资产，为股东创造了巨大价值。<strong>管理层品质可以弥补行业劣势</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">行业衰退期的逆向投资</span>
+            <h4>龙头企业反而有机会整合行业</h4>
+            <p>当整个行业被看空时，具备优秀管理层的龙头企业反而有机会<strong>整合行业</strong>，在竞争对手撤退时抢占市场份额。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">后续退出</div>
+            <p>巴菲特后来出售了大部分持仓。此案例的核心教训是：行业下行期，<strong>管理层品质</strong>是决定投资成败的关键变量。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <!-- 2.6 -->
+        <h3 id="section-2-6">2.6 富国银行（Wells Fargo &amp; Company）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资时间</strong></td>
+              <td>1990年</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>房地产危机导致银行股暴跌，市场恐慌</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>最优秀的零售银行；低成本存款优势；保守的贷款文化</td>
+            </tr>
+            <tr>
+              <td><strong>关键数据</strong></td>
+              <td>买入市盈率不足5倍，市净率约1倍</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>长期核心持仓，后成为伯克希尔最大银行股持仓之一</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">银行业投资关键</span>
+            <h4>管理层的风险控制能力远重于资产增长速度</h4>
+            <p>银行业是典型的<strong>杠杆行业</strong>，风险控制比增长速度更重要。富国银行的保守贷款文化使其在危机中表现优于同行。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">核心竞争力</span>
+            <h4>低成本存款是银行的核心竞争力</h4>
+            <p>富国银行拥有最广泛的零售网点和<strong>最低的资金成本</strong>，这使其在任何利率环境下都能保持盈利能力。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">行业危机时买入龙头企业</div>
+            <p>行业危机时买入龙头企业，而非回避整个行业。房地产危机是<strong>行业性恐慌</strong>，富国银行的核心竞争力并未受损。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <!-- 2.7 -->
+        <h3 id="section-2-7">2.7 美国运通公司（American Express Company）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>首次投资时间</strong></td>
+              <td>1964年</td>
+            </tr>
+            <tr>
+              <td><strong>再次大规模买入</strong></td>
+              <td>1991年、2014年</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>"色拉油丑闻"导致股价暴跌 / 旅行支票业务受冲击</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>信用卡网络效应；高端客户群体；旅行相关服务护城河</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>数十倍回报，伯克希尔前十大持仓之一</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">品牌韧性</span>
+            <h4>短期丑闻未破坏长期品牌价值</h4>
+            <p>危机中的品牌韧性是关键判断：客户忠诚度依然稳固，<strong>品牌信任</strong>没有因单一事件崩塌。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">网络效应</span>
+            <h4>持卡人与商户相互促进，形成双边市场垄断</h4>
+            <p>更多持卡人 → 更多商户接受 → 更多人需要持卡。这种<strong>正反馈循环</strong>使得竞争对手难以打破既有的网络效应。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">投资理念的转折点</div>
+            <p>美国运通是巴菲特从"格雷厄姆式烟蒂股"转向<strong>"优质成长股"</strong>的关键案例之一。它教会巴菲特：品牌和商业模式的质量，比纯粹的便宜更重要。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <!-- 2.8 -->
+        <h3 id="section-2-8">2.8 IBM公司（International Business Machines）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资时间</strong></td>
+              <td>2011年</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>科技股长期被巴菲特回避，IBM是首次大规模科技投资</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>企业级服务的"锁定效应"；稳定的现金流和分红；转型中的价值重估</td>
+            </tr>
+            <tr>
+              <td><strong>关键数据</strong></td>
+              <td>投入约107亿美元，买入约5.5%股份</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>2017–2018年逐步清仓，承认投资失误</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">能力圈的边界</div>
+            <p>即使是巴菲特，<strong>跨界投资也面临挑战</strong>。科技行业的快速变化使得IBM的转型未能跟上云计算时代的步伐，原有的"锁定效应"逐渐失效。</p>
+          </div>
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">科技行业的挑战</span>
+            <h4>技术迭代速度超出预期</h4>
+            <p>IBM的转型未能跟上<strong>云计算时代</strong>的步伐。科技行业的快速变化是其最大的风险——今天的护城河可能明天就被颠覆。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">理性纠错</span>
+            <h4>承认错误并修正</h4>
+            <p>2018年清仓IBM，将资金转向苹果（Apple），体现了<strong>理性纠错</strong>的投资纪律——不因沉没成本而固执持有。</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <!-- 2.9 -->
+        <h3 id="section-2-9">2.9 亨氏食品公司（H.J. Heinz Company）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资时间</strong></td>
+              <td>2013年（与3G资本合作收购）</td>
+            </tr>
+            <tr>
+              <td><strong>买入背景</strong></td>
+              <td>与巴西3G资本合作，私有化亨氏</td>
+            </tr>
+            <tr>
+              <td><strong>核心逻辑</strong></td>
+              <td>全球知名食品品牌；成本削减和运营优化空间；与卡夫合并协同效应</td>
+            </tr>
+            <tr>
+              <td><strong>关键数据</strong></td>
+              <td>伯克希尔投入约121亿美元，占50%股份</td>
+            </tr>
+            <tr>
+              <td><strong>投资成果</strong></td>
+              <td>2015年与卡夫合并为卡夫亨氏，后面临挑战</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">品牌 + 成本控制</span>
+            <h4>品牌护城河与成本控制的结合</h4>
+            <p>亨氏番茄酱拥有全球领先的市场份额。<strong>品牌护城河</strong>确保定价权，3G资本的<strong>成本控制</strong>提升运营效率。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">合作风险</span>
+            <h4>与激进投资者合作的风险</h4>
+            <p>3G资本的深度成本削减策略短期有效，但<strong>可能损害长期品牌价值</strong>——过度削减研发和营销投入，削弱品牌的持续竞争力。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">教训案例</div>
+            <p>后续卡夫亨氏的<strong>商誉减记</strong>和股价下跌，成为伯克希尔投资中的教训案例。过度削减成本可能损害品牌长期价值，平衡短期效率与长期投入至关重要。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三 -->
+      <section id="section-3">
+        <h2>三、九大案例的共同规律</h2>
+
+        <p>纵观巴菲特的九大普通股投资案例，可以发现清晰的共同模式。这些规律不是巧合，而是巴菲特<strong>系统性投资方法</strong>的必然结果。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>规律维度</th>
+              <th>具体表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>买入时机</strong></td>
+              <td>市场恐慌、行业危机、个股黑天鹅事件——<strong>逆向投资</strong></td>
+            </tr>
+            <tr>
+              <td><strong>企业特征</strong></td>
+              <td>简单易懂、护城河深厚、现金流充裕——<strong>优质企业</strong></td>
+            </tr>
+            <tr>
+              <td><strong>估值原则</strong></td>
+              <td>留有安全边际，不追逐热门——<strong>理性定价</strong></td>
+            </tr>
+            <tr>
+              <td><strong>持有期限</strong></td>
+              <td>以"永远"为持有单位，除非投资逻辑被破坏——<strong>长期主义</strong></td>
+            </tr>
+            <tr>
+              <td><strong>管理品质</strong></td>
+              <td>理性、坦诚、为股东着想——<strong>人以群分</strong></td>
+            </tr>
+            <tr>
+              <td><strong>行业偏好</strong></td>
+              <td>消费、金融、媒体——<strong>与人类基本需求相关</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          在别人贪婪时恐惧，在别人恐惧时贪婪。
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四 -->
+      <section id="section-4">
+        <h2>四、现金流贴现与股东盈余 ÷ 无风险利率</h2>
+
+        <h3 id="section-4-1">4.1 核心框架：两种方法的内在统一</h3>
+
+        <p>巴菲特估值的本质：无论是复杂的DCF模型，还是简化的"股东盈余 ÷ 无风险利率"，核心都是<strong>将企业未来产生的现金回流，折现到当前时点</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>方法</th>
+              <th>适用场景</th>
+              <th>复杂度</th>
+              <th>巴菲特的使用频率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>现金流贴现（DCF）</strong></td>
+              <td>现金流稳定、可预测的企业</td>
+              <td>中等</td>
+              <td>概念性理解，非机械计算</td>
+            </tr>
+            <tr>
+              <td><strong>股东盈余 ÷ 无风险利率</strong></td>
+              <td>永续经营、护城河深厚的企业</td>
+              <td>极简</td>
+              <td>日常心智计算的主要工具</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">关键认知</div>
+            <p>两种方法在<strong>数学上是等价的</strong>。当假设"永续零增长"时，DCF公式就简化为"股东盈余 ÷ 无风险利率"。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 现金流贴现模型（DCF）</h3>
+
+        <p><strong>标准DCF公式</strong>：</p>
+
+        <div class="formula-block">
+          企业内在价值 = Σ [<span class="var">FCF<sub>t</sub></span> / (1 + <span class="var">r</span>)<sup>t</sup>] + [<span class="var">FCF<sub>n+1</sub></span> / (<span class="var">r</span> − <span class="var">g</span>)] × 1 / (1 + <span class="var">r</span>)<sup>n</sup>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>符号</th>
+              <th>含义</th>
+              <th>巴菲特的实践调整</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FCF<sub>t</sub></strong></td>
+              <td>第t年的自由现金流</td>
+              <td>使用<strong>股东盈余</strong>替代标准FCF</td>
+            </tr>
+            <tr>
+              <td><strong>r</strong></td>
+              <td>折现率</td>
+              <td><strong>无风险利率</strong>（长期国债利率），不加风险溢价</td>
+            </tr>
+            <tr>
+              <td><strong>g</strong></td>
+              <td>永续增长率</td>
+              <td>保守假设，通常≤3%或等于通胀率</td>
+            </tr>
+            <tr>
+              <td><strong>n</strong></td>
+              <td>详细预测期</td>
+              <td>5–10年，之后进入永续增长</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>巴菲特<strong>从不做复杂的Excel建模</strong>，他的DCF是心智层面的模糊计算：</p>
+
+        <div class="pull-quote">
+          "如果一项投资需要精确到小数点后两位的计算才能决定，那我就不应该做这笔投资。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">步骤一</span>
+            <h4>估算未来5–10年的平均股东盈余</h4>
+            <p>基于企业的历史表现和行业趋势，做出<strong>保守但合理</strong>的预测。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤二</span>
+            <h4>假设一个保守的永续增长率</h4>
+            <p>通常假设为零或极低增长——宁可低估，不可高估。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤三</span>
+            <h4>使用无风险利率作为折现率</h4>
+            <p>不加风险溢价——风险已在企业选择和安全边际中体现。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤四</span>
+            <h4>与当前市值比较，留出安全边际</h>
+            <p>只有当计算出的内在价值<strong>显著高于</strong>当前市值时，才值得买入。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-3">4.3 股东盈余 ÷ 无风险利率</h3>
+
+        <p>当假设企业<strong>永续零增长</strong>时，DCF公式简化为：</p>
+
+        <div class="formula-block">
+          企业内在价值 = <span class="var">股东盈余</span> ÷ <span class="var">无风险利率</span>
+        </div>
+
+        <p>这就是巴菲特最常用的<strong>"简易估值法"</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>参数</th>
+              <th>定义</th>
+              <th>获取方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>分子：股东盈余</strong></td>
+              <td>企业真实可分配现金</td>
+              <td>净利润 + 折旧摊销 − 必要资本支出</td>
+            </tr>
+            <tr>
+              <td><strong>分母：无风险利率</strong></td>
+              <td>资本的机会成本</td>
+              <td>长期美国国债到期收益率</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">将企业视为"永续债券"</div>
+            <p>票面利息 = 股东盈余（每年产生的真实现金），市场利率 = 无风险利率（替代投资的机会成本），债券价值 = 利息 ÷ 利率。</p>
+          </div>
+        </div>
+
+        <p><strong>示例</strong>：如果一家企业每年产生10亿美元股东盈余，长期国债利率为5%，则：</p>
+
+        <div class="pull-quote">
+          内在价值 = 10亿 ÷ 5% = 200亿美元
+          <cite>— 简易估值法示例</cite>
+        </div>
+
+        <h3 id="section-4-4">4.4 两种方法的对比与选择</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对比维度</th>
+              <th>现金流贴现（DCF）</th>
+              <th>股东盈余 ÷ 无风险利率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>增长假设</strong></td>
+              <td>可包含增长阶段</td>
+              <td>假设零增长或极低增长</td>
+            </tr>
+            <tr>
+              <td><strong>适用企业</strong></td>
+              <td>增长可预测的企业</td>
+              <td>护城河深厚、现金流稳定的成熟企业</td>
+            </tr>
+            <tr>
+              <td><strong>计算复杂度</strong></td>
+              <td>需要预测多期现金流</td>
+              <td>单期计算，心智可完成</td>
+            </tr>
+            <tr>
+              <td><strong>对利率敏感</strong></td>
+              <td>是（折现率影响终值）</td>
+              <td>是（分母直接决定估值）</td>
+            </tr>
+            <tr>
+              <td><strong>巴菲特偏好</strong></td>
+              <td>概念理解</td>
+              <td><strong>日常决策主力工具</strong></td>
+            </tr>
+            <tr>
+              <td><strong>安全边际来源</strong></td>
+              <td>保守假设增长率/折现率</td>
+              <td>要求市场价格显著低于计算结果</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特的估值哲学</div>
+            <p>九大案例揭示了一个共同的估值逻辑：不需要精确到小数点的计算，而是通过<strong>简单稳定的企业选择</strong>、<strong>保守的假设</strong>和<strong>充足的安全边际</strong>来降低不确定性。正如巴菲特所言："宁要模糊的正确，不要精确的错误。"</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '巴菲特之道';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

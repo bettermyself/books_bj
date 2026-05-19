@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>沃伦·巴菲特的教育 · 巴菲特之道</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    a.toc-chapter-title { text-decoration: none; }
+    a.toc-chapter-title:hover { color: var(--gold); background: rgba(201,168,76,.08); }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">巴菲特之道</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="五西格玛事件：世界上最伟大的投资家.html" class="toc-chapter-title">第1章 五西格玛事件：世界上最伟大的投资家</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title current-chapter">第2章 沃伦·巴菲特的教育</span>
+        </li>
+        <li class="toc-chapter">
+          <a href="购买企业的12个坚定准则.html" class="toc-chapter-title">第3章 购买企业的12个坚定准则</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="普通股投资9个案例.html" class="toc-chapter-title">第4章 普通股投资9个案例</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资组合管理：投资数学.html" class="toc-chapter-title">第5章 投资组合管理：投资数学</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资心理学.html" class="toc-chapter-title">第6章 投资心理学</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="耐心的价值.html" class="toc-chapter-title">第7章 耐心的价值</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特之道》第8章：最伟大的投资家.html" class="toc-chapter-title">第8章 最伟大的投资家</a>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、章节概述</a></li>
+        <li><a href="#section-2">二、三位关键导师概览</a></li>
+        <li><a href="#section-3">三、本杰明·格雷厄姆</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 投资与投机</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 市场先生寓言</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 安全边际</a></li>
+        <li><a href="#section-3-4" class="sub">3.4 内在价值评估</a></li>
+        <li><a href="#section-4">四、菲利普·费雪</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 闲聊法</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 对管理层的重视</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 长期持有哲学</a></li>
+        <li><a href="#section-5">五、查理·芒格</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 对巴菲特的转型影响</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 多元思维模型</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 能力圈原则</a></li>
+        <li><a href="#section-6">六、巴菲特投资哲学的融合</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 三位导师思想的整合</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 巴菲特的进化轨迹</a></li>
+        <li><a href="#section-7">七、本章核心启示</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 对投资者的实践指导</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 关键金句总结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">巴菲特之道 · 第二章 · 沃伦·巴菲特的教育</div>
+        <h1 class="article-title">沃伦·巴菲特的教育</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>罗伯特·哈格斯特朗</span>
+          <span><strong>主题</strong>三位导师与投资哲学的形成</span>
+        </div>
+      </header>
+
+      <!-- 一 -->
+      <section id="section-1">
+        <h2>一、章节概述</h2>
+
+        <p>本章深入探讨了沃伦·巴菲特投资哲学的形成过程，追溯了三位关键导师对他的深远影响：<strong>本杰明·格雷厄姆</strong>、<strong>菲利普·费雪</strong>以及<strong>查理·芒格</strong>。通过理解这三位大师的思想精髓，我们能够清晰地看到巴菲特如何将价值投资理论发展完善，并最终形成其独特的投资体系。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">本章线索</div>
+            <p>巴菲特的投资哲学并非凭空而来，而是站在三位巨人的肩膀上——<strong>格雷厄姆的定量基础</strong>、<strong>费雪的定性洞察</strong>、<strong>芒格的思维升华</strong>，三者交融，铸就了独一无二的投资方法论。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二 -->
+      <section id="section-2">
+        <h2>二、三位关键导师概览</h2>
+
+        <p>巴菲特的投资哲学源于三位导师的智慧融合，每位导师都在不同维度上塑造了他的投资思维。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>导师</th>
+              <th>核心贡献</th>
+              <th>代表著作</th>
+              <th>对巴菲特的影响</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>格雷厄姆</strong></td>
+              <td>价值投资理论奠基人</td>
+              <td>《证券分析》《聪明的投资者》</td>
+              <td>奠定了<strong>方法论基础</strong>，教授安全边际和定量分析</td>
+            </tr>
+            <tr>
+              <td><strong>菲利普·费雪</strong></td>
+              <td>成长股投资先驱</td>
+              <td>《怎样选择成长股》</td>
+              <td>启发对<strong>企业品质</strong>和<strong>管理层能力</strong>的重视</td>
+            </tr>
+            <tr>
+              <td><strong>查理·芒格</strong></td>
+              <td>多元思维模型倡导者</td>
+              <td>《穷查理宝典》</td>
+              <td>帮助完成从"<strong>便宜买平庸</strong>"到"<strong>合理价买伟大</strong>"的转型</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三 -->
+      <section id="section-3">
+        <h2>三、本杰明·格雷厄姆：价值投资之父</h2>
+
+        <p>格雷厄姆被誉为"<strong>华尔街教父</strong>"，其思想是巴菲特投资体系的<strong>基石</strong>。他最早系统性地定义了"投资"与"投机"的区别，并创立了完整的价值分析框架。</p>
+
+        <h3 id="section-3-1">3.1 投资与投机的本质区别</h3>
+
+        <p>格雷厄姆认为，投资必须经过<strong>深入分析</strong>，并确保<strong>本金安全</strong>和<strong>适当回报</strong>。这一简洁的定义划清了理性投资与盲目投机之间的界限。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>投资 (Investment)</th>
+              <th>投机 (Speculation)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>决策基础</td>
+              <td>深入的基本面分析</td>
+              <td>市场情绪、消息、技术图形</td>
+            </tr>
+            <tr>
+              <td>风险态度</td>
+              <td>追求本金安全</td>
+              <td>追求短期暴利，忽视风险</td>
+            </tr>
+            <tr>
+              <td>回报预期</td>
+              <td>合理、可预期的回报</td>
+              <td>不切实际的超额回报幻想</td>
+            </tr>
+            <tr>
+              <td>持有心态</td>
+              <td>长期持有，关注企业价值</td>
+              <td>短期交易，关注价格波动</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-3-2">3.2 市场先生寓言 (Mr. Market)</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">格雷厄姆最具智慧的发明</div>
+            <p>巴菲特将其视为投资中<strong>最重要的概念</strong>。市场先生寓言是理解市场波动本质的最佳心智模型。</p>
+          </div>
+        </div>
+
+        <p>想象你持有一家私人企业的股份，你的合伙人"市场先生"每天都会向你报价，要买你手中的股份或卖给你他的股份。<strong>市场先生患有严重的情绪障碍</strong>：有时极度乐观，报出离谱的高价；有时极度悲观，报出离谱的低价。</p>
+
+        <div class="pull-quote large">
+          你不应该因为市场先生的报价而评价你的企业，相反，你应该利用他的愚蠢——在他悲观时买入，在他乐观时卖出。
+          <cite>— 本杰明·格雷厄姆</cite>
+        </div>
+
+        <h3 id="section-3-3">3.3 安全边际 (Margin of Safety)</h3>
+
+        <p><strong>安全边际</strong>是格雷厄姆投资体系的核心概念。其含义是以显著低于内在价值的价格购买资产，为可能的错误和不利情况预留缓冲空间。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">核心定义</span>
+            <h4>安全边际 = 内在价值 - 市场价格</h4>
+            <p>只有当价格<strong>远低于价值</strong>时才出手，通常要求折扣率达到30%–50%。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">三大作用</span>
+            <h4>降低风险 · 提高回报 · 容错机制</h4>
+            <p>即使分析有误，安全边际也能保护本金安全。这是价值投资最核心的风险管理工具。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-4">3.4 内在价值评估</h3>
+
+        <p>格雷厄姆提供了<strong>定量分析</strong>的工具来评估企业内在价值。他更倾向于依赖<strong>可验证的、当前的资产和盈利数据</strong>，而非对未来增长的预测。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">方法一</span>
+            <h4>资产负债表分析</h4>
+            <p>关注企业的<strong>流动资产</strong>、<strong>固定资产</strong>和<strong>负债情况</strong>，从静态角度评估企业价值。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法二</span>
+            <h4>盈利能力测试</h4>
+            <p>考察企业历史盈利记录，用<strong>可验证的盈利数据</strong>来验证企业的赚钱能力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法三</span>
+            <h4>成长性评估</h4>
+            <p>适度考虑未来增长潜力，但格雷厄姆对此<strong>高度谨慎</strong>——他更信任已经发生的数字。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四 -->
+      <section id="section-4">
+        <h2>四、菲利普·费雪：成长股投资先驱</h2>
+
+        <p>如果说格雷厄姆教巴菲特如何<strong>计算价值</strong>，费雪则教他如何<strong>判断品质</strong>。费雪将目光从资产负债表延伸到了企业更广阔的商业图景中。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对比维度</th>
+              <th>本杰明·格雷厄姆</th>
+              <th>菲利普·费雪</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>关注焦点</td>
+              <td><strong>现有资产价值</strong>（定量）</td>
+              <td><strong>未来成长潜力</strong>（定性）</td>
+            </tr>
+            <tr>
+              <td>企业类型</td>
+              <td>被低估的普通企业、烟蒂股</td>
+              <td>具有卓越管理层的成长型企业</td>
+            </tr>
+            <tr>
+              <td>分析方法</td>
+              <td>财务报表、账面价值、清算价值</td>
+              <td>深入调研、管理层访谈、竞争优势分析</td>
+            </tr>
+            <tr>
+              <td>持有期限</td>
+              <td>相对短期，价值恢复即卖出</td>
+              <td>长期持有，伴随企业成长</td>
+            </tr>
+            <tr>
+              <td>分散程度</td>
+              <td>极度分散（建议30+只股票）</td>
+              <td>相对集中（精选少数几只）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-1">4.1 "闲聊法" (Scuttlebutt Method)</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">独特的尽职调查方法</div>
+            <p>费雪的"闲聊法"是一种从多角度获取企业真实信息的调研方式，目的是获得<strong>财务报表无法体现的定性信息</strong>。</p>
+          </div>
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">调研对象</span>
+            <h4>客户、供应商、竞争对手、前员工、行业专家</h4>
+            <p>通过全方位的信息交叉验证，还原企业真实的竞争地位和发展前景。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">调研内容</span>
+            <h4>产品竞争力 · 管理层诚信与能力 · 行业地位</h4>
+            <p>聚焦于那些<strong>不会出现在财务报表中</strong>，但对企业长期价值至关重要的信息。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 对管理层的重视</h3>
+
+        <p>费雪强调<strong>人的因素</strong>是投资成功的关键。他认为，再好的商业模式，如果没有优秀的管理者来执行，也无法创造持续的价值。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">品质一</span>
+            <h4>诚信与坦诚</h4>
+            <p>管理层是否对股东诚实，是否<strong>如实披露坏消息</strong>。坦诚的管理层是投资安全的第一道防线。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">品质二</span>
+            <h4>能力与创新</h4>
+            <p>管理层是否具备<strong>持续推动企业成长</strong>的战略眼光和执行力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">品质三</span>
+            <h4>长期导向</h4>
+            <p>管理层是否关注<strong>长期价值创造</strong>，而非短期利润操纵。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-3">4.3 长期持有哲学</h3>
+
+        <div class="pull-quote large">
+          如果当初买进股票时做的判断是正确的，那么卖出的最佳时机是永远不卖。
+          <cite>— 菲利普·费雪</cite>
+        </div>
+
+        <p>费雪的投资哲学强调，真正的利润来自于<strong>陪伴优秀企业长期成长</strong>。频繁交易不仅增加成本，更可能让你错过最大的涨幅。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五 -->
+      <section id="section-5">
+        <h2>五、查理·芒格：巴菲特的合伙人兼导师</h2>
+
+        <p>如果说格雷厄姆和费雪为巴菲特提供了原材料，那么<strong>芒格就是那位将这些材料锻造成投资利器的铁匠</strong>。芒格帮助巴菲特完成了其投资生涯中最重要的进化。</p>
+
+        <h3 id="section-5-1">5.1 对巴菲特的转型影响</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特投资生涯中最重要的进化</div>
+            <p>芒格让巴菲特认识到：<strong>以便宜价格购买平庸公司</strong>看似安全，实则是时间和精力的巨大浪费。真正的致富之道是以<strong>合理价格购买伟大公司</strong>，然后让复利发挥魔力。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>转型前（格雷厄姆式）</th>
+              <th>转型后（芒格式）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>投资策略</td>
+              <td>以<strong>便宜价格</strong>购买<strong>平庸公司</strong></td>
+              <td>以<strong>合理价格</strong>购买<strong>伟大公司</strong></td>
+            </tr>
+            <tr>
+              <td>关注焦点</td>
+              <td>关注<strong>账面价值</strong>和<strong>清算价值</strong></td>
+              <td>关注<strong>经济特许权</strong>和<strong>护城河</strong></td>
+            </tr>
+            <tr>
+              <td>集中度</td>
+              <td>分散投资，降低风险</td>
+              <td>集中投资，深度研究</td>
+            </tr>
+            <tr>
+              <td>持有期</td>
+              <td>频繁交易，价值恢复即卖出</td>
+              <td>长期持有，伴随优秀企业成长</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-2">5.2 多元思维模型 (Latticework of Mental Models)</h3>
+
+        <p>芒格倡导投资者建立跨学科的<strong>思维框架</strong>，认为单一的财务分析视角远远不够。真正的投资智慧来自于多个学科的思维碰撞。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">心理学</span>
+            <h4>理解人类误判心理和市场非理性</h4>
+            <p>市场波动很大程度上由人性驱动。理解贪婪、恐惧、从众等心理偏差，是逆向投资的前提。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">经济学</span>
+            <h4>理解市场机制和商业逻辑</h4>
+            <p>供需关系、规模效应、竞争优势衰减等经济学原理是商业分析的底层框架。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">数学与统计学</span>
+            <h4>理解概率、复利和统计规律</h4>
+            <p>复利是世界第八大奇迹。用概率思维评估投资机会，而非简单的"对"与"错"。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">生物学/生态学</span>
+            <h4>理解商业竞争和生态系统演化</h4>
+            <p>商业竞争如同自然选择——适者生存。理解行业生态有助于识别真正的长期赢家。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">工程学</span>
+            <h4>理解系统思维和反馈机制</h4>
+            <p>企业是一个复杂系统。用系统思维看待企业运营，能发现线性分析无法触及的洞见。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-3">5.3 能力圈原则 (Circle of Competence)</h3>
+
+        <div class="pull-quote large">
+          你必须清楚自己能力圈的边界，并待在边界之内。如果你知道边界在哪里，你就不算真的越界。
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">第一步</span>
+            <h4>定义能力圈</h4>
+            <p>真正理解的<strong>行业、企业和商业模式</strong>。不是"听说过"，而是能够做出独立判断的领域。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第二步</span>
+            <h4>坚守能力圈</h4>
+            <p>只投资自己能做出<strong>独立判断</strong>的领域。诱惑无处不在，纪律是唯一的防线。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第三步</span>
+            <h4>扩展能力圈</h4>
+            <p>通过<strong>持续学习</strong>逐步扩大边界，但不可急于求成。能力圈的扩展应该是自然生长的。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">芒格的核心洞察</div>
+            <p><strong>时间是好企业的朋友，坏企业的敌人。</strong>平庸企业即使低价买入，也会消耗管理精力和时间成本。伟大企业的长期复利回报远超平庸企业的短期折扣。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六 -->
+      <section id="section-6">
+        <h2>六、巴菲特投资哲学的融合与升华</h2>
+
+        <h3 id="section-6-1">6.1 三位导师思想的整合</h3>
+
+        <p>巴菲特成功地将三位导师的精华融为一体，创造出了一套独特的投资体系。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">格雷厄姆的基石</span>
+            <h4>安全边际 · 市场先生 · 定量分析 · 理性态度</h4>
+            <p>格雷厄姆教巴菲特如何<strong>计算</strong>——用数字和逻辑来评估投资标的的安全度。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">费雪的精髓</span>
+            <h4>企业品质 · 管理层能力 · 长期持有 · 定性调研</h4>
+            <p>费雪教巴菲特如何<strong>判断</strong>——从更广阔的视角评估企业的长期竞争力和成长潜力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">芒格的升华</span>
+            <h4>伟大企业 · 能力圈 · 多元思维 · 集中投资</h4>
+            <p>芒格教巴菲特如何<strong>思考</strong>——用跨学科的智慧来做出更高层次的投资决策。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-2">6.2 巴菲特的进化轨迹</h3>
+
+        <p>巴菲特的投资哲学经历了一个清晰的进化过程，从格雷厄姆式的"捡烟蒂"到芒格式"买伟大企业"，每一次转变都带来了业绩的飞跃。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>阶段</th>
+              <th>时间</th>
+              <th>特征</th>
+              <th>典型案例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>格雷厄姆阶段</strong></td>
+              <td>1950s–1960s</td>
+              <td>烟蒂股投资，极度分散，定量为主</td>
+              <td>投资<strong>邓普斯特机械制造公司</strong>，清算资产获利</td>
+            </tr>
+            <tr>
+              <td><strong>过渡期</strong></td>
+              <td>1970s</td>
+              <td>开始关注企业品质，但仍受格雷厄姆影响</td>
+              <td>投资<strong>华盛顿邮报</strong>，认识到媒体特许权价值</td>
+            </tr>
+            <tr>
+              <td><strong>芒格阶段</strong></td>
+              <td>1980s 至今</td>
+              <td>以合理价格买伟大企业，集中投资，长期持有</td>
+              <td><strong>可口可乐</strong>（1988）、<strong>苹果</strong>（2016）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          以合理的价格购买一家优秀的公司，远胜于以优惠的价格购买一家平庸的公司。
+          <cite>— 沃伦·巴菲特，1989年致股东信</cite>
+        </div>
+
+        <p>这一转变背后的逻辑清晰而深刻：<strong>机会成本</strong>决定了时间精力应配置在最有价值的地方；<strong>复利威力</strong>意味着伟大企业的长期复利回报远超平庸企业的折扣收益；<strong>生活质量</strong>——与优秀企业和优秀人为伍，比与问题企业纠缠更令人愉悦。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七 -->
+      <section id="section-7">
+        <h2>七、本章核心启示</h2>
+
+        <h3 id="section-7-1">7.1 对投资者的实践指导</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>启示</th>
+              <th>行动建议</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>建立投资哲学</strong></td>
+              <td>不要盲从市场热点，建立自己的投资原则和决策框架</td>
+            </tr>
+            <tr>
+              <td><strong>重视安全边际</strong></td>
+              <td>无论多么看好一家企业，都要为意外情况预留缓冲空间</td>
+            </tr>
+            <tr>
+              <td><strong>研究企业本质</strong></td>
+              <td>不要只看股价波动，深入研究企业的商业模式、竞争优势和管理层</td>
+            </tr>
+            <tr>
+              <td><strong>坚守能力圈</strong></td>
+              <td>不懂不做，通过持续学习逐步扩大能力边界</td>
+            </tr>
+            <tr>
+              <td><strong>长期思维</strong></td>
+              <td>以企业所有者的身份思考，而非股票交易者</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-7-2">7.2 关键金句总结</h3>
+
+        <div class="pull-quote large">
+          投资不需要超人的智商，需要的是控制情绪的能力和独立思考的勇气。
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <div class="pull-quote">
+          "风险来自于你不知道自己在做什么。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <div class="pull-quote">
+          "时间是优秀企业的朋友，平庸企业的敌人。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '巴菲特之道';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

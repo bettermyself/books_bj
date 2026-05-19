@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第1章：公司治理 · 巴菲特致股东的信</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="index.html">巴菲特致股东的信</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第1章 公司治理</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2章 财务与投资</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第3章 投资替代品</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第4章 普通股投资</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第5章 兼并与收购</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第6章 估值与会计</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第7章 会计诡计</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第8章 会计政策</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第9章 税务问题</span>
+        </li>
+      </ul>
+
+      <!-- 本章目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-a">A. 完整公平的信息披露</a></li>
+        <li><a href="#section-a1" class="sub">一、信息披露的核心理念</a></li>
+        <li><a href="#section-a2" class="sub">二、公平报告的定义</a></li>
+        <li><a href="#section-a3" class="sub">三、反对选择性披露</a></li>
+        <li><a href="#section-a4" class="sub">四、CEO盈利预测的警示</a></li>
+        <li><a href="#section-a5" class="sub">五、给投资者的三个建议</a></li>
+        <li><a href="#section-a6" class="sub">六、伯克希尔的坦诚</a></li>
+        <li><a href="#section-b">B. 董事会与公司高管</a></li>
+        <li><a href="#section-b1" class="sub">一、CEO与基层员工的考核差异</a></li>
+        <li><a href="#section-b2" class="sub">二、董事会里的三种情形</a></li>
+        <li><a href="#section-b3" class="sub">三、"独立"董事的真相</a></li>
+        <li><a href="#section-b4" class="sub">四、独立董事的三个条件</a></li>
+        <li><a href="#section-b5" class="sub">五、伯克希尔的管理哲学</a></li>
+        <li><a href="#section-c">C. 企业变化的焦虑</a></li>
+        <li><a href="#section-c1" class="sub">一、纺织业务的关闭与反思</a></li>
+        <li><a href="#section-c2" class="sub">二、伯灵顿工业公司案例</a></li>
+        <li><a href="#section-c3" class="sub">三、报业的兴衰与反思</a></li>
+        <li><a href="#section-d">D. 社会契约</a></li>
+        <li><a href="#section-d1" class="sub">一、BNSF铁路公司</a></li>
+        <li><a href="#section-d2" class="sub">二、中美能源公司</a></li>
+        <li><a href="#section-e">E. 由股东决策的公司捐赠</a></li>
+        <li><a href="#section-f">F. 公司高管的报酬原则</a></li>
+        <li><a href="#section-f1" class="sub">一、留存利润增长≠管理成就</a></li>
+        <li><a href="#section-f2" class="sub">二、股票期权的双重标准</a></li>
+        <li><a href="#section-f3" class="sub">三、伯克希尔的激励哲学</a></li>
+        <li><a href="#section-g">G. 风险、声誉和失察</a></li>
+        <li><a href="#section-g1" class="sub">一、CEO对风险承担绝对责任</a></li>
+        <li><a href="#section-g2" class="sub">二、声誉至上</a></li>
+        <li><a href="#section-g3" class="sub">三、直面坏消息</a></li>
+        <li><a href="#section-g4" class="sub">四、审计委员会的四个质询</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">巴菲特致股东的信 · 第1章</div>
+        <h1 class="article-title">公司治理</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>沃伦·巴菲特</span>
+          <span><strong>主题</strong>公司治理、信息披露、董事会、高管薪酬、风险管理</span>
+        </div>
+      </header>
+
+      <!-- ===== A. 完整公平的信息披露 ===== -->
+      <section id="section-a">
+        <h2>A. 完整公平的信息披露</h2>
+
+        <div class="pull-quote large">
+          在伯克希尔公司，我们通常会<strong>换位思考</strong>，设想如果我们自己处于股东的位置，应该得到什么样的信息，我们会从这样的角度向股东披露完整的报告。
+        </div>
+
+        <h3 id="section-a1">一、信息披露的核心理念</h3>
+        <p>芒格和我会公开当前状况下，公司的<strong>所有重要的运营状况</strong>，以及公司高管对于<strong>长期商业经济特征的坦诚看法</strong>。无论是很多财务细节，还是任何重大的运营数据的讨论，我们都希望给出<strong>解读</strong>。</p>
+
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="remedy-card">
+            <span class="remedy-num">我们反对的内容</span>
+            <h4>❌ 避免使用的做法</h4>
+            <p>人物、工厂、产品的照片<br/>引用 <strong>EBITDA</strong> 的概念<br/>模糊不清的会计技巧<br/>由公关部或财经公关顾问发出的信息</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">我们期待的内容</span>
+            <h4>✅ 应有的做法</h4>
+            <p>公司CEO能<strong>直接用自己的语言</strong>解释所发生的事情<br/>坦诚、清晰、无修饰的运营状况说明</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关于EBITDA的警示</div>
+            <p>巴菲特和芒格认为，引用EBITDA的概念会让他们"不寒而栗"——难道管理层认为公司的资本开支会由<strong>牙齿仙女（Tooth Fairy）</strong>承担吗？</p>
+          </div>
+        </div>
+
+        <h3 id="section-a2">二、公平报告的定义</h3>
+        <table class="article-table">
+          <thead>
+            <tr><th>要素</th><th>具体做法</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>平等获取</td><td>我们的30万个"合伙人"（指伯克希尔的股东）能够在<strong>同一时间</strong>或尽可能同时得到信息</td></tr>
+            <tr><td>发布时间</td><td>选择在<strong>周五股市收盘后</strong>，或<strong>次日的早晨</strong>，将年度和季度财报发布在互联网上</td></tr>
+            <tr><td>消化时间</td><td>让股东或有兴趣的潜在投资者有充分的时间，在<strong>周一开盘之前</strong>消化信息</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-a3">三、反对选择性披露</h3>
+        <p>巴菲特为SEC主席<strong>小阿瑟·莱维特（Arthur Levitt, Jr.）</strong>进行的股市打假活动鼓掌——选择性披露已像癌症一样蔓延，成为大型公司的标准化行为。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>问题</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>操作方式</td><td>用于"指引"分析师或大股东对于盈利的预期，提供正好或略低于公司真实预期的数据</td></tr>
+            <tr><td>本质</td><td>这就像<strong>抛媚眼或点头</strong>一样，给那些满脑子投机思维的机构和顾问发出暗示</td></tr>
+            <tr><td>危害</td><td>相对于以投资为导向的个人投资者，这些人得到了更多的信息优势</td></tr>
+            <tr><td>性质</td><td>这实际上是一种<strong>贪污腐败行为</strong>，但却被华尔街和美国企业界奉为圭臬</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">变革的真相</div>
+            <p>现在，所有公司都被要求平等地对待他们的股东。但这种变革，<strong>不是出于道德良心，而是出于强迫压力</strong>，这对于公司CEO们以及投资者关系部门而言，并不是一件光彩的事。</p>
+          </div>
+        </div>
+
+        <h3 id="section-a4">四、CEO盈利预测的警示</h3>
+        <p>芒格和我们都认为，<strong>CEO们预测公司增长速度，是骗人的和危险的</strong>。当然，他们是被分析师和公司自己的投资者关系部门怂恿裹挟着这么做。但他们应该拒绝，因为这样预测多了会招致麻烦。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">危险 01</span>
+            <h4>不切实际的增长预期</h4>
+            <p>只有非常少的大型公司能维持15%的年复合增长率。巴菲特打赌：2000年最赚钱的200家公司中，能在未来20年保持15%每股盈利增长的公司，将<strong>不超过10家</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">危险 02</span>
+            <h4>腐蚀CEO行为</h4>
+            <p>许多CEO们参与那些并不经济的企业运作，仅仅是为了追求他们曾经宣布的盈利目标。在使出重重解数、筋疲力尽之后，他们有时甚至<strong>玩起了各种各样的会计游戏</strong>，以"制造数字"，达成目标。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">危险 03</span>
+            <h4>滚雪球效应</h4>
+            <p>一旦公司将盈利从一个时期转移到另一个时期，运营的缺口将会随之在未来要求更多的会计操纵。更加肆无忌惮，愚蠢就变成了欺诈。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "据悉，更多的钱是被'笔'偷走的，而不是被'枪'劫走的。"
+        </div>
+
+        <h3 id="section-a5">五、给投资者的三个建议</h3>
+        <table class="article-table">
+          <thead>
+            <tr><th style="width:3rem;">编号</th><th>建议主题</th><th>警示信号</th><th>具体说明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center;">1</td>
+              <td>警惕"弱会计"的公司</td>
+              <td>公司没有费用选项，或养老金假设如天马行空</td>
+              <td>管理层在公开方面使用低下的手段，背后也可能如此。<strong>厨房里如果有蟑螂，绝不可能只有一只。</strong></td>
+            </tr>
+            <tr>
+              <td style="text-align:center;">2</td>
+              <td>警惕"不知所云的注脚"</td>
+              <td>看不懂财务报告中的注释或管理解释</td>
+              <td>CEO可能不想让你明白。安然公司的某些交易描述至今令巴菲特困惑。鼓吹EBITDA有害——折旧在资产产生收益前就已支出现金。</td>
+            </tr>
+            <tr>
+              <td style="text-align:center;">3</td>
+              <td>警惕"大肆鼓吹的盈利成长预测"</td>
+              <td>企业很少能在毫无意外的环境中顺利发展</td>
+              <td>所有盈利都不是简单顺利可预知的。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-a6">六、伯克希尔的坦诚</h3>
+        <div class="pull-quote">
+          芒格和我<strong>不仅不知道伯克希尔下一年的盈利水平，甚至不知道下一个季度的盈利如何</strong>。对于那些一贯声称能够预知未来的CEO们，我们抱怀疑态度。如果他们总是能达到他们预测的目标，我们对其会是<strong>彻头彻尾的怀疑</strong>。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== B. 董事会与公司高管 ===== -->
+      <section id="section-b">
+        <h2>B. 董事会与公司高管</h2>
+
+        <h3 id="section-b1">一、CEO与基层员工的考核差异</h3>
+        <table class="article-table">
+          <thead>
+            <tr><th>层级</th><th>监督强度</th><th>问责后果</th><th>利益保障</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>基层员工（秘书/销售）</td><td>高——有清晰可量化标准</td><td>立即解雇</td><td>无</td></tr>
+            <tr><td>中层管理者</td><td>中</td><td>影响个人利益</td><td>有限</td></tr>
+            <tr><td>CEO/董事会成员</td><td>低——衡量标准几乎不存在</td><td>含混其辞、推诿塞责</td><td>即使公司被收购接管，仍获巨额利益</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">"先射箭后画靶"现象</div>
+            <p>碌碌无为的CEO经常可以蒙混过关——匆忙将落箭之点圈为靶心，事后合理化失败。在董事会议上，对CEO成绩表现的批评就像<strong>打嗝一样无关痛痒</strong>，而不称职的打字员却无法享受这种待遇。</p>
+          </div>
+        </div>
+
+        <h3 id="section-b2">二、董事会里的三种情形</h3>
+        <p>巴菲特指出，上市公司中存在三种根本不同的治理情形，尽管董事们的法律责任完全相同：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>情形</th><th>股权结构特征</th><th>典型案例</th><th>有效性</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>情形 1</td><td>无控股股东</td><td>大多数上市公司</td><td>⚠️ 容易被"长期"一词滥用，董事缺乏诚信或独立思考能力</td></tr>
+            <tr><td>情形 2</td><td>控股股东同时是公司高管</td><td>伯克希尔公司</td><td>取决于控股股东品质；外部董事除反对外别无他法</td></tr>
+            <tr><td>情形 3</td><td>控股股东不参与公司管理</td><td>好时食品、道琼斯</td><td>✅ <strong>逻辑上最为有效</strong>——外部董事可向大股东直接反映不满</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">理想董事会构成（第一种情形）</div>
+            <p>成员人数：<strong>十个或更少</strong>；多数应来自公司外部；外部董事应<strong>制定CEO业绩衡量标准</strong>；定期召开<strong>没有CEO参与</strong>的会议以评判其业绩。</p>
+          </div>
+        </div>
+
+        <p>董事会成员必备三个特质：<strong>精通业务</strong>、<strong>乐于本职</strong>、<strong>具有股东利益导向精神</strong>。错误做法是基于社会名声或多元化因素挑选董事——和和气气但无所事事的董事一旦被任命，再无丢失工作之虞。</p>
+
+        <h3 id="section-b3">三、"独立"董事的真相</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">真正的"独立"董事应具备</div>
+            <p>能思考独立、观点独立；<strong>必须精通商务</strong>；有兴趣并具有<strong>股东利益导向</strong>的特质。</p>
+          </div>
+        </div>
+
+        <p>历时62年的案例研究（1942年以来）揭示了投资公司董事会的失败：他们从未换过投资经理，也从未真正为投资者谈判降低管理费用。</p>
+
+        <div class="pull-quote">
+          "当董事们处理自己的金钱时，他们会另辟蹊径、谨慎小心；肩负其他投资人托付时，心中却不这么想。"
+        </div>
+
+        <p>以《圣经》"你的财富在哪里，你的心就在哪里"为标准，伯克希尔的实践：</p>
+        <table class="article-table">
+          <thead>
+            <tr><th>标准</th><th>伯克希尔实践</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>持股要求</td><td>每位董事至少将<strong>400万美元以上</strong>的身家放在伯克希尔</td></tr>
+            <tr><td>持股来源</td><td>没有任何股份是靠股票期权或赠予获得</td></tr>
+            <tr><td>酬劳水平</td><td>相较于自身年收入极其有限</td></tr>
+            <tr><td>风险承担</td><td>没有替董事安排任何责任保险</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">最不独立的董事</div>
+            <p>根据多年的董事会经验，<strong>最不独立的董事当属那些依赖董事报酬生活的人</strong>。更可笑的是，恰恰正是这些人被归类为"独立"董事。</p>
+          </div>
+        </div>
+
+        <h3 id="section-b4">四、独立董事的三个条件</h3>
+
+        <div class="pull-quote large">
+          如果你们赢，他们就大赢；如果你们输，他们就大输。这种方式或许可以被称之为<strong>所有者资本主义</strong>。
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">条件 01</span>
+            <h4>丰富的商业经验</h4>
+            <p>尤为难得，缺乏则其他两项作用有限。许多聪明、知名的社会人物对企业没有充足了解，不适合待在董事会内。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">条件 02</span>
+            <h4>以股东利益为导向</h4>
+            <p>核心立场，确保决策站在股东一边。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">条件 03</span>
+            <h4>在公司拥有真正的利益</h4>
+            <p>利益绑定，与股东同甘共苦。</p>
+          </div>
+        </div>
+
+        <h3 id="section-b5">五、伯克希尔的管理哲学</h3>
+        <p>芒格和巴菲特只做两项核心工作：<strong>吸引和留住杰出的经理人</strong>，以及<strong>资本配置</strong>。</p>
+
+        <div class="pull-quote">
+          "如果我们雇用的都是比我们矮的人，我们将成为一家侏儒公司；但如果我们雇用的都是比我们高的人，我们会成为一家巨人公司。"
+          <cite>— 大卫·奥格威</cite>
+        </div>
+
+        <p>给每位经理人一个简单的任务，模拟以下三种所有者心态运营公司：</p>
+        <table class="article-table">
+          <thead>
+            <tr><th>模拟情景</th><th>核心要义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>你拥有100%的股份</td><td>以真正所有者的眼光做决策</td></tr>
+            <tr><td>将公司视为家族在世界上拥有的唯一资产</td><td>审慎对待每一分资本</td></tr>
+            <tr><td>至少在100年的时间里不可出售或合并</td><td>着眼长期价值，而非短期业绩</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">加宽护城河</div>
+            <p>我们长期竞争优势的日渐提升，恰恰源自于这些日常不起眼的坚持。可以告诉CEO们着眼于<strong>长期价值的最大化</strong>，而不是下一个季度的盈利。日常经营原则：✅ 提升客户体验、削减不必要的成本、改进产品和服务；❌ 漠视客户、膨胀自大。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">短期主义的代价</div>
+            <p>如果管理层为了追逐短期的盈利而做出错误决策，会导致公司各方面处境恶化（成本、客户满意度、品牌美誉度），后续再做大量工作也无法弥补。看看如今<strong>汽车行业和航空行业的两难困境</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== C. 企业变化的焦虑 ===== -->
+      <section id="section-c">
+        <h2>C. 企业变化的焦虑</h2>
+
+        <h3 id="section-c1">一、纺织业务的关闭与反思</h3>
+        <p>1977年7月，伯克希尔决定关闭纺织业务。1967年巴菲特合伙企业收购伯克希尔-哈撒韦时，账面净资产为2200万美元，但内在价值远低于此；前九年总销售额5.3亿美元，累计亏损1000万美元。</p>
+
+        <p>1978年年报中，巴菲特列出了保留纺织业务的四个原因：在当地是重要的就业雇主、高管汇报直截了当干劲十足、工人精诚合作、以及<em>业务能产出适当回报</em>。巴菲特后来承认，<strong>第4点判断错误</strong>——自1979年后，纺织业务持续大量消耗现金，直到1985年彻底关闭。</p>
+
+        <div class="pull-quote">
+          "我忽略了哲学家孔德的忠告——聪明才智应是内心的仆人，而非奴隶。选择相信了我愿意相信的东西。"
+          <cite>— 巴菲特自省</cite>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">资本再投资的非理性循环</div>
+            <p>单个公司理性投资可降低成本提高效率，但所有公司同时投资，成本下降被价格战抵消，整体回报不变。就像<strong>人群中踮起脚尖看游行，所有人都更累了，但视野并未改善</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-c2">二、伯灵顿工业公司案例</h3>
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>1964年</th><th>1985年</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>销售额</td><td>12亿美元</td><td>28亿美元</td></tr>
+            <tr><td>股价</td><td>60美元</td><td>34美元（经拆股调整）</td></tr>
+            <tr><td>再投资金额</td><td>—</td><td>约30亿美元</td></tr>
+            <tr><td>通胀倍数（CPI）</td><td>1倍</td><td>3倍以上</td></tr>
+          </tbody>
+        </table>
+
+        <p>尽管再投资巨大，销售额实际下降，利润率与净资产回报率远低于20年前，<strong>股东购买力缩水至1/3</strong>。</p>
+
+        <div class="pull-quote large">
+          "你上了什么样的船，比你划船的效率更重要。"
+        </div>
+
+        <p>管理才能虽重要，但无法抵挡行业基本面恶化。如船长期漏水，换船比修补更有效。"如果你想得到一个好名声，一定要从事一个好行业。"</p>
+
+        <h3 id="section-c3">三、报业的兴衰与反思</h3>
+        <p>20世纪大部分时间里，报纸是公众获取信息的主要途径，广告商偏爱发行量最大的报纸，读者偏爱内容最丰富的报纸，最终形成"一城一报"的垄断格局。</p>
+
+        <p>早在1993年，巴菲特就警告："<em>媒体行业将被证明大不如前，不再像几年前我们想象的那样。</em>"但许多报业高管对自身行业的变化视而不见。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>挑战因素</th><th>影响</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>光纤、卫星电视、互联网</td><td>争夺眼球，报纸失去信息主导地位</td></tr>
+            <tr><td>免费、便捷的替代资源</td><td>互联网新闻盈利潜力远低于纸质时代</td></tr>
+            <tr><td>固定成本高</td><td>发行量下降加剧亏损风险</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">报纸"超级优越感"的褪色</div>
+            <p>没有规定保证收入不会低于成本。报纸的"超级优越感"会随着重要性消失而褪色。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "英雄还要靠时势，管理技能的杰出依然敌不过大环境基本面的恶化。"
+          <cite>— 巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== D. 社会契约 ===== -->
+      <section id="section-d">
+        <h2>D. 社会契约</h2>
+
+        <p>BNSF 铁路公司与中美能源公司区别于伯克希尔体系内其他企业的共同特征：拥有大量由<strong>长期负债</strong>支持的受管制长期资产，受政府严格管制，需持续进行大规模投资，同时被允许获得<strong>合理的资本投资回报</strong>。</p>
+
+        <h3 id="section-d1">一、BNSF 铁路公司：美国经济的流通命脉</h3>
+        <p>铁路承担了全美 <strong>42%</strong> 的城际间货运量（以"吨位-英里"衡量）。BNSF 运量占全行业 <strong>28%</strong>，提供全美超过 <strong>11%</strong> 的城际间吨位-英里运输量。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">资本投入与社会责任</div>
+            <p>我们是美国经济流通系统的主要和重要部分，有责任不断维护并改善 23,000 英里铁路及其辅助设施。<strong>2011 年维护与改进支出超过 20 亿美元</strong>（定期超出折旧额）。投资原则：预见社会需求，而非被动反馈。</p>
+          </div>
+        </div>
+
+        <h3 id="section-d2">二、中美能源公司：公用事业的社会契约典范</h3>
+        <table class="article-table">
+          <thead>
+            <tr><th>业务领域</th><th>覆盖范围 / 数据</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>电力供应</td><td>向 <strong>240 万</strong>美国客户供电；爱荷华州、怀俄明州、犹他州最大电力供应商</td></tr>
+            <tr><td>天然气管道</td><td>提供全美 <strong>8%</strong> 的天然气输送</td></tr>
+            <tr><td>伯克希尔持股</td><td>持有 <strong>89.8%</strong> 股份</td></tr>
+          </tbody>
+        </table>
+
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="remedy-card">
+            <span class="remedy-num">管道业务</span>
+            <h4>从倒数第一到第二名</h4>
+            <p>北方天然气公司 2002 年被收购时，行业权威评级为<strong>倒数第一</strong>（43 家公司中排第 43 名）。最新评级跃升至<strong>第 2 名</strong>；第 1 名同为旗下克恩河公司。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">电力价格</span>
+            <h4>爱荷华州自1999年从未涨价</h4>
+            <p>其他大型电力公司同期提价<strong>超过 70%</strong>，电价远高于中美能源。风电装机（2011年底）：<strong>2,909 兆瓦</strong>，超过美国任何其他受管制电厂，风电投资总额 <strong>54 亿美元</strong>。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          无论是铁路还是公用事业，都存在一种<strong>社会契约</strong>：若任何一方未能履行其职责，双方都将不可避免地遭受损失。没有第一流的电力和铁路系统，美国无法实现其巨大的经济潜力。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== E. 由股东决策的公司捐赠 ===== -->
+      <section id="section-e">
+        <h2>E. 由股东决策的公司捐赠方法</h2>
+
+        <div class="pull-quote">
+          "如果A拿着B的钱给C，而A又是立法者，这叫做纳税。但当A是公司高管或董事时，这叫作慈善。"
+          <cite>— 巴菲特</cite>
+        </div>
+
+        <p>巴菲特认为，公司的慈善行为应当反映<strong>股东的偏好</strong>，而非高管或董事的个人意愿。1981年9月30日，伯克希尔收到美国财政部的关键税务裁定：每位股东按持股比例，可指定慈善受赠机构，由伯克希尔代写支票，股东无需为该项捐赠缴纳个人所得税。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>特征</th><th>伯克希尔</th><th>多数上市公司</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>捐赠决策主体</td><td>股东（按持股比例）</td><td>管理层或董事会</td></tr>
+            <tr><td>决策依据</td><td>股东个人慈善偏好</td><td>同行压力、社会压力</td></tr>
+            <tr><td>税务效率</td><td>股东可免除个人所得税</td><td>无此安排</td></tr>
+            <tr><td>公司治理理念</td><td><strong>合伙制心态</strong></td><td>管理层代行所有权</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">计划成效（1980–2002）</div>
+            <p>有资格参与的股份数：932,206 股；回应率高达 <strong>95.6%</strong>（剔除巴菲特相关股份后为90%）；累计捐赠总额 <strong>1.97亿美元</strong>；受赠机构从不足1000个增长到3500个。</p>
+          </div>
+        </div>
+
+        <p>2003年，由于堕胎争议引发抵制，受影响最严重的是<strong>宠厨（Pampered Chef）</strong>的独立加盟商——这些加盟商既非员工，也未参与公司决策，却因抵制行为遭受严重收入损失。巴菲特决定终止母公司层面的捐赠计划：</p>
+
+        <div class="pull-quote">
+          "为了我们和其他股东得到一些可怜的税务效应，而伤害那些正直善良、努力工作的人们，实在没有仁慈可言。"
+          <cite>— 巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== F. 公司高管的报酬原则 ===== -->
+      <section id="section-f">
+        <h2>F. 公司高管的报酬原则</h2>
+
+        <h3 id="section-f1">一、留存利润增长 ≠ 管理成就</h3>
+        <p>当资本回报率平淡时，"投得越多、赚得越多"的记录并不值得称赞。将储蓄账户本金翻四倍，利息自然同比例增长，没人会因此夸奖你。然而，许多 CEO 退休时却因在位期间将公司盈利提升四倍而备受赞誉，却未审视这种增长是否仅仅来自<strong>留存利润的复利积累</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">储蓄账户演示</div>
+            <p>本金10万美元，利率8%，派息率25%（剩余75%留存）。十年后账户价值从$100,000增至$179,084，年度盈利从$8,000增至$13,515。<strong>这一切增长仅仅源于留存利润的复利，而非高效运用资金。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="section-f2">二、股票期权的双重标准与内在不公</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>维度</th><th>股东</th><th>固定价格期权持有人</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>资本成本</td><td>承担全部资本成本</td><td><strong>无资本成本负担</strong></td></tr>
+            <tr><td>下行风险</td><td>参与全部下跌风险</td><td><strong>无下跌风险</strong></td></tr>
+            <tr><td>分红偏好</td><td>希望合理分红</td><td>不分红更有利，可多分留存利润</td></tr>
+            <tr><td>利益对齐</td><td>追求公司真实价值成长</td><td>追求股价波动与留存复利</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">期权如何侵蚀公司价值</div>
+            <p>以"停滞公司 CEO 弗莱德·徒劳"为例：十年内全部盈利用于回购股份，公司业务毫无增长，弗莱德仅凭留存利润回购，期权价值高达 <strong>1.58亿美元</strong>。若十年间利润下滑20%，仍可获利<strong>超过1亿美元</strong>。CEO深知：<strong>每派发一分钱股息，就会降低他们手中期权的价值。</strong></p>
+          </div>
+        </div>
+
+        <p>巴菲特连用两次"令人吃惊"：这种随留存利润自动调整行权价的期权，几十年从未被发行过。报酬设计"专家"对此陌生，但设计对管理层有利的方案时却是百科全书——</p>
+        <div class="pull-quote">
+          "吃谁的面包，唱谁的歌。"
+        </div>
+
+        <h3 id="section-f3">三、伯克希尔的激励哲学：业绩挂钩与资本有成本</h3>
+        <p>伯克希尔奖励的是在其职责范围内的经营目标达成：喜诗糖果干得好，不奖励新闻公司；反之亦然。优秀表现应得奖励，即便股价下跌；平庸表现不应得特别奖励，即便股价飙升。激励可非常巨大：顶尖经理人奖金可达基本工资的<strong>五倍或更多，上不封顶</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">资本不免费：双向对称机制</div>
+            <p>以斯科特·费泽公司的拉尔夫为例：增量资本回报高于费用成本，奖金增加；低于费用成本，差价记在拉尔夫头上，奖金扣减。这体现了真正的<strong>"联盟"</strong>：双向合伙人，同享涨跌，而非"正面我赢，反面你输"。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">布朗鞋业：不寻常的报酬机制</div>
+            <p>1991年收购的H.H.布朗鞋业：高管年薪仅 <strong>$7,800</strong>，外加公司利润<strong>扣除资本成本后</strong>的分成。尽管制鞋业竞争激烈，布朗鞋业在利润率和资产回报率上均创下非凡历史纪录。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">CEO薪酬失控与董事会责任</div>
+            <p>薪酬委员会像滑雪道上的小狗，乖乖跟着顾问建议，忘记忠诚于股东。董事们必须像花自己的钱一样对待股东的钱，对杰出表现给丰厚奖励没错，但若无杰出表现，就该大声喊出<strong>"减少薪酬"</strong>。</p>
+          </div>
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">回归理性的薪酬原则</span>
+            <h4>五条核心准则</h4>
+            <p>
+              1. <strong>留存利润自动增长不是管理成就</strong>，激励机制应剔除这种"自动扶梯"效应<br/>
+              2. <strong>固定价格期权漠视资本成本</strong>，创造"正面我赢，反面股东输"的不对等赌局<br/>
+              3. <strong>报酬必须与可控业绩挂钩</strong>，分清局部责任与整体责任<br/>
+              4. <strong>资本必须计入成本</strong>，形成双向对称的奖惩<br/>
+              5. <strong>董事会必须代表股东</strong>，而非屈服于管理层和顾问
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== G. 风险、声誉和失察 ===== -->
+      <section id="section-g">
+        <h2>G. 风险、声誉和失察</h2>
+
+        <h3 id="section-g1">一、CEO对风险控制承担绝对责任</h3>
+
+        <div class="pull-quote large">
+          风险控制责任不可转移。若公司因风险失控而陷入困境，责任完全归于CEO，不应推诿给风险委员会或首席风险官。
+        </div>
+
+        <p>2008年金融危机中，仅四家最大的金融机构，便抹去股东财富高达 <strong>5,000亿美元</strong>。在许多失败案例中，股东持股价值损失 <strong>90%</strong> 或更多，但CEO们虽然个人财富受损，仍过着优渥的生活。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">建议准则</div>
+            <p>若机构和国家因其鲁莽行为受损，CEO和董事<strong>本人也应付出巨大代价</strong>，且该损失不能由原公司或保险公司进行补偿。他们应品尝"大棒"的滋味。在大型金融机构中，董事会若不能确保CEO对风险控制负全责，即属<strong>玩忽职守</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-g2">二、声誉至上：名誉胜过金钱</h3>
+
+        <div class="pull-quote large">
+          "我们可以承受金钱的损失，甚至损失大笔金钱，但我们无法承受名誉的损失，甚至一丝一毫也不可以。"
+          <cite>— 巴菲特</cite>
+        </div>
+
+        <p>在评估任何商业行为时，不应仅判断其是否合法，更需思考：</p>
+        <div class="pull-quote">
+          "如果这个行为被一个不友好却聪明的记者撰写，并刊出在国家报纸的头版上，我们是否还能愉快面对？"
+        </div>
+
+        <p>当一项决策需要靠"每个人都这么干"来辩解时，它几乎必然存在问题。若对一项行为的合规性或合理性心存"迫近底线"的疑虑，<strong>直接放弃它，就当这笔钱不属于你</strong>。</p>
+
+        <h3 id="section-g3">三、直面坏消息，塑造坦率文化</h3>
+        <p>巴菲特的处理原则是：<strong>立即通报任何重大坏消息</strong>。所罗门证券公司起初的一个可轻易解决的问题，因管理层不愿迅速直面坏消息，导致丑闻不断发酵，几乎令这家拥有8,000名员工的公司消亡。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">文化的力量</div>
+            <p>管理者对坏消息的态度，是企业文化形成的最关键因素。<strong>是文化，而不是文件，更能决定一个企业的行为。</strong>在伯克希尔25万名员工中，每日无人出错的可能性为零——关键是在最细微的不良气息出现时，利用巨大的影响力将问题消灭在萌芽状态。</p>
+          </div>
+        </div>
+
+        <h3 id="section-g4">四、审计委员会的四个关键质询</h3>
+        <p>审计委员会的核心任务是让审计师敢于披露真相。审计师惯于视CEO为客户，为了保住业务而不敢冒犯管理层。审计委员会必须向审计师指出，<strong>瞒报知情的问题将面临巨额罚金</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>序号</th><th>质询问题</th><th>目的与深层含义</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center;">1</td>
+              <td>如果审计师<strong>全权负责</strong>编制公司财务报表，最终成果是否与现管理层准备的报表有所不同？</td>
+              <td>迫使审计师披露所有实质性或非实质性的区别，揭示管理层可能存在的会计选择偏差</td>
+            </tr>
+            <tr>
+              <td style="text-align:center;">2</td>
+              <td>如果审计师本人就是<strong>投资者</strong>，他们是否已收到了所有用于了解报告期内公司财务表现的重要信息？</td>
+              <td>验证信息披露的充分性，确审计师没有隐瞒应告知投资者的关键信息</td>
+            </tr>
+            <tr>
+              <td style="text-align:center;">3</td>
+              <td>如果审计师本人就是<strong>CEO</strong>，公司是否严格遵循了本应遵守的内部审计流程？</td>
+              <td>检查公司内控流程的实际执行情况，而非仅仅停留在书面制度</td>
+            </tr>
+            <tr>
+              <td style="text-align:center;">4</td>
+              <td>审计师是否察觉到任何<strong>将营业收入或成本在不同报告期之间进行转移</strong>的行为？</td>
+              <td>专门防范操纵利润、跨期调节盈余的舞弊行为，确保盈利数字的真实可信</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">预防作用</div>
+            <p>这一流程将迫使审计师从一开始就拒绝为违规行为背书，从而防患于未然。对牢狱之灾的畏惧，将从源头制止不当行为。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>投资智慧 · 读书笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '巴菲特致股东的信';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

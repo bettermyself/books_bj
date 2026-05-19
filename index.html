@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>投资智慧·读书感悟</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-home">⌂ 首页</a>
+        <a href="#" class="nav-add" onclick="showAddBook(); return false;">＋ 新增书籍</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 英雄区 -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">价值投资 · 理性思考 · 终身学习</p>
+      <h1 class="hero-title">在书中寻找智慧的坐标</h1>
+      <p class="hero-desc">记录巴菲特、芒格等投资大师的思想精华</p>
+    </div>
+    <div class="hero-quotes">
+      <div class="quote-card" id="quote-rotator">
+        <p class="quote-text">"反过来想，总是反过来想。"</p>
+        <p class="quote-author">— 查理·芒格</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 书架主区 -->
+  <main class="main-content">
+    <div class="section-header">
+      <h2>我的书架 <span class="shelf-count" id="stat-books">0</span></h2>
+      <div class="filter-bar">
+        <input type="text" id="search-input" placeholder="搜索书名或作者…" oninput="renderBooks()" />
+        <select id="category-filter" onchange="renderBooks()">
+          <option value="">全部分类</option>
+          <option value="投资经典">投资经典</option>
+          <option value="思维方式">思维方式</option>
+          <option value="传记">传记</option>
+          <option value="商业">商业</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+    </div>
+    <div id="book-grid" class="book-grid"></div>
+    <div id="empty-state" class="empty-state" style="display:none">
+      <div class="empty-icon">📚</div>
+      <p>书架还是空的，点击右上角「新增书籍」开始你的阅读之旅</p>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <!-- 新增/编辑书籍 弹窗 -->
+  <div id="modal-book" class="modal-overlay" style="display:none" onclick="closeModal('modal-book',event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModalDirect('modal-book')">×</button>
+      <h3 id="modal-book-title">新增书籍</h3>
+      <div class="form-group">
+        <label>书名 <span class="required">*</span></label>
+        <input type="text" id="book-name" placeholder="例：穷查理宝典" />
+      </div>
+      <div class="form-group">
+        <label>作者</label>
+        <input type="text" id="book-author" placeholder="例：查理·芒格" />
+      </div>
+      <div class="form-group">
+        <label>分类</label>
+        <select id="book-category">
+          <option value="投资经典">投资经典</option>
+          <option value="思维方式">思维方式</option>
+          <option value="传记">传记</option>
+          <option value="商业">商业</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>封面颜色</label>
+        <div class="color-picker" id="color-picker"></div>
+      </div>
+      <div class="form-group">
+        <label>简介</label>
+        <textarea id="book-desc" rows="3" placeholder="一句话介绍这本书…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>阅读状态</label>
+        <select id="book-status">
+          <option value="想读">想读</option>
+          <option value="在读">在读</option>
+          <option value="已读">已读</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="closeModalDirect('modal-book')">取消</button>
+        <button class="btn-primary" onclick="saveBook()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 删除确认 弹窗 -->
+  <div id="modal-confirm" class="modal-overlay" style="display:none" onclick="closeModal('modal-confirm',event)">
+    <div class="modal-box modal-sm">
+      <h3>确认删除</h3>
+      <p id="confirm-msg">确定删除这本书及所有章节笔记？此操作不可撤销。</p>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="closeModalDirect('modal-confirm')">取消</button>
+        <button class="btn-danger" onclick="confirmDelete()">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

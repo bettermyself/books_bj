@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>耐心的价值 · 巴菲特之道</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    a.toc-chapter-title { text-decoration: none; }
+    a.toc-chapter-title:hover { color: var(--gold); background: rgba(201,168,76,.08); }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* ===== Formula Block ===== */
+    .formula-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      color: var(--text);
+      text-align: center;
+      line-height: 2;
+    }
+    .formula-block .var {
+      color: var(--gold-dk);
+      font-weight: 600;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">巴菲特之道</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="五西格玛事件：世界上最伟大的投资家.html" class="toc-chapter-title">第1章 五西格玛事件：世界上最伟大的投资家</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="沃伦·巴菲特的教育.html" class="toc-chapter-title">第2章 沃伦·巴菲特的教育</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="购买企业的12个坚定准则.html" class="toc-chapter-title">第3章 购买企业的12个坚定准则</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="普通股投资9个案例.html" class="toc-chapter-title">第4章 普通股投资9个案例</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资组合管理：投资数学.html" class="toc-chapter-title">第5章 投资组合管理：投资数学</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资心理学.html" class="toc-chapter-title">第6章 投资心理学</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title current-chapter">第7章 耐心的价值</span>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特之道》第8章：最伟大的投资家.html" class="toc-chapter-title">第8章 最伟大的投资家</a>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、长期而言：市场终将反映价值</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 短期是投票机，长期是称重机</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 长期投资的回报证据</a></li>
+        <li><a href="#section-1-3" class="sub">1.3 为何多数投资者仍选择短期交易</a></li>
+        <li><a href="#section-2">二、理性：重要的分野</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 理性≠高智力</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 巴菲特的理性优势</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 理性投资者的日常表现</a></li>
+        <li><a href="#section-3">三、慢速的观点</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 快思考 vs 慢思考</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 巴菲特的"慢速观点"</a></li>
+        <li><a href="#section-4">四、心智工具间隙</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 什么是心智工具间隙</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 如何填补心智工具间隙</a></li>
+        <li><a href="#section-5">五、时间与耐心：巴菲特的核心法则</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 耐心是巴菲特投资哲学的基石</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 时光的最佳之处在于其长度</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 巴菲特的"十年测试"</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 时间与耐心的辩证关系</a></li>
+        <li><a href="#section-6">六、本章核心启示</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 对投资者的行动建议</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 巴菲特耐心的三大体现</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">巴菲特之道 · 第七章 · 耐心的价值</div>
+        <h1 class="article-title">耐心的价值</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>罗伯特·哈格斯特朗</span>
+          <span><strong>主题</strong>长期投资 · 理性决策 · 慢思考 · 心智工具 · 耐心</span>
+        </div>
+      </header>
+
+      <!-- 一、长期而言：市场终将反映价值 -->
+      <section id="section-1">
+        <h2>一、长期而言：市场终将反映价值</h2>
+
+        <h3 id="section-1-1">1.1 短期是投票机，长期是称重机</h3>
+
+        <p>本杰明·格雷厄姆曾提出一个经典比喻：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">投票机</span>
+            <h4>短期而言</h4>
+            <p>股市是台<strong>投票机</strong>——反映的是大众情绪、恐惧与贪婪</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">称重机</span>
+            <h4>长期而言</h4>
+            <p>股市是台<strong>称重机</strong>——最终称量的是企业的真实内在价值</p>
+          </div>
+        </div>
+
+        <p>巴菲特对此深信不疑。他认为，尽管长期而言企业价值与市场股价之间趋于一致，但在特定时间段内，这种对应关系依然会扭曲。然而，这种扭曲对于长期投资者而言并非坏事。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特的智慧</div>
+            <p>"只要公司的内在价值以一个令人满意的速率在提升，公司被股市认可的速度并不重要。甚至，实际上，这种迟来的认可还有好处——它能提供更多可以以折扣价买入的机会。"</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-2">1.2 长期投资的回报证据</h3>
+
+        <p>研究表明，在较长时期内，耐心持有能够带来可观的回报：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>持有期限</th>
+              <th>价值翻倍概率</th>
+              <th>平均年回报率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>5年</strong></td>
+              <td>近30%</td>
+              <td>约14.9%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>数据显示，相当一部分股票在五年内价值可以翻倍。这证明了长期投资确实能带来可观的回报，而短期投机者往往因贪婪和恐惧做出冲动决策，最终接受较低的回报。</p>
+
+        <h3 id="section-1-3">1.3 为何多数投资者仍选择短期交易？</h3>
+
+        <p>尽管证据确凿，现实中大多数市场参与者仍倾向于短期行为，原因如下：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">原因一</span>
+            <h4>贪婪与缺乏耐心</h4>
+            <p>追求快速利润，无法忍受等待</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原因二</span>
+            <h4>错误信念</h4>
+            <p>认为自己能预测市场走向</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原因三</span>
+            <h4>信心崩溃</h4>
+            <p>经历了熊市和金融危机后，对长期投资取得正回报失去信心</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">根本原因</div>
+            <p>不了解投资的本质，<strong>关注价格大于关注企业</strong>，让价格控制了自己的投资决策，从而远离了投资大道。</p>
+          </div>
+        </div>
+
+        <p>纽约证券交易所的年化换手率在过去50年里从低于10%上升到超过300%，增加了30倍。理论上，交易量的提高应使市场具有更好的价格发现功能，减少价格与价值之间的差距。但实际上，由于大部分参与者是<strong>投机者而非投资者</strong>，交易量的上升反而导致了：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">结果一</span>
+            <h4>价格与价值的差距加大</h4>
+            <p>频繁交易使股价偏离企业真实价值</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">结果二</span>
+            <h4>系统噪声增加</h4>
+            <p>大量非理性交易干扰市场信号</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">结果三</span>
+            <h4>市场波动加剧</h4>
+            <p>短期情绪驱动价格剧烈震荡</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、理性：重要的分野 -->
+      <section id="section-2">
+        <h2>二、理性：重要的分野</h2>
+
+        <h3 id="section-2-1">2.1 理性≠高智力</h3>
+
+        <p>理性是一种信念，人们的意见或行为应该基于<strong>理由、知识</strong>，而不是<strong>情绪的反应</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关键洞察</div>
+            <p>理性不等同于高智力。聪明人可能会干傻事——这种现象在心理学中被称为<strong>"理性缺失"（Dysrationalia）</strong>。尽管具有高智力，却不能进行理性思考和行动。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-2">2.2 巴菲特的理性优势</h3>
+
+        <p>巴菲特意识到，市场短期的波动并不会影响他的财富，因为他的持有期限是长期的。他指出：</p>
+
+        <div class="pull-quote large">
+          "当其他人基于短期的贪婪与恐惧做决策时，理性最为重要。这就是赚钱的秘密。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>大多数投资者因为缺乏理性，容易陷入恐惧和贪婪的情绪，从而成为投资游戏中的受害者。而巴菲特则能够在其他人基于短期情绪做决策时保持理性，这是他长期跑赢市场的核心优势之一。</p>
+
+        <h3 id="section-2-3">2.3 理性投资者的日常表现</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>场景</th>
+              <th>非理性投资者</th>
+              <th>理性投资者</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>超市购物</strong></td>
+              <td>货比三家，买品质最好、价格最合理的</td>
+              <td>同样理性</td>
+            </tr>
+            <tr>
+              <td><strong>股市投资</strong></td>
+              <td>没有任何研究，盲目买进卖出</td>
+              <td>深入研究企业基本面，基于逻辑决策</td>
+            </tr>
+            <tr>
+              <td><strong>亏损后</strong></td>
+              <td>怪股市不给力，不反思自身方法</td>
+              <td>检讨决策逻辑，从错误中学习</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">技巧</div>
+            <p>投资的盲目心态越早戒除越好。普通人逛超市会理性比较，但在股市上却变得盲目——这种反差正是理性缺失的典型表现。</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、慢速的观点 -->
+      <section id="section-3">
+        <h2>三、慢速的观点</h2>
+
+        <h3 id="section-3-1">3.1 快思考 vs 慢思考</h3>
+
+        <p>投资中的认知过程可分为两种模式：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>系统1（快思考）</th>
+              <th>系统2（慢思考）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>速度</strong></td>
+              <td>快速、直觉化</td>
+              <td>缓慢、深思熟虑</td>
+            </tr>
+            <tr>
+              <td><strong>能量消耗</strong></td>
+              <td>低</td>
+              <td>高</td>
+            </tr>
+            <tr>
+              <td><strong>决策质量</strong></td>
+              <td>常基于肤浅分析，仓促决策</td>
+              <td>基于深入分析，质量更高</td>
+            </tr>
+            <tr>
+              <td><strong>典型表现</strong></td>
+              <td>看PE、净资产、分红率，股价是否接近历史低点</td>
+              <td>深入理解企业商业模式、竞争优势、管理层质量</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-3-2">3.2 巴菲特的"慢速观点"</h3>
+
+        <p>巴菲特强调，投资者应该像优秀的棒球击球手一样，<strong>耐心等待最佳的投资机会</strong>，而不是急于出手。</p>
+
+        <p>他常引用泰德·威廉姆斯（Ted Williams）的"甜蜜点"理论：</p>
+
+        <div class="pull-quote">
+          威廉姆斯在其职业生涯中，每击出一记本垒打，平均会<strong>放过30个不喜欢的投球</strong>。投资者也应该只在自己能力圈内的"甜蜜点"出击。
+          <cite>— 泰德·威廉姆斯的启示</cite>
+        </div>
+
+        <p>巴菲特在1998年的伯克希尔·哈撒韦年度会议上说：</p>
+
+        <div class="pull-quote large">
+          "我们不会仅仅为了购买而购买。我们只有在认为我们能得到有吸引力的东西时才会购买……你不会因为活动而得到报酬，你会因为正确而得到报酬。"
+          <cite>— 沃伦·巴菲特，1998年伯克希尔年会</cite>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>太多投资者几乎完全依赖系统1的直觉思维做出决定，从来不运用系统2的理性思维。这是投资失败的重要认知根源。</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、心智工具间隙 -->
+      <section id="section-4">
+        <h2>四、心智工具间隙</h2>
+
+        <h3 id="section-4-1">4.1 什么是心智工具间隙？</h3>
+
+        <p>心理学家基思·斯坦诺维奇（Keith Stanovich）提出，人类存在<strong>"心智工具间隙"（Mindware Gap）</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">先天能力</span>
+            <h4>人们天生具备系统1的直觉思维</h4>
+            <p>快速反应、模式识别、情绪驱动——这些是与生俱来的认知能力</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">缺失部分</span>
+            <h4>缺乏足够的心智工具支撑系统2</h4>
+            <p>缺乏分析工具来支撑理性决策，导致投资决策无效</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">核心需求</span>
+            <h4>超越表面财务指标，采用更深入的分析方法</h4>
+            <p>需要全面理解公司的潜力，而非仅看PE、市净率等简单指标</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 如何填补心智工具间隙？</h3>
+
+        <p>巴菲特通过以下方式填补这一间隙：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">方法一</span>
+            <h4>选择简单易懂的企业</h4>
+            <p>提高预测的准确性，只在能力圈内行动</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法二</span>
+            <h4>坚持安全边际</h4>
+            <p>买价低于内在价值，为未来现金流的变数提供缓冲</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法三</span>
+            <h4>长期跟踪研究</h4>
+            <p>在投资前对投资对象进行长期的跟踪和理解</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法四</span>
+            <h4>大量买入</h4>
+            <p>一旦确定，果断重仓，而非分散试探</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">心智工具的具体实践</div>
+            <p>阅读公司年报及其竞争对手的年报；做几个分红折现模型（不同成长率、不同股东盈余、不同时段）；研究管理层长期的资产配置策略；与朋友、同事、财务顾问讨论对该公司及竞争对手的看法。所有这些都<strong>无需高智商</strong>，但是费时费力，需要内在的努力与专注。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>投资所需的分析工具并非高不可攀，关键在于<strong>持续学习和实践</strong>，将知识转化为心智工具。</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、时间与耐心：巴菲特的核心法则 -->
+      <section id="section-5">
+        <h2>五、时间与耐心：巴菲特的核心法则</h2>
+
+        <h3 id="section-5-1">5.1 耐心是巴菲特投资哲学的基石</h3>
+
+        <p>巴菲特的成功源于他采用了一套<strong>完全不同的规则</strong>，其中耐心是最为重要的。他的耐心体现在：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">耐心体现一</span>
+            <h4>长期持有全资拥有的企业</h4>
+            <p>不因为短期利润波动而轻易出售</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">耐心体现二</span>
+            <h4>长期持有部分持股的企业</h4>
+            <p>即使市场暂时不认可，也坚信价值终将体现</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">耐心体现三</span>
+            <h4>有意识地放慢节奏</h4>
+            <p>在这个快节奏的世界里，巴菲特选择慢下来</p>
+          </div>
+        </div>
+
+        <p>一个置身其外的观察者，或许认为这种看似懒惰的态度会放走容易赚的钱。但真正欣赏这个过程的人却发现，<strong>巴菲特和伯克希尔正是用这种态度积累了巨额财富</strong>。</p>
+
+        <h3 id="section-5-2">5.2 时光的最佳之处在于其长度</h3>
+
+        <div class="pull-quote large">
+          "时光的最佳之处在于其长度。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>他不被短期表现的压力所困扰，因为他相信自己比市场更能对一个公司进行正确的判断。投机者没有耐心，而巴菲特却为此而生。</p>
+
+        <h3 id="section-5-3">5.3 巴菲特的"十年测试"</h3>
+
+        <p>巴菲特建议投资者用"十年测试"来检验自己的投资决策：</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">思想实验</div>
+            <p>"让我们假设，你必须做出一个很重要的投资决策，明天你将有一个机会挑选一家企业（仅仅一家）去投资，一旦你做出决定就不能动摇，你必须持有<strong>十年之久</strong>。最后，从该企业获得的利润将支持你的退休生活。现在，你应作何考虑？"</p>
+          </div>
+        </div>
+
+        <p>这个思想实验迫使投资者：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">关注一</span>
+            <h4>关注企业基本面</h4>
+            <p>而非股价波动</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">关注二</span>
+            <h4>评估管理层的长期质量</h4>
+            <p>而非短期业绩</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">关注三</span>
+            <h4>思考企业的长期竞争优势</h4>
+            <p>而非短期热点</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-4">5.4 时间与耐心的辩证关系</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>时间</th>
+              <th>耐心</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>本质</strong></td>
+              <td>客观存在的维度</td>
+              <td>主观选择的态度</td>
+            </tr>
+            <tr>
+              <td><strong>作用</strong></td>
+              <td>让价值最终显现</td>
+              <td>让投资者熬到价值显现的那一刻</td>
+            </tr>
+            <tr>
+              <td><strong>关系</strong></td>
+              <td>硬币的一面</td>
+              <td>硬币的另一面</td>
+            </tr>
+            <tr>
+              <td><strong>巴菲特实践</strong></td>
+              <td>持有数十年</td>
+              <td>期间不为波动所动</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          时间和耐心，一个硬币的两面，这就是巴菲特的精华。
+          <cite>— 本章核心总结</cite>
+        </div>
+
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、本章核心启示 -->
+      <section id="section-6">
+        <h2>六、本章核心启示</h2>
+
+        <h3 id="section-6-1">6.1 对投资者的行动建议</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">建议一</span>
+            <h4>停止预测市场</h4>
+            <p>不要在以预测为生的人身上浪费金钱</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">建议二</span>
+            <h4>研究企业基本面</h4>
+            <p>衡量公司未来的价值所在，买那些你感兴趣且理解的企业</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">建议三</span>
+            <h4>运用系统2思维</h4>
+            <p>避免直觉化的仓促决策，进行深思熟虑的分析</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">建议四</span>
+            <h4>填补心智工具间隙</h4>
+            <p>持续学习，建立系统的分析框架</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">建议五</span>
+            <h4>等待"甜蜜点"</h4>
+            <p>不要因为拥有多余的现金就随便出手，耐心等待机会的出现</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">建议六</span>
+            <h4>通过"十年测试"</h4>
+            <p>每一项投资都应经得起长期持有的检验</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-2">6.2 巴菲特耐心的三大体现</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>体现维度</th>
+              <th>具体表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>持股耐心</strong></td>
+              <td>长期持有，不因短期波动而卖出</td>
+            </tr>
+            <tr>
+              <td><strong>买入耐心</strong></td>
+              <td>等待安全边际，不急于出手</td>
+            </tr>
+            <tr>
+              <td><strong>思考耐心</strong></td>
+              <td>运用系统2慢思考，深入分析而非直觉反应</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2024 投资智慧 · 阅读感悟</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '巴菲特之道';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+</body>
+</html>

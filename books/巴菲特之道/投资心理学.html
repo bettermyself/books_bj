@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>投资心理学 · 巴菲特之道</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    a.toc-chapter-title { text-decoration: none; }
+    a.toc-chapter-title:hover { color: var(--gold); background: rgba(201,168,76,.08); }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">巴菲特之道</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="五西格玛事件：世界上最伟大的投资家.html" class="toc-chapter-title">第1章 五西格玛事件：世界上最伟大的投资家</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="沃伦·巴菲特的教育.html" class="toc-chapter-title">第2章 沃伦·巴菲特的教育</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="购买企业的12个坚定准则.html" class="toc-chapter-title">第3章 购买企业的12个坚定准则</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第4章 普通股投资9个案例</span>
+        </li>
+        <li class="toc-chapter">
+          <a href="投资组合管理：投资数学.html" class="toc-chapter-title">第5章 投资组合管理：投资数学</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title current-chapter">第6章 投资心理学</span>
+        </li>
+        <li class="toc-chapter">
+          <a href="耐心的价值.html" class="toc-chapter-title">第7章 耐心的价值</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特之道》第8章：最伟大的投资家.html" class="toc-chapter-title">第8章 最伟大的投资家</a>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、巴菲特的早年教训</a></li>
+        <li><a href="#section-2">二、市场先生：格雷厄姆的心理学框架</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 市场先生隐喻</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 格雷厄姆方法的三大原则</a></li>
+        <li><a href="#section-3">三、行为金融学：五大核心心理偏差</a></li>
+        <li><a href="#section-3-1" class="sub">（一）过分自信</a></li>
+        <li><a href="#section-3-2" class="sub">（二）过度反应偏差</a></li>
+        <li><a href="#section-3-3" class="sub">（三）损失厌恶</a></li>
+        <li><a href="#section-3-4" class="sub">（四）心理账户</a></li>
+        <li><a href="#section-3-5" class="sub">（五）旅鼠效应</a></li>
+        <li><a href="#section-4">四、短视损失厌恶</a></li>
+        <li><a href="#section-5">五、学术理论与巴菲特的对比</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 现代投资组合理论三支柱</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 巴菲特的风险定义</a></li>
+        <li><a href="#section-6">六、情绪陷阱管理</a></li>
+        <li><a href="#section-7">七、为何心理学至关重要</a></li>
+        <li><a href="#section-8">八、芒格的投注赔率</a></li>
+        <li><a href="#section-9">九、集中投资者的心理特质</a></li>
+        <li><a href="#section-9-1" class="sub">9.1 格雷厄姆-多德式的超级投资者</a></li>
+        <li><a href="#section-9-2" class="sub">9.2 集中投资的五大心理要求</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">巴菲特之道 · 第六章 · 投资心理学</div>
+        <h1 class="article-title">投资心理学</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>罗伯特·哈格斯特朗</span>
+          <span><strong>主题</strong>行为金融学 · 损失厌恶 · 市场先生 · 集中投资心理</span>
+        </div>
+      </header>
+
+      <!-- 一 -->
+      <section id="section-1">
+        <h2>一、巴菲特的早年教训</h2>
+
+        <p>11岁的巴菲特与姐姐多丽丝合伙购买了6股 Cities Service 优先股，买入价$38.25。数月后股价跌至$26.95，<strong>跌幅30%</strong>。当股价终于恢复后，巴菲特立即卖出，然而该股随后飙升至$200以上。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">教训一</span>
+            <h4>耐心的价值</h4>
+            <p>股价恢复后巴菲特立即卖出，随后该股飙升至$200+，<strong>过早卖出导致错失巨大收益</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">教训二</span>
+            <h4>情绪的影响</h4>
+            <p>短期股价波动与公司内在价值无关，却能引发投资者<strong>巨大的情绪不适</strong>。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资智慧</div>
+            <p>巴菲特从这次经历中学到——<strong>短期价格波动对价值影响甚微，但对投资者心理影响巨大</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二 -->
+      <section id="section-2">
+        <h2>二、市场先生：格雷厄姆的心理学框架</h2>
+
+        <h3 id="section-2-1">2.1 市场先生隐喻</h3>
+
+        <p>本杰明·格雷厄姆在《聪明的投资者》中提出"<strong>市场先生</strong>"概念——一个情绪极度不稳定的假想对手。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">特征一</span>
+            <h4>情绪极度不稳定</h4>
+            <p>好消息时过度兴奋报高价，坏消息时过度悲观报低价。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特征二</span>
+            <h4>不记仇</h4>
+            <p>即使你今天拒绝他的报价，明天他仍会带着新情绪回来。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特征三</span>
+            <h4>服务而非指导</h4>
+            <p>他是来服务你的，不是来指导你的——你可以自由选择交易或拒绝。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-2">2.2 格雷厄姆方法的三大原则</h3>
+
+        <p>巴菲特作为格雷厄姆最优秀的学生，提炼出三大核心原则：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>原则</th>
+              <th>核心要义</th>
+              <th>竞争优势</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>视股票为企业</strong></td>
+              <td>将股票视为企业的一部分，而非交易筹码</td>
+              <td>获得完全不同于市场大多数人的视角</td>
+            </tr>
+            <tr>
+              <td><strong>安全边际</strong></td>
+              <td>以显著低于内在价值的价格买入</td>
+              <td>赋予你竞争优势</td>
+            </tr>
+            <tr>
+              <td><strong>真正的投资者态度</strong></td>
+              <td>理性对待市场波动，不被情绪左右</td>
+              <td><strong>可战胜股市中99%的人</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          "如果你具有这种态度，你就能战胜股市中99%的人，它可赋予你巨大的优势。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三 -->
+      <section id="section-3">
+        <h2>三、行为金融学：五大核心心理偏差</h2>
+
+        <p><strong>行为金融学</strong>是通过心理学理论解释市场低效的一种调查研究，研究投资者心理偏差如何导致市场定价错误。</p>
+
+        <h3 id="section-3-1">（一）过分自信（Overconfidence）</h3>
+
+        <p>投资者普遍相信自己比他人更聪明，能战胜市场。这是<strong>主动型基金经理业绩不佳的主要原因</strong>。</p>
+
+        <div class="pull-quote">
+          "最难以想象的事情之一是你不会超越平均。"
+          <cite>— 丹尼尔·卡尼曼（诺贝尔经济学奖得主）</cite>
+        </div>
+
+        <h3 id="section-3-2">（二）过度反应偏差（Overreaction Bias）</h3>
+
+        <p>人们对坏消息反应过度，对好消息反应迟钝。信息技术发展使投资者能每分钟查看股价，<strong>信息过载导致对非重要事件的过度反应</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">简单对策</div>
+            <p><strong>投资后不要频繁查看手机</strong>——减少信息摄入，减少非理性反应。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-3">（三）损失厌恶（Loss Aversion）</h3>
+
+        <p><strong>核心发现</strong>：人们对同等数量损失和盈利的感受不对称——<strong>损失带来的痛苦是盈利带来喜悦的2~2.5倍</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>场景</th>
+              <th>选项A</th>
+              <th>选项B</th>
+              <th>多数人选择</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>盈利场景</strong></td>
+              <td>固定获得$500</td>
+              <td>抛硬币：正面$1000，反面$0</td>
+              <td><strong>A（确定收益）</strong></td>
+            </tr>
+            <tr>
+              <td><strong>损失场景</strong></td>
+              <td>固定损失$500</td>
+              <td>抛硬币：正面损失$1000，反面$0</td>
+              <td><strong>B（冒险一搏）</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">损失厌恶的五大投资危害</div>
+            <p>① 偏好固定收益产品，回避股票<br/>② 过早获利了结（害怕收益变损失）<br/>③ 心态不稳时承担过度风险<br/>④ <strong>抱住亏损股不放，卖出盈利股</strong>（处置效应）<br/>⑤ 税务厌恶——潜意识为避税而降低收益</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-4">（四）心理账户（Mental Accounting）</h3>
+
+        <p>将不同用途的资金视为独立账户，而非统一整体。典型案例：丢失$10后去ATM取新$10，后来找到旧$10却视为"意外之财"。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">投资错误</div>
+            <p>为不同目标（女儿婚礼、退休）分别投资债券/股票，而非<strong>基于整体风险收益配置</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-5">（五）旅鼠效应（The Lemming Factor）</h3>
+
+        <p>从众心理，跟随多数人行动。专业基金经理因考核机制将"<strong>安全</strong>"等同于"<strong>平均</strong>"，服从传统而非独立思考。</p>
+
+        <div class="pull-quote">
+          "警惕将'安全'与'平均'等同的体系。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四 -->
+      <section id="section-4">
+        <h2>四、短视损失厌恶：情绪风暴的双重引擎</h2>
+
+        <p><strong>短视损失厌恶 = 损失厌恶 + 估值频率</strong>。对亏损的敏感度远高于盈利，而查看投资组合的频率越高，感受到的波动越大，情绪压力越大。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">关键数据</div>
+            <p>长期投资主要回报发生的月份只占所有月份的<strong>7%</strong>，也就是说，在余下93%的月份并无回报。看投资结果的时间频率越频繁，你看到亏损的次数就越多。如果你每天看一次，有一半的机会看到亏损；但如果你一个月看一次，这种亏损带来的心灵损伤将小很多。</p>
+          </div>
+        </div>
+
+        <p>泰勒和贝纳茨测试了不同时间段的回报，参考卡尼曼和特沃斯基损失厌恶的两倍效应进行计算。结果发现——直到观察期间为<strong>一年</strong>时，投资者的情感效用因子才会变为正数。</p>
+
+        <div class="pull-quote">
+          "最好股市一年只开放一天交易。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>巴菲特能够克服短视损失厌恶，核心在于<strong>伯克希尔·哈撒韦的企业结构</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>结构优势</th>
+              <th>心理效应</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>同时持有上市公司股票和全资企业</strong></td>
+              <td>理解企业内在价值，而非仅关注股价</td>
+            </tr>
+            <tr>
+              <td><strong>以企业所有者视角思考</strong></td>
+              <td>剥离市场噪音，聚焦基本面</td>
+            </tr>
+            <tr>
+              <td><strong>长期持有心态</strong></td>
+              <td>"买入后股市关闭10年也无妨"</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特的技巧</div>
+            <p>一旦买入股票，他会<strong>很高兴股市关闭10年</strong>，这样就不用考虑卖出。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五 -->
+      <section id="section-5">
+        <h2>五、学术理论与巴菲特的对比</h2>
+
+        <h3 id="section-5-1">5.1 现代投资组合理论三支柱</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>理论家</th>
+              <th>理论</th>
+              <th>核心观点</th>
+              <th>巴菲特的反驳</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>哈里·马科维茨</strong></td>
+              <td>协方差/多元化理论</td>
+              <td>通过协方差构建组合，无法不承担超额风险而获得超额收益</td>
+              <td>以安全边际和深度研究降低风险，无需过度多元化</td>
+            </tr>
+            <tr>
+              <td><strong>尤金·法玛</strong></td>
+              <td>有效市场假说</td>
+              <td>股价反映所有信息，市场几乎不可能被战胜</td>
+              <td>市场经常非理性，情绪导致定价错误</td>
+            </tr>
+            <tr>
+              <td><strong>威廉·夏普</strong></td>
+              <td>资本资产定价模型(CAPM)</td>
+              <td>系统风险（β）无法分散，非系统风险可通过多元化化解</td>
+              <td>风险不是股价波动，而是企业内在价值受损的可能性</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-2">5.2 巴菲特的风险定义</h3>
+
+        <div class="pull-quote large">
+          "投资损失或伤害的可能性。真正关键的是企业的<strong>'内在价值风险'</strong>，而不是股票价格的走势。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>巴菲特认为真正的风险标准是：<strong>一项投资的税后回报是否为投资人至少保持其投资之初的购买力，加上合适的利率因素</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六 -->
+      <section id="section-6">
+        <h2>六、情绪陷阱管理：格雷厄姆的忠告</h2>
+
+        <p>格雷厄姆指出，股票的非理性波动源于人类根深蒂固的投机心理——<strong>希望</strong>（Hope）、<strong>恐惧</strong>（Fear）和<strong>贪婪</strong>（Greed）。</p>
+
+        <p>格雷厄姆提醒投资者必须为市场波动做好准备：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">准备一</span>
+            <h4>知识准备</h4>
+            <p>理解企业价值与价格的关系，建立分析框架。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">准备二</span>
+            <h4>心理准备</h4>
+            <p>建立理性框架，抵御情绪冲击，保持独立判断。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">准备三</span>
+            <h4>财务准备</h4>
+            <p>确保在下跌时有能力采取正确行动，而非被迫卖出。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七 -->
+      <section id="section-7">
+        <h2>七、为何心理学至关重要</h2>
+
+        <div class="pull-quote large">
+          "恐惧和贪婪会推动股价或高于或低于内在价值。当人们贪婪或畏惧时，他们经常以愚蠢的价格买卖股票。短期而言，人们的情绪对于股价更具影响，而不是公司的基本面。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>理解心理冲动具有<strong>双重价值</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>价值维度</th>
+              <th>具体应用</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>避免自身犯错</strong></td>
+              <td>识别并规避多数投资者常犯的心理错误</td>
+            </tr>
+            <tr>
+              <td><strong>捕捉他人错误</strong></td>
+              <td>识别市场因情绪导致的定价错误，从中发现机会</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八 -->
+      <section id="section-8">
+        <h2>八、芒格的投注赔率：心理学与概率的结合</h2>
+
+        <p>查理·芒格将投资比作赛马投注：</p>
+
+        <div class="pull-quote large">
+          "对于我而言，参与赛马或股市的最明智的方法，是<strong>等待具有最佳赔率的良马出现</strong>。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>专业赛马投注者拜尔建议将资金分为两部分：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">游戏资金</span>
+            <h4>日常小额参与</h4>
+            <p>保持市场感觉，但严格控制金额。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">重要资金</span>
+            <h4>仅在高赔率时出手</h4>
+            <p>两个条件同时满足时才动用：① 赛马胜出信心很高；② 回报赔率非常有利。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "当世界给予你机会的时候，聪明的投资者会出重手。当他们具有极大赢面时，他们会下大注。其余的时间里，他们做的仅仅是等待。<strong>就是这么简单。</strong>"
+          <cite>— 查理·芒格</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九 -->
+      <section id="section-9">
+        <h2>九、集中投资者的心理特质</h2>
+
+        <h3 id="section-9-1">9.1 格雷厄姆-多德式的超级投资者</h3>
+
+        <p>集中投资策略的成功者有共同特征：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">凯恩斯</span>
+            <h4>"一个人如果将投资分散于自己不甚了解的企业上…这种认识绝对是错误的。"</h4>
+            <p>在特定期间里，只能对两三家企业具有充分的自信与把握。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">芒格</span>
+            <h4>投资组合非常集中，业绩波动大但方法一致</h4>
+            <p>核心方法——寻找价值折扣，不为波动所动。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">卢·辛普森</span>
+            <h4>以如饥似渴的阅读习惯闻名</h4>
+            <p>反复研读年报而非华尔街报告，通过深度研究获得信息优势。</p>
+          </div>
+        </div>
+
+        <h3 id="section-9-2">9.2 集中投资的五大心理要求</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警告</div>
+            <p>成为一个集中投资者需要<strong>适当的性格及人格特质</strong>。</p>
+          </div>
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">要求一</span>
+            <h4>企业思维</h4>
+            <p>未将股票首先视为企业一部分时，不要进入股市。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要求二</span>
+            <h4>深度研究</h4>
+            <p>勤奋研究目标公司及其竞争对手，达到无人比你更了解的状态。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要求三</span>
+            <h4>长期承诺</h4>
+            <p>没有5年（最好10年）的时间准备，不要开始集中投资。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要求四</span>
+            <h4>拒绝杠杆</h4>
+            <p>不使用财务杠杆，避免追加保证金电话摧毁完美计划。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要求五</span>
+            <h4>理性性格</h4>
+            <p>具备适当的情绪控制能力和独立判断能力。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          "学投资的人只需要学好两门课程：<strong>如何估值企业</strong>、<strong>如何对待股价</strong>。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">最终提示</div>
+            <p>第6章告诉我们，后者往往比前者更难，因为它要求你<strong>战胜自己</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '巴菲特之道';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
