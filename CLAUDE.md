@@ -222,9 +222,10 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 ### 底部脚本（必须包含）
 
 ```javascript
-// 侧边栏滚动高亮
+// 侧边栏滚动高亮（激活项切换时自动滚入视野）
 const links = document.querySelectorAll('#sidebar-nav a');
 const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+let lastActive = null;
 
 function onScroll() {
   const scrollY = window.scrollY + 132;
@@ -233,6 +234,12 @@ function onScroll() {
     if (sec.offsetTop <= scrollY) current = sec;
   }
   links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+  const activeLink = document.querySelector('#sidebar-nav a.active');
+  if (activeLink && activeLink !== lastActive) {
+    lastActive = activeLink;
+    activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 
