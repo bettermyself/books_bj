@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>关于现实思维的现实思考 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">穷查理宝典</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 查理·芒格传略</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 芒格主义：查理的即席谈话</span>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="在哈佛学校毕业典礼上的演讲.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="第二讲 论基本的、普世的智慧，及其与投资管理.html">第二讲 论基本的、普世的智慧</a></li>
+            <li><a href="第三讲 论基本的、普世的智慧（修正稿）.html">第三讲 论基本的、普世的智慧（修正稿）</a></li>
+            <li><a href="第四讲 关于现实思维的现实思考.html" class="active">第四讲 关于现实思维的现实思考</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 芒格的人生哲学</span>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、演讲概述：核心问题</a></li>
+        <li><a href="#section-2">二、五个有用的普遍观念</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 观念总览</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 观念详解</a></li>
+        <li><a href="#section-3">三、格罗兹的可口可乐计划</a></li>
+        <li><a href="#section-4">四、解决方案：对格罗兹的陈述</a></li>
+        <li><a href="#section-5">五、核心策略：条件反射</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 操作性条件反射</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 巴甫洛夫条件反射</a></li>
+        <li><a href="#section-5-5" class="sub">5.5 社会认同效应</a></li>
+        <li><a href="#section-5-6" class="sub">5.6 Lollapalooza效应</a></li>
+        <li><a href="#section-6">六、物流和销售策略</a></li>
+        <li><a href="#section-7">七、反向思考：必须避免的情况</a></li>
+        <li><a href="#section-8">八、教育意义的总结</a></li>
+        <li><a href="#section-9">九、附录：相关人物与概念</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第四讲</div>
+        <h1 class="article-title">关于现实思维的现实思考</h1>
+        <div class="article-meta">
+          <span><strong>演讲者</strong>查理·芒格（Charlie Munger）</span>
+          <span><strong>时间</strong>1996 年 7 月 20 日</span>
+          <span><strong>性质</strong>非正式演讲</span>
+        </div>
+      </header>
+
+      <!-- 一、演讲概述 -->
+      <section id="section-1">
+        <h2>一、演讲概述</h2>
+        <h3 id="section-1-1">核心问题</h3>
+
+        <p>在漫长的职业生涯中，我掌握了一些<strong>超级简单的普遍观念</strong>，我发现它们对解决问题很有帮助。现在我将要讲述<strong>五个这样的观念</strong>，然后再向大家提出一个极难回答的问题：</p>
+
+        <div class="pull-quote large">
+          "如何用 200 万美元的初始资本打造一家价值高达 2 万亿美元的企业？"
+        </div>
+
+        <p>2 万亿美元的数额足够算得上是一种现实成就。接下来，我将会利用我有用的普遍观念，尝试去解决这个问题。最后，我将会指出我的论证的重要教育意义所在。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、五个有用的普遍观念 -->
+      <section id="section-2">
+        <h2>二、五个有用的普遍观念</h2>
+
+        <h3 id="section-2-1">2.1 观念总览</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>序号</th><th>观念名称</th><th>核心要义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>先解决显而易见的大问题</strong></td><td>简化任务的最佳方法一般是先解决那些答案显而易见的大问题</td></tr>
+            <tr><td>2</td><td><strong>数学运算能力</strong></td><td>惟有数学才能揭示科学的真实面貌，因为数学似乎是上帝的语言</td></tr>
+            <tr><td>3</td><td><strong>反面思考</strong></td><td>光是正面思考问题是不够的，你必须进行反面思考</td></tr>
+            <tr><td>4</td><td><strong>跨学科的基本学术智慧</strong></td><td>最好的、最具有实践性的智慧是基本的学术智慧，但必须以跨学科的方式思考</td></tr>
+            <tr><td>5</td><td><strong>Lollapalooza 效应</strong></td><td>真正的大效应，通常在几种因素的共同作用下才会出现</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-2">2.2 观念详解</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">观念一：先解决显而易见的大问题</div>
+            <p>简化任务的最佳方法一般是先解决那些答案显而易见的大问题。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">观念二：数学运算能力</div>
+            <p>惟有数学才能揭示科学的真实面貌，因为数学似乎是上帝的语言。如果缺乏数学运算能力，在我们大多数人所过的生活中，你们将会像一个<strong>参加踢屁股比赛的独腿人</strong>。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">观念三：反面思考</div>
+            <p>光是正面思考问题是不够的，你必须进行反面思考。就像有个乡下人说过的，他要是知道他的死亡地点就好了，那他就永远不去那里。实际上，许多问题是无法通过正面思考来解决的。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "反过来想，总是反过来想。"
+          <cite>— 卡尔·雅可比（伟大代数学家）</cite>
+        </div>
+
+        <p>毕达哥拉斯学派也同样通过逆向思考证明"2 的平方根是一个无理数"。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">观念四：跨学科的基本学术智慧</div>
+            <p>最好的、最具有实践性的智慧是基本的学术智慧。但有一个极其重要的前提：<strong>你必须以跨学科的方式思考</strong>。你必须经常使用所有可以从各个学科的大一课程中学到的概念。如果能够熟练地掌握这些基本概念，你解决问题的方法将不会受到限制。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警告：不要完全依赖别人</div>
+            <p>如果你们在思考问题的时候完全依赖别人，时常花钱请一些专业顾问，那么每当碰到你们那狭小的知识面之外的问题，你们将会遭遇很大的灾难。你们不但要浪费很多精力去处理复杂的合作问题，而且还将会遇到萧伯纳笔下那个人物所说的情况："每个职业最终都是蒙骗外行人的勾当。"</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "如果你想要完成，就自己着手去做。如果不想，就让别人去做。"
+          <cite>— 本杰明·富兰克林</cite>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">观念五：Lollapalooza 效应</div>
+            <p>真正的大效应，也就是 lollapalooza 效应，通常在几种因素的共同作用下才会出现。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>案例</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>肺结核治愈</td><td>多年以来，许多人的肺结核之所以能够治愈，是因为他们同时服用了三种药物</td></tr>
+            <tr><td>飞机的飞行</td><td>飞机的飞行也是遵守同样的模式</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、格罗兹的可口可乐计划 -->
+      <section id="section-3">
+        <h2>三、现实问题：格罗兹的可口可乐计划</h2>
+
+        <h3 id="section-3-1">3.1 问题设定</h3>
+
+        <p>在<strong>1884 年的亚特兰大</strong>，你们和其他 20 个同伴来到一个古怪而有钱的亚特兰大市民面前，他的名字叫<strong>格罗兹</strong>。</p>
+
+        <p><strong>你们和格罗兹有两个共同点：</strong></p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">共同点 一</span>
+            <h4>掌握五个有用的普遍观念</h4>
+            <p>你们经常使用这五个有用的观念来解决问题。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">共同点 二</span>
+            <h4>掌握 1996 年大学必修课基本概念</h4>
+            <p>然而这些基本概念的所有发现者和例证都出现在 1884 年以前，你们对 1884 年以后发生的事情一无所知。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-2">3.2 投资条件</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>条件</th><th>详情</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>初始投资</strong></td><td>200 万美元（1884 年的面值）</td></tr>
+            <tr><td><strong>企业类型</strong></td><td>生产非酒精饮料的新企业</td></tr>
+            <tr><td><strong>股权结构</strong></td><td>格罗兹占一半股份，永远归格罗兹慈善基金所有</td></tr>
+            <tr><td><strong>企业名称</strong></td><td>可口可乐</td></tr>
+            <tr><td><strong>目标回报</strong></td><td>150 年后（2034 年）格罗兹基金资产达到 1 万亿美元</td></tr>
+            <tr><td><strong>成功奖励</strong></td><td>另一半股权归计划提出者</td></tr>
+            <tr><td><strong>企业总价值</strong></td><td>2 万亿美元（含历年分红）</td></tr>
+            <tr><td><strong>陈述时间</strong></td><td>15 分钟</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、解决方案：对格罗兹的陈述 -->
+      <section id="section-4">
+        <h2>四、解决方案：对格罗兹的陈述</h2>
+
+        <h3 id="section-4-1">4.1 显而易见的大问题</h3>
+
+        <p>好啊，格罗兹，为了简化我们的任务，我们应该先弄清楚下面几个<strong>显而易见的大问题</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">问题 一</span>
+            <h4>打造强大的品牌商标</h4>
+            <p>我们无法通过销售没有品牌的饮料而开创出一个价值 2 万亿美元的企业。因此，我们必须将"可口可乐"变成一个受法律保护的、强大的品牌。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题 二</span>
+            <h4>从亚特兰大走向全球</h4>
+            <p>我们必须在亚特兰大创业，接着在美国其他地方取得成功，然后快速地用我们的新饮料占领全世界的市场，这就需要我们生产一种广受欢迎的产品，它必须拥有一些强有力的基本要素。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 数学运算确定目标</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心思路</div>
+            <p>下面我们将使用数学运算来确定我们的目标到底意味着什么。</p>
+          </div>
+        </div>
+
+        <p>根据合理的推测，到 2034 年，全世界大概有<strong>80 亿饮料消费者</strong>。平均而言，这些消费者中的每一个都会比 1884 年的普通消费者更有钱。每个消费者的身体成分主要是水，每天必须喝下<strong>64 盎司的水</strong>，也就是八瓶八盎司的饮料。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>计算步骤</th><th>数据</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>全球饮料消费者</td><td>80 亿人</td></tr>
+            <tr><td>每人每日水摄入量</td><td>64 盎司（8 瓶）</td></tr>
+            <tr><td>目标市场份额（水摄入总量）</td><td>25%</td></tr>
+            <tr><td>新市场占据比例</td><td>50%</td></tr>
+            <tr><td><strong>预计年销量</strong></td><td><strong>29,200 亿瓶</strong></td></tr>
+            <tr><td>每瓶净利润</td><td>4 美分</td></tr>
+            <tr><td><strong>预计年利润</strong></td><td><strong>1,170 亿美元</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>这就足够了，如果我们仍然能够保持良好的增长率，那么企业的价值轻轻松松就可以达到<strong>2 万亿美元</strong>。</p>
+
+        <h3 id="section-4-3">4.3 利润目标的合理性</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>支持因素</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>货币贬值</strong></td><td>150 年是一段很长的时间。美元和罗马的德拉克马一样，肯定也会贬值</td></tr>
+            <tr><td><strong>购买力上升</strong></td><td>相应地，世界各地的普通饮料消费者的真实购买力将会上升</td></tr>
+            <tr><td><strong>水摄入量增长</strong></td><td>由于花相对较少的钱就能改善消费体验，所以消费者的水摄入量将会迅速上涨</td></tr>
+            <tr><td><strong>成本下降</strong></td><td>随着技术的进步，用一般购买力单位来衡量的话，我们这种简单产品的成本将会下降</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>综合效应</strong>：这四种因素加起来将会有助于我们每瓶四美分的目标的实现。在这 150 年里，以美元计算，全世界的饮料购买力将会增长 40 倍。倒推起来，就等于说在 1884 年的各种条件下，我们每瓶只要有四美分的 1/40 或者<strong>1/10 美分</strong>就够了。如果我们的产品确实广受欢迎，那么这个目标是轻轻松松就可以达到的。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、核心策略：创造和维持条件反射 -->
+      <section id="section-5">
+        <h2>五、核心策略：创造和维持条件反射</h2>
+
+        <h3 id="section-5-1">5.1 生意的本质</h3>
+
+        <p>我们必须拥有一个<strong>强大商标</strong>。而要拥有强大的商标，我们自然必须正确地用基本的学术观念来理解这种生意的本质。我们可以从心理学的入门课上学到，本质上，我们要做的生意就是<strong>创造和维持条件反射</strong>。</p>
+
+        <p>"可口可乐"的商标名称和商标形象将会扮演<strong>刺激因素</strong>的角色，购买和喝下我们的饮料则是我们想要的<strong>反应</strong>。</p>
+
+        <h3 id="section-5-2">5.2 两种条件反射</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>名称</th><th>核心机制</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>操作性条件反射</strong></td><td>通过操作性的条件反射</td></tr>
+            <tr><td>2</td><td><strong>经典条件反射（巴甫洛夫反射）</strong></td><td>通过经典的条件反射，通常被称为"巴甫洛夫反射"</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">策略要点</div>
+            <p>由于我们想要得到一种 <strong>lollapalooza 结果</strong>，我们应该同时使用这两种引发条件反射的技巧——这样我们就能加强每种技巧所产生的效应。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-3">5.3 操作性条件反射的实现</h3>
+
+        <p>我们的任务中操作性条件反射的部分很容易完成。我们只需要：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 一</span>
+            <h4>将饮用回报最大化</h4>
+            <p>将饮用我们饮料对消费者的回报最大化。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 二</span>
+            <h4>降低被消除的可能性</h4>
+            <p>一旦我们引发想要的反射之后，将它因竞争对手构建的操作性条件反射而被消除的可能性降到最低。</p>
+          </div>
+        </div>
+
+        <p><strong>回报类别</strong>（对我们是现实的）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>序号</th><th>回报类型</th><th>具体说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>营养价值</strong></td><td>饮料中所含的卡路里和其他成分的营养价值</td></tr>
+            <tr><td>2</td><td><strong>感官刺激</strong></td><td>在通过达尔文的自然选择而形成的人类神经系统的影响下起到刺激消费作用的味道、口感和香气</td></tr>
+            <tr><td>3</td><td><strong>刺激品</strong></td><td>比如糖和咖啡因</td></tr>
+            <tr><td>4</td><td><strong>温度效应</strong></td><td>当人们觉得太热时的凉爽效应，或者当人们觉得太冷时的温暖效应</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">综合运用</div>
+            <p>因为想要得到一个 lollapalooza 结果，所以我们自然会将这几类回报都囊括在内。</p>
+          </div>
+        </div>
+
+        <p><strong>具体实施：</strong></p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">决策 一</span>
+            <h4>设计适合冷藏饮用的饮料</h4>
+            <p>喝冷饮有助于抵抗过热的天气。天热的时候人体会消耗更多的水分，而天冷的时候则不然。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">决策 二</span>
+            <h4>添加糖和咖啡因</h4>
+            <p>茶、咖啡和柠檬汁已经被广泛地用作饮料，添加这些刺激品是很自然的选择。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">决策 三</span>
+            <h4>不断试验找到最佳口味</h4>
+            <p>通过不断地试验来确定味道和其他要素，让人们在饮用之后得到最大的快乐。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">决策 四</span>
+            <h4>全球快速铺开</h4>
+            <p>致力于在最短的时间内让世界各地的人随时都能喝上我们的饮料。一种竞争性产品如果未经尝试，就很难鼓励人们养成另外一种截然不同的习惯。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-4">5.4 巴甫洛夫条件反射的运用</h3>
+
+        <p>接下来我们要考虑的是我们必须使用的<strong>巴甫洛夫条件反射</strong>。在巴甫洛夫条件反射中，<strong>光靠联想就能产生强大的效应</strong>。</p>
+
+        <div class="pull-quote large">
+          "巴甫洛夫那条狗的神经系统使它可以对着不能吃的铃铛咽口水。男人的大脑渴望那个他们无法拥有的漂亮女人手里拿着的饮料。"
+        </div>
+
+        <p>所以啊，格罗兹，我们必须用各种<strong>漂亮高贵的形象</strong>来刺激消费者的神经系统。因为只要能够做到这一点，我们的饮料就会让消费者联想起那些他们喜欢或者仰慕的东西。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>策略</th><th>具体措施</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>广告投入</strong></td><td>强烈的巴甫洛夫条件反射需要花费很多钱，尤其是要支付许多广告费。我们将会预先花费比我们可以想象到的多得多的钱，但这些钱将会花得很有效</td></tr>
+            <tr><td><strong>竞争壁垒</strong></td><td>随着我们在新饮料市场上迅速扩张，我们的竞争对手将会面临巨大的竞争劣势，他们无法购买广告来引发他们需要的巴甫洛夫条件反射</td></tr>
+            <tr><td><strong>规模效应</strong></td><td>这种结果和其他"产量创造力量"等效应相结合，应该能够帮助我们在各地赢得和保持至少 50% 的市场</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>产品命名与形象设计：</strong></p>
+
+        <p>由联想引起的巴甫洛夫效应可以帮助我们选定我们的新饮料的味道、口感和香气。考虑到巴甫洛夫效应，我们将会明智地选择这个听起来<strong>神秘又高贵的名字</strong>——"可口可乐"，而不是一个街头小贩的名字，比如说"格罗兹的咖啡因糖水"。</p>
+
+        <p>出于同样的巴甫洛夫原因，明智的做法是让我们的饮料：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">设计 一</span>
+            <h4>看起来很像红酒，而不是糖水</h4>
+            <p>如果这种饮料生产出来很清澈，我们将会给它添加人工色素。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">设计 二</span>
+            <h4>充气</h4>
+            <p>让我们的产品看起来像是香槟或者其他昂贵的饮料。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">设计 三</span>
+            <h4>味道调制得更好</h4>
+            <p>让竞争产品难以模仿。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">设计 四</span>
+            <h4>不同于任何标准味道</h4>
+            <p>这样我们就能给竞争对手制造最大的困难，并确保绝无现有的饮料因为味道碰巧和我们的产品相同而获益。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-5">5.5 社会认同效应</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心洞察</div>
+            <p>人类有一种强大的"有样学样"的天性，心理学家通常称之为<strong>"社会认同"</strong>。</p>
+          </div>
+        </div>
+
+        <p>社会认同，仅仅由于看到别人的消费而引起的模仿性消费，不但能够让消费者更加容易接受我们的产品，而且还能让消费者觉得自己得到了更多的回报。当我们设计广告和促销计划、在考虑放弃当前的利润以便投入到促进当前和未来的消费时，我们将会永远把这种强大的社会认可因素考虑在内。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键结论</div>
+            <p>这样一来，与其他绝大多数产品不同的是，<strong>我们的产品卖得越多，就能卖得越好</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-6">5.6 综合效应：Lollapalooza 效应</h3>
+
+        <p>格罗兹，我们现在可以明白，如果将以下因素结合起来：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>因素</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>巴甫洛夫条件反射</strong></td><td>强大的联想效应</td></tr>
+            <tr><td><strong>社会认同效应</strong></td><td>"有样学样"的天性</td></tr>
+            <tr><td><strong>操作性条件反射</strong></td><td>一种口感出色、提神醒脑、冰凉爽口、能够引起操作性条件反射的饮料</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          "这三种因素产生的巨大合力将会让我们的销量在很长的时间内节节升高。这跟化学里面的<strong>自我催化反应</strong>差不多，这恰恰是我们需要的那种由多因素引发的 lollapalooza 效应。"
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、物流和销售策略 -->
+      <section id="section-6">
+        <h2>六、物流和销售策略</h2>
+
+        <h3 id="section-6-1">6.1 销售模式</h3>
+
+        <p>我们这家公司的物流和销售策略将会很简单。说到销售我们的饮料，可行的方法只有两种：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">方式 一</span>
+            <h4>作为糖浆卖给冷饮销售店或者饭店</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方式 二</span>
+            <h4>作为完整的瓶装汽水进行销售</h4>
+          </div>
+        </div>
+
+        <p>我们想要 lollapalooza 效应，所以我们当然两种方法都会采用。我们也想要巨大的巴甫洛夫和社会认同效应，所以将会一直用大量的钱来做广告和促销活动，<strong>以四折的价格把糖浆卖给冷饮销售店</strong>。</p>
+
+        <h3 id="section-6-2">6.2 生产布局</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>生产环节</th><th>策略</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>糖浆生产</strong></td><td>只要几个糖浆厂就能满足全世界的需求</td></tr>
+            <tr><td><strong>罐装厂</strong></td><td>为了避免不必要的运输成本，我们需要在世界各地建立起罐装厂</td></tr>
+            <tr><td><strong>利润最大化</strong></td><td>前提是我们拥有定价权，有权决定卖给冷饮销售店的糖浆价格和瓶装产品价格</td></tr>
+            <tr><td><strong>控制权</strong></td><td>让每个独立瓶装厂都成为<strong>委托制造商</strong>，而不是糖浆买方，更不能让它们拥有永久经营权</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-6-3">6.3 配方保护</h3>
+
+        <p>由于我们这种超级重要的口味不可能得到专利权或者版权，所以我们将会努力地<strong>保密我们的配方</strong>。我们将会大肆宣传我们的秘方，这会加强巴甫洛夫效应。</p>
+
+        <p>到最后，随着食品化工学的发展，竞争对手将能够生产出味道跟我们差不多的饮料。但是到那个时候，我们将会取得很大的领先优势，品牌效应也很强大，而且有完善的<strong>"永不缺货"</strong>的世界性销售渠道，所以竞争对手复制我们的味道并不会阻碍我们实现目标。</p>
+
+        <p>此外，食品化学的发展固然对我们的竞争对手有帮助，但肯定也会给我们带来好处，包括：更好的冷藏设备、更好的运输、不加糖而保持甜味的方法，以及抓住一些开发相关饮料的机会。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、反向思考：必须避免的四种情况 -->
+      <section id="section-7">
+        <h2>七、反向思考：必须避免的四种情况</h2>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">反向思考</div>
+            <p>我们的商业计划只需要经受最后一道考验了。我们将会再次像雅可比那样进行反向思考。<strong>我们必须避开哪些我们不想遇到的情况呢？</strong></p>
+          </div>
+        </div>
+
+        <p>有四种情况明显是我们应该避免的：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>序号</th><th>必须避免的情况</th><th>原因分析</th><th>应对策略</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><strong>消费者喝了饮料之后感到腻烦</strong></td>
+              <td>根据现代达尔文主义的理论，消费者一旦感到腻烦，其生理机制就会对我们的饮料产生抵抗作用</td>
+              <td>通过实验找到一种很棒的、不会腻的味道</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><strong>失去我们强大的商标名称</strong></td>
+              <td>哪怕失去一半也不行。如果市面上有一种"百比可乐"在销售，我们将会蒙受惨重的损失</td>
+              <td>就算出现"百比可乐"，我们也应该是这个品牌的持有人</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><strong>妒忌产生的恶果</strong></td>
+              <td>妒忌在十诫中占有显著的位置，因为它是人类的天性</td>
+              <td>避免妒忌的最佳方法是做到名副其实——致力于提高产品质量，制定合理的价格，提供无害的快乐</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><strong>突然对产品味道做出重大改变</strong></td>
+              <td>即使在双盲测试中新的味道尝起来更好，换成新味道也是愚蠢的做法——原有的味道已经深入人心</td>
+              <td>改变味道会引发<strong>剥夺性超级反应综合征</strong>，还会让竞争对手通过复制口味而取得优势</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">剥夺性超级反应综合征</div>
+            <p>使人们因难以接受"损失"而没有任何商量的余地，这种心理倾向促使大部分的赌徒失去理智。味道的改变将会允许竞争对手通过复制我们的口味而取得优势，因为他们可以利用：① 消费者因为被剥夺了原有的味道而产生的敌对情绪；② 我们以前的产品创造出来的、对我们原来的味道的热爱。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、教育意义的总结 -->
+      <section id="section-8">
+        <h2>八、教育意义的总结</h2>
+
+        <h3 id="section-8-1">8.1 可口可乐案例的验证</h3>
+
+        <p>真正的可口可乐公司的历史是否印证了我的方法的可行性呢？</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间 / 指标</th><th>数据</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1896 年（虚构格罗兹起家后 12 年）</td><td>真正的可口可乐公司的净资产为 15 万美元，利润差不多等于零</td></tr>
+            <tr><td>历史失误</td><td>真正的可口可乐公司真的失去了其商标的一半，而且确实以固定的糖浆价格授予了某些瓶装厂永久经营权</td></tr>
+            <tr><td>当前资产（1996 年）</td><td>1,250 亿美元</td></tr>
+            <tr><td>增长要求</td><td>价值每年只要增长 8%，2034 年就能达到 2 万亿美元</td></tr>
+            <tr><td>销售增长要求</td><td>销售量每年只要增长 6%，到 2034 年就能达到 29,200 亿瓶的销售目标</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>根据以往的销售业绩，这样的增长速度是可以达到的，而且到 2034 年之后，可口可乐取代白水的空间还很大。所以我认为，这位虚构的格罗兹如果从一开始就能把握先机，发展壮大，并且避免那些最糟糕的错误，应该能够轻轻松松完成两万亿美元的目标，而且当他完成目标的时候，离 2034 年还早呢。</p>
+          </div>
+        </div>
+
+        <h3 id="section-8-2">8.2 高等教育的缺陷</h3>
+
+        <p>这就引出了我今天演讲的主要目的。如果我对格罗兹的问题的解答大体上是正确的，如果你们认可一个我相信可以成立的假设——大多数拥有博士学位的教师，甚至大多数心理学教授和商学院院长，都没办法给出像我这么简单的答案，那么<strong>我们的教育就大有问题了</strong>。</p>
+
+        <h4>缺陷一：缺乏跨学科的综合</h4>
+
+        <p>第一，高等学府的心理学研究固然值得钦佩，也很有用，有过许多重要的天才实验，但却<strong>缺乏跨学科的综合</strong>。尤其值得一提的是，心理学研究并没有给予多种心理因素共同造成的 lollapalooza 效应足够的重视。</p>
+
+        <div class="pull-quote large">
+          "一切应该尽可能简单——但不能过于简单。"
+          <cite>— 爱因斯坦</cite>
+        </div>
+
+        <p>总而言之，心理学之所以会被误解，是因为缺乏伟大的集大成者。如果物理学没有产生许多像迈克尔·法拉第那样的杰出实验家和像詹姆斯·克拉克·麦克斯韦那样的集大成者，恐怕电磁学现在还会遭到误解。</p>
+
+        <h4>缺陷二：学科壁垒严重</h4>
+
+        <p>第二，<strong>心理学和其他学科之间老死不相往来的情况十分严重</strong>。但是只有跨学科的方法才能够正确地解决现实问题——无论是在学术界，还是在可口可乐公司。</p>
+
+        <p>简单来说：其他学科的学者往往瞧不起心理学，但心理学其实非常重要又非常有用；与此同时，心理学系的学者往往自视甚高，但心理学的现状其实非常糟糕。当然，自我评价比外界评价更加积极是很正常的现象。实际上，这种差距大到有个非常优秀的大学（<strong>芝加哥大学</strong>）直接废除了整个心理学系，也许是指望以后能重新建一个更好的吧。</p>
+
+        <h3 id="section-8-3">8.3 可口可乐公司的教训</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">"新可乐"大惨败</div>
+            <p>可口可乐公司的高层管理人员都很聪明，做事很有效率，身边围绕着许多商学院和法学院的毕业生，可是连他们也没有很好地掌握基本的心理学知识，乃至无法预言和避免对他们公司造成很大威胁的<strong>"新可乐"大惨败</strong>。</p>
+          </div>
+        </div>
+
+        <p>按理说这些人如此聪明，周围有那么多顶尖大学毕业的专业顾问，不应该出现如此之大的知识缺陷。这也不是一种让人满意的情况。</p>
+
+        <div class="pull-quote large">
+          "学术界的高级知识分子和企业的高级管理人员之间存在的这种极度无知，其实是高等教育的各种重大缺陷共同造成的 <strong>lollapalooza 效应</strong>。"
+        </div>
+
+        <p>因为这种坏效应是 lollapalooza 级别的，所以必定有多个相互影响的因素。我认为至少有两个因素要为这种情况负责。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、附录：相关人物与概念 -->
+      <section id="section-9">
+        <h2>九、附录：相关人物与概念</h2>
+
+        <h3 id="section-9-1">9.1 重要人物</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>人物</th><th>生卒年份</th><th>主要贡献</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>伽利略·伽利雷</strong></td><td>1564—1642</td><td>钟摆运动、地心引力、抛物线轨迹等奠基性发现；制造了第一个天文望远镜</td></tr>
+            <tr><td><strong>毕达哥拉斯</strong></td><td>公元前 582—公元前 496</td><td>希腊爱奥尼亚人，数学家和哲学家，被尊称为"数字之父"</td></tr>
+            <tr><td><strong>伊凡·巴甫洛夫</strong></td><td>1849—1936</td><td>提出了条件反射定理，1904 年因对消化系统的研究获得诺贝尔奖</td></tr>
+            <tr><td><strong>亚里士多德</strong></td><td>公元前 384—公元前 322</td><td>作品涵盖物理学、形而上学、修辞学和伦理学等多个学科</td></tr>
+            <tr><td><strong>迈克尔·法拉第</strong></td><td>1791—1867</td><td>发现了苯类化学物质，最先描绘了碳化氯的结构；发现了电磁感应和电解原理</td></tr>
+            <tr><td><strong>詹姆斯·克拉克·麦克斯韦</strong></td><td>1831—1879</td><td>对电磁学作出了重要贡献，包括第一次提出光是电磁放射线的一种形式</td></tr>
+            <tr><td><strong>艾萨克·牛顿</strong></td><td>1643—1727</td><td>万有引力理论</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-9-2">9.2 关键概念</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>概念</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>货币贬值</strong></td><td>如果一个国家的货币的购买力下降，那么我们会说这个国家的货币贬值了</td></tr>
+            <tr><td><strong>自我催化反应</strong></td><td>当一个化学反应物本身是其反应的催化剂时，自我催化反应（也被称为自我催化作用）就会出现。例如，锡瘟是白锡的自我催化反应；大气臭氧层的枯竭是自我催化反应的另一个例子</td></tr>
+            <tr><td><strong>十诫</strong></td><td>犹太教和基督教特有的宗教和道德戒律。按照《圣经》的记载，十诫是上帝庄严地向摩西宣布并由摩西转告以色列人的</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-9-3">9.3 经典格言</h3>
+
+        <div class="poem">
+          "如果说我曾发现什么有价值的原理，<br/>
+          那应该归功于我的耐心观察，而非其他才能。"
+          <span class="poem-author">—— 艾萨克·牛顿</span>
+        </div>
+
+        <div class="poem">
+          "没有大胆的猜想，就没有伟大的发现。"
+          <span class="poem-author">—— 艾萨克·牛顿</span>
+        </div>
+
+        <div class="poem">
+          "我们造的墙太多，而修的桥太少。"
+          <span class="poem-author">—— 艾萨克·牛顿</span>
+        </div>
+
+        <div class="poem">
+          "如果说我比其他人看得更远，<br/>
+          那是因为我站在巨人的肩膀上。"
+          <span class="poem-author">—— 艾萨克·牛顿</span>
+        </div>
+
+        <div class="poem">
+          "圆滑是一门表达观点而又不树敌的艺术。"
+          <span class="poem-author">—— 艾萨克·牛顿</span>
+        </div>
+
+        <div class="pull-quote large">
+          "我的目的是教育性的，所以今天的游戏是和大家一起来寻找更好的思维方法。"
+          <cite>— 查理·芒格</cite>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
