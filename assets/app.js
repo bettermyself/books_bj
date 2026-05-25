@@ -1,3 +1,16 @@
+// ===== 封面图片迁移 =====
+function migrateCoverImages() {
+  const coverMap = { '穷查理宝典': 'img/穷查理宝典.jpg' };
+  let changed = false;
+  getAllBooks().forEach(b => {
+    if (coverMap[b.name] && !b.cover) {
+      b.cover = coverMap[b.name];
+      changed = true;
+    }
+  });
+  if (changed) persistDB();
+}
+
 // ===== 颜色配置 =====
 const COVER_COLORS = [
   { bg: '#1a3a2a', label: '墨绿' },
@@ -37,6 +50,7 @@ let pendingDeleteExtra = null;
 document.addEventListener('DOMContentLoaded', async () => {
   await initDB();
   seedIfEmpty();
+  migrateCoverImages();
   renderBooks();
   updateStats();
   startQuoteRotator();
@@ -110,9 +124,9 @@ function renderBooks() {
 
   grid.innerHTML = books.map((b, idx) => `
     <div class="book-card" style="animation-delay:${idx*0.05}s" onclick="openBook(${b.id})">
-      <div class="book-cover" style="background:${b.color||'#1a2a3a'}">
+      <div class="book-cover" style="${b.cover ? `background-image:url('${b.cover}');background-size:cover;background-position:center` : `background:${b.color||'#1a2a3a'}`}">
         <div class="book-spine"></div>
-        <span>${b.emoji||'📚'}</span>
+        ${b.cover ? '' : `<span>${b.emoji||'📚'}</span>`}
       </div>
       <div class="book-info">
         <div class="book-title">${esc(b.name)}</div>
