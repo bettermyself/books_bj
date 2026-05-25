@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>专业人士需要更多的跨学科技能 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">穷查理宝典</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 查理·芒格传略</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 芒格主义：查理的即席谈话</span>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="在哈佛学校毕业典礼上的演讲.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="第二讲 论基本的、普世的智慧，及其与投资管理.html">第二讲 论基本的、普世的智慧</a></li>
+            <li><a href="第三讲 论基本的、普世的智慧（修正稿）.html">第三讲 论基本的、普世的智慧（修正稿）</a></li>
+            <li><a href="第四讲 关于现实思维的现实思考.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="第五讲_专业人士需要更多的跨学科技能.html" class="active">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="第六讲_一流慈善基金的投资实践.html">第六讲 一流慈善基金的投资实践</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 芒格的人生哲学</span>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、演讲框架：五个核心问题</a></li>
+        <li><a href="#section-2">二、为什么需要跨学科技能？</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 专业缺陷的认知根源</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 两种最危险的认知偏见</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 治疗"铁锤人倾向"的良方</a></li>
+        <li><a href="#section-3">三、当前教育的不足</a></li>
+        <li><a href="#section-4">四、飞行员训练六要素模型</a></li>
+        <li><a href="#section-5">五、加速跨学科教育的四大实践</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 更多必修课</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 跨学科实践机会</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 善用商业刊物</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 避免政治意识形态</a></li>
+        <li><a href="#section-6">六、核心方法论</a></li>
+        <li><a href="#section-7">七、关键人物与思想</a></li>
+        <li><a href="#section-8">八、结语：拥抱普世智慧</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第五讲</div>
+        <h1 class="article-title">专业人士需要更多的跨学科技能</h1>
+        <div class="article-meta">
+          <span><strong>演讲场合</strong>哈佛大学法学院1948届毕业生五十周年团聚</span>
+          <span><strong>时间</strong>1998年4月24日</span>
+          <span><strong>演讲者</strong>查理·芒格（Charlie Munger）</span>
+        </div>
+      </header>
+
+      <!-- 一、演讲框架：五个核心问题 -->
+      <section id="section-1">
+        <h2>一、演讲框架：五个核心问题</h2>
+
+        <p>芒格以<strong>苏格拉底式的"自问自答"</strong>展开演讲，提出并回答了以下五个问题：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th style="width:10%">序号</th><th style="width:40%">核心问题</th><th>核心论点</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>是否广大专业人士都需要更多的跨学科技能？</td>
+              <td><strong>是</strong>。跨学科知识有助于提高专业认识，对抗认知偏见</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>我们的教育提供了足够的跨学科知识吗？</td>
+              <td><strong>没有</strong>。教育太过局限在单一学科内</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>对于大部分软科学而言，什么样的跨学科教育才是可行的、最好的？</td>
+              <td>借鉴飞行员训练的<strong>六要素系统</strong></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>过去50年来，精英学府在提供最好的跨学科教育方面取得了什么进展？</td>
+              <td>虽有进步，但仍远远不够</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>哪些教育实践能够加快这个进程？</td>
+              <td>四大实践：必修课程、实践机会、商业刊物、避免意识形态</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、为什么需要跨学科技能？ -->
+      <section id="section-2">
+        <h2>二、为什么需要跨学科技能？</h2>
+
+        <h3 id="section-2-1">2.1 专业缺陷的认知根源</h3>
+
+        <p>要回答第一个问题，首先必须确定<strong>跨学科知识是否有助于提高专业认识</strong>。</p>
+
+        <div class="pull-quote">
+          "归根到底，每个职业都是蒙骗外行人的勾当。"
+          <cite>— 萧伯纳笔下人物</cite>
+        </div>
+
+        <p>早年的情况证明这一诊断千真万确——16世纪主要的专业人士<strong>修道士</strong>曾将<strong>威廉·丁道尔</strong>烧死，原因仅是他将《圣经》翻译成英文。</p>
+
+        <p>但萧伯纳低估了问题的严重性。他认为专业人士出于自私而故意使坏，但更重要的是——<strong>各种相互交织的潜意识心理倾向也对专业人士的行为有经常性的、可怕的影响</strong>。</p>
+
+        <h3 id="section-2-2">2.2 两种最危险的认知偏见</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>偏见类型</th><th>定义</th><th>危害</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>激励机制造成的偏见</strong></td>
+              <td>拥有这种天生认知偏见的专业人士会认为，<strong>对他们自己有利的，就是对客户和整个文明社会有利的</strong></td>
+              <td>导致利益冲突下的错误决策</td>
+            </tr>
+            <tr>
+              <td><strong>铁锤人倾向</strong></td>
+              <td>来自谚语："在只有铁锤的人看来，每个问题都非常像一颗钉子"</td>
+              <td>用单一工具/思维模型解决所有问题</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-3">2.3 治疗"铁锤人倾向"的良方</h3>
+
+        <div class="pull-quote large">
+          "治疗'铁锤人倾向'的良方很简单：如果一个人拥有许多跨学科技能，那么根据定义，他就拥有了许多工具，因此能够尽可能少犯'铁锤人倾向'引起的认知错误。"
+        </div>
+
+        <p>此外，当他拥有足够多的跨学科知识，从实用心理学中了解到，在一生中他必须与自己和其他人身上那两种倾向作斗争，那么他就在通往<strong>普世智慧</strong>的道路上迈出了有建设性的一步。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、当前教育的不足 -->
+      <section id="section-3">
+        <h2>三、当前教育的不足</h2>
+
+        <h3 id="section-3-1">3.1 教育过度局限在单一学科</h3>
+
+        <p>第二个问题很容易回答——<strong>我们的教育太过局限在一个学科里面</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">学科割裂的代价</div>
+            <p>重大问题往往牵涉到许多学科。相应地，用单一学科来解决这些问题，就像玩桥牌的时候一心只想靠将牌取胜。这是很神经的，跟疯帽匠的茶话会差不多。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-2">3.2 软科学的学科隔离</h3>
+
+        <p>多年以来，人们认为各种<strong>软科学</strong>——就是一切没有像生物学那么基础的学科——彼此之间是相互独立的。早在年轻时，学科之间<strong>壁垒森严、拉帮结派、排斥异己</strong>的情况就已经很严重，有些杰出的教授为此感到非常震惊。</p>
+
+        <h3 id="section-3-3">3.3 怀特海的警钟</h3>
+
+        <p><strong>阿尔弗雷德·诺斯·怀特海</strong>很早就对此敲响了警钟：</p>
+
+        <div class="pull-quote large">
+          "各个学科之间的割裂是非常有害的。"
+          <cite>— 阿尔弗雷德·诺斯·怀特海</cite>
+        </div>
+
+        <p>自那以后，许多精英教育机构越来越认可怀特海的观点，着力于改善学科隔离的状况，引进了跨学科教育。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>代表人物</th><th>所属机构</th><th>贡献</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>E. O. 威尔逊</strong></td><td>哈佛大学</td><td>在学科边缘奋斗的佼佼者</td></tr>
+            <tr><td><strong>莱纳斯·卡尔·鲍林</strong></td><td>加州理工学院</td><td>在学科边缘奋斗的佼佼者</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、飞行员训练六要素模型 -->
+      <section id="section-4">
+        <h2>四、跨学科教育的最佳模型：飞行员训练六要素</h2>
+
+        <h3 id="section-4-1">4.1 为什么选择飞行员训练？</h3>
+
+        <p>对于大部分软科学而言，什么样的跨学科教育才是可行的、最好的？我们只需要检验一下<strong>最成功的专业教育</strong>，找出里面有哪些重要元素，然后把这些元素组合起来，就能得到合理的解决方法。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">寻找最佳模型的逻辑</div>
+            <p>不能去没有竞争压力的教育学院之类的学校找，因为它们深受负面心理倾向的影响。我们应该到那些对教育质量要求最严格、对教育结果的检查最严密的地方去找。这就把我们带到一个合乎逻辑的地方：<strong>大获成功并在今天已成为必修课的飞行员训练</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 飞行员训练的六要素系统</h3>
+
+        <p>这个显然正确的<strong>六要素系统</strong>对高风险的专业教育提出了严格的要求，人类头脑的结构决定了我们需要这样的系统。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th style="width:8%">要素</th><th>核心内容</th><th>对软科学教育的启示</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. 知识广度</strong></td>
+              <td>学习大量的跨学科知识</td>
+              <td>软科学学生必须掌握多学科基础</td>
+            </tr>
+            <tr>
+              <td><strong>2. 技能熟练度</strong></td>
+              <td>持久地掌握能够应用自如的所有必要技能</td>
+              <td>技能需要通过反复练习达到自动化</td>
+            </tr>
+            <tr>
+              <td><strong>3. 综合应用能力</strong></td>
+              <td>拥有根据实际情况综合熟练使用各种知识的能力</td>
+              <td>能够跨学科整合，解决复杂问题</td>
+            </tr>
+            <tr>
+              <td><strong>4. 正向思考技巧</strong></td>
+              <td>证明代数问题用到的那些正向思考的技巧</td>
+              <td>培养逻辑推理和正向分析能力</td>
+            </tr>
+            <tr>
+              <td><strong>5. 逆向思考技巧</strong></td>
+              <td>证明代数问题用到的那些逆向思考的技巧</td>
+              <td>培养"反过来想"的逆向思维能力</td>
+            </tr>
+            <tr>
+              <td><strong>6. 检查清单习惯</strong></td>
+              <td>核对"检查清单"的终身习惯</td>
+              <td>建立系统化的自查机制，减少错误</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-3">4.3 精英教育的必然要求</h3>
+
+        <div class="pull-quote large">
+          "在试图把优秀学生培养成优秀人才的精英教育中，如果想要得到最佳的结果，我们必须让学生学习大量的跨学科知识，持久地掌握能够应用自如的所有必要技能，拥有根据实际情况综合熟练使用各种知识的能力，以及证明代数问题用到的那些正向思考和逆向思考的技巧，再加上核对'检查清单'的终身习惯。"
+        </div>
+
+        <p>若要获取全面的普世智慧，<strong>没有别的办法，更没有捷径</strong>。这个任务涵盖的知识面特别广，乍看之下令人望而生畏，似乎是不可能完成的。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、加速跨学科教育的四大实践 -->
+      <section id="section-5">
+        <h2>五、加速跨学科教育的四大实践</h2>
+
+        <h3 id="section-5-1">5.1 实践一：更多的课程应该是必修课</h3>
+
+        <p><strong>更多的课程应该是必修课，而不是选修课。</strong>这就意味着那些决定哪门课必修的人必须熟练地掌握大量的跨学科知识。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">现实警示</div>
+            <p>法学院毕业的学生必须掌握心理学和会计学。然而，许多精英学府，即使到今天，也没有这样的要求。那些制定培养计划的人往往知识面太窄，无法理解哪些课是必需的，也没有能力纠正不足之处。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">5.2 实践二：提供更多跨学科实践机会</h3>
+
+        <p><strong>学生应该有更多用跨学科的知识解决问题的实践机会</strong>，包括一些像驾驶飞行模拟器那样的机会，以免掌握的技能由于长期不用而遗忘。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">案例：哈佛商学院的"两位老太太"考题</div>
+            <p>一位聪明的教授出题：有两位不问世事的老太太刚刚继承了新英格兰地区一家鞋厂，这家鞋厂专门制造名牌皮鞋，现在生意上遇到一些严重的问题。请写下给两位老太太的建议。</p>
+          </div>
+        </div>
+
+        <p>几乎每个学生的答案都被判不及格，但一位聪明的学生得到了高分。他的答案非常短：</p>
+
+        <div class="pull-quote large">
+          "这家企业所在的行业和所处的地方竞争都很激烈，再加上当前遇到的问题非常棘手，两位不问世事的老太太通过聘请外人来解决问题不是明智的做法。考虑到问题的难度和无法避免的代理成本，两位老太太应该尽快卖掉这家鞋厂，最好是卖给那家拥有最大边际效应优势的竞争对手。"
+        </div>
+
+        <p>这个高分学生作答的根据并非当年商学院传授的知识，而是一些更为基本的概念——<strong>代理成本</strong>和<strong>边际效应</strong>，它们分别来自本科生的<strong>心理学</strong>和<strong>经济学</strong>课程。</p>
+
+        <h3 id="section-5-3">5.3 实践三：善用商业刊物作为"飞行模拟器"</h3>
+
+        <p><strong>大多数软科学专业学院应该更多地使用最好的商业刊物。</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>推荐刊物</th><th>功能定位</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>《华尔街日报》</td><td>承担"飞行模拟器"的功能</td></tr>
+            <tr><td>《福布斯》</td><td>报道错综复杂的事件，供学生用多学科知识分析</td></tr>
+            <tr><td>《财富》</td><td>让学生学到新的成因模式，而非仅仅复习原有知识</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          "我什么都读：企业年报、10-K报表、10-Q报表、传记、历史书，每天还要读五份报纸。在飞机上，我会阅读座椅后背的安全指南。阅读是很重要的。这么多年来，是阅读让我致富。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>这些刊物可以承担飞行模拟器的功能：它们报道的那些事件往往有错综复杂的原因，我们可以让学生试着用各个学科的知识来加以分析。如果学生想要尽可能地提高自己的判断力，那么在校期间就实践他毕业后要终生从事的工作，是非常有道理的做法。</p>
+
+        <h3 id="section-5-4">5.4 实践四：避免强烈的政治意识形态</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警惕意识形态</div>
+            <p>当大学偶尔有职位空缺，需要招人时，应该避免聘请那些持有强烈的政治意识形态——不管是左翼的还是右翼的——的教授。学生也应该避免受政治意识形态影响。激情澎湃的人缺乏掌握跨学科知识所需的客观态度，受意识形态影响的人很难拥有综合各门学科知识的能力。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、核心方法论 -->
+      <section id="section-6">
+        <h2>六、核心方法论："拿来主义"与硬科学治学精神</h2>
+
+        <h3 id="section-6-1">6.1 吉卜林的"拿来主义"</h3>
+
+        <div class="poem">
+          当荷马拨弄他灿烂的竖琴时，他早已听过人们沿着陆地和海洋唱过的歌；<br/>
+          凡他所需用的思想，他便采撷给自己用——和我一样！<br/><br/>
+          市集中的女孩和渔郎，牧人和水手，<br/>
+          他们听到旧调重弹，却不作声——和你们一样！<br/><br/>
+          他们知道他偷窃；他也晓得他们知道。<br/>
+          他们不说出来，也不对此大惊小怪，<br/>
+          只是沿路向荷马眨眨眼，荷马也报以眨眼——和我们一样！
+          <span class="poem-author">—— 吉卜林</span>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心观点</div>
+            <p>只要多多实行<strong>"拿来主义"</strong>，许多软科学学科就能减少"铁锤人倾向"引起的错误。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-2">6.2 罗杰·费希尔的跨学科实践</h3>
+
+        <p>在同学<strong>罗杰·费希尔</strong>（Roger Fisher）的领导下，许多法学院将其他学科的成果应用到谈判研究中去。罗杰那本充满智慧和道德感的谈判著作《谈判力》（Getting to Yes）到目前已经卖掉三百多万册。这些法学院还吸取了大量有用的经济学知识。</p>
+
+        <h3 id="section-6-3">6.3 硬科学的治学精神</h3>
+
+        <p>与当前软科学常见的做法相比，硬科学的这种基本治学精神与方法更为严格。这让我们想起了飞行员训练——飞行员训练能够取得极大的成功，绝对不是偶然的。<strong>现实是最好的老师</strong>。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">跨学科知识的合理组织模式</div>
+            <p>① 必须完全弄清楚所有知识的原始出处；② 必须把更基本的解释放在第一位。跟飞行员训练的情况一样，硬科学的治学精神与方法不是"拿来主义"，而是<strong>"不管是否喜欢都必须熟练地掌握"</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、关键人物与思想 -->
+      <section id="section-7">
+        <h2>七、关键人物与思想</h2>
+
+        <h3 id="section-7-1">7.1 警示者与先驱</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>人物</th><th>生卒年</th><th>核心贡献/观点</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>威廉·丁道尔</strong></td>
+              <td>1495—1536</td>
+              <td>将《圣经》翻译成英文，被修道士烧死；其译文是钦定版英文《圣经》的基础</td>
+            </tr>
+            <tr>
+              <td><strong>阿尔弗雷德·诺斯·怀特海</strong></td>
+              <td>1861—1947</td>
+              <td>敲响学科割裂的警钟："各个学科之间的割裂是非常有害的"</td>
+            </tr>
+            <tr>
+              <td><strong>莱纳斯·卡尔·鲍林</strong></td>
+              <td>1901—1994</td>
+              <td>20世纪最伟大的化学家之一；获诺贝尔化学奖（1954）与和平奖（1962）；将量子物理学引入化学研究</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-7-2">7.2 怀特海的智慧箴言</h3>
+
+        <div class="pull-quote">
+          "傻瓜徒有想象力，而缺乏知识；学究空有知识，但缺乏想象力。"
+          <cite>— 怀特海</cite>
+        </div>
+
+        <div class="pull-quote">
+          "真正的勇气并非庸俗英雄的野蛮暴力，而是美德和理性的坚定决心。"
+          <cite>— 怀特海</cite>
+        </div>
+
+        <div class="pull-quote large">
+          "令知识死亡的并非无知，而是对无知的无知。"
+          <cite>— 怀特海</cite>
+        </div>
+
+        <div class="pull-quote">
+          "'愚蠢'的问题是全新的发展的开端。"
+          <cite>— 怀特海</cite>
+        </div>
+
+        <h3 id="section-7-3">7.3 跨学科实践的典范</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>人物</th><th>身份</th><th>跨学科实践</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>阿尔·尤厄兹奇</strong></td>
+              <td>FlightSafety International创始人</td>
+              <td>构建"六大性格支柱"企业文化：言而有信、公正无私、相互尊重、关怀他人、敢于担当、公民精神</td>
+            </tr>
+            <tr>
+              <td><strong>罗杰·费希尔</strong></td>
+              <td>哈佛法学院教授</td>
+              <td>将经济学等学科成果引入谈判研究，著有《谈判力》</td>
+            </tr>
+            <tr>
+              <td><strong>理查德·费曼</strong></td>
+              <td>诺贝尔物理学奖得主</td>
+              <td>参与曼哈顿计划；调查"挑战者号"事故；展示跨学科调查能力</td>
+            </tr>
+            <tr>
+              <td><strong>贾雷德·戴蒙德</strong></td>
+              <td>UCLA地理学教授</td>
+              <td>原本是生理学家，出色综合了许多学科的伟大模型；著有《崩溃》《枪炮、病菌与钢铁》</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-7-4">7.4 贾雷德·戴蒙德的跨学科之路</h3>
+
+        <div class="pull-quote">
+          "我总是对许多事情感兴趣，同时对许多事情感兴趣，我总是试图向我自己解释这些事情。我提出了许多问题。"
+          <cite>— 贾雷德·戴蒙德</cite>
+        </div>
+
+        <p>贾雷德·戴蒙德1999年获得由克林顿总统颁发的国家科学奖章，表彰他在进化生物学领域取得的突出贡献，以及利用达尔文理论在生理学、生态学等不同领域中取得的优秀成果。他是<strong>典型的例外：一位掌握跨学科知识的教授</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、结语 -->
+      <section id="section-8">
+        <h2>八、结语：改变激励机制，拥抱普世智慧</h2>
+
+        <p>芒格的答案中最让他感兴趣的是，虽然他说的一切并无新意，许多理性和受过良好教育的人早就说过了，但他批评的这些坏现象在全美国的顶尖学府中仍然非常普遍。</p>
+
+        <p>在这些高等学府的软科学院系，几乎每个教授都养成了单学科的思维习惯，即使在他自己学院的马路对面就有一种更好的思维模型。这种荒唐的现象意味着软科学院系的<strong>激励机制</strong>是很成问题的。</p>
+
+        <div class="pull-quote large">
+          "如果真理和一个人的利益背道而驰，那么这个人就很难接受真理。"
+          <cite>— 约翰逊博士</cite>
+        </div>
+
+        <p>如果这个问题是高等学校的激励机制引起的，那么解决的方法很简单——<strong>因为激励机制是可以被改变的</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">世俗回报与精神快乐</div>
+            <p>如果责任不能驱使人们去改善这种情况，还可以考虑利益。只要法学院和其他学术机构愿意采用一种更为跨学科的方法去解决许多问题，不管是常见的问题还是罕见的问题，它们就会像查理·芒格那样，得到巨大的世俗回报。它们不但能够取得更多成就，还将获得更多乐趣。芒格推荐的这种精神境界是非常快乐的，没有人愿意从那里离开。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          "离开就像切断自己的双手。"
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 附录：核心金句回顾 -->
+      <section id="section-appendix">
+        <h2>核心金句回顾</h2>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">金句 一</span>
+            <h4>"在只有铁锤的人看来，每个问题都非常像一颗钉子。"</h4>
+            <p>—— 铁锤人倾向的经典比喻</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">金句 二</span>
+            <h4>"令知识死亡的并非无知，而是对无知的无知。"</h4>
+            <p>—— 怀特海</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">金句 三</span>
+            <h4>"如果真理和一个人的利益背道而驰，那么这个人就很难接受真理。"</h4>
+            <p>—— 约翰逊博士</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">金句 四</span>
+            <h4>"离开就像切断自己的双手。"</h4>
+            <p>—— 查理·芒格，形容跨学科思维带来的精神快乐</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
