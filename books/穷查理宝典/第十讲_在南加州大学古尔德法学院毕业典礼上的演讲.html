@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>人生的道理与智慧 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">穷查理宝典</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 查理·芒格传略</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 芒格主义：查理的即席谈话</span>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="在哈佛学校毕业典礼上的演讲.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="第二讲 论基本的、普世的智慧，及其与投资管理.html">第二讲 论基本的、普世的智慧</a></li>
+            <li><a href="第三讲 论基本的、普世的智慧（修正稿）.html">第三讲 论基本的、普世的智慧（修正稿）</a></li>
+            <li><a href="第四讲 关于现实思维的现实思考.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="第五讲_专业人士需要更多的跨学科技能.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="第六讲_一流慈善基金的投资实践.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="第七讲_在慈善圆桌会议早餐会上的讲话.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="第八讲_2003年的金融大丑闻.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="第九讲_论学院派经济学：考虑跨学科需求之后的优点和缺点.html">第九讲 论学院派经济学</a></li>
+            <li><a href="第十讲_在南加州大学古尔德法学院毕业典礼上的演讲.html" class="active">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 芒格的人生哲学</span>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、引言：孔子与孝道</a></li>
+        <li><a href="#section-2">二、对我最有用的人生道理</a></li>
+        <li><a href="#section-2-1" class="sub">让自己配得上所想要的</a></li>
+        <li><a href="#section-2-2" class="sub">正确的爱应以仰慕为基础</a></li>
+        <li><a href="#section-2-3" class="sub">终身学习是道德责任</a></li>
+        <li><a href="#section-2-4" class="sub">跨学科思维</a></li>
+        <li><a href="#section-2-5" class="sub">逆向思考</a></li>
+        <li><a href="#section-2-6" class="sub">将不平等最大化</a></li>
+        <li><a href="#section-2-7" class="sub">普朗克知识 vs. 司机知识</a></li>
+        <li><a href="#section-2-8" class="sub">做有强烈兴趣的事</a></li>
+        <li><a href="#section-2-9" class="sub">极度勤奋</a></li>
+        <li><a href="#section-2-10" class="sub">以爱比克泰德的态度面对挫折</a></li>
+        <li><a href="#section-2-11" class="sub">节俭是责任的仆人</a></li>
+        <li><a href="#section-2-12" class="sub">信任之网优于繁文缛节</a></li>
+        <li><a href="#section-3">三、应当避免的事情</a></li>
+        <li><a href="#section-4">四、重要的认知习惯</a></li>
+        <li><a href="#section-5">五、结语</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第十讲</div>
+        <h1 class="article-title">人生的道理与智慧</h1>
+        <div class="article-meta">
+          <span><strong>演讲者</strong>查理·芒格</span>
+          <span><strong>场合</strong>南加州大学古尔德法学院毕业典礼</span>
+          <span><strong>时间</strong>2007年5月23日</span>
+        </div>
+      </header>
+
+      <!-- 一、引言：孔子与孝道 -->
+      <section id="section-1">
+        <h2>一、引言：孔子与孝道</h2>
+
+        <p>芒格以孔子的<strong>孝道</strong>思想开篇，向在场的家长和亚裔听众致意。</p>
+
+        <div class="pull-quote">
+          "孝道既是天生的，也需要教育，应当代代相传。如果人们能够学会践行孝道，便能更好地扮演在社会和政府中的角色。"
+          <cite>— 孔子（公元前551—前479）</cite>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>层面</th><th>具体内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>日常行为</strong></td><td>照顾父母、听从教诲、敬爱赡养、以礼相待</td></tr>
+            <tr><td><strong>家族责任</strong></td><td>传宗接代、兄弟相互扶持</td></tr>
+            <tr><td><strong>道德态度</strong></td><td>给父母明智建议、隐讳其错误</td></tr>
+            <tr><td><strong>哀思祭祀</strong></td><td>在父母生病、死亡时表达哀伤，去世后进行祭祀</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、对我最有用的人生道理 -->
+      <section id="section-2">
+        <h2>二、对我最有用的人生道理</h2>
+
+        <h3 id="section-2-1">2.1 让自己配得上所想要的</h3>
+
+        <div class="pull-quote large">
+          "要得到你想要的某样东西，最可靠的办法是让你自己配得起它。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>这是黄金法则：<strong>己所不欲，勿施于人</strong>。拥有这种精神的人，不仅赢得金钱和名誉，更赢得他人长久的信任与尊敬——能够赢得别人的信任，是非常快乐的事情。</p>
+
+        <h3 id="section-2-2">2.2 正确的爱应以仰慕为基础</h3>
+
+        <p>正确的爱建立在仰慕之上，应当去爱那些对我们有教育意义的先贤。萨默赛特·毛姆在《<strong>人性的枷锁</strong>》（1915）中描绘了一种<strong>病态的爱</strong>：</p>
+
+        <div class="pull-quote">
+          "爱情就如他腿上的寄生虫，吮吸着他生命的热血，维持其可恶的生存；它拼命地吸取他的精力，使他对别的一切都提不起兴趣。"
+          <cite>— 萨默赛特·毛姆《人性的枷锁》</cite>
+        </div>
+
+        <p>这种单方面痴迷、自我消耗的爱是一种病，应当尽快治好。</p>
+
+        <h3 id="section-2-3">2.3 终身学习是道德责任</h3>
+
+        <p>获得智慧不仅仅是为了让生活更好，更是一种<strong>道德责任</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>维度</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>人类文明</strong></td><td>怀特海指出：人类只有"发明了发明的方法"之后，才能快速发展</td></tr>
+            <tr><td><strong>个人成长</strong></td><td>同理，只有"学习了学习的方法"之后，才能真正进步</td></tr>
+            <tr><td><strong>巴菲特习惯</strong></td><td>醒着的时间有一半用来看书，其余大部分时间与智者深度交流</td></tr>
+            <tr><td><strong>学习机器</strong></td><td>每天夜里睡觉时都比早晨聪明一点点——这种习惯的复利效应惊人</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">榜样：约瑟夫·米拉</div>
+            <p>骨肿瘤病理学家约瑟夫·米拉（Joseph M. Mirra）在休假期间，每天工作17小时、每周7天，历时整整一年，写出了世界上最好的骨癌病理学教科书之一，广受全球癌症治疗中心采用。<strong>如果你的价值观与他相近，你想取得多大的成就就能取得多大的成就。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="section-2-4">2.4 跨学科思维</h3>
+
+        <p>一位法学院教授曾讽刺地描述"法律头脑"：面对两件相互关联的事，偏要强行只考虑其中一件——这是荒唐的。正确的做法：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">第一步</span>
+            <h4>吸取核心道理</h4>
+            <p>从<strong>所有重要学科</strong>中吸取核心道理（约占每门学科知识的95%）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第二步</span>
+            <h4>形成思维框架</h4>
+            <p>将它们融入头脑，形成<strong>思维框架</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第三步</span>
+            <h4>持续实践</h4>
+            <p>在日常中持续实践（如同钢琴，不练习就无法弹好）。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "如果一个人不知道他出生之前发生过什么事情，那么他在生活中就像一个无知的孩童。"
+          <cite>— 西塞罗（古罗马最伟大的律师）</cite>
+        </div>
+
+        <p>将西塞罗的话推而广之：除历史之外，所有学科的重要思想都是人们必须了解的。若只是死记硬背应付考试，这种知识毫无用处；必须让它们<strong>在头脑中形成活的思维框架</strong>，才能在随后的日子里自动运用。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">跨学科思维的成效</div>
+            <p>让生活更有乐趣；让你能做更多事情；让你变得更有建设性；积累可观的物质财富。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">风险：过于聪明</div>
+            <p>当你的知识比上级更丰富且让其颜面尽失时，可能引发强烈报复。正如伏尔泰所言："假如有权有势的人错了，而你是对的，那你就危险啦。"建议学会<strong>适度隐藏睿见</strong>——让客户觉得自己是房间里最聪明的人，让上级觉得自己是第二聪明的人。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-5">2.5 逆向思考</h3>
+
+        <p>乡下人的智慧：</p>
+
+        <div class="pull-quote large">
+          "要是知道我会死在哪里就好啦，那我将永远不去那个地方。"
+          <cite>— 乡下人的谚语</cite>
+        </div>
+
+        <p>对于复杂问题，将问题<strong>反过来思考</strong>往往更有效：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>问题类型</th><th>正向思考</th><th>逆向思考</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>帮助印度</strong></td><td>我要怎样帮助印度？</td><td>什么会最大程度损害印度？→ 避免去做</td></tr>
+            <tr><td><strong>追求成功</strong></td><td>如何取得成功？</td><td>什么会让我在生活中失败？→ 逐一排除</td></tr>
+          </tbody>
+        </table>
+
+        <p>这与代数中的<strong>反向证明</strong>同理：正面难解的问题，逆向往往迎刃而解。</p>
+
+        <h3 id="section-2-6">2.6 将不平等最大化</h3>
+
+        <p>加州大学洛杉矶分校篮球主教练<strong>约翰·伍登</strong>（1910—2010）的做法：将比赛时间集中给水平最高的7名球员，5名水平较低者作陪练。结果是顶尖球员学到更多，球队赢得更多冠军。</p>
+
+        <div class="pull-quote">
+          你不希望从50个医生中随机抓一个给孩子做脑外科手术；你也不希望最优秀的人才被平均分配。<strong>让最好的球员打很长时间的比赛。</strong>
+        </div>
+
+        <h3 id="section-2-7">2.7 普朗克知识 vs. 司机知识</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>特征</th><th>本质</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>普朗克知识</strong></td><td>真正理解，付出努力，具备真实能力</td><td>货真价实</td></tr>
+            <tr><td><strong>司机知识</strong></td><td>鹦鹉学舌，表达流利，发型好、声音好听</td><td>伪装成真实知识的表象</td></tr>
+          </tbody>
+        </table>
+
+        <p>在生活中，要努力成为拥有<strong>普朗克知识</strong>的人——尽管会面临来自"司机们"的巨大阻力。</p>
+
+        <h3 id="section-2-8">2.8 做有强烈兴趣的事</h3>
+
+        <div class="pull-quote">
+          "我可以强迫自己把许多事情做得相当好，但我无法将我没有强烈兴趣的事情做到<strong>非常出色</strong>。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>如果有机会，应当选择自己有强烈兴趣的领域，并在其中深耕。</p>
+
+        <h3 id="section-2-9">2.9 极度勤奋</h3>
+
+        <p>芒格早年两位合伙人的简单协议：</p>
+
+        <div class="pull-quote">
+          "一切平分。如果我们没有完成对客户的承诺，我们俩要<strong>每天工作14小时、每周工作7天</strong>，直到完成为止。"
+        </div>
+
+        <p>这种简单的老派观念，几乎必然能提供一个很好的结果。</p>
+
+        <h3 id="section-2-10">2.10 以爱比克泰德的态度面对挫折</h3>
+
+        <p>生活中难免遭遇沉重的、不公平的打击。爱比克泰德认为：<strong>每一次不幸都是锻炼和吸取教训的机会</strong>，而非沉沦于自怜的理由。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>爱比克泰德的道德观</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>控制你的情欲，以免它们报复你</td></tr>
+            <tr><td>别根据愿望要求现实，应依据现实确定愿望</td></tr>
+            <tr><td>智者不为缺少的东西悲哀，而为拥有的东西高兴</td></tr>
+            <tr><td>你遇到什么事并不重要，<strong>重要的是你做出了什么反应</strong></td></tr>
+            <tr><td>凡事尽力而为，别计较结果</td></tr>
+            <tr><td>唯有受过教育的人是自由的</td></tr>
+            <tr><td>困扰人们的并非事物，而是他们对事物的看法</td></tr>
+            <tr><td>要和那些比你优秀的人为伴，他们能促使你做到最好</td></tr>
+            <tr><td>富裕并非拥有许多财产，而是拥有很少需求</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">爱比克泰德的墓志铭</div>
+            <p>"此处埋着爱比克泰德，一个奴隶，身体残疾，极端穷困，<strong>蒙受诸神的恩宠</strong>。"——他因成为智者、顶天立地的男子汉并教育了无数后人而被铭记。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-11">2.11 节俭是责任的仆人</h3>
+
+        <p>芒格的祖父<strong>托马斯·查理·芒格</strong>（1861—1941），出身贫寒，被西奥多·罗斯福总统任命为联邦地区法官，以清晰的司法观点闻名。他终生量入为出，原因有二：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">原因一</span>
+            <h4>对妻子的责任</h4>
+            <p>当时联邦法官的遗孀没有抚恤金，节俭是对妻子的责任。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原因二</span>
+            <h4>能在危急时刻帮助他人</h4>
+            <p>家有余资，能够在危急时刻帮助他人——他曾以个人优质资产的<strong>三分之一</strong>换取叔叔濒临倒闭银行的劣质资产，拯救了那家银行。</p>
+          </div>
+        </div>
+
+        <p>诗人豪斯曼（A. E. Housman）的诗句道出了这种心态的精髓：</p>
+
+        <div class="poem">
+          别人的想法是飘忽不定的，<br/>
+          他们想着和恋人幽会，想走大运或出大名。<br/>
+          我总是想着麻烦，我的想法是稳重的，<br/>
+          所以当麻烦来临时，我早已做好准备。<br/>
+          <span class="poem-author">—— 豪斯曼</span>
+        </div>
+
+        <h3 id="section-2-12">2.12 信任之网优于繁文缛节</h3>
+
+        <div class="pull-quote large">
+          "比复杂官僚程序更好的制度是：一张无缝的、非官僚的信任之网——没有稀奇古怪的程序，只有一群可靠的人，彼此之间拥有正确的信任。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>以梅奥诊所手术室为例：若医生像律师一样设立繁琐规程，更多病人会死于非命。成为律师后，永远不要只被程序牵着鼻子走，而应在生活中尽可能地<strong>培养信任之网</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、应当避免的事情 -->
+      <section id="section-3">
+        <h2>三、应当避免的事情</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>应避免的行为/心态</th><th>危害</th><th>参考案例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>懒惰</strong></td><td>无论有多少优点，都无法避免悲惨下场</td><td>—</td></tr>
+            <tr><td><strong>言而无信</strong></td><td>失去他人信任，导致彻底失败</td><td>—</td></tr>
+            <tr><td><strong>极端意识形态</strong></td><td>使头脑以惊人速度"坏掉"，丧失理性判断力</td><td>电视布道者、政治极端主义者</td></tr>
+            <tr><td><strong>自我服务偏好</strong></td><td>潜意识为愚蠢或邪恶的行为辩护</td><td>莫扎特长期透支收入，最终财务困境</td></tr>
+            <tr><td><strong>妒忌、怨憎、仇恨</strong></td><td>灾难性的思想状态，腐蚀心智</td><td>—</td></tr>
+            <tr><td><strong>自怜</strong></td><td>导致近乎偏执，于事无补</td><td>—</td></tr>
+            <tr><td><strong>变态的激励机制</strong></td><td>表现越差获得越多回报的系统，控制认知与行为</td><td>某些强制超长工时的律师事务所</td></tr>
+            <tr><td><strong>不崇敬的上司</strong></td><td>我们都受权威人物控制，危险而难以脱身</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关于极端意识形态的"铁律"</div>
+            <p>"我觉得我没资格拥有一种观点，<strong>除非我能比我的对手更好地反驳我的立场</strong>。"——芒格</p>
+          </div>
+        </div>
+
+        <p><strong>关于自我服务偏好的正确应用</strong>：所罗门兄弟公司的法律总顾问曾以道德说辞劝说CEO上报一件不愉快的事，CEO一再拖延，最终主管部门追责，两人均完蛋。正确的说服方式是本杰明·富兰克林指出的：</p>
+
+        <div class="pull-quote">
+          "如果你想要说服别人，要诉诸<strong>利益</strong>，而非诉诸理性。"
+          <cite>— 本杰明·富兰克林</cite>
+        </div>
+
+        <p>即应直接说明：如果这种情况持续下去，会毁掉你的，让你身败名裂。我的建议能让你免于万劫不复。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、重要的认知习惯 -->
+      <section id="section-4">
+        <h2>四、重要的认知习惯</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>习惯</th><th>操作要点</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>留意相反证据</strong></td><td>尤其在证伪自己信奉的理论时（达尔文用20年完善进化论，专门准备反驳）</td></tr>
+            <tr><td><strong>核对检查清单</strong></td><td>将广泛知识在头脑中列成检查清单，使用时逐项核对，能有效避免错误</td></tr>
+            <tr><td><strong>诉诸利益</strong></td><td>说服他人时，着重分析对其自身的利弊，而非单纯讲道理</td></tr>
+            <tr><td><strong>适度隐藏睿见</strong></td><td>在权威人物面前，有时需要谨慎掩饰自己的知识优势，以免引发报复</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">达尔文的做法</div>
+            <p>他早在19世纪30年代末就形成了进化论，却花了整整20年才于1859年出版《物种起源》——他在公开发表前，已谨慎地为所有可能的反驳做好了准备。这种对相反证据的高度重视，值得效仿。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、结语 -->
+      <section id="section-5">
+        <h2>五、结语</h2>
+
+        <div class="pull-quote large">
+          "我的剑传给能挥舞它的人。"
+          <cite>— 约翰·班扬《天路历程》（1678）</cite>
+        </div>
+
+        <p>《天路历程》中的"真理剑客"是一位武功高强的朝圣者，独自打败了三个匪徒，在基督徒快要到达终点时加入了朝圣之路。芒格以此作结，意在将毕生积累的智慧与价值观，传给真正能够运用它们的人。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">唐纳德·霍尔的评价</div>
+            <p>本讲内容节选自《穷查理宝典》，全面呈现了查理·芒格在"行为金融学"与人生智慧方面的原创理论。正如唐纳德·霍尔所言："查理早在行为金融学这个名称被发明之前，就已提出了这门学科的主要观点。"</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
