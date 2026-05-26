@@ -8,7 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 python server.py   # 启动本地服务，自动打开 http://localhost:8000
 ```
 
-`server.py` 仅使用 Python 3 标准库（`http.server`、`socketserver`），无需安装依赖。它提供静态文件服务并暴露两个 API 端点：
+`server.py` 仅使用 Python 3 标准库（`http.server`、`socketserver`），无需安装依赖。启动后自动打开浏览器。它提供静态文件服务并暴露四个 API 端点：
+- `GET /api/books` — 从 `data/books.json` 读取全量书籍数据
+- `POST /api/save-books` — 将全量数据写入 `data/books.json`（前端每次增删改后自动调用）
 - `POST /api/create-book-folder` — 新增书籍时在磁盘创建 `books/<书名>/index.html`
 - `POST /api/delete-book-folder` — 删除书籍时调用 `shutil.rmtree()` 删除 `books/<书名>/` 整个文件夹
 
@@ -17,9 +19,9 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 ### 主书架页（index.html）
 
 - **`index.html`** — 书架网格、英雄区名言轮播、书籍数量徽章、新增/编辑/删除书籍弹窗、确认弹窗。
-- **`assets/data.js`** — 所有持久化逻辑，必须最先加载。使用 `localStorage`（键名 `reading_notes_v1`），通过 `window._db` 暴露内存缓存。所有增删改查函数（`addBook`、`updateBook`、`deleteBook`、`getBook`、`getAllBooks`、`addChapter`、`updateChapter`、`deleteChapter`）均调用 `persistDB()` 同步到 `localStorage`。
+- **`assets/data.js`** — 所有持久化逻辑，必须最先加载。使用服务端优先的双层存储：`initDB()` 先从 `GET /api/books` 加载数据到 `window._db`，失败时回退到 `localStorage`（键名 `reading_notes_v1`）。所有增删改查函数（`addBook`、`updateBook`、`deleteBook`、`getBook`、`getAllBooks`、`addChapter`、`updateChapter`、`deleteChapter`）均调用 `persistDB()`，同时写入 `localStorage` 和 `POST /api/save-books`（服务端持久化到 `data/books.json`）。
 - **`assets/app.js`** — 所有 UI 逻辑：颜色选择器、名言轮播、统计渲染、书籍增删改弹窗、`confirmDelete()` 处理器（通过 `pendingDeleteType` 区分 `'book'` 和 `'chapter'`）、`esc()` XSS 安全转义、`openBook(id)` 含阅读位置恢复、`createBookFolder()` / `deleteBookFolder()` 服务端调用。
-- **`assets/book.js`** — 书籍详情页逻辑（章节增删改、展开/折叠、简易 Markdown 渲染、阅读页检测）。
+- **`assets/book.js`** — 书籍详情页逻辑（章节增删改、展开/折叠、简易 Markdown 渲染、阅读页检测）。当前未被任何 HTML 页面引用，属于遗留代码。
 - **`assets/style.css`** — 所有共享样式。`:root` 上定义 CSS 自定义属性（金色调色板、背景/文字色阶、边框、圆角、阴影）。
 
 **脚本加载顺序很重要：** `data.js` 必须在 `app.js` 之前加载。
@@ -47,6 +49,8 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 
 ## 关键模式
 
+- **双层持久化**：数据同时写入 `data/books.json`（服务端，权威源）和 `localStorage`（离线缓存）。`initDB()` 优先从服务端加载，`persistDB()` 同时写入两处。
+- **封面图片**：书籍数据中的 `cover` 字段存储相对路径（如 `img/穷查理宝典.jpg`），封面图片存放在 `img/` 目录。
 - **书籍文件夹命名**：`server.py` 中的 `safe_dirname()` 和 `app.js` 中的 `.replace(/[\\/:*?"<>|]/g, '_')` 必须保持同步——两者剔除相同的非法文件名字符。
 - **种子数据**：`seedIfEmpty()` 每次页面加载都会执行，但受 `db.seeded` 布尔值（持久化在 `localStorage` 中）控制。它仅在首次加载时插入示例书籍，之后即使用户删除所有书也不会再次插入。
 - **章节页 BOOK_FOLDER 常量**：每个章节 HTML 底部有 `const BOOK_FOLDER = '书名'`，必须与磁盘上的文件夹名一致，用于驱动阅读位置的 localStorage 键。
@@ -57,7 +61,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 
 ```js
 // 书籍
-{ id, name, author, category, color, emoji, desc, status, createdAt, chapters: [...] }
+{ id, name, author, category, color, emoji, cover, desc, status, createdAt, chapters: [...] }
 // 章节
 { id, title, order, content, createdAt, updatedAt }
 // 数据库根对象

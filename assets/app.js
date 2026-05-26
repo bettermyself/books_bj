@@ -1,9 +1,9 @@
 // ===== 封面图片迁移 =====
 function migrateCoverImages() {
-  const coverMap = { '穷查理宝典': 'img/穷查理宝典.jpg' };
+  const coverMap = { '穷查理宝典': 'img/穷查理宝典.jpg', '巴菲特致股东的信': 'img/巴菲特致股东的信.png', '巴菲特之道': 'img/巴菲特之道.png' };
   let changed = false;
   getAllBooks().forEach(b => {
-    if (coverMap[b.name] && !b.cover) {
+    if (coverMap[b.name] && b.cover !== coverMap[b.name]) {
       b.cover = coverMap[b.name];
       changed = true;
     }
@@ -124,17 +124,8 @@ function renderBooks() {
 
   grid.innerHTML = books.map((b, idx) => `
     <div class="book-card" style="animation-delay:${idx*0.05}s" onclick="openBook(${b.id})">
-      <div class="book-cover" style="${b.cover ? `background-image:url('${b.cover}');background-size:cover;background-position:center` : `background:${b.color||'#1a2a3a'}`}">
-        <div class="book-spine"></div>
-        ${b.cover ? '' : `<span>${b.emoji||'📚'}</span>`}
-      </div>
-      <div class="book-info">
-        <div class="book-title">${esc(b.name)}</div>
-        <div class="book-author">${esc(b.author||'未知作者')}</div>
-        <div class="book-meta">
-          <span class="book-category">${esc(b.category||'其他')}</span>
-          <span class="book-status status-${b.status||'想读'}">${b.status||'想读'}</span>
-        </div>
+      <div class="book-cover" ${b.cover ? '' : `style="background:${b.color||'#1a2a3a'}"`}>
+        ${b.cover ? `<img src="${b.cover}" alt="${esc(b.name)}" class="book-cover-img" />` : `<div class="book-spine"></div><span>${b.emoji||'📚'}</span>`}
       </div>
       <div class="book-card-actions" onclick="event.stopPropagation()">
         <button class="action-btn action-edit" onclick="showEditBook(${b.id})" title="编辑">✎</button>

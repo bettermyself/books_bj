@@ -97,7 +97,8 @@
           "createdAt": 1779194578159,
           "updatedAt": 1779194578159
         }
-      ]
+      ],
+      "cover": "img/巴菲特之道.png"
     },
     {
       "name": "巴菲特致股东的信",
@@ -182,7 +183,8 @@
           "createdAt": 1779194578159,
           "updatedAt": 1779194578159
         }
-      ]
+      ],
+      "cover": "img/巴菲特致股东的信.png"
     }
   ],
   "nextBookId": 4,
