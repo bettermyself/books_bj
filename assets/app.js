@@ -141,10 +141,24 @@ function openBook(id) {
   if (!b) return;
   const folderName = b.name.replace(/[\\/:*?"<>|]/g, '_').trim();
 
-  // 有上次阅读位置，直接跳转
+  // 有上次阅读位置，先验证路径是否有效
   const lastPage = localStorage.getItem('reading_last_page_' + folderName);
   if (lastPage) {
-    window.location.href = lastPage;
+    fetch(lastPage, { method: 'HEAD' })
+      .then(r => {
+        if (r.ok) {
+          window.location.href = lastPage;
+        } else {
+          localStorage.removeItem('reading_last_page_' + folderName);
+          localStorage.removeItem('reading_scroll_' + folderName);
+          window.location.href = `books/${folderName}/index.html`;
+        }
+      })
+      .catch(() => {
+        localStorage.removeItem('reading_last_page_' + folderName);
+        localStorage.removeItem('reading_scroll_' + folderName);
+        window.location.href = `books/${folderName}/index.html`;
+      });
     return;
   }
 

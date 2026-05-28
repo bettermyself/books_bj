@@ -21,7 +21,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 - **`index.html`** — 书架网格、英雄区名言轮播、书籍数量徽章、新增/编辑/删除书籍弹窗、确认弹窗。
 - **`assets/data.js`** — 所有持久化逻辑，必须最先加载。使用服务端优先的双层存储：`initDB()` 先从 `GET /api/books` 加载数据到 `window._db`，失败时回退到 `localStorage`（键名 `reading_notes_v1`）。所有增删改查函数（`addBook`、`updateBook`、`deleteBook`、`getBook`、`getAllBooks`、`addChapter`、`updateChapter`、`deleteChapter`）均调用 `persistDB()`，同时写入 `localStorage` 和 `POST /api/save-books`（服务端持久化到 `data/books.json`）。
 - **`assets/app.js`** — 所有 UI 逻辑：颜色选择器、名言轮播、统计渲染、书籍增删改弹窗、`confirmDelete()` 处理器（通过 `pendingDeleteType` 区分 `'book'` 和 `'chapter'`）、`esc()` XSS 安全转义、`openBook(id)` 含阅读位置恢复、`createBookFolder()` / `deleteBookFolder()` 服务端调用。
-- **`assets/book.js`** — 书籍详情页逻辑（章节增删改、展开/折叠、简易 Markdown 渲染、阅读页检测）。当前未被任何 HTML 页面引用，属于遗留代码。
+- **`assets/book.js`** — 书籍详情页逻辑（章节增删改、展开/折叠、简易 Markdown 渲染、阅读页检测）。**当前未被任何 HTML 页面引用，属于遗留死代码，新增章节时无需修改此文件。**
 - **`assets/style.css`** — 所有共享样式。`:root` 上定义 CSS 自定义属性（金色调色板、背景/文字色阶、边框、圆角、阴影）。
 
 **脚本加载顺序很重要：** `data.js` 必须在 `app.js` 之前加载。

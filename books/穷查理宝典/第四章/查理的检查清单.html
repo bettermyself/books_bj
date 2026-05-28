@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>查理的检查清单 · 穷查理宝典</title>
-  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="../../../assets/style.css" />
   <style>
     html { font-size: 17.6px; }
 
@@ -403,8 +403,8 @@
         </div>
       </div>
       <nav class="nav-links">
-        <a href="../../index.html" class="nav-home">⌂ 首页</a>
-        <a href="../../index.html" class="nav-home">← 返回书架</a>
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
       </nav>
     </div>
   </header>
@@ -413,15 +413,18 @@
 
     <aside class="chapter-sidebar">
       <div class="breadcrumb">
-        <a href="../../index.html">书架</a>
+        <a href="../../../index.html">书架</a>
         <span class="crumb-sep">/</span>
-        <a href="../../index.html">穷查理宝典</a>
+        <a href="../../../index.html">穷查理宝典</a>
       </div>
 
       <div class="sidebar-label">全书目录</div>
       <ul class="book-toc">
         <li class="toc-chapter">
           <span class="toc-chapter-title">第一章 查理·芒格传略</span>
+          <ul class="toc-lectures">
+            <li><a href="../第一章/查理芒格传略.html">查理·芒格传略</a></li>
+          </ul>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
@@ -616,7 +619,7 @@
     const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
     const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
 
-    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
     localStorage.setItem(PAGE_KEY, relativePath);
 
     const savedScroll = localStorage.getItem(SCROLL_KEY);

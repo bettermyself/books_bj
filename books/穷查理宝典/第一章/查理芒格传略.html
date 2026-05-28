@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>查理·芒格传略 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一章 查理·芒格传略</span>
+          <ul class="toc-lectures">
+            <li><a href="查理芒格传略.html" class="active">查理·芒格传略</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 芒格主义：查理的即席谈话</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/在哈佛学校毕业典礼上的演讲.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理.html">第二讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（修正稿）.html">第三讲 论基本的、普世的智慧（修正稿）</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲_专业人士需要更多的跨学科技能.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲_一流慈善基金的投资实践.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲_在慈善圆桌会议早餐会上的讲话.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲_2003年的金融大丑闻.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲_论学院派经济学：考虑跨学科需求之后的优点和缺点.html">第九讲 论学院派经济学</a></li>
+            <li><a href="../第四章/第十讲_在南加州大学古尔德法学院毕业典礼上的演讲.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第四章 查理十一讲 第十一讲 人类误判心理学.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录.html">最新的普世智慧：查理答问录</a></li>
+            <li><a href="../第四章/查理的检查清单.html">查理的检查清单</a></li>
+            <li><a href="../第四章/赛马即投资.html">赛马即投资</a></li>
+            <li><a href="../第四章/事关信任.html">事关信任</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 芒格的人生哲学</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">引言：伯克希尔背后的沉默天才</a></li>
+        <li><a href="#section-2">人物档案</a></li>
+        <li><a href="#section-3">成长岁月（1924—1941）</a></li>
+        <li><a href="#section-4">求学与从军（1941—1948）</a></li>
+        <li><a href="#section-5">律师生涯与个人变故（1948—1965）</a></li>
+        <li><a href="#section-6">结识巴菲特（1959年）</a></li>
+        <li><a href="#section-7">投资合伙公司与财富积累</a></li>
+        <li><a href="#section-8">伯克希尔·哈撒韦时代</a></li>
+        <li><a href="#section-9">精神导师：本杰明·富兰克林</a></li>
+        <li><a href="#section-10">慈善事业</a></li>
+        <li><a href="#section-11">关于衰老与晚年的思考</a></li>
+        <li><a href="#section-12">家人与友人眼中的查理</a></li>
+        <li><a href="#section-13">投资哲学与人生智慧</a></li>
+        <li><a href="#section-14">尾声：永远的精神遗产</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第一章</div>
+        <h1 class="article-title">查理·芒格传略</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>迈克尔·布洛基</span>
+          <span><strong>主题</strong>传记 · 投资智慧 · 人生哲学</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        "最接近把一个人的生活重新过一遍的事情是回忆那种生活，并用文字记录下来，让这种回忆尽可能地长久。"
+        <cite>— 本杰明·富兰克林</cite>
+      </div>
+
+      <!-- 一、引言 -->
+      <section id="section-1">
+        <h2>一、引言：伯克希尔背后的沉默天才</h2>
+
+        <p>伯克希尔·哈撒韦的辉煌故事背后，是两位金融界的天才：广受赞誉的沃伦·巴菲特，和他以低调为乐的<strong>"沉默伙伴"</strong>查理·芒格。</p>
+
+        <p>查理是沃伦的朋友、律师、顾问，也是沃伦口中<strong>"可恶的'说不大师'"</strong>。自沃伦1964年接管伯克希尔、查理随后加入管理层以来，公司市值从1000万美元猛增至1350亿美元，增长<strong>13500倍</strong>，且流通股并未大幅增加。这是两位美国中西部人齐心协力、不断抓住他人错过的机会所取得的杰出成就。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、人物档案 -->
+      <section id="section-2">
+        <h2>二、人物档案</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>信息</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>全名</td><td>查理·托马斯·芒格（Charles Thomas Munger）</td></tr>
+            <tr><td>出生</td><td>1924年1月1日，内布拉斯加州奥马哈市</td></tr>
+            <tr><td>婚姻</td><td>离异后再婚（1956年与南希·巴里·博斯韦克结婚）</td></tr>
+            <tr><td>子女</td><td>8个子女，16个孙辈</td></tr>
+            <tr><td>职务</td><td>伯克希尔·哈撒韦副董事长（1978年至今）</td></tr>
+            <tr><td>财富</td><td>约16亿美元（《福布斯》400富豪榜，2004年）</td></tr>
+            <tr><td>主要投资</td><td>好市多（Costco）、每日快讯（Daily Journal）、传家地产（Price Legacy）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">同乡名人</div>
+            <p>奥马哈这片中西部土地亦孕育了威尔·罗杰斯、亨利·方达、约翰·佩尔辛、哈里·杜鲁门、沃尔特·迪士尼、安·兰德斯、杰拉德·福特及沃伦·巴菲特。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、成长岁月 -->
+      <section id="section-3">
+        <h2>三、成长岁月（1924—1941）</h2>
+
+        <h3>早年家庭与教育启蒙</h3>
+
+        <p>查理的正式教育始于邓迪小学，与两位妹妹玛丽和卡萝尔同校，接受了正统的道德教育。老师们记得他聪明而有点目中无人——他习惯用从大量阅读（尤其是传记）中积累的知识，质疑老师和同学的世俗智慧。</p>
+
+        <p>他早年便对本杰明·富兰克林的格言警句产生了不可磨灭的崇拜之情。父母埃尔·芒格和弗罗伦斯·芒格夫妇鼓励阅读，每年圣诞节为每个孩子送书，而那些书通常在当天晚上便被狼吞虎咽地看完。</p>
+
+        <div class="pull-quote large">
+          "我这辈子遇到的聪明人没有不每天阅读的——没有，一个都没有。沃伦读书之多，我读书之多，可能会让你感到吃惊。我的孩子们都笑话我，他们觉得我是一本长了两条腿的书。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <h3>童年兴趣与早期商业天赋</h3>
+
+        <p>查理在家饲养仓鼠，并善于用仓鼠与其他孩子进行交易——通常能换来更大的或更少见颜色的仓鼠。当他养的仓鼠达到35只时，母亲勒令他停止，因地下室的鼠窝实在太臭。</p>
+
+        <p>他还通过世交埃德·戴维斯医生的医学藏书，养成了终生对科学的兴趣，14岁便成了医生的好朋友，甚至观看过泌尿科手术录像并对统计结果着迷。</p>
+
+        <h3>中央高中时期</h3>
+
+        <p>查理就读于奥马哈中央高中——一所规模庞大、被视为优秀大学预科的公立学校。由于妈妈在他入学前便教会了他认字，他在小学和中学一直是班上年纪和个子最小的学生。因身材瘦小，他参加了射击队，凭借神准的枪法获得杰出代表队员奖并最终成为队长。</p>
+
+        <h3>大萧条时代的深刻记忆</h3>
+
+        <p>20世纪30年代，奥马哈深受大萧条影响。查理亲眼目睹流浪汉在街头乞讨、有人愿意清扫车道以换取一个三明治。这段经历让他终生难忘。</p>
+
+        <p>他的祖父芒格法官在此期间展现了慷慨与商业智慧：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">事件一</span>
+            <h4>收购不良贷款</h4>
+            <p>花费35000美元收购叔叔汤姆银行的不良贷款，帮助银行在罗斯福银行整顿期后重新开业，法官最终收回了绝大部分投资。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">事件二</span>
+            <h4>资助药房创业</h4>
+            <p>资助音乐家女婿开办制药学校并买下一家因大萧条倒闭的药店，该药店后来财源广进。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">查理从中领悟到</div>
+            <p>只要相互支持，芒格家族便能度过历史上最糟糕的经济崩溃。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、求学与从军 -->
+      <section id="section-4">
+        <h2>四、求学与从军（1941—1948）</h2>
+
+        <h3>密歇根大学与物理学的启示</h3>
+
+        <p>1941年，查理从中央高中毕业，前往密歇根大学主修数学。上了理科基础课后，他爱上了物理学——尤其为爱因斯坦等物理学家研究未知事物的方式所着迷。他此后热衷于用物理学方式解决问题，认为这是处理各种生活问题的有效技巧。</p>
+
+        <div class="pull-quote">
+          "由于受到第二次世界大战期间各种因素的刺激，我曾短暂地钻研过基础物理学。这次钻研极大地提高了我的智慧，让我得到了更多的思维模式，所以我更不会成为寓言中那个'拿着铁锤的人'。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <h3>军旅生涯</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>阶段</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>入伍</td><td>19岁完成密歇根大二学业后加入美国陆军空军兵团军官培养计划</td></tr>
+            <tr><td>新墨西哥大学</td><td>学习自然科学与工程学</td></tr>
+            <tr><td>加州理工学院</td><td>专攻热力学与气象学，被培养成气象学家</td></tr>
+            <tr><td>服役地</td><td>阿拉斯加州诺姆市永久军事基地</td></tr>
+            <tr><td>退役</td><td>1946年从美国陆军空军兵团退役</td></tr>
+          </tbody>
+        </table>
+
+        <p>服役期间，查理与南希·哈金斯（其妹玛丽在斯克里普斯学院的好友）结婚，婚后生下长子泰迪。</p>
+
+        <h3>哈佛法学院</h3>
+
+        <p>虽未持有学士学位，查理借"复员军人安置法案"申请哈佛法学院——其父也是该校毕业生。哈佛法学院前院长罗斯科·庞德是芒格家世交，亲自为查理说情，促成了录取。</p>
+
+        <p>1948年，查理以<strong>12名优秀毕业生之一的身份</strong>从哈佛法学院毕业（同届335人）。空军测试表明他智商极高，在哈佛的求学经历也印证了这一点——他轻而易举地取得成功，尽管偶尔因行事出人意表而得罪了少数几个人。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、律师生涯与个人变故 -->
+      <section id="section-5">
+        <h2>五、律师生涯与个人变故（1948—1965）</h2>
+
+        <h3>踏上法律道路</h3>
+
+        <p>毕业后，查理通过加利福尼亚州律师执业考试，供职于赖特&加雷特律师事务所（后更名为穆西克、毕勒&加雷特）。他在南帕萨迪纳修建了一座由建筑师姨父弗雷德里克·斯托特设计的房子，与南希及三个孩子（泰迪、莫莉、温蒂）定居于此。</p>
+
+        <h3>人生最深的试炼</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间</th><th>事件</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1953年</td><td>与第一任妻子离婚</td></tr>
+            <tr><td>约1953年</td><td>深爱的儿子泰迪确诊白血病（当时无法治愈）</td></tr>
+            <tr><td>—</td><td>他会去医院探望垂死的儿子，然后痛哭着走在帕萨迪纳的街头</td></tr>
+            <tr><td>1956年1月27日</td><td>与南希·巴里·博斯韦克结婚（斯坦福毕业生，离婚并育有两子）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">命运的重击</div>
+            <p>泰迪的去世是29岁的查理难以承受的打击。当年骨髓移植尚未出现，白血病是不治之症。</p>
+          </div>
+        </div>
+
+        <p>婚礼上，四个年龄在4至7岁的孩子（男方的两个女儿和女方的两个儿子）共同见证了这场小型家庭婚礼。此后他们又生了三个儿子和一个女儿，共育有<strong>八个子女</strong>。</p>
+
+        <h3>创办芒格、托尔斯律师事务所</h3>
+
+        <p>1962年2月，查理与四位同事合伙成立新律师事务所，最初五位合伙人为：罗伊·托尔斯、罗德里克·希尔斯、狄克·艾斯本思赫德、弗雷德·沃尔德、查理·芒格。</p>
+
+        <p>该事务所历经多次更名，最终定名为<strong>芒格、托尔斯&奥尔森（MTO）</strong>，发展成为美国一流商业律师事务所之一，在洛杉矶和旧金山设有办事处。</p>
+
+        <div class="pull-quote">
+          "关键是把手头的事情做好……把手头的事情做好。把已经拥有的客户照顾好，其他的自然会来找你。"
+          <cite>— 查理·芒格，论吸引客户</cite>
+        </div>
+
+        <p>虽然查理1965年便离开了该事务所（仅工作三年），但他的影响至今犹存——他的名字仍排在175名律师的前列。离开时，他将自己的股份<strong>无偿转让</strong>给了因癌症早逝、留有妻儿的年轻合伙人弗雷德·沃尔德。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">不以营利为唯一目标</div>
+            <p>芒格、托尔斯&奥尔森长期不事声张地为洛杉矶贫困人民和弱势群体提供大量法律援助服务。查理至今仍提醒律师们："别只看到钱"，要"选择那些你愿意与他交朋友的客户"。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、结识巴菲特 -->
+      <section id="section-6">
+        <h2>六、结识巴菲特（1959年）</h2>
+
+        <h3>历史性的相遇</h3>
+
+        <p>查理因父亲去世返回奥马哈料理后事。儿时挚友埃德·戴维斯医生的子女为他安排了一场晚宴，出席者中有一位叫沃伦·巴菲特的年轻人。</p>
+
+        <p>两人相识的契机颇具趣味：沃伦曾向戴维斯医生夫妇讲述自己的投资哲学，打动了他们，使其将毕生积蓄的10万美元交由沃伦管理。医生解释原因时说，沃伦让他想起了查理·芒格。</p>
+
+        <p>那晚，29岁的沃伦与35岁的查理相谈甚欢，话题涵盖商业、金融、历史，无所不谈。他们都意识到，彼此注定要一起做生意。</p>
+
+        <h3>伙伴关系的确立</h3>
+
+        <p>他们之间不存在正式的合伙关系或契约关系——这种纽带是由两个相互理解、相互信赖的中西部人的<strong>一次握手和拥抱</strong>创造出来的。他们通过电话和长达九页的书信持续交流。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">沃伦的推动</div>
+            <p>沃伦对查理继续从事律师职业不以为然，他认为查理固然可以把当律师作为一种爱好，但当律师赚的钱没有沃伦正在做的事情赚得多。这种逻辑帮助查理在经济条件允许时第一时间放弃了律师生涯。</p>
+          </div>
+        </div>
+
+        <h3>互利的合作网络</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>受益方</th><th>合作收益</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>沃伦·巴菲特</td><td>投资或收购企业时，随时享有芒格托尔斯律师事务所的顶级法律顾问服务</td></tr>
+            <tr><td>芒格托尔斯</td><td>获得巴菲特顾问费，且巴菲特的声誉为事务所带来更多高端客户</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、投资合伙公司与财富积累 -->
+      <section id="section-7">
+        <h2>七、投资合伙公司与财富积累</h2>
+
+        <h3>早期房地产投资</h3>
+
+        <p>查理1961年首次涉足房地产，与客户奥蒂斯·布思合作在加州理工学院附近修建分户式产权公寓，<strong>投入10万美元获得30万美元利润</strong>。此后又在帕萨迪纳、阿罕布拉等地持续开发，至1964年收手时，房地产开发累计带来高达<strong>140万美元</strong>的收益。</p>
+
+        <h3>惠勒芒格公司（1962—1975）</h3>
+
+        <p>查理与杰克·惠勒合伙成立惠勒芒格公司，后艾尔·马歇尔也加入。因杰克·惠勒在太平洋海岸股票交易所拥有两个席位，公司只需支付极低的交易费用，且行政开销保持在接近零的水平。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时期</th><th>业绩</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>前11年（1962—1972）</td><td>年均复合毛收益率 <strong>28.3%</strong>（净收益率20%），同期道指年均仅6.7%</td></tr>
+            <tr><td>1973年</td><td>亏损 <strong>31.9%</strong>（主力股蓝筹印花公司和新美国基金大跌）</td></tr>
+            <tr><td>1974年</td><td>亏损 <strong>31.5%</strong></td></tr>
+            <tr><td>1975年</td><td>强劲反弹 <strong>+73.2%</strong></td></tr>
+            <tr><td>14年年均（净）</td><td><strong>13.7%</strong>，同期道指年均5%</td></tr>
+          </tbody>
+        </table>
+
+        <p>1975年，查理效法巴菲特（沃伦已于1969年关闭自己的合伙公司），决定不再直接为投资者管理基金，转而通过控股股份公司来建立财富。公司清算时，股东获得蓝筹印花公司和多元零售公司的股份，这些股份后来转为伯克希尔·哈撒韦股票（1975年底收市价38美元，2005年超过85000美元/股）。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">志同道合的伙伴</div>
+            <p>查理与沃伦有时也会产生分歧。查理曾说："如果我们之中有一个人看好某件事情，往往意味着两个人都会看好。"这也是他们偶尔担心的——两人太过相似。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、伯克希尔·哈撒韦时代 -->
+      <section id="section-8">
+        <h2>八、伯克希尔·哈撒韦时代</h2>
+
+        <p>在挑选价值被低估的公司、从公开市场购买大量股票或直接收购方面，沃伦和查理的业绩无与伦比。他们的主要收购和投资包括：</p>
+
+        <p><strong>直接收购企业：</strong>约翰斯·曼维尔、布法罗晚报、飞行安全国际、Netjets飞机租赁、邵牌地毯、本杰明·摩尔油漆、政府职员保险公司（GEICO）、牛奶皇后等。</p>
+
+        <p><strong>公开市场重仓股：</strong>华盛顿邮报、可口可乐、吉列、美国运通等。</p>
+
+        <p>大多数情况下，他们的主要投资都是<strong>长期持有</strong>的——几乎每家直接收购的企业至今仍在伯克希尔旗下。</p>
+
+        <p>查理自1978年起担任伯克希尔副董事长，在每年约六小时的股东大会和约三小时的西科年会上，他仅凭铅笔和白纸，无需彩排，即可流利回答各种提问。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、精神导师：本杰明·富兰克林 -->
+      <section id="section-9">
+        <h2>九、精神导师：本杰明·富兰克林</h2>
+
+        <p>查理终生仰慕本杰明·富兰克林，认为富兰克林用自己赚到的钱实现了财务独立，进而专注于社会改良，这是值得效仿的精神风范。</p>
+
+        <div class="pull-quote large">
+          "我本人是个传记爱好者。我认为当你试图让人们学到有用的伟大概念时，最好是将这些概念和提出它们的伟人的生活与个性联系起来。和'已逝的伟人'交朋友，听起来很好玩，但如果你确实在生活中与那些有杰出思想的已逝的伟人成为朋友，那么我认为你会过上更好的生活，得到更好的教育。"
+          <cite>— 查理·芒格，于喜诗糖果公司75周年庆典</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、慈善事业 -->
+      <section id="section-10">
+        <h2>十、慈善事业</h2>
+
+        <p>查理和南希长年低调地慷慨捐款给多所教育机构和研究机构，直到资助建造重要建筑物后，善举才为世人所知。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>受益机构</th><th>捐赠内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>哈佛—西湖中学（北好莱坞）</td><td>科学中心建设；查理担任校董</td></tr>
+            <tr><td>亨廷顿图书馆（圣马力诺）</td><td>新楼建设，命名为"南希·芒格和查理·芒格研究中心"（2004年落成，9万平方英尺）</td></tr>
+            <tr><td>斯坦福大学法学院</td><td>新研究生宿舍楼（落成后供法学院、商学院等研究生入住）</td></tr>
+            <tr><td>撒玛利亚医院（洛杉矶）</td><td>长期参与管理并担任董事会主席</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          "从前的查理·芒格为这些年轻人提供了一种可怕的职业榜样，因为与他从资本主义得到的好处相比，他对文明作出的回报还不够多。"
+          <cite>— 查理·芒格（自我批评）</cite>
+        </div>
+
+        <p>此外，查理虽自称是保守的共和党人，但大力提倡计划生育；他还资助各种旨在改善教育环境和质量的活动，认为财富应当用于帮助子孙继承一个更美好的世界。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十一、关于衰老与晚年的思考 -->
+      <section id="section-11">
+        <h2>十一、关于衰老与晚年的思考</h2>
+
+        <p>受西塞罗《论老年》（由本杰明·富兰克林于1744年率先在美国出版）的启发，查理在晚年写下了一篇深刻的反思文章。</p>
+
+        <h3>西塞罗的主要论点</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>主题</th><th>西塞罗的观点</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>年龄与智慧</td><td>智力价值远高于体力，老年人的平均优势高于年轻人</td></tr>
+            <tr><td>学习</td><td>一息尚存，就应不断学习；"活到老，学到老"（引用梭伦语）</td></tr>
+            <tr><td>贪婪</td><td>越接近人生终点，财迷心窍越荒唐</td></tr>
+            <tr><td>死亡</td><td>害怕死亡是愚蠢的——死后要么过上更好的永恒生活，要么不再保留任何人间痛苦</td></tr>
+            <tr><td>晚年幸福</td><td>若生活方式正确，晚年只会比年轻时更加幸福</td></tr>
+          </tbody>
+        </table>
+
+        <h3>芒格的个人感悟</h3>
+
+        <p>查理认为，西塞罗最伟大的总结是：</p>
+
+        <div class="pull-quote large">
+          "晚年的最佳保护铠甲是一段在它之前被悉心度过的生活，一段被用于追求有益的知识、光荣的功绩和高尚的举止的生活。"
+          <cite>— 西塞罗</cite>
+        </div>
+
+        <p>查理的感悟是：人生中只要做好准备、抓住几个关键机会，迅速采取合乎逻辑的行动，财富和幸福便会得到极大的增长。这样的机会很少，通常落在那些不断寻找和等待、充满求知欲的人身上。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十二、家人与友人眼中的查理 -->
+      <section id="section-12">
+        <h2>十二、家人与友人眼中的查理</h2>
+
+        <h3>性格特质综述</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>特质</th><th>描述</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>求知欲</td><td>每天阅读，终生不辍；对任何引起注意的事情都要穷根究底</td></tr>
+            <tr><td>专注力</td><td>深陷沉思时对周围一切视若无睹，甚至会忽略社交礼仪</td></tr>
+            <tr><td>理性</td><td>在商业决策上极度理性，这是他成功的核心秘密</td></tr>
+            <tr><td>幽默感</td><td>经常为自己讲的笑话而笑得前俯后仰</td></tr>
+            <tr><td>直接坦诚</td><td>不拐弯抹角，但讲故事的方式兼顾了听者的感受</td></tr>
+            <tr><td>低调</td><td>虽名列《福布斯》富豪榜，却为此感到懊恼，始终保持低调</td></tr>
+          </tbody>
+        </table>
+
+        <h3>友人证言</h3>
+
+        <div class="pull-quote">
+          "查理有把事情彻底弄清楚的欲望。他遇事喜欢穷根究底，任何引起他注意的事情，他都想对其有更多的认识，弄清楚那到底是怎么回事。"
+          <cite>— 罗伊·托尔斯，1946年起的朋友兼生意伙伴</cite>
+        </div>
+
+        <div class="pull-quote">
+          "当查理陷入沉思的时候，他往往对周遭的一切视若无睹，甚至会忽略社交礼仪。"
+          <cite>— 鲍勃·伯德，西科金融公司总裁，1969年起的朋友</cite>
+        </div>
+
+        <div class="pull-quote">
+          "查理是我遇到过的最渊博的思想家。从经商原则到经济规律，从学生宿舍的设计到游艇的设计，他都没有对手。"
+          <cite>— 沃伦·巴菲特，1959年起的朋友兼合伙人</cite>
+        </div>
+
+        <div class="pull-quote">
+          "查理甚至超越了沃伦给予我的高度期望。他确实是我遇到过的最渊博的思想家……我们最长的一次通信详细地讨论了裸鼢鼠的择偶习惯以及它们对人类的启示。"
+          <cite>— 比尔·盖茨</cite>
+        </div>
+
+        <h3>巴菲特答问录精选</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">问：查理成功的秘密是什么？</span>
+            <h4>理性</h4>
+            <p>嗯，有一次，有位漂亮的女士强迫查理用一个词来概括，他说他很"理性"。他天生就是很理性的人，并把它用在做生意上——在生意场上绝对是理性的，那让他取得了巨大的商业成绩。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问：他有哪些道德品质促成了成功？</span>
+            <h4>诚实正直</h4>
+            <p>他的道德品质真的来自他十分敬佩的本杰明·富兰克林。他为人诚实正直，他做的总是比分内事要多，而且从来不抱怨。我们合伙了40年，他从来不对我做的事情放马后炮。我们从来没有发生过一次争执。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问：他最异乎寻常的特点是哪些？</span>
+            <h4>独一无二</h4>
+            <p>查理的一切都是异乎寻常的。我花了40年在他身上找寻常的东西，现在还没找到呢。查理谱写了他自己的乐曲——那是真的没有人听过的乐曲。他是独一无二的。</p>
+          </div>
+        </div>
+
+        <h3>子女的追忆</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">温蒂·芒格</span>
+            <h4>餐桌讲坛</h4>
+            <p>父亲以餐桌为讲坛，以德育故事和反面教材教育子女，故事结局往往极端可怕，让孩子们一边尖叫一边大笑，留下深刻印记。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">小查理·芒格</span>
+            <h4>借车加满油</h4>
+            <p>父亲借还车时必加满油的教诲，让他从此懂得如何交朋友、维护友谊。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">戴维·博斯韦克</span>
+            <h4>无休止的练习</h4>
+            <p>父亲添置网球发球机后，无休止地练习网前截击，最终掌握了别人都不屑练习的技术，在竞争中获得令人抓狂的优势。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">莫莉·芒格</span>
+            <h4>逆其道而行</h4>
+            <p>父亲教导她遇事要抱怀疑态度、逆其道而行，这在20世纪60年代末期的混乱局面中尤其受用。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">艾米莉·欧格登</span>
+            <h4>父亲的双手</h4>
+            <p>她的手与父亲的手极为相似，父亲的手捧着书、做着手势，塑造了她的人生。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">菲利普·芒格</span>
+            <h4>经久耐用</h4>
+            <p>父亲带他去布鲁克斯兄弟商店和马莎百货购买经久耐用的衣服，那些衣服陪伴他走过了人生重要时刻，令他终生难忘。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十三、投资哲学与人生智慧 -->
+      <section id="section-13">
+        <h2>十三、投资哲学与人生智慧</h2>
+
+        <h3>沃伦·巴菲特的评价</h3>
+
+        <div class="pull-quote">
+          "他的投资组合集中在非常少的几只股票上，因而业绩波动更大，但也是基于同样的价值投资策略。他愿意接受业绩出现更大的起伏，他恰好是一个心理结构倾向集中的人，业绩显示也是如此。"
+          <cite>— 沃伦·巴菲特，摘自"格雷厄姆—多德斯维尔式的超级投资者"</cite>
+        </div>
+
+        <h3>查理的核心格言</h3>
+
+        <div class="pull-quote large">
+          "我们的经验往往会验证一个长久以来的观念：只要做好准备，在人生中抓住几个机会，迅速地采取适当的行动，去做简单而合乎逻辑的事情，这辈子的财富就会得到极大的增长。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <div class="pull-quote large">
+          "上面提到的这种机会很少，它们通常会落在不断地寻找和等待、充满求知欲望而又热衷于对各种不同的可能性作出分析的人头上。"
+          <cite>— 查理·芒格</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十四、尾声 -->
+      <section id="section-14">
+        <h2>十四、尾声：永远的精神遗产</h2>
+
+        <p>查理·芒格在他漫长的从业生涯中，始终研究那些获得成功的人生和那些留下遗憾或遭遇失败的人生。这种研究，使他拥有了渊博的知识，也使他成为芒格、托尔斯&奥尔森最重要的精神导师。</p>
+
+        <div class="pull-quote">
+          "查理·芒格在他的从业生涯中一直在研究那些获得成功的人生和其他那些留下遗憾或者遭遇失败的人生。这种研究让我们明白他为什么拥有那么渊博的知识，为什么仍旧是芒格、托尔斯&奥尔森最重要的精神导师。"
+          <cite>— 罗纳德·奥尔森，芒格、托尔斯&奥尔森律师事务所合伙人，伯克希尔·哈撒韦公司董事</cite>
+        </div>
+
+        <p>聪明绝顶的查理·芒格，始终是沃伦·巴菲特的宝贵合伙人，也是更广阔商业世界的导师。他们联手创建了历史上最成功、最受广泛尊敬的公司之一。</p>
+      </section>
+
+      <div class="article-footer">— 本章由迈克尔·布洛基撰写 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    const relativePath = 'books/' + BOOK_FOLDER + '/第一章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        chapter.classList.toggle('open');
+      });
+    });
+
+  </script>
+
+</body>
+</html>

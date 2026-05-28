@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>人生的道理与智慧 · 穷查理宝典</title>
-  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="../../../assets/style.css" />
   <style>
     /* ===== 110% Scale ===== */
     html { font-size: 17.6px; }
@@ -456,8 +456,8 @@
         </div>
       </div>
       <nav class="nav-links">
-        <a href="../../index.html" class="nav-home">⌂ 首页</a>
-        <a href="../../index.html" class="nav-home">← 返回书架</a>
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
       </nav>
     </div>
   </header>
@@ -468,9 +468,9 @@
     <aside class="chapter-sidebar">
       <!-- 面包屑 -->
       <div class="breadcrumb">
-        <a href="../../index.html">书架</a>
+        <a href="../../../index.html">书架</a>
         <span class="crumb-sep">/</span>
-        <a href="../../index.html">穷查理宝典</a>
+        <a href="../../../index.html">穷查理宝典</a>
       </div>
 
       <!-- 全书目录树 -->
@@ -478,6 +478,9 @@
       <ul class="book-toc">
         <li class="toc-chapter">
           <span class="toc-chapter-title">第一章 查理·芒格传略</span>
+          <ul class="toc-lectures">
+            <li><a href="../第一章/查理芒格传略.html">查理·芒格传略</a></li>
+          </ul>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
@@ -940,7 +943,7 @@
     const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
 
     // 记录当前页面为该书最后阅读页
-    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
     localStorage.setItem(PAGE_KEY, relativePath);
 
     // 恢复上次滚动位置

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>事关信任 · 穷查理宝典</title>
-  <link rel="stylesheet" href="../../assets/style.css" />
+  <title>赛马即投资 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
   <style>
     html { font-size: 17.6px; }
 
@@ -287,50 +287,37 @@
     .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
     .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
 
-    .remedy-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
       margin: 1.5rem 0;
-    }
-    .remedy-card {
+      font-size: .88rem;
       background: var(--bg3);
-      border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      transition: border-color .2s, transform .2s;
-      position: relative;
       overflow: hidden;
+      border: 1px solid var(--border);
     }
-    .remedy-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      background: var(--gold);
-    }
-    .remedy-card:hover {
-      border-color: rgba(201,168,76,.4);
-      transform: translateX(2px);
-    }
-    .remedy-num {
-      display: inline-block;
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      color: var(--gold);
+    .article-table thead {
       background: rgba(201,168,76,.1);
-      padding: .2rem .65rem;
-      border-radius: 20px;
-      border: 1px solid rgba(201,168,76,.25);
-      margin-bottom: .65rem;
     }
-    .remedy-card h4 {
-      font-size: 1.02rem;
-      color: var(--text);
-      margin-bottom: .6rem;
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
     }
-    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
 
     .section-divider {
       display: flex;
@@ -371,8 +358,8 @@
         </div>
       </div>
       <nav class="nav-links">
-        <a href="../../index.html" class="nav-home">⌂ 首页</a>
-        <a href="../../index.html" class="nav-home">← 返回书架</a>
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
       </nav>
     </div>
   </header>
@@ -381,15 +368,18 @@
 
     <aside class="chapter-sidebar">
       <div class="breadcrumb">
-        <a href="../../index.html">书架</a>
+        <a href="../../../index.html">书架</a>
         <span class="crumb-sep">/</span>
-        <a href="../../index.html">穷查理宝典</a>
+        <a href="../../../index.html">穷查理宝典</a>
       </div>
 
       <div class="sidebar-label">全书目录</div>
       <ul class="book-toc">
         <li class="toc-chapter">
           <span class="toc-chapter-title">第一章 查理·芒格传略</span>
+          <ul class="toc-lectures">
+            <li><a href="../第一章/查理芒格传略.html">查理·芒格传略</a></li>
+          </ul>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
@@ -417,8 +407,8 @@
             <li><a href="事关信任.html">事关信任</a></li>
             <li><a href="最新的普世智慧：查理答问录.html">最新的普世智慧：查理答问录</a></li>
             <li><a href="查理的检查清单.html">查理的检查清单</a></li>
-            <li><a href="赛马即投资.html">赛马即投资</a></li>
-            <li><a href="事关信任.html" class="active">事关信任</a></li>
+            <li><a href="赛马即投资.html" class="active">赛马即投资</a></li>
+            <li><a href="事关信任.html">事关信任</a></li>
           </ul>
         </li>
         <li class="toc-chapter">
@@ -428,9 +418,9 @@
 
       <div class="sidebar-label sidebar-label-sub">本讲目录</div>
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li><a href="#section-1">信任的核心地位</a></li>
-        <li><a href="#section-2">本杰明·格雷厄姆的忠告</a></li>
-        <li><a href="#section-3">芒格与巴菲特的伙伴关系</a></li>
+        <li><a href="#section-1">芒格与巴菲特的共同偏好</a></li>
+        <li><a href="#section-2">巴菲特的赛马渊源</a></li>
+        <li><a href="#section-3">速度派 vs 旅途派</a></li>
       </ul>
     </aside>
 
@@ -438,97 +428,86 @@
 
       <header class="article-header">
         <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲</div>
-        <h1 class="article-title">事关信任</h1>
+        <h1 class="article-title">赛马即投资</h1>
         <div class="article-meta">
           <span><strong>作者</strong>查理·芒格</span>
-          <span><strong>主题</strong>信任 · 道德 · 伙伴关系</span>
+          <span><strong>主题</strong>赛马 · 投资类比</span>
         </div>
       </header>
 
-      <div class="pull-quote large">
-        "信任能让资本主义运转得更好。"
-        <cite>— 查理·芒格</cite>
-      </div>
-
-      <!-- 信任的核心地位 -->
+      <!-- 芒格与巴菲特的共同偏好 -->
       <section id="section-1">
-        <h2>信任的核心地位</h2>
+        <h2>芒格与巴菲特的共同偏好</h2>
 
-        <p>芒格与巴菲特向来以<strong>道德高尚、品行端正</strong>著称。他们秉持艾伯特·盖瑞（1901—1927年任美国钢铁公司董事长）的理念：</p>
-
-        <div class="pull-quote">
-          "正直的行为是好的，并不是因为它们能够带来好处；它们能够带来好处，是因为它们是好的。"
-          <cite>— 艾伯特·盖瑞</cite>
-        </div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">信任的经济价值</div>
-            <p>在高信任度的环境中，交易成本大幅降低，合作效率显著提升。信任不是道德的装饰品，而是资本主义运行的基础设施。</p>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- 本杰明·格雷厄姆的忠告 -->
-      <section id="section-2">
-        <h2>本杰明·格雷厄姆的忠告</h2>
-
-        <p>芒格曾参加"本杰明·格雷厄姆小组"会议。格雷厄姆通过一场"认知评估测验"（其中包含极易令人上当的问题）揭示了信任的重要性：</p>
+        <p>芒格喜欢将<strong>彩池投注赛马</strong>与<strong>股票市场</strong>进行类比，并将最好的投资机会比喻为"定错价格的赌局"：</p>
 
         <div class="pull-quote large">
-          "无论你们多么聪明，总有一些更聪明的人，如果他们真的想骗你们，你们就会上当。所以，要确定与你们共事的聪明人值得你们信赖。"
-          <cite>— 本杰明·格雷厄姆</cite>
+          "我们要寻找一匹获胜几率是1/2、赔率是一赔三的马。"
+          <cite>— 查理·芒格</cite>
         </div>
 
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <div class="callout-title">核心教训</div>
-            <p>智商不是防火墙。再聪明的人也无法防住一个铁了心要欺骗你的人。唯一可靠的防御是——只与值得信赖的人共事。</p>
+            <div class="callout-title">核心思想</div>
+            <p>投资与赛马的共同本质：寻找市场错误定价的机会。当胜率远高于赔率所反映的水平时，就是最佳的下注时机。</p>
           </div>
         </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- 芒格与巴菲特的伙伴关系 -->
+      <!-- 巴菲特的赛马渊源 -->
+      <section id="section-2">
+        <h2>巴菲特的赛马渊源</h2>
+
+        <p>巴菲特早年对赛马产生浓厚兴趣，曾与朋友合作出版投注指南<strong>《马童之选》</strong>，在奥马哈的加斯拉布赛马场销售。他对赛马的研究——涉及体重、速度排名、步速、以往表现和血统等大量变量——与他后来的投资方法高度一致。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">早年经历与投资方法</div>
+            <p>巴菲特在赛马研究中培养的数据分析习惯，为他后来的价值投资方法论奠定了基础——两者都需要在海量变量中找到真正决定结果的关键因素。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 速度派 vs 旅途派 -->
       <section id="section-3">
-        <h2>芒格与巴菲特的伙伴关系</h2>
+        <h2>速度派 vs 旅途派</h2>
 
-        <div class="pull-quote">
-          "查理和我是在1959年由戴维斯一家介绍认识的。我们是两个倾向于掌握主导权的人。然而我们自从认识到现在从来没有争吵过。"
-          <cite>— 沃伦·巴菲特</cite>
-        </div>
+        <p>赌马界两大流派与投资风格存在深刻对应：</p>
 
-        <p>这段超过半个世纪的伙伴关系，是信任在商业世界中最有力的证明。两个都具有强烈主见的聪明人，之所以能够<strong>从不争吵</strong>，根本原因在于：</p>
-
-        <div class="remedy-grid">
-          <div class="remedy-card">
-            <span class="remedy-num">基础一</span>
-            <h4>共同的价值观</h4>
-            <p>两人对正直、理性、独立思考的追求高度一致，根本性的分歧极少。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">基础二</span>
-            <h4>绝对的信任</h4>
-            <p>彼此确信对方不会做有损于自己或合伙事业的事情，这是高效协作的前提。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">基础三</span>
-            <h4>互补的思维</h4>
-            <p>巴菲特擅长定量分析和商业判断，芒格擅长跨学科思维和风险识别，各司其职。</p>
-          </div>
-        </div>
+        <table class="article-table">
+          <thead>
+            <tr><th>流派</th><th>赛马视角</th><th>投资类比</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>速度派</strong></td>
+              <td>认为跑最快的马能赢</td>
+              <td>类似股市中的<strong>动量投资者</strong></td>
+            </tr>
+            <tr>
+              <td><strong>旅途派</strong></td>
+              <td>关注马匹在"旅途"中遇到的各种细节（赛道状况、排位、直道数量等）</td>
+              <td>巴菲特自称属于此类——关注企业经营的具体过程与环境</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div class="callout tip">
           <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <div class="callout-title">终极启示</div>
-            <p>找到一个你完全信任、思维互补且价值观一致的伙伴，可能是人生中最有价值的投资。</p>
+            <div class="callout-title">巴菲特的自我定位</div>
+            <p>巴菲特曾自称为"旅途派赌徒"。他的同行几乎没有人能听懂这句话；赌马者当然能听懂。</p>
           </div>
+        </div>
+
+        <div class="pull-quote">
+          "<strong>印证案例</strong>：1993年《莱斯赛马年报》用旅途派方法预测肯塔基赛马大会冠军为'海洋豪杰'（Sea Hero），结果该马获胜，2美元的投注回报高达27.8美元。"
         </div>
       </section>
 
@@ -576,7 +555,7 @@
     const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
     const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
 
-    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
     localStorage.setItem(PAGE_KEY, relativePath);
 
     const savedScroll = localStorage.getItem(SCROLL_KEY);
