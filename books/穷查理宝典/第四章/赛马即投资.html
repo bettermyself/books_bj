@@ -383,6 +383,9 @@
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
+          <ul class="toc-lectures">
+            <li><a href="../第二章/第二章_芒格的生活_学习和决策方法.html">芒格的生活、学习和决策方法</a></li>
+          </ul>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第三章 芒格主义：查理的即席谈话</span>
@@ -581,7 +584,9 @@
     document.querySelectorAll('.toc-chapter-title').forEach(title => {
       title.addEventListener('click', () => {
         const chapter = title.closest('.toc-chapter');
-        chapter.classList.toggle('open');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
       });
     });
 

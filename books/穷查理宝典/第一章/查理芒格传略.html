@@ -427,6 +427,9 @@
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
+          <ul class="toc-lectures">
+            <li><a href="../第二章/第二章_芒格的生活_学习和决策方法.html">芒格的生活、学习和决策方法</a></li>
+          </ul>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第三章 芒格主义：查理的即席谈话</span>
@@ -983,8 +986,6 @@
       <section id="section-14">
         <h2>十四、尾声：永远的精神遗产</h2>
 
-        <p>查理·芒格在他漫长的从业生涯中，始终研究那些获得成功的人生和那些留下遗憾或遭遇失败的人生。这种研究，使他拥有了渊博的知识，也使他成为芒格、托尔斯&奥尔森最重要的精神导师。</p>
-
         <div class="pull-quote">
           "查理·芒格在他的从业生涯中一直在研究那些获得成功的人生和其他那些留下遗憾或者遭遇失败的人生。这种研究让我们明白他为什么拥有那么渊博的知识，为什么仍旧是芒格、托尔斯&奥尔森最重要的精神导师。"
           <cite>— 罗纳德·奥尔森，芒格、托尔斯&奥尔森律师事务所合伙人，伯克希尔·哈撒韦公司董事</cite>
@@ -1063,7 +1064,9 @@
     document.querySelectorAll('.toc-chapter-title').forEach(title => {
       title.addEventListener('click', () => {
         const chapter = title.closest('.toc-chapter');
-        chapter.classList.toggle('open');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
       });
     });
 

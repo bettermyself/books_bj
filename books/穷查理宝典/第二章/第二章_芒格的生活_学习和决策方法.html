@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>芒格的生活、学习和决策方法 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.9;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      position: absolute;
+      top: -.2rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .3;
+      font-style: normal;
+    }
+    .poem-author {
+      display: block;
+      margin-top: .8rem;
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 查理·芒格传略</span>
+          <ul class="toc-lectures">
+            <li><a href="../第一章/查理芒格传略.html">查理·芒格传略</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第二章 芒格的生活、学习和决策方法</span>
+          <ul class="toc-lectures">
+            <li><a href="第二章_芒格的生活_学习和决策方法.html" class="active">芒格的生活、学习和决策方法</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 芒格主义：查理的即席谈话</span>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/在哈佛学校毕业典礼上的演讲.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理.html">第二讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（修正稿）.html">第三讲 论基本的、普世的智慧（修正稿）</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲_专业人士需要更多的跨学科技能.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲_一流慈善基金的投资实践.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲_在慈善圆桌会议早餐会上的讲话.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲_2003年的金融大丑闻.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲_论学院派经济学：考虑跨学科需求之后的优点和缺点.html">第九讲 论学院派经济学</a></li>
+            <li><a href="../第四章/第十讲_在南加州大学古尔德法学院毕业典礼上的演讲.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第四章 查理十一讲 第十一讲 人类误判心理学.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录.html">最新的普世智慧：查理答问录</a></li>
+            <li><a href="../第四章/查理的检查清单.html">查理的检查清单</a></li>
+            <li><a href="../第四章/赛马即投资.html">赛马即投资</a></li>
+            <li><a href="../第四章/事关信任.html">事关信任</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 芒格的人生哲学</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">引言：富兰克林与芒格的精神传承</a></li>
+        <li><a href="#section-2">一、商业世界是一个"生态系统"</a></li>
+        <li><a href="#section-3">二、多元思维模型</a></li>
+        <li><a href="#section-3-1" class="sub">核心理念</a></li>
+        <li><a href="#section-3-2" class="sub">涵盖的学科范围</a></li>
+        <li><a href="#section-3-3" class="sub">Lollapalooza 效应</a></li>
+        <li><a href="#section-4">三、愿意改变想法</a></li>
+        <li><a href="#section-5">四、接受现实</a></li>
+        <li><a href="#section-6">五、耐心的艺术</a></li>
+        <li><a href="#section-7">六、影响芒格的思想来源</a></li>
+        <li><a href="#section-7-1" class="sub">菲利浦·费舍尔</a></li>
+        <li><a href="#section-7-2" class="sub">本杰明·格雷厄姆</a></li>
+        <li><a href="#section-8">七、能力圈原则</a></li>
+        <li><a href="#section-8-1" class="sub">三类投资项目的划分</a></li>
+        <li><a href="#section-8-2" class="sub">马克斯·普朗克与司机的故事</a></li>
+        <li><a href="#section-9">八、护城河理论</a></li>
+        <li><a href="#section-10">九、芒格的投资评估过程</a></li>
+        <li><a href="#section-10-1" class="sub">估值方式与核心原则</a></li>
+        <li><a href="#section-10-2" class="sub">详尽评估框架</a></li>
+        <li><a href="#section-10-3" class="sub">"扣动扳机之前"的检查清单</a></li>
+        <li><a href="#section-11">十、坐等投资法与集中持仓</a></li>
+        <li><a href="#section-11-1" class="sub">泰德·威廉姆斯的77格击球区</a></li>
+        <li><a href="#section-12">十一、投资原则检查清单</a></li>
+        <li><a href="#section-13">十二、诚实是最好的策略</a></li>
+        <li><a href="#section-14">十三、避免行动的悖论——"反过来想"</a></li>
+        <li><a href="#section-16">结语：芒格成功的本质</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第二章</div>
+        <h1 class="article-title">芒格的生活、学习和决策方法</h1>
+        <div class="article-meta">
+          <span><strong>主题</strong>多元思维模型 · 投资哲学 · 决策方法</span>
+          <span><strong>关键词</strong>护城河 · 能力圈 · Lollapalooza效应</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        "凡事往简单处想，往认真处行。"
+        <cite>— 查理·芒格</cite>
+      </div>
+
+      <!-- 引言 -->
+      <section id="section-1">
+        <h2>引言：富兰克林与芒格的精神传承</h2>
+
+        <p>本杰明·富兰克林虽主要靠自学成才，却在新闻、出版、慈善、科学、外交和发明等众多领域取得了惊人成就。他的成功根植于<strong>勤奋工作、永不满足的求知欲以及从容不迫的行为方式</strong>，加之头脑聪明、乐于接受新事物，每当进入新领域，总能迅速融会贯通。</p>
+
+        <p>查理·芒格将富兰克林视为最大的偶像——两人同为自学成才，共享诸多独特品格：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>共同品格</th><th>具体体现</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>未雨绸缪</strong></td><td>充分准备，提前应对可能的风险</td></tr>
+            <tr><td><strong>富有耐心</strong></td><td>坚持等待合适时机，不轻易行动</td></tr>
+            <tr><td><strong>律己严厉</strong></td><td>对自身要求极高，严守原则</td></tr>
+            <tr><td><strong>不偏不倚</strong></td><td>保持客观中立，独立思考</td></tr>
+          </tbody>
+        </table>
+
+        <p>正是充分利用这些特性，芒格在个人生活和生意场上——尤其在投资领域——取得了巨大成功。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、商业世界是一个"生态系统" -->
+      <section id="section-2">
+        <h2>一、商业世界是一个"生态系统"</h2>
+
+        <div class="pull-quote">
+          "如果我们试图理解一样看似独立存在的东西，我们将会发现它和宇宙间的其他一切都有联系。"
+          <cite>— 约翰·缪尔</cite>
+        </div>
+
+        <p>芒格认为，将自由市场经济视为某种<strong>生态系统</strong>是极为有用的思维方式：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">观点一</span>
+            <h4>位置决定繁衍</h4>
+            <p>动物在合适的地方能够繁衍，人只要在社会上找到了专属于自己的位置，也能取得很大的成功。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">观点二</span>
+            <h4>适者生存法则</h4>
+            <p>经济与生态系统之间有诸多相似之处，<strong>适者生存</strong>的法则同样适用于商业竞争。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">观点三</span>
+            <h4>极端取胜系统</h4>
+            <p>在商业世界中，取胜的系统往往在最大化或最小化某一变量上走到近乎荒谬的极端——好市多仓储超市是典型例证。</p>
+          </div>
+        </div>
+
+        <p>对芒格来说，<strong>成功的投资只是他小心谋划、专注行事的生活方式的副产品</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、多元思维模型 -->
+      <section id="section-3">
+        <h2>二、多元思维模型</h2>
+
+        <h3 id="section-3-1">核心理念</h3>
+
+        <div class="pull-quote">
+          "你必须知道重要学科的重要理论，并经常使用它们——要全部都用上，而不是只用几种。在手里拿着铁锤的人看来，世界就像一颗钉子。这是处理问题的一种笨办法。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>查理的投资方法与大多数投资者的粗陋系统截然不同。他不对公司财务信息进行肤浅的独立评估，而是对<strong>候选公司内部经营状况及其所处的更大"生态系统"</strong>作出全面分析。他将这套分析工具称为<strong>"多元思维模型"</strong>。</p>
+
+        <h3 id="section-3-2">涵盖的学科范围</h3>
+
+        <p>这些模型借用并糅合了来自众多传统学科的分析工具、方法和公式：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>学科领域</th><th>代表性模型</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>工程学</td><td>冗余备份模型（安全边际）</td></tr>
+            <tr><td>数学</td><td>复利模型</td></tr>
+            <tr><td>物理学与化学</td><td>临界点、倾覆力矩、自我催化模型</td></tr>
+            <tr><td>生物学</td><td>现代达尔文综合模型</td></tr>
+            <tr><td>心理学</td><td>认知误判模型（25种常见诱因）</td></tr>
+            <tr><td>历史学、统计学、经济学</td><td>多种辅助分析框架</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">思维模型的数量</div>
+            <p>芒格估计，他掌握的思维模型约有<strong>100种</strong>。</p>
+          </div>
+        </div>
+
+        <p>几乎每个系统都受到多种因素的影响，若要理解这样的系统，就必须熟练运用来自不同学科的多元思维模式。这种广谱分析法能够更好地理解各候选投资因素之间如何相互影响、相互联系，有时会揭示<strong>"波浪效应"或"溢出效应"</strong>——隐秘的连锁影响。</p>
+
+        <h3 id="section-3-3">Lollapalooza 效应详解</h3>
+
+        <div class="pull-quote">
+          "当几个模型联合起来，你就能得到 lollapalooza 效应；这是两种、三种或四种力量共同作用于同一个方向……就像物理学里面的临界质量，当你达到一定程度的质量，你就能引发核爆炸。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>情形</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>力量方向一致</strong></td><td>产生 lollapalooza 效应，效果远超各力量之和</td></tr>
+            <tr><td><strong>力量相互冲突</strong></td><td>需要权衡取舍，鱼与熊掌不可兼得</td></tr>
+            <tr><td><strong>力量简单叠加</strong></td><td>临界点以下，效果等于各力量之和</td></tr>
+          </tbody>
+        </table>
+
+        <p>芒格在投资评估时采用的"重要学科的重要理论"方法，<strong>在商业世界中是独一无二的</strong>。他自述："直到今天，我从来没在任何地方上过任何化学、经济学、心理学或者商学的课程。"然而这些学科，尤其是心理学，却构成了他系统赖以立足的基础。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">系统的自创性</div>
+            <p>芒格说："当我的朋友沃伦和我各自从研究生院毕业的时候，我们发现商业世界中的许多预测模型明显是极端不理性的……所以，如果你的教授没有给你合适的跨学科方法，你可以亲自纠正那种愚蠢。"</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、愿意改变想法 -->
+      <section id="section-4">
+        <h2>三、愿意改变想法</h2>
+
+        <div class="pull-quote">
+          "当面临要么改变想法、要么证明无需这么做的选择时，绝大多数人都会忙于寻找证据。"
+          <cite>— 约翰·肯尼斯·加尔布雷思</cite>
+        </div>
+
+        <p>芒格养成了一种异常罕见的性格——<strong>愿意甚至渴望去证实和承认自己的错误，并从中吸取教训</strong>：</p>
+
+        <div class="pull-quote">
+          "如果说伯克希尔取得了不错的发展，那主要是因为沃伦和我非常善于破坏我们自己最爱的观念。哪年你没有破坏一个你最爱的观念，那么你这年就白过了。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>查理喜欢把人们的观念和方法比喻为"工具"——如果有了更好的工具（观念或方法），用它取代较没用的旧工具，是理所当然的选择。大多数人如加尔布雷思所说，永远不舍得他们那些较为没用的旧工具。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、接受现实 -->
+      <section id="section-5">
+        <h2>四、接受现实</h2>
+
+        <div class="pull-quote">
+          "假如有20种相互影响的因素，那么你必须学会处理这种错综复杂的关系——因为世界就是这样的。但如果你能像达尔文那样，带着好奇的毅力，循序渐进地去做，那么你就不会觉得这是艰巨的任务。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p><strong>简单是长期努力工作的结果，而不是起点。</strong>芒格的"简单"唯有在到达理解的漫长旅途的终点才会到来。他毕生钻研人类行为模式、商业系统和众多科学学科，才形成了那看似轻易得来的洞察力。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、耐心 -->
+      <section id="section-6">
+        <h2>五、耐心："不厌倦等待地等待"的艺术</h2>
+
+        <div class="pull-quote large">
+          "赚大钱的诀窍不在于买进卖出……而在于等待。"
+          <cite>— 杰西·利弗莫尔</cite>
+        </div>
+
+        <p>芒格曾说："你看那些对冲基金——他们不知道怎么等待！在我个人的投资组合里，我曾经一连几年就只持有国债，然后不去动它们，只是一直等待、等待……"</p>
+
+        <p>为什么其他人没有更多地使用芒格的投资技巧？原因有二：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">原因一</span>
+            <h4>跨学科方法太难</h4>
+            <p>大多数人没有能力系统掌握如此多的学科知识。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原因二</span>
+            <h4>性格难以复制</h4>
+            <p>很少有投资者能像芒格那样，宁愿显得愚蠢，也不愿随"大流"。芒格坚持不偏不倚的客观态度，能够冷静地逆流行观点的潮流而上——这种"独狼"性格是他取得优异业绩的重要原因，而<strong>性格主要是天生的</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、影响芒格投资观念的思想来源 -->
+      <section id="section-7">
+        <h2>六、影响芒格投资观念的思想来源</h2>
+
+        <h3 id="section-7-1">菲利浦·费舍尔的影响</h3>
+
+        <p>菲利浦·费舍尔（Philip Fisher，1907—2004），《怎样选择成长股》作者，1931年开始投资生涯。与本杰明·格雷厄姆惯于投资"价格低廉的烟屁股"不同，费舍尔偏好购买那些能够<strong>"增长、增长再增长"的高品质公司</strong>股票。</p>
+
+        <p>芒格从费舍尔处学到了关注企业成长性和品质的核心思想。</p>
+
+        <h3 id="section-7-2">本杰明·格雷厄姆的影响</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>核心概念</th><th>格雷厄姆的阐述</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>市场先生</strong></td><td>市场有时受非理性恐惧或贪婪驱使，投资者需亲自作出客观判断</td></tr>
+            <tr><td><strong>安全边际</strong></td><td>总是取决于付出的价格；价格更高时，安全边际便不复存在</td></tr>
+            <tr><td><strong>价值评估</strong></td><td>最成功的投资必定是最像生意的投资；购买股票要像购买日用品，而非香水</td></tr>
+            <tr><td><strong>市场的本质</strong></td><td>就短线而言，市场是投票机器；就长线而言，是称重机器</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          "本杰明·格雷厄姆曾经教我只买便宜的股票，<strong>查理让我改变了这种做法</strong>。这是查理对我真正的影响。要让我从格雷厄姆的局限理论中走出来，需要一股强大的力量。查理的思想就是那股力量，他扩大了我的视野。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>芒格同样把人类作出错误判断的某些心理因素，当作判断投资机会的重要思维模型，并发展出<strong>"双轨分析法"</strong>：</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">双轨分析法</div>
+            <p>"首先，理性地看，哪些因素真正控制了涉及的利益；其次，当大脑处于潜意识状态时，有哪些潜意识因素会使大脑自动形成虽然有用但往往失灵的结论？"</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、能力圈原则 -->
+      <section id="section-8">
+        <h2>七、能力圈原则</h2>
+
+        <div class="pull-quote">
+          "如果说我们有什么本事的话，那就是我们能够弄清楚我们什么时候在能力圈的中心运作，什么时候正在向边缘靠近。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <div class="pull-quote">
+          "如果你确有能力，你就会非常清楚能力圈的边界在哪里。如果你问起（你是否超出了能力圈），那就意味着你已经在圈子之外了。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <h3 id="section-8-1">三类投资项目的划分</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>投资分类</th><th>含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>可以投资</strong></td><td>容易理解、有发展空间、能在任何市场环境下生存的主流行业</td></tr>
+            <tr><td><strong>不能投资</strong></td><td>大张旗鼓宣传的"交易"、公开招股等</td></tr>
+            <tr><td><strong>太难理解</strong></td><td>制药业、高科技行业等（因商业模式复杂，难以预测）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">老托马斯·沃森的格言</div>
+            <p>"我不是天才。我有几点聪明，我只不过就留在这几点里面。"——最好地概括了这一原则。</p>
+          </div>
+        </div>
+
+        <h3 id="section-8-2">马克斯·普朗克与司机的故事</h3>
+
+        <p>芒格讲述过一个经典趣闻：普朗克的司机经常聆听其讲座，有一次主动提出与普朗克互换，竟能背诵讲稿。然而当有人提出一个深度问题时，他机智地说："慕尼黑这么发达的城市，居然有市民提出如此简单的问题——我想请我的司机来回答。"</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关键启示</div>
+            <p>在现实世界，弄清楚你何时是"马克斯·普朗克"（真正的专家）、何时是"司机"（只是掌握表面知识），至关重要。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、护城河理论 -->
+      <section id="section-9">
+        <h2>八、护城河理论</h2>
+
+        <div class="pull-quote">
+          "我们想要护城河每年变宽。那并不意味着今年的利润将会比去年的多，但如果护城河每年都变宽，企业的经营将会非常好。当我们看到的是一条很狭窄的护城河——那就太危险了。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>查理认为，一个企业的<strong>竞争优势是该企业的"护城河"</strong>，是保护企业免遭入侵的无形沟壕：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>护城河类型</th><th>来源</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>品牌声誉</strong></td><td>长期积累的消费者信任</td></tr>
+            <tr><td><strong>成本优势</strong></td><td>规模效应或独特运营模式（如好市多）</td></tr>
+            <tr><td><strong>网络效应</strong></td><td>用户越多，产品价值越高</td></tr>
+            <tr><td><strong>切换成本</strong></td><td>用户迁移至竞品的代价极高</td></tr>
+            <tr><td><strong>监管许可</strong></td><td>特许经营权或行业壁垒</td></tr>
+          </tbody>
+        </table>
+
+        <p>芒格和巴菲特深知：<strong>能够历经数代而不衰的企业非常少</strong>，因此努力识别并只购买那些有很大机会击败竞争围攻力量的企业。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、芒格的投资评估过程 -->
+      <section id="section-10">
+        <h2>九、芒格的投资评估过程</h2>
+
+        <h3 id="section-10-1">估值的两种方式与核心原则</h3>
+
+        <div class="pull-quote">
+          "一般来说，股票的估值方式有两种。第一种是人们评估小麦价值的方法——看实际的使用价值。第二种方法是人们评估伦勃朗的方法——因为价格在过去一路上涨，所以被认为价值很高。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <div class="pull-quote large">
+          "投资等于出去赌马。我们要寻找一匹获胜几率是二分之一、赔率是一赔三的马——<strong>寻找标错赔率的赌局，这就是价值投资的本质</strong>。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p><strong>最重要的观念</strong>是把股票当成企业的所有权，并根据它的竞争优势来判断该企业的持有价值。如果该企业未来的贴现现金流比你现在购买的股票价格要高，那么这个企业就具有投资价值。当你占据优势的时候才采取行动——你必须了解赔率，要训练你自己，在赔率有利于你时才下赌注。</p>
+
+        <h3 id="section-10-2">详尽评估框架</h3>
+
+        <p>芒格的评估过程涵盖以下关键维度：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>评估维度</th><th>具体内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>财务分析</strong></td><td>重新调整财务报表：自由现金流、产品库存、固定资产、无形资产（品牌）的真实价值</td></tr>
+            <tr><td><strong>负债分析</strong></td><td>严格审查资产负债表负债部分，包括保险浮存金等特殊性质的负债</td></tr>
+            <tr><td><strong>管理层评估</strong></td><td>能干、可靠、为股东考虑的程度；如何分配现金；薪酬是否合理</td></tr>
+            <tr><td><strong>竞争优势</strong></td><td>从产品、市场、商标、雇员、分销渠道、社会潮流等评估护城河深度与持久性</td></tr>
+            <tr><td><strong>外部环境</strong></td><td>制度大气候、劳动力/供应商/客户关系、技术变化影响、环境问题</td></tr>
+            <tr><td><strong>风险评估</strong></td><td>潜在风险变为现实的可能性；寻找风险很小且容易理解的项目</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">对财务报告的态度</div>
+            <p>查理总是持中西部特有的怀疑态度——它至多是正确计算企业真实价值的<strong>起点</strong>，而不是终点。</p>
+          </div>
+        </div>
+
+        <h3 id="section-10-3">"扣动扳机之前"的检查清单（急诊评估）</h3>
+
+        <p>在需要短时间内完成评估时，芒格还会进行更精细的筛选：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">检查项 1</span>
+            <h4>市场行情</h4>
+            <p>目前的价格和成交量是多少？交易行情如何？</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">检查项 2</span>
+            <h4>信息敏感度</h4>
+            <p>经营年报何时披露？是否存在其他敏感因素？</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">检查项 3</span>
+            <h4>退出策略</h4>
+            <p>是否存在随时退出投资的策略？</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">检查项 4</span>
+            <h4>资金状况</h4>
+            <p>手头上有足够的流动资金吗？还是必须借贷？</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">检查项 5</span>
+            <h4>机会成本</h4>
+            <p>这笔资金的机会成本是多少？用来买股票的钱现在或将来有更好的用途吗？</p>
+          </div>
+        </div>
+
+        <p>芒格的评估在最后阶段，<strong>价值评估变成了一种哲学的评估，而不是数学的衡量</strong>：分析本身与毕生积累的经验及认知模型技巧共同作用，最终形成一种投资"感觉"。</p>
+
+        <div class="pull-quote">
+          "（购买）股价公道的伟大企业比（购买）股价超低的普通企业好。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>巴菲特对此补充："查理很早就懂得这个道理，我是后来才明白的。"</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、坐等投资法与集中持仓 -->
+      <section id="section-11">
+        <h2>十、坐等投资法与集中持仓</h2>
+
+        <p>查理认为，未雨绸缪、富有耐心、律己严厉和不偏不倚这四项原则若坚定遵守，便能产生最著名的芒格特征之一：<strong>不要非常频繁地买卖</strong>。</p>
+
+        <div class="pull-quote">
+          "你付给交易员的费用更少，听到的废话也更少，如果这种方法生效，税务系统每年会给你1%—3%的额外回报。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>芒格的投资观</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>集中持仓</strong></td><td>只要几次决定便能造就成功的投资生涯；愿意购买三家公司的股票就足够了</td></tr>
+            <tr><td><strong>大赌注</strong></td><td>喜欢一家企业时会下非常大的赌注，且通常长时间持有</td></tr>
+            <tr><td><strong>何时卖出</strong></td><td>偏向于把大量钱投放在不用再另作决策的地方；购买伟大公司，便可安坐下来</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          "如果你因为一样东西的价值被低估而购买了它，那么当它的价格上涨到你预期的水平时，你就必须考虑把它卖掉。那很难。但是，如果你能购买几个伟大的公司，那么你就可以安坐下来啦。那是很好的事情。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <h3 id="section-11-1">泰德·威廉姆斯的77格击球区</h3>
+
+        <p>泰德·威廉姆斯是过去70年来唯一一个单个赛季打出400次安打的棒球运动员。他将击打区划分为<strong>77个格子</strong>，只有当球落在"最佳"格子时才挥棒。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">类比一</span>
+            <h4>观察而不行动</h4>
+            <p>作为投资者，你可以一直观察各种企业的证券价格，把它们当成一些格子。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类比二</span>
+            <h4>等待好球</h4>
+            <p>在大多数时候，你什么也不用做，只要看着就好了。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类比三</span>
+            <h4>全力出击</h4>
+            <p>当你发现一个速度很慢、线路又直，正好落在你最爱格子中间的"好球"时，就全力出击。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">常见的投资错误</div>
+            <p><strong>许多投资者的共同问题是挥棒太过频繁</strong>——无论是个人投资者，还是受"机构行为铁律"驱使的专业投资者，都有这种倾向。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十一、投资原则检查清单 -->
+      <section id="section-12">
+        <h2>十一、投资原则检查清单</h2>
+
+        <div class="pull-quote">
+          "聪明的飞行员即使才华再过人，经验再丰富，也绝不会不使用检查清单。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>以下检查清单并非按重要性排序，每个原则都是整个复杂投资分析过程的一部分：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">原则一 · 风险</span>
+            <h4>测算安全边际，避免资本金持续亏损</h4>
+            <p>运用工程学的"冗余思维模型"；避免和道德品质有问题的人交易；坚持为预定的风险要求合适的补偿；永远记住通货膨胀和利率的风险。<strong>避免犯下大错；避免资本金持续亏损。</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则二 · 独立</span>
+            <h4>客观和理性的态度需要独立思考</h4>
+            <p>你是错是对，并不取决于别人同意你还是反对你——唯一重要的是你的分析和判断是否正确。随大流只会让你往平均值靠近（只能获得中等的业绩）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则三 · 准备</span>
+            <h4>比求胜的意愿更重要的是做好准备的意愿</h4>
+            <p>通过广泛的阅读把自己培养成终生自学者；培养好奇心，每天努力使自己聪明一点点。熟练掌握各大学科的思维模型。如果你想要变得聪明，你必须不停地追问"为什么，为什么，为什么"。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则四 · 谦虚</span>
+            <h4>别愚弄你自己</h4>
+            <p>只在明确界定的能力圈内行事；辨认和核查否定性的证据；抵制追求虚假的精确和错误的确定性的欲望。<strong>最重要的是，别愚弄你自己，而且要记住，你是最容易被自己愚弄的人。</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则五 · 严格分析</span>
+            <h4>要朝前想、往后想——反过来想，总是反过来想</h4>
+            <p>区分价值和价格、过程和行动、财富和规模；记住浅显的好过掌握深奥的；成为一名<strong>商业分析家</strong>，而不是市场、宏观经济或者证券分析家；考虑总体的风险和效益，永远关注潜在的二阶效应和更高层次的影响。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则六 · 配置</span>
+            <h4>好主意特别少——狠狠地下赌注</h4>
+            <p>最好的用途总是由第二好的用途衡量出来的（机会成本）。<strong>好主意特别少——当时机对你有利时，狠狠地下赌注（配置资本）。</strong>别"爱上"投资项目——要依情况而定，照机会而行。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则七 · 耐心</span>
+            <h4>"复利是世界第八大奇迹"</h4>
+            <p>不到必要的时候，别去打断它；避免多余的交易税和摩擦成本，永远别为了行动而行动；幸运来临时要保持头脑清醒；享受结果，也享受过程，因为你活在过程当中。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则八 · 决心</span>
+            <h4>当别人贪婪时，要害怕；当别人害怕时，要贪婪</h4>
+            <p>机会来临的次数不多，所以当它来临时，抓住它。机会只眷顾有准备的人：投资就是这样的游戏。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则九 · 改变</span>
+            <h4>不断地挑战和主动地修正你"最爱的观念"</h4>
+            <p>认识和适应你身边的世界的真实本质，别指望它来适应你。<strong>不断地挑战和主动地修正你"最爱的观念"。</strong>正视现实，即使你并不喜欢它——尤其当你不喜欢它的时候。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则十 · 专注</span>
+            <h4>直面你的大问题，别把它们藏起来</h4>
+            <p>声誉和正直是你最有价值的财产——而且能够在瞬间化为乌有；避免妄自尊大和厌倦无聊的情绪；别因为过度关心细节而忽略了显而易见的东西；千万要排除不需要的信息："千里之堤，溃于蚁穴"。<strong>直面你的大问题，别把它们藏起来。</strong></p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "上天并没有赐予人类在所有时刻了解关于一切事情的一切的天赋。但对于那些努力在人世间寻找定错价格的赌注的人，上天有时会赐给他们一次这样的赌注。"
+          <cite>— 查理·芒格</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十二、诚实是最好的策略 -->
+      <section id="section-13">
+        <h2>十二、诚实是最好的策略</h2>
+
+        <div class="pull-quote">
+          "做正确的事情能给个人的品格和事业带来很大的好处。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>芒格向来是诚实和正直的同义词。他的老友瑞克·格伦回忆了两个典型故事：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">故事一</span>
+            <h4>收购债券</h4>
+            <p>本可以远低于面值收购两位老太太的债券，查理却按照面值给她们钱。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">故事二</span>
+            <h4>合资公司股权交易</h4>
+            <p>格伦开价13万美元，芒格说"不行，23万美元才对"，并真的支付了更高的价格。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "在股票交易所占价格低廉的股票便宜是一回事，但是占合伙人或者老太太便宜是另外一回事——这是查理绝对不会做的事。"
+          <cite>— 瑞克·格伦</cite>
+        </div>
+
+        <p>债券投资专家比尔·格罗斯的评价：</p>
+
+        <div class="pull-quote">
+          "应该用卫星将查理的道德标准播送到世界各地的金融中心，以便防止未来再出现安然或世通之类的丑闻。他们（芒格和巴菲特）在持续终生的商业'赛跑'中，不但处于领先地位，而且沿途还从来不抄近道。"
+          <cite>— 比尔·格罗斯</cite>
+        </div>
+
+        <p>芒格在西科年会上讲述了诚实经营的哲学：</p>
+
+        <div class="pull-quote large">
+          "我们很早就知道，这种经营方式能让我们赚更多的钱……本杰明·富兰克林并没有说诚实是最好的道德品质，<strong>他说诚实是最好的策略</strong>。"
+          <cite>— 查理·芒格</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十三、避免行动的悖论 -->
+      <section id="section-14">
+        <h2>十三、避免行动的悖论——"反过来想"</h2>
+
+        <div class="pull-quote large">
+          "我只想知道我将来会死在什么地方，这样我就可以永远不去那里啦。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>芒格一般会先注意<strong>应该避免什么</strong>，弄清楚应该别做什么事情，然后才考虑接下来要采取的行动。</p>
+
+        <div class="pull-quote">
+          "光是'避免犯傻的芒格体系'就能帮助你超越许多在你之上的人，无论他们有多么聪明。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>他同时小心翼翼地避免<strong>"物理学妒忌"</strong>——人类那种将非常复杂的系统（如经济系统）简化为几道牛顿式普遍公式的倾向。他坚守爱因斯坦的告诫：</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">爱因斯坦的告诫</div>
+            <p>"科学理论应该尽可能简单，但不能过于简单。"</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 结语 -->
+      <section id="section-16">
+        <h2>结语：芒格成功的本质</h2>
+
+        <p>自从人类开始投资以来，他们就一直在寻找能够快速致富的神奇公式。然而，查理的优异业绩<strong>并非来自一道神奇公式</strong>，而是来自：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">要素一</span>
+            <h4>追求更好的思维方式</h4>
+            <p>不停地寻找更好的思维方式的追求。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要素二</span>
+            <h4>一丝不苟的准备</h4>
+            <p>通过一丝不苟的准备进行"预付"的意愿。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要素三</span>
+            <h4>跨学科研究</h4>
+            <p>跨学科研究模式的非凡后果。</p>
+          </div>
+        </div>
+
+        <p>总而言之，它来自查理最基本的行为守则，最根本的人生哲学：</p>
+
+        <div class="pull-quote large">
+          <strong>准备 · 纪律 · 耐心 · 决心</strong>
+        </div>
+
+        <p>每个因素都是互不相干的，但它们加起来就变成了威力强大的临界物质，能够催化那种因芒格而闻名的<strong>Lollapalooza 效应</strong>。</p>
+
+        <div class="pull-quote">
+          "这些高深的睿智长者小心翼翼地照顾他们的复利机器——那是两位出类拔萃的人联合发明的。其他人也许会试图复制伯克希尔·哈撒韦，但他们永远无法复制这两位出类拔萃的人物。"
+          <cite>— 罗伯特·伦兹纳和戴维·冯蒂勒</cite>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第二章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
