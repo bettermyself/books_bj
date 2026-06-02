@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>芒格主义：查理的即席谈话 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.9;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      position: absolute;
+      top: -.2rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .3;
+      font-style: normal;
+    }
+    .poem-author {
+      display: block;
+      margin-top: .8rem;
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 查理·芒格传略</span>
+          <ul class="toc-lectures">
+            <li><a href="../第一章/查理芒格传略.html">查理·芒格传略</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 芒格的生活、学习和决策方法</span>
+          <ul class="toc-lectures">
+            <li><a href="../第二章/第二章_芒格的生活_学习和决策方法.html">芒格的生活、学习和决策方法</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第三章 芒格主义：查理的即席谈话</span>
+          <ul class="toc-lectures">
+            <li><a href="第三章_芒格主义_查理的即席谈话.html" class="active">芒格主义：查理的即席谈话</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/在哈佛学校毕业典礼上的演讲.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理.html">第二讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（修正稿）.html">第三讲 论基本的、普世的智慧（修正稿）</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲_专业人士需要更多的跨学科技能.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲_一流慈善基金的投资实践.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲_在慈善圆桌会议早餐会上的讲话.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲_2003年的金融大丑闻.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲_论学院派经济学：考虑跨学科需求之后的优点和缺点.html">第九讲 论学院派经济学</a></li>
+            <li><a href="../第四章/第十讲_在南加州大学古尔德法学院毕业典礼上的演讲.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第四章 查理十一讲 第十一讲 人类误判心理学.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录.html">最新的普世智慧：查理答问录</a></li>
+            <li><a href="../第四章/查理的检查清单.html">查理的检查清单</a></li>
+            <li><a href="../第四章/赛马即投资.html">赛马即投资</a></li>
+            <li><a href="../第四章/事关信任.html">事关信任</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 芒格的人生哲学</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-intro">编者前言</a></li>
+        <li><a href="#section-1">一、我们成功的关键</a></li>
+        <li><a href="#section-1-1" class="sub">两条核心原则</a></li>
+        <li><a href="#section-2">二、论伯克希尔·哈撒韦</a></li>
+        <li><a href="#section-2-1" class="sub">商业模式</a></li>
+        <li><a href="#section-2-2" class="sub">历史业绩与未来预期</a></li>
+        <li><a href="#section-2-3" class="sub">伯克希尔的文化</a></li>
+        <li><a href="#section-2-4" class="sub">收购策略</a></li>
+        <li><a href="#section-2-5" class="sub">保险业务与接班人问题</a></li>
+        <li><a href="#section-3">三、投资建议</a></li>
+        <li><a href="#section-3-1" class="sub">集中投资与分散投资批评</a></li>
+        <li><a href="#section-3-2" class="sub">坐等投资法与优秀企业</a></li>
+        <li><a href="#section-3-3" class="sub">投资的关键性格特质</a></li>
+        <li><a href="#section-4">四、思维模型</a></li>
+        <li><a href="#section-5">五、对高等教育的批评</a></li>
+        <li><a href="#section-6">六、怎样变得幸福、富裕</a></li>
+        <li><a href="#section-6-1" class="sub">幸福、致富、好配偶、阅读</a></li>
+        <li><a href="#section-7">七、对企业管理层的批评</a></li>
+        <li><a href="#section-8">八、对基金管理行业的批评</a></li>
+        <li><a href="#section-9">九、对华尔街的批评</a></li>
+        <li><a href="#section-10">十、对会计的批评</a></li>
+        <li><a href="#section-11">十一、对股票期权的批评</a></li>
+        <li><a href="#section-12">十二、对金融机构和衍生品的警告</a></li>
+        <li><a href="#section-13">十三、对律师、法律制度的批评</a></li>
+        <li><a href="#section-14">十四、幽默语录</a></li>
+        <li><a href="#section-15">十五、各方评价芒格</a></li>
+        <li><a href="#section-16">十六、"说不大师"的故事</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第三章 · 芒格主义</div>
+        <h1 class="article-title">芒格主义：查理的即席谈话</h1>
+        <div class="article-meta">
+          <span><strong>来源</strong>2001—2006年伯克希尔·哈撒韦公司和西科金融公司年会</span>
+          <span><strong>整理</strong>惠特尼·提尔逊</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        "智者的聪慧和长者的经验，也许能够通过语录得以保存。"
+        <cite>— 埃萨克·狄斯雷利</cite>
+      </div>
+
+      <!-- 编者前言 -->
+      <section id="section-intro">
+        <h2>编者前言</h2>
+
+        <p>沃伦·巴菲特和查理·芒格毫无疑问是有史以来最伟大的投资二人组。向他们学习的真正价值，不仅在于了解如何让金钱以高复利长期增长，更在于：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">价值一</span>
+            <h4>更深刻地理解人类本性与世界现状</h4>
+            <p>透过两位智者的眼睛，看懂世界的运行方式与人性的底层逻辑。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">价值二</span>
+            <h4>学会如何理性思考</h4>
+            <p>掌握跨学科的思维模型，培养真正的理性决策能力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">价值三</span>
+            <h4>过上正直、幸福、善良的生活</h4>
+            <p>这三者相辅相成——正直带来内心的平静，善良带来人际的信任，而幸福是两者的自然结果。</p>
+          </div>
+        </div>
+
+        <p>查理比沃伦更为神秘——关于他的书只有两本，发表的演讲和文章也少得多。本章内容从过去五年伯克希尔和西科年会的记录中抽取，保留了查理<strong>最有洞察力、最发人深思、最好玩有趣</strong>的话，并依照话题加以组织。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、我们成功的关键 -->
+      <section id="section-1">
+        <h2>一、我们成功的关键</h2>
+
+        <h3 id="section-1-1">两条核心原则</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>原则</th><th>核心内容</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>避免愚蠢，而非追求聪明</strong></td>
+              <td>我们从来不试图成为非常聪明的人，而是持续试图别变成蠢货——乌龟吸取前辈的洞见，有时也能跑赢追求独创性的兔子</td>
+            </tr>
+            <tr>
+              <td><strong>道德高于法律底线</strong></td>
+              <td>在"应该做的事情"和"不受法律制裁的事情"之间，应有巨大的鸿沟。做正确的事，往往能赚到更多的钱</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">路易斯·文森狄的规则</div>
+            <p>说真话，你将无须记住你的谎言。就是这么简单的一个概念。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、论伯克希尔·哈撒韦 -->
+      <section id="section-2">
+        <h2>二、论伯克希尔·哈撒韦</h2>
+
+        <h3 id="section-2-1">商业模式：刺猬的大道理</h3>
+
+        <p>伯克希尔的核心逻辑可以用一个公式概括：</p>
+
+        <div class="pull-quote large">
+          以 3% 利率获取浮存金 → 投资年回报率 13% 的企业 = 极好的生意
+        </div>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">浮存金</span>
+            <h4>低成本的资本来源</h4>
+            <p>理赔之前可用于投资的现金保费收入，资本成本仅 3%。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">投资回报</span>
+            <h4>高回报的资产配置</h4>
+            <p>收购企业税前回报率约为 13% 或更高。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">复利优势</span>
+            <h4>两者之差 = 持续复利</h4>
+            <p>低成本资金与高回报投资之间的利差，形成持续的复利优势。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-2">历史业绩与未来预期</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>维度</th><th>评估</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>历史业绩</strong></td><td>好到几近荒谬；若举债经营至默多克水平一半，规模应是现在的 5 倍</td></tr>
+            <tr><td><strong>未来展望</strong></td><td>增长率将低于过去，但仍是极好的企业</td></tr>
+            <tr><td><strong>不乐观的两个原因</strong></td><td>①规模过大，只能涉足竞争更激烈的领域；②未来 15～20 年股市大气候不如过去景气</td></tr>
+            <tr><td><strong>确定性</strong></td><td>现金每年增加，结构灵活，收购整体出售企业具有优势</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">大数定理——沉重的铁锚</div>
+            <p>所有经济发展都会在规模越来越大的过程中锻造出自己的数学铁锚。——巴菲特</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-3">伯克希尔的文化</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">老派传统</span>
+            <h4>类似富兰克林与卡内基的文化</h4>
+            <p>非常老派，坚守传统的商业伦理与价值观念。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">保守主义</span>
+            <h4>抵御灾难的能力</h4>
+            <p>不盲目扩张，比绝大多数地方更能抵御灾难。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">诚实披露</span>
+            <h4>股价值多少就说多少</h4>
+            <p>不试图拉抬股价，对股东坦诚相待。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">股东至上</span>
+            <h4>高度负责的态度</h4>
+            <p>对于把大部分净资产投在伯克希尔的股东，高度负责。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-4">收购策略</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>策略要点</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>不为收购而收购</strong></td><td>等待不用多想也知道会成功的机会（三分之二的行业收购是失败的）</td></tr>
+            <tr><td><strong>主动寻找</strong></td><td>不坐等上门，每年收购一至两家，20 年如此</td></tr>
+            <tr><td><strong>看重激情</strong></td><td>认为激情比头脑能力更重要</td></tr>
+            <tr><td><strong>敬佩创办人</strong></td><td>收购后管理层通常留任，且从未让人失望</td></tr>
+            <tr><td><strong>极度放权</strong></td><td>附属公司企业文化由其自决，权力分散到几乎全面退位</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">芒格论"合力"</div>
+            <p>我们并不回避合力，只是回避那些对合力的宣称。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-5">保险业务与接班人问题</h3>
+
+        <p>再保险并非纯粹的价格竞争型商品——<strong>支付意愿和支付能力</strong>的信誉形成护城河。伯克希尔愿意在市场不景气时少签保单，不迎合华尔街——这是重要的竞争优势。总体评价：位于行业前 10%，对保险业务持<strong>中等乐观</strong>态度。</p>
+
+        <p>关于沃伦离开后的影响：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>领域</th><th>预期影响</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>资本配置</strong></td><td>继任者难以达到沃伦的水准</td></tr>
+            <tr><td><strong>旗下企业运营</strong></td><td>将继续正常运转</td></tr>
+            <tr><td><strong>整体规模</strong></td><td>预计将持续变大、变强</td></tr>
+            <tr><td><strong>增长速度</strong></td><td>肯定低于过去，这是诚实的预期</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、投资建议 -->
+      <section id="section-3">
+        <h2>三、投资建议</h2>
+
+        <h3 id="section-3-1">集中投资与对分散投资的批评</h3>
+
+        <p><strong>核心观点</strong>：投资 10 家公司，而非 100 家或 400 家。好项目不会经常出现，<strong>机会只眷顾有准备的人</strong>。98% 的大型投资机构不这么做——这正是我们的优势。投资规矩：<strong>等待好球的出现</strong>，不受逼迫全部投出。</p>
+
+        <div class="pull-quote">
+          "认为投资应该越分散越好，是一种发疯的观念。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>几乎所有好投资的分散程度都是相对较低的。如果剔除伯克希尔最好的 15 个决策，业绩将非常平庸。需要的不是大量行动，而是<strong>极大的耐心</strong>。</p>
+
+        <h3 id="section-3-2">坐等投资法与优秀企业的定义</h3>
+
+        <p>购买价值被低估的股票，待其回归合理价格再卖——这很难。更好的方式：<strong>购买几个伟大的公司，安坐下来</strong>。我们偏向于把大量的钱投在不用再另作决策的地方。</p>
+
+        <div class="pull-quote">
+          "有这么两类企业："
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>特征</th><th>评价</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>第一类</strong></td><td>每年赚 12%，利润可以拿走</td><td>✅ 好企业</td></tr>
+            <tr><td><strong>第二类</strong></td><td>每年赚 12%，但所有多余现金必须再投资，从不分红</td><td>❌ 我们讨厌这种</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">喜诗糖果的教训</div>
+            <p>伊拉·马歇尔说我们低估了优质的价值。我们听进了批评，改变了想法。能够建设性地接受批评，是非常重要的品质。伯克希尔在很大程度上是<strong>建立在建设性的批评之上的</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-3">错误的分类与投资的关键性格特质</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>错误类型</th><th>描述</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>吮吸大拇指</strong></td><td>看到好机会，什么也不做</td></tr>
+            <tr><td><strong>只买一点</strong></td><td>本应大量买入，却只买了一点点</td></tr>
+          </tbody>
+        </table>
+
+        <p>这些坐失良机的错误不出现在财务报表上，却可能让我们失去几十亿美元。</p>
+
+        <p>成功投资者需要的不只是智商，更需要：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">特质一</span>
+            <h4>耐心</h4>
+            <p>毫不焦躁地持有股票的性情。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特质二</span>
+            <h4>求知欲</h4>
+            <p>在很长时间内保持大量求知欲望。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特质三</span>
+            <h4>自律与自控</h4>
+            <p>无论多大压力，不改变原则。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特质四</span>
+            <h4>能力圈边界意识</h4>
+            <p>清楚地知道自己的边界在哪里。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">能力圈判断法</div>
+            <p>如果你在问自己是否过了能力圈的范围，那这个问题本身就是答案。</p>
+          </div>
+        </div>
+
+        <p><strong>对其他投资理论的批评：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>理论/工具</th><th>芒格评价</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Beta 系数</td><td>没什么道理</td></tr>
+            <tr><td>现代组合投资理论</td><td>没什么道理</td></tr>
+            <tr><td>资本成本计算</td><td>用机会成本思考才是正确方式</td></tr>
+            <tr><td>市场完全有效理论</td><td>98% 的人信奉这种胡言乱语</td></tr>
+            <tr><td>布莱克-舒尔斯模型</td><td>适用于短期期权；用于长期期权则是"很神经的做法"</td></tr>
+            <tr><td>IPO 炒新</td><td>普通人很容易遭受重挫</td></tr>
+            <tr><td>宏观统计预测</td><td>几乎没有用，密切关注旗下企业更有效</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、思维模型 -->
+      <section id="section-4">
+        <h2>四、思维模型</h2>
+
+        <div class="pull-quote">
+          "你必须知道重要学科的重要理论，并经常使用它们——<strong>要全部都用上，而不是只用几种。</strong>"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>常见的错误模式：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">错误一</span>
+            <h4>单一学科思维</h4>
+            <p>只掌握一个学科的思维模型，试图用一种方法解决所有问题。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">错误二</span>
+            <h4>铁锤人倾向</h4>
+            <p>典型比喻：<strong>"在手里拿着铁锤的人看来，世界就像一颗钉子。"</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">错误三</span>
+            <h4>学了就忘</h4>
+            <p>错误的学习方法：学完之后"放掉浴缸里的水"，用时再无从提取。</p>
+          </div>
+        </div>
+
+        <h3>不自欺的精神</h3>
+
+        <div class="pull-quote large">
+          "不自欺的精神是你能拥有的最好的精神。它非常强大，因为它太少见了。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>凯恩斯说：介绍新观念倒不是很难，难的是<strong>清除那些旧观念</strong>。</p>
+
+        <h3>常识（非常识）</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">要点一</span>
+            <h4>常识是威力巨大的工具</h4>
+            <p>得到系统的常识是一种威力巨大的工具。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点二</span>
+            <h4>辨认智慧与拒绝愚蠢</h4>
+            <p>拥有常识意味着：有能力辨认智慧，也有能力<strong>拒绝愚蠢</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点三</span>
+            <h4>电脑的危险</h4>
+            <p>人们计算得太多，思考得太少。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点四</span>
+            <h4>基本知识的价值</h4>
+            <p>你拥有的基本知识越多，你需要吸取的新知识就越少。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、对高等教育的批评 -->
+      <section id="section-5">
+        <h2>五、对高等教育的批评</h2>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">致命的无关联性</div>
+            <p>学科之间毫无关联，是致命的缺陷。每个系都有些"看不见大环境的古怪家伙"。怀特海早已指出：各学科孤立、不能融会贯通是极大的问题（现代名称：<strong>神经研究法</strong>）。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、怎样变得幸福、富裕 -->
+      <section id="section-6">
+        <h2>六、怎样变得幸福、富裕</h2>
+
+        <h3 id="section-6-1">如何获得幸福和成功</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>建议</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>生活不只是积累财富</strong></td><td>如果唯一的成功就是买股票发财，那是失败的生活</td></tr>
+            <tr><td><strong>知道该避免什么</strong></td><td>大多数成功来自于知道要避免什么：过早死亡、糟糕的婚姻等</td></tr>
+            <tr><td><strong>养成良好习惯</strong></td><td>避免艾滋病、危险驾驶、吸毒；培养良好的心理习惯</td></tr>
+            <tr><td><strong>远离邪恶之人</strong></td><td>尤其是那些性感诱人的异性</td></tr>
+          </tbody>
+        </table>
+
+        <h3>如何致富</h3>
+
+        <div class="pull-quote large">
+          "每天起床的时候，争取变得比你从前更聪明一点。认真地、出色地完成你的任务。慢慢地，你会有所进步……到最后，大多数人得到了他们应得的东西。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <h3>如何找到好配偶</h3>
+
+        <div class="pull-quote">
+          "唯一的最佳方法是你首先必须<strong>值得拥有好配偶</strong>，因为从定义上来说，好配偶可绝不是傻瓜。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <h3>提防妒忌</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">妒忌——永无乐趣的罪行</div>
+            <p>妒忌是<strong>仅有的一种你不可能得到任何乐趣的罪行</strong>。斯坦利·德鲁肯米勒（索罗斯基金）因无法忍受别人赚钱而亏得一塌糊涂。伯克希尔根本不在意别人在科技产业赚了钱。</p>
+          </div>
+        </div>
+
+        <h3>阅读的重要性</h3>
+
+        <div class="pull-quote large">
+          "我这辈子遇到的聪明人没有不每天阅读的——没有，一个都没有。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>芒格偏爱<strong>传记</strong>——将伟大概念与提出它们的伟人生活联系起来，学得更好。与"已逝的伟人"交朋友，能过上更好的生活，得到更好的教育。</p>
+
+        <h3>其他建议</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">建议一</span>
+            <h4>减少物质需求</h4>
+            <p>对抗通货膨胀最好的手段之一。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">建议二</span>
+            <h4>避免欠债</h4>
+            <p>一旦走进负债怪圈很难走出；支付 18% 利息无法取得进展。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">建议三</span>
+            <h4>慈善回馈</h4>
+            <p>非常幸运的人有责任反馈社会。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、对企业管理层的批评 -->
+      <section id="section-7">
+        <h2>七、对企业管理层的批评</h2>
+
+        <h3>篡改盈利数字与做假账</h3>
+
+        <p>财报数据上有太多金钱压力，导致普遍的"谢皮科效应"——每个人都觉得自己没错，因为别人也这么做。本质如同连锁信，与合法的风险投资活动混在一起，显得体面。</p>
+
+        <div class="pull-quote">
+          "<strong>如果你把葡萄干和大便搅在一起，你得到的仍然是大便。</strong>"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <h3>美国企业对"特别费"的痴迷</h3>
+
+        <div class="pull-quote">
+          "你说这笔费用每年总是会出现，它还有什么特别的呢？"
+          <cite>— 查理·芒格</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、对基金管理行业的批评 -->
+      <section id="section-8">
+        <h2>八、对基金管理行业的批评</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>问题</th><th>描述</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>有缺陷的激励机制</strong></td><td>要求人们假装做他们做不了的事情，假装喜欢不喜欢的事情</td></tr>
+            <tr><td><strong>没有增加价值</strong></td><td>整个投资管理行业加起来，并没有对全部客户的资产提供净附加值</td></tr>
+            <tr><td><strong>高额费用</strong></td><td>开放式基金收取 2% 年费，经纪商再收 3%～4%，最终伤害普通基民</td></tr>
+            <tr><td><strong>共同基金丑闻</strong></td><td>部分基金管理人接受贿赂，出卖股东利益</td></tr>
+          </tbody>
+        </table>
+
+        <h3>对指数基金的看法</h3>
+
+        <div class="pull-quote">
+          "对于一般基金来说，投资指数是比无借贷股票投资更为聪明的策略——尤其是在年管理费超过 1% 的现状下。"
+          <cite>— 查理·芒格</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、对华尔街的批评 -->
+      <section id="section-9">
+        <h2>九、对华尔街的批评</h2>
+
+        <h3>道德水准</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">华尔街道德现状</div>
+            <p>华尔街的平均道德水准<strong>永远至多只能说是中等</strong>。过去几十年，投资银行业的道德风气逐渐败坏。现在的风气：只要能赚钱，什么都可以卖；能卖掉就道德高尚——<strong>这个标准不够</strong>。</p>
+          </div>
+        </div>
+
+        <h3>所罗门个案</h3>
+
+        <p>所罗门竟然争抢"跳来跳去的捷克人"罗伯特·麦克斯韦尔的业务。教训：<strong>你得防止人们为了挣钱将不三不四的人带入</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、对会计的批评 -->
+      <section id="section-10">
+        <h2>十、对会计的批评</h2>
+
+        <h3>大型会计师事务所的道德沦丧</h3>
+
+        <p>年轻时的大型事务所是非常正派的地方。过去 25 年逐渐沦落，明目张胆做假账、帮助客户逃税。</p>
+
+        <h3>核心会计问题</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>问题</th><th>芒格观点</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>创造性会计</strong></td>
+              <td><strong>绝对是对文明的诅咒</strong>；民主国家往往需要丑闻才能撬动改革</td>
+            </tr>
+            <tr>
+              <td><strong>EBITDA 误用</strong></td>
+              <td>每次看到 EBITDA，都应该用"<strong>狗屁利润</strong>"来代替它</td>
+            </tr>
+            <tr>
+              <td><strong>养老基金假设</strong></td>
+              <td>IBM 预期 10% 回报率，实际 6% 更现实；林肯的狗腿比喻：说尾巴是腿，不能让它变成腿</td>
+            </tr>
+            <tr>
+              <td><strong>激进会计法</strong></td>
+              <td>伯克希尔始终采用保守会计法，拒绝有悖道德准则的做法</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>安达信教训</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">安达信倒闭的启示</div>
+            <p>没有失败的资本主义，就像没有地狱的宗教。合伙制企业在采取举动和选择客户方面必须<strong>额外谨慎</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十一、对股票期权的批评 -->
+      <section id="section-11">
+        <h2>十一、对股票期权的批评</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>问题</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>激励机制失效</strong></td><td>给已六十几岁的创始人 CEO 大量期权以刺激忠诚，是精神错乱的想法</td></tr>
+            <tr><td><strong>不公平分配</strong></td><td>可能使什么都没做的人获得大量回报，而真正贡献者却什么都没有</td></tr>
+            <tr><td><strong>会计错误</strong></td><td>认为期权没有成本的理论，导致大量公司滥用期权</td></tr>
+            <tr><td><strong>股权稀释</strong></td><td>期权不但增加成本，还稀释股权——<strong>任何反对这种看法的人都是神经病</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">芒格对布莱克-舒尔斯的评价</div>
+            <p>该模型对短期期权有效；用于长期期权则是"一无所知"的系统。举例：为何 30 美元期权比 60 美元期权价值更低，布莱克-舒尔斯反而认为后者更高——这简直是疯了。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十二、对金融机构和衍生品的警告 -->
+      <section id="section-12">
+        <h2>十二、对金融机构和衍生品的警告</h2>
+
+        <h3>金融机构的天然风险</h3>
+
+        <div class="pull-quote">
+          "金融机构的本质决定了它很容易阴沟里翻船：放贷太多、愚蠢的收购、过度借贷……"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <p>伯克希尔对大量举债的金融机构<strong>尤其警惕</strong>。当机构开始宣传风险管理有多好时，我们就感到紧张。</p>
+
+        <h3>衍生品的系统性问题</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>问题维度</th><th>描述</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>复杂性</strong></td><td>涉及金额达几万亿美元，复杂到无法相信</td></tr>
+            <tr><td><strong>会计虚假</strong></td><td>所谓固定资产并非真实固定资产；GAAP 应用于衍生品导致大量虚假利润</td></tr>
+            <tr><td><strong>长尾风险</strong></td><td>可能要经过好几年才能测算某项交易的真实亏损或收益</td></tr>
+            <tr><td><strong>信用连锁</strong></td><td>信用调低需增加抵押金，类似股票保证金，可能引发连锁破产</td></tr>
+            <tr><td><strong>能源案例</strong></td><td>能源衍生品全部完蛋——想动用账面资产时，钱并不在那里</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">芒格的警告</div>
+            <p>在未来五到十年里，如果美国没有遇到与衍生品相关的大问题，我将会非常吃惊。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">测试管理层的方法</div>
+            <p>问他们"你真的能理解你的衍生品账目吗？"——如果有人说"是"，那这个人要么疯掉了，要么是在说谎。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十三、对律师、法律制度的批评 -->
+      <section id="section-13">
+        <h2>十三、对律师、法律制度的批评</h2>
+
+        <h3>玛莎·斯图亚特案的教训</h3>
+
+        <p>她是<strong>在聘请了著名大律师之后</strong>，因编造虚假故事欺骗检察官而入狱的。如果一开始说出真相，本可以没事。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心教训</div>
+            <p><strong>说真话永远是最简单、最有效的策略。</strong></p>
+          </div>
+        </div>
+
+        <h3>侵权赔偿制度的问题</h3>
+
+        <p>原告方律师协会权力越来越大，影响法官判决。导致优秀企业不愿进入某些行业（如新型警察头盔研发公司）。制度本身不利于最好的企业的正常发展。</p>
+
+        <h3>石棉诉讼乱象</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">问题一</span>
+            <h4>赔偿分流</h4>
+            <p>真正严重受伤的人因为钱被分流而得不到足够赔偿。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题二</span>
+            <h4>伪证泛滥</h4>
+            <p>大量无资格的人通过伪证（由律师教唆医生）获得赔偿。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题三</span>
+            <h4>费用黑洞</h4>
+            <p>只有 25% 的钱给到索赔者手里，其余被律师、医生等拿走。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要教训</div>
+            <p>坏人一旦变得有钱，将会获得巨大政治力量，无法阻止他们干坏事——关键是把这类事情<strong>扼杀在萌芽状态</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十四、幽默语录 -->
+      <section id="section-14">
+        <h2>十四、幽默语录</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>场景</th><th>芒格原话/改述</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>薪酬顾问</strong></td><td>"我宁愿将毒蛇丢进我的衬衣里，也不愿聘请一名薪酬顾问。"</td></tr>
+            <tr><td><strong>会弹钢琴吗？</strong></td><td>"我不知道，我从来没试过。"</td></tr>
+            <tr><td><strong>菲利浦·费舍尔</strong></td><td>"如果某个吸引我的人同意我的观点，我就会很高兴，所以我对费舍尔有很多美好的回忆。"</td></tr>
+            <tr><td><strong>自我表扬</strong></td><td>"自我表扬起到的积极作用一般来说比别人的表扬要大。"</td></tr>
+            <tr><td><strong>互联网与股票投机</strong></td><td>"如果你把葡萄干和大便搅在一起，你得到的仍然是大便。"</td></tr>
+            <tr><td><strong>千年虫问题</strong></td><td>"我觉得很有趣竟然有这样一个问题。你知道吗，可以预测，2000年将会到来。"</td></tr>
+            <tr><td><strong>议会的变迁</strong></td><td>"当年（议会）受赌场老板、马会所有者和卖酒商人的控制……和今天的议会相比，我想我更喜欢当时的情况。"</td></tr>
+            <tr><td><strong>地位与行为规范</strong></td><td>"如果你是个喜欢酗酒的铲沙工人，你可以去脱衣舞俱乐部；但如果你是波士顿的主教，那你就不应该去了。"</td></tr>
+            <tr><td><strong>股票期权（最辛辣）</strong></td><td>"我宁愿在妓院弹钢琴谋生，也不愿靠股票期权赚钱。"</td></tr>
+            <tr><td><strong>衍生品会计</strong></td><td>"说美国衍生品的会计法像阴沟，是对阴沟的侮辱。"</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十五、各方评价芒格 -->
+      <section id="section-15">
+        <h2>十五、各方评价芒格</h2>
+
+        <h3>路易斯·辛普森（美国政府职员保险公司总裁兼CEO）</h3>
+
+        <div class="pull-quote">
+          "查理身上某些性格特点组合，我从未在其他人身上看到过：聪明绝顶、兴趣广泛、几乎从不遗忘任何事情。他最大的优点是对<strong>诚实、道德和正直的绝对坚持</strong>——从来不为自己攫取非分之物，值得毫无保留地信任。此外，他还拥有投资的理想性格：<strong>毫不妥协的耐心、自律、自控</strong>——无论多大压力，从不动摇原则。"
+          <cite>— 路易斯·辛普森</cite>
+        </div>
+
+        <h3>吉姆·塞内加尔（好市多CEO）</h3>
+
+        <div class="pull-quote">
+          "他敏锐地指出好市多会员制非常有价值；他的洞见、质询和支持使好市多的管理和运营都得到了改善。最重要的是他的<strong>直率和基于常识的敏锐商业触觉</strong>。"
+          <cite>— 吉姆·塞内加尔</cite>
+        </div>
+
+        <h3>芒格评价吉姆·塞内加尔</h3>
+
+        <div class="pull-quote">
+          "吉姆·塞内加尔是传奇式的企业经营者——就像卡内基、洛克菲勒。他是 20 世纪最出色的五名零售商之一。他每周工作 80 个小时，在职业操守、正直、忠诚和无私方面为整个企业树立杰出榜样。<strong>他既是行动上的领袖，也是道德上的领袖。</strong>我们在好市多拥有属于自己的、活着的、呼吸着的山姆·沃尔顿。"
+          <cite>— 查理·芒格</cite>
+        </div>
+
+        <h3>查克·瑞克斯豪瑟（芒格多年友人）</h3>
+
+        <div class="pull-quote">
+          "人们通常认为查理的价值在于识别风险和说'不'，但其实查理最有价值的地方，在于他能够<strong>识别那些可以参股的时机</strong>。"
+          <cite>— 查克·瑞克斯豪瑟</cite>
+        </div>
+
+        <h3>奥蒂斯·布思（大股东、多年友人）</h3>
+
+        <div class="pull-quote">
+          "我做过的最好的投资决定就是，这些年来把我的双手放进口袋里，让巴菲特和芒格去施展拳脚。我只是认识到他们比我更出色。"
+          <cite>— 奥蒂斯·布思</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十六、"说不大师"的故事 -->
+      <section id="section-16">
+        <h2>十六、"说不大师"的故事</h2>
+
+        <p>查理以"说不"著称，但他真正的价值在于：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">能力一</span>
+            <h4>识别该说"不"的情况</h4>
+            <p>帮助沃伦规避风险，两人仔细考量每一个风险。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">能力二</span>
+            <h4>识别该说"是"的情况</h4>
+            <p>当沃伦表示仍想做某件事时，查理有时会说"我能不能参股"——这才是真正宝贵的信号。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">终极标准</span>
+            <h4>奥蒂斯·布思的总结</h4>
+            <p>查理明白要找到真正好的东西很难，所以就算你 90% 的时间都在说"不"，你也不会错失太多的东西。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          "查理的价值不在于说'不'，而在于知道什么时候该说'是'。"
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <div class="article-footer">
+        <p>本章内容摘录自 2001—2006 年伯克希尔·哈撒韦公司和西科金融公司年会记录，由惠特尼·提尔逊整理。西科年会历年会议实录另可参见《杰出投资者文摘》。</p>
+      </div>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第三章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
