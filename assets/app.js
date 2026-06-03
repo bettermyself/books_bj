@@ -42,6 +42,7 @@ const QUOTES = [
 let editingBookId = null;
 let selectedColor = COVER_COLORS[0].bg;
 let selectedEmoji = COVER_EMOJIS[0];
+let selectedCoverDataUrl = null;
 let pendingDeleteId = null;
 let pendingDeleteType = null; // 'book' | 'chapter'
 let pendingDeleteExtra = null;
@@ -98,6 +99,56 @@ function buildColorPicker() {
     };
     el.appendChild(sw);
   });
+}
+
+// ===== 封面图片选择 =====
+function handleCoverFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    alert('图片不能超过 2MB');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    // 压缩大图：超过 400px 宽则缩至 400px
+    const img = new Image();
+    img.onload = function() {
+      if (img.width > 400) {
+        const canvas = document.createElement('canvas');
+        const ratio = 400 / img.width;
+        canvas.width = 400;
+        canvas.height = Math.round(img.height * ratio);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        selectedCoverDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+      } else {
+        selectedCoverDataUrl = e.target.result;
+      }
+      showCoverPreview(selectedCoverDataUrl, file.name);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showCoverPreview(dataUrl, fileName) {
+  const preview = document.getElementById('cover-preview-box');
+  const img = document.getElementById('cover-preview-img');
+  const nameEl = document.getElementById('cover-file-name');
+  const clearBtn = document.getElementById('cover-clear-btn');
+  if (preview) preview.style.display = 'block';
+  if (img) img.src = dataUrl;
+  if (nameEl) nameEl.textContent = fileName || '';
+  if (clearBtn) clearBtn.style.display = 'inline-block';
+}
+
+function clearCoverImage() {
+  selectedCoverDataUrl = null;
+  document.getElementById('cover-preview-box').style.display = 'none';
+  document.getElementById('cover-file-name').textContent = '';
+  document.getElementById('cover-clear-btn').style.display = 'none';
+  document.getElementById('cover-file-input').value = '';
 }
 
 // ===== 渲染书架 =====
@@ -183,12 +234,12 @@ function showAddBook() {
   editingBookId = null;
   selectedColor = COVER_COLORS[0].bg;
   selectedEmoji = COVER_EMOJIS[0];
+  clearCoverImage();
   document.getElementById('modal-book-title').textContent = '新增书籍';
   document.getElementById('book-name').value = '';
   document.getElementById('book-author').value = '';
   document.getElementById('book-category').value = '投资经典';
   document.getElementById('book-desc').value = '';
-  document.getElementById('book-status').value = '想读';
   buildColorPicker();
   document.getElementById('modal-book').style.display = 'flex';
   setTimeout(() => document.getElementById('book-name').focus(), 100);
@@ -200,12 +251,19 @@ function showEditBook(id) {
   editingBookId = id;
   selectedColor = b.color || COVER_COLORS[0].bg;
   selectedEmoji = b.emoji || COVER_EMOJIS[0];
+  clearCoverImage();
+  // 如果已有封面图片，恢复预览
+  if (b.cover && b.cover.startsWith('data:')) {
+    selectedCoverDataUrl = b.cover;
+    showCoverPreview(b.cover, '当前封面');
+  } else if (b.cover) {
+    showCoverPreview(b.cover, '当前封面');
+  }
   document.getElementById('modal-book-title').textContent = '编辑书籍';
   document.getElementById('book-name').value = b.name;
   document.getElementById('book-author').value = b.author || '';
   document.getElementById('book-category').value = b.category || '投资经典';
   document.getElementById('book-desc').value = b.desc || '';
-  document.getElementById('book-status').value = b.status || '想读';
   buildColorPicker();
   document.getElementById('modal-book').style.display = 'flex';
 }
@@ -220,7 +278,7 @@ function saveBook() {
     color: selectedColor,
     emoji: selectedEmoji,
     desc: document.getElementById('book-desc').value.trim(),
-    status: document.getElementById('book-status').value,
+    cover: selectedCoverDataUrl || undefined,
   };
   if (editingBookId) {
     updateBook(editingBookId, fields);

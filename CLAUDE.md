@@ -31,7 +31,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 每本书在 `books/` 下有独立文件夹，包含独立的 HTML 章节页面。例如：`books/穷查理宝典/在哈佛学校毕业典礼上的演讲.html`。
 
 章节页结构：
-- 自包含 HTML，内联 `<style>` 块（仅通过 `../../assets/style.css` 引入基础变量）
+- 自包含 HTML，内联 `<style>` 块（仅通过 `../../../assets/style.css` 引入基础变量，章节页在 `books/<书名>/<章节>/` 下，需三层 `../` 回到根目录）
 - 110% 缩放：`html { font-size: 17.6px; }`，所有 rem 值自动放大
 - **左侧导航栏**（352px，粘性定位，占满视口高度，隐藏滚动条）：面包屑 → 全书目录树 → 本讲小节锚点
 - **右侧正文区**：文章正文，含引用块、提示卡片、表格、药方卡片、诗歌块、章节分隔符
@@ -73,8 +73,8 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 ## 新增章节页步骤
 
 1. 创建 `books/<书名>/新章节.html` — 按照下方「章节页设计规范」编写，修改正文内容和底部 `BOOK_FOLDER` 常量
-2. 更新同一书籍所有兄弟章节 HTML 中的 `toc-lectures` 列表
-3. 如果是新书的第一个章节，创建 `books/<书名>/index.html` 并用 meta-refresh 跳转到默认章节
+2. 更新同一书籍所有兄弟章节 HTML 中的 `toc-lectures` 列表（新增章节时，用脚本批量替换所有文件中的 TOC 条目最为稳妥，避免逐个手改遗漏）
+3. 如果是新书的第一个章节，创建 `books/<书名>/index.html` 并用 meta-refresh 跳转到默认章节（书级跳转页保留；章级目录不再需要 `index.html`，删除了也不影响功能）
 
 ## 章节页设计规范
 
@@ -89,7 +89,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>章节标题 · 书名</title>
-  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="../../../assets/style.css" />
   <style>
     /* 110% 缩放 */
     html { font-size: 17.6px; }
@@ -121,7 +121,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 
 ### 顶部导航栏
 
-复用主站 `site-header`，导航链接包含「⌂ 首页」和「← 返回书架」，均指向 `../../index.html`。
+复用主站 `site-header`，导航链接包含「⌂ 首页」和「← 返回书架」，均指向 `../../../index.html`。
 
 ### 左侧导航栏结构（从上到下）
 
@@ -192,7 +192,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
   </div>
 </div>
 ```
-**使用场景**：核心观点列表、步骤、原则、药方等需要逐条突出的内容。左侧有金色竖条装饰。
+**使用场景**：核心观点列表、步骤、原则、药方等需要逐条突出的内容。左侧有金色竖条装饰。使用响应式多列布局 `repeat(auto-fill, minmax(320px, 1fr))`，宽屏3列、中等屏幕2列、窄屏1列。
 
 #### 7. 诗歌/长引文块（`.poem`）
 ```html

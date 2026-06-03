@@ -92,20 +92,24 @@
         </select>
       </div>
       <div class="form-group">
-        <label>封面颜色</label>
+        <label>封面图片</label>
+        <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
+          <button type="button" class="btn-ghost" onclick="document.getElementById('cover-file-input').click()">📷 选择图片</button>
+          <span id="cover-file-name" style="font-size:.82rem;color:var(--text3);"></span>
+          <button type="button" class="btn-ghost" id="cover-clear-btn" onclick="clearCoverImage()" style="display:none;font-size:.78rem;color:#c0392b;">清除</button>
+        </div>
+        <div id="cover-preview-box" style="margin-top:.6rem;display:none;">
+          <img id="cover-preview-img" style="max-width:100px;max-height:140px;border-radius:6px;border:1px solid var(--border);object-fit:cover;" />
+        </div>
+        <input type="file" id="cover-file-input" accept="image/*" style="display:none;" onchange="handleCoverFile(event)" />
+      </div>
+      <div class="form-group">
+        <label>封面颜色 <span style="font-weight:400;color:var(--text3);">（无图片时使用）</span></label>
         <div class="color-picker" id="color-picker"></div>
       </div>
       <div class="form-group">
         <label>简介</label>
         <textarea id="book-desc" rows="3" placeholder="一句话介绍这本书…"></textarea>
-      </div>
-      <div class="form-group">
-        <label>阅读状态</label>
-        <select id="book-status">
-          <option value="想读">想读</option>
-          <option value="在读">在读</option>
-          <option value="已读">已读</option>
-        </select>
       </div>
       <div class="modal-actions">
         <button class="btn-ghost" onclick="closeModalDirect('modal-book')">取消</button>
