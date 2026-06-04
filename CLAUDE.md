@@ -31,7 +31,9 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 每本书在 `books/` 下有独立文件夹，包含独立的 HTML 章节页面。例如：`books/穷查理宝典/在哈佛学校毕业典礼上的演讲.html`。
 
 章节页结构：
-- 自包含 HTML，内联 `<style>` 块（仅通过 `../../../assets/style.css` 引入基础变量，章节页在 `books/<书名>/<章节>/` 下，需三层 `../` 回到根目录）
+- 自包含 HTML，内联 `<style>` 块，通过引入 `assets/style.css` 复用基础 CSS 变量。相对路径取决于 HTML 文件的嵌套层级：
+  - `books/<书名>/章节.html`（平铺）：`../../assets/style.css`
+  - `books/<书名>/<章号>/章节.html`（子目录）：`../../../assets/style.css`
 - 110% 缩放：`html { font-size: 17.6px; }`，所有 rem 值自动放大
 - **左侧导航栏**（352px，粘性定位，占满视口高度，隐藏滚动条）：面包屑 → 全书目录树 → 本讲小节锚点
 - **右侧正文区**：文章正文，含引用块、提示卡片、表格、药方卡片、诗歌块、章节分隔符
@@ -89,7 +91,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>章节标题 · 书名</title>
-  <link rel="stylesheet" href="../../../assets/style.css" />
+  <link rel="stylesheet" href="../../assets/style.css" /> <!-- 或 ../../../ 视嵌套层级而定 -->
   <style>
     /* 110% 缩放 */
     html { font-size: 17.6px; }
@@ -121,7 +123,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 
 ### 顶部导航栏
 
-复用主站 `site-header`，导航链接包含「⌂ 首页」和「← 返回书架」，均指向 `../../../index.html`。
+复用主站 `site-header`，导航链接包含「⌂ 首页」和「← 返回书架」，路径根据嵌套层级使用 `../../index.html` 或 `../../../index.html`。
 
 ### 左侧导航栏结构（从上到下）
 
@@ -223,7 +225,9 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 4. **组件混搭**：同一节内鼓励混合使用 2-3 种组件类型，避免单调
 5. **间距统一**：组件间距由 CSS 控制（`margin: 1.25rem 0` 至 `1.5rem 0`），不要手动加 `<br>` 撑间距
 
-### 底部脚本（必须包含）
+### 底部脚本（必须包含，不可省略任何部分）
+
+**`lastActive` + `scrollIntoView` 逻辑不可省略**——缺少时侧边栏目录项在滚动过程中不会自动滚入可见区域，用户无法看到当前阅读位置对应的高亮项。
 
 ```javascript
 // 侧边栏滚动高亮（激活项切换时自动滚入视野）

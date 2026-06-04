@@ -613,7 +613,7 @@
         <h3 id="section-a4">四、永久持有与卖出准则</h3>
         <p>我们将部分股票视为伯克希尔永久的组成部分，只要满足：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr 1fr;">
           <div class="remedy-card">
             <span class="remedy-num">条件 01</span>
             <h4>资产回报前景令人满意</h4>
@@ -789,7 +789,7 @@
           </tbody>
         </table>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
           <div class="remedy-card">
             <span class="remedy-num">问题 1：概率</span>
             <h4>交易完成的确定性</h4>
@@ -855,11 +855,6 @@
             <tr><td>时机选择</td><td>仅在胜券在握时出手</td><td>经常随潮流而动</td></tr>
           </tbody>
         </table>
-
-        <div class="pull-quote">
-          "如果只是为了赚钱而整天盯着股票行情，这种生活有什么意义可言？"
-          <cite>— 巴菲特</cite>
-        </div>
 
         <h3 id="section-b7">七、冷静期的思考与原则（1989年展望）</h3>
         <p>尽管1988年套利成绩出色，我们仍希望<strong>冷眼旁观</strong>：长期仓位上升，手中现金下降，无需为套利而套利；并购浪潮过于泛滥，贷款和买家双方表现出放纵的乐观主义。我们不会预测股市、利率或商业活动短期走势。</p>
@@ -1083,6 +1078,14 @@
           正如芒格和我学到的：巧妇难为无米之炊。我们能用丝绸织出丝绸钱包，但前提是先拿到丝绸。
         </div>
 
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">解读</div>
+            <p>再高明的投资者，买到烂公司也变不出好回报——就像巧妇没有米做不出饭。只有先选到<strong>质地优良的企业</strong>（丝绸），投资技巧才能发挥作用，创造出丰厚回报（丝绸钱包）。巴菲特借此强调：选对公司是一切投资的前提。</p>
+          </div>
+        </div>
+
         <p>早年寻找"便宜货"的经历让我遭受惩罚、受到教育：</p>
 
         <table class="article-table">
@@ -1135,7 +1138,7 @@
         <h3 id="section-d3">三、权益类投资策略详解</h3>
         <p>我们的方法自1977年以来本质未变，仅将"有吸引力的价格"强化为"非常<strong>有吸引力的价格</strong>"。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
           <div class="remedy-card">
             <span class="remedy-num">铁律 ①</span>
             <h4>我们能理解</h4>
@@ -1272,7 +1275,7 @@
 
         <p>若你打算自己构建投资组合，请记住：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
           <div class="remedy-card">
             <span class="remedy-num">功课 01</span>
             <h4>正确评估能力圈内的企业</h4>
@@ -1387,7 +1390,7 @@
         <h3 id="section-f2">二、企业内部的隐形敌人：惯性驱使</h3>
         <p>这是一种足以压倒一切的、看不见的力量，我们称其为"惯性驱使"或"机构强迫症"。当这种强迫症发作时，理性经常会枯萎。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
           <div class="remedy-card">
             <span class="remedy-num">表现 01</span>
             <h4>抗拒改变</h4>
@@ -1496,7 +1499,7 @@
 
         <p>杠杆会放大收益，带来短暂的辉煌，但它也具有极高的成瘾性。历史反复证明了一条残酷的数学真理，无论使用者多么聪明，杠杆最终的结果通常是归零。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr 1fr;">
           <div class="remedy-card">
             <span class="remedy-num">阶段一</span>
             <h4>获利时</h4>
@@ -1547,9 +1550,10 @@
   </footer>
 
   <script>
-    // 侧边栏滚动高亮
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
     const links = document.querySelectorAll('#sidebar-nav a');
     const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
 
     function onScroll() {
       const scrollY = window.scrollY + 132;
@@ -1558,6 +1562,12 @@
         if (sec.offsetTop <= scrollY) current = sec;
       }
       links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
 
