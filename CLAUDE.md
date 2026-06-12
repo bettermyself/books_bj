@@ -56,7 +56,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 - **书籍文件夹命名**：`server.py` 中的 `safe_dirname()` 和 `app.js` 中的 `.replace(/[\\/:*?"<>|]/g, '_')` 必须保持同步——两者剔除相同的非法文件名字符。
 - **种子数据**：`seedIfEmpty()` 每次页面加载都会执行，但受 `db.seeded` 布尔值（持久化在 `localStorage` 中）控制。它仅在首次加载时插入示例书籍，之后即使用户删除所有书也不会再次插入。
 - **章节页 BOOK_FOLDER 常量**：每个章节 HTML 底部有 `const BOOK_FOLDER = '书名'`，必须与磁盘上的文件夹名一致，用于驱动阅读位置的 localStorage 键。
-- **侧边栏目录树**：章节页使用层级导航（全书章节 → 各讲 → 小节锚点）。新增一讲时，需在同一书籍所有兄弟 HTML 文件的 `toc-lectures` 列表中添加对应 `<li><a>` 条目以保持跨页导航同步。
+- **侧边栏目录树**：章节页使用层级导航（全书章节 → 各讲 → 小节锚点）。**目录结构按章实际讲数自适应**——单讲章节用扁平链接（`.toc-chapter-title` 直接写成 `<a>`，无 `.toc-lectures` 子列表、不渲染折叠脚本），避免单讲时出现"伪下拉"的冗余套娃；只有一章有 2 讲及以上时才启用嵌套结构（`.toc-chapter` 包裹 `.toc-lectures` 子列表 + 折叠展开脚本）。新增一讲时，需在同一书籍所有兄弟 HTML 文件中按此规则更新对应章节的 TOC 条目以保持跨页同步。
 - **设计令牌**：金色调色板（`--gold: #a07828`、`--gold-lt: #c9a84c`、`--gold-dk: #7a5a10`），奶油色背景（`--bg: #f5f2ec`），Georgia/Noto Serif SC 字体栈。章节页通过引入共享样式表复用这些变量。
 
 ## 数据结构
@@ -75,7 +75,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 ## 新增章节页步骤
 
 1. 创建 `books/<书名>/新章节.html` — 按照下方「章节页设计规范」编写，修改正文内容和底部 `BOOK_FOLDER` 常量
-2. 更新同一书籍所有兄弟章节 HTML 中的 `toc-lectures` 列表（新增章节时，用脚本批量替换所有文件中的 TOC 条目最为稳妥，避免逐个手改遗漏）
+2. 更新同一书籍所有兄弟章节 HTML 中的「全书目录」——按章实际讲数自适应：单讲章保持扁平 `<a class="toc-chapter-title">`，多讲章改用 `.toc-lectures` 子列表 + 折叠脚本。新增章节时，用脚本批量替换所有文件中的 TOC 条目最为稳妥，避免逐个手改遗漏
 3. 如果是新书的第一个章节，创建 `books/<书名>/index.html` 并用 meta-refresh 跳转到默认章节（书级跳转页保留；章级目录不再需要 `index.html`，删除了也不影响功能）
 
 ## 章节页设计规范
@@ -128,7 +128,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 ### 左侧导航栏结构（从上到下）
 
 1. **面包屑**（`.breadcrumb`）：`书架 / 书名`
-2. **全书目录**（`.sidebar-label` + `.book-toc`）：列出全书各章，当前章加 `.current-chapter`，展开的章节内用 `.toc-lectures` 列出各讲，当前讲加 `.active`
+2. **全书目录**（`.sidebar-label` + `.book-toc`）：列出全书各章，当前章加 `.current-chapter`。**按章实际讲数自适应**——单讲章节直接把 `.toc-chapter-title` 写成 `<a>` 链接（加 `style="text-decoration:none;"`，指向该讲路径），不再套 `.toc-lectures` 子列表、不渲染折叠脚本；只有一章有 2 讲及以上时，才用 `.toc-chapter` 包裹 `.toc-lectures` 子列表（当前讲加 `.active`），并保留折叠展开脚本。
 3. **本讲目录**（`.sidebar-label.sidebar-label-sub` + `#sidebar-nav`）：列出正文各 `<section>` 的锚点链接，二级标题用 `.sub` 类名缩进
 
 ### 正文区组件库
@@ -194,7 +194,7 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
   </div>
 </div>
 ```
-**使用场景**：核心观点列表、步骤、原则、药方等需要逐条突出的内容。左侧有金色竖条装饰。使用响应式多列布局 `repeat(auto-fill, minmax(320px, 1fr))`，宽屏3列、中等屏幕2列、窄屏1列。
+**使用场景**：核心观点列表、步骤、原则、药方等需要逐条突出的内容。左侧有金色竖条装饰。使用响应式多列布局 `repeat(auto-fit, minmax(320px, 1fr))`，宽屏3列、中等屏幕2列、窄屏1列。
 
 #### 7. 诗歌/长引文块（`.poem`）
 ```html

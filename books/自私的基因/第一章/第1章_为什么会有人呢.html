@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第1章 为什么会有人呢？ · 自私的基因</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after { content: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      font-style: italic;
+      color: var(--text);
+      line-height: 2;
+      position: relative;
+    }
+    .poem::before {
+      content: '\201C';
+      position: absolute;
+      top: -.2rem;
+      left: .8rem;
+      font-size: 4rem;
+      color: rgba(201,168,76,.2);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .85rem;
+      letter-spacing: .04em;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">自私的基因</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="第1章_为什么会有人呢.html" class="toc-chapter-title current-chapter" style="text-decoration:none;">第一章 为什么会有人呢？</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="../第二章/第2章复制因子.html" class="toc-chapter-title" style="text-decoration:none;">第二章 复制因子</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">达尔文与生命存在的意义</a></li>
+        <li><a href="#section-2">本书的核心主题</a></li>
+        <li><a href="#section-3" class="sub">对前人著作的批判</a></li>
+        <li><a href="#section-4" class="sub">本书的核心论点</a></li>
+        <li><a href="#section-5">本书不准备论证的内容</a></li>
+        <li><a href="#section-6">关于基因决定论的澄清</a></li>
+        <li><a href="#section-7">利他性与自私性的定义</a></li>
+        <li><a href="#section-8">自私性与利他性行为的典型案例</a></li>
+        <li><a href="#section-9">类群选择理论的批判</a></li>
+        <li><a href="#section-10">"物种主义"的道德反思</a></li>
+        <li><a href="#section-11">本书的立场：基因选择</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">自私的基因 · 第一章</div>
+        <h1 class="article-title">为什么会有人呢？</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>理查德·道金斯（Richard Dawkins）</span>
+          <span><strong>主题</strong>进化论 · 基因选择 · 利他与自私</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        行星上的智慧生物开始思索自身存在的道理时，才算真正成熟。
+      </div>
+
+      <!-- 一、达尔文 -->
+      <section id="section-1">
+        <h2>一、达尔文与生命存在的意义</h2>
+
+        <p>30多亿年来，地球上的各种生命有机体始终对自身存在的道理一无所知。直到<strong>查尔斯·达尔文（Charles Darwin）</strong>的出现，才第一次对"我们为何存在"这一问题给出了有条理、站得住脚的阐述。</p>
+
+        <p>好奇的孩子常会问："为什么会有人呢？"达尔文使我们能够给出一个<strong>切合实际的回答</strong>。面对以下这些深刻问题，我们无须再求助于怪力乱神：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">问题一</span>
+            <h4>生命有意义吗？</h4>
+            <p>达尔文的进化论为这一古老追问提供了自然主义的答案框架。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题二</span>
+            <h4>人生目的何在？</h4>
+            <p>从基因视角审视，生存与繁殖构成了生命运转的底层逻辑。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题三</span>
+            <h4>人是什么？</h4>
+            <p>我们是基因创造出来的"生存机器"，却也是唯一能反叛基因的物种。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "现在我要讲明的一点是，1859年之前试图回答这一问题的一切尝试都是徒劳无益的，如果我们将其全部置于脑后，我们的境遇会更好些。"
+          <cite>— 动物学家辛普森（G. G. Simpson）</cite>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">哲学界的滞后</div>
+            <p>时至今日，达尔文进化论的深刻哲学意义仍未被充分认识——哲学及人文学科的讲授，仍好像不曾有过达尔文此人。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、核心主题 -->
+      <section id="section-2">
+        <h2>二、本书的核心主题</h2>
+
+        <p>本书并非全面宣扬达尔文主义，而是<strong>聚焦探索进化论对一个特定问题的影响</strong>：</p>
+
+        <div class="pull-quote large">
+          自私行为与利他行为在生物学上的意义。
+        </div>
+
+        <p>这一主题与人类生活息息相关，涵盖我们的爱与憎、斗争与合作、馈赠与盗窃、贪婪与慷慨。</p>
+
+        <h3 id="section-3">对前人著作的批判</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>著作</th><th>作者</th><th>核心错误</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>《论进犯行为》<em>On Aggression</em></td>
+              <td>洛伦茨（Lorenz）</td>
+              <td>错误地以<strong>物种/种群利益</strong>作为进化关键</td>
+            </tr>
+            <tr>
+              <td>《社会契约》<em>The Social Contract</em></td>
+              <td>阿德里（Ardrey）</td>
+              <td>同上</td>
+            </tr>
+            <tr>
+              <td>《爱与憎》<em>Love and Hate</em></td>
+              <td>埃布埃尔——埃尔布菲尔特（Eibl-Eibesfeldt）</td>
+              <td>同上</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">根本错误</div>
+            <p>这三本书将进化的关键归于物种或种群的利益，而非<strong>个体（或基因）的利益</strong>——这是对进化论的根本性误解。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4">本书的核心论点</h3>
+
+        <div class="pull-quote large">
+          我们以及其他一切动物，都是各自基因所创造的机器。
+        </div>
+
+        <p>基因如同芝加哥黑社会中发迹的匪徒，在高度竞争性的世界上生存了下来，有的延续长达数百万年。<strong>成功基因的一个突出特性，就是其无情的自私性。</strong></p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">推论一</span>
+            <h4>基因自私 → 个体自私</h4>
+            <p>基因的自私性，通常导致个体行为的自私性。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">推论二</span>
+            <h4>特殊情况下的有限利他</h4>
+            <p>在某些特殊情况下，基因也会滋长一种有限的利他主义，以更有效地达到其自私目的。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键限定词</div>
+            <p>"特殊"与"有限"是关键限定词——对整个物种而言，<strong>普遍的爱与普遍的利益在进化论上毫无意义</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、不论证的内容 -->
+      <section id="section-5">
+        <h2>三、本书不准备论证的内容</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>不论证的内容</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>以进化论为基础的道德观</td>
+              <td>本书只讲事物如何进化，不讲人类应如何行动</td>
+            </tr>
+            <tr>
+              <td>"本性与教养"争论的立场</td>
+              <td>作者有自己观点，但不在此书中表达（仅在第13章融入文化观点）</td>
+            </tr>
+            <tr>
+              <td>对人类或具体动物行为的细节描述</td>
+              <td>仅在举例说明时使用有事实根据的细节</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">重要区分</div>
+            <p>阐述对事物的认识，与提倡该事物，是两件截然不同的事。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、基因决定论 -->
+      <section id="section-6">
+        <h2>四、关于基因决定论的澄清</h2>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">极为常见的谬见</div>
+            <p><strong>遗传特性是固定不变的</strong>——这是一种严重的误解。</p>
+          </div>
+        </div>
+
+        <p>事实是：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">事实一</span>
+            <h4>基因可以被反抗</h4>
+            <p>基因可以驱使行为趋向自私，但<strong>我们不必终生屈从</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">事实二</span>
+            <h4>人类的独特性</h4>
+            <p>只有人类同时受文化、后天习得与遗传的多重影响支配。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">事实三</span>
+            <h4>教育的力量</h4>
+            <p>通过教育，可以将慷慨大度和利他主义灌输到人们头脑中。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          "让我们懂得我们自私的基因居心何在，至少可以有机会去打乱它们的计划，而这是其他物种从来没能做到的。"
+          <cite>— 理查德·道金斯</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、定义 -->
+      <section id="section-7">
+        <h2>五、利他性与自私性的定义</h2>
+
+        <p>本书对利他性和自私性的定义，是<strong>行为层面</strong>的，而非主观意识或动机层面的。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>概念</th><th>定义</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>利他性行为</td>
+              <td>行为结果牺牲自身利益，从而增进另一同类实体的利益</td>
+            </tr>
+            <tr>
+              <td>自私性行为</td>
+              <td>行为效果与利他性相反</td>
+            </tr>
+            <tr>
+              <td>利益</td>
+              <td>即"生存的机会"——对生存概率的影响，哪怕极微小，也能对进化产生巨大作用</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>这里不涉及动机的心理学，不论行为者是否抱有自私动机，均不影响本定义的适用。在实际运用中，需用"明显的"来修饰：<strong>明显的利他行为</strong>表面看似使利他者更可能死亡，但更仔细观察，往往会发现它实际上是<strong>伪装起来的自私行为</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、典型案例 -->
+      <section id="section-8">
+        <h2>六、自私性与利他性行为的典型案例</h2>
+
+        <h3>明显的自私性行为</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>案例</th><th>行为描述</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>黑头鸥</td>
+              <td>趁邻居不备，吞食邻居雏鸥，无需远出捕食即可饱餐</td>
+            </tr>
+            <tr>
+              <td>雌螳螂</td>
+              <td>交配时或之后将雄螳螂吃掉（从头部开始）；失去头部的雄螳螂仍可完成交配，甚至因头部神经抑制中心被移除而性活动增强</td>
+            </tr>
+            <tr>
+              <td>帝企鹅</td>
+              <td>在水边踌躇，互相往水中推，以探测是否有海豹，不肯自愿当"试验品"</td>
+            </tr>
+            <tr>
+              <td>拒绝分享</td>
+              <td>拒绝与同类分享食物、地盘或配偶</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>明显的利他性行为</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>案例</th><th>行为描述</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>工蜂刺蜇</td>
+              <td>刺蜇掠夺者时内脏被拖出，工蜂随即死亡，以自身死亡保护蜂群储存的食物</td>
+            </tr>
+            <tr>
+              <td>小鸟警告声</td>
+              <td>发现猛禽时发出警告声，吸引捕食者注意力到自身，使鸟群得以逃脱</td>
+            </tr>
+            <tr>
+              <td>母鸟"调虎离山"</td>
+              <td>捕食者靠近巢穴时，母鸟假装翅膀折断引开捕食者，以自身风险换取雏鸟安全</td>
+            </tr>
+            <tr>
+              <td>父母对子女</td>
+              <td>孕育、喂养、保护后代，付出巨大代价</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、类群选择 -->
+      <section id="section-9">
+        <h2>七、类群选择理论的批判</h2>
+
+        <h3>类群选择理论的核心主张</h3>
+
+        <p><strong>温-爱德华兹（Wynne-Edwards）</strong>提出"类群选择"理论，后由<strong>阿德里</strong>在《社会契约》中普及：</p>
+
+        <div class="pull-quote">
+          若一个群体的个体成员愿为群体利益牺牲自己，该群体灭绝的可能性将小于自私群体。因此世界将由具有自我牺牲精神的个体所组成的群体占据。
+        </div>
+
+        <h3>个体选择（基因选择）的三大反驳</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">反驳一</span>
+            <h4>自私叛逆者问题</h4>
+            <p>即使在利他主义群体中，只要出现少数拒绝牺牲的自私个体，按定义它们更可能生存并繁殖，其自私特性将随自然选择扩散，数代之后利他性群体将被自私个体淹没。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">反驳二</span>
+            <h4>外来污染问题</h4>
+            <p>纯粹的利他性群体极难维持，邻近的自私群体成员可移居并通婚，玷污其"纯洁性"。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">反驳三</span>
+            <h4>时间尺度问题</h4>
+            <p>群体灭绝是一个<strong>缓慢过程</strong>，而个体竞争是<strong>快速短兵相接</strong>的搏斗。即便群体缓慢衰亡，其中的自私个体仍可获得短期繁荣。</p>
+          </div>
+        </div>
+
+        <h3>类群选择论的逻辑困境——归谬</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类群选择论的逻辑延伸</th><th>荒谬结论</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>可以在物种群体之间进行选择</td>
+              <td>那为何不能在更高级别（属、科、目、纲）之间选择？</td>
+            </tr>
+            <tr>
+              <td>物种应为本物种利益牺牲个体</td>
+              <td>难道应要求狮子"为了哺乳纲的利益"不去猎杀羚羊，转而捕食鸟类或爬行动物？</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">为何类群选择论仍有吸引力</div>
+            <p>它与大多数人的<strong>道德和政治观念</strong>高度吻合（群体内利他、群体间竞争）。它在教育体系中根深蒂固，连诺贝尔奖得主洛伦茨在《论进犯行为》中，也未意识到自己的观点与正统达尔文学说相抵触。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、物种主义 -->
+      <section id="section-10">
+        <h2>八、"物种主义"的道德反思</h2>
+
+        <p>类群选择理论的吸引力，折射出人类道德中的<strong>"物种主义"</strong>倾向（理查德·赖德，Richard Ryder 用语）：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">现象</span>
+            <h4>同物种偏向</h4>
+            <p>同物种成员被认为比其他物种成员更应得到道义上的特殊考虑。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">悖论</span>
+            <h4>令人不安的对比</h4>
+            <p>一个人类胎儿（感情不比阿米巴多）享受的法律保护，远超一只有感情、有思维、甚至能学习人类语言的<strong>成年黑猩猩</strong>。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "我不知道能否将'物种主义'置于一个比'种族主义'更合理的地位上，但我知道，这种'物种主义'在进化生物学上<strong>毫无正当依据</strong>。"
+          <cite>— 理查德·道金斯</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、基因选择 -->
+      <section id="section-11">
+        <h2>九、本书的立场：基因选择</h2>
+
+        <p>本书深受<strong>威廉斯（Williams）</strong>著作《适应与自然选择》（<em>Adaptation and Natural Selection</em>）的影响，同时其理论根源可追溯至<strong>魏斯曼（August Weismann）</strong>的"种质延续性"理论。</p>
+
+        <div class="pull-quote large">
+          选择的基本单位，也是自我利益的基本单位，既不是物种，也不是群体，甚至严格来说也不是个体，而是——遗传单位：基因。
+          <cite>— 理查德·道金斯</cite>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">这一观点看似极端，实则正统</div>
+            <p>这一观点乍听极端，但本质上是<strong>正统的</strong>，只是表达方式与众不同。对此论证，需从生命起源开始讲起，这也是后续章节的任务。</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© 2024 Reading Notes · 自私的基因</span>
+    </div>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sectionIds = ['section-1','section-2','section-4','section-5','section-6','section-7','section-8','section-9','section-10','section-11'];
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '自私的基因';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第一章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
