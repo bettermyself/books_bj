@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第4章 基因机器 · 自私的基因</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .chapter-article ul, .chapter-article ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+    }
+    .chapter-article ul li, .chapter-article ol li { margin-bottom: .4rem; }
+    .chapter-article ul li::marker { color: var(--gold); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      font-style: italic;
+      color: var(--text);
+      line-height: 2;
+      position: relative;
+    }
+    .poem::before {
+      content: '\201C';
+      position: absolute;
+      top: -.2rem;
+      left: .8rem;
+      font-size: 4rem;
+      color: rgba(201,168,76,.2);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .85rem;
+      letter-spacing: .04em;
+    }
+
+    .flow-block {
+      background: rgba(201,168,76,.04);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Consolas', 'Monaco', 'Noto Serif SC', monospace;
+      font-size: .92rem;
+      color: var(--text);
+      line-height: 1.9;
+      text-align: center;
+      white-space: pre-line;
+    }
+    .flow-block .arrow {
+      display: block;
+      color: var(--gold);
+      font-weight: 700;
+      margin: .1rem 0;
+    }
+    .flow-block .step {
+      display: block;
+      font-family: 'Noto Serif SC', Georgia, serif;
+      font-style: normal;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">自私的基因</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="../第一章/第1章_为什么会有人呢.html" class="toc-chapter-title" style="text-decoration:none;">第一章 为什么会有人呢？</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="../第二章/第2章复制因子.html" class="toc-chapter-title" style="text-decoration:none;">第二章 复制因子</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="../第三章/第3章不朽的双螺旋.html" class="toc-chapter-title" style="text-decoration:none;">第三章 不朽的双螺旋</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="第4章基因机器.html" class="toc-chapter-title current-chapter" style="text-decoration:none;">第四章 基因机器</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">生存机器的起源与进化</a></li>
+        <li><a href="#h-1-1" class="sub">两大分支的分化</a></li>
+        <li><a href="#h-1-2" class="sub">多细胞体与基因群体</a></li>
+        <li><a href="#section-2">行为的本质——快速动作</a></li>
+        <li><a href="#h-2-1" class="sub">动物行为 vs 植物运动</a></li>
+        <li><a href="#h-2-2" class="sub">肌肉——快速动作核心部件</a></li>
+        <li><a href="#section-3">神经系统：生物计算机</a></li>
+        <li><a href="#h-3-1" class="sub">定时装置的演进</a></li>
+        <li><a href="#h-3-2" class="sub">神经元 vs 晶体管</a></li>
+        <li><a href="#h-3-3" class="sub">大脑的功能结构</a></li>
+        <li><a href="#h-3-4" class="sub">记忆力的重要性</a></li>
+        <li><a href="#section-4">基因如何控制行为</a></li>
+        <li><a href="#h-4-1" class="sub">仙女座类比</a></li>
+        <li><a href="#h-4-2" class="sub">程序员类比</a></li>
+        <li><a href="#h-4-3" class="sub">蜜蜂卫生行为</a></li>
+        <li><a href="#section-5">预测未来的策略</a></li>
+        <li><a href="#h-5-1" class="sub">基因预测的本质</a></li>
+        <li><a href="#h-5-2" class="sub">三种预测策略</a></li>
+        <li><a href="#h-5-3" class="sub">学习策略的局限</a></li>
+        <li><a href="#h-5-4" class="sub">模拟能力与意识</a></li>
+        <li><a href="#h-5-5" class="sub">赌博隐喻</a></li>
+        <li><a href="#h-5-6" class="sub">大脑的解放与自主性</a></li>
+        <li><a href="#section-6">联络与欺骗</a></li>
+        <li><a href="#h-6-1" class="sub">联络的定义</a></li>
+        <li><a href="#h-6-2" class="sub">欺骗行为的类型</a></li>
+        <li><a href="#h-6-3" class="sub">欺骗的本质</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">自私的基因 · 第四章</div>
+        <h1 class="article-title">基因机器</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>理查德·道金斯（Richard Dawkins）</span>
+          <span><strong>主题</strong>生存机器 · 神经系统 · 基因间接控制</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        亿万年的进化中，基因把生存机器从消极的贮藏器，打造成了能在毫秒间自主决策、并最终涌现出意识的精密机器。
+      </div>
+
+      <!-- 一、生存机器的起源与进化 -->
+      <section id="section-1">
+        <h2>一、生存机器的起源与进化</h2>
+
+        <p>生存机器最初作为<strong>基因的贮藏器</strong>而存在，其原始功能是消极的防御——保护基因免受化学战和意外分子攻击。</p>
+
+        <h3 id="h-1-1">1.1 两大分支的分化</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>分支</th><th>特征</th><th>代表</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>植物</strong></td><td>利用阳光直接合成复杂分子，速度快</td><td>光合作用生物</td></tr>
+            <tr><td><strong>动物</strong></td><td>利用植物化学劳动果实，通过摄食获取能量</td><td>一切动物</td></tr>
+          </tbody>
+        </table>
+
+        <p>随着时间推移，两大分支逐步发展出日益巧妙的技能，并在海洋、陆地、天空、地下、树上等各类生境中形成专业化小分支，最终形成今日丰富多彩的动植物多样性。</p>
+
+        <h3 id="h-1-2">1.2 多细胞体与基因群体</h3>
+
+        <p>动植物经进化发展为<strong>多细胞体</strong>，每个细胞获得全套基因的完整拷贝。对于"躯体"的本质，作者持独特观点：</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">作者观点</div>
+            <p>与其将躯体视为"细胞的群体"，不如将其理解为<strong>基因的群体</strong>，细胞是基因化学工业的工作单位。</p>
+          </div>
+        </div>
+
+        <p>尽管躯体本质上是基因群体，但在行为层面，动物表现为<strong>内部协调的整体单位</strong>。这是因为：</p>
+        <ul>
+          <li>自然选择有利于能与其他基因合作的基因</li>
+          <li>中央协调系统比无政府状态更具生存优势</li>
+          <li>共同进化过程使个体生存机器的集群性已难以辨认</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、行为的本质——快速动作 -->
+      <section id="section-2">
+        <h2>二、行为的本质——快速动作</h2>
+
+        <h3 id="h-2-1">2.1 动物行为 vs 植物运动</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>维度</th><th>动物</th><th>植物</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>速度</strong></td><td>超过植物数十万倍</td><td>极其缓慢</td></tr>
+            <tr><td><strong>可逆性</strong></td><td>可逆，可无数次重复</td><td>通常是不可逆的生长</td></tr>
+            <tr><td><strong>性质</strong></td><td>快速主动行为</td><td>缓慢生长运动</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="h-2-2">2.2 肌肉——快速动作的核心部件</h3>
+
+        <p>肌肉是动物进化中用以进行快速动作的引擎，其工作原理类似蒸汽机或内燃机：</p>
+        <ul>
+          <li><strong>能量来源</strong>：贮藏的化学燃料</li>
+          <li><strong>输出方式</strong>：以<strong>张力形式</strong>产生直接机械力（区别于气压）</li>
+          <li><strong>传力机制</strong>：通过绳索和带铰链的杠杆（在人体中，杠杆=骨骼，绳索=肌腱，铰链=关节）</li>
+        </ul>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">核心问题</div>
+            <p>如何控制肌肉收缩的时间和速度？这正是神经系统的使命。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、神经系统：生物计算机 -->
+      <section id="section-3">
+        <h2>三、神经系统：生物计算机</h2>
+
+        <h3 id="h-3-1">3.1 人造机器的定时装置演进</h3>
+
+        <div class="flow-block"><span class="step">机械定时</span>
+<span class="arrow">↓</span>
+<span class="step">凸轮装置</span>
+<span class="arrow">↓</span>
+<span class="step">打孔卡片</span>
+<span class="arrow">↓</span>
+<span class="step">电子计算机（半导体 / 晶体管）</span></div>
+
+        <p>生存机器<strong>绕过了凸轮和打孔卡片</strong>，其定时装置与电子计算机更为相似。</p>
+
+        <h3 id="h-3-2">3.2 神经元 vs 晶体管</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>比较维度</th><th>神经元</th><th>晶体管</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>工作速度</strong></td><td>较慢</td><td>较快</td></tr>
+            <tr><td><strong>连接数量</strong></td><td>可达数万个连接</td><td>仅 3 个</td></tr>
+            <tr><td><strong>微型化</strong></td><td>极高（100 亿个 / 颅腔）</td><td>较低（颅腔仅容几百个）</td></tr>
+            <tr><td><strong>通讯方式</strong></td><td>类似脉冲码</td><td>数字脉冲</td></tr>
+            <tr><td><strong>复杂度</strong></td><td>作为数据处理单位更复杂</td><td>相对简单</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要事实</div>
+            <p>人脑约有 <strong>100 亿个神经元</strong>，而一个脑壳最多只能塞进几百个晶体管。</p>
+          </div>
+        </div>
+
+        <h3 id="h-3-3">3.3 大脑的功能结构</h3>
+
+        <p>大脑对生存机器的贡献主要体现在<strong>控制和协调肌肉收缩</strong>，其运作依赖三类神经：</p>
+        <ol>
+          <li><strong>运动神经</strong>：从大脑通向各肌肉的导线</li>
+          <li><strong>感觉神经</strong>：连接感觉器官（眼、耳、味蕾等）与大脑</li>
+          <li><strong>神经节网络</strong>：密集神经组织，承担局部信号处理</li>
+        </ol>
+
+        <div class="pull-quote">
+          功能类比：大脑与计算机相似——分析复杂输入信号，参考存储数据，发出复杂输出信号。
+        </div>
+
+        <h3 id="h-3-4">3.4 记忆力的重要性</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">进化重要进展</div>
+            <p>记忆力的"发明"使肌肉收缩的定时不仅受近期事件影响，还受<strong>很久以前</strong>事件的影响。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>比较项目</th><th>计算机记忆</th><th>生物记忆</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>可靠性</strong></td><td>更高</td><td>相对较低</td></tr>
+            <tr><td><strong>容量</strong></td><td>较小</td><td>更大</td></tr>
+            <tr><td><strong>检索技巧</strong></td><td>较弱</td><td>远超计算机</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、基因如何控制行为 -->
+      <section id="section-4">
+        <h2>四、基因如何控制行为</h2>
+
+        <h3 id="h-4-1">4.1 基因控制的间接性——仙女座类比</h3>
+
+        <p>基因控制行为的方式<strong>不是像牵线木偶那样直接控制</strong>，而是像计算机程序员一样<strong>通过间接途径</strong>。</p>
+
+        <p><strong>科幻类比</strong>（霍伊尔与埃利奥特《仙女座的 A》）：一个 200 光年外的文明无法实时遥控地球上的计算机，只能<strong>事先编好程序</strong>送达。基因对生存机器的控制与之如出一辙。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>要素</th><th>科幻场景</th><th>基因现实</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>发出者</strong></td><td>仙女座文明</td><td>基因</td></tr>
+            <tr><td><strong>传递方式</strong></td><td>无线电波（200 年延迟）</td><td>蛋白质合成（需数月）</td></tr>
+            <tr><td><strong>执行者</strong></td><td>地球上的计算机</td><td>生存机器的大脑</td></tr>
+            <tr><td><strong>时滞障碍</strong></td><td>200 光年通信延迟</td><td>行为需秒级响应</td></tr>
+            <tr><td><strong>控制方式</strong></td><td>事先编好程序，不能实时干预</td><td>事先构建神经系统，无法实时指挥</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">核心原因</div>
+            <p>基因通过控制蛋白质合成发挥作用，培养胚胎需数月；而行为的时间单位是<strong>秒或毫秒</strong>。两者时间尺度的巨大差异，决定了基因只能事先部署，无法实时指挥。</p>
+          </div>
+        </div>
+
+        <h3 id="h-4-2">4.2 程序员类比</h3>
+
+        <p>基因的角色类似于<strong>下棋程序的编制员</strong>：</p>
+        <ul>
+          <li>不逐步操纵每一个动作（这是作弊）</li>
+          <li>提供一般战略和适用诀窍</li>
+          <li>程序一旦运行，便<strong>完全独立操作</strong></li>
+          <li>无法预见所有可能情况，只能提供通用策略</li>
+        </ul>
+
+        <h3 id="h-4-3">4.3 行为遗传学实例——蜜蜂卫生行为</h3>
+
+        <p>这是说明行为可遗传的经典案例（罗森布勒实验）。</p>
+
+        <p><strong>实验对象</strong>：蜜蜂腐臭病（侵袭巢室幼虫的传染病）。</p>
+
+        <p><strong>卫生行为步骤</strong>：</p>
+        <ol>
+          <li>找到受感染幼虫的巢室</li>
+          <li>揭开蜡盖</li>
+          <li>拉出幼虫</li>
+          <li>拖出蜂房</li>
+          <li>弃于垃圾堆</li>
+        </ol>
+
+        <p><strong>遗传分析结果</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>蜂群类型</th><th>揭盖基因</th><th>扔幼虫基因</th><th>行为表现</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>纯卫生品系</td><td>✅ 有</td><td>✅ 有</td><td>完全卫生行为</td></tr>
+            <tr><td>纯易感品系</td><td>❌ 无（隐性）</td><td>❌ 无（隐性）</td><td>无卫生行为</td></tr>
+            <tr><td>折中杂交种</td><td>✅ 有</td><td>❌ 无</td><td>仅揭盖，不扔幼虫</td></tr>
+            <tr><td>隐性不卫生种</td><td>❌ 无</td><td>✅ 有（隐藏）</td><td>揭盖后立即扔幼虫</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键验证</div>
+            <p>罗森布勒亲手揭开蜡盖后，"不卫生"蜂群中有一半立即表现出正常的扔幼虫行为，证实了"扔幼虫基因"的存在。</p>
+          </div>
+        </div>
+
+        <p><strong>实验说明的重点</strong>：</p>
+        <ol>
+          <li>即使不了解基因与行为的化学连接，也可以恰当地说"操纵某种行为的基因"</li>
+          <li>基因在影响共有生存机器时是<strong>合作的</strong>（两种基因互相依存）</li>
+          <li>作为复制因子，这两种基因<strong>基本相互独立</strong>，可在世代间自由传递</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、预测未来的策略 -->
+      <section id="section-5">
+        <h2>五、预测未来的策略</h2>
+
+        <h3 id="h-5-1">5.1 基因预测的本质</h3>
+
+        <p><strong>北极熊基因案例</strong>：</p>
+        <ul>
+          <li>基因"预测"后代将面对寒冷环境 → 准备厚皮毛</li>
+          <li>基因"预测"大地将被积雪覆盖 → 皮毛呈白色（伪装）</li>
+          <li>这种"预测"并非思考，而是<strong>历史选择的结果</strong></li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">若预测失败</div>
+            <p>若北极气候急变，小熊生于热带沙漠，基因的预测就错了，小熊夭折，基因随之消亡。</p>
+          </div>
+        </div>
+
+        <h3 id="h-5-2">5.2 三种预测未来的策略</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>策略</th><th>原理</th><th>优势</th><th>局限</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>先天编程</strong></td><td>基因预先设定行为规则</td><td>无需额外资源</td><td>无法应对未预见情况</td></tr>
+            <tr><td><strong>学习能力</strong></td><td>奖惩机制引导行为修正</td><td>适应环境变化</td><td>基因仍需预设奖惩标准</td></tr>
+            <tr><td><strong>模拟能力</strong></td><td>大脑内建立世界模型预演</td><td>安全快速，无需实际试错</td><td>模型精度有限</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="h-5-3">5.3 学习策略的局限</h3>
+
+        <p>基因通过设定奖惩来引导学习：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">有益信号</span>
+            <h4>基因标记为"该追求"</h4>
+            <p>口中的甜味、情欲亢进、适中温度、微笑的小孩……</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">不快信号</span>
+            <h4>基因标记为"该回避"</h4>
+            <p>各种痛苦、恶心、空腹、哭叫的小孩……</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">局限性举例</div>
+            <p>基因无法预见糖精和自慰也能带来满足感，也无法预见糖过多的现代环境中糖吃过多的危险。</p>
+          </div>
+        </div>
+
+        <h3 id="h-5-4">5.4 模拟能力与意识的涌现</h3>
+
+        <p><strong>模拟技术的进化意义</strong>：生存机器很早就"发明"了人类工程学的许多技术：</p>
+        <ul>
+          <li>透镜与抛物面反射镜</li>
+          <li>声波频谱分析</li>
+          <li>伺服控制系统</li>
+          <li>声呐</li>
+          <li>输入信息缓冲存储</li>
+        </ul>
+
+        <p><strong>模拟的本质</strong>：在大脑中建立有限世界模型，预演各种选择的后果，安全且快速地替代实际试错。</p>
+
+        <p><strong>意识的产生</strong>：</p>
+
+        <div class="pull-quote">
+          模拟能力的演化最终导致了<strong>主观意识</strong>的产生——大脑对世界事物的模拟达到完美程度，以至于把<strong>自身模型也包括在内</strong>，形成"自我意识"。
+        </div>
+
+        <h3 id="h-5-5">5.5 赌博隐喻——行为决策的本质</h3>
+
+        <p>每个行为决定都是一场赌博：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>赌博参数</th><th>行为对应</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>赌注</strong></td><td>付出的生存代价（风险）</td></tr>
+            <tr><td><strong>机会</strong></td><td>环境概率</td></tr>
+            <tr><td><strong>赢款</strong></td><td>基因生存获益</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>经典场景</strong>：动物去水坑喝水。</p>
+        <ul>
+          <li><strong>去</strong>：被捕食风险增加</li>
+          <li><strong>不去</strong>：渴死风险增加</li>
+          <li><strong>最优策略</strong>：忍耐后一次性大量饮水，减少去水坑次数</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">雌雄差异</div>
+            <p>通常可将<strong>雄性</strong>视为下大赌注、冒大风险的赌徒，将<strong>雌性</strong>视为稳扎稳打的投资者（尤其在一雄多雌物种中）。</p>
+          </div>
+        </div>
+
+        <h3 id="h-5-6">5.6 大脑的解放与自主性</h3>
+
+        <p>随着大脑日趋高度发达，其决策自主性不断提升：</p>
+
+        <div class="flow-block"><span class="step">基因（策略制定者）</span>
+<span class="arrow">↓</span>
+<span class="step">神经系统（执行者）</span>
+<span class="arrow">↓</span>
+<span class="step">大脑（逐步接管决策）</span></div>
+
+        <p>大脑甚至有能力<strong>拒不服从基因的命令</strong>，例如拒绝生育全部后代（人类情况尤为特殊）。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、联络与欺骗 -->
+      <section id="section-6">
+        <h2>六、联络与欺骗</h2>
+
+        <h3 id="h-6-1">6.1 联络的定义</h3>
+
+        <div class="pull-quote">
+          当一个生存机器对另一个生存机器的行为或神经系统状态施加影响时，前者就是在和后者进行<strong>联络</strong>。
+        </div>
+
+        <p><strong>联络的例子</strong>：</p>
+        <ul>
+          <li>鸟、蛙、蟋蟀的鸣唱</li>
+          <li>狗摇动尾巴、竖起长颈毛</li>
+          <li>黑猩猩的"露齿而笑"</li>
+          <li>人类的手势和语言</li>
+          <li>蜜蜂的舞蹈（指示食物方向和距离）</li>
+          <li>座头鲸的歌声（音域从亚音速到超音速，理论上可传至全球）</li>
+        </ul>
+
+        <h3 id="h-6-2">6.2 欺骗行为的类型</h3>
+
+        <p>联络系统一旦形成，便存在被利用的风险。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>欺骗类型</th><th>典型案例</th><th>机制</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>拟态欺骗</strong></td><td>蝴蝶模拟味道恶劣的昆虫；食蚜蝇模拟胡蜂</td><td>伪装外貌避免被捕食</td></tr>
+            <tr><td><strong>捕食欺骗</strong></td><td>琵琶鱼用蠕动的"钓鱼竿"诱捕小鱼</td><td>模拟猎物喜好的信号</td></tr>
+            <tr><td><strong>性欺骗</strong></td><td>蜂兰花引诱蜜蜂与其交配</td><td>获得花粉传播</td></tr>
+            <tr><td><strong>同种欺骗</strong></td><td>小鸟发出虚假警报独占食物</td><td>牺牲同伴利益自肥</td></tr>
+            <tr><td><strong>跨种捕食</strong></td><td><em>Photuris</em> 属萤火虫模拟 <em>Photinus</em> 属雌虫闪光引来雄虫后将其吃掉</td><td>利用种间信号系统</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="h-6-3">6.3 欺骗的本质</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要澄清</div>
+            <p>本书中"欺骗""说谎"仅指<strong>功能效果上相当于欺骗的行为</strong>，并不涉及有意识的欺骗意图。</p>
+          </div>
+        </div>
+
+        <p><strong>欺骗的范围不限于不同物种之间</strong>：</p>
+        <ul>
+          <li>子女可以欺骗父母</li>
+          <li>丈夫可以欺骗妻子</li>
+          <li>兄弟之间可以相互欺骗</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">进化观点</div>
+            <p>动物联络行为从一开始就可能<strong>掺有某种欺诈成分</strong>，因为所有动物在相互交往时至少涉及某种利害冲突。并非信号系统先发展为互利，后才被坏分子利用——欺骗与联络可能同步产生。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© 2024 Reading Notes · 自私的基因</span>
+    </div>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '自私的基因';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
