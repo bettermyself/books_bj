@@ -649,18 +649,6 @@
           </tbody>
         </table>
 
-        <div class="code-block">
-          <span class="comment"># 期权行权现金流模拟（伪代码）</span>
-          <span class="keyword">def</span> cash_flow_impact(shares_exercised, exercise_price, par_value):
-              cash_inflow = shares_exercised * exercise_price
-              capital_surplus = shares_exercised * (exercise_price - par_value)
-              <span class="keyword">return</span> {
-                  <span class="string">"现金流入"</span>: cash_inflow,
-                  <span class="string">"资本盈余增加"</span>: capital_surplus,
-                  <span class="string">"损益表影响"</span>: <span class="string">"无"</span>  <span class="comment"># 关键：利润不体现在当期收益</span>
-              }
-        </div>
-
         <div class="callout tip">
           <div class="callout-icon">💡</div>
           <div class="callout-body">
