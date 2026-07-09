@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>读财报前的准备工作 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    /* 固定两列（窄屏回退为单列） */
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* ===== Code Block ===== */
+    .chapter-article pre {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+      font-size: .88rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      color: var(--text);
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="第三节读财报前的准备工作.html" class="active">第三节 读财报前的准备工作</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第二章 资产负债表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第三章 利润表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第四章 现金流量表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、获取上市公司财报</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 官方信息披露渠道</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 查询方法</a></li>
+        <li><a href="#section-1-3" class="sub">1.3 重要提示</a></li>
+        <li><a href="#section-1-4" class="sub">1.4 实时信息跟踪</a></li>
+        <li><a href="#section-2">二、财报范本选择</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 为何选择贵州茅台</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 学习建议</a></li>
+        <li><a href="#section-3">三、贵州茅台基本情况</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 上市历程与财务表现</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 主营业务</a></li>
+        <li><a href="#section-4">四、茅台酒生产工艺详解</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 生产密码"12987"</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 生产流程时间表</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 粮耗比例</a></li>
+        <li><a href="#section-4-4" class="sub">4.4 七轮次取酒特点</a></li>
+        <li><a href="#section-4-5" class="sub">4.5 储存与勾兑</a></li>
+        <li><a href="#section-4-6" class="sub">4.6 产销周期对应关系</a></li>
+        <li><a href="#section-5">五、上市公司组织架构</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 销售模式</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 控股子公司架构</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 商标租赁安排</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 回购退市可行性分析</a></li>
+        <li><a href="#section-6">六、白酒消费税机制</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 消费税基本规则</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 白酒消费税构成</a></li>
+        <li><a href="#section-6-3" class="sub">6.3 计税规则演变</a></li>
+        <li><a href="#section-6-4" class="sub">6.4 茅台消费税计算示例</a></li>
+        <li><a href="#section-7">七、数据及结构更新（2020年版）</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 财务数据更新</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 新增重要子公司</a></li>
+        <li><a href="#section-7-3" class="sub">7.3 产品矩阵</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第一章 你必须学会看懂财报 · 第三节</div>
+        <h1 class="article-title">读财报前的准备工作</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>以贵州茅台为例，掌握读财报前的准备工作</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <p>年报信息披露最详细，可信度最高。学会了阅读年报，半年报和季报自然不在话下。本章将以<strong>贵州茅台</strong>的年报为例，全面展示财报阅读的方法。</p>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、获取上市公司财报 -->
+      <section id="section-1">
+        <h2>一、获取上市公司财报</h2>
+
+        <h3 id="section-1-1">1.1 官方信息披露渠道</h3>
+
+        <p>我国上市公司财报及公告的官方披露渠道主要有三个：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>渠道名称</th><th>网址</th><th>可查询范围</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>巨潮资讯网</strong></td><td>http://www.cninfo.com.cn</td><td>深沪两地所有上市公司财报及公告</td></tr>
+            <tr><td><strong>上海证券交易所</strong></td><td>http://www.sse.com.cn</td><td>上交所上市企业财报及公告</td></tr>
+            <tr><td><strong>深圳证券交易所</strong></td><td>http://www.szse.cn</td><td>深交所上市企业财报及公告</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">推荐</div>
+            <p><strong>巨潮资讯网</strong>覆盖面最广，同时包含深沪两地所有上市公司信息，是首选渠道。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-2">1.2 查询方法</h3>
+
+        <p>以巨潮资讯网为例，查询一家上市公司年报只需四个步骤：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 1</span>
+            <h4>找到入口</h4>
+            <p>在网站首页找到"查公告"或"公告查询"输入框。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 2</span>
+            <h4>输入代码</h4>
+            <p>输入股票简称或代码（如：600519 或 贵州茅台）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 3</span>
+            <h4>选择类别</h4>
+            <p>选择信息类别（一季报、年报、投资公告等）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 4</span>
+            <h4>设置时间</h4>
+            <p>设置时间段，查询对应时期的公告。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-3">1.3 重要提示</h3>
+
+        <p>在查询上市公司财报时，有几点值得注意：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">数据范围</span>
+            <h4>2000 年以后全覆盖</h4>
+            <p>三家网站均提供 2000 年以后的财报及公告下载，更早期信息需联系上市公司索取。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">披露时限</span>
+            <h4>次年 4 月 30 日前</h4>
+            <p>上市公司年报需在次年 4 月 30 日之前披露，无法按时披露会被停牌处理——这通常是警示信号。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警惕信号</div>
+            <p>年报无法按时披露而被<strong>停牌处理</strong>，往往是企业经营出现重大问题的前兆，需要高度警惕。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-4">1.4 实时信息跟踪</h3>
+
+        <p>通过股票类 App 将企业纳入<strong>自选股</strong>，打开通知功能，即可随时掌握企业动态。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">补充建议</div>
+            <p>除了官方渠道，还可以关注上市公司的<strong>投资者关系</strong>页面，部分公司会在官网上同步披露财报和重大公告。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、财报范本选择 -->
+      <section id="section-2">
+        <h2>二、财报范本选择</h2>
+
+        <h3 id="section-2-1">2.1 为何选择贵州茅台作为学习范本</h3>
+
+        <p>选择贵州茅台作为财报学习范本，有六大理由：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>理由</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>业务单一</strong></td><td>主营业务就是产酒卖酒，易于理解（2013 年新增财务公司业务占比极小）</td></tr>
+            <tr><td><strong>结构简单</strong></td><td>仅 5 家子公司纳入合并报表，其中一家占营收 95% 以上</td></tr>
+            <tr><td><strong>产销对应</strong></td><td>当年生产量与 4—5 年后销售量有可靠对应关系，便于理解报表数字关系</td></tr>
+            <tr><td><strong>财务健康</strong></td><td>先收钱后发货，几乎无坏账；存货成本远低于出厂价（约 7%），无贬值风险</td></tr>
+            <tr><td><strong>研究充分</strong></td><td>市场研究深入，遇到问题易于在网络找到相关资料</td></tr>
+            <tr><td><strong>参照价值</strong></td><td>可作为衡量其他企业投资价值的标杆</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          选择最简单、最透明的公司入手，是学习财报的最佳路径。
+          <cite>— 唐朝</cite>
+        </div>
+
+        <h3 id="section-2-2">2.2 学习建议</h3>
+
+        <p>建议下载<strong>贵州茅台 2013 年度财务报告</strong>，对照本书进行学习。理论与实践相结合，才能真正掌握财报分析的方法。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">学习方法</div>
+            <p>一边阅读财报原文，一边对照本书的讲解，遇到不理解的地方，记下来通过网络搜索或查阅相关资料，逐步消化。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、贵州茅台基本情况 -->
+      <section id="section-3">
+        <h2>三、贵州茅台基本情况</h2>
+
+        <h3 id="section-3-1">3.1 上市历程与财务表现</h3>
+
+        <p>贵州茅台于<strong>2001 年 8 月</strong>上市，上市前净资产不足 5 亿元，IPO 募资近 20 亿元，此后未再融资。截至 2014 年 11 月：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>数据（截至 2014 年 11 月）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>上市时间</strong></td><td>2001 年 8 月</td></tr>
+            <tr><td><strong>上市前净资产</strong></td><td>不足 5 亿元</td></tr>
+            <tr><td><strong>IPO 募资</strong></td><td>近 20 亿元（此后未再融资）</td></tr>
+            <tr><td><strong>累计分红</strong></td><td>超过 220 亿元（其中近 80 亿元归公众股东）</td></tr>
+            <tr><td><strong>净资产</strong></td><td>超过 450 亿元</td></tr>
+            <tr><td><strong>市值</strong></td><td>约 1800 亿元</td></tr>
+            <tr><td><strong>公众股东持股比例</strong></td><td>35.1%</td></tr>
+          </tbody>
+        </table>
+
+        <p>从不足 5 亿净资产到超过 450 亿——上市 13 年间净资产增长近<strong>90 倍</strong>，且仅靠 IPO 融资一次，此后再未向市场伸手要钱。分红却累计超过 220 亿元，堪称 A 股市场的典范。</p>
+
+        <h3 id="section-3-2">3.2 主营业务</h3>
+
+        <p><strong>核心产品：</strong>茅台酒及茅台系列酒</p>
+
+        <div class="pull-quote">
+          茅台酒销售收入占公司营业收入 <strong>95% 以上</strong>（2014 年半年报数据），主营业务极其清晰明了。
+          <cite>— 这也是选择茅台作为学习范本的重要原因</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、茅台酒生产工艺详解 -->
+      <section id="section-4">
+        <h2>四、茅台酒生产工艺详解</h2>
+
+        <p>理解茅台酒的独特工艺，是读懂茅台财报的关键。茅台酒的酿造过程可以凝练为一组"密码"。</p>
+
+        <h3 id="section-4-1">4.1 生产密码"12987"</h3>
+
+        <p>茅台酒的酿造工艺可以用五个数字概括：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>数字</th><th>含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td>生产周期 1 年</td></tr>
+            <tr><td><strong>2</strong></td><td>2 次投料</td></tr>
+            <tr><td><strong>9</strong></td><td>9 次蒸煮</td></tr>
+            <tr><td><strong>8</strong></td><td>8 次发酵</td></tr>
+            <tr><td><strong>7</strong></td><td>7 次取酒</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">🧠</div>
+          <div class="callout-body">
+            <div class="callout-title">记忆口诀</div>
+            <p>一年周期、两次投料、九次蒸煮、八次发酵、七次取酒——记住<strong>"12987"</strong>五个数字即可。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 生产流程时间表</h3>
+
+        <p>茅台酒的生产严格遵循节气规律，每一道工序都有对应的时间节点：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间节点</th><th>生产环节</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>端午节</strong></td><td>踩曲</td><td>用小麦制作酒曲，耗时约 120 天</td></tr>
+            <tr><td><strong>重阳节</strong></td><td>下沙</td><td>开始酿酒（沙指当地红色糯高粱）</td></tr>
+            <tr><td><strong>第 1—2 个月</strong></td><td>第一次发酵</td><td>蒸煮 → 摊凉 → 加曲 → 收堆 → 下窖（封闭发酵约 1 个月）</td></tr>
+            <tr><td><strong>岁末年初</strong></td><td>二次下沙</td><td>加入等量新高粱，重复上述流程</td></tr>
+            <tr><td><strong>次年初</strong></td><td>第一次取酒</td><td>第三次蒸煮后开始首次蒸馏取酒</td></tr>
+            <tr><td><strong>次年 8 月</strong></td><td>生产周期结束</td><td>完成第七次取酒，进入储存环节</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-3">4.3 粮耗比例</h3>
+
+        <p>每吨茅台酒耗费的粮食如下：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">小麦</span>
+            <h4>2.6 吨</h4>
+            <p>用于制作酒曲，是酿造茅台酒的关键原料。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">高粱</span>
+            <h4>2.4 吨</h4>
+            <p>当地红色糯高粱，是酿酒的主料。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          粮耗比 = 1 : 5——即每产出 1 吨茅台酒，需要投入约 5 吨粮食。
+        </div>
+
+        <p>掌握了粮耗比，就可以从粮食采购量反推基酒产量，或者从基酒产量推算原材料需求量——这是<strong>交叉验证财报数据</strong>的重要线索。</p>
+
+        <h3 id="section-4-4">4.4 七轮次取酒特点</h3>
+
+        <p>七次取酒，每一轮次产出的酒质各不相同：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>轮次</th><th>名称</th><th>特点</th><th>产量占比</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>第 1 轮</strong></td><td>糙沙酒</td><td>酸涩辛辣</td><td>9%</td></tr>
+            <tr><td><strong>第 2 轮</strong></td><td>回沙酒</td><td>酸涩辛辣</td><td>14%</td></tr>
+            <tr><td><strong>第 3—5 轮</strong></td><td>大回酒</td><td>出酒最多、品质最好</td><td>62%（25% + 22% + 15%）</td></tr>
+            <tr><td><strong>第 6 轮</strong></td><td>小回酒</td><td>品质略低于大回酒</td><td>10%</td></tr>
+            <tr><td><strong>第 7 轮</strong></td><td>追糟酒</td><td>发焦发苦</td><td>5%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键洞察</div>
+            <p>第 3—5 轮"大回酒"占总产量的 <strong>62%</strong>，品质最高。这意味着茅台酒的品质主要由这三轮决定，后两轮仅占 15%，不影响整体品质。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-5">4.5 储存与勾兑</h3>
+
+        <p>基酒产出后，进入漫长的储存与勾兑环节：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">基酒分类</span>
+            <h4>三大酒体</h4>
+            <p>按品质特点分为酱香、醇甜、窖底三种，分酒质、分轮次封存。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">储存期</span>
+            <h4>3 年</h4>
+            <p>基酒存放 3 年后勾兑成商品酒。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">勾兑方式</span>
+            <h4>不掺水</h4>
+            <p>用不同类型、批次、风格的基酒加老酒调和。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">二次储存</span>
+            <h4>半年至一年</h4>
+            <p>勾兑好的商品酒继续存放半年至一年后灌装出厂。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-6">4.6 产销周期对应关系</h3>
+
+        <p>将以上所有环节串联起来，可以得到一条清晰的产销时间线：</p>
+
+        <div class="poem">
+          2010 年端午启动生产<br/>
+          ↓<br/>
+          2011 年产出基酒<br/>
+          ↓（储存 3 年）<br/>
+          2014 年勾兑成商品酒<br/>
+          ↓（存放半年至一年）<br/>
+          2015—2016 年实现销售
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">应用价值</div>
+            <p>当年茅台基酒产量可作为预测<strong>4—5 年后</strong>可销售数量的基础。这一对应关系是分析茅台财报的黄金钥匙。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、上市公司组织架构 -->
+      <section id="section-5">
+        <h2>五、上市公司组织架构</h2>
+
+        <h3 id="section-5-1">5.1 销售模式</h3>
+
+        <p>贵州茅台的销售采用行业通用的"双层架构"模式：</p>
+
+        <div class="poem">
+          <strong>生产端</strong>（上市公司本部）<br/>
+          ↓ 以基本不产生利润的价格<br/>
+          <strong>销售端</strong>（销售公司）<br/>
+          ↓ 按出厂价<br/>
+          <strong>经销商 / 专卖店</strong>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">避税逻辑</div>
+            <p>此模式利用消费税只对生产企业征收的特点，通过将利润留在销售公司来<strong>合法避税</strong>。国内几乎所有涉及消费税的企业都采用此模式。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">5.2 控股子公司架构（2013 年）</h3>
+
+        <p>2013 年贵州茅台共有 5 家控股子公司纳入合并报表：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>子公司名称</th><th>股权结构</th><th>主要职能</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>贵州茅台酒销售有限公司</strong></td><td>上市公司 95%、茅台集团 5%</td><td>白酒销售主力（2013 年完成 298.55 亿元，占总销售收入 309.21 亿元）</td></tr>
+            <tr><td><strong>贵州茅台酒进出口有限公司</strong></td><td>上市公司 70%、茅台集团 30%</td><td>茅台酒出口（2013 年约 11 亿元）</td></tr>
+            <tr><td><strong>个性化定制营销有限公司</strong></td><td>上市公司 70%、天信慧通 30%</td><td>定制产品销售（2013 年新设）</td></tr>
+            <tr><td><strong>茅台集团财务公司</strong></td><td>上市公司 51%、茅台集团及习酒 49%</td><td>集团财务管理（2013 年新设）</td></tr>
+            <tr><td><strong>贵州名将酒业</strong></td><td>上市公司 55%、金讯贸易 45%</td><td>其他酒类业务</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键观察</div>
+            <p>销售公司一家就贡献了 298.55 亿元收入，占总额的 <strong>96.6%</strong>，再次印证了茅台业务的高度集中。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-3">5.3 商标租赁安排</h3>
+
+        <p>贵州茅台有一个特殊的制度安排——上市公司使用的商标并不归自己所有：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">所有权</span>
+            <h4>归属茅台集团</h4>
+            <p>上市公司使用的商标属于茅台集团，需支付商标使用费。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">租金</span>
+            <h4>年销售收入的 1%—2%</h4>
+            <p>按年销售收入的一定比例支付，而非固定金额。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">租约期限</span>
+            <h4>截至 2050 年 12 月 31 日</h4>
+            <p>期限长达近 50 年，给投资者以充分预期。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">到期处理</span>
+            <h4>商标无偿归上市公司</h4>
+            <p>租约到期后商标自动归上市公司所有，无须额外支付对价。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>商标租赁费用虽占比不高，但在计算茅台真实盈利能力时需要纳入考量。另外，商标所有权在集团手中，存在<strong>集团与上市公司利益不完全一致</strong>的潜在风险。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-4">5.4 回购退市可行性分析</h3>
+
+        <p>唐朝提出了一个有趣的思考实验：如果茅台集团将上市公司<strong>私有化退市</strong>，需要多少钱？</p>
+
+        <p><strong>假设条件：</strong>按 300 元/股回购 4 亿公众股，需资金 1200 亿元。</p>
+
+        <p><strong>资金来源：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">自有资金</span>
+            <h4>200 多亿元</h4>
+            <p>公司现有现金可直接用于回购。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">银行贷款</span>
+            <h4>1000 亿元</h4>
+            <p>以存货、土地厂房、商标等抵押，利率 7.2%。</p>
+          </div>
+        </div>
+
+        <p><strong>还款计划（零增长假设）：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>年份</th><th>营收</th><th>税前利润</th><th>期初贷款</th><th>当年还息</th><th>息后利润</th><th>所得税(25%)</th><th>税后净利</th><th>当年还本</th><th>年底贷款余额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>2014</strong></td><td>300</td><td>220</td><td>1000</td><td>72</td><td>148</td><td>37</td><td>111</td><td>111</td><td>889</td></tr>
+            <tr><td><strong>2015</strong></td><td>300</td><td>220</td><td>889</td><td>64</td><td>156</td><td>39</td><td>117</td><td>117</td><td>772</td></tr>
+            <tr><td><strong>2016</strong></td><td>300</td><td>220</td><td>772</td><td>56</td><td>164</td><td>41</td><td>123</td><td>123</td><td>649</td></tr>
+            <tr><td><strong>2017</strong></td><td>300</td><td>220</td><td>649</td><td>47</td><td>173</td><td>43</td><td>130</td><td>130</td><td>519</td></tr>
+            <tr><td><strong>2018</strong></td><td>300</td><td>220</td><td>519</td><td>37</td><td>183</td><td>46</td><td>137</td><td>137</td><td>382</td></tr>
+            <tr><td><strong>2019</strong></td><td>300</td><td>220</td><td>382</td><td>27</td><td>193</td><td>48</td><td>144</td><td>144</td><td>237</td></tr>
+            <tr><td><strong>2020</strong></td><td>300</td><td>220</td><td>237</td><td>17</td><td>203</td><td>51</td><td>152</td><td>152</td><td>85</td></tr>
+            <tr><td><strong>2021</strong></td><td>300</td><td>220</td><td>85</td><td>6</td><td>214</td><td>53</td><td>160</td><td>85</td><td>0</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          约 <strong>7 年</strong>可还清全部贷款本息，此后每年净利润全部归集团所有，无须再看资本市场脸色。
+        </div>
+
+        <p><strong>结论：</strong>即便在零增长的极端保守假设下，茅台集团也有能力在 7 年内完成私有化退市。这个分析反过来印证了茅台强大的<strong>自由现金流创造能力</strong>——这也是价值投资者最看重的财务特征之一。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、白酒消费税机制 -->
+      <section id="section-6">
+        <h2>六、白酒消费税机制</h2>
+
+        <h3 id="section-6-1">6.1 消费税基本规则</h3>
+
+        <p>消费税是理解白酒企业财务报表不可回避的一环：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>开设时间</strong></td><td>1994 年</td></tr>
+            <tr><td><strong>归属</strong></td><td>中央政府 100% 收入</td></tr>
+            <tr><td><strong>主力税源</strong></td><td>烟、酒、汽油、汽车</td></tr>
+            <tr><td><strong>征收对象</strong></td><td>仅对<strong>生产厂家</strong>征收</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">关键规则</div>
+            <p>消费税仅对生产厂家征收——这正是白酒企业普遍设立销售公司进行<strong>合法避税</strong>的制度根源。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-2">6.2 白酒消费税构成</h3>
+
+        <p>白酒消费税由两部分组成：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">从价税</span>
+            <h4>销售额 × 20%</h4>
+            <p>按销售额（不含增值税）的 20% 征收，是消费税的主体。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">从量税</span>
+            <h4>1 元 / 升（或千克）</h4>
+            <p>按销售数量定额征收，占比较小但不可忽略。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-3">6.3 计税规则演变</h3>
+
+        <p>消费税的计税规则经历了三次重要调整：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时期</th><th>规则</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>2009 年 8 月 1 日前</strong></td><td>厂家可低价卖给销售公司避税</td></tr>
+            <tr><td><strong>2009.8.1 — 2017.4.30</strong></td><td>若厂价 &lt; 销售价 70%，按销售价的 50%—70% 核定计税</td></tr>
+            <tr><td><strong>2017 年 5 月 1 日起</strong></td><td>统一按销售公司卖出价格的 <strong>60%</strong> 计税</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">演化趋势</div>
+            <p>从最初的"厂家可自由定价"到"按 70% 核定"再到"统一按 60% 计税"，税收政策<strong>持续收紧</strong>，税务机关在逐步压缩白酒企业的避税空间。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-4">6.4 茅台消费税计算示例（2020 年）</h3>
+
+        <p>以 2020 年茅台 53 度飞天为例，给出完整的消费税计算过程：</p>
+
+        <p><strong>已知条件：</strong></p>
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">出厂价</span>
+            <h4>969 元 / 500 毫升</h4>
+            <p>销售公司卖给经销商的价格。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">增值税率</span>
+            <h4>13%</h4>
+            <p>消费税计税基础需剔除增值税。</p>
+          </div>
+        </div>
+
+        <p><strong>从价消费税计算：</strong></p>
+
+        <div class="poem">
+          969 ÷ 113% × 60% × 20% = <strong>102.9 元</strong>
+        </div>
+
+        <p><strong>从量消费税：</strong>0.5 元 / 500 毫升</p>
+
+        <div class="pull-quote large">
+          合计消费税：102.9 + 0.5 = <strong>103.4 元 / 瓶</strong>
+        </div>
+
+        <p>一瓶出厂价 969 元的飞天茅台，消费税约 103 元，占出厂价的<strong>约 10.7%</strong>。掌握了这个计算方法，投资者就可以自行核验茅台财报中的消费税数据是否合理。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">应用提示</div>
+            <p>可用"出厂价 ÷ 1.13 × 60% × 20% + 0.5 元/斤"快速估算单瓶消费税，然后乘以销量，与利润表中的"税金及附加"科目交叉验证。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、数据及结构更新（2020年版） -->
+      <section id="section-7">
+        <h2>七、数据及结构更新（2020年版）</h2>
+
+        <p>本书初版写于 2014 年，2020 年版对部分数据和组织结构进行了更新。</p>
+
+        <h3 id="section-7-1">7.1 财务数据更新（截至 2020 年 10 月）</h3>
+
+        <p>从 2015 年初到 2020 年 10 月，茅台的核心财务数据发生了巨大变化：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>2015 年初</th><th>2020 年 10 月</th><th>变化</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>累计分红</strong></td><td>超过 220 亿元</td><td>超过 970 亿元</td><td>增加 747 亿元</td></tr>
+            <tr><td><strong>净资产</strong></td><td>超过 450 亿元</td><td>约 1500 亿元</td><td>增长 233%</td></tr>
+            <tr><td><strong>市值</strong></td><td>约 1800 亿元</td><td>超过 21000 亿元</td><td>增长 1067%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          6 年间，市值从 1800 亿跃升至 21000 亿，增长超 <strong>10 倍</strong>——这就是"买对、拿住"的力量。
+        </div>
+
+        <h3 id="section-7-2">7.2 新增重要子公司</h3>
+
+        <p>2014 年，茅台在子公司层面进行了重要布局，新增了三家核心子公司：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>子公司名称</th><th>成立时间</th><th>股权结构</th><th>主要职能</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>北京友谊使者商贸</strong></td><td>2014 年 6 月</td><td>茅台 60%、永辉超市 20%、国茂源 20%</td><td>茅台产品与永辉超市渠道强强联合</td></tr>
+            <tr><td><strong>贵州赖茅酒业</strong></td><td>2014 年 10 月</td><td>茅台 43%、国茂源 25%、易捷销售 32%</td><td>赖茅系列产品全国销售</td></tr>
+            <tr><td><strong>贵州茅台酱香酒营销</strong></td><td>2014 年 12 月</td><td>茅台 100%</td><td>除茅台酒和赖茅酒外的其他酱香酒销售</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-7-3">7.3 产品矩阵</h3>
+
+        <p>茅台已形成清晰的产品矩阵——<strong>"一曲三茅四酱"体系</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类别</th><th>品牌</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>一曲</strong></td><td>贵州大曲</td></tr>
+            <tr><td><strong>三茅</strong></td><td>华茅、王茅、赖茅</td></tr>
+            <tr><td><strong>四酱</strong></td><td>汉酱、仁酒、王子、迎宾</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">财报术语</div>
+            <p>财报中提到的"<strong>酱香系列酒</strong>"或"<strong>茅台系列酒</strong>"，指的就是这八个品牌。它们与"茅台酒"（飞天等核心产品）是两个不同的品类。</p>
+          </div>
+        </div>
+
+        <p>理解茅台的产品矩阵，有助于在阅读财报时准确区分<strong>茅台酒</strong>和<strong>系列酒</strong>的收入构成，进而分析不同产品线的增长趋势和盈利能力。</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第1章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

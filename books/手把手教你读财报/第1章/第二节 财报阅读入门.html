@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>财报阅读入门 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* 有序列表（业绩预告触发条件等） */
+    .chapter-article ol {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.6rem;
+      color: var(--text);
+      line-height: 1.9;
+    }
+    .chapter-article ol li { font-size: .92rem; margin-bottom: .35rem; padding-left: .25rem; }
+    .chapter-article ol li::marker { color: var(--gold); font-weight: 700; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* 固定两列变体 */
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 640px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="第二节 财报阅读入门.html" class="active">第二节 财报阅读入门</a></li>
+            <li><a href="第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第二章 资产负债表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第三章 利润表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第四章 现金流量表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">📖 一、财报基础知识</a></li>
+        <li><a href="#section-1-1" class="sub">时间规则</a></li>
+        <li><a href="#section-1-2" class="sub">报表范围</a></li>
+        <li><a href="#section-2">📊 二、资产负债表解读</a></li>
+        <li><a href="#section-2-1" class="sub">核心逻辑</a></li>
+        <li><a href="#section-2-2" class="sub">基本结构与排列</a></li>
+        <li><a href="#section-2-3" class="sub">阅读技巧</a></li>
+        <li><a href="#section-3">📈 三、利润表解读</a></li>
+        <li><a href="#section-3-1" class="sub">权责发生制</a></li>
+        <li><a href="#section-3-2" class="sub">归母净利润与估值</a></li>
+        <li><a href="#section-4">💰 四、现金流量表解读</a></li>
+        <li><a href="#section-4-1" class="sub">现金等价物</a></li>
+        <li><a href="#section-4-2" class="sub">三大活动分类</a></li>
+        <li><a href="#section-5">📝 五、补充阅读要点</a></li>
+        <li><a href="#section-5-1" class="sub">必读内容</a></li>
+        <li><a href="#section-5-2" class="sub">业绩预告规则</a></li>
+        <li><a href="#section-6">✅ 六、入门总结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第一章 你必须学会看懂财报 · 第二节</div>
+        <h1 class="article-title">财报阅读入门</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>掌握三大报表的阅读框架</span>
+        </div>
+      </header>
+
+      <!-- 一、财报基础知识 -->
+      <section id="section-1">
+        <h2>📖 一、财报基础知识</h2>
+
+        <h3 id="section-1-1">时间规则</h3>
+
+        <p>境外上市企业可根据行业或经营特点，自行设定财年的起止日期；而我国上市公司则有统一规定。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">🌍</div>
+          <div class="callout-body">
+            <div class="callout-title">境外上市案例</div>
+            <p>阿里巴巴（美国 + 香港上市）的财年为当年 <strong>4 月 1 日至次年 3 月 31 日</strong>，并非按自然年。</p>
+          </div>
+        </div>
+
+        <p>我国上市公司统一按<strong>自然年</strong>（1 月 1 日—12 月 31 日）作为财年，并披露四类报告：<strong>一季报、半年报（中报）、三季报、年报</strong>。各类报告的披露时间要求如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>报告类型</th><th>披露时间</th><th>特殊要求</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>年报</td><td>年度结束后 4 个月内</td><td>必须经会计师事务所审计</td></tr>
+            <tr><td>一季报</td><td>一季度结束后 1 个月内</td><td>不得早于年报披露</td></tr>
+            <tr><td>半年报</td><td>8 月底之前</td><td>—</td></tr>
+            <tr><td>三季报</td><td>10 月底之前</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          信息详细程度排序：年报 &gt; 半年报 &gt; 一季报 / 三季报。
+          <cite>— 因此年报是了解一家公司最完整的资料</cite>
+        </div>
+
+        <h3 id="section-1-2">报表范围</h3>
+
+        <p>每份财报至少包含<strong>三大报表</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">报表一</span>
+            <h4>资产负债表</h4>
+            <p>反映企业某一时点的"家底"——资产、负债与股东权益的存量。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">报表二</span>
+            <h4>利润表</h4>
+            <p>反映一段时期内的经营成果——收入、费用与利润的流量。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">报表三</span>
+            <h4>现金流量表</h4>
+            <p>反映一段时期内现金的流入与流出，追踪钱的真实去向。</p>
+          </div>
+        </div>
+
+        <p>按记录范围，报表又分为<strong>母公司报表</strong>与<strong>合并报表</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>报表类型</th><th>记录范围</th><th>子公司处理方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>母公司报表</td><td>仅上市公司本部</td><td>仅记录股权投资成本及现金分红</td></tr>
+            <tr><td>合并报表</td><td>上市公司本部 + 全部子公司</td><td>合并全部资产、负债、收入和费用</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重点关注</div>
+            <p>投资者应重点分析<strong>合并报表</strong>数据——它反映的是整个企业集团的真实面貌，而非仅仅母公司一家。</p>
+          </div>
+        </div>
+
+        <p>合并报表将上市公司本部和全部子公司视为一个"假想的企业集团"，其编制逻辑如下：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 1</span>
+            <h4>统一会计政策</h4>
+            <p>以上市公司本部的会计政策为准，统一全集团的核算口径。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 2</span>
+            <h4>合并全部科目</h4>
+            <p>将本部与子公司的资产、负债、收入、费用逐一合并相加。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 3</span>
+            <h4>抵销内部交易</h4>
+            <p>集团内部的投资、交易及债权债务相互抵销，避免重复计算。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 4</span>
+            <h4>反映对外关系</h4>
+            <p>最终只呈现整个集团与外部单位 / 个人之间的关系。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、资产负债表解读 -->
+      <section id="section-2">
+        <h2>📊 二、资产负债表解读</h2>
+
+        <h3 id="section-2-1">核心逻辑</h3>
+
+        <div class="pull-quote large">
+          表的右边记录钱的来源，表的左边记录钱的去处。
+          <cite>— 资产负债表的一句话记忆</cite>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">🧮</div>
+          <div class="callout-body">
+            <div class="callout-title">会计第一恒等式</div>
+            <p><strong>资产 = 负债 + 股东权益</strong>（其中股东权益 = 资产 − 负债，即净资产）。表的左右两侧永远相等。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-2">基本结构与排列</h3>
+
+        <p>资产负债表分为左右两栏：左栏列示<strong>资产</strong>（钱的去处），右栏列示<strong>负债和股东权益</strong>（钱的来源）。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>资产（钱的去处）</th><th>负债和股东权益（钱的来源）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>流动资产</td><td>流动负债</td></tr>
+            <tr><td>非流动资产</td><td>非流动负债</td></tr>
+            <tr><td>—</td><td>股东权益</td></tr>
+            <tr><td><strong>资产总计</strong></td><td><strong>负债和权益总计</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>两栏各自的<strong>排列原则</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">左侧 · 资产</span>
+            <h4>按变现便捷度排列</h4>
+            <p>从上到下：货币资金 → 其他流动资产 → 固定资产 / 无形资产 / 商誉。越往上越容易变成现金。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">右侧 · 负债与权益</span>
+            <h4>按归还紧迫程度排列</h4>
+            <p>从上到下：流动负债 → 非流动负债 → 股东权益。越往上越需要尽快偿还。</p>
+          </div>
+        </div>
+
+        <p>流动类与非流动类的划分界限：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>分类标准</th><th>流动类</th><th>非流动类</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>时间界限</td><td>1 年或 1 个营业周期内</td><td>超过 1 年或 1 个营业周期</td></tr>
+            <tr><td>资产举例</td><td>货币资金、应收账款、存货</td><td>固定资产、无形资产、商誉</td></tr>
+            <tr><td>负债举例</td><td>短期借款、应付账款</td><td>长期借款、应付债券</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-3">阅读技巧</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">纵向对比</span>
+            <h4>时间维度</h4>
+            <p>与历史数据对比，分析变化趋势，思考管理层为何这样调整资产 / 负债结构。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">横向对比</span>
+            <h4>行业维度</h4>
+            <p>与同行业公司对比资产占比差异，判断公司在产业链中的地位与竞争力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">实用建议</span>
+            <h4>简化阅读</h4>
+            <p>新手可将"百万"或"亿"后的数字四舍五入，训练对三位分节法数字的快速识别能力。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">重点科目</div>
+            <p>横向对比时重点关注<strong>应收票据、应收账款、应付账款、预付款项、预收款项</strong>——这些科目集中反映公司在产业链中的地位和竞争力。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、利润表解读 -->
+      <section id="section-3">
+        <h2>📈 三、利润表解读</h2>
+
+        <h3 id="section-3-1">基本结构与权责发生制</h3>
+
+        <p>利润表按以下步骤层层计算，最终得出归属上市公司股东的利润：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>计算步骤 / 项目</th><th>计算结果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>营业总收入</td><td>初始数据</td></tr>
+            <tr><td>− 营业总成本</td><td>—</td></tr>
+            <tr><td>+ 非主营业务净收入</td><td>营业利润</td></tr>
+            <tr><td>+ 营业外收支净额</td><td>利润总额</td></tr>
+            <tr><td>− 所得税</td><td>净利润</td></tr>
+            <tr><td>− 少数股东损益</td><td>归母净利润</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">权责发生制——财务造假的"温床"</div>
+            <p>利润表采用<strong>权责发生制</strong>：以权利或责任的发生来确认收入和费用，而非现金的实际收付。这正是利润可以被调节、甚至被造假的根源。</p>
+          </div>
+        </div>
+
+        <p>两个典型例子帮助理解权责发生制：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>会计处理</th><th>案例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>费用分摊</td><td>购买 100 万货车，预计使用 5 年，每年计入 20 万费用，而非当年全部计入。</td></tr>
+            <tr><td>收入确认</td><td>第四季度运输费尚未收到，但 12 月 31 日仍需计入本年度收入。</td></tr>
+          </tbody>
+        </table>
+
+        <p>由此带来四类常见的<strong>"账实不符"</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">情形一</span>
+            <h4>没收到的钱</h4>
+            <p>可能被算作本期收入（钱还没进账，利润已经确认）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">情形二</span>
+            <h4>没付出的钱</h4>
+            <p>可能被记录为本期成本（费用已计提，现金尚未流出）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">情形三</span>
+            <h4>已收到的钱</h4>
+            <p>可能不是本期收入（如预收货款，要递延到以后期间）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">情形四</span>
+            <h4>已付出的钱</h4>
+            <p>可能不是本期成本（如购建资产，要分期摊销）。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-2">归母净利润与估值</h3>
+
+        <p>合并报表中，子公司少数股东所对应的份额需要剔除，才能得到真正归属上市公司股东的部分：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>科目</th><th>位置</th><th>含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>少数股东权益</td><td>资产负债表</td><td>合作伙伴持有子公司少数股份对应的净资产</td></tr>
+            <tr><td>少数股东损益</td><td>利润表</td><td>合作伙伴持有子公司少数股份对应的利润 / 亏损</td></tr>
+            <tr><td>归母净资产</td><td>资产负债表</td><td>归属于上市公司股东的权益</td></tr>
+            <tr><td>归母净利润</td><td>利润表</td><td>归属于上市公司股东的净利润</td></tr>
+          </tbody>
+        </table>
+
+        <p>在此基础上衍生出每股指标与估值指标：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">每股指标</span>
+            <h4>每股净资产</h4>
+            <p>归母净资产 ÷ 总股本</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">每股指标</span>
+            <h4>每股收益</h4>
+            <p>归母净利润 ÷ 总股本</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">估值指标</span>
+            <h4>市净率（PB）</h4>
+            <p>股价 ÷ 每股净资产 = 总市值 ÷ 归母净资产</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">估值指标</span>
+            <h4>市盈率（PE）</h4>
+            <p>股价 ÷ 每股收益 = 总市值 ÷ 归母净利润</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、现金流量表解读 -->
+      <section id="section-4">
+        <h2>💰 四、现金流量表解读</h2>
+
+        <h3 id="section-4-1">核心原理与现金等价物</h3>
+
+        <p>现金流量表的原理与日常记账一致：<strong>期初现金 + 期间收入 − 期间支出 = 期末现金</strong>。由于企业很少持有大量现金，流动资金通常以<strong>现金等价物</strong>的形态存在：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">形态一</span>
+            <h4>银行存款</h4>
+            <p>活期存款，随时可取，流动性最强。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">形态二</span>
+            <h4>理财产品</h4>
+            <p>短期限、低风险，可较快变现。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">形态三</span>
+            <h4>高流动性短期债券</h4>
+            <p>期限短、市场活跃，接近现金。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚖️</div>
+          <div class="callout-body">
+            <div class="callout-title">法规要求</div>
+            <p>根据《现金管理暂行条例》，企业保留现金的限额一般为 <strong>3—5 天零星开支</strong>（边远地区不超过 15 天）。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">三大活动分类</h3>
+
+        <p>现金流量表按<strong>经营、投资、筹资</strong>三大活动分类归集现金流。</p>
+
+        <p><strong>经营活动</strong>——与企业主营业务相关、与投资和筹资活动无关的现金流入 / 流出：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>企业类型</th><th>经营活动定义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>制造企业</td><td>生产或销售商品</td></tr>
+            <tr><td>银行</td><td>借入 / 借出资金</td></tr>
+            <tr><td>证券公司</td><td>提供股票交易服务、自营买卖股票</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>投资活动</strong>主要包括三类：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">类型一</span>
+            <h4>长期资产买卖</h4>
+            <p>固定资产、无形资产等长期资产的买入或处置。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类型二</span>
+            <h4>对外股权投资</h4>
+            <p>对外投资和处置，以及持有期间的回报。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类型三</span>
+            <h4>金融理财投资</h4>
+            <p>各类金融、理财类产品的买卖。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>现金等价物范围内的形态转换（如活期存款 ↔ 短期债券）<strong>不计入</strong>投资活动。</p>
+          </div>
+        </div>
+
+        <p><strong>筹资活动</strong>主要包括：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">类型一</span>
+            <h4>股权融资</h4>
+            <p>发行股票、回购股票。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类型二</span>
+            <h4>利润分配</h4>
+            <p>向股东分配股利。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类型三</span>
+            <h4>债务活动</h4>
+            <p>借债、还债、支付利息。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">排除</div>
+            <p>日常经营活动中产生的应收、应付款项<strong>不属于</strong>筹资活动。</p>
+          </div>
+        </div>
+
+        <p>三大活动汇总后，得到现金流量表的基本结构：</p>
+
+        <div class="poem">
+          期初现金及现金等价物余额<br/>
+          ＋ 经营活动产生的现金流量<br/>
+          ＋ 投资活动产生的现金流量<br/>
+          ＋ 筹资活动产生的现金流量<br/>
+          ＋ 汇率变动影响<br/>
+          ═══════════════════════════<br/>
+          期末现金及现金等价物余额
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、补充阅读要点 -->
+      <section id="section-5">
+        <h2>📝 五、补充阅读要点</h2>
+
+        <h3 id="section-5-1">必读内容</h3>
+
+        <p>除三大报表外，财报中还有几部分内容值得重点关注：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>内容</th><th>阅读重点</th><th>阅读技巧</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>董事会报告</td><td>判断董事会可信度、市场判断准确性、企业掌控力</td><td>将多年报告连读，前后对比</td></tr>
+            <tr><td>重要事项</td><td>影响企业经营的重大事件</td><td>细读全文</td></tr>
+            <tr><td>财报附注</td><td>三大表的详细解释</td><td>企业不愿让投资者明白的内容，常藏于此</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-2">业绩预告规则</h3>
+
+        <p><strong>上海证券交易所</strong>——年度业绩出现以下情形之一时，必须在 <strong>1 月 31 日前</strong>披露业绩预告：</p>
+
+        <ol>
+          <li>预计全年亏损</li>
+          <li>扭亏为盈</li>
+          <li>实现盈利且净利润同比<strong>增长或下降 ≥ 50%</strong></li>
+        </ol>
+
+        <div class="callout info">
+          <div class="callout-icon">ℹ️</div>
+          <div class="callout-body">
+            <div class="callout-title">其他报告期</div>
+            <p>非年度报告期，交易所鼓励上市公司<strong>自愿披露</strong>业绩预告。</p>
+          </div>
+        </div>
+
+        <p><strong>深圳证券交易所</strong>——必须披露业绩预告的时间节点：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>报告期</th><th>年报</th><th>一季报</th><th>半年报</th><th>三季报</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>披露截止</td><td>≤ 1 月 31 日</td><td>≤ 4 月 15 日</td><td>≤ 7 月 15 日</td><td>≤ 10 月 15 日</td></tr>
+          </tbody>
+        </table>
+
+        <p>满足以下任一条件即需披露：</p>
+
+        <ol>
+          <li>亏损</li>
+          <li>扭亏为盈</li>
+          <li>实现盈利且净利润同比变动 <strong>≥ 50%</strong></li>
+          <li>期末净资产为负值</li>
+          <li>年度营业收入 <strong>&lt; 1000 万元</strong></li>
+        </ol>
+
+        <div class="callout info">
+          <div class="callout-icon">ℹ️</div>
+          <div class="callout-body">
+            <div class="callout-title">豁免规则</div>
+            <p>符合"净利润同比变动 ≥ 50%"但上年同期<strong>基数较小</strong>的，可申请豁免披露。</p>
+          </div>
+        </div>
+
+        <p>"基数较小"的定义（按上年同期每股收益衡量）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>报告期</th><th>上年同期每股收益阈值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>年度</td><td>≤ 0.05 元</td></tr>
+            <tr><td>前三季度</td><td>≤ 0.04 元</td></tr>
+            <tr><td>半年度</td><td>≤ 0.03 元</td></tr>
+            <tr><td>第一季度</td><td>≤ 0.02 元</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、入门总结 -->
+      <section id="section-6">
+        <h2>✅ 六、入门总结</h2>
+
+        <p>掌握三大报表的基本阅读框架，你就算财报入门了：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">资产负债表</span>
+            <h4>看懂企业家底</h4>
+            <p>分析资产负债结构，理解钱的来源与去处。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">利润表</span>
+            <h4>理解盈利能力</h4>
+            <p>警惕权责发生制陷阱，关注利润的真实质量。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">现金流量表</span>
+            <h4>追踪现金流向</h4>
+            <p>验证利润的真实性，现金才是不会说谎的。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">进阶建议</div>
+            <p>高手更关注<strong>资产负债表</strong>而非利润表；坚持<strong>三表结合分析、相互印证</strong>；并配合董事会报告和财报附注深入研究。</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第1章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

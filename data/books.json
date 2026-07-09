@@ -277,9 +277,21 @@
       "id": 5,
       "createdAt": 1781243288094,
       "chapters": []
+    },
+    {
+      "name": "手把手教你读财报",
+      "author": "唐朝",
+      "category": "投资经典",
+      "color": "#1a3a2a",
+      "emoji": "📚",
+      "cover": "img/手把手教你读财报.png",
+      "desc": "",
+      "id": 6,
+      "createdAt": 1783573276761,
+      "chapters": []
     }
   ],
-  "nextBookId": 6,
+  "nextBookId": 7,
   "nextChapterId": 33,
   "seeded": true
 }
