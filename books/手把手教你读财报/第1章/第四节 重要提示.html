@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>重要提示 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    /* 固定两列（窄屏回退为单列） */
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* ===== Code Block ===== */
+    .chapter-article pre {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+      font-size: .88rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      color: var(--text);
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="第四节 重要提示.html" class="active">第四节 重要提示</a></li>
+            <li><a href="第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第二章 资产负债表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第三章 利润表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第四章 现金流量表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、董事会与监事会声明</a></li>
+        <li><a href="#section-2">二、董事会出席情况</a></li>
+        <li><a href="#section-3">三、审计意见</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 核心表述</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 为什么审计意见至关重要？</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 审计意见的位置</a></li>
+        <li><a href="#section-4">四、利润分配预案</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 2013年利润分配方案概览</a></li>
+        <li><a href="#section-4-2-1" class="sub">概念一：净利润</a></li>
+        <li><a href="#section-4-2-2" class="sub">概念二：盈余公积金</a></li>
+        <li><a href="#section-4-2-3" class="sub">概念三：送股与转增的区别</a></li>
+        <li><a href="#section-4-2-4" class="sub">概念四：一般风险准备</a></li>
+        <li><a href="#section-4-2-5" class="sub">概念五：未分配利润</a></li>
+        <li><a href="#section-5">五、前瞻性陈述风险声明</a></li>
+        <li><a href="#section-6">六、关联方资金占用与对外担保</a></li>
+        <li><a href="#section-7">七、分红税收差别化政策</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 核心规则</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 差别化税率表</a></li>
+        <li><a href="#section-8">阅读要点总结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第一章 你必须学会看懂财报 · 第四节</div>
+        <h1 class="article-title">重要提示</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>掌握财报重要提示部分的关键阅读要点，识别投资风险信号</span>
+        </div>
+      </header>
+
+      <!-- 引言 -->
+      <p>财务报告的<strong>《重要提示》</strong>部分虽然篇幅不长，但包含了投资决策的关键信息。本节以贵州茅台 2013 年财报为例，解析重要提示中的核心要点。</p>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、董事会与监事会声明 -->
+      <section id="section-1">
+        <h2>一、董事会与监事会声明</h2>
+
+        <p>翻开任何一份上市公司年报，最先看到的是董事会与监事会的郑重声明：</p>
+
+        <div class="pull-quote">
+          "公司董事会、监事会及董事、监事、高级管理人员保证年度报告内容的真实、准确、完整，不存在虚假记载、误导性陈述或重大遗漏，并承担个别和连带的法律责任。"
+          <cite>— 上市公司年报标准表述</cite>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关键提醒</div>
+            <p>这是监管要求的标准表述，但实际上：上市公司造假案例<strong>屡见不鲜</strong>，而因虚假年报承担法律责任的高管却<strong>极少</strong>。请始终保持怀疑态度。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资原则</div>
+            <p>财报是用来<strong>排除企业</strong>的工具。不要盲目相信这些保证——始终保持怀疑，用数据交叉验证。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、董事会出席情况 -->
+      <section id="section-2">
+        <h2>二、董事会出席情况</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>数量</th><th>备注</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>董事总数</strong></td><td>11 人</td><td>—</td></tr>
+            <tr><td><strong>亲自出席</strong></td><td>10 人</td><td>—</td></tr>
+            <tr><td><strong>授权委托</strong></td><td>1 人</td><td>独立董事梁蓓因工作原因授权独立董事陈红代为出席</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">分析</div>
+            <p>该信息对投资决策参考价值较低，了解即可。除非出现大面积缺席的情况，一般无须深究。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、审计意见 -->
+      <section id="section-3">
+        <h2>三、审计意见 ⚠️</h2>
+
+        <p>审计意见是<strong>整个年报最重要的第一道关卡</strong>——它决定了这份财报值不值得继续读下去。</p>
+
+        <h3 id="section-3-1">3.1 核心表述</h3>
+
+        <div class="pull-quote large">
+          立信会计师事务所（特殊普通合伙）为本公司出具了<strong>标准无保留意见</strong>的审计报告。
+        </div>
+
+        <h3 id="section-3-2">3.2 为什么审计意见至关重要？</h3>
+
+        <p>会计师事务所在利益上有天然的尴尬处境：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">利益冲突</span>
+            <h4>拿人钱财</h4>
+            <p>会计师从上市公司收取审计费用，而非从监管机构或投资者处拿钱。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">牌照稀缺</span>
+            <h4>证券业务牌照价值高</h4>
+            <p>截至 2014 年底：全国 7790 家会计师事务所中，仅 53 家拥有证券牌照。截至 2020 年 6 月：40 家事务所审计 3845 家上市公司，收取审计费 55.1 亿元。</p>
+          </div>
+        </div>
+
+        <p>立信会计师事务所一家就审计了<strong>567 家</strong>上市公司，收取审计费<strong>7.21 亿元</strong>，位列行业第一。在这种利益格局下，会计师的独立性能有几何？</p>
+
+        <p><strong>审计意见的五种类型及真实含义：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>会计师出具意见</th><th>会计师真实意思</th><th>投资建议</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>标准无保留意见</strong></td><td>造假迹象未被本人发现</td><td>✅ 可以继续阅读</td></tr>
+            <tr><td><strong>附带说明的无保留意见</strong></td><td>黑锅有人背，本人大胆收钱</td><td>⚠️ 谨慎对待</td></tr>
+            <tr><td><strong>保留意见</strong></td><td>假报表，别看了</td><td>❌ 直接排除</td></tr>
+            <tr><td><strong>无法出具意见</strong></td><td>本人拒绝和拙劣的骗子合作</td><td>❌ 直接排除</td></tr>
+            <tr><td><strong>否定意见</strong></td><td>本人举报诈骗犯</td><td>❌ 直接排除</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          只有"标准无保留意见"的审计报告才有阅读价值，其他意见类型的财报直接丢进垃圾桶。
+        </div>
+
+        <h3 id="section-3-3">3.3 审计意见的位置</h3>
+
+        <p>审计意见可能出现在以下三处位置（根据会计师习惯，可能出现在一处或多处）：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">位置 1</span>
+            <h4>年报第 1 页《重要提示》</h4>
+            <p>最显眼的位置，通常在年报首页的"重要提示"板块。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">位置 2</span>
+            <h4>第十节 财务会计报告开头</h4>
+            <p>在财报正文的财务会计报告部分开头再次声明。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">位置 3</span>
+            <h4>审计报告正文</h4>
+            <p>关键语句："我们认为……公允反映了……"，这是最具法律效力的表述。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、利润分配预案 -->
+      <section id="section-4">
+        <h2>四、利润分配预案</h2>
+
+        <p>利润分配预案告诉你：公司赚了多少钱、打算分多少钱、怎么分。这是投资者最关心的实质性内容。</p>
+
+        <h3 id="section-4-1">4.1 2013 年利润分配方案概览</h3>
+
+        <p><strong>核心数据：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>金额（亿元）</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>2013 年度净利润</strong></td><td>151.37</td><td>经立信会计师事务所审计确认</td></tr>
+            <tr><td><strong>减：法定盈余公积金</strong></td><td>11.84</td><td>按母公司净利润 10% 提取</td></tr>
+            <tr><td><strong>减：一般风险准备</strong></td><td>0.13</td><td>茅台财务公司专项提取</td></tr>
+            <tr><td><strong>减：2012 年度分红</strong></td><td>66.64</td><td>2013 年内实施</td></tr>
+            <tr><td><strong>加：年初未分配利润</strong></td><td>287.00</td><td>2012 年底余额</td></tr>
+            <tr><td><strong>可供分配利润</strong></td><td><strong>359.75</strong></td><td>—</td></tr>
+            <tr><td><strong>拟分配利润</strong></td><td>46.45</td><td>10 股送 1 股 + 派现 43.74 元</td></tr>
+            <tr><td><strong>留存未分配利润</strong></td><td>313.30</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>分红方案：</strong></p>
+
+        <div class="poem">
+          以 2013 年末总股本 <strong>10.3818 亿股</strong>为基数<br/>
+          每 10 股派送红股 <strong>1 股</strong><br/>
+          每 10 股派发现金 <strong>43.74 元</strong>（含税）<br/>
+          <span class="poem-author">—— 需股东大会审议通过后实施</span>
+        </div>
+
+        <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+        <h3 id="section-4-2">4.2 核心概念解析</h3>
+
+        <p>理解利润分配预案，需要掌握以下五个核心概念：</p>
+
+        <!-- 概念一：净利润 -->
+        <h3 id="section-4-2-1">概念一：净利润</h3>
+
+        <p><strong>定义：</strong>企业按照<strong>权责发生制</strong>确认的利润，不等于实际收到的现金。</p>
+
+        <p><strong>案例说明：</strong>某公司卖出一批货，客户只打了欠条——</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>金额（万元）</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>销售收入</strong></td><td>200</td><td>客户仅打欠条，未付款</td></tr>
+            <tr><td><strong>减：原材料成本</strong></td><td>70</td><td>已支付现金</td></tr>
+            <tr><td><strong>减：生产制造费用</strong></td><td>30</td><td>已支付现金</td></tr>
+            <tr><td><strong>减：各种税费</strong></td><td>40</td><td>已支付现金</td></tr>
+            <tr><td><strong>税前利润</strong></td><td><strong>60</strong></td><td>—</td></tr>
+            <tr><td><strong>减：所得税（25%）</strong></td><td>15</td><td>需支付现金</td></tr>
+            <tr><td><strong>净利润</strong></td><td><strong>45</strong></td><td>账面利润，实际未收到现金</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资启示</div>
+            <p>净利润是会计概念，公司可能账面盈利但现金短缺。务必结合<strong>现金流量表</strong>分析，判断利润的"含金量"。</p>
+          </div>
+        </div>
+
+        <!-- 概念二：盈余公积金 -->
+        <h3 id="section-4-2-2">概念二：盈余公积金</h3>
+
+        <p><strong>法律规定：</strong>公司必须提取净利润的<strong>至少 10%</strong>作为法定盈余公积（强制性）。累计超过注册资金 50% 后，可由董事会决定是否继续计提。</p>
+
+        <p><strong>用途限制：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">用途 1</span>
+            <h4>弥补经营亏损</h4>
+            <p>当公司出现亏损时，可用盈余公积填补。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">用途 2</span>
+            <h4>派送红股</h4>
+            <p>但需保证送股后盈余公积 ≥ 注册资金的 25%。</p>
+          </div>
+        </div>
+
+        <p><strong>税务处理：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>分配方式</th><th>是否征税</th><th>税率</th><th>征税对象</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>现金分红</strong></td><td>是</td><td>差别化税率</td><td>个人股东</td></tr>
+            <tr><td><strong>盈余公积送红股</strong></td><td>是</td><td>差别化税率</td><td>个人股东</td></tr>
+            <tr><td><strong>资本公积转增股本</strong></td><td>否</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>用盈余公积送红股<strong>需缴税</strong>，因为税务局将其视为"先分现金给股东 → 股东再认购新股"的曲线分配。相比之下，资本公积转增股本不涉税。</p>
+          </div>
+        </div>
+
+        <!-- 概念三：送股与转增的区别 -->
+        <h3 id="section-4-2-3">概念三：送股与转增的区别</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>对比项</th><th>送股（派送红股）</th><th>转增（转增股本）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>资金来源</strong></td><td>未分配利润或盈余公积</td><td>资本公积</td></tr>
+            <tr><td><strong>是否征税</strong></td><td>是</td><td>否</td></tr>
+            <tr><td><strong>税率</strong></td><td>差别化个人所得税</td><td>不征税</td></tr>
+            <tr><td><strong>简称</strong></td><td>"送 × 股"</td><td>"转增 × 股"</td></tr>
+            <tr><td><strong>对股东影响</strong></td><td>持股比例不变，需缴税</td><td>持股比例不变，不缴税</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>贵州茅台案例计算：</strong></p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">茅台分红税务视角</div>
+            <p>方案：10 股送 1 股 + 派现 43.74 元 → 税务视角每 10 股分配现金 <strong>44.74 元</strong>（43.74 + 1 元面值红股）。总分配：10.3818 亿股 ÷ 10 × 44.74 元 ≈ <strong>46.45 亿元</strong>。送股后股本：10.3818 亿股 → <strong>11.41998 亿股</strong>。</p>
+          </div>
+        </div>
+
+        <!-- 概念四：一般风险准备 -->
+        <h3 id="section-4-2-4">概念四：一般风险准备</h3>
+
+        <p><strong>适用范围：</strong>仅金融企业需要计提。</p>
+
+        <p><strong>贵州茅台情况：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">原因</span>
+            <h4>拥有茅台财务公司</h4>
+            <p>茅台财务公司属于金融企业，因此需要计提一般风险准备。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">标准</span>
+            <h4>不低于风险资产余额的 1.5%</h4>
+            <p>仅与财务公司放贷额相关，与其他业务无关。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">非金融企业股东</div>
+            <p>了解定义即可，不必深究复杂的计算规则。只要知道它是从利润中强制扣除的一笔钱就够了。</p>
+          </div>
+        </div>
+
+        <!-- 概念五：未分配利润 -->
+        <h3 id="section-4-2-5">概念五：未分配利润</h3>
+
+        <p><strong>定义：</strong>历年净利润总和 − 盈余公积 − 历年分红。</p>
+
+        <p>这个看似简单的概念背后，有两个常见误区：</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">误区一：未分配利润 ≠ 可分配现金</div>
+            <p>原因 1：利润已转化为固定资产、在建工程、对外投资等。<br/>原因 2：部分净利润只是账面数字，从未有现金流入。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">误区二：公司现金余额 ≠ 未分配利润</div>
+            <p>查看公司实际有多少现金，直接查阅合并资产负债表的<strong>"货币资金"</strong>科目即可。</p>
+          </div>
+        </div>
+
+        <p><strong>分红上限规定：</strong>财政部规定，按<strong>合并报表与母公司报表中较小的未分配利润</strong>确定分配上限。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、前瞻性陈述风险声明 -->
+      <section id="section-5">
+        <h2>五、前瞻性陈述风险声明</h2>
+
+        <div class="pull-quote">
+          "本年度报告中所涉及的未来计划、发展战略等前瞻性陈述因存在不确定性，不构成本公司对投资者的实质承诺，敬请投资者注意投资风险。"
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">解读</div>
+            <p>财报中"预计、估计、计划、我们将……"等表述属于管理层展望，<strong>不构成承诺</strong>。投资失败与公司无关，请独立判断。这条声明在法律上保护了公司免受"未能实现预期"的诉讼风险。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、关联方资金占用与对外担保 -->
+      <section id="section-6">
+        <h2>六、关联方资金占用与对外担保</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>检查项</th><th>是否存在</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>控股股东及关联方非经营性占用资金</strong></td><td>否</td></tr>
+            <tr><td><strong>违反规定决策程序对外提供担保</strong></td><td>否</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">异常提醒</div>
+            <p>如独立董事或监事在此部分发表<strong>特殊声明或提醒</strong>，必须高度重视。这往往是公司治理存在严重问题的信号。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          两项都显示"否"，是标准答案。任何一项出现"是"，都是重大危险信号。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、新准则升级版：分红税收差别化政策 -->
+      <section id="section-7">
+        <h2>七、新准则升级版：分红税收差别化政策</h2>
+
+        <p><strong>政策生效时间：</strong>2015 年 9 月 8 日（财政部、国家税务总局、证监会联合发文）</p>
+
+        <h3 id="section-7-1">7.1 核心规则</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">征税时点</span>
+            <h4>卖出时才补缴</h4>
+            <p>分红到账时暂不征税，卖出时按持股时间补缴，由券商代扣。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">计算方法</span>
+            <h4>先进先出原则</h4>
+            <p>持股时间从买入日计算到卖出前一日，按先进先出原则确定。</p>
+          </div>
+        </div>
+
+        <h3 id="section-7-2">7.2 差别化税率表</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>持股时间</th><th>税率</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>≤ 1 个月</strong></td><td>20%</td><td>对现金红利 + 红股总额征税</td></tr>
+            <tr><td><strong>1 个月 &lt; 持股 ≤ 1 年</strong></td><td>10%</td><td>对现金红利 + 红股总额征税</td></tr>
+            <tr><td><strong>&gt; 1 年</strong></td><td>0%（免税）</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资建议</div>
+            <p>该政策明确<strong>鼓励长期投资</strong>。持股超过 1 年可享受分红免税优惠——这是监管部门引导价值投资的具体制度设计。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 阅读要点总结 -->
+      <section id="section-8">
+        <h2>阅读要点总结</h2>
+
+        <p>熟悉公司后，快速阅读《重要提示》只需关注以下内容：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">必看 1</span>
+            <h4>审计意见类型</h4>
+            <p>是否为"标准无保留意见"——这是第一道也是最重要的一道关卡。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">必看 2</span>
+            <h4>分红方案及金额</h4>
+            <p>了解公司的利润分配意愿和回馈股东的实际行动。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">必看 3</span>
+            <h4>异常说明</h4>
+            <p>是否存在独立董事或监事的特殊表态、补充说明。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">必看 4</span>
+            <h4>资金占用与担保</h4>
+            <p>关联方是否非经营性占用资金，是否存在违规对外担保。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">排除信号——出现以下任何一种情况，直接放弃</div>
+            <p>
+              ① 审计意见非"标准无保留意见"→ <strong>直接排除</strong><br/>
+              ② 存在关联方资金占用或违规担保 → <strong>高度警惕</strong><br/>
+              ③ 独立董事或监事发表异议 → <strong>深入调查</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          财报是用来排除企业的。重要提示就是第一道筛子——筛掉不合格的，剩下的再慢慢研究。
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第1章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
