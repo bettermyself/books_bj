@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生产类资产 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节 生产类资产.html" class="active">第一节 生产类资产</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第三章 利润表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第四章 现金流量表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-overview">📋 概述</a></li>
+        <li><a href="#sec-1">🏭 一、固定资产</a></li>
+        <li><a href="#s1-policy" class="sub">折旧政策</a></li>
+        <li><a href="#s1-impact" class="sub">折旧政策的影响</a></li>
+        <li><a href="#s1-impair" class="sub">减值测试</a></li>
+        <li><a href="#sec-2">🔧 二、固定资产清理</a></li>
+        <li><a href="#sec-3">🏗️ 三、在建工程与工程物资</a></li>
+        <li><a href="#sec-4">⛽ 四、油气资产</a></li>
+        <li><a href="#sec-5">💎 五、无形资产与开发支出</a></li>
+        <li><a href="#sec-6">🌿 六、生物资产</a></li>
+        <li><a href="#sec-7">🤝 七、商誉</a></li>
+        <li><a href="#s7-econ" class="sub">经济商誉</a></li>
+        <li><a href="#sec-8">📅 八、长期待摊费用</a></li>
+        <li><a href="#sec-9">🆕 九、新准则升级版</a></li>
+        <li><a href="#s9-1" class="sub">持有待售资产</a></li>
+        <li><a href="#s9-3" class="sub">使用权资产与租赁负债</a></li>
+        <li><a href="#sec-summary">📌 总结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第二章 资产负债表 · 第一节</div>
+        <h1 class="article-title">生产类资产</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>生产类资产的会计处理与造假识别</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="sec-overview">
+        <h2>📋 概述</h2>
+
+        <p>生产类资产是指资产负债表中与企业日常生产制造直接相关的资产科目，包括从「<strong>固定资产</strong>」至「<strong>长期待摊费用</strong>」之间的全部科目。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📄</div>
+          <div class="callout-body">
+            <div class="callout-title">贵州茅台 2013 年合并资产负债表（节选）</div>
+            <p>编制单位：贵州茅台酒股份有限公司 ｜ 报告日期：2013 年 12 月 31 日 ｜ 单位：元（人民币）</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>附注</th><th>期末余额</th><th>年初余额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>固定资产</td><td>(十一)</td><td>8,523,256,960.11</td><td>6,807,333,231.09</td></tr>
+            <tr><td>在建工程</td><td>(十二)</td><td>456,328,292.13</td><td>392,672,323.95</td></tr>
+            <tr><td>工程物资</td><td>(十三)</td><td>1,725,110.46</td><td>2,676,942.59</td></tr>
+            <tr><td>固定资产清理</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>生产性生物资产</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>油气资产</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>无形资产</td><td>(十四)</td><td>3,563,308,110.51</td><td>862,615,899.20</td></tr>
+            <tr><td>开发支出</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>商誉</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>长期待摊费用</td><td>(十五)</td><td>8,048,744.96</td><td>10,177,029.43</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、固定资产 -->
+      <section id="sec-1">
+        <h2>🏭 一、固定资产</h2>
+
+        <h3>1.1 定义</h3>
+        <p>固定资产是指公司为经营活动而持有（非转售目的）、使用寿命超过一年、价值较大的非货币性资产，包括建筑物、机械设备、运输工具等。</p>
+
+        <h3>1.2 核心要点</h3>
+        <p>固定资产的会计处理，核心集中在「<strong>折旧</strong>」与「<strong>减值</strong>」两个环节，理解它们就抓住了报表分析的关键。</p>
+
+        <h3 id="s1-depr">1.2.1 固定资产必须计提折旧</h3>
+        <p>购买或自建固定资产的支出不能全部计入当年成本，而是按一定规则分摊至预计使用期内，这个分摊过程称为<strong>计提折旧</strong>。</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">规则一</span>
+            <h4>按月计提</h4>
+            <p>按月计提折旧，作为当月费用在利润表中扣除。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">规则二</span>
+            <h4>上限归零</h4>
+            <p>折旧上限为资产价值归零，不能无限折旧。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">规则三</span>
+            <h4>归零停止</h4>
+            <p>归零后仍可使用的资产，不再计提折旧。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-policy">1.2.2 折旧政策</h3>
+        <p><strong>常见折旧方法</strong>各有特点，适用的资产与目的也不尽相同：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>折旧方法</th><th>特点</th><th>适用场景</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>年限平均法（直线法）</strong></td><td>每期折旧额相等</td><td>最常用，适用于大部分资产</td></tr>
+            <tr><td><strong>工作量法</strong></td><td>按实际工作量计提</td><td>考虑资产使用强度</td></tr>
+            <tr><td><strong>双倍余额递减法</strong></td><td>前期折旧多，后期少</td><td>加速折旧，递延纳税</td></tr>
+            <tr><td><strong>年数总和法</strong></td><td>逐年递减折旧</td><td>加速折旧</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要提醒</div>
+            <p>折旧政策一经选定不得随意变更。如公司突然改变折旧政策，投资者需警惕其动机。</p>
+          </div>
+        </div>
+
+        <p><strong>贵州茅台折旧政策示例</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类别</th><th>折旧年限（年）</th><th>残值率（%）</th><th>年折旧率（%）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>房屋及建筑物</td><td>20</td><td>5</td><td>4.75</td></tr>
+            <tr><td>机器设备</td><td>10</td><td>5</td><td>9.5</td></tr>
+            <tr><td>电子设备</td><td>5</td><td>5</td><td>19</td></tr>
+            <tr><td>运输设备</td><td>5</td><td>5</td><td>19</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">🔍</div>
+          <div class="callout-body">
+            <div class="callout-title">查找方法</div>
+            <p>在财报中搜索「固定资产的折旧方法」即可找到公司折旧政策。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-impact">1.2.3 折旧政策的影响</h3>
+        <p>折旧总额相同，但不同折旧方法对各期利润影响不同：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">优秀公司倾向</span>
+            <h4>加速折旧</h4>
+            <p>采用双倍余额递减法、年数总和法，增加前期费用、延迟纳税，相当于获得一笔免息贷款。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">短视公司倾向</span>
+            <h4>做大当期利润</h4>
+            <p>采用减少当期折旧的方法，做大当期利润，但需提前纳税。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-hidden">1.2.4 折旧可能隐藏价值</h3>
+        <p>某些固定资产虽然账面价值极低甚至归零，但实际价值可能未大幅贬值甚至增值：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">水电企业</span>
+            <h4>大坝</h4>
+            <p>越用越坚固，账面已折旧殆尽，实际价值却极高。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">白酒企业</span>
+            <h4>酒窖</h4>
+            <p>老窖池随年限增值，是核心护城河之一。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">城区房产</span>
+            <h4>土地与建筑</h4>
+            <p>地段稀缺性带来长期升值，远超账面成本。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">隐藏价值</div>
+            <p>这类资产常是报表中的隐藏价值，容易成为股价催化剂。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-impair">1.2.5 固定资产减值测试</h3>
+        <p><strong>减值原因</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">供给端</span>
+            <h4>行业产能过剩</h4>
+            <p>供过于求导致资产产出能力贬值。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">市场端</span>
+            <h4>资产市价持续下跌</h4>
+            <p>市场报价反映资产真实价值下滑。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">技术端</span>
+            <h4>技术陈旧、损坏</h4>
+            <p>技术迭代或物理损坏降低资产效用。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">使用端</span>
+            <h4>长期闲置</h4>
+            <p>资产长期未投入生产，价值存疑。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">环境端</span>
+            <h4>经营环境负面变化</h4>
+            <p>行业政策、市场需求等出现不利转变。</p>
+          </div>
+        </div>
+
+        <p><strong>会计处理</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>环节</th><th>处理方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>计提</td><td>可变现价值低于账面价值时，计提减值准备</td></tr>
+            <tr><td>列报</td><td>减值准备作为费用从利润表扣除</td></tr>
+            <tr><td>转回</td><td><strong>减值不可逆</strong>：即使减值原因消失，也不允许转回</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警惕报表操纵：先减值，后出售</div>
+            <p><strong>操纵手法</strong>：先主观低估可变现价值 → 计提大额减值 → 第二年出售资产 → 产生账面利润。</p>
+            <p><strong>识别信号</strong>：某年计提大额减值，次年出售且成交价显著高于账面成本。</p>
+            <div class="pull-quote large" style="margin:.9rem 0 0;">"只要你在厨房里发现一只蟑螂，你很快就会遇到它的亲戚们。"<cite>— 巴菲特</cite></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、固定资产清理 -->
+      <section id="sec-2">
+        <h2>🔧 二、固定资产清理</h2>
+
+        <h3>2.1 定义</h3>
+        <p>记录因出售、报废、损毁、对外投资、非货币性资产交换、债务重组等原因，从固定资产划出、尚未处理完毕的固定资产账面净值。</p>
+
+        <h3>2.2 会计处理</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">净收益</span>
+            <h4>计入营业外收入</h4>
+            <p>处置固定资产产生的净收益，计入利润表的营业外收入。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">净损失</span>
+            <h4>计入营业外支出</h4>
+            <p>处置固定资产产生的净损失，计入利润表的营业外支出。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、在建工程与工程物资 -->
+      <section id="sec-3">
+        <h2>🏗️ 三、在建工程与工程物资</h2>
+
+        <h3>3.1 在建工程</h3>
+        <p><strong>定义</strong>：正在建设的工程，包括新建、改建、扩建、更新改造等尚未完成的工程。</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">本质</span>
+            <h4>中转站</h4>
+            <p>消耗「工程物资」，创造「固定资产」，建成后应转入固定资产。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">关键</span>
+            <h4>不计提折旧</h4>
+            <p>在建工程尚未投入使用，<strong>不需要计提折旧</strong>。</p>
+          </div>
+        </div>
+
+        <p>⚠️ <strong>风险提示</strong>：在建工程若出现以下异常情况，往往暗藏风险，需结合财报附注寻找合理解释。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>异常情况</th><th>可能风险</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>在建工程数额巨大且持续多年不转固定资产</td><td>① 工程已完工但故意不转固，避免折旧美化利润<br/>② 虚构工程，通过在建工程转移资金，制造虚假收入</td></tr>
+            <tr><td>投入资金增加，但工程进度停滞或减少</td><td>可能藏有猫腻，需查找合理解释</td></tr>
+          </tbody>
+        </table>
+
+        <h3>3.2 工程物资</h3>
+        <p>为在建工程准备的物资，无需额外说明。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">2018 年起</div>
+            <p>工程物资合并入「在建工程」科目。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、油气资产 -->
+      <section id="sec-4">
+        <h2>⛽ 四、油气资产</h2>
+
+        <h3>4.1 定义</h3>
+        <p>石油天然气开采企业所拥有或控制的油井、气井及相关设施和矿区权益。</p>
+
+        <h3>4.2 特点</h3>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">处理方式</span>
+            <h4>类似固定资产</h4>
+            <p>同样计提折旧并进行减值测试。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">单独披露</span>
+            <h4>价值占比大</h4>
+            <p>因在报表中价值占比较高，单独列示。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">清理科目</span>
+            <h4>油气资产清理</h4>
+            <p>可设立「油气资产清理」科目，类比固定资产清理。</p>
+          </div>
+        </div>
+
+        <h3>4.3 费用资本化</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>阶段</th><th>会计处理</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>地质研究</td><td>作为费用直接扣除</td></tr>
+            <tr><td>取得探矿权/采矿权、勘探钻井、开发钻井</td><td>部分费用可计入「油气资产」</td></tr>
+            <tr><td>生产阶段</td><td>作为费用直接扣除</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">研究建议</div>
+            <p>研究石油天然气企业时，直接阅读财报附注中的油气资产会计政策。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、无形资产与开发支出 -->
+      <section id="sec-5">
+        <h2>💎 五、无形资产与开发支出</h2>
+
+        <h3>5.1 无形资产定义</h3>
+        <p>企业拥有或控制的无实物形态但可单独辨认的资产，主要包括：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">权利类</span>
+            <h4>专利权 · 商标权 · 著作权</h4>
+            <p>受法律保护的无形权利资产。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">资源类</span>
+            <h4>土地使用权</h4>
+            <p>企业占有使用土地的权利（中国特色）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">经营类</span>
+            <h4>特许经营权 · 版权</h4>
+            <p>特许授予或取得的使用、经营权。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">技术类</span>
+            <h4>非专利技术</h4>
+            <p>未申请专利但具有经济价值的技术诀窍。</p>
+          </div>
+        </div>
+
+        <h3>5.2 摊销与减值</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>处理方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>摊销</strong>（无形资产的"折旧"）</td><td>使用寿命确定：类似固定资产折旧，残值为零<br/>使用寿命不确定：不做摊销，仅期末减值测试</td></tr>
+            <tr><td><strong>减值</strong></td><td>一经确定不允许转回</td></tr>
+          </tbody>
+        </table>
+
+        <h3>5.3 无形资产的来源</h3>
+
+        <h3>5.3.1 外部获取</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">购买</span>
+            <h4>含非货币资产交换</h4>
+            <p>通过市场交易购入无形资产。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">股东出资</span>
+            <h4>投入无形资产</h4>
+            <p>股东以无形资产作价投入企业。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关注点</div>
+            <p>交易价格是否公平，是否存在损害小股东利益的情况。</p>
+          </div>
+        </div>
+
+        <h3>5.3.2 内部研发</h3>
+        <p><strong>研发阶段划分</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>阶段</th><th>定义</th><th>会计处理</th><th>理由</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>研究阶段</strong></td><td>为获取新技术或知识进行的探索活动</td><td>全部费用化，计入当期管理费用</td><td>不确定性大，无法确定是否带来经济回报</td></tr>
+            <tr><td><strong>开发阶段</strong></td><td>研究成果形成后，为商业化投入资源</td><td>符合条件可资本化，计入无形资产（过渡期记为"开发支出"）</td><td>有针对性，可能性较大可带来回报</td></tr>
+            <tr><td><strong>无法区分</strong></td><td>—</td><td>全部计入当期管理费用</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <h3>5.4 记录无形资产的学问</h3>
+        <p><strong>不同企业的选择</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>企业类型</th><th>倾向</th><th>原因</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>高利润公司</strong></td><td>研发支出全部费用化</td><td>减少当期税收，享受加计扣除政策，利润数据更可靠</td></tr>
+            <tr><td><strong>困难/创业企业</strong></td><td>费用资本化</td><td>增加资产，减少费用，财报更好看</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>研发全部费用化的公司，利润数据可靠性更高。</p>
+          </div>
+        </div>
+
+        <h3>5.5 土地使用权</h3>
+        <p><strong>中国特色</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">一般规则</span>
+            <h4>计入无形资产</h4>
+            <p>因公有制，企业购买的是土地使用权，通常计入无形资产。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">例外一</span>
+            <h4>计入存货</h4>
+            <p>房地产公司为建房出售购买的土地，计入<strong>存货</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">例外二</span>
+            <h4>投资性房地产</h4>
+            <p>土地与房产一起列为投资性房地产时，可脱离无形资产。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、生物资产 -->
+      <section id="sec-6">
+        <h2>🌿 六、生物资产</h2>
+
+        <h3>6.1 定义与分类</h3>
+        <p>生物资产是指有生命的动植物，常见于农、林、渔、牧行业。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>定义</th><th>示例</th><th>会计科目</th><th>折旧</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>消耗性生物资产</strong></td><td>为出售而持有</td><td>存栏待售牲畜、生长中的蔬菜、肉猪肉鸡、鲤鱼扇贝</td><td>存货</td><td>不计提</td></tr>
+            <tr><td><strong>公益性生物资产</strong></td><td>环境保护目的，无直接经济效益</td><td>防风固沙林、水土保持林</td><td>单独披露</td><td>不计提</td></tr>
+            <tr><td><strong>生产性生物资产</strong></td><td>产出农产品或提供劳务</td><td>果树、母猪、奶牛、拉车骡马</td><td>单独披露</td><td>需计提</td></tr>
+          </tbody>
+        </table>
+
+        <h3>6.2 减值处理</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>减值可否转回</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>消耗性生物资产</td><td>✓ 可转回</td></tr>
+            <tr><td>生产性生物资产</td><td>✗ 不可转回</td></tr>
+          </tbody>
+        </table>
+
+        <h3>6.3 难以判断价值的生物资产</h3>
+        <p><strong>盘点难度</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">可大致清点</span>
+            <h4>猪 · 牛 · 鸡 · 兔</h4>
+            <p>陆生、圈养动物数量与大小相对可核查。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">难以盘点</span>
+            <h4>鲤鱼 · 鲍鱼 · 海参 · 扇贝</h4>
+            <p>水中生物的数量、大小甚至存在性都难以核实。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">经典造假案例：蓝田造假案</div>
+            <p>虚构 20 万亩湖水下的王八和鱼虾数量及繁殖率。</p>
+            <p><strong>填坑方式</strong>：声称「王八发瘟病死光了，尸体烂在湖底」。</p>
+          </div>
+        </div>
+
+        <h3>6.4 造假的高危地带</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">操纵手法：减值—转回的利润魔术</div>
+            <p><strong>今年</strong>：声称疫情/环境导致生物资产死亡、逃跑或消瘦 → 计提减值 → 利润大降。</p>
+            <p><strong>明年</strong>：声称实际损失低于预期 → 减值转回 → 利润魔术般增加。</p>
+          </div>
+        </div>
+
+        <p><strong>造假高发行业特征</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>行业</th><th>共性特征</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>农、林、渔、牧<br/>软件、集成电路<br/>生物科技</td><td>① 税收优惠多<br/>② 产品不易核查<br/>③ 产品差异大，无价格参照物<br/>④ 产品交付量难监控</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资建议</div>
+            <p>这些行业需格外警惕，谨慎涉足。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、商誉 -->
+      <section id="sec-7">
+        <h2>🤝 七、商誉</h2>
+
+        <h3>7.1 商誉的产生</h3>
+        <p>商誉产生于企业并购活动。无收购活动的企业，商誉科目为空。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">简化示例</div>
+            <p>上市公司 A 购买 B 公司 80% 股权，成交价 1100 万元；B 公司账面可辨认净资产公允价值 1000 万元。</p>
+          </div>
+        </div>
+
+        <div class="formula">A 应得：1000 × 80% = <strong>800 万元</strong>
+实际支付：<strong>1100 万元</strong>
+商誉 = 1100 − 800 = <strong>300 万元</strong>（美好希望的出价）</div>
+
+        <h3>7.2 可辨认净资产的公允价值</h3>
+        <p><strong>计算公式</strong>：</p>
+
+        <div class="formula"><strong>可辨认净资产 = 净资产 − 商誉 = 资产 − 负债 − 商誉</strong></div>
+
+        <p><strong>公允价值三个层次</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>层次</th><th>定义</th><th>可信度</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>第一层次</strong></td><td>资产有活跃公开市场报价，市价即公允价值</td><td>★★★ 高</td></tr>
+            <tr><td><strong>第二层次</strong></td><td>参照相似资产报价或可观察估值参数（市盈率、市净率等）</td><td>★★ 中</td></tr>
+            <tr><td><strong>第三层次</strong></td><td>公司和会计师事务所自设估值参数和模型</td><td>★ 低</td></tr>
+          </tbody>
+        </table>
+
+        <h3>7.3 商誉的会计处理</h3>
+        <p><strong>摊销</strong>：商誉不要求摊销，每年做减值测试，<strong>减值不可逆</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">商誉减值风险：商誉爆雷</div>
+            <p>所收购资产获利能力下降 →「美好希望」缩水 → 计提减值。减值作为费用扣除 → 当年利润暴跌甚至巨亏，即「<strong>商誉爆雷</strong>」。</p>
+          </div>
+        </div>
+
+        <h3>7.4 商誉的操纵空间</h3>
+        <p><strong>价格安排策略</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>策略</th><th>做法</th><th>目的</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>降低商誉</strong></td><td>做高可辨认资产成交价</td><td>增加后期折旧，降低利润</td></tr>
+            <tr><td><strong>增加商誉</strong></td><td>压低可辨认资产作价</td><td>减少折旧费用，美化利润（买家常用）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警示信号</div>
+            <p>收购中商誉占比超高（如 90% 以上）；财报仅笼统披露「经测试未发生减值」而无详细信息。</p>
+          </div>
+        </div>
+
+        <h3 id="s7-econ">7.5 经济商誉（Economic Goodwill）</h3>
+
+        <div class="pull-quote large">"直接和间接的企业分析经验，使我现在特别倾向于那些拥有金额很大的、可持续的经济商誉，却对有形资产需求很少的企业……在通货膨胀时期，经济商誉是一份不断创造丰厚回报的大礼。"<cite>— 巴菲特</cite></div>
+
+        <p><strong>经济商誉</strong>：企业在长期竞争中建立的、无法单独辨认但确实能带来超额利润的能力。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">选股标准</div>
+            <p>寻找拥有大量可持续经济商誉、有形资产需求少的企业。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、长期待摊费用 -->
+      <section id="sec-8">
+        <h2>📅 八、长期待摊费用</h2>
+
+        <h3>8.1 定义</h3>
+        <p>企业已经支出、预计在一年以上时间起效的费用。<strong>常见类型</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">类型一</span>
+            <h4>筹建费用</h4>
+            <p>企业筹建期间发生的、受益期较长的支出。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类型二</span>
+            <h4>产品模具生产成本</h4>
+            <p>为生产特定产品而投入的模具成本。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类型三</span>
+            <h4>固定资产改良费用</h4>
+            <p>能提高固定资产性能的改良支出。</p>
+          </div>
+        </div>
+
+        <h3>8.2 改良 vs 修理</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>判断标准</th><th>会计处理</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>改良</strong></td><td>提高固定资产性能（延长使用寿命、提高产品质量、降低成本）</td><td>计入长期待摊费用（资产）</td></tr>
+            <tr><td><strong>修理</strong></td><td>未提高性能，仅日常维护</td><td>计入当期费用</td></tr>
+          </tbody>
+        </table>
+
+        <h3>8.3 风险提示</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">本质：已花掉的钱，假装是资产</div>
+            <p>长期待摊费用是已经花掉的钱，却假装是资产，用于：减少当期费用、增加当期利润，且<strong>无任何变现价值</strong>。</p>
+            <p><strong>警示</strong>：数字越大，资产质量越差，是游走于合法与非法边缘的报表调控手段。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">🪳</div>
+          <div class="callout-body">
+            <div class="callout-title">经典案例：美国世通（WorldCom）</div>
+            <p>将电信工程扩建费用计入长期待摊费用，<strong>5 个季度虚增 38 亿美元利润</strong>。</p>
+            <p><strong>结果</strong>：造假曝光，市值从 2000 亿美元归零，成为「美国有史以来最大破产案」。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、新准则升级版 -->
+      <section id="sec-9">
+        <h2>🆕 九、新准则升级版</h2>
+
+        <h3 id="s9-1">9.1 持有待售资产与持有待售负债</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">实施时间</span>
+            <h4>2017 年 5 月 28 日起</h4>
+            <p>新准则规定的生效时点。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">定义</span>
+            <h4>计划出售且基本确定一年内完成</h4>
+            <p>企业计划出售且基本确定会在一年内完成出售的非流动资产。</p>
+          </div>
+        </div>
+
+        <p><strong>适用范围</strong>：生产类资产、控股子公司股权、联营企业股权。</p>
+
+        <h3>9.1.1 划入条件</h3>
+        <p>需<strong>同时满足</strong>以下两个条件：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">条件一</span>
+            <h4>可立即出售</h4>
+            <p>资产或资产组合责权利单独、确定；能立即移交买家。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">条件二</span>
+            <h4>极有可能一年内完成</h4>
+            <p>① 已获相关机构批准（股东大会/董事会/监管部门）；<br/>② 已与确定购买方签订具有法律约束力的协议（含确定价格、时间及严厉违约惩罚）。</p>
+          </div>
+        </div>
+
+        <h3>9.1.2 会计影响</h3>
+        <p><strong>持有待售的特点</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>影响</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>不再计提折旧</strong></td><td>资产、资产组合一旦归入持有待售 → 停止折旧 → 当期利润增加</td></tr>
+            <tr><td><strong>联营企业股权处理</strong></td><td>拟出售部分对应的亏损比例不再计入投资收益 → 减少利润拖累</td></tr>
+            <tr><td><strong>减值处理</strong></td><td>按账面价值和公允价值孰低计入；减值可转回（与其他资产不同）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">简化示例</div>
+            <p>上市公司 A 持有 B 公司 25% 股权（联营企业），B 公司连年亏损，每年 25% 亏损计入 A 公司投资收益。A 公司计划卖掉 20% 股权，划入持有待售后，投资收益仅需计入 B 公司亏损的 5%。</p>
+          </div>
+        </div>
+
+        <h3>9.2 固定资产清理与工程物资</h3>
+        <p><strong>2018 年起合并</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">科目一</span>
+            <h4>固定资产清理 → 固定资产</h4>
+            <p>合并入固定资产科目，计量方法不变。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">科目二</span>
+            <h4>工程物资 → 在建工程</h4>
+            <p>合并入在建工程科目，计量方法不变。</p>
+          </div>
+        </div>
+
+        <h3 id="s9-3">9.3 使用权资产与租赁负债</h3>
+        <p><strong>实施时间</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">境外上市</span>
+            <h4>2019 年 1 月 1 日起</h4>
+            <p>境外及境内外同时上市企业。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">境内上市</span>
+            <h4>2021 年 1 月 1 日起</h4>
+            <p>境内上市公司。</p>
+          </div>
+        </div>
+
+        <h3>9.3.1 新旧准则对比</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>原准则</th><th>新准则</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>分类</strong></td><td>区分融资租赁和经营租赁</td><td>不再区分，统一处理</td></tr>
+            <tr><td><strong>经营租赁</strong></td><td>租金作为当期费用</td><td>确认使用权资产和租赁负债</td></tr>
+            <tr><td><strong>融资租赁</strong></td><td>确认租赁资产和长期应付款</td><td>同左，单独列示科目</td></tr>
+            <tr><td><strong>例外</strong></td><td>无</td><td>短期租赁（≤12 个月）和低价值资产租赁可简化处理</td></tr>
+          </tbody>
+        </table>
+
+        <h3>9.3.2 融资租赁判定标准（原准则，参考）</h3>
+        <p>符合以下<strong>任一标准</strong>即为融资租赁：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">标准一</span>
+            <h4>资产性质特殊</h4>
+            <p>仅承租人能使用，具有专用性。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">标准二</span>
+            <h4>期满所有权转移</h4>
+            <p>租赁期满所有权归承租人。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">标准三</span>
+            <h4>优惠购买选择权</h4>
+            <p>承租人有购买选择权且价格远低于公允价值。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">标准四</span>
+            <h4>租期占使用寿命 ≥ 75%</h4>
+            <p>租赁期占资产使用寿命的大部分。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">标准五</span>
+            <h4>租金折现值 ≈ 公允价值</h4>
+            <p>应付租金折现值接近全新设备公允价值（实务中 ≥ 90%）。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">知识补充：折现与折现率</div>
+            <p>因金钱有时间价值，不同时间的同等金额需折现后才能比较。</p>
+            <p><strong>示例（3% 利率）</strong>：两年后 106.09 元 = 一年后 103 元 = 现在 100 元。</p>
+            <p>将未来金额还原成现值的过程称为「<strong>折现</strong>」，使用的利率称为「<strong>折现率</strong>」。</p>
+          </div>
+        </div>
+
+        <h3>9.3.3 承租人的会计处理</h3>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">简化案例</div>
+            <p>上市公司 D 租赁生产线，租期 5 年；每年年底支付租金 1000 万元；内含利率 6%（最近增量贷款利率）。</p>
+          </div>
+        </div>
+
+        <p><strong>第一步：确认租赁负债</strong>（未来租金折现值之和）</p>
+
+        <div class="formula">= 1000÷1.06 + 1000÷1.06² + 1000÷1.06³ + 1000÷1.06⁴ + 1000÷1.06⁵
+≈ <strong>4212.36 万元</strong></div>
+
+        <p><strong>第二步：确认使用权资产</strong>（租赁负债 + 初始费用 + 预计期满费用折现值）</p>
+
+        <div class="formula">本例使用权资产 = <strong>4212.36 万元</strong>（假设无其他费用）</div>
+
+        <p><strong>第三步：确认未确认融资费用</strong></p>
+
+        <div class="formula">未确认融资费用 = 应付租金总额 − 租赁负债
+= 5000 − 4212.36 = <strong>787.64 万元</strong></div>
+
+        <p><strong>各期分摊明细</strong>（类似等额本息房贷，前期利息多、后期利息少）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间</th><th>实付现金（万元）</th><th>融资费用（万元）</th><th>租赁负债（万元）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>期初</td><td>—</td><td>—</td><td>4212.36</td></tr>
+            <tr><td>第一年末</td><td>1000</td><td>252.74</td><td>3465.10</td></tr>
+            <tr><td>第二年末</td><td>1000</td><td>207.91</td><td>2673.01</td></tr>
+            <tr><td>第三年末</td><td>1000</td><td>160.38</td><td>1833.39</td></tr>
+            <tr><td>第四年末</td><td>1000</td><td>110.00</td><td>943.39</td></tr>
+            <tr><td>第五年末</td><td>1000</td><td>56.61</td><td>0.00</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>合计</td><td>5000</td><td>787.64</td><td>—</td></tr>
+          </tfoot>
+        </table>
+
+        <h3>9.3.4 出租人的会计处理</h3>
+        <p>出租方仍采用原准则，区分经营租赁和融资租赁。</p>
+
+        <p><strong>经营租赁</strong>：计提资产折旧和减值；应收租金作为收入。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">融资租赁示例</div>
+            <p>出租生产线，公允价值 7000 万元，相关费用 200 万元；每年收租金 1500 万元，租期 6 年；期满支付 300 万元买下。</p>
+          </div>
+        </div>
+
+        <p><strong>会计处理</strong>：</p>
+
+        <div class="formula">应收融资租赁款 = 1500 × 6 + 300 = <strong>9300 万元</strong>
+租赁投资净额 = 7000 + 200 = <strong>7200 万元</strong>
+未实现融资收益 = 9300 − 7200 = <strong>2100 万元</strong>
+对应利率 ≈ <strong>7.66%</strong>（用房贷计算器算出）</div>
+
+        <p><strong>各期收入确认</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间</th><th>实收现金（万元）</th><th>融资租赁收入（万元）</th><th>融资租赁投资净额（万元）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>期初</td><td>—</td><td>—</td><td>7200.00</td></tr>
+            <tr><td>第一年末</td><td>1500</td><td>551.52</td><td>6251.52</td></tr>
+            <tr><td>第二年末</td><td>1500</td><td>478.87</td><td>5230.39</td></tr>
+            <tr><td>第三年末</td><td>1500</td><td>400.65</td><td>4131.03</td></tr>
+            <tr><td>第四年末</td><td>1500</td><td>316.44</td><td>2947.47</td></tr>
+            <tr><td>第五年末</td><td>1500</td><td>225.78</td><td>1673.25</td></tr>
+            <tr><td>第六年末</td><td>1500</td><td>126.75</td><td>300.00</td></tr>
+            <tr><td>第六年末</td><td>300</td><td>—</td><td>0.00</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>合计</td><td>9300</td><td>2100.00</td><td>—</td></tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 总结 -->
+      <section id="sec-summary">
+        <h2>📌 总结</h2>
+
+        <p>生产类资产是企业日常生产制造的物质基础，理解这些科目的会计处理方法和潜在风险点，是财报分析的重要基础。投资者需要特别关注：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">关注一</span>
+            <h4>折旧政策变更</h4>
+            <p>可能是利润操纵信号。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">关注二</span>
+            <h4>减值计提与资产出售</h4>
+            <p>警惕「先减值后出售」的报表美化手法。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">关注三</span>
+            <h4>在建工程长期不转固</h4>
+            <p>可能隐藏虚构工程或避免折旧。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">关注四</span>
+            <h4>生物资产</h4>
+            <p>农林渔牧等行业造假高发区，需谨慎。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">关注五</span>
+            <h4>商誉爆雷</h4>
+            <p>关注商誉占比和减值测试披露质量。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">关注六</span>
+            <h4>长期待摊费用</h4>
+            <p>数字越大，资产质量越差。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资建议</div>
+            <p>选择研发费用全部费用化、拥有大量经济商誉且有形资产需求少的企业。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接/待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第2章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
