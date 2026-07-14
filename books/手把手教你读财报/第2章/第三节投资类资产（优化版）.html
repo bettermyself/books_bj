@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>投资类资产 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.5rem 0 .75rem;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+    .chapter-article ul, .chapter-article ol {
+      margin: 0 0 1rem 0;
+      padding-left: 1.6rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .35rem;
+    }
+    .callout-body ul, .callout-body ol {
+      margin: .25rem 0 0 0;
+      padding-left: 1.4rem;
+    }
+    .callout-body li { font-size: .9rem; line-height: 1.75; margin-bottom: .3rem; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: .5rem; font-size: .9rem; }
+    .callout-body p:last-child { margin-bottom: 0; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table.tnum td:first-child { white-space: normal; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+    /* 表格说明小标题 */
+    .table-caption {
+      font-size: .82rem;
+      color: var(--text2);
+      margin: -.5rem 0 .25rem;
+      font-weight: 600;
+    }
+    .table-note {
+      font-size: .8rem;
+      color: var(--text3);
+      margin: -.75rem 0 1rem;
+      font-style: italic;
+    }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Footnote ===== */
+    .footnote {
+      font-size: .8rem;
+      color: var(--text3);
+      margin: .35rem 0 1rem;
+      line-height: 1.7;
+    }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="第三节投资类资产（优化版）.html" class="active">第三节 投资类资产</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第三章 利润表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第四章 现金流量表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-intro">📋 引言</a></li>
+        <li><a href="#sec-1">🏠 一、投资性房地产</a></li>
+        <li><a href="#s1-1" class="sub">1.1 计量模式</a></li>
+        <li><a href="#s1-2" class="sub">1.2 资产转换规则</a></li>
+        <li><a href="#sec-2">💵 二、债权类投资</a></li>
+        <li><a href="#s2-1" class="sub">2.1 持有至到期投资</a></li>
+        <li><a href="#s2-2" class="sub">2.2 交易性金融资产</a></li>
+        <li><a href="#s2-3" class="sub">2.3 可供出售金融资产</a></li>
+        <li><a href="#sec-3">🏢 三、长期股权投资</a></li>
+        <li><a href="#s3-1" class="sub">3.1 股权投资分类</a></li>
+        <li><a href="#s3-2" class="sub">3.2 记录与变化</a></li>
+        <li><a href="#sec-4">⚠️ 四、股权投资的雷区信号</a></li>
+        <li><a href="#sec-5">🧾 五、递延所得税资产和负债</a></li>
+        <li><a href="#s5-1" class="sub">5.1 产生原理</a></li>
+        <li><a href="#s5-2" class="sub">5.2 常见分歧来源</a></li>
+        <li><a href="#s5-3" class="sub">5.3 如何看待</a></li>
+        <li><a href="#sec-6">🆕 六、新准则升级版</a></li>
+        <li><a href="#s6-1" class="sub">6.1 借壳上市</a></li>
+        <li><a href="#s6-2" class="sub">6.2 金融资产分类变化</a></li>
+        <li><a href="#s6-3" class="sub">6.3 金融资产重分类</a></li>
+        <li><a href="#sec-7">📉 七、资产减值</a></li>
+        <li><a href="#s7-1" class="sub">7.1 减值认定标准</a></li>
+        <li><a href="#s7-2" class="sub">7.2 规则未变的资产减值</a></li>
+        <li><a href="#s7-3" class="sub">7.3 规则已变的金融资产减值</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第二章 资产负债表 · 第三节</div>
+        <h1 class="article-title">投资类资产</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>投资类资产的分类、计量规则、利润表影响与新准则升级</span>
+        </div>
+      </header>
+
+      <!-- 引言 -->
+      <section id="sec-intro">
+        <h2>📋 引言</h2>
+
+        <div class="pull-quote">境外上市及境内外同时上市的企业，自 <strong>2018年1月1日</strong> 起施行新金融工具准则；境内上市企业自 <strong>2019年1月1日</strong> 起施行。新旧准则下投资类资产的分类和处理规则差异较大，本节先介绍原准则的处理逻辑（适用于新准则施行前的财报阅读），再讲解新准则带来的变化。</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心提示</div>
+            <p>投资类资产的分类直接影响利润表。</p>
+          </div>
+        </div>
+
+        <p>公司完成生产经营、回收资金后进行的各类投资（房产、债权、理财、信托、股权、基金、衍生工具等），会依据持有目的被归入不同的资产负债表科目——投资性房地产、持有至到期投资、交易性金融资产、可供出售金融资产、长期股权投资等，从而对利润表产生截然不同的影响。</p>
+
+        <p>例如，同样是持有其他上市公司股票，若分类为"可供出售金融资产"，股价涨跌只要未卖出就不影响利润表；若分类为"交易性金融资产"，涨跌金额则全部计入当期利润。同一笔投资，不同的分类会带来完全不同的利润数据——<strong>不理解这种分类逻辑，就可能踩中财务地雷，或错判股价异动的原因</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、投资性房地产 -->
+      <section id="sec-1">
+        <h2>🏠 一、投资性房地产</h2>
+
+        <p>企业持有的房产及其附着土地，按用途分类如下：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>持有目的</th><th>归属科目</th></tr></thead>
+          <tbody>
+            <tr><td>自用（住宅、写字楼、商铺、厂房）</td><td>固定资产</td></tr>
+            <tr><td>房地产公司用于出售</td><td>存货</td></tr>
+            <tr><td>用于收租或谋取增值</td><td><strong>投资性房地产</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s1-1">1.1 计量模式</h3>
+        <p>投资性房地产建造或购买之初均以<strong>成本入账</strong>，后续计量可选择两种模式：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>计量模式</th><th>处理方式</th><th>对利润表的影响</th></tr></thead>
+          <tbody>
+            <tr><td><strong>成本模式</strong></td><td>按期计提折旧，年末做减值测试</td><td>折旧及减值计入费用；租金收入计入其他业务收入</td></tr>
+            <tr><td><strong>公允价值模式</strong></td><td>不计提折旧和摊销，直接以期末公允价值计价</td><td>公允价值涨跌计入"公允价值变动收益"，直接影响当期净利润</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意事项</div>
+            <ul>
+              <li>会计准则<strong>建议采用成本模式</strong>（更谨慎），但房价持续上涨时，成本模式无法反映资产增值。</li>
+              <li>一家公司<strong>只能选择一种模式</strong>计量其持有的全部投资性房地产，不允许部分资产用成本模式、部分用公允价值模式。</li>
+              <li>采用公允价值模式（无论是新增计量还是从成本模式切换而来），须同时满足两个条件：
+                <ol>
+                  <li>该房地产所在地存在活跃的房地产交易市场，可直接交易；</li>
+                  <li>企业能从活跃市场获得同类或类似房地产（区域、结构、新旧程度相近）的市场价格及相关信息。</li>
+                </ol>
+              </li>
+              <li>公允价值变动带来的"利润"<strong>不对应现金流入或流出</strong>：房价上涨，利润增加但无现金流入；房价下跌，亏损增加但无现金流出。</li>
+              <li><strong>跨市场对比要谨慎</strong>：沪深上市房企多采用成本模式，港股上市房企多采用公允价值模式，两者的利润和资产数据差异在对比分析时必须重点考量。</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 id="s1-2">1.2 资产转换规则</h3>
+        <p>由于持有目的变化，投资性房地产可能与自用房地产、存货、固定资产之间发生转换：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>转换方向</th><th>处理方式</th></tr></thead>
+          <tbody>
+            <tr><td>自用房地产 ↔ 存货 ↔ 成本模式投资性房地产</td><td>均按历史成本平移，<strong>不影响</strong>净资产及利润表</td></tr>
+            <tr><td>成本模式投资性房地产 → 公允价值模式投资性房地产</td><td>以转换日公允价值为新账面价值，差额调整<strong>期初留存收益</strong></td></tr>
+            <tr><td>公允价值模式投资性房地产 → 固定资产/存货</td><td>以转换日公允价值作为新账面成本；转换前的公允价值变动计入<strong>利润表</strong></td></tr>
+            <tr><td>自用房地产/存货 → 公允价值模式投资性房地产</td><td>以转换日公允价值为账面价值；差额为负计入<strong>利润表</strong>，差额为正调整<strong>股东权益</strong>（不影响利润）</td></tr>
+          </tbody>
+        </table>
+
+        <p>公允价值模式<strong>不允许转回</strong>成本模式。整套转换规则的设计意图，都是为了防止企业借转换操纵利润——关注要点只需锁定该科目采用的是成本模式还是公允价值模式，并理解两种模式对利润数据的影响即可。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、债权类投资 -->
+      <section id="sec-2">
+        <h2>💵 二、债权类投资</h2>
+
+        <p>债权类投资涉及的科目包括：贷款和应收款项、买入返售金融资产、持有至到期投资、交易性金融资产、可供出售金融资产等。其中应收款项已在经营类资产部分介绍，贷款和买入返售金融资产主要涉及金融类企业，本节从略（可参阅《手把手教你读财报2：18节课看透银行业》，2017年1月出版）。</p>
+
+        <h3 id="s2-1">2.1 持有至到期投资</h3>
+        <p>以"收取合同现金流为目标"的债权投资（借钱收息、到期收本），最常见的是对债券的投资，归类为<strong>"持有至到期投资"</strong>。</p>
+
+        <p><strong>案例：贵州茅台的持有至到期投资</strong></p>
+        <p>2013年财报显示，贵州茅台持有5000万元商业银行次级定期债券（本息偿还顺序在其他债权之后、股本之前）：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>期末账面余额</th><th>期初账面余额</th></tr></thead>
+          <tbody>
+            <tr><td>商业银行次级定期债券</td><td>50,000,000.00</td><td>50,000,000.00</td></tr>
+            <tr><td><strong>合计</strong></td><td><strong>50,000,000.00</strong></td><td><strong>50,000,000.00</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>按面值购买的债券处理简单：以购买成本作为账面价值，每年按票面利率产生的利息计入当年利润。</p>
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">权责发生制</div>
+            <p>按权责发生制原则，无论利息是否到手都确认为"利润"，区别只在于是"应收利息"还是现金。</p>
+          </div>
+        </div>
+
+        <p><strong>实际利率与摊余成本</strong></p>
+        <p>真实的债券交易远比"面值买入"复杂——溢价买入高息债、折价买入低息债、零息债券等情况下，如何计算逐年投资收益？为此引入两个概念：</p>
+        <ul>
+          <li><strong>实际利率</strong>：使投资在持有期内现金流现值等于初始投入成本的折现率。</li>
+          <li><strong>摊余成本</strong>：每期"摊"入投资收益后"余"下的账面成本，作为下一期计算收益的基础，此计量方法称为"<strong>以摊余成本计量</strong>"。</li>
+        </ul>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">示例：贵州茅台 5 年期债券</div>
+            <p>贵州茅台1月1日出资1000万元购买5年期债券，到期一次性偿还1500万元本息。</p>
+            <ol>
+              <li>用复利公式 <strong>1000×(1+r)⁵=1500</strong>，解得实际利率 <strong>r ≈ 8.45%</strong>。</li>
+              <li>第一年投资收益 = 1000×8.45% = <strong>84.5万元</strong>，计入利润表；由于未收到现金，账面价值增至 1000+84.5=<strong>1084.5万元</strong>。</li>
+              <li>后续各年以上一年末摊余成本 × 实际利率，滚算收益。</li>
+            </ol>
+          </div>
+        </div>
+
+        <p class="table-caption">摊余成本滚算表（单位：万元）</p>
+        <table class="article-table tnum">
+          <thead><tr><th>时间</th><th>现金流出</th><th>现金流入</th><th>投资收益</th><th>摊余成本余额</th></tr></thead>
+          <tbody>
+            <tr><td>第一年初</td><td>1000</td><td>0</td><td>—</td><td>1000.00</td></tr>
+            <tr><td>第一年底</td><td>0</td><td>0</td><td>84.50</td><td>1084.50</td></tr>
+            <tr><td>第二年底</td><td>0</td><td>0</td><td>91.64</td><td>1176.14</td></tr>
+            <tr><td>第三年底</td><td>0</td><td>0</td><td>99.38</td><td>1275.52</td></tr>
+            <tr><td>第四年底</td><td>0</td><td>0</td><td>107.78</td><td>1383.30</td></tr>
+            <tr><td>第五年底</td><td>0</td><td>1500</td><td>116.70</td><td>0.00</td></tr>
+            <tr><td><strong>合计</strong></td><td><strong>1000</strong></td><td><strong>1500</strong></td><td><strong>500</strong></td><td>—</td></tr>
+          </tbody>
+        </table>
+        <p class="table-note">注：四舍五入产生的细微差异在最后一年做了调整。</p>
+
+        <p>现金流量表只在第一年记录1000万元流出、第五年记录1500万元流入；利润表逐年记录投资收益（合计500万元的分摊结果）；摊余成本余额即每年资产负债表中"持有至到期投资"的账面价值。</p>
+
+        <p>若债券期间还有分期付息（如每年付息+期末一次性回报），实际利率需通过现金流折现方程求解：</p>
+        <div class="formula">[59÷(1+r)] + [59÷(1+r)²] + [59÷(1+r)³] + [59÷(1+r)⁴] + [(1250+59)÷(1+r)⁵] = 1000</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资者无需自行计算</div>
+            <p>只要理解摊余成本和实际利率的原理，直接采用公司披露的数据即可——公司财务和会计师事务所不会在这类基础公式上出错。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-2">2.2 交易性金融资产</h3>
+        <p>若债权资产没有约定固定回报，公司持有的主要目的是从<strong>资产价格波动中获利</strong>而非收回本息，则归类为"以公允价值计量且其变动计入当期损益的金融资产"，即<strong>"交易性金融资产"</strong>。涵盖范围广泛：非保本理财、结构性存款、信托产品、债券、可转债、股票、基金、金融衍生工具等。</p>
+
+        <p><strong>两个关键特点</strong></p>
+        <ol>
+          <li>分类依据是公司的<strong>持有意图</strong>，与最终是否中途卖出无关；但一旦归入此类，<strong>不允许再转换</strong>为其他科目。</li>
+          <li><strong>金融衍生工具</strong>（期货、期权、远期合同、利率互换、货币互换等）必须归为交易性金融资产。</li>
+        </ol>
+
+        <p><strong>计量与利润影响</strong></p>
+        <p>交易性金融资产<strong>不计提折旧、不做减值测试</strong>，持有期间的公允价值变动直接计入利润表"公允价值变动收益"科目：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>情形</th><th>处理</th></tr></thead>
+          <tbody>
+            <tr><td>买入成本100元</td><td>记录交易性金融资产100元，交易税费作当期费用扣除</td></tr>
+            <tr><td>期末股价150元</td><td>账面价值调至150元，利润表记录<strong>+50元</strong>公允价值变动收益</td></tr>
+            <tr><td>期末股价80元</td><td>账面价值调至80元，利润表记录<strong>-20元</strong>公允价值变动收益</td></tr>
+            <tr><td>持有期间分红/利息</td><td>计入当期投资收益</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">税务口径差异</div>
+            <p>公允价值变动产生的利润或亏损，税务局均不予确认（不征税、不允许税前扣除），只有实际卖出时才确认应纳税所得。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">📌</div>
+          <div class="callout-body">
+            <div class="callout-title">对股价的助涨助跌效应</div>
+            <p>交易性金融资产的公允价值波动计入当期利润，牛市或熊市中会通过上市公司的市盈率倍数效应放大股价波动——每1元的增量利润，可能通过N倍市盈率体现为N元的股价涨幅，反之亦然。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-3">2.3 可供出售金融资产</h3>
+        <p>若公司对某笔债权或股权投资的目的并不明确（既可能收息持有，也可能博取差价），归类为<strong>"可供出售金融资产"</strong>。</p>
+
+        <p><strong>计量方式</strong></p>
+        <ul>
+          <li>初始成本 = 买入成本 + 交易费用（与交易性金融资产不同，后者的交易费用直接费用化，不计入账面价值）。</li>
+          <li>公允价值变动<strong>不计入当期利润</strong>，而是计入股东权益（资本公积——其他资本公积）。</li>
+          <li>2014年7月1日后的规则要求：单独列示在利润表净利润之后的"<strong>其他综合收益</strong>"科目披露（详见第三章）。</li>
+          <li>出售时：卖价与买入成本的差额计入利润表投资收益，同时将累计公允价值变动<strong>转出</strong>其他资本公积/其他综合收益。</li>
+        </ul>
+
+        <p><strong>对当期利润的影响</strong></p>
+        <p>尽管公允价值变动本身不影响利润，以下三项仍会影响当期利润表：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>影响因素</th><th>计入科目</th></tr></thead>
+          <tbody>
+            <tr><td>持有期间应得分红或利息（与现金是否到账无关）</td><td>投资损益</td></tr>
+            <tr><td>外汇汇兑损益（汇率变动导致的外币资产账面价值变化）</td><td>汇兑收益</td></tr>
+            <tr><td>计提的减值准备</td><td>资产减值损失（降低利润）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">减值判断标准</div>
+            <p>公允价值"严重下跌"或"非暂时性下跌"时才计提减值。多数企业自设标准为累计跌幅超过成本的20%~50%（严重下跌），连续下跌超过12个月（非暂时性下跌）。</p>
+          </div>
+        </div>
+
+        <p><strong>减值转回规则</strong></p>
+        <table class="article-table tnum">
+          <thead><tr><th>资产类型</th><th>减值消失后能否转回</th></tr></thead>
+          <tbody>
+            <tr><td>债权类资产</td><td>✅ 可转回利润表，增加当期利润</td></tr>
+            <tr><td>权益类资产（有公开报价）</td><td>⚠️ 可转回资本公积/其他综合收益，<strong>影响股东权益但不影响利润</strong></td></tr>
+            <tr><td>权益类资产（无公开报价，公允价值无法获得）</td><td>❌ 不允许转回</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、长期股权投资 -->
+      <section id="sec-3">
+        <h2>🏢 三、长期股权投资</h2>
+
+        <p>股权投资对象既包括上市公司股票，也包括非上市公司股权，涉及三个科目：长期股权投资、交易性金融资产、可供出售金融资产。</p>
+
+        <h3 id="s3-1">3.1 股权投资分类</h3>
+        <p>按影响力分为控制、重大影响、无重大影响三类，对应子公司、联营/合营公司、小股投资：</p>
+
+        <p><strong>判定为"控制"（子公司）的五条标准</strong>（符合任一即可）：</p>
+        <ol>
+          <li>直接或间接持有超过50%的股份；</li>
+          <li>通过协议约定拥有超过50%的表决权；</li>
+          <li>在董事会占多数席位；</li>
+          <li>有权任免董事会多数成员；</li>
+          <li>有权决定公司财务或经营政策。</li>
+        </ol>
+
+        <p><strong>判定为"重大影响"的常见情形</strong>：</p>
+        <ol>
+          <li>在董事会拥有席位；</li>
+          <li>向关键管理/技术岗位派出员工；</li>
+          <li>参与经营或财务决策制定；</li>
+          <li>与投资对象存在重大关联交易；</li>
+          <li>持股20%~50%（无充分反证的情况下）；</li>
+          <li>投资对象的关键技术依赖本公司。</li>
+        </ol>
+
+        <p><strong>合营公司</strong>：因股权比例或协议约定，上市公司无法单独决策，但其他股东也无法单独决策（常见模式：各持50%，或34%股份但决策需2/3以上同意）。</p>
+        <p>除合营公司外，其他有重大影响的投资对象归为<strong>联营公司</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">特殊情形</div>
+            <p>若上市公司本部是专业投资管理主体，仅为其投资管理业务提供服务的子公司才纳入合并范围；其他任何持股比例的股权投资，均计入交易性金融资产。</p>
+          </div>
+        </div>
+
+        <p><strong>2014年7月1日准则调整</strong>：无重大影响、无公开市场交易、公允价值无法获得的"三无股权"，此前按成本法计入长期股权投资，此后改为"以成本模式计量的可供出售金融资产"（对利润表的影响未变，仍是分红和减值）。</p>
+
+        <h3 id="s3-2">3.2 长期股权投资的记录与变化</h3>
+
+        <p><strong>母公司报表（成本法核算）</strong></p>
+        <p>上市公司股权投资先记录于母公司资产负债表的"长期股权投资"科目。以贵州茅台2013年财报为例（母公司口径，单位：元）：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>被投资单位</th><th>投资成本</th><th>期末余额</th><th>持股比例(%)</th><th>表决权比例(%)</th></tr></thead>
+          <tbody>
+            <tr><td>贵州茅台酒销售有限公司</td><td>9,500,000.00</td><td>9,500,000.00</td><td>95.00</td><td>95.00</td></tr>
+            <tr><td>贵州茅台酒进出口有限责任公司</td><td>5,600,000.00</td><td>5,600,000.00</td><td>70.00</td><td>70.00</td></tr>
+            <tr><td>北京茅台神舟商贸有限公司</td><td>2,750,000.00</td><td>2,750,000.00</td><td>55.00</td><td>55.00</td></tr>
+            <tr><td>贵州名将酒业有限公司</td><td>2,750,000.00</td><td>2,750,000.00</td><td>55.00</td><td>55.00</td></tr>
+            <tr><td>贵州茅台酒厂(集团)投资合作有限责任公司</td><td>4,000,000.00</td><td>4,000,000.00</td><td>40.00</td><td>40.00</td></tr>
+            <tr><td>贵州茅台集团财务有限公司</td><td>408,000,000.00</td><td>408,000,000.00</td><td>51.00</td><td>51.00</td></tr>
+            <tr><td>贵州茅台酒个性化定制营销有限公司</td><td>14,000,000.00</td><td>14,000,000.00</td><td>70.00</td><td>70.00</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>成本法核算规则</strong>：只要不计提减值，账面价值永远等于投资成本，不受被投资方经营盈亏影响；被投资方权力机构批准分红方案时，按比例确认"投资收益"并计"应收股利"，实际收款时不影响利润表。</p>
+
+        <p><strong>合并报表：子公司股权"消失"</strong></p>
+        <p>编制合并报表时，需合并子公司全部资产负债及收入费用，因此子公司股权在<strong>合并</strong>资产负债表的"长期股权投资"科目中消失，只在"商誉"科目保留收购溢价（若有）。贵州茅台2013年合并报表的长期股权投资从母公司口径的44660万元，降至400万元（仅为对"贵州茅台酒厂(集团)投资合作有限公司"40%股权的成本法投资，因持股虽达40%但公司认定无重大影响、公允价值无法取得）。</p>
+
+        <p>2014年7月1日后，"三无股权"改分类为"以成本模式计量的可供出售金融资产"，对利润表影响不变，但简化了长期股权投资的构成——此后合并报表的"长期股权投资"<strong>只剩权益法核算的联合营公司股权</strong>。</p>
+
+        <p><strong>权益法：对利润表的三点影响</strong></p>
+        <ol>
+          <li>联合营公司当年利润/亏损，按持股比例计入投资收益；</li>
+          <li>联合营公司其他综合收益变动，按持股比例计入本公司其他综合收益；</li>
+          <li>与联合营公司之间交易的未实现损益，按持股比例从投资收益中扣除。</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">知识链接：未实现损益扣除方法</div>
+            <ul>
+              <li><strong>顺流交易</strong>（上市公司→联合营公司销售）：商品未被联合营公司卖给第三方前，按股权比例扣除相应损益。</li>
+              <li><strong>逆流交易</strong>（联合营公司→上市公司销售）：商品未被上市公司卖给第三方前，按股权比例部分不计入投资收益。</li>
+              <li>若联合营公司会计政策与本公司不同，需按本公司政策重新计算其利润后再按比例计入。</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>权益法：对资产负债表的三点影响</strong></p>
+        <ol>
+          <li>按持股比例的应得利润/亏损，增减长期股权投资账面价值；</li>
+          <li>联合营公司其他权益变动（净利润和利润分配除外），按比例计入其他综合收益，同时调整账面价值；</li>
+          <li>联合营公司分红方案通过时，增加"应收股利"、减少长期股权投资账面价值；实际收款时应收股利转为货币资金。</li>
+        </ol>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">案例：贵州茅台 30% 联营股权（权益法）</div>
+            <p>贵州茅台2014年初以3000万元投资甲公司30%股权（联营公司，权益法核算）。</p>
+            <ul>
+              <li>甲公司当年净利润1000万元 → 确认投资收益 1000×30%=<strong>300万元</strong>；</li>
+              <li>甲公司其他综合收益减少200万元 → 计入其他综合收益 -200×30%=<strong>-60万元</strong>；</li>
+              <li>长期股权投资账面价值：3000+300-60=<strong>3240万元</strong>；</li>
+              <li>若甲公司分红600万元，茅台应得180万元 → 确认"应收股利"180万元，账面价值调至 3240-180=<strong>3060万元</strong>；</li>
+              <li>分红到账后，应收股利转为货币资金，与利润表无关。</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>两个重要细节</strong></p>
+        <ol>
+          <li>若联合营公司持续亏损，长期股权投资账面价值<strong>减至零为止</strong>（除非有协议约定承担额外损失义务）。</li>
+          <li>若上市公司通过风险投资、基金、信托等机构<strong>间接</strong>持有联合营公司部分股权，该部分可分类为交易性金融资产，剩余部分仍用权益法核算（无论剩余比例多少）。</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、股权投资的雷区信号 -->
+      <section id="sec-4">
+        <h2>⚠️ 四、股权投资的雷区信号</h2>
+
+        <p>股权交易操作灵活、税务处理简单，是企业对外投资/收购的主要形式，也是<strong>大股东与上市公司之间利益输送的高发地带</strong>。监管部门已通过多项规则堵漏（减值不允许转回、同一控制下交易不得计入利润、不改变分类的减持不产生利润等），但道高一尺魔高一丈，以下是几种值得警惕的操纵手法（<strong>⚠️ 仅为经验总结，不代表出现即等于造假</strong>）：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>手法</th><th>操作方式</th><th>警示信号</th></tr></thead>
+          <tbody>
+            <tr><td><strong>(1) 大额减值 + 次期卖出</strong></td><td>本期对联合营股权超额计提减值制造亏损，下期按公允价值出售获利，拉高利润同比增速</td><td>减值计提金额与后续出售收益的时间配对异常紧密</td></tr>
+            <tr><td><strong>(2) 伪装非同一控制收购</strong></td><td>将实质为同一控制下的关联交易，包装为非同一控制交易以创造利润（购买法下资产支付的公允价值差、"捡便宜"的负商誉均可计入利润）</td><td>交易作价显失公平，或交易双方存在隐蔽关联关系</td></tr>
+            <tr><td><strong>(3) 边缘小额交易：子公司→联营公司</strong></td><td>不丧失控股权范围内减持通常只调整净资产；但导致控股权丧失时可确认投资收益，作价易被操纵</td><td>持股比例在控制权临界点附近反复小额交易</td></tr>
+            <tr><td><strong>(4) 边缘小额交易：金融资产→联营公司</strong></td><td>对持有的破净股小额增持或谋取董事席位，使其从金融资产转为权益法核算的联营股权，公允价值与股价差额计入营业外收入</td><td>临界点附近小额增持并伴随大额投资收益确认</td></tr>
+            <tr><td><strong>(5) 拆分一揽子减持</strong></td><td>将同一笔减持拆成多次交易：先在不丧失控股权范围内亏本卖出（不影响利润，但降低净资产、拉高ROE），再在丧失控股权的交易中把亏损加回价格、确认大额投资收益</td><td>对同一对象连续多次买卖，尤其在分类临界点附近，且各笔作价差异明显</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">相关准则界定</div>
+            <p><strong>同一控制下交易（权益结合法）</strong>：视为"资产负债按账面价值合并"，不产生利润，只调整股东权益；合并报表<strong>从期初起</strong>即视为合并范围。</p>
+            <p><strong>非同一控制下交易（购买法）</strong>：只合并购买日后的数据；差额计入营业外收入，影响当期利润。</p>
+            <p><strong>一揽子交易的四条界定原则</strong>（会计准则）：①交易同时或彼此关联订立；②整体才能达成完整商业结果；③一项交易的发生依赖于另一项；④单独看不经济，合并看才经济。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资心态提示</div>
+            <p>证实一件事很难，但怀疑它不难。发现可疑迹象，尤其涉及疑似关联关系或作价不公平的交易，回避优于验证。正如巴菲特所说："与不诚信的人做成一笔好生意，这样的事我从未见过。"</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、递延所得税资产和负债 -->
+      <section id="sec-5">
+        <h2>🧾 五、递延所得税资产和负债</h2>
+
+        <p>企业按会计准则做账、税务局按税法收税，两套标准在计算应纳税所得时存在的差异（"税会差异"）会催生这对科目。</p>
+
+        <h3 id="s5-1">5.1 产生原理</h3>
+        <table class="article-table tnum">
+          <thead><tr><th>差异类型</th><th>处理方式</th></tr></thead>
+          <tbody>
+            <tr><td><strong>永久性差异</strong>（未来也不会被税法承认，如免税收入、超标业务招待费等）</td><td>会计直接按税务局标准调整应纳税所得（"税法优先"原则）</td></tr>
+            <tr><td><strong>暂时性差异</strong>（仅纳税时间先后不同）</td><td>通过"递延所得税资产/负债"科目暂存差异</td></tr>
+          </tbody>
+        </table>
+        <ul>
+          <li><strong>递延所得税资产</strong>：会计认为税务局多收的税，视为暂存在税务局的一笔资产。</li>
+          <li><strong>递延所得税负债</strong>：会计认为税务局少收的税，视为欠税务局的一笔负债。</li>
+        </ul>
+
+        <h3 id="s5-2">5.2 常见分歧来源</h3>
+        <ol>
+          <li>会计计入本期的费用，税法要求实际发生或分批扣除（如未经核定的减值计提、预提保修费等）；</li>
+          <li>会计费用可按税法<strong>超额扣除</strong>（如研发费用加计扣除）；</li>
+          <li>税法允许的加速折旧 / 一次性计入费用与会计直线折旧法的差异；</li>
+          <li>收入确认时点在税法与会计准则间的差异；</li>
+          <li>经营亏损可在税法允许年限内（如5年）用未来利润抵扣，产生递延所得税资产；</li>
+          <li><strong>内部销售</strong>：合并报表范围内企业间销售在税务局眼中已实现利润需征税，但合并报表视为未实现，不产生利润；</li>
+          <li><strong>公允价值变动损益</strong>：交易性金融资产、公允价值模式的投资性房地产的公允价值变动，税务局只在实际出售时确认损益。</li>
+        </ol>
+
+        <h3 id="s5-3">5.3 如何看待</h3>
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">对股东有利的是负债而非资产</div>
+            <p>对股东有利的是<strong>递延所得税负债</strong>（相当于税务局的无息贷款），而非递延所得税资产（相当于资金被税务局占用的预缴税款）。</p>
+          </div>
+        </div>
+
+        <p>两者<strong>不能互相抵销</strong>——造成资产的原因归入资产科目，造成负债的原因归入负债科目，抵扣或补缴时各自独立处理。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、新准则升级版 -->
+      <section id="sec-6">
+        <h2>🆕 六、新准则升级版</h2>
+
+        <h3 id="s6-1">6.1 借壳上市：法律与会计层面的差异</h3>
+
+        <p>借壳上市中，法律意义上的收购主体与会计意义上的收购主体经常不同，财报编制和阅读逻辑因此产生重大差异。以<strong>2015年分众传媒借壳七喜控股（SZ.002027）</strong>为例：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>维度</th><th>法律层面</th><th>会计层面</th></tr></thead>
+          <tbody>
+            <tr><td>收购关系表述</td><td>七喜控股收购分众多媒体100%股权，分众多媒体成为全资子公司</td><td>分众多媒体原股东通过股份置换实际取得七喜控股<strong>87.3%</strong>股权并控制上市公司</td></tr>
+            <tr><td>合并报表主体</td><td>—</td><td>以<strong>分众多媒体</strong>为主体编制，原七喜控股全部资产负债作为下属子公司并入（原资产负债后整体作价8.8亿元卖给原实际控制人）</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>关键数据</strong>：</p>
+        <ul>
+          <li>七喜控股借壳前总股本 3.02亿股；</li>
+          <li>向7家机构增发2.53亿股募资50亿元，并向分众多媒体原股东发行38.14亿股完成收购；</li>
+          <li>收购后总股本 = 3.02+2.53+38.14 ≈ <strong>43.68亿股</strong>；</li>
+          <li>分众多媒体原股东持股比例 = 38.14÷43.68 ≈ <strong>87.3%</strong>，实质丧失原七喜控股股东的控制权。</li>
+        </ul>
+
+        <p><strong>"虚拟股本"的处理</strong>：为体现分众多媒体股东出让12.7%股份的实质，合并资产负债表的股本科目按 2.91亿元真实注册资金 + 0.42亿元虚拟新增注册资金 = 3.34亿元反映（使 2.91÷3.34≈87.3%）。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">无观察价值</div>
+            <p>这个3.34亿元股本在现实中不存在，<strong>无观察价值</strong>。股东权益中除股本以外的其他数据，同样经过调节或只反映分众多媒体历史累计数据，对投资者同样无观察价值。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">正确做法：以母公司股本为分母</div>
+            <p>上市公司真实股本以<strong>母公司</strong>资产负债表的股本数据为准，各类每股指标应以此为分母计算：</p>
+            <ul>
+              <li>每股净资产 = 合并资产负债表归属母公司所有者权益 ÷ 母公司资产负债表股本</li>
+              <li>每股收益 = 合并利润表归属母公司净利润 ÷ 母公司资产负债表股本</li>
+            </ul>
+          </div>
+        </div>
+
+        <p>（分众传媒股本沿革：43.68亿股借壳 → 2016年10转增10股 → 2017年10转增4股 → 2018年10转增2股 → 最终146.78亿股，即2019年度母公司资产负债表的真实股本来源。）</p>
+        <p>其余财报阅读方式与普通公司无区别。</p>
+
+        <h3 id="s6-2">6.2 金融资产分类变化</h3>
+
+        <p>新金融工具准则带来两大变化：<strong>金融资产分类调整</strong>、<strong>资产减值规则调整</strong>。</p>
+
+        <p><strong>新旧分类对照</strong></p>
+        <table class="article-table tnum">
+          <thead><tr><th>原准则（四大类）</th><th>新准则（三大类）</th></tr></thead>
+          <tbody>
+            <tr><td>①贷款和应收款项 ②持有至到期投资</td><td>①以摊余成本计量的金融资产（<strong>"AC"</strong>）</td></tr>
+            <tr><td>③交易性金融资产</td><td>②以公允价值计量且其变动计入当期损益的金融资产（<strong>"FVTPL"</strong>）</td></tr>
+            <tr><td>④可供出售金融资产</td><td>③以公允价值计量且其变动计入其他综合收益的金融资产（<strong>"FVOCI"</strong>）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">老唐原创记忆法</div>
+            <ul>
+              <li><strong>"瘫子"（AC）</strong>：意图收息、等待到期还本，瘫在床上啥也不干。</li>
+              <li><strong>"笋子"（FVTPL）</strong>：意图博取差价，期待资产像笋子一样嗖嗖疯涨然后挖出来卖钱。</li>
+              <li><strong>"粽子"（FVOCI）</strong>：持有目的说不清楚，像粽子一样黏糊裹在一起。</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>三类资产的财报归属与处理规则</strong></p>
+        <table class="article-table tnum">
+          <thead><tr><th>绰号</th><th>财报科目</th><th>处理规则</th></tr></thead>
+          <tbody>
+            <tr><td><strong>"笋子"</strong></td><td>交易性金融资产（超1年到期且预期持有超1年部分单列"其他非流动金融资产"）</td><td>与原"交易性金融资产"完全一致</td></tr>
+            <tr><td><strong>"瘫子"</strong></td><td>货币资金、贷款、应收账款/票据、债权投资、其他流动资产、一年内到期的非流动资产、部分其他应收款/长期应收款</td><td>与原"持有至到期投资"完全一致</td></tr>
+            <tr><td><strong>"粽子"</strong></td><td>其他债权投资、其他流动资产、一年内到期的非流动资产、应收款项融资、其他权益工具投资</td><td>对应原"可供出售金融资产"</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意混杂科目</div>
+            <p>"其他流动资产"和"一年内到期的非流动资产"两个科目<strong>混杂"瘫子"和"粽子"</strong>——期限不足一年的短期债权统一进"其他流动资产"；长期债权临近到期时统一进"一年内到期的非流动资产"，需结合附注判断具体归属。</p>
+          </div>
+        </div>
+
+        <p><strong>"其他权益工具投资"的演变</strong>（原"三无股权"）：</p>
+        <p>以成本法核算的长期股权投资（2014年前）→ 以成本模式计量的可供出售金融资产（2014年7月1日后）→ 以公允价值计量且其变动计入其他综合收益的金融资产，单列为"其他权益工具投资"（新准则后）。</p>
+        <p>归入"其他权益工具投资"后的两大特点：</p>
+        <ol>
+          <li><strong>不允许再变更</strong>为其他类型金融资产；</li>
+          <li>持有期间公允价值变动计入其他综合收益，<strong>永久不影响利润</strong>；处置时累计变动只转入留存收益，依然与利润无关（原准则下出售时是转入当期利润的）。</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">"离别钩"效应</div>
+            <p>一旦归入"其他权益工具投资"，就与公司利润数据永别——这是监管部门为防止上市公司按需处置股权调节利润而设计的规则。<strong>⚠️ 每年分红仍计入当期损益，不受影响。</strong></p>
+          </div>
+        </div>
+
+        <p><strong>"兜底公允价值"</strong>：原"三无股权"本无法获得公允价值，为何能归入"公允价值计量"类别？因为准则允许公司使用<strong>历史成本</strong>作为无法获取公允价值时的"第三层次兜底公允价值"，从而解决了分类障碍。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">📌</div>
+          <div class="callout-body">
+            <div class="callout-title">披露要求</div>
+            <p>采用公允价值计量的资产负债，须在附注"公允价值的披露"中说明计算方法并与账面价值比较（参考贵州茅台2019年财报第107页、海康威视2019年财报第215页）。以下三种情况例外：①账面价值与公允价值差异很小的金融资产/负债；②租赁负债；③含相机分红特征且无法可靠计量公允价值的资产/负债。</p>
+          </div>
+        </div>
+
+        <h3 id="s6-3">6.3 金融资产重分类</h3>
+
+        <p>金融资产一经分类原则上不重分类，仅在持有目的或现金流特征确实发生变化时允许，且须解释原因。</p>
+
+        <p><strong>原准则下的重分类影响</strong></p>
+        <table class="article-table tnum">
+          <thead><tr><th>原类别 → 新类别</th><th>处理方式</th></tr></thead>
+          <tbody>
+            <tr><td>持有至到期投资 → 可供出售金融资产</td><td>以公允价值作为新账面价值，差额调整<strong>股东权益</strong></td></tr>
+            <tr><td>可供出售金融资产（有固定到期期限）→ 持有至到期投资</td><td>以初始成本（加回累计公允价值变动及减值）作为账面成本</td></tr>
+            <tr><td>可供出售金融资产（无固定到期期限）→ 持有至到期投资</td><td>以公允价值作为账面价值，原其他综合收益部分不变</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>新准则下的重分类影响</strong>（仅债权类资产可重分类，权益类和衍生金融资产不允许）</p>
+        <table class="article-table tnum">
+          <thead><tr><th>原类别 → 新类别</th><th>处理方式</th></tr></thead>
+          <tbody>
+            <tr><td>"瘫子" → "笋子"</td><td>以公允价值计价，差额<strong>计入当期损益</strong></td></tr>
+            <tr><td>"瘫子" → "粽子"</td><td>以公允价值计价，差额计入<strong>其他综合收益</strong></td></tr>
+            <tr><td>"笋子" → "瘫子"/"粽子"</td><td>以公允价值作为新账面价值</td></tr>
+            <tr><td>"粽子" → "瘫子"</td><td>账面价值加回已计入其他综合收益的部分</td></tr>
+            <tr><td>"粽子" → "笋子"</td><td>已计入其他综合收益的部分<strong>转入当期损益</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">📌</div>
+          <div class="callout-body">
+            <div class="callout-title">利润影响有限</div>
+            <p>仅当债权类资产从"粽子"或"瘫子"重分类为"笋子"时才影响利润表，但因债权类资产公允价值波动通常较小，整体影响有限。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">反操纵条款</div>
+            <p>重分类日须为做出决定后<strong>下一个会计周期的第一天</strong>，且不得追溯调整（如2019年11月5日做出决定，重分类日须为2020年1月1日），专门用于防止期末突击重分类创造利润。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、资产减值 -->
+      <section id="sec-7">
+        <h2>📉 七、资产减值</h2>
+
+        <h3 id="s7-1">7.1 减值认定标准</h3>
+        <p>资产减值 = 账面价值 &gt; 可回收金额。<strong>可回收金额</strong>取以下两者中的较高值：</p>
+        <ol>
+          <li>资产公允价值 - 处置预计所需费用；</li>
+          <li>资产未来现金流的折现值。</li>
+        </ol>
+        <p>只有两者<strong>同时低于</strong>账面价值时，才认定发生减值，需计提减值准备并计入当期费用。判断依赖三个变量：公允价值（通常可观测）、未来现金流预测、折现率——后两者主观性较强，是财务操纵的高发地带。</p>
+
+        <h3 id="s7-2">7.2 规则未变的资产减值</h3>
+        <p>适用于固定资产、在建工程、商誉、无形资产、存货、生物性资产、投资性房地产、长期股权投资等。减值迹象包括：</p>
+        <ul>
+          <li>资产市价大幅下跌（跌幅超20%~50%、持续超1年，标准由公司自定）；</li>
+          <li>行业、技术或法律环境重大不利变化；</li>
+          <li>资产所处市场环境重大不利变化；</li>
+          <li>资产陈旧、过时、闲置或损坏；</li>
+          <li>市场利率上升导致折现值下降；</li>
+          <li>内部报告显示未来现金流总量大幅下降。</li>
+        </ul>
+
+        <p><strong>处理规则</strong>：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>规则</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>①</td><td>公允价值模式的投资性房地产<strong>不需要</strong>计提减值</td></tr>
+            <tr><td>②</td><td>其他资产减值计入利润表"资产减值损失"，作当期费用扣除</td></tr>
+            <tr><td>③</td><td><strong>存货</strong>（含消耗性生物资产）减值消失时<strong>可转回</strong>；其他资产减值<strong>不允许转回</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s7-3">7.3 规则已变的金融资产减值（"瘫子""笋子""粽子"）</h3>
+        <p>减值方法由"<strong>已发生损失法</strong>"改为"<strong>预期信用损失法</strong>"：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>方法</th><th>逻辑</th><th>特点</th></tr></thead>
+          <tbody>
+            <tr><td>已发生损失法（原准则）</td><td>只有客观证据表明已发生损失才计提</td><td>减值波动大、缺乏前瞻性</td></tr>
+            <tr><td>预期信用损失法（新准则）</td><td>基于未来可能违约事件的预计损失计提，无论是否已发生</td><td>提前预判损失，平滑多期报表</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>小变化：减值转回规则统一</strong>——新准则下，原"持有至到期投资"和"贷款及应收款项"合并处理；"笋子"（交易性金融资产）和"其他权益工具投资"均不需要计提减值，也就不存在转回问题。</p>
+
+        <p><strong>大变化：计提方法调整</strong>——仅涉及"瘫子"和"粽子"中的<strong>债权类资产</strong>（贷款、应收账款/票据、应收款项融资、租赁应收款、合同资产、其他应收款/长期应收款、债权投资、其他流动资产、其他债权投资等）。</p>
+
+        <p><strong>判断偿还能力/意愿下降的六种情形</strong>：</p>
+        <ol>
+          <li>发行方或债务人发生重大财务困难；</li>
+          <li>债务人违反合同（利息/本金违约、超信用期）；</li>
+          <li>债权人因债务人财务困难做出通常不会做的让步；</li>
+          <li>债务人很可能破产或财务重组；</li>
+          <li>该金融资产的活跃市场因发行方困难而消失；</li>
+          <li>以大幅折扣出售同类金融资产，反映信用损失存在。</li>
+        </ol>
+
+        <p><strong>简便方法：应收账款预期信用损失</strong></p>
+        <p>企业可参照历史信用损失经验，编制逾期天数与计提比例对照表。以海康威视2018年年报的账龄计提比例为例：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>账龄</th><th>应收账款计提比例(%)</th><th>其他应收款计提比例(%)</th></tr></thead>
+          <tbody>
+            <tr><td>1年以内(含)</td><td>5</td><td>5</td></tr>
+            <tr><td>1~2年</td><td>10</td><td>10</td></tr>
+            <tr><td>2~3年</td><td>30</td><td>30</td></tr>
+            <tr><td>3~4年</td><td>50</td><td>50</td></tr>
+            <tr><td>4~5年</td><td>80</td><td>80</td></tr>
+            <tr><td>5年以上</td><td>100</td><td>100</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>账龄法 → 预期信用损失法的转换逻辑</strong>（迁徙率法）：</p>
+        <ol>
+          <li>依据历史数据（可选3年、5年等固定期限）计算每级账龄的<strong>迁徙率</strong>——即上一账龄段应收款演变为下一账龄段的比例；</li>
+          <li>假设迁徙率依次为5%、20%、50%、70%、90%（示意数据），5年以上计提比例100%；</li>
+          <li>以4~5年账面余额 E 为例：90%会拖成5年以上并全损，减值准备 = E×90%×100% = <strong>90%E</strong>；</li>
+          <li>以3~4年账面余额 D 为例：70%会迁徙到4年以上，其中90%再全损，减值准备 = D×70%×90%×100% = <strong>63%D</strong>；</li>
+          <li>依此类推汇总各段计提，本期与上期计提差额即当年计提额，计入利润表<strong>"信用减值损失"</strong>。</li>
+        </ol>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">科目拆分</div>
+            <p>原准则"资产减值损失"在新准则下拆分为"资产减值损失"（实际发生的各类资产减值汇总）和"<strong>信用减值损失</strong>"（预期信用风险导致的潜在减值，单列披露）。</p>
+          </div>
+        </div>
+
+        <p><strong>账龄 vs. 逾期</strong>：账龄指财务记录应收账款的时长；逾期指超过合同约定付款截止日的天数。二者概念不同，但实务中大部分企业尚无法精确对应每笔应收款的付款截止日，两者目前多混用，投资者了解区别即可，无需深究。</p>
+
+        <p><strong>预期信用损失三阶段法</strong>（用于无法套用简易法的偶发性应收款，如其他应收款、长期应收款）：</p>
+        <table class="article-table tnum">
+          <thead><tr><th>阶段</th><th>定义</th><th>计提口径</th></tr></thead>
+          <tbody>
+            <tr><td>第一阶段</td><td>信用风险未显著增加</td><td>按未来<strong>12个月</strong>违约损失概率计提，以<strong>账面余额</strong>×实际利率计算利息收入</td></tr>
+            <tr><td>第二阶段</td><td>信用风险显著增加，未发生信用减值</td><td>按<strong>全部存续期</strong>违约损失概率计提，以<strong>账面余额</strong>×实际利率计算利息收入</td></tr>
+            <tr><td>第三阶段</td><td>已发生信用减值</td><td>以<strong>账面价值</strong>（账面余额-减值准备）×实际利率计算利息收入</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">📌</div>
+          <div class="callout-body">
+            <div class="callout-title">最常用的判断标准</div>
+            <p>实务中最常用、最易操作的判断标准是：<strong>合同付款逾期超过（含）30日</strong>，即从第一阶段踢出。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关注价值提示</div>
+            <p>第二、三阶段的区分对利润表影响不大（因其他应收款通常涉及关联方借款、差旅费、保证金等低风险、金额较小的资产），造假"性价比"低，关注价值有限。部分公司为省事，甚至逾期30天直接从第一阶段跳至第三阶段处理。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接/待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第2章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
