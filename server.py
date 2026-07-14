@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import socketserver
+import sys
 import urllib.parse
 import webbrowser
 from pathlib import Path
@@ -227,6 +228,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 def main():
+    if os.environ.get('SERVER_LOG') == '1':
+        # 后台模式（由「启动服务.bat」设 SERVER_LOG=1 触发）：输出重定向到日志文件，便于排查问题；
+        # 前台 `python server.py` 不设此变量，仍输出到控制台，行为不变。
+        log_path = BASE_DIR / 'server.log'
+        sys.stdout = sys.stderr = open(log_path, 'a', encoding='utf-8', buffering=1)
     with socketserver.TCPServer(('', PORT), Handler) as httpd:
         httpd.allow_reuse_address = True
         url = f'http://localhost:{PORT}'
