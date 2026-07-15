@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>负债和所有者权益 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.5rem 0 .75rem;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+    .chapter-article ul, .chapter-article ol {
+      margin: 0 0 1rem 0;
+      padding-left: 1.6rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .35rem;
+    }
+    .callout-body ul, .callout-body ol {
+      margin: .25rem 0 0 0;
+      padding-left: 1.4rem;
+    }
+    .callout-body li { font-size: .9rem; line-height: 1.75; margin-bottom: .3rem; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: .5rem; font-size: .9rem; }
+    .callout-body p:last-child { margin-bottom: 0; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table.tnum td:first-child { white-space: normal; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Poem Block ===== */
+    .poem {
+      text-align: center;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--text);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .poem-author {
+      display: block;
+      font-size: .85rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="第四节负债和所有者权益_优化版.html" class="active">第四节 负债和所有者权益</a></li>
+            <li><a href="第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第三章 利润表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第四章 现金流量表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-intro">📋 概述</a></li>
+        <li><a href="#sec-1">💰 一、负债</a></li>
+        <li><a href="#s1-1" class="sub">1.1 负债的特点</a></li>
+        <li><a href="#s1-2" class="sub">1.2 负债的分类</a></li>
+        <li><a href="#s1-3" class="sub">1.3 投资人视角的负债分类</a></li>
+        <li><a href="#s1-4" class="sub">1.4 负债的双刃剑效应</a></li>
+        <li><a href="#sec-2">📝 二、负债主要科目解读</a></li>
+        <li><a href="#s2-1" class="sub">2.1 金融机构特有科目</a></li>
+        <li><a href="#s2-2" class="sub">2.2 应付职工薪酬</a></li>
+        <li><a href="#s2-3" class="sub">2.3 专项应付款</a></li>
+        <li><a href="#s2-4" class="sub">2.4 预计负债</a></li>
+        <li><a href="#s2-5" class="sub">2.5 递延收益（新准则）</a></li>
+        <li><a href="#sec-3">🏛️ 三、所有者权益（股东权益）</a></li>
+        <li><a href="#s3-1" class="sub">3.1 所有者权益的构成</a></li>
+        <li><a href="#s3-2" class="sub">3.2 实收资本（股本）</a></li>
+        <li><a href="#s3-3" class="sub">3.3 资本公积</a></li>
+        <li><a href="#s3-4" class="sub">3.4 库存股</a></li>
+        <li><a href="#s3-5" class="sub">3.5 股权激励方式对比</a></li>
+        <li><a href="#s3-6" class="sub">3.6 专项储备和一般风险准备</a></li>
+        <li><a href="#s3-7" class="sub">3.7 盈余公积</a></li>
+        <li><a href="#s3-8" class="sub">3.8 未分配利润</a></li>
+        <li><a href="#s3-9" class="sub">3.9 资金使用自由度排序</a></li>
+        <li><a href="#s3-10" class="sub">3.10 其他权益工具（新准则）</a></li>
+        <li><a href="#sec-4">🍶 四、以贵州茅台为例</a></li>
+        <li><a href="#sec-5">📜 五、股权激励新规定（2016）</a></li>
+        <li><a href="#s5-1" class="sub">5.1 时间和数量限制</a></li>
+        <li><a href="#s5-2" class="sub">5.2 限制性股票</a></li>
+        <li><a href="#s5-3" class="sub">5.3 股票期权</a></li>
+        <li><a href="#s5-4" class="sub">5.4 其他限制</a></li>
+        <li><a href="#sec-6">⚠️ 六、大额分红的警惕</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第二章 资产负债表 · 第四节</div>
+        <h1 class="article-title">负债和所有者权益</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>负债的分类与科目解读、所有者权益的构成、股权激励方式、大额分红的警惕</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="sec-intro">
+        <h2>📋 概述</h2>
+
+        <div class="pull-quote large">负债是债权人的权益。债权人没有参与经营的权利，也没有参与企业利润分配的权利，但享有按照约定收回本金和利息的权利。</div>
+
+        <p>负债可能源于经营活动、融资活动或投资活动。理解负债的结构和性质，是评估企业财务健康状况的关键环节。与资产不同，<strong>负债里通常很少会有假账</strong>——直接隐瞒负债在信息时代比较困难，这使得负债成为财务报表中相对"诚实"的部分。但投资者仍需关注负债的<strong>结构和期限</strong>，因为它们直接影响企业的流动性和偿付能力。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、负债 -->
+      <section id="sec-1">
+        <h2>💰 一、负债</h2>
+
+        <h3 id="s1-1">1.1 负债的特点</h3>
+
+        <table class="article-table tnum">
+          <thead><tr><th>特点</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><strong>计量客观性</strong></td><td>价值通常有既定数额或由既定计量模式确定，计量的主观性较小，很少引起会计学争论</td></tr>
+            <tr><td><strong>投资人关注度</strong></td><td>相比资产，负债较少成为关注重心。资产可能恶化，而负债不会变得更糟</td></tr>
+            <tr><td><strong>造假难度</strong></td><td>负债里通常很少会有假账，直接隐瞒负债在信息时代比较困难</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s1-2">1.2 负债的分类</h3>
+
+        <h4>按属性分类</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>分类</th><th>特征</th><th>会计科目</th><th>重分类规则</th></tr></thead>
+          <tbody>
+            <tr><td><strong>交易性金融负债</strong></td><td>需要归还的本息总额<strong>不确定</strong>，受市场因素或企业自身信用因素变化影响</td><td>以公允价值计量且其变动计入当期损益的金融负债</td><td>两种金融负债之间<strong>不允许重分类</strong></td></tr>
+            <tr><td><strong>其他金融负债</strong></td><td>需要归还的本息总额<strong>确定</strong></td><td>以摊余成本计量的金融负债</td><td>同上</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">会计错配特例</div>
+            <p>为消除会计错配，企业可将某些相互依存的金融资产和负债指定为"以公允价值计量且其变动计入当期损益"类别，<strong>指定一经做出，不得撤销</strong>。</p>
+          </div>
+        </div>
+
+        <h4>按偿还期限分类</h4>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">流动负债</span>
+            <h4>距离到期时间一年以内</h4>
+            <p>短期借款、应付账款、预收款项、应付职工薪酬、应交税费、其他应付款等。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">非流动负债</span>
+            <h4>距离到期时间一年以上</h4>
+            <p>长期借款、应付债券、长期应付款、预计负债、递延收益、递延所得税负债等。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重分类提醒</div>
+            <p>超过一年的长期借款和债券，伴随时间推移距离到期日小于一年时，需要转入<strong>"一年内到期的非流动负债"</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-3">1.3 投资人视角的负债分类</h3>
+
+        <h4>按来源分类</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>负债类型</th><th>来源</th><th>主要科目</th><th>是否有息</th></tr></thead>
+          <tbody>
+            <tr><td><strong>融资性负债</strong></td><td>因运营或投资需要借贷或发行债券</td><td>短期借款、交易性金融负债、长期借款、应付债券、一年内到期的非流动负债</td><td>通常<strong>有息</strong></td></tr>
+            <tr><td><strong>分配性负债</strong></td><td>伴随企业盈利而产生，应付但未付的股利和所得税</td><td>应付股利、应交所得税</td><td>通常<strong>无息</strong></td></tr>
+            <tr><td><strong>经营性负债</strong></td><td>伴随企业经营活动产生</td><td>应付账款、预收款项、应付职工薪酬等</td><td>通常<strong>无息</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h4>按是否承担利息分类</h4>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">有息</span>
+            <h4>融资性负债</h4>
+            <p>需要支付利息，是企业财务费用的主要来源，也是评估企业偿债压力的核心指标。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">无息</span>
+            <h4>经营性负债 + 分配性负债</h4>
+            <p>不直接产生利息成本，是企业利用商业信用和经营活动自然形成的负债。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-4">1.4 负债的双刃剑效应</h3>
+
+        <table class="article-table tnum">
+          <thead><tr><th>积极作用</th><th>消极风险</th></tr></thead>
+          <tbody>
+            <tr><td>扩大企业控制的资产规模，为股东创造更多财富</td><td>可能成为企业不能负担之重，在危机中吸干企业现金流，成为推动企业倒塌的重要推手</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资人关注要点</div>
+            <ol>
+              <li><strong>现金覆盖率</strong>：企业的现金及现金等价物能否覆盖有息负债</li>
+              <li><strong>负债比例</strong>：有息负债占总资产比例，最好与同行（尤其是行业龙头）对比</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、负债主要科目解读 -->
+      <section id="sec-2">
+        <h2>📝 二、负债主要科目解读</h2>
+
+        <h3 id="s2-1">2.1 金融机构特有科目</h3>
+
+        <h4>向中央银行借款</h4>
+
+        <p>金融机构（银行和非银行金融机构）的特权。央行作为银行的银行，在金融机构出现短期资金周转不灵时提供资金支持（如SLF、PSL等货币政策工具）。</p>
+
+        <h4>吸收存款及同业存放</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><strong>吸收存款</strong></td><td>金融机构吸收的集团内部各公司存款</td></tr>
+            <tr><td><strong>同业存放</strong></td><td>其他金融机构存放的资金</td></tr>
+            <tr><td><strong>合并抵销</strong></td><td>上市公司及其控制的子公司存放在财务公司的存款，在制作合并报表时抵销</td></tr>
+            <tr><td><strong>利息特点</strong></td><td>需要付息，但同时产生利息收入和手续费收入，类似原材料采购，通常无须视为有息负债</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s2-2">2.2 应付职工薪酬</h3>
+
+        <p>包括职工的工资、奖金、补助、五险一金、福利、工会经费、职工教育经费、辞退补偿等。</p>
+
+        <p><strong>计入科目规则</strong>：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>人员类型</th><th>计入科目</th></tr></thead>
+          <tbody>
+            <tr><td>生产员工</td><td>生产成本</td></tr>
+            <tr><td>车间管理人员</td><td>制造费用</td></tr>
+            <tr><td>企业管理人员</td><td>管理费用</td></tr>
+            <tr><td>销售人员</td><td>销售费用</td></tr>
+            <tr><td>在建工程相关人员</td><td>在建工程</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">投资者注意</div>
+            <p>对于<strong>净利润率很低</strong>且<strong>职工人数较多</strong>的公司，需测算工资上调多大比例会使公司由盈转亏。该比例如果比较小，建议慎重决策。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-3">2.3 专项应付款</h3>
+
+        <p>政府投入的具有专项或特定用途的款项，如科研项目补助、公益性拆迁补偿等。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">特点</div>
+            <p>无须偿还，属于<strong>"良性"债务</strong>，是政府白给的资金。在资产负债表中虽列在负债方，但实际上不会导致企业未来经济利益的流出。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-4">2.4 预计负债</h3>
+
+        <p>企业自行估计的，因以下活动大概率会导致公司承担责任的预计支出金额：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">01</span>
+            <h4>对外担保</h4>
+            <p>为其他企业提供担保所产生的或有负债</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">02</span>
+            <h4>未决诉讼</h4>
+            <p>正在进行中、尚未判决的诉讼案件</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">03</span>
+            <h4>产品质量保证</h4>
+            <p>因产品质量问题可能产生的维修、退换义务</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">04</span>
+            <h4>重组义务</h4>
+            <p>企业重组过程中可能发生的支出</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">05</span>
+            <h4>亏损性合同</h4>
+            <p>待执行合同变为亏损合同的预计损失</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">大概率定义</div>
+            <p>管理层判断发生概率在<strong>50%～95%</strong>之间。这类负债具有一定的主观判断空间，投资者需关注其金额和变动趋势。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-5">2.5 递延收益（新准则）</h3>
+
+        <p><strong>内容</strong>：企业已收到或应收到的政府补助。</p>
+
+        <p><strong>处理方式</strong>（企业自选，选定后不能轻易改变）：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>补助类型</th><th>处理方式</th></tr></thead>
+          <tbody>
+            <tr><td><strong>与资产相关</strong></td><td>冲减资产账面价值 OR 确认为递延收益，在资产使用寿命里平均分配计入损益</td></tr>
+            <tr><td><strong>补偿未来费用或损失</strong></td><td>确认为递延收益，在对应费用或损失发生的同期转入损益或冲减相关成本</td></tr>
+            <tr><td><strong>补偿已发生费用或损失</strong></td><td>直接计入当期损益或冲减当年相关成本</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、所有者权益（股东权益） -->
+      <section id="sec-3">
+        <h2>🏛️ 三、所有者权益（股东权益）</h2>
+
+        <h3 id="s3-1">3.1 所有者权益的构成</h3>
+
+        <div class="formula"><strong>所有者权益 = 总资产 - 总负债</strong></div>
+
+        <p><strong>主要组成部分</strong>：</p>
+
+        <div class="formula">
+所有者权益
+├── 实收资本（股本）
+├── 资本公积
+├── 盈余公积  ─┐
+└── 未分配利润 ┘ 留存收益</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">净资产概念</div>
+            <p>属于上市公司股东拥有的净资产 = <strong>归属于母公司所有者权益合计</strong>（不包括少数股东权益）。这是计算每股净资产等指标的分母。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-2">3.2 实收资本（股本）</h3>
+
+        <p><strong>定义</strong>：实收资本 = 注册资本 ÷ 股票面值</p>
+
+        <p><strong>股票面值</strong>：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><strong>标准面值</strong></td><td>深交所和上交所上市公司通常为1元/股</td></tr>
+            <tr><td><strong>特例</strong></td><td>紫金矿业（0.1元/股）、洛阳钼业（0.2元/股）</td></tr>
+            <tr><td><strong>意义</strong></td><td>仅为方便示意在注册资本里所占比例，<strong>与股票价值无对应关系</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s3-3">3.3 资本公积</h3>
+
+        <h4>来源</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>来源</th><th>说明</th><th>纳税情况</th></tr></thead>
+          <tbody>
+            <tr><td><strong>股本溢价</strong></td><td>发行价格超出面值的部分（扣除上市相关支出）</td><td>-</td></tr>
+            <tr><td><strong>利得和损失</strong></td><td>与企业日常经营活动无关、与股东投入无关，但能导致净资产增减的因素（如外部捐赠、资产评估价值变动）</td><td>-</td></tr>
+            <tr><td><strong>转增股本</strong></td><td>经股东大会同意，资本公积可转成股本</td><td><strong>不纳税</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h4>三种特例（计入当期损益而非资本公积）</h4>
+
+        <ol>
+          <li>交易性金融资产的公允价值变动</li>
+          <li>以公允价值模式计量的投资性房地产公允价值变动</li>
+          <li>汇率波动导致的外汇资产汇兑损益</li>
+        </ol>
+
+        <h4>送股 vs 转增</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>对比项</th><th>送股</th><th>转增</th></tr></thead>
+          <tbody>
+            <tr><td><strong>资金来源</strong></td><td>未分配利润</td><td>资本公积</td></tr>
+            <tr><td><strong>法律实质</strong></td><td>先将利润分配给股东，再按面值向全体股东等比例发行新股</td><td>股东投入的本金在不同科目间调整</td></tr>
+            <tr><td><strong>纳税</strong></td><td>需缴纳个人所得税</td><td>不纳税</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s3-4">3.4 库存股</h3>
+
+        <h4>产生原因</h4>
+
+        <ol>
+          <li>上市公司（及其子公司）回购自己的股票后，暂时没有来得及处置</li>
+          <li>股权激励过程中，尚未达到解锁条件的限制性股票（2014年5月后）</li>
+        </ol>
+
+        <h4>回购目的</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>目的</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><strong>股权激励</strong></td><td>用于董事、管理层及核心员工的激励，意图长期利益捆绑</td></tr>
+            <tr><td><strong>注销</strong></td><td>提升每股价值（前提：回购价格低于公司每股内在价值）</td></tr>
+            <tr><td><strong>私有化退市</strong></td><td>国内股市不常见</td></tr>
+          </tbody>
+        </table>
+
+        <h4>股权激励特点</h4>
+
+        <ol>
+          <li><strong>不白给</strong>：通常以折扣价格卖给激励对象</li>
+          <li><strong>有锁定期</strong>：一般有约定锁定期（如三年后才能卖出）</li>
+        </ol>
+
+        <h4>库存股的会计性质</h4>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">性质</span>
+            <h4>不是资产</h4>
+            <p>是股本和资本公积的<strong>抵销科目</strong>，在资产负债表的所有者权益部分以负数列示。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">权利</span>
+            <h4>无权利</h4>
+            <p>不享有分红权，也没有表决权。库存股不参与每股收益的计算。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">金额</span>
+            <h4>记录回购总金额</h4>
+            <p>回购花费的总金额计入库存股（如按10元回购1亿股，库存股科目记录10亿元）。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-5">3.5 股权激励方式对比</h3>
+
+        <table class="article-table tnum">
+          <thead><tr><th>方式</th><th>定义</th><th>现金支付时点</th><th>价格特点</th></tr></thead>
+          <tbody>
+            <tr><td><strong>回购股票低价出售</strong></td><td>回购股票后折价卖给激励对象</td><td>激励对象需支付折扣价</td><td>折价幅度自定</td></tr>
+            <tr><td><strong>股票期权</strong></td><td>约定未来达到条件后，激励对象有权以约定价格（行权价格）认购公司发行的股票</td><td><strong>不需要现在支付</strong></td><td>行权价格较高</td></tr>
+            <tr><td><strong>限制性股票</strong></td><td>激励对象现在可用折扣价格（授予价格）认购公司增发的股票，但达到约定条件前不能转让或抵押</td><td><strong>需要现在支付</strong></td><td>授予价格通常低于期权行权价格</td></tr>
+            <tr><td><strong>股票增值权</strong></td><td>不给股票，激励对象享受约定时间段内的股价涨幅，现金结算差价</td><td>现金结算</td><td>-</td></tr>
+            <tr><td><strong>虚拟分红权</strong></td><td>给激励对象虚拟股权，享有分红权（或许还有投票权），离职后权利丧失</td><td>-</td><td>-</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">薪酬支出处理</div>
+            <p>股权激励的公允价值需根据激励对象岗位，分别计入营业成本、管理费用或销售费用，并在服务期间<strong>按时间加权分摊</strong>。</p>
+          </div>
+        </div>
+
+        <h4>股权激励薪酬支出分摊示例</h4>
+
+        <p><strong>假设</strong>：张三获得36万股期权，每满一年可按X元获得12万股，期权公允价值10元/股。</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>时间</th><th>当年薪酬支出计算</th><th>累计支出</th></tr></thead>
+          <tbody>
+            <tr><td>第一年末</td><td>(12万+6万+4万)×10元 = 220万元</td><td>220万元</td></tr>
+            <tr><td>第二年末</td><td>(6万+4万)×10元 = 100万元</td><td>320万元</td></tr>
+            <tr><td>第三年末</td><td>4万×10元 = 40万元</td><td>360万元</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s3-6">3.6 专项储备和一般风险准备</h3>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>适用行业</th><th>用途</th></tr></thead>
+          <tbody>
+            <tr><td><strong>专项储备</strong></td><td>高危行业</td><td>安全生产费及类似性质费用</td></tr>
+            <tr><td><strong>一般风险准备</strong></td><td>金融机构</td><td>预防可能产生的亏损而额外准备的资金</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s3-7">3.7 盈余公积</h3>
+
+        <h4>利润分配顺序</h4>
+
+        <ol>
+          <li>弥补以前年度亏损（若有）</li>
+          <li>按当年税后利润的10%计提<strong>法定盈余公积</strong></li>
+          <li>由股东决定是否提取<strong>任意盈余公积</strong></li>
+          <li>决定是否向股东分配</li>
+        </ol>
+
+        <h4>盈余公积类型对比</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>类型</th><th>提取比例</th><th>提取上限</th><th>决定权</th></tr></thead>
+          <tbody>
+            <tr><td><strong>法定盈余公积</strong></td><td>当年利润的10%</td><td>累积到注册资本的50%后可不继续提取</td><td>政府强制</td></tr>
+            <tr><td><strong>任意盈余公积</strong></td><td>股东自定</td><td>无上下限</td><td>股东自愿</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>法定盈余公积的10%提取要求，是以<strong>上市公司本部净利润（母公司利润表净利润）</strong>为基数，不是合并利润表的净利润或归母净利润。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-8">3.8 未分配利润</h3>
+
+        <p><strong>定义</strong>：公司历年赚取的报表利润中，没有分给股东，也没有划为盈余公积的部分。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要提示</div>
+            <p>未分配利润按照<strong>权责发生制</strong>计算，并不等于现金。即便利润全是现金，这些"未分配利润"也很可能已经变成土地设备、固定资产、在建工程及其他投资。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">查看现金余额</div>
+            <p>资产负债表<strong>"货币资金"</strong>科目才代表公司账上现金数量。未分配利润多≠公司有钱，这是一个常见的理解误区。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-9">3.9 资金使用自由度排序</h3>
+
+        <div class="formula">
+<strong>未分配利润</strong>  &gt;  <strong>盈余公积</strong>  &gt;  <strong>资本公积</strong>  &gt;  <strong>注册资金</strong>
+   ↓           ↓          ↓          ↓
+股东自由决定  可弥补亏损   只可转成    完全不能动
+             或送股      股本     （抽逃注册资金
+                                  是刑事犯罪）</div>
+
+        <h3 id="s3-10">3.10 其他权益工具（新准则）</h3>
+
+        <p><strong>定义</strong>：企业发行在外、除普通股以外的其他带有权益性质的金融工具账面价值。</p>
+
+        <p><strong>包括</strong>：优先股、永续债、可回售工具、可转债（权益部分）、期权、认股权证等。</p>
+
+        <h4>分类原则</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>判断标准</th><th>归入金融负债</th><th>归入其他权益工具</th></tr></thead>
+          <tbody>
+            <tr><td><strong>强制义务</strong></td><td>企业承担交付现金或其他金融资产的强制义务</td><td>企业无强制交付义务</td></tr>
+            <tr><td><strong>风险承担</strong></td><td>持有人不承担企业经营风险及股价波动风险</td><td>持有人和企业共担风险</td></tr>
+            <tr><td><strong>交换方式</strong></td><td>需要用<strong>可变数量</strong>的企业股权交换</td><td>用<strong>固定数量</strong>的企业股权交换</td></tr>
+          </tbody>
+        </table>
+
+        <h4>重分类规则</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>重分类方向</th><th>账面价值处理</th><th>差额处理</th></tr></thead>
+          <tbody>
+            <tr><td>其他权益工具 → 金融负债</td><td>以重分类日公允价值为金融负债账面价值</td><td>差额调整股东权益</td></tr>
+            <tr><td>金融负债 → 其他权益工具</td><td>以金融负债账面价值为其他权益工具账面价值</td><td>-</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">名称辨析</div>
+            <ul>
+              <li><strong>其他权益工具</strong>（权益科目）：本公司<strong>发行</strong>的融资工具</li>
+              <li><strong>其他权益工具投资</strong>（资产科目）：本公司<strong>投资</strong>的其他公司股权</li>
+            </ul>
+            <p>两者仅差"投资"二字，但一个在负债/权益方、一个在资产方，切勿混淆。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、以贵州茅台为例 -->
+      <section id="sec-4">
+        <h2>🍶 四、以贵州茅台为例</h2>
+
+        <h3 id="s4-1">4.1 负债结构（2013年）</h3>
+
+        <p><strong>负债合计</strong>：113.25亿元</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>类型</th><th>金额（亿元）</th></tr></thead>
+          <tbody>
+            <tr><td>流动负债</td><td>113.07</td></tr>
+            <tr><td>非流动负债</td><td>0.18</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>主要科目</strong>：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>科目</th><th>期末余额（亿元）</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>预收款项</td><td>30.45</td><td>经营性负债</td></tr>
+            <tr><td>应交税费</td><td>33.12</td><td>分配性负债</td></tr>
+            <tr><td>吸收存款及同业存放</td><td>27.73</td><td>财务公司吸收的集团内部存款</td></tr>
+            <tr><td>应付账款</td><td>2.85</td><td>经营性负债</td></tr>
+            <tr><td>应付职工薪酬</td><td>2.60</td><td>经营性负债</td></tr>
+            <tr><td>其他应付款</td><td>16.05</td><td>经营性负债</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s4-2">4.2 所有者权益结构（2013年）</h3>
+
+        <p><strong>归属于母公司所有者权益</strong>：426.2亿元</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>科目</th><th>金额（亿元）</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>实收资本（股本）</td><td>10.38</td><td>103818万股 × 1元/股</td></tr>
+            <tr><td>资本公积</td><td>13.75</td><td>上市融资股本溢价等</td></tr>
+            <tr><td>盈余公积</td><td>42.21</td><td>留存收益</td></tr>
+            <tr><td>一般风险准备</td><td>0.13</td><td>金融机构特有</td></tr>
+            <tr><td>未分配利润</td><td>359.75</td><td>留存收益</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>会计恒等式验证</strong>：</p>
+
+        <div class="formula">
+资产 = 负债 + 所有者权益
+<strong>554.54亿元 = 113.25亿元 + 441.29亿元 ✓</strong></div>
+
+        <p>这是一个简单的验证：资产总计554.54亿，负债合计113.25亿，所有者权益441.29亿（其中归属于母公司所有者权益426.2亿 + 少数股东权益15.09亿），恒等式成立。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、股权激励新规定（2016） -->
+      <section id="sec-5">
+        <h2>📜 五、股权激励新规定（2016）</h2>
+
+        <h3 id="s5-1">5.1 时间和数量限制</h3>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>要求</th></tr></thead>
+          <tbody>
+            <tr><td><strong>激励时间跨度</strong></td><td>不得短于1年，不得长于10年</td></tr>
+            <tr><td><strong>公司总激励额度</strong></td><td>全部在有效期内的股权激励总数，累计不得超过公司股本总额的<strong>10%</strong></td></tr>
+            <tr><td><strong>个人激励额度</strong></td><td>任何一名激励对象通过全部在有效期内的股权激励计划获授的股票，累计不得超过公司股本总额的<strong>1%</strong>（非经股东大会特别决议批准）</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s5-2">5.2 限制性股票</h3>
+
+        <h4>授予价格</h4>
+
+        <p>原则上不得低于下列价格的<strong>较高者</strong>：</p>
+
+        <ol>
+          <li>股权激励计划草案公布前1个交易日成交均价的<strong>50%</strong></li>
+          <li>股权激励计划草案公布前20/60/120个交易日成交均价之一的<strong>50%</strong></li>
+        </ol>
+
+        <h4>解除限售要求</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>要求</th></tr></thead>
+          <tbody>
+            <tr><td><strong>授予日与首次解除限售日间隔</strong></td><td>不得少于12个月</td></tr>
+            <tr><td><strong>分批解除限售</strong></td><td>每期间隔不得少于12个月</td></tr>
+            <tr><td><strong>每期解除比例</strong></td><td>不得超过激励对象所获限制性股票总量的50%</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s5-3">5.3 股票期权</h3>
+
+        <h4>行权价格</h4>
+
+        <p>原则上不得低于下列价格的<strong>较高者</strong>：</p>
+
+        <ol>
+          <li>股权激励计划草案公布前1个交易日成交均价</li>
+          <li>股权激励计划草案公布前20/60/120个交易日成交均价之一</li>
+        </ol>
+
+        <h4>行权时间要求</h4>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>要求</th></tr></thead>
+          <tbody>
+            <tr><td><strong>授权日与首次可行权日间隔</strong></td><td>不得少于12个月</td></tr>
+            <tr><td><strong>分期行权</strong></td><td>每期时限不得少于12个月</td></tr>
+            <tr><td><strong>后期起算</strong></td><td>后一行权期的起算日不得早于前一行权期的届满日</td></tr>
+            <tr><td><strong>每期可行权比例</strong></td><td>不得超过所获期权总额的50%</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s5-4">5.4 其他限制</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">禁止财务资助</div>
+            <p>上市公司不得向激励对象提供任何形式的财务资助，包括贷款、贷款担保及其他形式。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、大额分红的警惕 -->
+      <section id="sec-6">
+        <h2>⚠️ 六、大额分红的警惕</h2>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">分红陷阱</div>
+            <p>当上市公司宣布大额现金分红时，需多想一分钟：</p>
+            <ol>
+              <li><strong>净资产下降</strong>：股东大会通过分红方案后，分红所需现金从"未分配利润"划入"应付股利"，导致公司净资产下降</li>
+              <li><strong>提高ROE</strong>：大额分红降低净资产基数，在净利润不变的前提下提高净资产收益率（ROE = 净利润 ÷ 净资产）</li>
+              <li><strong>再融资动机</strong>：企业再融资、股权激励等资本活动常需要ROE满足某数值要求</li>
+              <li><strong>飞去来器</strong>：先大额分红、再巨额融资的公司，不少是利用了这个规则</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="pull-quote large">看见公司实施大额现金分红时，不要第一时间将其归为利好，请多想一分钟。</div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接/待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第2章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

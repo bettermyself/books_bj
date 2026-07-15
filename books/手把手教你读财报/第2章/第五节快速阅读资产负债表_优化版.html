@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>快速阅读资产负债表 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.5rem 0 .75rem;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+    .chapter-article ul, .chapter-article ol {
+      margin: 0 0 1rem 0;
+      padding-left: 1.6rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .35rem;
+    }
+    .callout-body ul, .callout-body ol {
+      margin: .25rem 0 0 0;
+      padding-left: 1.4rem;
+    }
+    .callout-body li { font-size: .9rem; line-height: 1.75; margin-bottom: .3rem; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: .5rem; font-size: .9rem; }
+    .callout-body p:last-child { margin-bottom: 0; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table.tnum td:first-child { white-space: normal; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Poem Block ===== */
+    .poem {
+      text-align: center;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--text);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .poem-author {
+      display: block;
+      font-size: .85rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="第五节快速阅读资产负债表_优化版.html" class="active">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第三章 利润表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第四章 现金流量表</span></li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-intro">📋 概述</a></li>
+        <li><a href="#sec-1">💰 一、负债和所有者权益：优先看</a></li>
+        <li><a href="#s1-1" class="sub">1.1 总量概览</a></li>
+        <li><a href="#s1-2" class="sub">1.2 负债从何入手</a></li>
+        <li><a href="#s1-3" class="sub">1.3 深挖负债明细的方法</a></li>
+        <li><a href="#s1-4" class="sub">1.4 计算有息负债率</a></li>
+        <li><a href="#sec-2">📊 二、资产项目：钱花去了哪里</a></li>
+        <li><a href="#s2-1" class="sub">2.1 建立总体印象</a></li>
+        <li><a href="#s2-2" class="sub">2.2 结构分析：轻重资产</a></li>
+        <li><a href="#s2-3" class="sub">2.3 历史分析：观察行业变化</a></li>
+        <li><a href="#s2-4" class="sub">2.4 财务稳健、业务专注</a></li>
+        <li><a href="#sec-3">🔗 三、合并报表与母公司报表的关系</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第二章 资产负债表 · 第五节</div>
+        <h1 class="article-title">快速阅读资产负债表</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>先看钱的来源再看去处、负债结构拆解、轻重资产分析、四大关键比值、合并与母公司报表差异</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="sec-intro">
+        <h2>📋 概述</h2>
+
+        <p>理解了资产负债表各科目的含义之后，接下来要解决的问题是：<strong>如何在最短时间内抓住资产负债表的要点</strong>。</p>
+
+        <div class="pull-quote large">拿到一份资产负债表，可以按照日常生活中"先找钱、后花钱"的习惯来读——先看钱的来源，再看钱的去处。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、负债和所有者权益：优先看 -->
+      <section id="sec-1">
+        <h2>💰 一、负债和所有者权益：优先看</h2>
+
+        <h3 id="s1-1">1.1 总量概览：公司有多少家当，多少是自己的</h3>
+
+        <p>首先看报表最后一行"负债和所有者权益总计"，了解公司的总资产规模；再看上一行"所有者权益合计"，了解其中有多少是自有资金，多少是借来的。</p>
+
+        <p>以贵州茅台2013年财报为例：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>期末余额（元）</th><th>年初余额（元）</th></tr></thead>
+          <tbody>
+            <tr><td>所有者权益合计</td><td>44,129,092,273.26</td><td>35,454,036,397.25</td></tr>
+            <tr><td>负债和所有者权益总计</td><td>55,454,150,677.05</td><td>44,998,208,953.46</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">解读</div>
+            <ul>
+              <li>2013年总资产（负债+所有者权益）约555亿元，较2012年的450亿元增加约105亿元。</li>
+              <li>2013年末负债约113亿元，较2012年约95亿元增加约18亿元。</li>
+              <li>净资产增加约87亿元，但当年净利润（含少数股东损益）达159.6亿元，差额约73亿元的去向是<strong>分红</strong>：
+                <ul>
+                  <li>2013年内实施2012年度分红方案（10派64.19元），分掉现金约66.6亿元；</li>
+                  <li>非全资子公司向少数股东分红约6.3亿元。</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p>这两笔分红会在现金流量表中体现。</p>
+
+        <h3 id="s1-2">1.2 负债从何入手</h3>
+
+        <p>拿到负债明细后，需要依次追问：<strong>为何借？向谁借？借多久？利息几何？</strong> 这几个问题有助于判断企业借款的原因及迫切程度。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警示信号</div>
+            <p>如果企业借款代价较高，通常是危机信号。尤其是自有货币资金充裕却仍以较高利率借款的企业，需要高度警惕。</p>
+          </div>
+        </div>
+
+        <p>茅台2013年负债明细（仅列涉及科目）：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>期末余额（元）</th><th>年初余额（元）</th></tr></thead>
+          <tbody>
+            <tr><td><strong>流动负债</strong></td><td></td><td></td></tr>
+            <tr><td>吸收存款及同业存放</td><td>2,773,189,099.54</td><td>—</td></tr>
+            <tr><td>应付账款</td><td>284,748,288.89</td><td>345,280,977.68</td></tr>
+            <tr><td>预收款项</td><td>3,045,113,586.10</td><td>5,091,386,269.55</td></tr>
+            <tr><td>应付职工薪酬</td><td>260,284,491.74</td><td>269,657,755.58</td></tr>
+            <tr><td>应交税费</td><td>3,311,880,890.49</td><td>2,430,093,461.38</td></tr>
+            <tr><td>应付利息</td><td>27,383,888.89</td><td>—</td></tr>
+            <tr><td>其他应付款</td><td>1,604,688,158.14</td><td>1,389,984,092.02</td></tr>
+            <tr><td><strong>流动负债合计</strong></td><td><strong>11,307,288,403.79</strong></td><td><strong>9,526,402,556.21</strong></td></tr>
+            <tr><td><strong>非流动负债</strong></td><td></td><td></td></tr>
+            <tr><td>专项应付款</td><td>17,770,000.00</td><td>17,770,000.00</td></tr>
+            <tr><td><strong>非流动负债合计</strong></td><td><strong>17,770,000.00</strong></td><td><strong>17,770,000.00</strong></td></tr>
+            <tr><td><strong>负债合计</strong></td><td><strong>11,325,058,403.79</strong></td><td><strong>9,544,172,556.21</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>结构拆解</strong>：113亿元负债中——</p>
+
+        <ul>
+          <li>约28亿元：财务公司日常经营吸收的存款</li>
+          <li>约30亿元：预收款项</li>
+          <li>约33亿元：应交税费</li>
+          <li>其他约23亿元：生产经营形成的应付款</li>
+        </ul>
+
+        <p>以上均属于<strong>生产经营性负债</strong>，而非因缺钱而借的<strong>有息负债</strong>。</p>
+
+        <h3 id="s1-3">1.3 深挖负债明细的方法</h3>
+
+        <p>对于存疑的数字，可在财报附注中检索关键词查明细。例如茅台"应交税费"33亿元的构成（财报第78页）：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>项目</th><th>期末数（元）</th><th>期初数（元）</th></tr></thead>
+          <tbody>
+            <tr><td>增值税</td><td>562,486,836.89</td><td>470,576,873.82</td></tr>
+            <tr><td>消费税</td><td>243,153,840.84</td><td>259,500,310.54</td></tr>
+            <tr><td>营业税</td><td>428,794.72</td><td>357,440.00</td></tr>
+            <tr><td>企业所得税</td><td>2,310,139,914.56</td><td>1,469,957,553.78</td></tr>
+            <tr><td>个人所得税</td><td>46,257,754.01</td><td>96,871,863.58</td></tr>
+            <tr><td>城市维护建设税</td><td>101,787,102.50</td><td>76,355,542.37</td></tr>
+            <tr><td>城市教育费附加</td><td>23,084,576.76</td><td>20,037,449.12</td></tr>
+            <tr><td>地方教育费附加</td><td>15,804,454.94</td><td>13,290,215.83</td></tr>
+            <tr><td>房产税</td><td>214,961.75</td><td>17,137,033.37</td></tr>
+            <tr><td>土地使用税</td><td>1,711.64</td><td>111.17</td></tr>
+            <tr><td>价格调节基金</td><td>8,253,559.99</td><td>5,823,243.42</td></tr>
+            <tr><td>印花税</td><td>267,381.89</td><td>185,824.38</td></tr>
+            <tr><td><strong>合计</strong></td><td><strong>3,311,880,890.49</strong></td><td><strong>2,430,093,461.38</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>解读</strong>：欠税主要是企业所得税（23亿元）、代扣代缴的增值税（5.6亿元）、消费税（2.4亿元），其他杂项约2亿元。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>年度报表截至12月31日，但税款按规定最晚可于次年5月31日前汇算清缴，因此应交税费是任何企业的正常现象，关键是看<strong>是否与企业经营规模相匹配</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-4">1.4 计算有息负债率</h3>
+
+        <ul>
+          <li>教科书常用公式："负债÷总资产"，但参考意义有限。</li>
+          <li><strong>更有价值的算法</strong>："<strong>有息负债÷总资产</strong>"，因为无息负债对企业没有偿付压力。</li>
+        </ul>
+
+        <p>判断标准：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>比较维度</th><th>建议做法</th></tr></thead>
+          <tbody>
+            <tr><td>行业对比</td><td>只与<strong>同时期、同行业</strong>企业比较，不跨行业比较</td></tr>
+            <tr><td>警戒线</td><td>有息负债率 <strong>≥ 60%</strong> 属于比较激进</td></tr>
+            <tr><td>风险提示</td><td>⚠️ 超过警戒线的企业，遇到宏观或行业突变时陷入困境的可能性较大</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、资产项目：钱花去了哪里 -->
+      <section id="sec-2">
+        <h2>📊 二、资产项目：钱花去了哪里</h2>
+
+        <p>看完钱的来源，再看钱的去处——原有资金的变化，以及新增资金（利润、新增股东投入、新增负债）的流向。由于报表附带上期数据，可直接对比分析。</p>
+
+        <h3 id="s2-1">2.1 建立总体印象</h3>
+
+        <p>先看"资产总计"一行建立总体印象。以贵州茅台2013年财报为例：资产555亿元，较上年450亿元增长105亿元。</p>
+
+        <p>然后重点关注以下<strong>四个比值</strong>，并从<strong>结构、历史、同行</strong>三个角度分析：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>比值</th><th>分析目的</th></tr></thead>
+          <tbody>
+            <tr><td>生产资产 ÷ 总资产</td><td>判断企业是"轻公司"还是"重公司"</td></tr>
+            <tr><td>应收款 ÷ 总资产</td><td>判断销售政策是否激进</td></tr>
+            <tr><td>货币资金 ÷ 有息负债</td><td>判断偿债能力</td></tr>
+            <tr><td>非主业资产 ÷ 总资产</td><td>判断企业是否专注主业</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">说明</div>
+            <p>以下比值分析均为个人经验总结，概念未必严格吻合教科书定义，仅供参考。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-2">2.2 结构分析：轻资产公司优于重资产公司</h3>
+
+        <p><strong>"生产资产"的定义</strong>（区别于严格的"有形资产"概念）：固定资产、在建工程、工程物资，以及无形资产中的土地。以茅台2013年财报为例，合计约125亿元。</p>
+
+        <p><strong>轻公司 vs 重公司</strong>：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>类型</th><th>特征</th><th>风险与优势</th></tr></thead>
+          <tbody>
+            <tr><td>重公司</td><td>生产资产占比大，需持续投入资金维护、更新、升级</td><td>折旧压力大；行业需求饱和时易陷入价格战，现金被折旧迅速吸干</td></tr>
+            <tr><td>轻公司</td><td>生产资产占比小，成本以可变成本为主</td><td>无需持续更新资产，能与股东分享更多利润；逆境中更易维持盈利能力</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>举例说明重资产的困境</strong>：某设备预期使用5年，5年前购价1000万元，每年折旧200万元（残值为零）。5年后更新时，新设备售价1500万元，累计折旧1000万元不够用，还需再补500万元。而这5年累计净利润恰好也是500万元——五年的忙碌，全部用于设备更新，相当于给设备商打工。</p>
+
+        <p>芒格对此有一句经典评价：</p>
+
+        <div class="pull-quote">"世界上有两种生意，第一种生意是你可以每年赚取12%的收益，然后年末你可以拿走所有的利润。第二种生意是你同样可以每年赚取12%的收益，但是你不得不把赚来的钱重新投资，然后你指着所有的厂房设备对股东们说：这就是你们的利润。我恨第二种生意。"<cite>— 查理·芒格</cite></div>
+
+        <p><strong>重资产行业的风险机制</strong>：一旦产能过剩，已投入的产能难以退出（退出则价值归零）。企业为争夺市场往往以可变成本为底线打价格战，试图挽回固定成本。同时，产品销量下滑时，单位产品需分摊更多固定成本，更容易导致亏损。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资建议</div>
+            <ul>
+              <li>优先选择不需要持续更新资产的轻资产企业，这类企业才有条件与股东分享更多利润。</li>
+              <li>例外情况：如果重资产公司估值显而易见地便宜，或处于行业高增长初期，仍可作为优质投资标的。</li>
+              <li>由两三家寡头垄断的重资产行业，也可能存在值得投资的公司；但市场份额分散的重资产行业普遍艰难。</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>轻重划分的量化标准</strong>：</p>
+
+        <div class="formula">轻重比值 = 当年税前利润总额 ÷ 生产资产</div>
+
+        <p>若显著高于<strong>社会平均资本回报率</strong>（银行贷款标准利率的2倍，粗略估算），则为"轻公司"，反之为"重公司"。</p>
+
+        <p><strong>茅台案例验证</strong>：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>指标</th><th>数值</th></tr></thead>
+          <tbody>
+            <tr><td>生产资产合计</td><td>约125亿元</td></tr>
+            <tr><td>当年税前利润总额</td><td>214亿元</td></tr>
+            <tr><td>轻重比值</td><td>214÷125 ≈ 171%</td></tr>
+            <tr><td>社会平均资本回报率参考</td><td>6% × 2 = 12%</td></tr>
+          </tbody>
+        </table>
+
+        <p>171% 远高于 12%，说明大部分利润并非依靠生产资产赚取。若按12%的社会平均回报率计算，投入125亿元生产资产理论上只能获得约15亿元利润（125×12%=15）；剩余的199亿元（214-15）则是由不需要计提折旧的"轻"资产创造的。</p>
+
+        <h3 id="s2-3">2.3 历史分析：观察行业变化</h3>
+
+        <p>观察公司"生产资产÷总资产"比例的历史变化趋势，并站在企业经营者角度思考：<strong>为什么变重或变轻？增加/减少的是哪类资产？利弊各是什么？</strong></p>
+
+        <p>同时可对比竞争对手的同期数据：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>对比结果</th><th>可能的含义</th></tr></thead>
+          <tbody>
+            <tr><td>各企业变化方向趋同</td><td>行业战略共识基本一致，行业方向未发生突变或转折</td></tr>
+            <tr><td>各企业变化方向迥异</td><td>行业内对发展战略出现分歧，可能潜藏机会或陷阱</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>财务报表只能提供数据，不能给出答案。财报是分析公司的<strong>起点</strong>而非终点，需要结合对行业和企业本身的深刻认识才能做出正确判断。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-4">2.4 财务稳健、业务专注的企业值得信赖</h3>
+
+        <h4>① 应收款 ÷ 总资产</h4>
+
+        <p>统计口径：资产负债表中所有含"应收"字样的科目总和，减去银行承兑汇票金额。</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>检查维度</th><th>判断标准</th></tr></thead>
+          <tbody>
+            <tr><td>比例是否过大</td><td>超过总资产50%明显有问题；超过30%已属严重；比例<strong>越小越好</strong>，接近零最理想</td></tr>
+            <tr><td>相当于几个月收入</td><td>用应收账款余额 ÷ 月均营业收入估算，需结合行业商业模式判断，建议与同行中位数对比</td></tr>
+            <tr><td>是否有突变</td><td>应收款增幅不应超过营业收入增幅，否则可能是激进销售政策的信号（基数极小的除外）</td></tr>
+            <tr><td>是否有异常</td><td>如单独测试减值为零、集中于少数关联企业、其他应收款突增等</td></tr>
+          </tbody>
+        </table>
+
+        <h4>② 货币资金 ÷ 有息负债</h4>
+
+        <p>用于判断公司的<strong>偿债能力</strong>。</p>
+
+        <div class="pull-quote">巴菲特："现金就像氧气，99%的时间你不会注意到它，直到它没有了。"</div>
+
+        <table class="article-table tnum">
+          <thead><tr><th>标准</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>基本要求</td><td>货币资金（尤其现金及现金等价物）应能覆盖有息负债</td></tr>
+            <tr><td>可放宽标准</td><td>货币资金 + 交易性金融资产 + 应收票据 ≥ 有息负债</td></tr>
+            <tr><td>比较方式</td><td>属于<strong>刚性标准</strong>，可与企业自身历史对比，<strong>无须</strong>与同行业比较</td></tr>
+          </tbody>
+        </table>
+
+        <h4>③ 非主业资产 ÷ 总资产</h4>
+
+        <p>判断公司是否专注于自身擅长的领域。若与主业无关的资产（交易性金融资产、可供出售金融资产、持有至到期投资、银行理财产品、投资性房地产等）占比上升，可能说明管理层认为本行业已难以发现有潜力的投资机会。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、合并报表与母公司报表的关系 -->
+      <section id="sec-3">
+        <h2>🔗 三、合并报表与母公司报表的关系</h2>
+
+        <p>以上分析均以投资者关注的<strong>合并资产负债表</strong>为例。母公司资产负债表的阅读方法基本相同，但需特别注意一点差异：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>报表类型</th><th>子公司资产负债权益的体现方式</th></tr></thead>
+          <tbody>
+            <tr><td>合并报表</td><td>完整并入子公司的资产、负债、权益明细</td></tr>
+            <tr><td>母公司报表</td><td>全部归入"<strong>长期股权投资</strong>"一个科目，且仅反映股份公司的<strong>投资成本</strong>，不体现子公司实际的净资产、负债、资产规模</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>换算方法</strong>：合并报表各项目（长期股权投资除外）减去母公司报表对应项目，差额即为<strong>归属子公司的部分</strong>。</p>
+
+        <p><strong>茅台2013年案例</strong>：</p>
+
+        <table class="article-table tnum">
+          <thead><tr><th>科目</th><th>合并报表（亿元）</th><th>母公司报表（亿元）</th><th>差额（子公司部分，亿元）</th></tr></thead>
+          <tbody>
+            <tr><td>货币资金</td><td>251.85</td><td>117.68</td><td>134.17</td></tr>
+            <tr><td>存货</td><td>118.37</td><td>115.71</td><td>2.66</td></tr>
+          </tbody>
+        </table>
+
+        <p>存货差额2.66亿元的构成：截至2013年12月31日，销售公司从母公司购入尚未完成销售的商品酒成本。按茅台整体约93%的毛利率估算，对应商品酒价值约38亿元：</p>
+
+        <div class="formula">2.66 ÷ (1 - 93%) = 2.66 ÷ 7% ≈ 38（亿元）</div>
+
+        <p>这部分酒通常处于库房、运输途中、中转仓、直营店，或已被经销商提货但尚未入账。</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接/待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第2章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
