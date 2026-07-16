@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>速读利润表 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-flat::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem Block ===== */
+    .poem {
+      text-align: center;
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--text);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      font-size: 4rem;
+      color: var(--gold);
+      opacity: .15;
+      position: absolute;
+      top: -.5rem;
+      left: 1rem;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .poem-author {
+      display: block;
+      font-size: .85rem;
+      color: var(--gold);
+      margin-top: .8rem;
+      font-style: normal;
+    }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2章/第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="../第2章/第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="../第2章/第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="../第2章/第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="../第2章/第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第三章 利润表</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节利润表的重点_优化版.html">第一节 利润表的重点</a></li>
+            <li><a href="第二节创造利润的过程_优化版.html">第二节 创造利润的过程</a></li>
+            <li><a href="第三节速读利润表.html" class="active">第三节 速读利润表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title toc-flat" href="../第4章/第一节现金流量表拆解.html" style="text-decoration:none;">第四章 现金流量表</a>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-overview">概述：四个要点</a></li>
+        <li><a href="#sec-1">一、营业收入</a></li>
+        <li><a href="#s1-1" class="sub">营业收入的重要性</a></li>
+        <li><a href="#s1-2" class="sub">收入增长的三种途径</a></li>
+        <li><a href="#s1-3" class="sub">关注增速与行业对比</a></li>
+        <li><a href="#s1-4" class="sub">特殊情况：佛龛市场</a></li>
+        <li><a href="#s1-5" class="sub">持续增长的难度</a></li>
+        <li><a href="#sec-2">二、毛利率</a></li>
+        <li><a href="#s2-1" class="sub">毛利率的计算与意义</a></li>
+        <li><a href="#s2-2" class="sub">投资建议</a></li>
+        <li><a href="#s2-3" class="sub">毛利率评判标准</a></li>
+        <li><a href="#sec-3">三、费用率</a></li>
+        <li><a href="#s3-1" class="sub">费用的构成</a></li>
+        <li><a href="#s3-2" class="sub">费用率的计算方法</a></li>
+        <li><a href="#s3-3" class="sub">费用率的警示信号</a></li>
+        <li><a href="#s3-4" class="sub">费用率评判标准</a></li>
+        <li><a href="#s3-5" class="sub">毛利率与费用率的联合分析</a></li>
+        <li><a href="#s3-6" class="sub">研发费用的辩证思考</a></li>
+        <li><a href="#sec-4">四、营业利润率</a></li>
+        <li><a href="#s4-1" class="sub">计算公式与意义</a></li>
+        <li><a href="#s4-2" class="sub">优化建议</a></li>
+        <li><a href="#s4-3" class="sub">案例分析：贵州茅台</a></li>
+        <li><a href="#s4-4" class="sub">营业利润率分析要点</a></li>
+        <li><a href="#sec-5">五、关键验证：净利润的现金实现</a></li>
+        <li><a href="#s5-1" class="sub">验证方法</a></li>
+        <li><a href="#s5-2" class="sub">评判标准</a></li>
+        <li><a href="#s5-3" class="sub">利润与现金流的权衡</a></li>
+        <li><a href="#sec-note">附注：2018年财报变更说明</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第三章 利润表 · 第三节</div>
+        <h1 class="article-title">速读利润表</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>掌握速读利润表的四个要点：营业收入、毛利率、费用率、营业利润率，并验证净利润的现金含量</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="sec-overview">
+        <h2>概述</h2>
+
+        <p>理解了资产负债表后，利润表就是一张特别简单的表。我们拿到一张利润表，关注<strong>四个要点</strong>足矣：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">要点一</span>
+            <h4>营业收入</h4>
+            <p>展示企业经营状况和发展趋势。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点二</span>
+            <h4>毛利率</h4>
+            <p>衡量产品或服务的竞争优势。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点三</span>
+            <h4>费用率</h4>
+            <p>反映企业的管理运营效率。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点四</span>
+            <h4>营业利润率</h4>
+            <p>完整体现企业的盈利能力。</p>
+          </div>
+        </div>
+
+        <p>看清楚了它们，单独就利润表而言就算可以了。需要和其他报表配合起来看的部分，我们在第五章聊。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、营业收入 -->
+      <section id="sec-1">
+        <h2>一、营业收入</h2>
+
+        <h3 id="s1-1">1.1 营业收入的重要性</h3>
+
+        <p>营业收入展示企业经营状况和发展趋势。作为投资者，首选的企业是营业收入<strong>增长、增长、增长</strong>——过去增长，现在增长，预计在可见的未来将继续保持增长的企业。</p>
+
+        <div class="pull-quote large">首选的企业是营业收入<strong>增长、增长、增长</strong>——过去增长，现在增长，预计在可见的未来将继续保持增长的企业。</div>
+
+        <h3 id="s1-2">1.2 收入增长的三种途径</h3>
+
+        <p>如果不考虑收购兼并式的增长，企业收入的增长通常有三种途径：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>增长途径</th><th>特点描述</th><th>可靠性评估</th><th>需要评估的风险</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>潜在需求增长</strong></td><td>行业内不会产生受损者，仅受益程度不同</td><td>⭐⭐⭐ 最强</td><td>无明显风险</td></tr>
+            <tr><td><strong>市场份额扩大</strong></td><td>以竞争对手受损为代价</td><td>⭐⭐ 中等</td><td>竞争对手的反击力度及反击下增长的可持续性</td></tr>
+            <tr><td><strong>价格提升</strong></td><td>以客户付出更多为代价</td><td>⭐ 较弱</td><td>产品或服务的替代性强弱，客户可能减少消费或寻找替代品</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s1-3">1.3 关注增速与行业对比</h3>
+
+        <p>投资者不仅要看企业营业收入绝对数的增长，还要看<strong>增速是否高于行业平均水平</strong>。</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 积极信号</span>
+            <h4>增速高于行业平均</h4>
+            <p>证明企业的市场份额在扩大，仍然是行业中的强者。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">⚠️ 警示信号</span>
+            <h4>增速低于行业平均</h4>
+            <p>提示企业的市场份额在缩小，可能意味着行业内出现了更强硬的对手，或企业某方面的竞争优势正在"融化"。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-4">1.4 特殊情况：佛龛市场（利基市场）</h3>
+
+        <p><strong>佛龛市场特点：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">特征一</span>
+            <h4>市场规模有限</h4>
+            <p>容不下更多对手参与竞争。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特征二</span>
+            <h4>竞争优势强</h4>
+            <p>企业已建立相当强的竞争优势。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特征三</span>
+            <h4>双输博弈</h4>
+            <p>新对手加入后，很可能导致两家都很难赚到钱。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特征四</span>
+            <h4>空间隔离</h4>
+            <p>空间狭小，和其他区域间隔明显。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资策略</div>
+            <p>对这种市场里的企业，投资者无须关注营业收入的增长，而是要<strong>重点关注经营所得现金的去向和利用效率</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-5">1.5 持续增长的难度</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">常识提醒</div>
+            <p>持续的增长相当困难。</p>
+          </div>
+        </div>
+
+        <p><strong>案例分析：</strong>以贵州茅台2013年310亿元营业收入为起点，假设公司能持续保持20%的年增长水平：</p>
+
+        <ul style="margin: 0 0 1rem 1.5rem; font-size: .95rem; line-height: 1.85; color: var(--text);">
+          <li>到2055年，营收将达到65.6万亿元</li>
+          <li>高于2014年我国GDP（约63.6万亿元）</li>
+          <li>这显而易见是不现实的</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资提示</div>
+            <p>估算企业未来增长幅度及可持续时间，尤其是估值时会用到的"永续增长率"假设数据，一定要<strong>防止自己过于乐观</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、毛利率 -->
+      <section id="sec-2">
+        <h2>二、毛利率</h2>
+
+        <h3 id="s2-1">2.1 毛利率的计算与意义</h3>
+
+        <div class="formula"><strong>毛利润 = 营业收入 − 营业成本</strong>
+        <strong>毛利率 = 毛利润 ÷ 营业收入</strong></div>
+
+        <p><strong>毛利率的意义：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">高毛利率</span>
+            <h4>竞争优势强</h4>
+            <p>产品或服务具有很强的竞争优势，替代品较少或替代代价很高。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">低毛利率</span>
+            <h4>竞争激烈</h4>
+            <p>产品或服务存在大量替代品且替代代价很低，价格微小变动都可能使客户放弃购买。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-2">2.2 投资建议</h3>
+
+        <p>一般来说，建议投资者<strong>尽量选择高毛利率的企业</strong>。</p>
+
+        <div class="pull-quote">"我并不试图超过七英尺高的栏杆，我到处找的是我能跨过的一英尺高的栏杆。"<cite>— 巴菲特</cite></div>
+
+        <p>投资不是竞技，投资者追求的不是克服困难的快感，而是<strong>稳定轻松的获利</strong>。选择低毛利率的企业，意味着要依赖管理层的运营能力或者冒高倍杠杆的风险，实属不必要。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">案例：巴菲特的失败投资</div>
+            <p>巴菲特投入17亿美元买入英国超市运营商特易购（TESCO）约4%的股份，2014年亏损超过7亿美元，不得不"割肉"减持。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-3">2.3 毛利率评判标准</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>毛利率区间</th><th>企业状态</th><th>投资建议</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>≥ 40%</strong></td><td>通常具有某种持续竞争优势</td><td>✅ 优先选择</td></tr>
+            <tr><td><strong>20% - 40%</strong></td><td>处于高度竞争的环境</td><td>⚠️ 谨慎评估</td></tr>
+            <tr><td><strong>&lt; 20%</strong></td><td>竞争激烈，利润空间极小</td><td>❌ 留给专业人士</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>A股高毛利率行业：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">高毛利行业</span>
+            <h4>信息技术</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">高毛利行业</span>
+            <h4>生物医药</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">高毛利行业</span>
+            <h4>食品饮料</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">高毛利行业</span>
+            <h4>餐饮旅游</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">高毛利行业</span>
+            <h4>文化传播</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">高毛利行业</span>
+            <h4>房地产</h4>
+          </div>
+        </div>
+
+        <p style="text-align:center; color: var(--text3); font-size: .85rem;"><em>基本也是牛股集中营</em></p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、费用率 -->
+      <section id="sec-3">
+        <h2>三、费用率</h2>
+
+        <h3 id="s3-1">3.1 费用的构成</h3>
+
+        <p>费用一般习惯性地被称为"三费"（2018年后为"四费"）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>费用类型</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>销售费用</strong></td><td>营销推广相关费用</td></tr>
+            <tr><td><strong>管理费用</strong></td><td>日常管理运营费用</td></tr>
+            <tr><td><strong>财务费用</strong></td><td>利息收支相抵后的净额</td></tr>
+            <tr><td><strong>研发费用</strong></td><td>2018年后单独披露</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s3-2">3.2 费用率的计算方法</h3>
+
+        <p><strong>保守策略：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">财务费用为正</span>
+            <h4>净支出情况</h4>
+            <p>费用率 = (销售费用 + 管理费用 + 财务费用) ÷ 营业总收入</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">财务费用为负</span>
+            <h4>净收入情况</h4>
+            <p>费用率 = (销售费用 + 管理费用) ÷ 营业总收入</p>
+          </div>
+        </div>
+
+        <h3 id="s3-3">3.3 费用率的警示信号</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">主要需警惕</div>
+            <p>费用率过高或费用率剧烈变化的公司。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-3a">3.3.1 销售费用分析</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>销售费用水平</th><th>产品特性</th><th>扩张风险</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>高</strong></td><td>产品缺乏"拉力"，必须靠营销"推力"才能完成销售</td><td>扩张时需要配套新团队、资金和促销方案，对管理能力要求极高</td></tr>
+            <tr><td><strong>低</strong></td><td>产品或服务本身容易引起购买者的重复购买，甚至自发分享、传播</td><td>扩张风险较小</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s3-3b">3.3.2 管理费用分析</h3>
+
+        <p><strong>正常情况：</strong>管理费用增幅应等于或小于营业收入增幅。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">异常情况</div>
+            <p>管理费用增幅大于营业收入增幅，需要查出明细，挖掘究竟是什么发生了变化。</p>
+          </div>
+        </div>
+
+        <p><strong>特别警惕：</strong>连续数年出现小额净利润的公司，可能利用管理费用调控报表：</p>
+
+        <ul style="margin: 0 0 1rem 1.5rem; font-size: .95rem; line-height: 1.85; color: var(--text);">
+          <li>将实际的微亏调整为微利</li>
+          <li>累积几年微利后，搞一次大亏，填完以前的坑（俗称<strong>"洗大澡"</strong>）</li>
+          <li>常用手段：折旧、摊销、计提准备等</li>
+        </ul>
+
+        <h3 id="s3-4">3.4 费用率评判标准</h3>
+
+        <p><strong>以费用占毛利润的比例观察：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>费用占毛利润比例</th><th>企业评价</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>≤ 30%</strong></td><td>✅ 优秀企业</td></tr>
+            <tr><td><strong>30% - 70%</strong></td><td>⚠️ 具有一定竞争优势</td></tr>
+            <tr><td><strong>&gt; 70%</strong></td><td>❌ 关注价值不大</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s3-5">3.5 毛利率与费用率的联合分析</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">案例一</span>
+            <h4>毛利率40%，费用占毛利80%</h4>
+            <p>100元收入 → 40元毛利 → 32元费用 → 8元营业利润 → 扣除25%所得税 → <strong>净利润率仅6%</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">案例二</span>
+            <h4>毛利率20%，费用占毛利80%</h4>
+            <p>100元收入 → 20元毛利 → 16元费用 → 4元营业利润 → 扣除25%所得税 → <strong>净利润率仅3%</strong></p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>如此微薄的利润空间，市场稍有波动就可能导致企业账面难看。从投资的角度说，如果有得选，尽量避免在这种公司身上浪费宝贵的资本和时间。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-6">3.6 研发费用的辩证思考</h3>
+
+        <h3 id="s3-6a">3.6.1 保守派观点：规避高研发费用企业</h3>
+
+        <p><strong>理由：</strong></p>
+
+        <ul style="margin: 0 0 1rem 1.5rem; font-size: .95rem; line-height: 1.85; color: var(--text);">
+          <li>不断投入巨额研发费用的公司，很可能经营前景不明，风险较高</li>
+          <li>依靠专利权保护或技术领先的企业，一旦专利到期或遭遇新技术替代，竞争优势会丧失殆尽</li>
+          <li>金钱的堆积并不意味着技术的成功，研发失败概率大于成功概率</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">案例</div>
+            <p>2014年10月6日，因为研发失败，美股GTAT在一个交易日内从11美元以上跌至0.8美元，随后一周跌破0.4美元。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-6b">3.6.2 激进派观点：拥抱高研发费用企业</h3>
+
+        <p><strong>理由：</strong></p>
+
+        <ul style="margin: 0 0 1rem 1.5rem; font-size: .95rem; line-height: 1.85; color: var(--text);">
+          <li>新技术或新产品的研发一旦成功，可能带来巨大的回报</li>
+          <li>高风险对应高收益</li>
+        </ul>
+
+        <h3 id="s3-6c">3.6.3 投资建议</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>投资者类型</th><th>策略建议</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>风险规避型</strong></td><td>远离研发费用高的企业</td></tr>
+            <tr><td><strong>风险偏好型</strong></td><td>合理配置投入比例，以应对潜在的高波动性和高不确定性</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、营业利润率 -->
+      <section id="sec-4">
+        <h2>四、营业利润率</h2>
+
+        <h3 id="s4-1">4.1 计算公式与意义</h3>
+
+        <div class="formula"><strong>营业利润率 = 营业利润 ÷ 营业收入</strong></div>
+
+        <p>营业利润率是<strong>公司分析的核心指标之一</strong>，基本完整体现了企业的盈利能力。</p>
+
+        <h3 id="s4-2">4.2 优化建议</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">更符合逻辑的算法</div>
+            <p>如果将营业利润排在"公允价值变动收益"之前，由营业总收入减去营业总成本得出一个<strong>不含"公允价值变动收益、投资收益和汇兑收益"的"营业利润"</strong>，然后再除以营业收入得到的比例，其实更符合逻辑。</p>
+          </div>
+        </div>
+
+        <p><em>可惜财政部不会听老唐的，所以，我们要么自己算，要么就凑合使用利润表上的现成数据，坚持同口径就好。</em></p>
+
+        <h3 id="s4-3">4.3 案例分析：贵州茅台</h3>
+
+        <p>贵州茅台这种高毛利率企业，成本和费用占比变化不大，结果就是伴随营业收入的高速增长，营业利润率可以<strong>飙升至高达70%左右</strong>。</p>
+
+        <h3 id="s4-4">4.4 营业利润率分析要点</h3>
+
+        <p>投资者不仅要看数字大小，更要<strong>对比历史变化</strong>。</p>
+
+        <p><strong>营业利润率上升时，需要分析原因：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>可能原因</th><th>需要思考的问题</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>售价提升</strong></td><td>提价会不会导致市场份额下降？</td></tr>
+            <tr><td><strong>成本下降</strong></td><td>是全行业一起降了，还是本公司独降？原因是什么？是一次性影响还是持续影响？</td></tr>
+            <tr><td><strong>费用控制得力</strong></td><td>费用控制有没有伤及公司团队战斗力？是一次性的费用减少还是永久性的费用减少？竞争对手是否可以采用同样行动？</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、关键验证：净利润的现金实现 -->
+      <section id="sec-5">
+        <h2>五、关键验证：净利润的现金实现</h2>
+
+        <p>看完上面四个要点，一份利润表就基本清楚了。但还有<strong>非常重要的一步</strong>：确认净利润是否变成现金回到公司账户。</p>
+
+        <h3 id="s5-1">5.1 验证方法</h3>
+
+        <div class="formula"><strong>现金实现率 = 经营现金流净额 ÷ 净利润</strong></div>
+
+        <p><strong>数据来源：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">数据来源一</span>
+            <h4>经营现金流净额</h4>
+            <p>来自<strong>现金流量表</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">数据来源二</span>
+            <h4>净利润</h4>
+            <p>来自<strong>利润表</strong></p>
+          </div>
+        </div>
+
+        <h3 id="s5-2">5.2 评判标准</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>比值情况</th><th>评价</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>持续大于1</strong></td><td>✅ 优秀企业的重要特征，代表净利润全部或大部分变成了真实的现金</td></tr>
+            <tr><td><strong>小于1</strong></td><td>⚠️ 需要关注利润质量</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s5-3">5.3 利润与现金流的权衡</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">利润</span>
+            <h4>充满估计和假设</h4>
+            <p>权责发生制下存在大量主观判断空间。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">现金</span>
+            <h4>实打实的硬通货</h4>
+            <p>不依赖估计，真实反映企业造血能力。</p>
+          </div>
+        </div>
+
+        <p>企业的经营总是在利润和现金流之间权衡：</p>
+
+        <ul style="margin: 0 0 1rem 1.5rem; font-size: .95rem; line-height: 1.85; color: var(--text);">
+          <li>究竟是在保证现金流的前提下最大化追求利润？</li>
+          <li>还是在实现利润最大化的前提下考虑现金流？</li>
+        </ul>
+
+        <div class="pull-quote large">确认净利润是否变成现金回到公司账户，是速读利润表的<strong>最后一步，也是最关键的一步</strong>。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 附注 -->
+      <section id="sec-note">
+        <h2>附注</h2>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">2018年财报变更说明</div>
+            <p>2018年财政部要求利润表"研发费用"单设科目披露。故阅读2018年后公司财报时，请自动将本节里谈到的"三费"替换为"四费"。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接/待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第3章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

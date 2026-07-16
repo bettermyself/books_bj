@@ -138,6 +138,7 @@
       cursor: default;
     }
     .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-flat::after { display: none; }
     .toc-chapter-title.toc-pending:hover {
       color: var(--text3);
       background: transparent;
@@ -521,8 +522,17 @@
             <li><a href="第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
           </ul>
         </li>
-        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第三章 利润表</span></li>
-        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第四章 现金流量表</span></li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 利润表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第3章/第一节利润表的重点_优化版.html">第一节 利润表的重点</a></li>
+            <li><a href="../第3章/第二节创造利润的过程_优化版.html">第二节 创造利润的过程</a></li>
+            <li><a href="../第3章/第三节速读利润表.html">第三节 速读利润表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title toc-flat" href="../第4章/第一节现金流量表拆解.html" style="text-decoration:none;">第四章 现金流量表</a>
+        </li>
         <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
       </ul>
 

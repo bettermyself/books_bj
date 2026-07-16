@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>现金流量表拆解 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    /* 扁平链接章节：不显示折叠箭头 */
+    .toc-chapter-title.toc-flat::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Poem Block ===== */
+    .poem {
+      text-align: center;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 2;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '\201C';
+      position: absolute;
+      top: -.5rem;
+      left: 1rem;
+      font-size: 4rem;
+      color: rgba(201,168,76,.15);
+      font-family: 'Georgia', serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      font-style: normal;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2章/第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="../第2章/第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="../第2章/第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="../第2章/第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="../第2章/第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 利润表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第3章/第一节利润表的重点_优化版.html">第一节 利润表的重点</a></li>
+            <li><a href="../第3章/第二节创造利润的过程_优化版.html">第二节 创造利润的过程</a></li>
+            <li><a href="../第3章/第三节速读利润表.html">第三节 速读利润表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 现金流量表</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节现金流量表拆解.html" class="active">第一节 现金流量表拆解</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-1">一、为何要单独编制现金流量表</a></li>
+        <li><a href="#sec-1-activities" class="sub">三大活动的划分逻辑</a></li>
+        <li><a href="#sec-2">二、知识链接：三大活动科目详解</a></li>
+        <li><a href="#sec-2-1" class="sub">2.1 经营活动现金流量</a></li>
+        <li><a href="#sec-2-2" class="sub">2.2 投资活动现金流量</a></li>
+        <li><a href="#sec-2-3" class="sub">2.3 筹资活动现金流量</a></li>
+        <li><a href="#sec-2-4" class="sub">2.4 汇率变动影响</a></li>
+        <li><a href="#sec-3">三、现金流量表的两种编制方法</a></li>
+        <li><a href="#sec-3-1" class="sub">3.1 直接法现金流量</a></li>
+        <li><a href="#sec-3-2" class="sub">3.2 间接法现金流量</a></li>
+        <li><a href="#sec-4">四、经营活动现金流的关键数字</a></li>
+        <li><a href="#sec-4-1" class="sub">4.1 经营活动现金流量净额</a></li>
+        <li><a href="#sec-4-2" class="sub">4.2 与净利润的印证</a></li>
+        <li><a href="#sec-4-3" class="sub">4.3 销售商品收到的现金</a></li>
+        <li><a href="#sec-5">五、投资与筹资活动现金流</a></li>
+        <li><a href="#sec-5-1" class="sub">5.1 投资活动现金流</a></li>
+        <li><a href="#sec-5-2" class="sub">5.2 筹资活动现金流</a></li>
+        <li><a href="#sec-6">六、总结：最终勾稽</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第四章 现金流量表 · 第一节</div>
+        <h1 class="article-title">现金流量表拆解</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>理解现金流量表的编制逻辑、三大活动的科目含义，以及如何通过关键数字判断企业质地</span>
+        </div>
+      </header>
+
+      <!-- 一、为何要单独编制现金流量表 -->
+      <section id="sec-1">
+        <h2>一、为何要单独编制现金流量表</h2>
+
+        <p>在"资产负债表"环节曾提到，现金流量表只是对货币资金科目下"现金及现金等价物"变化的展开。既然查看货币资金明细就能看到现金变化，为何还要单独制表？</p>
+
+        <p>关键在于<strong>现金变化的"来龙去脉"</strong>。假设一家企业年初持有 1000 万元、年末持有 5000 万元，现金净增 4000 万元。但这 4000 万元究竟从何而来？</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>现金来源</th><th>代表含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>借来的</td><td>增加了负债，需要偿还</td></tr>
+            <tr><td>挣来的</td><td>企业自身盈利能力的体现</td></tr>
+            <tr><td>股东投入的</td><td>依赖外部资本注入</td></tr>
+          </tbody>
+        </table>
+
+        <p>同样是增加 4000 万元，<strong>借的、挣的、投的意义完全不同</strong>。现金流量表正是负责展示企业账面现金及现金等价物来龙去脉的一张表。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关注重点</div>
+            <p>现金流量表同样分为<strong>合并现金流量表</strong>和<strong>母公司现金流量表</strong>，投资人主要关心<strong>合并现金流量表</strong>数据。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>会计准则规定小企业可以不编制现金流量表（所有上市公司均不属于小企业）。这一规定也说明，现金流量表的重要性其实<strong>低于</strong>资产负债表和利润表。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-1-activities">三大活动的划分逻辑</h3>
+
+        <p>结合此前对资产负债表和利润表的认识，企业的钱有三个来源：借的、股东投的、自己挣的。现金流量表据此将企业现金活动归为三大类，外加一个附加项：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>活动类别</th><th>通俗理解</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>筹资活动现金流</strong></td><td>找钱</td><td>企业借钱和吸引股东投钱的行为</td></tr>
+            <tr><td><strong>投资活动现金流</strong></td><td>下本钱</td><td>企业挣钱过程中的投资行为</td></tr>
+            <tr><td><strong>经营活动现金流</strong></td><td>日常经营</td><td>企业挣钱过程中的日常经营行为</td></tr>
+            <tr><td>汇率变动影响</td><td>附加"小尾巴"</td><td>汇率变动对现金及现金等价物的影响</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、知识链接：三大活动科目详解 -->
+      <section id="sec-2">
+        <h2>二、知识链接：三大活动科目详解</h2>
+
+        <p>现金流量表各科目内容都很直白，单看科目标题即可大致理解含义。以下为各科目简介，未列出的一般为金融类企业涉及科目。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">技巧</div>
+            <p>阅读财报时遇到不明白的科目，可直接用<strong>关键词在财报里搜索</strong>，即可找到对应明细。例如搜索"支付的其他与投资活动有关的现金"，可在茅台 2013 年财报第 85 页查到具体构成。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-2-1">2.1 经营活动现金流量</h3>
+
+        <p><strong>一、经营活动现金流入的主要科目</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>科目</th><th>内容说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>销售商品、提供劳务收到的现金</td><td>本期销售商品、提供劳务收到的现金，收回以前销售形成的应收款，以及本期新增预收款，减去本期退货支付的现金（均含代收增值税）。代购代销业务收到的现金也在此反映</td></tr>
+            <tr><td>收到税费返还</td><td>各种税费返还款，如增值税即征即退、出口退税及其他税收优惠政策约定的返还</td></tr>
+            <tr><td>收到的其他与经营活动有关的现金</td><td>上述之外的经营相关现金，如经营租赁租金、自有资金利息收入、企业间往来等；除税费返还外的其他政府补助也在此反映</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>二、经营活动现金流出的主要科目</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>科目</th><th>内容说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>购买商品、接受劳务支付的现金</td><td>本期采购支付的现金，以及支付以前的应付款，减去本期退货收到的现金。代购代销业务支付的现金也在此反映</td></tr>
+            <tr><td>支付给职工以及为职工支付的现金</td><td>本期实际支付给职工的工资、奖金、津贴和补贴等职工薪酬（含代扣代缴个人所得税）。<strong>不包括</strong>支付给在建工程人员的薪酬</td></tr>
+            <tr><td>支付的各项税费</td><td>本期支付的各项税费</td></tr>
+            <tr><td>支付的其他与经营活动有关的现金</td><td>上述之外的经营相关支出，如经营租赁租金、差旅费、业务招待费、保险费、罚款支出、企业间往来等</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="sec-2-2">2.2 投资活动现金流量</h3>
+
+        <p><strong>一、投资活动现金流入的主要项目</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>内容说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>收回投资收到的现金</td><td>出售、转让或到期收回各种现金等价物范围以外的投资收到的现金。<strong>不含</strong>债权性投资的利息收入</td></tr>
+            <tr><td>取得投资收益收到的现金</td><td>因各种投资而分得的现金股利和利息等</td></tr>
+            <tr><td>处置固定资产、无形资产和其他长期资产收回的现金净额</td><td>卖资产的钱减去费用后的净额；受灾后的保险赔偿也在此</td></tr>
+            <tr><td>处置子公司及其他营业单位收到的现金净额</td><td>处置子公司及营业单位收到的现金净额</td></tr>
+            <tr><td>收到其他与投资活动有关的现金</td><td>上述之外的投资相关流入，如关联方资金拆借、承建单位缴纳的保证金等</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>滚动到期的短期理财产品，可能以较小投资额形成很大的投资现金流入与流出。例如 10 亿元投一个月理财产品并滚动操作，一年内可在现金流量表里创造百亿以上的投资现金流入和流出。</p>
+          </div>
+        </div>
+
+        <p><strong>二、投资活动现金流出的主要项目</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>内容说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>购建固定资产、无形资产和其他长期资产支付的现金</td><td>购买或自建长期资产所支出的现金，含应由在建工程和无形资产负担的职工薪酬。分期付款购建的固定资产，<strong>首付</strong>算在这里，<strong>后续部分</strong>算作筹资活动现金支出</td></tr>
+            <tr><td>投资支付的现金</td><td>为现金等价物范围以外的各种投资所支付的现金及相关费用</td></tr>
+            <tr><td>取得子公司及其他营业单位支付的现金净额</td><td>收购公司或业务部门支付的现金，减去所收购对象账上现金</td></tr>
+            <tr><td>支付其他与投资活动有关的现金</td><td>与"收到其他与投资活动有关的现金"反向。因被动稀释丧失对子公司货币资金控制，也记录在此</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="sec-2-3">2.3 筹资活动现金流量</h3>
+
+        <p><strong>一、筹资活动现金流入</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>内容说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>吸收投资收到的现金</td><td>发行股票的现金收入减去发行费用</td></tr>
+            <tr><td>取得借款收到的现金</td><td>各类长短期借款所收到的现金</td></tr>
+            <tr><td>发行债券收到的现金</td><td>发行债券的现金收入减去发行费用</td></tr>
+            <tr><td>收到其他与筹资活动有关的现金</td><td>上述之外的筹资相关流入，如接受股东现金捐赠等</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>二、筹资活动现金流出</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>内容说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>偿还债务支付的现金</td><td>以现金偿还债务的本金</td></tr>
+            <tr><td>分配股利、利润或偿付利息支付的现金</td><td>实际支付的现金股利、支付给其他投资单位的利润、借款利息、债券利息</td></tr>
+            <tr><td>支付其他与筹资活动有关的现金</td><td>上述之外的筹资相关流出，如捐赠、融资租赁费、借款利息、分期付款购建资产的后期现金等</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="sec-2-4">2.4 汇率变动对现金及现金等价物的影响</h3>
+
+        <p>按会计准则规定，外币现金流量以及境外子公司的现金流量，应采用<strong>现金流量发生当日的汇率或近似汇率</strong>折算，其与按<strong>报表日汇率</strong>折算产生的差额，单独作为"汇率变动对现金及现金等价物的影响"披露。</p>
+
+        <p>该项目一般无须单独计算，而是按报表日现金及现金等价物净增加额，与经营、投资、筹资三项活动带来的现金净增加额对比，<strong>差额直接计入该项</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、现金流量表的两种编制方法 -->
+      <section id="sec-3">
+        <h2>三、现金流量表的两种编制方法</h2>
+
+        <p>借助搜索大法和上述科目含义，我们不必在直白简单的科目上浪费时间，直接讨论如何理解现金流量表。</p>
+
+        <h3 id="sec-3-1">3.1 直接法现金流量</h3>
+
+        <p>现金流量表看上去是一笔流水账，理论上应是对企业现金流入流出活动的汇总。但上市公司及其子公司一年的现金流水数据实在庞大，逐笔统计工作量太大。</p>
+
+        <p>因此实践中的通行做法是：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">步骤一</span>
+            <h4>先统计投资和筹资活动现金流</h4>
+            <p>通常是有限次数的大额流入或流出，相对容易统计。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤二</span>
+            <h4>再结合利润表和资产负债表反推</h4>
+            <p>以利润表为基础、以资产负债表为参照，反推经营活动现金流。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">趋势</div>
+            <p>随着非现金支付普及和现金管理软件功能提升，已有部分公司开始按流水统计并自动汇总现金流量表。但主流仍是<strong>以利润表为基础、以资产负债表为参照反推</strong>。</p>
+          </div>
+        </div>
+
+        <p><strong>直接法编制经营活动现金流的思路：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>步骤</th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① 以利润表为基础</td><td>先假定所有收入都足额收到现金、所有支出都足额付出现金，得出现金流量表雏形</td></tr>
+            <tr><td>② 以资产负债表调节收入侧</td><td><strong>增加流入</strong>：代收增值税、收回历史应收款、新增预收款、贴现票据；<strong>减少流入</strong>：应收增加、预收减少</td></tr>
+            <tr><td>③ 以资产负债表调节支出侧</td><td>对照应付票据、应付账款、应交税费、应付薪酬、预付款、折旧减值等科目，调整"支出已足额付现"的假设</td></tr>
+          </tbody>
+        </table>
+
+        <p>由此得出经营活动现金流量后，企业再统计固定资产、无形资产、投资相关资产、递延所得税、应付债券、长期债务、股本、资本公积等科目变化带来的现金流入流出，按性质分类为<strong>投资活动现金流量</strong>和<strong>筹资活动现金流量</strong>。最后附加汇率变动影响，现金流量表即告完成。</p>
+
+        <div class="pull-quote">这种从营业收入开始编制经营活动现金流量的方法，称为"<strong>直接法</strong>"。</div>
+
+        <h3 id="sec-3-2">3.2 间接法现金流量</h3>
+
+        <p>按我国会计准则规定，企业除按直接法披露经营现金流量外，还应在<strong>附注</strong>里披露间接法经营活动现金流量。</p>
+
+        <p>所谓"间接法"，指从利润表的<strong>净利润</strong>数据入手，做三类调整后反推出经营现金流量：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>调整类别</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>①</td><td>利润表里已作为费用扣除，但实际并未支付现金的项目</td></tr>
+            <tr><td>②</td><td>利润表的收入或费用，但与经营活动无关的项目</td></tr>
+            <tr><td>③</td><td>未体现在本期利润表里的经营性应付应收和存货变化，对当期经营性现金流量的影响</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="sec-3-2-table">表 4-1-1 净利润到经营活动现金流量净额的变化过程演示</h3>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">数据说明</div>
+            <p>数据来自茅台 2013 年报本期金额，为便于阅读，四舍五入简化为"亿元"并保留两位小数。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>调整类别</th><th>补充资料</th><th>本期金额（亿元）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>起点</strong></td><td>净利润</td><td>159.65</td></tr>
+            <tr><td rowspan="5"><strong>加 ①</strong></td><td>资产减值准备</td><td>-0.02</td></tr>
+            <tr><td>(有形)资产折旧</td><td>5.20</td></tr>
+            <tr><td>无形资产摊销</td><td>0.32</td></tr>
+            <tr><td>长期待摊费用摊销</td><td>0.04</td></tr>
+            <tr><td>资产处置或报废造成的损失</td><td>0.09</td></tr>
+            <tr><td rowspan="3"><strong>加 ②</strong></td><td>财务费用</td><td>0</td></tr>
+            <tr><td>投资损失</td><td>-0.03</td></tr>
+            <tr><td>公允价值变动损失</td><td>—</td></tr>
+            <tr><td rowspan="6"><strong>加 ③</strong></td><td>递延所得税资产的减少</td><td>-1.82</td></tr>
+            <tr><td>递延所得税负债的增加</td><td>—</td></tr>
+            <tr><td>存货减少值</td><td>-21.71</td></tr>
+            <tr><td>经营性应收减少值</td><td>-0.63</td></tr>
+            <tr><td>经营性应付增加值</td><td>-14.54</td></tr>
+            <tr><td></td><td></td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td><strong>=</strong></td><td><strong>经营活动产生的现金流量净额</strong></td><td><strong>126.55</strong></td></tr>
+          </tfoot>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">注</div>
+            <p>"—"代表本科目无数字；"0"代表本科目有数字，但四舍五入后不足 0.01 亿元。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-3-2-steps">间接法三步走详解</h3>
+
+        <p>以净利润为起点，经过如下三步反推经营活动现金流量净额：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">第一步（加①）</span>
+            <h4>加回已扣除但未付现的费用</h4>
+            <p>将利润表里已作为费用扣除、但实际并未支付现金的金额一律加回。如资产减值准备、折旧、摊销、资产处置或报废产生的损失。<br/>⚠️ 若某科目为<strong>收益</strong>（如坏账转回、处置资产盈利），<strong>记录为负数</strong>即可。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第二步（加②）</span>
+            <h4>加回与经营活动无关的支出</h4>
+            <p>将不属于经营活动的支出或亏损加回。如财务费用支出、投资亏损及当期公允价值下跌（盈利记为负数）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第三步（加③）</span>
+            <h4>调整经营性应收应付及存货变化</h4>
+            <p>它们属于经营活动，会直接影响当期现金流入流出，但未直接体现在本期利润表上。包括递延所得税资产/负债、存货、经营性应收应付的变化。</p>
+          </div>
+        </div>
+
+        <p><strong>第三步各项详解：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>逻辑</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>递延所得税资产减少</strong></td><td>动用了预缴税款，利润表扣除的税款本期未实际付现，需加回</td></tr>
+            <tr><td><strong>递延所得税负债增加</strong></td><td>多欠了税务局税款，利润表记录的税款支出本期未实际付现，需加回</td></tr>
+            <tr><td><strong>存货减少</strong></td><td>营业成本动用了过去支付现金采购/制造的存货，本期无现金支出，需加回</td></tr>
+            <tr><td><strong>经营应收净减少</strong></td><td>额外收回历史欠账，是利润表未记录的现金收入，需加上</td></tr>
+            <tr><td><strong>经营性应付增加</strong></td><td>额外拖欠了应付成本，增加了在手现金，需加上</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>间接法核心公式：</strong></p>
+
+        <div class="formula"><strong>当期经营活动产生的现金流量净额 = 净利润</strong>
+        ＋ ① 利润表里已扣除但未实际付现的费用
+        ＋ ② 与经营活动无关的费用和亏损
+        ＋ ③ 利用期初（经营相关）非现金资产或负债转化来的现金</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">学习建议</div>
+            <p>采用间接法便于将净利润与经营活动现金流量比较，了解二者差异的原因，从而<strong>更好地观察净利润的质量</strong>。理解后可多在原表上练习体会真实含义，起初可能有点晕，多练几次就好。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、经营活动现金流的关键数字 -->
+      <section id="sec-4">
+        <h2>四、经营活动现金流的关键数字</h2>
+
+        <p>现金流量表的重心是<strong>经营活动现金流</strong>。企业不可能长期靠股东投入或借债生存，买入股票的投资者通常也是冲着企业的经营获利能力而来。</p>
+
+        <p>经营活动现金流中，有两个关键数字：<strong>经营活动现金流量净额</strong>和<strong>销售商品、提供劳务收到的现金</strong>。</p>
+
+        <h3 id="sec-4-1">4.1 经营活动现金流量净额</h3>
+
+        <p><strong>第一层判断：是否大于零。</strong> 经营活动现金流量净额为负的企业，通常日子不好过（银行和控股类公司除外），即入不敷出。</p>
+
+        <p><strong>第二层判断：与折旧摊销比较。</strong> 数值大于零后，进一步对比折旧摊销水平判断企业质地：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>经营活动现金净流量水平</th><th>企业状况</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>小于零</strong></td><td>入不敷出，需要筹钱度日</td></tr>
+            <tr><td><strong>等于零</strong></td><td>勉强维持当前经营规模，无剩余积累购建新资产；随设备老化，生产能力与竞争力将日渐衰减</td></tr>
+            <tr><td><strong>大于零，但小于折旧摊销</strong></td><td>可维持当前规模并部分补偿折旧摊销，但不具备更新升级能力</td></tr>
+            <tr><td><strong>大于零，且等于折旧摊销</strong></td><td>可维持现有规模并补偿折旧摊销，但无法为扩大再生产提供现金，只能维持现状</td></tr>
+            <tr><td><strong>大于零，且大于折旧摊销</strong></td><td>正常经营、补偿折旧摊销，还能为扩大再生产提供资金，具有潜在成长性。<strong>超过越多，成长性越高</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">最后一种状况的企业，才是值得投资人从财务角度关注的企业。</div>
+
+        <h3 id="sec-4-2">4.2 经营现金流净额与净利润的印证</h3>
+
+        <p>用<strong>经营活动现金流净额 ÷ 净利润</strong>，可确认净利润是否真正变成现金进入公司账户。<strong>这个比值越大越好，持续大于 1 是优秀企业的重要特征。</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>比值情况</th><th>解读</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>≥ 1，尤其持续 ≥ 1</strong></td><td>净利润全部或大部分（考虑增值税）变成实实在在的现金，是"印钞机"的概率较大。可能意味着商品/服务供不应求、买家不断打预付款订货；高折旧企业（如水力发电公司）也常出现此情况</td></tr>
+            <tr><td><strong>持续 &lt; 1</strong></td><td>净利润质量堪忧，甚至生意越做越大、日子越难过。通常源于<strong>赊销卖货</strong>（查应收票据、应收账款证实）或<strong>存货积压</strong>（比对存货变化值证实）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">例外：房地产行业</div>
+            <p><strong>房地产行业不适用</strong>此指标。其销售模式为卖期房，必然产生大量预收款，收入又可靠交房速度调节，现金流入与营业收入的关系不可靠。房地产行业看<strong>当期销售和已销售未结算累积量</strong>可能更合适。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-4-3">4.3 销售商品、提供劳务收到的现金</h3>
+
+        <p>该数字可与营业收入对比。因含增值税，其理想值应满足：</p>
+
+        <div class="formula">销售商品、提供劳务收到的现金 ≈ 营业收入 × (1 + 增值税税率)
+        （或加上本期净增加的银行承兑汇票后成立）</div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>比值情况</th><th>解读</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>持续 ≥ 1</strong></td><td>绝大部分销售款项已收到，企业经营良好，商业地位稳固</td></tr>
+            <tr><td><strong>长期远小于 1</strong></td><td>大量款项被作为应收账款欠着，说明产品/服务缺乏竞争力，或需警惕虚增收入</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">需小心的情形</div>
+            <p>某些企业大量收到银票或商票后，既不持有到期也不贴现，而是<strong>转手背书支付给上游供货商</strong>，导致现金流入和流出均不体现在现金流量表里。此类情况较多时，"销售商品、提供劳务收到的现金"的观察价值会大打折扣。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、投资活动现金流与筹资活动现金流 -->
+      <section id="sec-5">
+        <h2>五、投资活动现金流与筹资活动现金流</h2>
+
+        <h3 id="sec-5-1">5.1 投资活动现金流：判断扩张还是收缩</h3>
+
+        <p>企业投资活动现金的流向可归纳为：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>方向</th><th>现金流出（投出去）</th><th>现金流入（收回来）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>投给自己</strong></td><td>形成固定资产、无形资产或子公司</td><td>出售有形/无形资产</td></tr>
+            <tr><td><strong>投给外部</strong></td><td>购买股票、债券、理财产品，参股联合营企业</td><td>出售股权/债券/理财产品；投资对象的分红和利息</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>去除短期理财滚动干扰后</strong>，可用投资活动现金净流量判断企业发展趋势：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">净流量为负</span>
+            <h4>企业处于花钱扩张阶段</h4>
+            <p>现金流出大于流入，企业正在对外投资或购建资产。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">净流量为正</span>
+            <h4>企业正在收缩或扩张放缓</h4>
+            <p>现金流入大于流出，可能正在收回投资或出售资产。</p>
+          </div>
+        </div>
+
+        <p><strong>评估企业投资，需关注三点：</strong></p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">第一</span>
+            <h4>是否在能力范围内</h4>
+            <p>跨行业多元化经营大概率演化为"多元恶化"。曾经的空调霸主春兰空调，即便在院士董事长带领下也身陷多元恶化泥潭至今未出。⚠️ 建议投资者慎重对待管理层的多元化扩张憧憬。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第二</span>
+            <h4>投资回报率是否够高</h4>
+            <p>若回报率不显著高于社会资金平均回报水平（可简单以贷款标准利率的两倍估算），说明管理层乱来；反之则可能是对股东有利的投资。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第三</span>
+            <h4>资金来源是否健康</h4>
+            <p>优先看是来自<strong>自产现金</strong>（经营或此前投资回报）还是<strong>筹资现金流入</strong>。投资人通常更喜欢企业自产现金投资；但若项目预期回报确实可观，筹资也是正确决定。</p>
+          </div>
+        </div>
+
+        <p>投资活动现金流出主要看两个科目——"购建固定资产、无形资产和其他长期资产支付的现金"和"取得子公司及其他营业单位支付的现金净额"，二者对应资产负债表上相关资产的增加。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">延伸：自由现金流（巴菲特概念）</div>
+            <p>指企业经营活动赚来的钱里，去掉为维持现有盈利能力必须再投下去的钱后，剩下的部分。它是股东在不伤及企业当前获利能力的前提下可拿走的回报，是<strong>企业唯一真实的价值</strong>，几乎所有企业价值评估都会用到。</p>
+            <p style="margin-top:.5rem;">该数字财报上没有，需靠理解企业后估算。简便起见，部分投资人直接用"经营活动现金流净额 − 购建固定资产、无形资产和其他长期资产支付的现金"模拟。但当购建资产主要用于扩大规模而非维持现有盈利能力时，此算法会<strong>低估</strong>自由现金流。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-5-2">5.2 筹资活动现金流：区分权益与债务</h3>
+
+        <p>筹资活动比较简单，核心是区分两类筹资方式：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>筹资类型</th><th>方式举例</th><th>观察价值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>权益性筹资</strong></td><td>增发股票、发行可转债或优先股等</td><td>发行价反映市场对企业价值及成长性的估计，可作为估值参考</td></tr>
+            <tr><td><strong>债务性筹资</strong></td><td>贷款、发行债券等</td><td>利率反映市场对企业信用的评价，可帮助评价企业安全性</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警示</div>
+            <p><strong>一般来说，债务性筹资利率越高，企业越危险。</strong>特别是那些账上货币资金不少、却仍以高利率借款的企业——这相当于拿着高音喇叭对着大海喊：我是骗子……</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、总结：现金流量表的最终勾稽 -->
+      <section id="sec-6">
+        <h2>六、总结：现金流量表的最终勾稽</h2>
+
+        <p>三大活动形成的现金流净额，加上企业期初拥有的现金及现金等价物，经过汇率调整（若有）之后，便得到<strong>期末现金及现金等价物总额</strong>：</p>
+
+        <div class="formula"><strong>期末现金及现金等价物 = 期初现金及现金等价物</strong>
+        ＋ 经营活动现金流净额
+        ＋ 投资活动现金流净额
+        ＋ 筹资活动现金流净额
+        ＋ 汇率变动影响</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">勾稽关系</div>
+            <p>这个数字，正是<strong>资产负债表上"货币资金"科目里的现金及现金等价物总额</strong>，实现了两张报表的相互勾稽。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接/待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第4章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

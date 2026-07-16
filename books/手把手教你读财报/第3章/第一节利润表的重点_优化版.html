@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>利润表的重点 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-flat::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2章/第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="../第2章/第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="../第2章/第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="../第2章/第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="../第2章/第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第三章 利润表</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节利润表的重点_优化版.html" class="active">第一节 利润表的重点</a></li>
+            <li><a href="第二节创造利润的过程_优化版.html">第二节 创造利润的过程</a></li>
+            <li><a href="第三节速读利润表.html">第三节 速读利润表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title toc-flat" href="../第4章/第一节现金流量表拆解.html" style="text-decoration:none;">第四章 现金流量表</a>
+        </li>
+        <li class="toc-chapter"><span class="toc-chapter-title toc-pending">第五章 财务指标综合分析</span></li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-overview">📋 概述</a></li>
+        <li><a href="#sec-1">📊 一、市场为何追逐利润表</a></li>
+        <li><a href="#s1-formula" class="sub">股价决定公式</a></li>
+        <li><a href="#s1-systems" class="sub">两种投资体系</a></li>
+        <li><a href="#s1-davis" class="sub">戴维斯双击</a></li>
+        <li><a href="#sec-2">🔍 二、市盈率还是每股收益</a></li>
+        <li><a href="#s2-bg" class="sub">研究背景</a></li>
+        <li><a href="#s2-returns" class="sub">回报来源分类</a></li>
+        <li><a href="#s2-sp500" class="sub">标普500数据（1900-2009）</a></li>
+        <li><a href="#s2-findings" class="sub">核心发现</a></li>
+        <li><a href="#sec-3">⭐ 三、市场的挚爱：每股收益</a></li>
+        <li><a href="#s3-why" class="sub">为什么关注每股收益</a></li>
+        <li><a href="#s3-disclosure" class="sub">每股收益的披露</a></li>
+        <li><a href="#sec-4">📑 四、合并利润表与母公司利润表</a></li>
+        <li><a href="#s4-diff" class="sub">核心区别</a></li>
+        <li><a href="#s4-consolidated" class="sub">合并利润表</a></li>
+        <li><a href="#s4-oci" class="sub">其他综合收益</a></li>
+        <li><a href="#s4-moutai" class="sub">茅台本部利润详解</a></li>
+        <li><a href="#sec-5">🆕 五、新准则升级版</a></li>
+        <li><a href="#s5-changes" class="sub">主要科目变化</a></li>
+        <li><a href="#s5-oci-detail" class="sub">其他综合收益细化</a></li>
+        <li><a href="#sec-summary">📌 核心要点总结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第三章 利润表 · 第一节</div>
+        <h1 class="article-title">利润表的重点</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>理解利润表的本质、每股收益的重要性与合并利润表的阅读方法</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="sec-overview">
+        <h2>📋 概述</h2>
+
+        <p>利润也被称为"损益"（损失和收益）。利润表也叫"损益表"，它是<strong>最受资本市场追捧的财务报表</strong>。上市公司在发布年度报告时，会特意单独发布一份"年报摘要"，其中展示的大部分数据都来自利润表。年度财务报告里也会单列一节内容叫"会计数据及财务指标摘要"，其中大部分数据同样来自利润表。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、市场为何追逐利润表 -->
+      <section id="sec-1">
+        <h2>📊 一、市场为何追逐利润表</h2>
+
+        <h3 id="s1-formula">1.1 股价决定公式</h3>
+
+        <p>市场之所以如此重视利润表，是因为股价由市盈率和每股收益的乘积决定：</p>
+
+        <div class="formula"><strong>P（股价）= PE（市盈率）× E（每股收益）</strong></div>
+
+        <p>因为市盈率的计算公式是 PE = P ÷ E，所以 P = PE × E 其实只是个永不会错的套套逻辑（Tautology：同义反复）。但它提供了一个看问题的角度，引导意图获取股票价差的投资人永远关心两个数字：<strong>市盈率</strong>和<strong>每股收益</strong>。</p>
+
+        <h3 id="s1-systems">1.2 两种投资体系</h3>
+
+        <p>对这两个数字的不同侧重，产生两种不同的投资体系：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>投资体系</th><th>关注重点</th><th>投资策略</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>心理变化体系</strong></td><td>市盈率变动</td><td>捕捉市盈率从低到高，或从高到更高的股价变动</td></tr>
+            <tr><td><strong>企业成长体系</strong></td><td>每股收益增长</td><td>寻找每股收益从低到高，或从高到更高的收益</td></tr>
+            <tr><td><strong>戴维斯双击</strong></td><td>市盈率 + 每股收益</td><td>追求市盈率和每股收益双增长</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s1-davis">💡 知识链接：戴维斯双击</h3>
+
+        <p><strong>戴维斯双击</strong>是美国戴维斯家族的投资哲学。老戴维斯1947年以5万美元开始投资，至1994年去世时拥有9亿美元财富，跻身世界级投资大师行列。</p>
+
+        <p><strong>核心思路：</strong>寻找10倍以下市盈率、经营业绩年增长率能达到10%～15%的企业，享受其业绩增长和市盈率增长对股价的倍增效应。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">案例说明</div>
+            <p>某企业今年每股收益1元，预期年增长率15%，当前市盈率8倍 → 股价 = 8 × 1 = 8元。5年后市场情绪回归正常，给该公司15倍市盈率，每股收益约2元 → 股价 = 15 × 2 = 30元。投资者5年3.75倍，折合年化收益率超过30%。</p>
+          </div>
+        </div>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">相关概念</span>
+            <h4>戴维斯双杀</h4>
+            <p>股价承受估值和收益双双下降的打击。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">相关概念</span>
+            <h4>戴维斯单击/单杀</h4>
+            <p>仅市盈率或收益的上升或下降带来的股价变化。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、市盈率还是每股收益：约翰·博格的解读 -->
+      <section id="sec-2">
+        <h2>🔍 二、市盈率还是每股收益：约翰·博格的解读</h2>
+
+        <h3 id="s2-bg">2.1 研究背景</h3>
+
+        <p>在股市生存，第一要素就是先要想清楚，自己究竟打算靠什么体系安身立命。</p>
+
+        <p><strong>约翰·博格</strong>（以一己之力开创了指数基金行业的投资大师）在普林斯顿大学就读期间致力于研究：<strong>究竟是市盈率变化更重要，还是企业利润增长更重要？</strong></p>
+
+        <p>1951年，他在自己的毕业论文《投资公司的经济角色》里，分拆统计了美国股市的回报来源。</p>
+
+        <h3 id="s2-returns">2.2 回报来源分类</h3>
+
+        <p>约翰·博格将导致股价变化的因素划分为：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>回报类型</th><th>来源</th><th>细分</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>实业回报</strong></td><td>企业净利润增长</td><td>分红 + 利润增长</td></tr>
+            <tr><td><strong>投机回报</strong></td><td>市盈率波动</td><td>-</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>研究结论：</strong>股市回报主要来源于实业回报。长期视角看投机回报微不足道，且相当不稳定。</p>
+
+        <h3 id="s2-sp500">2.3 标普500投资收益来源数据（1900-2009年）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间</th><th>股息率(1)</th><th>利润增长(2)</th><th>实业回报(3)=(1)+(2)</th><th>投机回报(4)</th><th>总回报=(3)+(4)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1900-1909</td><td>3.5</td><td>4.7</td><td>8.2</td><td>0.8</td><td>9.0</td></tr>
+            <tr><td>1910-1919</td><td>4.3</td><td>2.0</td><td>6.3</td><td>-3.4</td><td>2.9</td></tr>
+            <tr><td>1920-1929</td><td>5.9</td><td>5.6</td><td>11.5</td><td>3.3</td><td>14.8</td></tr>
+            <tr><td>1930-1939</td><td>4.5</td><td>-5.6</td><td>-1.1</td><td>0.3</td><td>-0.8</td></tr>
+            <tr><td>1940-1949</td><td>5.0</td><td>9.9</td><td>14.9</td><td>-6.3</td><td>8.6</td></tr>
+            <tr><td>1950-1959</td><td>6.9</td><td>3.9</td><td>10.8</td><td>9.3</td><td>20.1</td></tr>
+            <tr><td>1960-1969</td><td>3.1</td><td>5.5</td><td>8.6</td><td>-1.0</td><td>7.6</td></tr>
+            <tr><td>1970-1979</td><td>3.5</td><td>9.9</td><td>13.4</td><td>-7.5</td><td>5.9</td></tr>
+            <tr><td>1980-1989</td><td>5.2</td><td>4.4</td><td>9.6</td><td>7.7</td><td>17.3</td></tr>
+            <tr><td>1990-1999</td><td>3.2</td><td>7.4</td><td>10.6</td><td>7.2</td><td>17.8</td></tr>
+            <tr><td>2000-2009</td><td>1.2</td><td>0.8</td><td>2.0</td><td>-3.2</td><td>-1.2</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td><strong>110年平均</strong></td><td><strong>4.5</strong></td><td><strong>4.3</strong></td><td><strong>8.8</strong></td><td><strong>0.3</strong></td><td><strong>9.1</strong></td></tr>
+          </tfoot>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">数据说明</div>
+            <p>博格将包含500家公司的标普500指数视为一个投资组合，每年现金分红总量÷总市值得到股息率；对期初和期末的总利润增幅做年化处理，得出利润增长；对期初与期末市盈率变化带来的回报，年化处理后得出投机回报率。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-findings">2.4 核心发现</h3>
+
+        <p>标普500指数110年内实现了年化9.1%的投资回报率，相当于1900年的1美元变成2009年的14,478美元。其中：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">实业回报</span>
+            <h4>8.8% 年化回报</h4>
+            <p>源于企业净利润增长与分红，除20世纪30年代外，所有10年期均为正数（2.0%～14.9%）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">投机回报</span>
+            <h4>仅 0.3% 年化回报</h4>
+            <p>源于市盈率波动，11个10年期内6正5负，年化在-7.5%～9.3%之间剧烈波动。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">"市场就像一只钟摆，永远在短命的乐观（它使得股票过于昂贵）和不合理的悲观（它使得股票过于廉价）之间摆动。"<cite>— 格雷厄姆</cite></div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">投资大师共识</div>
+            <p>长期而言投资者获利的主要来源是企业的净利润增长和分红，而不是市盈率的波动。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、市场的挚爱：每股收益 -->
+      <section id="sec-3">
+        <h2>⭐ 三、市场的挚爱：每股收益</h2>
+
+        <h3 id="s3-why">3.1 为什么关注每股收益</h3>
+
+        <p>无论哪种投资流派，都需要关注每股收益：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>投资流派</th><th>对每股收益的要求</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>捕捉市盈率变动</strong></td><td>确定收益不下降或降幅小于市盈率增幅</td></tr>
+            <tr><td><strong>分享企业成长</strong></td><td>投资收益建立在每股收益增长基础上</td></tr>
+            <tr><td><strong>两手抓</strong></td><td>需要每股收益持续增长</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">案例说明</div>
+            <p>当年每股收益1元，10倍市盈率。你判断市场情绪转乐观，可能直奔20倍市盈率去，准备下手吃一倍差价。但你得先分析每股收益会不会大幅下降。否则即便市场如你所愿到达20倍市盈率，每股收益却变五毛了，结果10×1=20×0.5，股价差=0。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-disclosure">3.2 每股收益的披露</h3>
+
+        <p>以2013年贵州茅台为例，利润表中每股收益显示如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>本期金额</th><th>上期金额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>基本每股收益</strong></td><td>14.58</td><td>12.82</td></tr>
+            <tr><td><strong>稀释每股收益</strong></td><td>14.58</td><td>12.82</td></tr>
+          </tbody>
+        </table>
+
+        <p>同时，在财报"主要财务数据"部分也有披露：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>主要财务指标</th><th>2013年</th><th>2012年</th><th>本期比上年同期增减(%)</th><th>2011年</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>基本每股收益(元/股)</td><td>14.58</td><td>12.82</td><td>13.74</td><td>8.44</td></tr>
+            <tr><td>稀释每股收益(元/股)</td><td>14.58</td><td>12.82</td><td>13.74</td><td>8.44</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>两种每股收益的区别：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">基本每股收益</span>
+            <h4>按现有股本计算</h4>
+            <p>仅考虑当前已发行普通股数量。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">稀释每股收益</span>
+            <h4>考虑潜在股本</h4>
+            <p>按现有股本加上潜在股本（发行在外的认股权证、股票期权、可转债等工具可能导致增加的公司股本）计算。</p>
+          </div>
+        </div>
+
+        <p>因为茅台没有认股权证、股票期权、可转债之类的东西，所以这两个数值是一样的。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、合并利润表与母公司利润表 -->
+      <section id="sec-4">
+        <h2>📑 四、合并利润表与母公司利润表</h2>
+
+        <h3 id="s4-diff">4.1 核心区别</h3>
+
+        <p>利润表同样分为合并利润表和母公司利润表，两者的核心区别是对于子公司的处理。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>报表类型</th><th>处理方式</th><th>市场关注度</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>母公司利润表</strong></td><td>仅将子公司宣布的分红纳入"投资收益"</td><td>低</td></tr>
+            <tr><td><strong>合并利润表</strong></td><td>将上市公司及其子公司作为一个"假想的企业集团"，反映整体与外部的交易成果</td><td>高</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s4-consolidated">4.2 合并利润表：市场真正关心的表</h3>
+
+        <p>合并利润表将上市公司及其子公司作为一个"假想的企业集团"，将全部子公司当期的经营情况和母公司当期经营情况合并，并在合并过程中抵销"假想的企业集团"内部所有公司之间的交易。它最终反映了上市公司及其子公司作为一个整体，与外部其他单位或个人发生的交易成果，是<strong>投资者真正需要关心的数据</strong>。</p>
+
+        <p><strong>贵州茅台2013年合并利润表：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>本期金额</th><th>上期金额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>五、净利润</strong></td><td>15,964,899,881.05</td><td>14,008,450,702.17</td></tr>
+            <tr><td>归属于母公司所有者的净利润</td><td>15,136,639,784.35</td><td>13,308,079,612.88</td></tr>
+            <tr><td>少数股东损益</td><td>828,260,096.70</td><td>700,371,089.29</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">数据解读</div>
+            <p>贵州茅台及其子公司2013年共计赚取159.65亿元净利润；8.28亿元利润属于子公司其他参股股东（少数股东损益）；<strong>151.37亿元属于上市公司全体股东</strong>（归母净利），这是资本市场投资人最关心的上市公司业绩。用151.37亿元 ÷ 总股本（10.3818亿股）= 每股收益14.58元。</p>
+          </div>
+        </div>
+
+        <h3 id="s4-oci">4.3 其他综合收益：股东的"备忘录"</h3>
+
+        <p>有时企业会有部分依照会计准则<strong>不允许计入当期净利润的利得或损失</strong>，例如：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">类型一</span>
+            <h4>可供出售金融资产公允价值变动</h4>
+            <p>持有期间的价值波动不进入净利润。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">类型二</span>
+            <h4>金融资产重分类造成的利得或损失</h4>
+            <p>资产重分类时产生的价值差额。</p>
+          </div>
+        </div>
+
+        <p>这些利得或损失通过利润表"其他综合收益"科目披露。披露时，还需要按照该项利得或损失以后能否计入损益，分为：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">分类一</span>
+            <h4>以后不能重分类进损益的其他综合收益</h4>
+            <p>永不计入利润表的公允价值变动。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">分类二</span>
+            <h4>以后将重分类进损益的其他综合收益</h4>
+            <p>在未来处置资产时可转入利润表。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">本质</div>
+            <p>"其他综合收益"相当于给股东列出了一个备忘，提醒股东本年度除净利润之外，还有一些其他价值变动。它本质上是一个资产负债表科目，只是借用利润表的位置来展示。<strong>其他综合收益与净利润相加，得出"综合收益总额"</strong>。贵州茅台2013年不存在"其他综合收益"变动，所以综合收益总额和净利润数据一致。</p>
+          </div>
+        </div>
+
+        <h3 id="s4-moutai">4.4 贵州茅台本部利润详解</h3>
+
+        <p><strong>母公司利润表：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>本期金额</th><th>上期金额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>四、净利润</strong></td><td>11,843,694,667.22</td><td>3,955,180,871.05</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>投资收益明细：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>本期金额</th><th>上期金额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>投资收益</strong></td><td>11,966,575,111.55</td><td>3,726,590,663.67</td></tr>
+          </tbody>
+        </table>
+
+        <p>通过对比可知：贵州茅台公司本部当年的经营活动是微亏的（118.44 - 119.67 = -1.23亿元）。</p>
+
+        <p><strong>原因：</strong>白酒企业乃至所有涉及消费税的企业，一般都会利用消费税只对生产企业征收的规则，单设销售公司，将生产本部产品低价卖给销售公司，将利润留在销售公司里，达到<strong>合法避税</strong>的目的。</p>
+
+        <p><strong>按成本法核算的长期股权投资收益：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>被投资单位</th><th>本期发生额</th><th>上期发生额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>贵州茅台酒销售有限公司</td><td>11,960,815,111.55</td><td>3,718,080,663.67</td></tr>
+            <tr><td>贵州茅台名将酒业有限公司</td><td>2,750,000.00</td><td>2,750,000.00</td></tr>
+            <tr><td>北京茅台神舟商贸有限公司</td><td>-</td><td>2,750,000.00</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td><strong>合计</strong></td><td><strong>11,963,565,111.55</strong></td><td><strong>3,723,580,663.67</strong></td></tr>
+          </tfoot>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要提示</div>
+            <p>子公司分红所对应的投资收益，仅仅体现了上市公司内部的资金调度，不代表利润的多或少。被投资收益扭曲的母公司利润表净利润数据是失真的，没有关心价值。资本市场投资者关心的净利润数据，主要是<strong>合并报表"归属于母公司所有者的净利润"科目</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、新准则升级版 -->
+      <section id="sec-5">
+        <h2>🆕 五、新准则升级版</h2>
+
+        <p>自《手把手教你读财报》第一版面世至2020年，会计准则的利润表科目陆续发生了一些变化。</p>
+
+        <h3 id="s5-changes">5.1 主要科目变化</h3>
+
+        <h3 id="s5-tax">5.1.1 "营业税金及附加" → "税金及附加"</h3>
+
+        <p>伴随我国2016年5月1日起全面推行"营改增（营业税改增值税）"，原来的"营业税金及附加"科目变成"税金及附加"。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意口径变化</div>
+            <p><strong>营业税是价内税</strong>（包含在营业收入内）；<strong>增值税是价外税</strong>（不包含在营业收入内）。营改增后营业收入数据和税金数据会同时降低。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">简化例子</div>
+            <p>营改增前：营业收入10.5亿元，营业税金及附加记录"营业税"0.5亿元。营改增后（增值税税率5%）：营业收入变成10.5÷1.05=10亿元，"税金及附加"里没有营业税，也不记录这0.5亿元增值税。</p>
+          </div>
+        </div>
+
+        <h3 id="s5-rd">5.1.2 新增"研发费用"科目</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">2018年</span>
+            <h4>研发费用单列</h4>
+            <p>新增"研发费用"科目，将原计入"管理费用"的研发费用单列披露。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">2019年</span>
+            <h4>摊销归入研发费用</h4>
+            <p>将自行开发的无形资产对应的摊销，从"管理费用"里移出，一并纳入"研发费用"科目披露。</p>
+          </div>
+        </div>
+
+        <h3 id="s5-other-income">5.1.3 新增"其他收益"科目</h3>
+
+        <p><strong>2017年新增</strong>，记录与日常经营相关，但又不属于营业收入的收益。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>与日常经营活动相关的政府补助</strong></td><td>软件企业增值税即征即退、研发费用补助、税收返还等</td></tr>
+            <tr><td><strong>代扣代缴个税手续费</strong></td><td>获税务局返还的代扣代缴个人所得税手续费</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">区别</div>
+            <p>与日常经营活动无关的政府补助（如地震或疫情补助）继续计入"营业外收入"。</p>
+          </div>
+        </div>
+
+        <h3 id="s5-amortized">5.1.4 新增"以摊余成本计量的金融资产终止确认收益"</h3>
+
+        <p><strong>2019年</strong>在"投资收益"科目下新增，单独披露本来计划持有收息并等待到期收回本金的"瘫子"，中途转让带来的收益或损失。</p>
+
+        <h3 id="s5-credit">5.1.5 新增"信用减值损失"科目</h3>
+
+        <p>按照新金融工具准则，减值准备的计提规则从"已发生损失法"修改为"预期信用损失法"后：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>科目</th><th>适用范围</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>信用减值损失</strong></td><td>各类应收款及对外债权投资，因预期欠债方信用变化而计提的减值准备</td></tr>
+            <tr><td><strong>资产减值损失</strong></td><td>其他减值准备</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s5-disposal">5.1.6 新增"资产处置收益"科目</h3>
+
+        <p><strong>2017年新增</strong>，记录原本记录于"营业外收入"科目的资产处置利得或损失，包括：处置固定资产、在建工程、生产性生物资产、无形资产、持有待售资产及负债等。</p>
+
+        <h3 id="s5-continuing">5.1.7 新增"净利润"科目下的"按经营持续性分类"</h3>
+
+        <p><strong>2017年新增</strong>，将公司净利润分类为：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>分类</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>持续经营净利润</strong></td><td>除终止经营外的净利润</td></tr>
+            <tr><td><strong>终止经营净利润</strong></td><td>处置已经划分为持有待售资产或负债，计划终止经营的业务部门或子公司带来的净利润或亏损</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s5-oci-detail">5.2 其他综合收益的不断细化</h3>
+
+        <p>其他综合收益是从2009年增设的报表科目，最早用来放置可供出售金融资产的公允价值变动。2014年7月后陆续将原本归入"资本公积——其他资本公积"科目内的多项内容，分拆出来单独在利润表的"其他综合收益"披露。</p>
+
+        <h3 id="s5-oci-structure">5.2.1 其他综合收益的结构（至2019年）</h3>
+
+        <p><strong>五、其他综合收益的税后净额</strong></p>
+
+        <p><strong>（一）不能重分类进损益的其他综合收益</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>科目</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1. 重新计量设定受益计划变动额</td><td>与职工离职后福利相关的设定受益计划负债及资产价值变动</td></tr>
+            <tr><td>2. 权益法下不能转损益的其他综合收益</td><td>联合营公司相关项目按股权比例归属</td></tr>
+            <tr><td>3. 其他权益工具投资公允价值变动</td><td>指定为"其他权益工具投资"的公允价值变动，永不计入损益</td></tr>
+            <tr><td>4. 企业自身信用风险公允价值变动</td><td>分类为金融负债的优先股或可转债因企业信用变化导致的公允价值变动</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>（二）将重分类进损益的其他综合收益</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>科目</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1. 权益法下可转损益的其他综合收益</td><td>联合营公司相关项目按股权比例归属</td></tr>
+            <tr><td>2. 其他债权投资公允价值变动</td><td>"粽子"债权资产的公允价值变动，最终处置时转入当期损益</td></tr>
+            <tr><td>3. 金融资产重分类计入其他综合收益的金额</td><td>"瘫子"重分类为"粽子"时的差额，最终处置时转回损益</td></tr>
+            <tr><td>4. 其他债权投资信用减值准备</td><td>"粽子"债权投资的信用减值准备</td></tr>
+            <tr><td>5. 现金流量套期储备</td><td>套期工具有效部分计入，平仓时转入损益</td></tr>
+            <tr><td>6. 外币财务报表折算差额</td><td>境外子公司或分支机构报表折算因汇率不同导致的差额</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s5-oci-tax">5.2.2 其他综合收益披露的是税后净额</h3>
+
+        <div class="callout info">
+          <div class="callout-icon">📐</div>
+          <div class="callout-body">
+            <div class="callout-title">例子</div>
+            <p>公司年初投资1000万元购买另外一家公司少量股权，分类为"其他权益工具投资"。年底这部分股权的公允价值为1200万元，企业所得税税率是25%。公允价值变动值：200万元；假设按1200万元卖出需缴纳所得税：(1200-1000)×25% = 50万元；记录"其他权益工具投资公允价值变动"：150万元（税后净额）。</p>
+          </div>
+        </div>
+
+        <h3 id="s5-oci-bs">5.2.3 与资产负债表的关联</h3>
+
+        <div class="formula"><strong>合并利润表"归属母公司股东所有的其他综合收益税后净额"</strong>
+        + <strong>合并资产负债表"其他综合收益"期初余额</strong>
+        = <strong>合并资产负债表"其他综合收益"期末余额</strong></div>
+
+        <h3 id="s5-hedge">5.2.4 现金流量套期储备详解</h3>
+
+        <p><strong>套期活动分类：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>套期类型</th><th>处理方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>公允价值套期</strong></td><td>两种合约的公允价值波动均直接计入当期损益</td></tr>
+            <tr><td><strong>现金流量套期</strong></td><td>套期有效部分计入其他综合收益，无效部分计入当期损益</td></tr>
+            <tr><td><strong>境外经营净投资套期</strong></td><td>处理方式同现金流量套期</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>套期有效性判断：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>情况</th><th>期货价格涨跌额与现货关系</th><th>处理</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>完全有效</strong></td><td>期货涨跌额 = 现货涨跌额</td><td>全部计入其他综合收益</td></tr>
+            <tr><td><strong>部分有效</strong></td><td>期货涨跌额 &lt; 现货涨跌额</td><td>期货盈亏全部属于有效部分，计入其他综合收益</td></tr>
+            <tr><td><strong>部分无效</strong></td><td>期货涨跌额 &gt; 现货涨跌额</td><td>与现货相等部分计入其他综合收益，超出部分计入当期损益</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s5-fx">5.2.5 外币财务报表折算差额 vs 汇兑收益</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>适用情况</th><th>会计处理</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>外币财务报表折算差额</strong></td><td>境外子公司以外币为记账本位币，合并报表时因采用汇率不同导致的差额</td><td>计入其他综合收益，不影响报表利润</td></tr>
+            <tr><td><strong>汇兑收益</strong></td><td>以人民币为记账本位币的公司，日常发生外币收支时，因汇率不同产生的汇兑差额</td><td>计入利润表</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 核心要点总结 -->
+      <section id="sec-summary">
+        <h2>📌 核心要点总结</h2>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">要点一</span>
+            <h4>利润表是资本市场最关注的财务报表</h4>
+            <p>核心关注指标是<strong>每股收益</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点二</span>
+            <h4>长期投资回报主要来源于企业净利润增长和分红</h4>
+            <p>而非市盈率波动。标普500指数110年数据已证明这一点。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点三</span>
+            <h4>合并利润表的"归母净利"是投资者真正需要关心的数据</h4>
+            <p>母公司利润表的投资收益体现内部资金调度，不代表真实盈利能力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点四</span>
+            <h4>其他综合收益是"备忘录"性质</h4>
+            <p>提醒股东除净利润外的其他价值变动，本质上属于资产负债表科目。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点五</span>
+            <h4>母公司利润表净利润数据是失真的</h4>
+            <p>被子公司分红投资收益扭曲，没有关心价值。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点六</span>
+            <h4>阅读财报时需注意会计准则变化</h4>
+            <p>营改增、研发费用单列、信用减值损失、其他收益等科目调整和口径变化。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接/待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第3章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
