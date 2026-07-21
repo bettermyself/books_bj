@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第一节 所有者权益变动表 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 单讲章节：不显示折叠箭头 */
+    .toc-chapter-title.toc-flat::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2章/第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="../第2章/第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="../第2章/第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="../第2章/第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="../第2章/第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 利润表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第3章/第一节利润表的重点_优化版.html">第一节 利润表的重点</a></li>
+            <li><a href="../第3章/第二节创造利润的过程_优化版.html">第二节 创造利润的过程</a></li>
+            <li><a href="../第3章/第三节速读利润表.html">第三节 速读利润表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title toc-flat" href="../第4章/第一节现金流量表拆解.html" style="text-decoration:none;">第四章 现金流量表</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 财务指标综合分析</span>
+          <ul class="toc-lectures">
+            <li><a href="../第5章/第一节鸟瞰三大表_优化版.html">第一节 鸟瞰三大表</a></li>
+            <li><a href="../第5章/第二节财务指标分析.html">第二节 财务指标分析</a></li>
+            <li><a href="../第5章/第三节使用财务数据估值.html">第三节 使用财务数据估值</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第六章 所有者权益变动表和财报附注</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节所有者权益变动表.html" class="active">第一节 所有者权益变动表</a></li>
+            <li><a href="第二节财报附注_优化版.html">第二节 财报附注</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-overview">📋 概述</a></li>
+        <li><a href="#sec-1">📖 一、核心概念解析</a></li>
+        <li><a href="#s1-gain" class="sub">1.1 利得与损失的由来</a></li>
+        <li><a href="#s1-classify" class="sub">1.2 利得和损失的两大分类</a></li>
+        <li><a href="#sec-2">🏢 二、以茅台为例：读懂报表结构</a></li>
+        <li><a href="#s2-header" class="sub">2.1 表头三大板块</a></li>
+        <li><a href="#s2-components" class="sub">2.2 权益构成</a></li>
+        <li><a href="#sec-3">🧮 三、期末权益总额的计算过程</a></li>
+        <li><a href="#s3-phase1" class="sub">3.1 第一阶段：年初余额</a></li>
+        <li><a href="#s3-phase2" class="sub">3.2 第二阶段：期末余额</a></li>
+        <li><a href="#s3-formula" class="sub">3.3 关键计算公式</a></li>
+        <li><a href="#sec-4">🆕 四、新准则升级版</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第六章 所有者权益变动表和财报附注 · 第一节</div>
+        <h1 class="article-title">所有者权益变动表</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>理解所有者权益变动表的构成，掌握权益变动的来龙去脉与计算方法</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="sec-overview">
+        <p>所有者权益变动表，也称"股东权益变动表"，负责反映公司本期内所有者权益的变动情况。其核心作用体现在三个方面：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">作用一</span>
+            <h4>反映直接计入权益的利得和损失</h4>
+            <p>揭示不经过利润表而直接影响净资产的收益变动。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">作用二</span>
+            <h4>反映权益总量的增减变动</h4>
+            <p>展示所有者权益在报告期内的净变化。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">作用三</span>
+            <h4>反映权益增减变动的结构</h4>
+            <p>分解各项变动来源，看清楚是什么导致了权益的变化。</p>
+          </div>
+        </div>
+
+        <p>所有者权益的来源主要有三大块：<strong>股东直接投入、留存收益、直接计入权益的利得和损失</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>所有者权益变动表的内容，本质上是"资产负债表"和"利润表"相关内容的整理与归集。如果已经仔细阅读过前两张报表，本表读不读影响不大。本节内容是对前文的复习，即便跳过也不影响财报的使用。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、核心概念解析 -->
+      <section id="sec-1">
+        <h2>📖 一、核心概念解析</h2>
+
+        <h3 id="s1-gain">1.1 利得与损失的由来</h3>
+
+        <p>"利得"是 <strong>2007 年</strong>正式引入我国会计准则的新定义。它的引入，将以前的"收入"按来源拆分为两部分：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>来源</th><th>名称</th><th>对应关系</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>来自日常经营活动</td><td><strong>收入</strong></td><td>收入 − 费用 = 利润</td></tr>
+            <tr><td>来自资产及负债的价值变化或偶然事件</td><td><strong>利得</strong></td><td>利得 − 损失 = 可能形成利润，也可能直接形成净资产</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s1-classify">1.2 利得和损失的两大分类</h3>
+
+        <p>利得和损失分为两大块，两者又各含五小块，均为"资产负债表"和"利润表"章节已讨论过的内容。</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">① 计入当期利润的利得和损失</h4>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">1</span>
+            <h4>资产减值损失</h4>
+            <p>资产可收回金额低于账面价值的差额。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">2</span>
+            <h4>公允价值变动收益</h4>
+            <p>交易性金融资产等以公允价值计量的资产价值波动。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">3</span>
+            <h4>投资收益</h4>
+            <p>对外投资所取得的利润、股利和债券利息等。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">4</span>
+            <h4>汇兑收益</h4>
+            <p>外币货币性项目因汇率变动产生的损益。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">5</span>
+            <h4>营业外收支</h4>
+            <p>与企业日常活动无直接关系的各项收支。</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">② 不计入当期利润的利得和损失</h4>
+
+        <p>指按照会计准则，在利润之后的<strong>"其他综合收益"</strong>部分披露，包括：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">1</span>
+            <h4>可供出售金融资产公允价值变动</h4>
+            <p>不含减值损失和汇兑收益。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">2</span>
+            <h4>金融资产重分类差额</h4>
+            <p>重分类日公允价值与账面价值的差额。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">3</span>
+            <h4>房地产转换差额</h4>
+            <p>自用或存货房地产转换为公允价值模式核算的投资性房地产时，转换日公允价值与原账面价值的差额。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">4</span>
+            <h4>权益法下的权益变动份额</h4>
+            <p>被投资单位除净利润以外的所有者权益变动，在持股比例不变的情况下，企业按持股比例计算应享有的份额。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">5</span>
+            <h4>可转换债券权益公允价值</h4>
+            <p>可转换债券所含权益对应的公允价值。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">温故知新</div>
+            <p>若对上述内容有疑惑，回看前文投资类资产及利润表"其他综合收益"部分即可。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、以茅台为例：读懂报表结构 -->
+      <section id="sec-2">
+        <h2>🏢 二、以茅台为例：读懂报表结构</h2>
+
+        <p>利得、资本的投入（或减少投入）、利润，都会引发所有者权益发生变化，所有者权益变动表正是归纳和展现这一变化过程的报表。下面对照<strong>贵州茅台 2013 年财报</strong>的合并所有者权益变动表，观摩其过程。</p>
+
+        <h3 id="s2-header">2.1 表头三大板块</h3>
+
+        <p>合并所有者权益变动表的表头分为三大块，如表 6-1-1 所示：</p>
+
+        <p style="font-size:.88rem;color:var(--text2);margin-bottom:.5rem;"><strong>表 6-1-1　合并所有者权益变动表</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>归属于母公司所有者权益</th><th>少数股东权益</th><th>所有者权益合计</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>……</td><td>实收资本 / 资本公积 / 盈余公积 / 未分配利润</td><td>—</td><td>= 前两者加总</td></tr>
+          </tbody>
+        </table>
+
+        <p>其中：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">核心</span>
+            <h4>归属于母公司所有者权益</h4>
+            <p>本表展示的重心，上市公司股东最关心的部分。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">少数</span>
+            <h4>少数股东权益</h4>
+            <p>上市公司下属子公司中占少数股份的股东所拥有的权益。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>这份报表是给上市公司股东看的，他们重点关心的是<strong>"归属于母公司所有者权益"</strong>，因此该项是全表的展示重心。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-components">2.2 归属于母公司所有者权益的构成</h3>
+
+        <p>在资产负债表中已谈过，所有者权益主要由四大块构成：<strong>实收资本、资本公积、盈余公积和未分配利润</strong>。因此"归属于母公司所有者权益"部分即按这四个项目展示。</p>
+
+        <p>由于"少数股东权益"的变化与"归属于母公司所有者权益"按比例同步，而"所有者权益合计"只是二者加总，均清晰明了，故下表仅展示"归属于母公司所有者权益"的变化细节。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、期末权益总额的计算过程 -->
+      <section id="sec-3">
+        <h2>🧮 三、期末权益总额的计算过程</h2>
+
+        <p>会计从上年年末数据开始，罗列造成各科目变化的原因，最终推导出期末余额。整个过程分为两个阶段。</p>
+
+        <h3 id="s3-phase1">3.1 第一阶段：从上年末余额到本年初余额</h3>
+
+        <p>先以上年末余额为起点，加上会计政策变更或会计差错更正带来的变化（若有），得到本年初余额。</p>
+
+        <p style="font-size:.88rem;color:var(--text2);margin-bottom:.5rem;"><strong>表 6-1-2　归属于母公司所有者权益构成（本年初余额）</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>说明</th><th>数据来源</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A：上年年末余额</strong></td><td>—</td><td>上年的资产负债表所有者权益对应科目</td></tr>
+            <tr><td><strong>B：会计政策变更导致的变化</strong></td><td>若有（变化为负值，则表达为负值）</td><td>—</td></tr>
+            <tr><td><strong>C：前期会计差错更正</strong></td><td>若有（变化为负值，则表达为负值）</td><td>—</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td><strong>D：本年年初余额</strong></td><td colspan="2"><strong>D = A + B + C</strong></td></tr>
+          </tfoot>
+        </table>
+
+        <h3 id="s3-phase2">3.2 第二阶段：从本年初余额到期末余额</h3>
+
+        <p>用"本年年初余额"加上"本期增减变动金额"，得出"本期期末余额"。其中最重要的<strong>"本期增减变动金额"</strong>分为五块：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>代号</th><th>项目</th><th>含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>E</strong></td><td>净利润</td><td>当期实现的净利润</td></tr>
+            <tr><td><strong>F</strong></td><td>其他综合收益</td><td>主要指五项不计入当期利润的利得和损失</td></tr>
+            <tr><td><strong>G</strong></td><td>所有者投入或减少资本</td><td>股东对资本的投入或减少</td></tr>
+            <tr><td><strong>H</strong></td><td>利润分配</td><td>当年对净利润的处理：提取盈余公积、提取一般风险准备、提取专项储备、向股东派发红利</td></tr>
+            <tr><td><strong>M</strong></td><td>所有者权益的内部结转</td><td>资本公积转增股本、盈余公积弥补亏损或转增股本</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:.88rem;color:var(--text2);margin-bottom:.5rem;"><strong>表 6-1-3　期末所有者权益总额获取的过程</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>代号</th><th>项目</th><th>数据来源</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>D</strong></td><td>本年年初余额</td><td>D = A + B + C</td></tr>
+            <tr><td><strong>E</strong></td><td>净利润</td><td>当期合并利润表</td></tr>
+            <tr><td><strong>F</strong></td><td>其他综合收益</td><td>当期合并利润表（主要是五项不计入当期利润的利得和损失）</td></tr>
+            <tr><td><strong>G</strong></td><td>所有者投入或减少资本</td><td>合并资产负债表实收资本和资本公积科目</td></tr>
+            <tr><td><strong>H-I</strong></td><td>当年提取的盈余公积</td><td>财报重要提示之"提取盈余公积"</td></tr>
+            <tr><td><strong>H-J</strong></td><td>当年提取一般风险准备</td><td>财报重要提示之"提取一般风险准备"</td></tr>
+            <tr><td><strong>H-K</strong></td><td>当年提取的专项储备</td><td>同上，若有（高危行业提取的安全生产费）</td></tr>
+            <tr><td><strong>H-L</strong></td><td>当年实施的上年度分红</td><td>上年度分红方案（给钱出去，用负数表示）</td></tr>
+            <tr><td><strong>M</strong></td><td>所有者权益内部结转</td><td>送股、转增股本、盈余补亏等</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>如果有需要补充说明的其他项目，上市公司会在表中单列或以其他项列出。</p>
+          </div>
+        </div>
+
+        <h3 id="s3-formula">3.3 关键计算公式</h3>
+
+        <div class="formula"><strong>期末所有者权益总额 = D + E + F + G + L</strong></div>
+
+        <p>需要特别理解<strong>为什么该公式不包含 M、I、J、K</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">不含 M</span>
+            <h4>内部结转不改变总量</h4>
+            <p>M 只是所有者权益内部存在形式的变化，增加其中某项一定会同时减少其他项，不引起"归属于母公司所有者权益"总额的变化。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">不含 I、J、K</span>
+            <h4>科目搬家不改变总量</h4>
+            <p>净利润分配中的 I、J、K 三项，只是将留存公司的净利润换了一个科目摆放，增加 I、J、K 的同时会减少净利润，总量不变。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">只有分红才真正减少了公司的所有者权益，因此需要减去（在公式中表示为加上其负值）。</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">理解要点</div>
+            <p>理解了上述<strong>"内部结转不改变总量、只有分红才流出"</strong>的逻辑，这张表就非常简单了。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、新准则升级版 -->
+      <section id="sec-4">
+        <h2>🆕 四、新准则升级版</h2>
+
+        <p>新准则下的所有者权益变动表变化不大，主要<strong>新增两个项目</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>新增项目</th><th>记录内容</th><th>参考章节</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>其他权益工具持有者投入资本</strong></td>
+              <td>企业发行的除普通股以外、分类为权益工具的金融工具带来的新增资本金额</td>
+              <td>第二章第四节"所有者权益新增科目：其他权益工具"（第 164 页）</td>
+            </tr>
+            <tr>
+              <td><strong>其他综合收益结转留存收益</strong></td>
+              <td>见下方两项明细</td>
+              <td>见下方参考</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>"其他综合收益结转留存收益"</strong>具体记录以下两项：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">1</span>
+            <h4>其他权益工具投资处置</h4>
+            <p>处置时，之前计入其他综合收益的利得和损失转入留存收益（未分配利润和盈余公积）的金额。</p>
+            <p style="font-size:.82rem;color:var(--text3);margin-top:.5rem;">📖 参见第二章第三节"新准则升级版"中有关其他权益工具投资的内容（第 132 页）。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">2</span>
+            <h4>企业自身信用风险变动</h4>
+            <p>由企业自身信用风险变动引起的、被计入其他综合收益的金融负债公允价值变动，在处置金融负债时需转入留存收益的金额。</p>
+            <p style="font-size:.82rem;color:var(--text3);margin-top:.5rem;">📖 参见第三章第一节"新准则升级版"中的"企业自身信用风险公允价值变动"部分（第 194 页）。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第6章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第二节 财报附注 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after { border-color: var(--gold); }
+    /* 单讲章节：不显示折叠箭头 */
+    .toc-chapter-title.toc-flat::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures { display: flex; }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead { background: rgba(201,168,76,.1); }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table tfoot td {
+      font-weight: 700;
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.06);
+      border-top: 2px solid var(--gold);
+    }
+
+    /* ===== Formula Block ===== */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    .formula strong { color: var(--gold-dk); }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2章/第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="../第2章/第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="../第2章/第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="../第2章/第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="../第2章/第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 利润表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第3章/第一节利润表的重点_优化版.html">第一节 利润表的重点</a></li>
+            <li><a href="../第3章/第二节创造利润的过程_优化版.html">第二节 创造利润的过程</a></li>
+            <li><a href="../第3章/第三节速读利润表.html">第三节 速读利润表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title toc-flat" href="../第4章/第一节现金流量表拆解.html" style="text-decoration:none;">第四章 现金流量表</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 财务指标综合分析</span>
+          <ul class="toc-lectures">
+            <li><a href="../第5章/第一节鸟瞰三大表_优化版.html">第一节 鸟瞰三大表</a></li>
+            <li><a href="../第5章/第二节财务指标分析.html">第二节 财务指标分析</a></li>
+            <li><a href="../第5章/第三节使用财务数据估值.html">第三节 使用财务数据估值</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第六章 所有者权益变动表和财报附注</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节所有者权益变动表.html">第一节 所有者权益变动表</a></li>
+            <li><a href="第二节财报附注_优化版.html" class="active">第二节 财报附注</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#sec-overview">📋 概述</a></li>
+        <li><a href="#sec-1">📖 一、附注简介</a></li>
+        <li><a href="#s1-importance" class="sub">1.1 附注的重要性</a></li>
+        <li><a href="#s1-structure" class="sub">1.2 附注结构组成</a></li>
+        <li><a href="#sec-2">🔍 二、科目解释详解</a></li>
+        <li><a href="#s2-basic" class="sub">2.1 公司基本情况</a></li>
+        <li><a href="#s2-policy" class="sub">2.2 会计政策与会计估计</a></li>
+        <li><a href="#s2-tax" class="sub">2.3 税项</a></li>
+        <li><a href="#s2-merger" class="sub">2.4 企业合并及合并财务报表</a></li>
+        <li><a href="#s2-consolidation" class="sub">2.5 合并报表项目解释 ⭐</a></li>
+        <li><a href="#s2-related" class="sub">2.6 关联方及关联交易</a></li>
+        <li><a href="#s2-share" class="sub">2.7 股份支付</a></li>
+        <li><a href="#s2-contingency" class="sub">2.8 或有事项</a></li>
+        <li><a href="#s2-commitment" class="sub">2.9 承诺事项</a></li>
+        <li><a href="#s2-post-bs" class="sub">2.10 资产负债表日后事项</a></li>
+        <li><a href="#s2-parent" class="sub">2.11 母公司报表项目解释 ⭐</a></li>
+        <li><a href="#s2-supplement" class="sub">2.12 补充资料</a></li>
+        <li><a href="#sec-3">📐 三、附注阅读方法</a></li>
+        <li><a href="#s3-strategy" class="sub">3.1 阅读策略</a></li>
+        <li><a href="#s3-method" class="sub">3.2 最佳阅读方法</a></li>
+        <li><a href="#sec-4">🆕 四、新准则升级版</a></li>
+        <li><a href="#s4-risk" class="sub">4.1 金融工具风险披露</a></li>
+        <li><a href="#s4-fair-value" class="sub">4.2 公允价值披露</a></li>
+        <li><a href="#sec-summary">💡 总结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第六章 所有者权益变动表和财报附注 · 第二节</div>
+        <h1 class="article-title">财报附注</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>掌握财报附注的十二大组成部分，学会与三张大表结合阅读，挖掘关键信息</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="sec-overview">
+        <p>附注是财报的重要组成部分，几乎所有重要的科目都会在附注里面附加明细说明。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、附注简介 -->
+      <section id="sec-1">
+        <h2>📖 一、附注简介</h2>
+
+        <h3 id="s1-importance">1.1 附注的重要性</h3>
+
+        <p>贵州茅台2013年财报的核心部分"财务会计报告"共计60页（第41-100页），其中：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>内容</th><th>篇幅占比</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>审计报告 + 财务报表</td><td>约30%</td></tr>
+            <tr><td><strong>附注</strong></td><td><strong>约70%</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心观点</div>
+            <p>附注是财报中信息量最丰富的部分，不读附注不能算合格的财报阅读者。</p>
+          </div>
+        </div>
+
+        <h3 id="s1-structure">1.2 附注结构组成</h3>
+
+        <p>虽然各公司财报附注格式略有区别，但大体结构类似。以贵州茅台2013年财报为例，附注由以下十二部分构成：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>序号</th><th>部分名称</th><th>页码</th><th>重要程度</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>三</td><td>公司基本情况</td><td>58-59</td><td>⭐</td></tr>
+            <tr><td>四</td><td>公司主要会计政策、会计估计和前期差错</td><td>59-65</td><td>⭐⭐⭐</td></tr>
+            <tr><td>五</td><td>税项</td><td>65</td><td>⭐⭐⭐</td></tr>
+            <tr><td>六</td><td>企业合并及合并财务报表</td><td>65-67</td><td>⭐⭐⭐</td></tr>
+            <tr><td>七</td><td><strong>合并报表项目解释</strong></td><td>67-86</td><td>⭐⭐⭐⭐⭐</td></tr>
+            <tr><td>八</td><td>关联方及关联交易</td><td>86-92</td><td>⭐⭐⭐</td></tr>
+            <tr><td>九</td><td>股份支付</td><td>92</td><td>⭐⭐</td></tr>
+            <tr><td>十</td><td>或有事项</td><td>92</td><td>⭐⭐</td></tr>
+            <tr><td>十一</td><td>承诺事项</td><td>92</td><td>⭐⭐</td></tr>
+            <tr><td>十二</td><td>资产负债表日后事项</td><td>92</td><td>⭐⭐</td></tr>
+            <tr><td>十三</td><td><strong>母公司财务报表主要项目解释</strong></td><td>92-97</td><td>⭐⭐⭐⭐⭐</td></tr>
+            <tr><td>十四</td><td>补充资料</td><td>97-100</td><td>⭐⭐</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>重要性划分</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">最重要</span>
+            <h4>第七部分 + 第十三部分</h4>
+            <p>合并报表项目解释和母公司财务报表主要项目解释，必须逐字细读。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">比较重要</span>
+            <h4>第四、五、六、八部分</h4>
+            <p>会计政策、税项、企业合并、关联交易，首次细读后续关注变化。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">可浏览</span>
+            <h4>其他部分</h4>
+            <p>公司基本情况、股份支付、或有事项、承诺事项、日后事项、补充资料。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、科目解释详解 -->
+      <section id="sec-2">
+        <h2>🔍 二、科目解释详解</h2>
+
+        <h3 id="s2-basic">2.1 公司基本情况</h3>
+
+        <p><strong>阅读建议</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">首次阅读</span>
+            <h4>✅ 可以看</h4>
+            <p>作为对公司的大致了解，快速浏览即可。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">后续阅读</span>
+            <h4>⏭️ 直接跳过</h4>
+            <p>内容基本不变，无需重复阅读。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-policy">2.2 公司主要会计政策、会计估计和前期差错</h3>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">内容说明</h4>
+
+        <p>这部分详细列出了公司所使用的：</p>
+        <p>• 会计政策<br/>• 会计估计<br/>• 前期差错</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">阅读策略</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>情况</th><th>处理方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>首次阅读</td><td>仔细读一遍，理解政策和估计基础</td></tr>
+            <tr><td>后续阅读</td><td>直接跳过（除非有变化）</td></tr>
+            <tr><td>数据异常时</td><td>到此处查找政策和估计说明</td></tr>
+            <tr><td>政策变化</td><td>会在"董事会报告"或"重大事项"中专项说明</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">前期差错类型</h4>
+
+        <p>前期差错包括但不限于：</p>
+        <p>• 算错账<br/>• 应用了错误的会计政策<br/>• 疏忽或曲解了事实<br/>• 造假账被发现<br/>• 存货或固定资产盘盈</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警示</div>
+            <p>报表经常有差错的企业，可能是低能，也可能是故意的。所有差错都要按照<strong>"假设错误没有发生"</strong>来调整报表。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-tax">2.3 税项</h3>
+
+        <p><strong>阅读建议</strong>：</p>
+        <p>• 首次阅读时可浏览<br/>• 后续只需在计算公司具体税额时，搜索所需税项之税率即可<br/>• 税率变化时，董事会一定会特意汇报</p>
+
+        <h3 id="s2-merger">2.4 企业合并及合并财务报表</h3>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">两大板块</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>板块</th><th>内容</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>合并范围公司名录</strong></td><td>子公司名单、持股比例、基本情况</td><td>了解集团架构</td></tr>
+            <tr><td><strong>合并范围变动说明</strong></td><td>本期新设/注销公司、增减出资情况</td><td>追踪业务变化</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">实用技巧：反推子公司净资产</h4>
+
+        <p>通过少数股东权益可以反推子公司净资产。</p>
+
+        <p><strong>计算公式</strong>：</p>
+
+        <div class="formula"><strong>子公司净资产 = 少数股东权益 ÷ 少数股东持股比例</strong></div>
+
+        <p><strong>案例示例</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>子公司</th><th>少数股东权益（万元）</th><th>上市公司持股</th><th>少数股东持股</th><th>子公司净资产（万元）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>茅台进出口公司</td><td>2,745.81</td><td>70%</td><td>30%</td><td>9,152.70</td></tr>
+            <tr><td>茅台销售公司</td><td>99,545.76</td><td>95%</td><td>5%</td><td>1,990,915.20</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s2-consolidation">2.5 合并报表项目解释 ⭐⭐⭐⭐⭐</h3>
+
+        <p>这是<strong>报表附注中最重要的部分</strong>。</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">解释范围</h4>
+
+        <p>贵州茅台2013年财报该部分分为44项解释，逐条解释了：</p>
+        <p>• 合并资产负债表的每一个有数字的科目<br/>• 合并利润表的每一个有数字的科目<br/>• 部分现金流量表补充数据</p>
+
+        <p>附注序号与报表"附注"列序号一一对应。</p>
+
+        <p><strong>示例：资产负债表对应关系</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>附注</th><th>期末余额</th><th>年初余额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>货币资金</td><td>(一)</td><td>25,185,009,331.68</td><td>22,061,999,850.17</td></tr>
+            <tr><td>应收票据</td><td>(二)</td><td>296,084,005.00</td><td>204,079,117.80</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>示例：利润表对应关系</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>附注</th><th>本期金额</th><th>上期金额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>营业外收入</td><td>(三十九)</td><td>32,763,249.14</td><td>6,756,532.19</td></tr>
+            <tr><td>营业外支出</td><td>(四十)</td><td>391,947,775.17</td><td>137,005,880.68</td></tr>
+            <tr><td>所得税费用</td><td>(四十一)</td><td>5,467,460,544.92</td><td>4,692,039,766.99</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">典型解释示例：营业收入、营业成本（附注三十一）</h4>
+
+        <p><strong>1. 营业收入、营业成本总览</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>本期发生额</th><th>上期发生额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>主营业务收入</td><td>30,921,391,282.59</td><td>26,455,251,445.86</td></tr>
+            <tr><td>其他业务收入</td><td>410,034.01</td><td>83,707.13</td></tr>
+            <tr><td>营业成本</td><td>2,193,920,307.99</td><td>2,044,306,468.76</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>2. 主营业务（分行业）</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>行业名称</th><th>本期收入</th><th>本期成本</th><th>上期收入</th><th>上期成本</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>酒类</td><td>30,921,391,282.59</td><td>2,193,909,811.13</td><td>26,455,251,445.86</td><td>2,044,240,866.68</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>3. 主营业务（分产品）</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>产品名称</th><th>本期收入</th><th>本期成本</th><th>上期收入</th><th>上期成本</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>茅台酒</td><td>29,055,414,849.74</td><td>1,574,205,906.56</td><td>24,032,635,151.18</td><td>1,400,404,842.86</td></tr>
+            <tr><td>系列酒</td><td>1,865,976,432.85</td><td>619,703,904.57</td><td>2,422,616,294.68</td><td>643,836,023.82</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td><strong>合计</strong></td><td><strong>30,921,391,282.59</strong></td><td><strong>2,193,909,811.13</strong></td><td><strong>26,455,251,445.86</strong></td><td><strong>2,044,240,866.68</strong></td></tr>
+          </tfoot>
+        </table>
+
+        <p><strong>4. 主营业务（分地区）</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>地区名称</th><th>本期收入</th><th>本期成本</th><th>上期收入</th><th>上期成本</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>国内</td><td>29,820,887,732.94</td><td>2,093,154,846.08</td><td>25,440,133,474.75</td><td>1,963,506,552.29</td></tr>
+            <tr><td>国外</td><td>1,100,503,549.65</td><td>100,754,965.05</td><td>1,015,117,971.11</td><td>80,734,314.39</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td><strong>合计</strong></td><td><strong>30,921,391,282.59</strong></td><td><strong>2,193,909,811.13</strong></td><td><strong>26,455,251,445.86</strong></td><td><strong>2,044,240,866.68</strong></td></tr>
+          </tfoot>
+        </table>
+
+        <p><strong>5. 前五名客户营业收入</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>排名</th><th>主营业务收入</th><th>占比</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>第一名</td><td>449,864,271.83</td><td>1.45%</td></tr>
+            <tr><td>第二名</td><td>427,494,025.49</td><td>1.38%</td></tr>
+            <tr><td>第三名</td><td>268,323,435.46</td><td>0.87%</td></tr>
+            <tr><td>第四名</td><td>255,348,235.93</td><td>0.83%</td></tr>
+            <tr><td>第五名</td><td>207,030,312.01</td><td>0.67%</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td><strong>合计</strong></td><td><strong>1,608,060,280.72</strong></td><td><strong>5.20%</strong></td></tr>
+          </tfoot>
+        </table>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">附注结构特点</h4>
+
+        <p>• <strong>第1-41项</strong>：逐条解释合并资产负债表和利润表科目<br/>• <strong>第42项</strong>：基本每股收益和稀释每股收益的计算过程<br/>• <strong>第43-44项</strong>：补充合并现金流量表数据，其中第44条第1小项为<strong>间接法编制的现金流量表</strong></p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">阅读建议</div>
+            <p>这部分的每个字都与投资者的钱包挂钩，需要<strong>逐字细读</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-related">2.6 关联方及关联交易</h3>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">核心内容</h4>
+
+        <p>该部分披露以下关键信息：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>披露内容</th><th>具体说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>关联方名单</td><td>哪些公司是上市公司关联方</td></tr>
+            <tr><td>交易对象</td><td>与哪些关联方发生了交易</td></tr>
+            <tr><td>交易内容</td><td>交易的是什么</td></tr>
+            <tr><td>定价机制</td><td>交易价格如何决定</td></tr>
+            <tr><td>交易条件</td><td>付款条件等其他交易细节</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">关联方范围</h4>
+
+        <p>关联方可能包括：</p>
+        <p>• 与上市公司存在股权关系的公司<br/>• 上市公司的母公司及母公司控股、合营或联营的企业<br/>• 与上市公司共同投资其他公司的个人或机构<br/>• 以上各方的主要股东、管理人员及其关系密切的家庭成员控制的公司</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">关联交易的双面性</h4>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">有利之处</span>
+            <h4>✅ 节约交易成本</h4>
+            <p>建立更可靠的供应或需求关系，基于信任，易于协调。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">潜在风险</span>
+            <h4>⚠️ 可能损害上市公司利益</h4>
+            <p>关联交易可能被用来转移利润或资源，损害中小股东利益。</p>
+          </div>
+        </div>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">重点关注事项</h4>
+
+        <p>投资者应警惕以下异常交易：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>关注点</th><th>判断标准</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>交易公平性</td><td>条件和价格是否严重偏离市场正常水平</td></tr>
+            <tr><td>应收款风险</td><td>是否产生大额应收款或高额预付款</td></tr>
+            <tr><td>担保风险</td><td>是否有风险巨大的关联担保</td></tr>
+            <tr><td>必要性</td><td>这些交易是否确有必要</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">判断技巧</div>
+            <p>对行业越熟悉，越能做出正确判断；对公司历史关联交易记录越熟悉，越有助于判断；阅读该企业及其竞争对手的财报越多，越有助于判断。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-share">2.7 股份支付</h3>
+
+        <p><strong>定义</strong>：主要指利用限制性股票或期权购买员工服务的行为。</p>
+
+        <p><strong>常见约束条件</strong>：</p>
+        <p>• 工作年限<br/>• 绩效考核</p>
+
+        <p>详细内容参见"库存股"相关章节。</p>
+
+        <h3 id="s2-contingency">2.8 或有事项</h3>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">定义</h4>
+
+        <p>对企业经济决策有影响的事项，但因暂时没有明确结果，无法录入报表，只能通过附注告知。</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">特点</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>影响</th><th>现状</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>正面或有事项</td><td>将来企业会收到钱</td><td>无法确定具体数额</td></tr>
+            <tr><td>负面或有事项</td><td>要赔别人钱</td><td>无法确定具体数额</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>最常见的或有事项</strong>：正在进行的诉讼</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警示</div>
+            <p>有些公司把实际上能够确定的负面信息故意不计入报表，而是<strong>"藏"在附注中披露</strong>。仔细阅读附注的投资者可能获得部分信息优势。</p>
+          </div>
+        </div>
+
+        <h3 id="s2-commitment">2.9 承诺事项</h3>
+
+        <p><strong>披露内容</strong>：</p>
+        <p>• 公司对外的合同承诺<br/>• 公司大股东对外的合同承诺</p>
+
+        <p><strong>包括</strong>：</p>
+        <p>• 还没开始执行的承诺<br/>• 还没有执行完毕的承诺</p>
+
+        <h3 id="s2-post-bs">2.10 资产负债表日后事项</h3>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">定义</h4>
+
+        <p>披露报表日（如年末或季度末）到财报批准发布日之间发生的、可能对公司有重大影响的事情。</p>
+
+        <p><strong>时间范围示例</strong>：</p>
+        <p>• 年报编制截止日：12月31日<br/>• 批准发布日：次年4月30日之前</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">两类事项</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>说明</th><th>处理方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>第一类</strong></td><td>报表日之前就存在，但当时不知道或不知道其影响，批准发布日前才获知</td><td>直接调整财报，披露的是已调整后的数据</td></tr>
+            <tr><td><strong>第二类</strong></td><td>报表日到批准发布日之间发生的新事项</td><td>不影响财报数据，只履行信息披露义务</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>案例示例</strong>（贵州茅台2013年财报）：</p>
+
+        <p>披露了2013年12月31日至2014年3月21日（报表批准发布日）期间发生的：</p>
+        <p>• 董事会分红预案<br/>• 注销一个子公司的情况</p>
+
+        <p>这些属于第二类事项，不影响财报数据。</p>
+
+        <h3 id="s2-parent">2.11 母公司财务报表主要项目解释 ⭐⭐⭐⭐⭐</h3>
+
+        <p>这是财报附注中<strong>仅次于"合并报表项目解释"的重要部分</strong>。</p>
+
+        <p><strong>阅读方法</strong>：与"合并报表项目解释"完全相同。</p>
+
+        <h3 id="s2-supplement">2.12 补充资料</h3>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">作用</h4>
+
+        <p>补充资料是否详细，是企业厚道与否的表现。</p>
+
+        <p><strong>主要内容</strong>：</p>
+        <p>• 企业认为需要特别说明的数据和事项<br/>• 报表中变化比较大的数据的解释</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>大部分报表数据的变化原因可以在这里找到解释。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、附注阅读方法 -->
+      <section id="sec-3">
+        <h2>📐 三、附注阅读方法</h2>
+
+        <h3 id="s3-strategy">3.1 阅读策略</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>部分</th><th>重要程度</th><th>阅读方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>合并报表项目解释</td><td>⭐⭐⭐⭐⭐</td><td><strong>细读</strong></td></tr>
+            <tr><td>母公司财务报表主要项目解释</td><td>⭐⭐⭐⭐⭐</td><td><strong>细读</strong></td></tr>
+            <tr><td>关联方及关联交易</td><td>⭐⭐⭐</td><td>重点阅读</td></tr>
+            <tr><td>会计政策、税项、企业合并</td><td>⭐⭐⭐</td><td>首次细读，后续关注变化</td></tr>
+            <tr><td>其他部分</td><td>⭐⭐</td><td>浏览</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="s3-method">3.2 最佳阅读方法</h3>
+
+        <p>财报附注不适合独立阅读，建议采用以下方法：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">1</span>
+            <h4>边读边查</h4>
+            <p>阅读三张大表时，不断查找附注里的对应解释。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">2</span>
+            <h4>整体浏览</h4>
+            <p>几张表阅读完毕后，按顺序浏览一遍附注。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">3</span>
+            <h4>重点关注</h4>
+            <p>熟悉公司后，针对关键数据重点关注。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、新准则升级版 -->
+      <section id="sec-4">
+        <h2>🆕 四、新准则升级版</h2>
+
+        <p>新准则下财报附注新增了两块内容：</p>
+
+        <h3 id="s4-risk">4.1 金融工具风险披露</h3>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">披露内容</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类别</th><th>具体内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>金融资产和负债分类</strong></td><td>详细分类说明</td></tr>
+            <tr><td><strong>风险类型</strong></td><td>信用风险、汇率风险、利率风险、市场风险、流动性风险等</td></tr>
+            <tr><td><strong>风险处理方式</strong></td><td>公司面对各种风险所采取的应对措施</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">披露对象</h4>
+
+        <p>• 以摊余成本计量的金融资产（"瘫子"）<br/>• 以公允价值计量且其变动计入当期损益的金融资产（"笋子"）<br/>• 以公允价值计量且其变动计入其他综合收益的金融资产（"粽子"）<br/>• 以公允价值计量且其变动计入当期损益的金融负债<br/>• 其他金融负债</p>
+
+        <h3 id="s4-fair-value">4.2 公允价值披露</h3>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">披露内容</h4>
+
+        <p>汇集公司所有以公允价值计量的资产和负债，包括：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>披露项</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>金额分布</strong></td><td>各层次公允价值的金额分布</td></tr>
+            <tr><td><strong>数据来源</strong></td><td>所采用的公允价值数据来源</td></tr>
+            <tr><td><strong>估值技术</strong></td><td>第二、三层次公允价值采用的估值技术</td></tr>
+            <tr><td><strong>主要参数</strong></td><td>估值中采用的主要参数</td></tr>
+            <tr><td><strong>特殊说明</strong></td><td>以账面价值作为公允价值的情况及原因</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">特殊情况处理</h4>
+
+        <p>对于因公允价值和账面价值差异很小等原因，直接以账面价值作为公允价值记录的金融资产和负债，需要作出情况说明和原因解释。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 总结 -->
+      <section id="sec-summary">
+        <h2>💡 总结</h2>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心要点</div>
+            <p>1. 附注占财报篇幅的70%，是信息量最丰富的部分<br/>2. <strong>最重要</strong>的是"合并报表项目解释"和"母公司财务报表主要项目解释"<br/>3. 附注应与三大报表结合阅读，不适合独立阅读<br/>4. 关注关联交易的公平性和或有事项的潜在风险<br/>5. 新准则下的金融工具风险和公允价值披露为投资决策提供了更多信息</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">不读附注，不能算合格的财报阅读者！</div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第6章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
