@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>董事会报告 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 待整理章节：淡化显示，不显示折叠箭头、不可点击 */
+    .toc-chapter-title.toc-pending {
+      opacity: .55;
+      cursor: default;
+    }
+    .toc-chapter-title.toc-pending::after { display: none; }
+    .toc-chapter-title.toc-flat::after { display: none; }
+    .toc-chapter-title.toc-pending:hover {
+      color: var(--text3);
+      background: transparent;
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    /* 固定两列（窄屏回退为单列） */
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    /* 固定三列（中屏两列，窄屏单列） */
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2章/第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="../第2章/第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="../第2章/第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="../第2章/第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="../第2章/第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 利润表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第3章/第一节利润表的重点_优化版.html">第一节 利润表的重点</a></li>
+            <li><a href="../第3章/第二节创造利润的过程_优化版.html">第二节 创造利润的过程</a></li>
+            <li><a href="../第3章/第三节速读利润表.html">第三节 速读利润表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第四章 现金流量表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第4章/第一节现金流量表拆解.html">第一节 现金流量表拆解</a></li>
+            <li><a href="../第4章/第二节企业的现金流肖像.html">第二节 企业的现金流肖像</a></li>
+            <li><a href="../第4章/第三节现金流量表速读.html">第三节 现金流量表速读</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 财务指标综合分析</span>
+          <ul class="toc-lectures">
+            <li><a href="../第5章/第一节鸟瞰三大表_优化版.html">第一节 鸟瞰三大表</a></li>
+            <li><a href="../第5章/第二节财务指标分析.html">第二节 财务指标分析</a></li>
+            <li><a href="../第5章/第三节使用财务数据估值.html">第三节 使用财务数据估值</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第六章 所有者权益变动表和财报附注</span>
+          <ul class="toc-lectures">
+            <li><a href="../第6章/第一节所有者权益变动表.html">第一节 所有者权益变动表</a></li>
+            <li><a href="../第6章/第二节财报附注_优化版.html">第二节 财报附注</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第七章 管理层的汇报</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节董事会报告_优化版.html" class="active">第一节 董事会报告</a></li>
+            <li><a href="第二节重要事项.html">第二节 重要事项</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">概述</a></li>
+        <li><a href="#section-2">📋 董事会报告结构</a></li>
+        <li><a href="#section-3">一、经营情况分析与讨论</a></li>
+        <li><a href="#section-3-1" class="sub">1.1 主营业务分析</a></li>
+        <li><a href="#section-3-2" class="sub">1.2 行业、产品或地区经营</a></li>
+        <li><a href="#section-3-3" class="sub">1.3 资产、负债情况分析</a></li>
+        <li><a href="#section-3-4" class="sub">1.4 投资状况分析</a></li>
+        <li><a href="#section-4">二、未来发展讨论与分析</a></li>
+        <li><a href="#section-4-1" class="sub">2.1 经营目标</a></li>
+        <li><a href="#section-4-2" class="sub">2.2 SWOT 分析</a></li>
+        <li><a href="#section-4-3" class="sub">2.3 实战案例：行业预判对比</a></li>
+        <li><a href="#section-4-4" class="sub">2.4 管理层预见能力验证</a></li>
+        <li><a href="#section-4-5" class="sub">2.5 茅台 2013 年市场判断</a></li>
+        <li><a href="#section-5">三、其他部分</a></li>
+        <li><a href="#section-6">总结与建议</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第七章 管理层的汇报 · 第一节</div>
+        <h1 class="article-title">董事会报告</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>读懂董事会报告，挖掘关键数据</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="section-1">
+        <h2>概述</h2>
+
+        <p>董事会报告是整份财报中<strong>重要性仅次于"财务会计报告"</strong>的部分，是管理层给股东的一次全面汇报。</p>
+
+        <p>由于各公司的商业模式不同，董事会报告的侧重点各异，无法统一分析。本节以<strong>贵州茅台财报</strong>为例，展示如何理解和阅读董事会报告，并从中挖掘关键数据。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 董事会报告结构 -->
+      <section id="section-2">
+        <h2>📋 董事会报告结构</h2>
+
+        <p>董事会报告通常包含以下五部分，其中<strong>前两部分是核心内容</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>序号</th><th>内容</th><th>重要性</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>一</td><td>董事会关于公司报告期内经营情况的讨论与分析</td><td>⭐⭐⭐</td></tr>
+            <tr><td>二</td><td>董事会关于公司未来发展的讨论与分析</td><td>⭐⭐⭐</td></tr>
+            <tr><td>三</td><td>董事会对会计师事务所"非标准审计报告"的说明</td><td>⭐</td></tr>
+            <tr><td>四</td><td>利润分配或资本公积金转增预案</td><td>⭐⭐</td></tr>
+            <tr><td>五</td><td>积极履行社会责任的工作情况</td><td>⭐</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、经营情况分析与讨论 -->
+      <section id="section-3">
+        <h2>一、经营情况分析与讨论</h2>
+
+        <p>这部分是董事会向股东汇报经营情况，也是董事会客串企业分析师，帮助我们全面梳理公司。其<strong>可靠性和专业性通常高于券商研究报告</strong>。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">重要提示</div>
+            <p>这部分包含一些<strong>非法定披露信息</strong>，连财报及附注都没有的数据。</p>
+          </div>
+        </div>
+
+        <!-- 1.1 主营业务分析 -->
+        <h3 id="section-3-1">1.1 主营业务分析</h3>
+
+        <p>董事会从<strong>收入、成本、费用、现金流</strong>四个角度对当年经营进行分析，基本涵盖投资者关心的各个经营要素。</p>
+
+        <p><strong>利润表及现金流量表关键数据</strong></p>
+        <p>以贵州茅台为例，核心财务指标如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>科目</th><th>本期数（元）</th><th>上年同期数（元）</th><th>变动比例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>营业收入</td><td>30,921,801,316.60</td><td>26,455,335,152.99</td><td>16.88%</td></tr>
+            <tr><td>营业成本</td><td>2,193,920,307.99</td><td>2,044,306,468.76</td><td>7.32%</td></tr>
+            <tr><td>销售费用</td><td>1,858,132,722.71</td><td>1,224,553,444.02</td><td>51.74%</td></tr>
+            <tr><td>管理费用</td><td>2,834,740,716.00</td><td>2,204,190,581.13</td><td>28.61%</td></tr>
+            <tr><td>财务费用</td><td>-429,074,364.68</td><td>-420,975,922.49</td><td>不适用</td></tr>
+            <tr><td>经营活动现金流量净额</td><td>12,655,024,861.92</td><td>11,921,310,609.25</td><td>6.15%</td></tr>
+            <tr><td>投资活动现金流量净额</td><td>-5,339,311,399.95</td><td>-4,199,476,298.27</td><td>不适用</td></tr>
+            <tr><td>筹资活动现金流量净额</td><td>-7,385,971,074.47</td><td>-3,914,524,622.85</td><td>不适用</td></tr>
+            <tr><td>研发支出</td><td>647,263,302.00</td><td>632,307,654.00</td><td>2.37%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键洞察</div>
+            <p>利润表重点数据、营业利润率和费用率一目了然；企业三大类活动的现金流净额清晰展示，方便快速描绘现金流肖像。</p>
+          </div>
+        </div>
+
+        <p><strong>产销存数据分析</strong></p>
+        <p>酒类产品产销存情况（单位：吨）</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>本期数</th><th>上年同期数</th><th>同比增减</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>销售量</td><td>25,177.99</td><td>25,715.75</td><td>-2.09%</td></tr>
+            <tr><td>生产量</td><td>26,033.64</td><td>24,299.00</td><td>7.14%</td></tr>
+            <tr><td>库存量</td><td>8,299.79</td><td>7,444.14</td><td>11.49%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意事项</div>
+            <p>表中的销售量、生产量及库存量均指<strong>成品酒</strong>（已灌装和包装完成的瓶装酒）。库存可能分布在：上市公司仓库、销售公司仓库、运输途中、全国九大中转库、自营店货架、经销商仓库。库存数据对应财务报表中"存货"科目的"库存商品"项。</p>
+          </div>
+        </div>
+
+        <p><strong>客户集中度分析</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>数据</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>前五名客户合计销售金额</td><td>160,806.03万元</td></tr>
+            <tr><td>占年度销售总额比例</td><td>5.20%</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>存货结构详解</strong></p>
+        <p>存货分类明细（单位：元）</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>期末账面余额</th><th>跌价准备</th><th>期末账面价值</th><th>期初账面余额</th><th>跌价准备</th><th>期初账面价值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>原材料</td><td>1,556,877,386.03</td><td>-</td><td>1,556,877,386.03</td><td>1,248,734,650.90</td><td>-</td><td>1,248,734,650.90</td></tr>
+            <tr><td>在产品</td><td>991,102,492.16</td><td>1,283,984.83</td><td>989,818,507.33</td><td>1,295,554,528.96</td><td>1,283,984.83</td><td>1,294,270,544.13</td></tr>
+            <tr><td>库存商品</td><td>713,532,808.42</td><td>-</td><td>713,532,808.42</td><td>730,078,328.46</td><td>-</td><td>730,078,328.46</td></tr>
+            <tr><td>自制半成品</td><td>8,576,581,537.25</td><td>-</td><td>8,576,581,537.25</td><td>6,392,644,069.93</td><td>-</td><td>6,392,644,069.93</td></tr>
+            <tr><td><strong>合计</strong></td><td><strong>11,838,094,223.86</strong></td><td><strong>1,283,984.83</strong></td><td><strong>11,836,810,239.03</strong></td><td><strong>9,667,011,578.25</strong></td><td><strong>1,283,984.83</strong></td><td><strong>9,665,727,593.42</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">特别提示：对于茅台等酒类企业</div>
+            <p><strong>自制半成品和在产品</strong>是"点石成金"的过程（5斤粮食变1斤酒）。只要出厂价远高于生产成本，存货越多越好。切勿将"在产品"或"自制半成品"误读为"存货积压"。</p>
+          </div>
+        </div>
+
+        <!-- 1.2 行业、产品或地区经营情况分析 -->
+        <h3 id="section-3-2">1.2 行业、产品或地区经营情况分析</h3>
+
+        <p><strong>关注要点</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">要点一</span>
+            <h4>各分类产品的增长或衰退情况</h4>
+            <p>观察不同产品线的营收变化趋势，判断核心产品的竞争力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点二</span>
+            <h4>毛利率的变化趋势</h4>
+            <p>毛利率的升降直接反映企业定价权和成本控制能力的变化。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点三</span>
+            <h4>传统销售区域是否有稳定增长</h4>
+            <p>已有市场的增长情况是基本盘是否稳固的试金石。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点四</span>
+            <h4>新消费区域开拓是否顺利</h4>
+            <p>新市场的拓展进度预示未来的增长空间。</p>
+          </div>
+        </div>
+
+        <!-- 1.3 资产、负债情况分析 -->
+        <h3 id="section-3-3">1.3 资产、负债情况分析</h3>
+
+        <p>该部分罗列了<strong>三类关键科目</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>科目类型</th><th>说明</th><th>示例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>主要科目</td><td>占比较大的科目</td><td>货币资金、存货、固定资产、无形资产（茅台合计占比88.6%）</td></tr>
+            <tr><td>敏感科目</td><td>影响经营质量</td><td>应收账款、应付账款等应收应付类科目</td></tr>
+            <tr><td>变化较大科目</td><td>异常波动项目</td><td>各公司情况不同，需重点关注变化原因</td></tr>
+          </tbody>
+        </table>
+
+        <p>通过阅读这些科目的变化及原因，可以对资产负债表有<strong>轮廓性了解</strong>。</p>
+
+        <!-- 1.4 投资状况分析 -->
+        <h3 id="section-3-4">1.4 投资状况分析</h3>
+
+        <p>⭐ <strong>这是投资者的宝藏部分</strong></p>
+
+        <p>企业未来能否增长，取决于企业今天的投资。未来的成长股，一般是<strong>当前投资活动现金流量净额为负</strong>的企业。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资状况分析的五个组成部分</div>
+            <p>1. 对外股权投资总体分析<br/>2. 非金融类公司委托理财及衍生品投资情况<br/>3. <strong>募集资金使用情况</strong> ⭐⭐⭐<br/>4. 主要子公司、参股公司分析<br/>5. <strong>非募集资金项目情况</strong> ⭐⭐⭐</p>
+          </div>
+        </div>
+
+        <p><strong>募集资金使用情况</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>关注点</th><th>目的</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>募集项目变更情况表</td><td>观察变更原因，判断是与时俱进还是"收钱变脸"，认识管理团队品性</td></tr>
+            <tr><td>计划投资金额 vs 实际投资金额</td><td>差异过大可能需要对管理层的管理能力和专业能力打折扣</td></tr>
+            <tr><td>项目进度披露</td><td>通过逐年对比，获得每个项目每年的生产情况</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">实战案例：茅台募集项目分析</div>
+            <p>通过对比不同年份财报中的表述：<br/><strong>2013年</strong>："项目2累计共生产系列酒基酒23,020.00吨、制曲58,899.00吨"<br/><strong>2012年</strong>："项目2累计共生产基酒19,859.04吨、制曲50,583.00吨"</p>
+            <p style="margin-top:.5rem;"><strong>得出结论</strong>：2013年生产基酒 23,020 − 19,859.04 = <strong>3,160.96吨</strong>；2013年制曲 58,899 − 50,583 = <strong>8,316吨</strong>；制曲与基酒比例 8,316 ÷ 3,160.96 ≈ <strong>2.6</strong>。</p>
+            <p style="margin-top:.5rem;"><strong>深层洞察</strong>：说明王子酒和茅台酒的生产要求基本一致，都是一斤酒需要2.6斤小麦所制的酒曲，证明二者的酒质区别不是由于原料或工艺造成，而是其他原因（如酒窖所处的地理位置）。</p>
+          </div>
+        </div>
+
+        <p><strong>非募集资金项目</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">信息来源一</span>
+            <h4>董事会报告中的直接披露</h4>
+            <p>董事会在报告中直接披露的重大非募集资金项目情况。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">信息来源二</span>
+            <h4>搜索"在建工程"</h4>
+            <p>在财报中搜索"在建工程"，找到未完工项目的细节和进度。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">信息来源三</span>
+            <h4>查看资金主要投向</h4>
+            <p>了解企业资金的主要投向及建设进度，判断扩张方向是否合理。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">持续关注价值</span>
+            <h4>对新增产能做到胸中有数</h4>
+            <p>持续追踪可对新增产能和市场压力等因素有前瞻性判断。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、董事会关于公司未来发展的讨论与分析 -->
+      <section id="section-4">
+        <h2>二、董事会关于公司未来发展的讨论与分析</h2>
+
+        <p>⭐ <strong>这是最大的宝藏部分</strong></p>
+
+        <p>投资企业就是投资未来。企业掌舵人如何看待企业在市场竞争中的优劣势，如何看待行业前景，准备如何开展商业活动，都是投资者必须关心的内容。</p>
+
+        <!-- 2.1 经营目标 -->
+        <h3 id="section-4-1">2.1 经营目标</h3>
+
+        <p>这部分容易被市场关注，通常会明确给出下一年度的经营计划。</p>
+
+        <div class="pull-quote">
+          根据行业现状、市场形势和公司的发展战略，预计公司2014年度实现营业收入较上年同期增长<strong>3%左右</strong>。
+          <cite>—— 贵州茅台2014年经营计划</cite>
+        </div>
+
+        <!-- 2.2 SWOT分析 -->
+        <h3 id="section-4-2">2.2 SWOT 分析（重点关注）</h3>
+
+        <p><strong>SWOT分析法</strong>（优劣势分析法）用来确定企业的：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>分析维度</th><th>英文</th><th>含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>竞争优势</td><td>Strength</td><td>企业内部的有利因素</td></tr>
+            <tr><td>竞争劣势</td><td>Weakness</td><td>企业内部的不利因素</td></tr>
+            <tr><td>机会</td><td>Opportunity</td><td>外部环境的有利因素</td></tr>
+            <tr><td>威胁</td><td>Threat</td><td>外部环境的不利因素</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">阅读技巧</div>
+            <p><strong>纵向比较</strong>：企业今年与往年表述有何不同；<strong>横向比较</strong>：企业和竞争对手的表述有何不同。从相似的话语中发现管理层对市场看法的变化。</p>
+          </div>
+        </div>
+
+        <!-- 2.3 实战案例 -->
+        <h3 id="section-4-3">2.3 实战案例：白酒行业寒冬前夜的预判对比</h3>
+
+        <p>白酒行业寒冬从<strong>2012年第四季度</strong>开始，在此之前是黄金十年。通过对比2012年初（发布2011年财报时）各家管理层的表述，可以判断其专业水准和企业家才能。</p>
+
+        <!-- 贵州茅台 -->
+        <p><strong>贵州茅台（2011年财报）</strong></p>
+        <p><strong>市场判断</strong>：⚠️ 危机感十足</p>
+
+        <div class="pull-quote large">
+          随着国内各大白酒企业纷纷推出高档白酒产品并加大推广力度，以及政策面对高档白酒的影响，<strong>高档白酒市场的竞争将可能会更加激烈</strong>。
+          <br/><br/>
+          从长远来看<strong>白酒产能会供大于求</strong>，白酒行业将会经历从竞争淘汰、整合规范到相对集中的过程。
+          <br/><br/>
+          白酒行业竞争将<strong>更加白热化</strong>……<strong>加剧行业产能泡沫风险和竞争激烈程度</strong>，未来白酒市场在价格、品牌、渠道、消费群体、资本结构等方面将会有较大的变动，<strong>中国白酒行业可能会出现重新洗牌的格局</strong>。
+          <br/><br/>
+          <strong>影响白酒行业发展的政策性因素在增加</strong>。
+          <cite>—— 贵州茅台2011年财报</cite>
+        </div>
+
+        <!-- 五粮液 -->
+        <p><strong>五粮液（2011年财报）</strong></p>
+        <p><strong>市场判断</strong>：✓ 相对乐观</p>
+
+        <div class="pull-quote">
+          <strong>高端白酒的市场集中度却较高</strong>，前几强酒企以其高品牌知名度、较强的市场营销能力和消费者忠诚度占据了市场的主要份额。<strong>以川酒为代表的浓香型白酒依然占据市场主导地位</strong>。
+          <br/><br/>
+          随着我国城镇化率和城乡居民收入水平的不断提高，消费水平快速增长，<strong>行业前景依然看好</strong>。
+          <cite>—— 五粮液2011年财报</cite>
+        </div>
+
+        <p><strong>核心观点</strong>：我们占据市场主导地位，行业前景看好。</p>
+
+        <!-- 泸州老窖 -->
+        <p><strong>泸州老窖（2011年财报）</strong></p>
+        <p><strong>市场判断</strong>：✓ 偏乐观</p>
+
+        <div class="pull-quote">
+          2011年，白酒业持续稳定增长，高端市场依然景气，中端产品增长迅猛，<strong>整个市场潜力巨大</strong>。
+          <br/><br/>
+          白酒业未来将逐步向<strong>品牌酒原产地集中</strong>，原产地概念将慢慢深入人心……预计未来几年白酒行业将逐步<strong>走出"战国时代"</strong>。
+          <cite>—— 泸州老窖2011年财报</cite>
+        </div>
+
+        <p><strong>面临压力</strong>：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">压力一</span>
+            <h4>与行业龙头存在差距</h4>
+            <p>公司和行业龙头企业在经营实力、品牌竞争力等方面仍有一定差距。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">压力二</span>
+            <h4>国家政策的不确定性</h4>
+            <p>国家政策的未知变动对白酒行业的影响不可忽视。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">压力三</span>
+            <h4>中高端人才缺失</h4>
+            <p>内部中高端人才的缺失对公司发展的制约日益明显。</p>
+          </div>
+        </div>
+
+        <!-- 洋河股份 -->
+        <p><strong>洋河股份（2011年财报）</strong></p>
+        <p><strong>市场判断</strong>：✓ 乐观</p>
+
+        <p><strong>三大发展机遇</strong>：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">机遇一</span>
+            <h4>消费市场扩容升级</h4>
+            <p>居民收入水平不断提高，市场容量不断扩大。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">机遇二</span>
+            <h4>规模协同效应显现</h4>
+            <p>集团管控体系正式构建，企业规模化协同效应显现。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">机遇三</span>
+            <h4>增长势能正在释放</h4>
+            <p>许多一线市场出现拐点放量，增长动力充足。</p>
+          </div>
+        </div>
+
+        <p><strong>三大挑战</strong>：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">挑战一</span>
+            <h4>宏观经济走向不明</h4>
+            <p>宏观经济形势的不确定性给企业经营带来外部压力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">挑战二</span>
+            <h4>行业竞争逐步升级</h4>
+            <p>白酒行业竞争日趋白热化，市场份额争夺加剧。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">挑战三</span>
+            <h4>与龙头企业存在差距</h4>
+            <p>与茅台、五粮液等龙头企业相比，在企业规模、经营实力、品牌影响力和市场网络构建等方面还存在一定差距。</p>
+          </div>
+        </div>
+
+        <!-- 2.4 管理层预见能力验证 -->
+        <h3 id="section-4-4">2.4 管理层预见能力验证</h3>
+
+        <p>为验证茅台管理层是否一贯悲观（恰好撞上转折），还需对比前一年的表述。</p>
+
+        <p><strong>贵州茅台（2010年财报，2011年4月发布）</strong></p>
+        <p><strong>市场判断</strong>：明显乐观</p>
+
+        <div class="pull-quote large">
+          经济的快速发展带来白酒业的全面升级，<strong>消费高档酒的人越来越多</strong>，喝高档酒已成为消费趋势。
+          <br/><br/>
+          对于茅台而言，在当前和今后一个时期，公司发展<strong>仍处于可以大有作为的重要战略机遇期</strong>。
+          <cite>—— 贵州茅台2010年财报</cite>
+        </div>
+
+        <p><strong>有利条件</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">条件一</span>
+            <h4>国家西部大开发战略进入新历史阶段</h4>
+            <p>政策红利为茅台所在的贵州地区带来新的发展机遇。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">条件二</span>
+            <h4>贵州省加快白酒基地建设</h4>
+            <p>贵州省提出加快以茅台酒为龙头的优质白酒基地建设。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">条件三</span>
+            <h4>消费升级提供广阔市场空间</h4>
+            <p>居民消费水平提升，高端消费需求持续增长。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">条件四</span>
+            <h4>茅台自身多年发展奠定坚实基础</h4>
+            <p>多年的品牌积累和产能建设为持续增长提供了保障。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>茅台管理层在2010年（行业繁荣期）乐观，2011年（转折前夜）警惕，体现了<strong>准确的市场预判能力</strong>，而非一贯悲观。</p>
+          </div>
+        </div>
+
+        <!-- 2.5 贵州茅台2013年财报的市场判断 -->
+        <h3 id="section-4-5">2.5 贵州茅台2013年财报的市场判断</h3>
+
+        <p><strong>宏观环境和行业环境——四大判断</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">判断一</span>
+            <h4>国际形势</h4>
+            <p>世界经济复苏存在不稳定、不确定因素，复苏艰难。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">判断二</span>
+            <h4>国内形势</h4>
+            <p>经济结构和产业结构调整压力大，处于结构调整阵痛期、增长速度换挡期，经济下行压力较大。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">判断三</span>
+            <h4>政策方面</h4>
+            <p>对酒类产品尤其高端产品的消费限制性政策态势将<strong>常态化和制度化</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">判断四</span>
+            <h4>行业发展</h4>
+            <p>行业仍处于深度调整中，复苏时点难以把握，未来将是挤压式"缓增长"阶段，<strong>预计2014年将是白酒行业发展更加困难的一年</strong>。</p>
+          </div>
+        </div>
+
+        <p><strong>公司面临的机遇——六大机遇</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>序号</th><th>机遇</th><th>核心要点</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>外部环境趋于改善</td><td>全球经济缓慢复苏，外部需求有望回暖</td></tr>
+            <tr><td>2</td><td>国家经济基本面依然较好</td><td>中国经济的长期增长动力仍然充足</td></tr>
+            <tr><td>3</td><td>全面深化改革注入活力</td><td>深化改革将为经济注入强大活力</td></tr>
+            <tr><td>4</td><td>行业集中度进一步提高</td><td>产业结构更加合理，有利于拥有品牌力和营销能力的名优企业可持续增长</td></tr>
+            <tr><td>5</td><td>消费需求持续</td><td>消费者消费水平不断提高、中产阶级群体扩大，将促进中高档名酒消费</td></tr>
+            <tr><td>6</td><td>白酒行业四个没有变</td><td>详见下方</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>白酒行业四个没有变</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">一</span>
+            <h4>情感交流的载体没有变</h4>
+            <p>白酒作为国人情感交流的载体没有变。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">二</span>
+            <h4>民族文化符号没有变</h4>
+            <p>白酒作为中华民族文化符号之一没有变。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">三</span>
+            <h4>国人偏爱的消费品没有变</h4>
+            <p>白酒作为国人偏爱的消费品没有变。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">四</span>
+            <h4>传统风俗习惯没有变</h4>
+            <p>国人消费白酒的传统风俗习惯和文化习惯没有变。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、其他部分 -->
+      <section id="section-5">
+        <h2>三、其他部分</h2>
+
+        <p>董事会报告的核心内容是<strong>经营情况和未来发展</strong>，剩余三大块粗略浏览即可：</p>
+
+        <h3 id="section-5-1">3.1 董事会对会计师事务所"非标准审计报告"的说明</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要警示</div>
+            <p>如果显示为<strong>非标准审计报告</strong>，应立即将该公司丢进垃圾桶。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">3.2 利润分配或资本公积金转增预案</h3>
+
+        <p>重要提示部分已经读过，这里只是对过去3年的整理，粗略浏览即可。</p>
+
+        <h3 id="section-5-3">3.3 积极履行社会责任的工作情况</h3>
+
+        <p><strong>原则</strong>：既要履行社会责任，按税法要求执行；也要充分使用国家的鼓励政策；不让股东利益受损。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 总结与建议 -->
+      <section id="section-6">
+        <h2>总结与建议</h2>
+
+        <p><strong>阅读董事会报告的核心价值</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>价值点</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>信息补充</td><td>获取财报附注中没有的非法定披露信息</td></tr>
+            <tr><td>管理层视角</td><td>了解管理层对企业和行业的真实看法</td></tr>
+            <tr><td>预判能力</td><td>通过纵向和横向对比，评估管理层的专业水准</td></tr>
+            <tr><td>投资方向</td><td>从投资状况分析中发现企业未来增长点</td></tr>
+            <tr><td>风险识别</td><td>及早发现行业转折和企业风险</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>阅读方法建议</strong></p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">方法一</span>
+            <h4>细读核心部分</h4>
+            <p>经营情况分析、未来发展讨论是必须细读的重点。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法二</span>
+            <h4>纵向对比</h4>
+            <p>连续几年的同类表述对比，发现管理层的态度变化。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法三</span>
+            <h4>横向对比</h4>
+            <p>与同行竞争对手的表述对比，判断行业格局和竞争态势。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法四</span>
+            <h4>寻找差异</h4>
+            <p>从相似话语中发现微妙变化，捕捉管理层暗示的信号。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">方法五</span>
+            <h4>验证真伪</h4>
+            <p>通过历史数据检验管理层的预判准确性，评估其可信度。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">
+          董事会报告不是套话和务虚，而是<strong>暗藏智慧和机密的宝藏</strong>。
+          <br/><br/>
+          认真读、仔细读，把几年的连起来读，把同行的拿来对比读，从中找分歧、找可信度、找真专家。
+          <br/><br/>
+          如果跳过这部分，可能就真的<strong>输在了起跑线上</strong>！
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+      <p style="text-align:center;font-size:.82rem;color:var(--text3);margin-top:1rem;">
+        <em>本文档基于贵州茅台财报案例编写，其他公司需根据自身商业模式灵活分析。</em>
+      </p>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，待整理章节不绑定） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第7章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

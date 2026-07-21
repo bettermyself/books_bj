@@ -356,8 +356,13 @@
       margin: 1.5rem 0;
     }
     .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
     @media(max-width: 792px) {
       .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
     }
     .remedy-card {
       background: var(--bg3);
@@ -489,7 +494,12 @@
           </ul>
         </li>
         <li class="toc-chapter">
-          <a class="toc-chapter-title toc-flat" href="../第4章/第一节现金流量表拆解.html" style="text-decoration:none;">第四章 现金流量表</a>
+          <span class="toc-chapter-title">第四章 现金流量表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第4章/第一节现金流量表拆解.html">第一节 现金流量表拆解</a></li>
+            <li><a href="../第4章/第二节企业的现金流肖像.html">第二节 企业的现金流肖像</a></li>
+            <li><a href="../第4章/第三节现金流量表速读.html">第三节 现金流量表速读</a></li>
+          </ul>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第五章 财务指标综合分析</span>
@@ -504,6 +514,13 @@
           <ul class="toc-lectures">
             <li><a href="第一节所有者权益变动表.html" class="active">第一节 所有者权益变动表</a></li>
             <li><a href="第二节财报附注_优化版.html">第二节 财报附注</a></li>
+          </ul>
+
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第七章 管理层的汇报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第7章/第一节董事会报告_优化版.html">第一节 董事会报告</a></li>
+            <li><a href="../第7章/第二节重要事项.html">第二节 重要事项</a></li>
           </ul>
         </li>
       </ul>
@@ -543,7 +560,7 @@
       <section id="sec-overview">
         <p>所有者权益变动表，也称"股东权益变动表"，负责反映公司本期内所有者权益的变动情况。其核心作用体现在三个方面：</p>
 
-        <div class="remedy-grid cols-2">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">作用一</span>
             <h4>反映直接计入权益的利得和损失</h4>
@@ -598,7 +615,7 @@
 
         <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">① 计入当期利润的利得和损失</h4>
 
-        <div class="remedy-grid cols-2">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">1</span>
             <h4>资产减值损失</h4>
@@ -630,7 +647,7 @@
 
         <p>指按照会计准则，在利润之后的<strong>"其他综合收益"</strong>部分披露，包括：</p>
 
-        <div class="remedy-grid cols-2">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">1</span>
             <h4>可供出售金融资产公允价值变动</h4>
@@ -692,7 +709,7 @@
 
         <p>其中：</p>
 
-        <div class="remedy-grid cols-2">
+        <div class="remedy-grid">
           <div class="remedy-card">
             <span class="remedy-num">核心</span>
             <h4>归属于母公司所有者权益</h4>
@@ -798,7 +815,7 @@
 
         <p>需要特别理解<strong>为什么该公式不包含 M、I、J、K</strong>：</p>
 
-        <div class="remedy-grid cols-2">
+        <div class="remedy-grid">
           <div class="remedy-card">
             <span class="remedy-num">不含 M</span>
             <h4>内部结转不改变总量</h4>
@@ -850,7 +867,7 @@
 
         <p><strong>"其他综合收益结转留存收益"</strong>具体记录以下两项：</p>
 
-        <div class="remedy-grid cols-2">
+        <div class="remedy-grid">
           <div class="remedy-card">
             <span class="remedy-num">1</span>
             <h4>其他权益工具投资处置</h4>

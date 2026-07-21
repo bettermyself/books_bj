@@ -351,6 +351,13 @@
     @media(max-width: 792px) {
       .remedy-grid.cols-2 { grid-template-columns: 1fr; }
     }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
     .remedy-card {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -531,7 +538,12 @@
           </ul>
         </li>
         <li class="toc-chapter">
-          <a class="toc-chapter-title toc-flat" href="../第4章/第一节现金流量表拆解.html" style="text-decoration:none;">第四章 现金流量表</a>
+          <span class="toc-chapter-title">第四章 现金流量表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第4章/第一节现金流量表拆解.html">第一节 现金流量表拆解</a></li>
+            <li><a href="../第4章/第二节企业的现金流肖像.html">第二节 企业的现金流肖像</a></li>
+            <li><a href="../第4章/第三节现金流量表速读.html">第三节 现金流量表速读</a></li>
+          </ul>
         </li>
         <li class="toc-chapter open">
           <span class="toc-chapter-title current-chapter">第五章 财务指标综合分析</span>
@@ -546,6 +558,13 @@
           <ul class="toc-lectures">
             <li><a href="../第6章/第一节所有者权益变动表.html">第一节 所有者权益变动表</a></li>
             <li><a href="../第6章/第二节财报附注_优化版.html">第二节 财报附注</a></li>
+          </ul>
+
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第七章 管理层的汇报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第7章/第一节董事会报告_优化版.html">第一节 董事会报告</a></li>
+            <li><a href="../第7章/第二节重要事项.html">第二节 重要事项</a></li>
           </ul>
         </li>
       </ul>
@@ -1038,7 +1057,7 @@
 
         <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">优劣排序</h4>
 
-        <div class="remedy-grid cols-2">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">第一等</span>
             <h4>高净利润率 · 茅台模式</h4>
@@ -1049,9 +1068,6 @@
             <h4>高周转率 · 沃尔玛模式</h4>
             <p>⚠️ 依赖管理层营运能力<br/>⚠️ 人的变化难测、难控<br/>⚠️ 需要持续关注管理层变化</p>
           </div>
-        </div>
-
-        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">第三等</span>
             <h4>高杠杆 · 银行模式</h4>
@@ -1112,7 +1128,7 @@
 
         <p>财务指标分析是企业分析的基础工具，建议：</p>
 
-        <div class="remedy-grid cols-2">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">1</span>
             <h4>安全性</h4>

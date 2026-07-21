@@ -11,8 +11,31 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 `server.py` 仅使用 Python 3 标准库（`http.server`、`socketserver`），无需安装依赖。启动后自动打开浏览器。它提供静态文件服务并暴露四个 API 端点：
 - `GET /api/books` — 从 `data/books.json` 读取全量书籍数据
 - `POST /api/save-books` — 将全量数据写入 `data/books.json`（前端每次增删改后自动调用）
-- `POST /api/create-book-folder` — 新增书籍时在磁盘创建 `books/<书名>/index.html`
+- `POST /api/create-book-folder` — 新增书籍时在磁盘创建 `books/<书名>/index.html`（使用内置 `BOOK_TEMPLATE`）
 - `POST /api/delete-book-folder` — 删除书籍时调用 `shutil.rmtree()` 删除 `books/<书名>/` 整个文件夹
+
+设置 `SERVER_LOG=1` 环境变量可将输出重定向到 `server.log`（后台静默运行模式）。日志中只打印 `/api/` 路径的请求，静态文件请求不记录。
+
+### 目录结构
+
+```
+├── index.html              # 主书架页
+├── server.py               # 本地开发服务器
+├── CLAUDE.md
+├── assets/
+│   ├── data.js             # 数据持久化层（必须最先加载）
+│   ├── app.js              # 主书架 UI 逻辑
+│   ├── book.js             # 遗留死代码，未被引用
+│   └── style.css           # 共享样式 + CSS 自定义属性
+├── data/
+│   └── books.json          # 服务端持久化数据（权威数据源）
+├── img/                    # 封面图片（jpg/png），通过相对路径引用
+├── books/                  # 每本书一个子文件夹，含独立 HTML 章节页
+│   └── <书名>/
+│       ├── index.html      # meta-refresh 跳转到默认章节
+│       └── *.html          # 各章节阅读页
+└── memory/                 # Claude Code 持久记忆（勿手动编辑）
+```
 
 ## 架构
 
@@ -51,8 +74,9 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 
 ## 关键模式
 
-- **双层持久化**：数据同时写入 `data/books.json`（服务端，权威源）和 `localStorage`（离线缓存）。`initDB()` 优先从服务端加载，`persistDB()` 同时写入两处。
-- **封面图片**：书籍数据中的 `cover` 字段存储相对路径（如 `img/穷查理宝典.jpg`），封面图片存放在 `img/` 目录。
+- **双层持久化**：数据同时写入 `data/books.json`（服务端，权威源）和 `localStorage`（离线缓存）。`initDB()` 优先从服务端加载，`persistDB()` 同时写入两处。服务端不可用时自动回退到 localStorage，并在恢复连接后尝试上传本地数据。
+- **封面图片**：书籍数据中的 `cover` 字段存储相对路径（如 `img/穷查理宝典.jpg`）或 base64 data URL（用户上传的自定义图片经前端压缩至 400px 宽后内嵌）。封面图片文件存放在 `img/` 目录，`migrateCoverImages()` 在页面加载时自动将已知书名映射到对应封面路径。
+- **书籍文件夹创建回退**：`createBookFolder()` 首先尝试通过 `POST /api/create-book-folder` 让服务端创建，失败时降级为客户端 `downloadBookTemplate()` 生成 HTML 文件供用户手动放置。`deleteBookFolder()` 同理调用 `/api/delete-book-folder`，失败时静默忽略。
 - **书籍文件夹命名**：`server.py` 中的 `safe_dirname()` 和 `app.js` 中的 `.replace(/[\\/:*?"<>|]/g, '_')` 必须保持同步——两者剔除相同的非法文件名字符。
 - **种子数据**：`seedIfEmpty()` 每次页面加载都会执行，但受 `db.seeded` 布尔值（持久化在 `localStorage` 中）控制。它仅在首次加载时插入示例书籍，之后即使用户删除所有书也不会再次插入。
 - **章节页 BOOK_FOLDER 常量**：每个章节 HTML 底部有 `const BOOK_FOLDER = '书名'`，必须与磁盘上的文件夹名一致，用于驱动阅读位置的 localStorage 键。
@@ -64,11 +88,12 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 ```js
 // 书籍
 { id, name, author, category, color, emoji, cover, desc, status, createdAt, chapters: [...] }
+// cover: 相对路径（如 'img/穷查理宝典.jpg'）或 base64 data URL（用户上传的压缩图片），可为 undefined
 // 章节
 { id, title, order, content, createdAt, updatedAt }
 // 数据库根对象
 { books, nextBookId, nextChapterId, seeded }
-// status 可选值: '想读' | '在读' | '已读'
+// status 可选值: '想读' | '在读' | '已读'（新建书籍默认为 '在读'，见 seedIfEmpty 示例）
 // category 可选值: '投资经典' | '思维方式' | '传记' | '商业' | '其他'
 ```
 
@@ -194,7 +219,21 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
   </div>
 </div>
 ```
-**使用场景**：核心观点列表、步骤、原则、药方等需要逐条突出的内容。左侧有金色竖条装饰。使用响应式多列布局 `repeat(auto-fit, minmax(320px, 1fr))`，宽屏3列、中等屏幕2列、窄屏1列。
+**使用场景**：核心观点列表、步骤、原则、药方等需要逐条突出的内容。左侧有金色竖条装饰。
+
+**列数规则**（按卡片数量选用固定列类名，最多不超过 3 列）：
+
+| 卡片数 | 类名 | 布局 |
+|--------|------|------|
+| 1–2 张 | 不指定（默认 auto-fit） | 自然宽度 |
+| 3 张 | `cols-3` | 1 行 × 3 列 |
+| 4 张 | `cols-2` | 2 行 × 2 列 |
+| 5 张 | 不指定（默认 auto-fit） | 自适应流式 |
+| 6 张 | `cols-3` | 2 行 × 3 列 |
+| 更多 | `cols-3` | N 行 × 3 列 |
+
+`.cols-3` 响应式：>1056px 三列，792px–1056px 两列，<792px 单列。
+`.cols-2` 响应式：>792px 两列，<792px 单列。
 
 #### 7. 诗歌/长引文块（`.poem`）
 ```html

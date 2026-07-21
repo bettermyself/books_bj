@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>第一节 鸟瞰三大表 · 手把手教你读财报</title>
+  <title>企业的现金流肖像 · 手把手教你读财报</title>
   <link rel="stylesheet" href="../../../assets/style.css" />
   <style>
     /* ===== 110% Scale ===== */
@@ -138,11 +138,12 @@
       cursor: default;
     }
     .toc-chapter-title.toc-pending::after { display: none; }
-    .toc-chapter-title.toc-flat::after { display: none; }
     .toc-chapter-title.toc-pending:hover {
       color: var(--text3);
       background: transparent;
     }
+    /* 扁平链接章节：不显示折叠箭头 */
+    .toc-chapter-title.toc-flat::after { display: none; }
     .toc-lectures {
       display: none;
       list-style: none;
@@ -407,6 +408,39 @@
     }
     .formula strong { color: var(--gold-dk); }
 
+    /* ===== Poem Block ===== */
+    .poem {
+      text-align: center;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 2;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '\201C';
+      position: absolute;
+      top: -.5rem;
+      left: 1rem;
+      font-size: 4rem;
+      color: rgba(201,168,76,.15);
+      font-family: 'Georgia', serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      font-style: normal;
+      letter-spacing: .04em;
+    }
+
     /* ===== Divider ===== */
     .section-divider {
       display: flex;
@@ -497,20 +531,18 @@
             <li><a href="../第3章/第三节速读利润表.html">第三节 速读利润表</a></li>
           </ul>
         </li>
-        <li class="toc-chapter">
-          <span class="toc-chapter-title">第四章 现金流量表</span>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 现金流量表</span>
           <ul class="toc-lectures">
-            <li><a href="../第4章/第一节现金流量表拆解.html">第一节 现金流量表拆解</a></li>
-            <li><a href="../第4章/第二节企业的现金流肖像.html">第二节 企业的现金流肖像</a></li>
-            <li><a href="../第4章/第三节现金流量表速读.html">第三节 现金流量表速读</a></li>
+            <li><a href="第一节现金流量表拆解.html">第一节 现金流量表拆解</a></li>
+            <li><a href="第二节企业的现金流肖像.html" class="active">第二节 企业的现金流肖像</a></li>
+            <li><a href="第三节现金流量表速读.html">第三节 现金流量表速读</a></li>
           </ul>
         </li>
-        <li class="toc-chapter open">
-          <span class="toc-chapter-title current-chapter">第五章 财务指标综合分析</span>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 财务指标综合分析</span>
           <ul class="toc-lectures">
-            <li><a href="第一节鸟瞰三大表_优化版.html" class="active">第一节 鸟瞰三大表</a></li>
-            <li><a href="第二节财务指标分析.html">第二节 财务指标分析</a></li>
-            <li><a href="第三节使用财务数据估值.html">第三节 使用财务数据估值</a></li>
+            <li><a href="../第5章/第一节鸟瞰三大表_优化版.html">第一节 鸟瞰三大表</a></li>
           </ul>
         </li>
         <li class="toc-chapter">
@@ -519,7 +551,7 @@
             <li><a href="../第6章/第一节所有者权益变动表.html">第一节 所有者权益变动表</a></li>
             <li><a href="../第6章/第二节财报附注_优化版.html">第二节 财报附注</a></li>
           </ul>
-
+        </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title">第七章 管理层的汇报</span>
           <ul class="toc-lectures">
@@ -532,22 +564,17 @@
       <!-- 本讲目录 -->
       <div class="sidebar-label sidebar-label-sub">本节目录</div>
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li><a href="#sec-overview">📋 概述</a></li>
-        <li><a href="#sec-1">📊 一、三大报表的核心内容</a></li>
-        <li><a href="#s1-bs" class="sub">资产负债表</a></li>
-        <li><a href="#s1-pl" class="sub">利润表</a></li>
-        <li><a href="#s1-cf" class="sub">现金流量表</a></li>
-        <li><a href="#sec-2">🔗 二、三大报表的钩稽关系</a></li>
-        <li><a href="#s2-cash-flow" class="sub">现金流转逻辑</a></li>
-        <li><a href="#s2-accounting" class="sub">会计恒等式的演化</a></li>
-        <li><a href="#s2-fraud" class="sub">利润操纵的识别</a></li>
-        <li><a href="#s2-revenue" class="sub">收入与现金流的勾稽关系</a></li>
-        <li><a href="#sec-3">🔬 三、企业财务分析四步法</a></li>
-        <li><a href="#s3-step1" class="sub">第一步：浏览科目，关注异常</a></li>
-        <li><a href="#s3-step2" class="sub">第二步：财务指标的历史分析</a></li>
-        <li><a href="#s3-step3" class="sub">第三步：对比利润和现金流量</a></li>
-        <li><a href="#s3-step4" class="sub">第四步：与竞争对手比较</a></li>
-        <li><a href="#sec-4">🎯 四、财务分析的最终目标</a></li>
+        <li><a href="#sec-1">一、经营现金流为正的企业</a></li>
+        <li><a href="#sec-1-1" class="sub">类型1 妖精型</a></li>
+        <li><a href="#sec-1-2" class="sub">类型2 老母鸡型</a></li>
+        <li><a href="#sec-1-3" class="sub">类型3 蛮牛型</a></li>
+        <li><a href="#sec-1-4" class="sub">类型4 奶牛型</a></li>
+        <li><a href="#sec-2">二、经营现金流为负的企业</a></li>
+        <li><a href="#sec-2-1" class="sub">类型5 大出血型</a></li>
+        <li><a href="#sec-2-2" class="sub">类型6 赌徒型</a></li>
+        <li><a href="#sec-2-3" class="sub">类型7 混吃等死型</a></li>
+        <li><a href="#sec-2-4" class="sub">类型8 骗吃骗喝型</a></li>
+        <li><a href="#sec-3">三、八类企业现金流特征汇总</a></li>
       </ul>
     </aside>
 
@@ -555,346 +582,388 @@
     <article class="chapter-article">
 
       <header class="article-header">
-        <div class="article-eyebrow">手把手教你读财报 · 第五章 财务指标综合分析 · 第一节</div>
-        <h1 class="article-title">鸟瞰三大表</h1>
+        <div class="article-eyebrow">手把手教你读财报 · 第四章 现金流量表 · 第二节</div>
+        <h1 class="article-title">企业的现金流肖像</h1>
         <div class="article-meta">
           <span><strong>作者</strong>唐朝</span>
           <span><strong>类别</strong>投资经典</span>
-          <span><strong>核心主旨</strong>理解三大报表的侧重点、钩稽关系，建立财务分析的系统框架</span>
+          <span><strong>核心主旨</strong>通过经营、投资、筹资三大活动现金流的正负组合，绘制八种企业现金流肖像，快速判断企业质地与投资价值</span>
         </div>
       </header>
 
-      <!-- 概述 -->
-      <section id="sec-overview">
-        <h2>📋 概述</h2>
+      <!-- 引言 -->
+      <p>现金流量表用来展示企业<strong>经营活动、投资活动和筹资活动</strong>的现金流变化。这三种活动都能为企业带来现金的流入或流出。</p>
 
-        <p>资产负债表、利润表和现金流量表共同反映一家企业的全景信息，但<strong>侧重点和表现手法各有不同</strong>。这三张相互关联的报表构成了企业财务信息的完整体系。理解它们各自的作用与彼此之间的钩稽关系，是读懂财报的基础。</p>
+      <p>若以"<strong>+</strong>"表示现金净流入、"<strong>-</strong>"表示现金净流出，那么三种活动的组合便构成了 <strong>8 种不同的现金流状况</strong>。利用这 8 种组合，我们可以为企业绘制一幅"现金流肖像"，据此判断企业是否具有投资价值，以及关注或投资该类企业时的重点所在。</p>
 
-        <div class="pull-quote large">三张表各有侧重，相互关联，共同构成企业财务的完整图景。</div>
-      </section>
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <div class="callout-title">提示</div>
+          <p>一份财报的偶然数据不足为凭。以下各种类型，起码要<strong>连续数年数据皆是如此</strong>，方可认定企业秉性。认真的投资人不相信"一见钟情"，请勿仅看一份财报就下结论。</p>
+        </div>
+      </div>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- 一、三大报表的核心内容 -->
+      <!-- 一、经营活动现金流净额为正的企业肖像 -->
       <section id="sec-1">
-        <h2>📊 一、三大报表的核心内容</h2>
+        <h2>一、经营活动现金流净额为正的企业肖像</h2>
 
-        <h3 id="s1-bs">1.1 资产负债表</h3>
+        <p>经营活动现金流净额为正，说明企业主业经营能够正常产生现金，是健康的基础信号。在此前提下，按投资与筹资活动的方向，可分为四种类型。</p>
 
-        <p><strong>性质：</strong>时点报表——企业在报表日的"照片"。</p>
-        <p><strong>反映内容：</strong>企业的财务状况。</p>
+        <p><strong>表 4-2-1 经营活动现金流净额为正时的现金流组合</strong></p>
 
         <table class="article-table">
           <thead>
-            <tr><th>维度</th><th>具体内容</th></tr>
+            <tr><th>类型</th><th>经营活动现金流净额</th><th>投资活动现金流净额</th><th>筹资活动现金流净额</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>资产</strong></td><td>企业拥有多少资产、资产类型分布</td></tr>
-            <tr><td><strong>负债</strong></td><td>负债总额、长短期负债结构、付息负债规模</td></tr>
-            <tr><td><strong>核心意义</strong></td><td>展示企业所控制资源的多寡强弱，决定企业持续经营和成长的能力</td></tr>
+            <tr><td>1</td><td>+</td><td>+</td><td>+</td></tr>
+            <tr><td>2</td><td>+</td><td>+</td><td>-</td></tr>
+            <tr><td>3</td><td>+</td><td>-</td><td>+</td></tr>
+            <tr><td>4</td><td>+</td><td>-</td><td>-</td></tr>
           </tbody>
         </table>
 
-        <h3 id="s1-pl">1.2 利润表</h3>
+        <h3 id="sec-1-1">1.1 类型 1："+ + +"型 —— 妖精型</h3>
 
-        <p><strong>性质：</strong>期间报表——报表时段的"视频录像"。</p>
-        <p><strong>反映内容：</strong>企业一段时间的经营成果。</p>
+        <p>三种活动<strong>全部为现金净流入</strong>，企业日进斗金、钞票滚滚而来。看似诱人，实则不对劲：企业经营既能挣钱，又不向外投资，为何还要筹资？积一堆钞票数着玩？</p>
 
-        <p><strong>核心逻辑：</strong></p>
-        <p>展示企业利用掌控的资源为他人创造价值并实现盈利的过程及结果，回放某段时间的企业经营行为和最终的赚赔结果。</p>
+        <div class="pull-quote large">事反必妖，这一类型归为<strong>妖精型</strong>。</div>
 
-        <div class="formula"><strong>基本公式：收入 − 费用 = 净利润</strong></div>
+        <p>通常有两种可能：</p>
 
-        <p><strong>与资产负债表的关系：</strong></p>
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">可能一</span>
+            <h4>正筹本钱</h4>
+            <p>即将展开大规模对内或对外投资活动。此为类型 3 的序曲，可参照类型 3 的关注要点。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">可能二</span>
+            <h4>起了鬼心思</h4>
+            <p>借上市公司躯壳搞钱，再将资金转给关联企业或关联人使用。</p>
+          </div>
+        </div>
 
-        <div class="formula"><strong>净利润 = 期末留存收益 + 期内实施的分红 − 期初留存收益</strong></div>
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关注要点</div>
+            <p>查明企业是否有大规模投资计划。若遍查资料仍无任何投资规划的迹象，则以<strong>远离</strong>为宜。</p>
+          </div>
+        </div>
 
-        <h3 id="s1-cf">1.3 现金流量表</h3>
+        <h3 id="sec-1-2">1.2 类型 2："+ + -"型 —— 老母鸡型</h3>
 
-        <p><strong>性质：</strong>期间报表——利润表的"画外音"。</p>
-        <p><strong>反映内容：</strong>企业现金流入流出的过程。</p>
+        <p>经营流入、投资流入、筹资流出。各项含义如下：</p>
 
-        <p><strong>核心作用：</strong>从另一个角度记录企业一段时间的活动，展示企业对现金的筹措和管控能力。</p>
+        <table class="article-table">
+          <thead>
+            <tr><th>活动</th><th>方向</th><th>含义解读</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>经营活动</td><td>流入</td><td>经营正常、良性，有钱可挣</td></tr>
+            <tr><td>投资活动</td><td>流入</td><td>或为<strong>以前投资的股利/利息收入</strong>（可能性大），或为<strong>变卖家当</strong>（少见）</td></tr>
+            <tr><td>筹资活动</td><td>流出</td><td>还债，或回报股东（分红、回购股票）</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>总体判断</strong>：若投资现金并非变卖家当所得，且经营与投资的现金流入足以覆盖筹资现金流出，可初步认定这是一家健康发展的企业——通过经营及此前投资进入收获期，有余钱归还借款或回报股东。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">需注意</div>
+            <p>投资活动现金净流入，显示企业已不再继续扩张，成长或许已成过去式。企业近似一只稳定产生现金的债券，如同定时定量产蛋的<strong>老母鸡</strong>。</p>
+          </div>
+        </div>
 
         <div class="callout tip">
           <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <div class="callout-title">三表关系</div>
-            <p>资产负债表是"底子"（家底有多厚），利润表是"面子"（经营有多风光），现金流量表是"日子"（现金能否周转）。三者缺一不可，共同构成企业分析的基础框架。</p>
+            <div class="callout-title">关注要点</div>
+            <p>只要<strong>售价不高（低 PE）</strong>、<strong>产蛋率不错（高股息率）</strong>，这种老母鸡型企业值得拥有。</p>
           </div>
         </div>
+
+        <h3 id="sec-1-3">1.3 类型 3："+ - +"型 —— 蛮牛型</h3>
+
+        <p>经营流入、投资流出、筹资流入。企业把经营挣的钱，加上借债或出让股权筹来的钱，一起投入新项目，扩张之心昭然若揭，如同一只勇往直前的<strong>蛮牛</strong>。</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">项目成功</span>
+            <h4>企业可能高速增长</h4>
+            <p>扩张顺利推进，企业进入快速增长通道。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">项目失败</span>
+            <h4>市值严重承压</h4>
+            <p>或与期望差距过大时，投资者的失望情绪会严重打压公司市值。</p>
+          </div>
+        </div>
+
+        <p>投资者必须重点考量两件事：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">第一</span>
+            <h4>项目前景</h4>
+            <p>所投项目究竟前景如何，是首先要考虑的因素，避免"蛮牛撞山"。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第二</span>
+            <h4>资金能否持续支撑</h4>
+            <p>扩张至产生现金那天，这尤其考验投资人对商业及行业的理解力。</p>
+          </div>
+        </div>
+
+        <p>不同筹资方式的判断侧重：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>筹资方式</th><th>积极信号</th><th>需警惕之处</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>以<strong>借债</strong>为主</td>
+              <td>显示企业对项目回报率有信心（预期远高于债务利息）；不稀释股权，对现有股东负责</td>
+              <td>债务的<strong>期限与数量</strong>是否足以支撑项目；是否会资金链断裂，致"蛮牛变死牛"</td>
+            </tr>
+            <tr>
+              <td>以<strong>出让股权</strong>为主</td>
+              <td>股权无需归还</td>
+              <td>管理层对收益率是否真有信心；是否因<strong>借不到债</strong>才被迫低价出让股权</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警示案例</div>
+            <p>2014 年 9 月 25 日，曾经的中国 500 强、四川最大民营钢企——川威集团资金链断裂后，其掌门人王劲感叹："如果有机会重来，两件事不能干：一是别做大，二是别借钱！"摊子铺得太大、寄望于借钱，一旦遭遇宏观资金面变动，企业便可能遭遇灭顶之灾。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-1-4">1.4 类型 4："+ - -"型 —— 奶牛型</h3>
+
+        <p>经营流入、投资流出、筹资流出。企业靠经营现金流入，一边实施投资扩张，一边清偿债务或回报股东。这种企业<strong>是否值得拥有，关键在于能否持续</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>情形</th><th>判断标准</th><th>结论</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>可持续</strong></td>
+              <td>经营现金流入 <strong>&gt;</strong> 投资现金流出 + 筹资现金流出之和</td>
+              <td>典型<strong>奶牛型</strong>：吃草挤奶，且奶牛还在长大，产奶能力有望进一步提升</td>
+            </tr>
+            <tr>
+              <td><strong>不可持续</strong></td>
+              <td>经营现金流入 <strong>&lt;</strong> 投资与筹资现金流出之和</td>
+              <td>随时可能变身"+ - +"蛮牛型</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关注要点</div>
+            <p>以「经营活动现金流入 − 投资活动现金流出 − 不含分红的筹资活动现金流出」计算差值。</p>
+            <p style="margin-top:.5rem;"><strong>差值为正</strong>：可能是一头优质成长奶牛。<br/><strong>差值为负</strong>：随时可能变身蛮牛型，参照蛮牛型关注事项。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>无论奶牛还是蛮牛，都别忘了分析所投项目的前景——投出去的钱若打了水漂，什么牛都会被拖成死牛。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">贵州茅台 2013 年财报为"+ - -"型；查流量表"上期金额"一列，2012 年同样是"+ - -"型。这是典型的<strong>纯种优质成长奶牛</strong>。<cite>— 实例</cite></div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- 二、三大报表的钩稽关系 -->
+      <!-- 二、经营活动现金流净额为负的企业肖像 -->
       <section id="sec-2">
-        <h2>🔗 二、三大报表的钩稽关系</h2>
+        <h2>二、经营活动现金流净额为负的企业肖像</h2>
 
-        <h3 id="s2-cash-flow">2.1 现金流转逻辑</h3>
+        <p>保持上述四种类型的投资与筹资状态不变，仅将经营活动现金流净额改为负值，便产生另外四种类型。</p>
 
-        <div class="formula">资金来源 → 现金流量表（入口）→ 转化为资产或费用 → 产生收入 → 现金流量表（回流）</div>
+        <p><strong>表 4-2-2 经营活动现金流净额为负时的现金流组合</strong></p>
 
         <table class="article-table">
           <thead>
-            <tr><th>现金流入来源</th><th>流向</th><th>对报表的影响</th></tr>
+            <tr><th>类型</th><th>经营活动现金流净额</th><th>投资活动现金流净额</th><th>筹资活动现金流净额</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>债务融资</strong></td><td>保留为现金</td><td>增加资产负债表的货币资金</td></tr>
-            <tr><td><strong>股东投入</strong></td><td>支出减少债务</td><td>改变资产负债表的负债数额</td></tr>
-            <tr><td><strong>经营收入</strong></td><td>支出变成资产</td><td>超过一年作用期限，计入资产负债表</td></tr>
-            <tr><td></td><td>支出变成费用</td><td>一年内作用期限，从利润表扣除</td></tr>
+            <tr><td>5</td><td>-</td><td>-</td><td>-</td></tr>
+            <tr><td>6</td><td>-</td><td>-</td><td>+</td></tr>
+            <tr><td>7</td><td>-</td><td>+</td><td>-</td></tr>
+            <tr><td>8</td><td>-</td><td>+</td><td>+</td></tr>
           </tbody>
         </table>
 
-        <h3 id="s2-accounting">2.2 会计恒等式的演化</h3>
-
-        <p><strong>传统恒等式：</strong></p>
-
-        <div class="formula"><strong>资产 = 负债 + 所有者权益</strong></div>
-
-        <p><strong>因利润表存在而演化的新等式：</strong></p>
-
-        <div class="formula"><strong>资产 = 负债 + 所有者权益 + 收入 − 费用</strong></div>
+        <p>经营现金流为负，意味着主业经营不产生现金流入。现实中，这种企业可能是初创企业，也可能是衰退期企业。由于 A 股市场目前不允许未盈利的初创企业上市，因此<strong>几乎可以肯定：经营活动现金流为负的企业，都处于衰退期</strong>。这四种组合，看着都挺吓人。</p>
 
         <div class="callout info">
           <div class="callout-icon">📝</div>
           <div class="callout-body">
-            <div class="callout-title">理解要点</div>
-            <p>新等式将利润表的经营成果纳入了资产负债表的平衡框架。收入增加会导致资产增加或负债减少，费用增加会导致资产减少或负债增加，从而维持等式平衡。</p>
+            <div class="callout-title">注</div>
+            <p>该判断不适用于允许尚未盈利的初创企业上市的资本市场。上海证券交易所于 2019 年开设的科创板，首次允许尚未盈利的企业上市。2020 年 1 月 9 日，苏州泽璟生物制药股份有限公司（688266.SH）作为我国第一家尚未盈利的上市企业登陆科创板。</p>
           </div>
         </div>
 
-        <h3 id="s2-fraud">2.3 利润操纵的识别</h3>
+        <h3 id="sec-2-1">2.1 类型 5："- - -"型 —— 大出血型</h3>
+
+        <p>企业所有活动<strong>均现金流出</strong>，属于大出血型。处于此状态的企业已不久于人世，必须迅速堵住出血点，或寻找外部输血，因此市场上极为少见。</p>
 
         <div class="callout warn">
           <div class="callout-icon">⚠️</div>
           <div class="callout-body">
-            <div class="callout-title">重要洞察</div>
-            <p>从新等式可以看出，企业如果想要<strong>虚增利润（收入 − 费用）</strong>，必将：</p>
+            <div class="callout-title">关注要点</div>
+            <p>作为珍惜资本的投资人，看见大出血型企业，<strong>坚决拒绝参与</strong>。</p>
           </div>
         </div>
 
-        <div class="remedy-grid cols-2">
-          <div class="remedy-card">
-            <span class="remedy-num">90% 造假选择</span>
-            <h4>虚增资产</h4>
-            <p>通过虚增应收账款、存货、固定资产等科目来匹配虚增的收入，是最常见的财务造假手段。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">10% 造假选择</span>
-            <h4>虚减负债</h4>
-            <p>需要债权人配合，操作难度大，相对少见。但如果发现负债异常减少而缺乏合理解释，同样需引起警惕。</p>
-          </div>
-        </div>
+        <h3 id="sec-2-2">2.2 类型 6："- - +"型 —— 赌徒型</h3>
 
-        <h3 id="s2-revenue">2.4 收入与现金流的勾稽关系</h3>
+        <p>经营流出、投资流出、筹资流入。这是一个<strong>做生意收不到钱、靠筹资度日、还不忘继续下注、力求一朝翻本</strong>的企业形象——即赌徒型。</p>
 
-        <p>利润表的每笔收入必然产生以下两种结果之一：</p>
-
-        <div class="remedy-grid cols-2">
-          <div class="remedy-card">
-            <span class="remedy-num">结果一</span>
-            <h4>产生了现金</h4>
-            <p>与现金流量表产生勾稽关系。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">结果二</span>
-            <h4>产生了应收</h4>
-            <p>与资产负债表产生勾稽关系。</p>
-          </div>
-        </div>
-
-        <p><strong>关键验证公式（涉及增值税的企业）：</strong></p>
-
-        <div class="formula"><strong>销售商品、提供劳务收到的现金</strong> ≈
-<strong>含增值税营业收入</strong>
-+ (应收票据期初余额 − 期末余额 − 本期已贴现票据)
-+ (应收账款期初余额 − 期末余额)
-+ (预收款项期末余额 − 期初余额)
-− 非现金抵账
-+ 收回已核销坏账</div>
-
-        <p>其中：</p>
-        <p><strong>含增值税营业收入</strong> = 营业收入 × (1 + 增值税税率)</p>
-        <p><strong>账面余额</strong> = 账面价值 + 减值准备</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
           <div class="callout-body">
-            <div class="callout-title">偏差分析</div>
-            <p>若上述等式出现较大偏差，最可能的原因是公司将<strong>承兑汇票背书</strong>支付给供货商，导致销售收入既没有体现为现金，期末的应收票据里也没有踪影。需要在财报附注中搜索<strong>"背书"</strong>，查看：使用票据背书转让购买商品或劳务的金额，以及使用票据背书转让购买固定资产及无形资产的金额。若加上背书金额仍有较大偏差且无法获得合理解释，则<strong>营业收入真实性存疑</strong>。</p>
+            <div class="callout-title">关注要点</div>
+            <p>除了看投资项目的前景，更要看这个"赌徒"的<strong>个人品性与赌运</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-2-3">2.3 类型 7："- + -"型 —— 混吃等死型（亦可能是老母鸡型）</h3>
+
+        <p>经营流出、投资流入、筹资流出。通俗讲，即生意亏钱、债主逼债，好在投资活动还有钱收。分析这类企业需分层判断：</p>
+
+        <p><strong>第一步：看投资现金流入靠什么产生</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>来源</th><th>类型判定</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>变卖家当</strong>（卖金融资产、长期股权投资、厂房设备等）</td>
+              <td>混吃等死型</td>
+              <td>坐吃山空</td>
+            </tr>
+            <tr>
+              <td><strong>此前投资公司经营挣钱、大把分红反哺</strong></td>
+              <td>整过容的老母鸡</td>
+              <td>实际等于经营现金流为正</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>对于"整容老母鸡"，最要紧的是<strong>扭转经营亏损</strong>，或干脆处理掉导致亏损的经营资产、另寻主业。堵住失血通道后，不失为一种可考虑的投资选择。</p>
+
+        <p><strong>第二步：看现金能否支撑两个出血点</strong></p>
+
+        <p>即便是整容老母鸡型，也要看现金流量表末的<strong>"现金及现金等价物净增加额"</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>净增加额</th><th>含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>为正数</strong></td><td>投资现金流足以支撑经营与筹资两处失血</td></tr>
+            <tr><td><strong>为负数</strong></td><td>要不了多久便会进入"混吃等死"的境界</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关注要点</div>
+            <p>不建议投资。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-2-4">2.4 类型 8："- + +"型 —— 骗吃骗喝型（亦可能是妖精型）</h3>
+
+        <p>经营流出、投资流入、筹资流入。比类型 7 略好，企业起码还能从市场筹到钱。关于投资现金流入的判断，与类型 7 完全一致，需看投资活动依赖什么创造现金流入：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>来源</th><th>类型判定</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>变卖家当</strong></td>
+              <td>骗吃骗喝型</td>
+              <td>比混吃等死型多了条借钱的路</td>
+            </tr>
+            <tr>
+              <td><strong>此前投资公司经营挣钱、大把分红回流</strong></td>
+              <td>妖精型</td>
+              <td>相当于经营现金流为正，凑成 3 个"+"，参见类型 1 关注要点</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关注要点</div>
+            <p>不建议投资。</p>
           </div>
         </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- 三、企业财务分析四步法 -->
+      <!-- 三、八类企业现金流特征汇总 -->
       <section id="sec-3">
-        <h2>🔬 三、企业财务分析四步法</h2>
+        <h2>三、八类企业现金流特征汇总</h2>
 
-        <h3 id="s3-step1">第一步：浏览科目，关注异常</h3>
+        <p>看一眼现金流量表三种活动的净额，便能大体判断企业属于哪种类型、关注要点为何、有无投资价值。</p>
 
-        <p><strong>异常定义：</strong>某科目出现明显过大比例的变动。</p>
-
-        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">资产负债表重点关注科目</h4>
+        <p><strong>表 4-2-3 八类企业现金流特征及关注要点</strong></p>
 
         <table class="article-table">
           <thead>
-            <tr><th>报表位置</th><th>重点科目</th><th>异常标准</th></tr>
+            <tr><th>类型</th><th>经现流净额</th><th>投现流净额</th><th>筹现流净额</th><th>企业类型</th><th>关注要点</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>资产端</strong></td><td>应收账款、应收票据、其他应收款、长期待摊费用</td><td>明显超过营业收入增长比例</td></tr>
-            <tr><td><strong>负债端</strong></td><td>应付票据、应付账款、其他应付款、短期借款</td><td>大比例增长</td></tr>
-          </tbody>
-        </table>
-
-        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .75rem;">利润表重点关注指标</h4>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>检查顺序</th><th>关注指标</th><th>检查内容</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>第一</strong></td><td>营业利润率</td><td>是否有大比例变化</td></tr>
-            <tr><td><strong>第二</strong></td><td>公允价值变动收益、投资收益、资产减值损失</td><td>三者之和在营业利润中的占比是否发生重大变化</td></tr>
-            <tr><td><strong>第三</strong></td><td>营业利润与净利润的比例</td><td>是否保持基本稳定</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">处理原则</div>
-            <p>无异常 → 进入下一步分析。有异常 → <strong>必须在附注中寻找解释</strong>，甚至致电公司。无法获得完整可信解释 → 对整份财报心存警惕。</p>
-          </div>
-        </div>
-
-        <div class="pull-quote large">"财报是用来排除企业的。"</div>
-
-        <h3 id="s3-step2">第二步：财务指标的历史分析</h3>
-
-        <p><strong>分析目的：</strong>寻找可靠性。</p>
-
-        <p><strong>类比说明：</strong></p>
-
-        <div class="remedy-grid cols-2">
-          <div class="remedy-card">
-            <span class="remedy-num">可信度高</span>
-            <h4>经常考90分的学生考95分</h4>
-            <p>业绩一贯优秀的企业持续向好，值得信赖。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">可信度低</span>
-            <h4>经常考60分的学生考95分</h4>
-            <p>突然暴增的业绩需要进一步核查，可能存在"一次性"因素甚至造假。</p>
-          </div>
-        </div>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>项目</th><th>建议</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>观察周期</strong></td><td>至少5年以上</td></tr>
-            <tr><td><strong>关键指标</strong></td><td>净资产收益率（ROE）</td></tr>
-            <tr><td><strong>普遍规律</strong></td><td>上市当年ROE通常较上市前3年平均水平下跌超过50%，且以后年度很难恢复</td></tr>
+            <tr><td>1</td><td>+</td><td>+</td><td>+</td><td>妖精型</td><td>企业计划投资项目情况</td></tr>
+            <tr><td>2</td><td>+</td><td>+</td><td>-</td><td>老母鸡型</td><td>低 PE、高股息率</td></tr>
+            <tr><td>3</td><td>+</td><td>-</td><td>+</td><td>蛮牛型</td><td>项目前景、资金支持</td></tr>
+            <tr><td>4</td><td>+</td><td>-</td><td>-</td><td>奶牛型</td><td>可持续性</td></tr>
+            <tr><td>5</td><td>-</td><td>-</td><td>-</td><td>大出血型</td><td>拒绝参与</td></tr>
+            <tr><td>6</td><td>-</td><td>-</td><td>+</td><td>赌徒型</td><td>项目前景与管理层品性</td></tr>
+            <tr><td>7</td><td>-</td><td>+</td><td>-</td><td>混吃等死型 ①</td><td>不建议投资</td></tr>
+            <tr><td>8</td><td>-</td><td>+</td><td>+</td><td>骗吃骗喝型 ②</td><td>不建议投资</td></tr>
           </tbody>
         </table>
 
         <div class="callout info">
           <div class="callout-icon">📝</div>
           <div class="callout-body">
-            <div class="callout-title">ROE下跌原因</div>
-            <p><strong>台面说辞：</strong>IPO导致净资产变大，投资项目尚未产生收益。<strong>台面下理由：</strong>上市时化妆师下手太狠。历史同比分析可以避免受某年异常情况影响，是投资者不应忽略的功课。</p>
+            <div class="callout-title">注</div>
+            <p>① 亦可能是老母鸡型；② 亦可能是妖精型。</p>
           </div>
         </div>
-
-        <h3 id="s3-step3">第三步：对比利润和现金流量变化趋势</h3>
-
-        <p><strong>核心目标：</strong>证明利润的含金量。</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>维度</th><th>标准</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>比例关系</strong></td><td>净利润总量与经营活动现金流量净额总量保持大致稳定比例</td></tr>
-            <tr><td><strong>理想状态</strong></td><td>经营活动现金流净额 ≥ 净利润</td></tr>
-          </tbody>
-        </table>
 
         <div class="callout warn">
           <div class="callout-icon">⚠️</div>
           <div class="callout-body">
-            <div class="callout-title">警示信号</div>
-            <p>若出现"企业获利很好，但现金流很差"的情况，必须深入思考：<strong>企业利润为什么没有转化为现金？</strong></p>
-          </div>
-        </div>
-
-        <p><strong>分析工具：</strong>根据现金流三大板块（经营活动、投资活动、筹资活动）的正负值建立<strong>企业现金流肖像</strong>，查阅对应类型企业应关注的要点。</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">记住</div>
-            <p>有利润没现金的企业，要么是纸面富贵，要么在走向资金链断裂的路上。</p>
-          </div>
-        </div>
-
-        <h3 id="s3-step4">第四步：与竞争对手比较</h3>
-
-        <p><strong>分析价值：</strong>带来更广阔的视野，避免被孤立的企业增速迷惑。</p>
-
-        <div class="callout info">
-          <div class="callout-icon">📐</div>
-          <div class="callout-body">
-            <div class="callout-title">案例说明</div>
-            <p>企业营业收入同比增长20%（看似不错），但行业平均增幅为50%。<strong>结论：</strong>企业市场份额在降低，竞争优势在消失。孤立看数字可能得出错误结论。</p>
-          </div>
-        </div>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>比较维度</th><th>比较内容</th><th>分析目的</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>资产负债结构</strong></td><td>与行业内企业对比资源运用方向</td><td>观察行业对未来发展是否有共识</td></tr>
-            <tr><td><strong>利润表指标</strong></td><td>各项收入和费用所占比例</td><td>评估管理层是否称职、是否有效运用股东资源</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- 四、财务分析的最终目标 -->
-      <section id="sec-4">
-        <h2>🎯 四、财务分析的最终目标</h2>
-
-        <p>通过以上四步分析，投资者可以完成对企业的全面评估：</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>评估维度</th><th>分析手段</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>安全性</strong></td><td>异常情况关注 + 历史对比</td></tr>
-            <tr><td><strong>盈利能力</strong></td><td>利润表指标分析 + 同业对比</td></tr>
-            <tr><td><strong>成长性</strong></td><td>趋势分析 + 行业对比</td></tr>
-            <tr><td><strong>营运能力</strong></td><td>现金流分析 + 资产周转分析</td></tr>
-          </tbody>
-        </table>
-
-        <p><strong>最终输出：</strong>企业价值的量化评估。</p>
-
-        <div class="pull-quote large">"财报分析不是为了找到好公司，而是为了排除坏公司。"</div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">下一步</div>
-            <p>具体应该关注哪些财务指标？将在下节详细讨论。财务分析的根本目的不是寻找"完美的企业"，而是建立一套<strong>系统性的排雷框架</strong>，在投资决策中避开陷阱。</p>
+            <div class="callout-title">核心提醒</div>
+            <p>上述各种类型的认定，起码要<strong>连续数年数据皆是如此</strong>，方可判定企业秉性。一两年的偶然数据不具代表性。</p>
           </div>
         </div>
       </section>
@@ -941,7 +1010,7 @@
       });
     });
 
-    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接不绑定） =====
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效，扁平链接/待整理章节不绑定） =====
     document.querySelectorAll('.toc-chapter-title').forEach(title => {
       const chapter = title.closest('.toc-chapter');
       if (!chapter.querySelector('.toc-lectures')) return;
@@ -958,7 +1027,7 @@
     const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
 
     // 记录当前页面为该书最后阅读页
-    const relativePath = 'books/' + BOOK_FOLDER + '/第5章/' + location.pathname.split('/').pop();
+    const relativePath = 'books/' + BOOK_FOLDER + '/第4章/' + location.pathname.split('/').pop();
     localStorage.setItem(PAGE_KEY, relativePath);
 
     // 恢复上次滚动位置
