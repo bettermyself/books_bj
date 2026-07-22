@@ -351,6 +351,21 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
 
     /* ===== Poem ===== */
     .poem {
@@ -592,7 +607,7 @@
         <h3 id="section-2-2">2.2 关键里程碑</h3>
         <p>巴菲特的投资生涯横跨半个多世纪，经历了无数次经济周期、金融危机和市场崩盘，却始终保持着卓越的业绩。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">1965</span>
             <h4>收购伯克希尔·哈撒韦</h4>
@@ -613,7 +628,7 @@
             <h4>持续进化</h4>
             <p>投资苹果、比亚迪等新时代企业，证明了价值投资方法论的时代适应性。</p>
           </div>
-        </div>
+    </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
@@ -665,7 +680,7 @@
         <h3 id="section-3-2">3.2 核心投资原则</h3>
         <p>巴菲特的投资原则可以归纳为四大类，构成了一个完整的价值投资框架。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">原则一</span>
             <h4>企业原则</h4>
@@ -686,7 +701,7 @@
             <h4>市场原则</h4>
             <p>利用"市场先生"的非理性，<strong>逆向投资</strong>——在他人恐惧时贪婪，在他人贪婪时恐惧。</p>
           </div>
-        </div>
+    </div>
 
         <div class="callout tip">
           <div class="callout-icon">💡</div>
@@ -735,7 +750,7 @@
 
         <h3 id="section-4-2">4.2 对投资者的启示</h3>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">启示 一</span>
             <h4>投资是可以学习的技能</h4>
@@ -751,7 +766,7 @@
             <h4>独立思考至关重要</h4>
             <p>不盲从市场共识，在他人恐惧时贪婪，在他人贪婪时恐惧——<strong>逆向思维</strong>是获取超额收益的关键。</p>
           </div>
-        </div>
+    </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>

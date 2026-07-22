@@ -351,6 +351,21 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
 
     /* ===== Poem ===== */
     .poem {
@@ -588,7 +603,7 @@
 
         <h3 id="section-1-3">1.3 财务准则：四个至关重要的财务标准</h3>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">准则 7</span>
             <h4>重视净资产回报率，而不是每股盈利</h4>
@@ -609,7 +624,7 @@
             <h4>每一美元的留存利润，至少创造一美元的市值</h4>
             <p>即"一美元原则"。若公司市值增长少于留存利润总额，说明公司倒退；善用留存利润则市值增长会超出。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-1-4">1.4 市场准则：两项相关的成本指导</h3>
 
@@ -664,7 +679,7 @@
 
         <p>能力圈原则是巴菲特投资方法的基石之一：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">关键一</span>
             <h4>定义边界比扩大圈更重要</h4>
@@ -680,13 +695,13 @@
             <h4>无法预测就放弃</h4>
             <p>如果一家公司的情况太复杂或一直不断变化，就无法聪明到可以预测其未来现金流的程度。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-2-3">2.3 市场观与耐心</h3>
 
         <p>巴菲特将市场比作"<strong>市场先生</strong>"——一个情绪不稳定、时而乐观溢价、时而悲观折价的虚拟伙伴。投资者应：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">原则 1</span>
             <h4>将市场先生视为仆人而非主人</h4>
@@ -702,7 +717,7 @@
             <h4>坚守"荒岛十年"原则</h4>
             <p>一旦买入伟大公司的股票，就用耐心伴随企业一起成长。</p>
           </div>
-        </div>
+    </div>
 
         <div class="callout tip">
           <div class="callout-icon">💡</div>
@@ -756,7 +771,7 @@
 
         <h3 id="section-3-2">3.2 生活哲学与财富观</h3>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">区分</span>
             <h4>富有 vs. 财富</h4>
@@ -772,7 +787,7 @@
             <h4>捐赠誓言</h4>
             <p>通过"捐赠誓言"承诺将绝大部分财富回馈社会，认为用自己的天赋赚取正当利润后，应将其用在更有价值、更有效率的领域。</p>
           </div>
-        </div>
+    </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
@@ -784,7 +799,7 @@
         <h3 id="section-4-1">4.1 投资成功的金三角</h3>
         <p>本章最终提炼出巴菲特投资成功的<strong>三大支柱</strong>：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">支柱一</span>
             <h4>理性</h4>
@@ -800,7 +815,7 @@
             <h4>纪律</h4>
             <p>坚守12项准则，只在能力圈内行动，只在有安全边际时出手。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-4-2">4.2 给普通投资者的启示</h3>
 

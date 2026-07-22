@@ -351,6 +351,21 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
 
     /* ===== Poem ===== */
     .poem {
@@ -607,7 +622,7 @@
           </tbody>
         </table>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">逆向投资</span>
             <h4>市场情绪极端悲观时，往往是最佳买入时机</h4>
@@ -623,7 +638,7 @@
             <h4>凯瑟琳·格雷厄姆的卓越资本配置</h4>
             <p>她展现了卓越的资本配置能力和对股东的坦诚态度，是巴菲特最信赖的管理者之一。</p>
           </div>
-        </div>
+    </div>
 
         <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
@@ -665,7 +680,7 @@
           </tbody>
         </table>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">关键区分</span>
             <h4>区分暂时性困难与结构性破坏</h4>
@@ -681,7 +696,7 @@
             <h4>低成本运营是保险业的终极护城河</h4>
             <p>GEICO的直销模式省去了代理人佣金，使其成本远低于竞争对手，能够以更低的价格吸引客户。</p>
           </div>
-        </div>
+    </div>
 
         <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
@@ -1214,7 +1229,7 @@
           <cite>— 沃伦·巴菲特</cite>
         </div>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">步骤一</span>
             <h4>估算未来5–10年的平均股东盈余</h4>
@@ -1232,10 +1247,10 @@
           </div>
           <div class="remedy-card">
             <span class="remedy-num">步骤四</span>
-            <h4>与当前市值比较，留出安全边际</h>
+            <h4>与当前市值比较，留出安全边际</h4>
             <p>只有当计算出的内在价值<strong>显著高于</strong>当前市值时，才值得买入。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-4-3">4.3 股东盈余 ÷ 无风险利率</h3>
 

@@ -351,6 +351,21 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
 
     /* ===== Poem ===== */
     .poem {
@@ -551,7 +566,7 @@
 
         <p>本杰明·格雷厄姆在《聪明的投资者》中提出"<strong>市场先生</strong>"概念——一个情绪极度不稳定的假想对手。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">特征一</span>
             <h4>情绪极度不稳定</h4>
@@ -567,7 +582,7 @@
             <h4>服务而非指导</h4>
             <p>他是来服务你的，不是来指导你的——你可以自由选择交易或拒绝。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-2-2">2.2 格雷厄姆方法的三大原则</h3>
 
@@ -810,7 +825,7 @@
 
         <p>格雷厄姆提醒投资者必须为市场波动做好准备：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">准备一</span>
             <h4>知识准备</h4>
@@ -826,7 +841,7 @@
             <h4>财务准备</h4>
             <p>确保在下跌时有能力采取正确行动，而非被迫卖出。</p>
           </div>
-        </div>
+    </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
@@ -906,7 +921,7 @@
 
         <p>集中投资策略的成功者有共同特征：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">凯恩斯</span>
             <h4>"一个人如果将投资分散于自己不甚了解的企业上…这种认识绝对是错误的。"</h4>
@@ -922,7 +937,7 @@
             <h4>以如饥似渴的阅读习惯闻名</h4>
             <p>反复研读年报而非华尔街报告，通过深度研究获得信息优势。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-9-2">9.2 集中投资的五大心理要求</h3>
 

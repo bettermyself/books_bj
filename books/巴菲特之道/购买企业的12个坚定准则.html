@@ -351,6 +351,21 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
 
     /* ===== Poem ===== */
     .poem {
@@ -584,7 +599,7 @@
 
         <p>巴菲特认为，<strong>投资回报与投资者对企业的理解程度成正比</strong>。只投资自己能完全理解的企业，包括营收、成本、现金流、劳资关系、价格弹性及资本配置需求等。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">能力圈原则</span>
             <h4>只投资自己能完全理解的企业</h4>
@@ -654,7 +669,7 @@
 
         <p><strong>配置公司资本的能力是管理层最重要的能力</strong>，长期而言将决定股东价值。理性的管理层在找不到超越平均回报率的投资项目时，应选择分红或回购股票。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">理性选择一</span>
             <h4>分红或提高分红</h4>
@@ -679,7 +694,7 @@
 
         <p>坦诚的管理层会<strong>承认错误、分享成功</strong>，全面真实反映公司状况。坦诚管理的三大价值在于帮助股东回答三个核心问题：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">问题一</span>
             <h4>公司的大致估值是多少？</h4>
@@ -695,7 +710,7 @@
             <h4>鉴于过去的表现，管理层干得如何？</h4>
             <p>诚实的业绩回顾让股东能够评估管理层的能力和资本配置水平。</p>
           </div>
-        </div>
+    </div>
 
         <div class="pull-quote">
           "在公众场合误导他人的CEO，在私底下也会误导自己。"
@@ -762,7 +777,7 @@
 
         <p>计算ROE时需要做三个关键调整：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">调整一</span>
             <h4>按成本计算证券价值</h4>
@@ -778,7 +793,7 @@
             <h4>关注无负债情况下的回报</h4>
             <p>警惕通过提高资产负债率来提高ROE的做法，巴菲特<strong>不喜欢</strong>这种做法。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-5-2">5.2 计算真正的"股东盈余"</h3>
 
@@ -855,7 +870,7 @@
           </tbody>
         </table>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">原则一</span>
             <h4>只选择简单稳定的企业</h4>
@@ -872,7 +887,7 @@
 
         <p><strong>安全边际理论</strong>是巴菲特买入决策的最终关口。在购进价格和企业价值之间要有足够的"安全边际"，缓冲效果可保证不受公司未来现金流量变动影响。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">保护一</span>
             <h4>为股价下跌提供保护</h4>

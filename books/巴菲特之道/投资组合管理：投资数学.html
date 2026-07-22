@@ -351,6 +351,21 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
 
     /* ===== Poem ===== */
     .poem {
@@ -556,7 +571,7 @@
 
         <p>安全边际理论本身虽重要却并不充分。在实际组合管理中，还必须考虑巴菲特所运用的三个关键因素：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">因素一</span>
             <h4>构建长期成长投资组合的方法</h4>
@@ -572,7 +587,7 @@
             <h4>控制情绪的方法</h4>
             <p>在面临过山车般行情考验时保持理性（心理学挑战将在第6章详述）。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-1-2">1.2 两种主流策略的局限性</h3>
 
@@ -627,7 +642,7 @@
 
         <p>传统多元化的弊端在于：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">弊端一</span>
             <h4>买入搞不懂的企业</h4>
@@ -643,7 +658,7 @@
             <h4>买入平庸公司</h4>
             <p>买的越多，买入<strong>平庸和垃圾公司</strong>的概率就越大。</p>
           </div>
-        </div>
+    </div>
 
         <div class="callout tip">
           <div class="callout-icon">💡</div>
@@ -934,7 +949,7 @@
 
         <p>衡量组合进展的替代指标——<strong>透视盈利</strong>（Look-through Earnings），包括：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">组成部分一</span>
             <h4>旗下各类企业的运营利润</h4>
@@ -950,7 +965,7 @@
             <h4>假设留存盈余已支付的税费</h4>
             <p>如果留存盈余已实际支付，公司必须支付的税费。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-6-3">6.3 投资门槛原则</h3>
 

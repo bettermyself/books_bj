@@ -351,6 +351,21 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
 
     /* ===== Poem ===== */
     .poem {
@@ -634,7 +649,7 @@
 
         <p><strong>安全边际</strong>是格雷厄姆投资体系的核心概念。其含义是以显著低于内在价值的价格购买资产，为可能的错误和不利情况预留缓冲空间。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">核心定义</span>
             <h4>安全边际 = 内在价值 - 市场价格</h4>
@@ -651,7 +666,7 @@
 
         <p>格雷厄姆提供了<strong>定量分析</strong>的工具来评估企业内在价值。他更倾向于依赖<strong>可验证的、当前的资产和盈利数据</strong>，而非对未来增长的预测。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">方法一</span>
             <h4>资产负债表分析</h4>
@@ -667,7 +682,7 @@
             <h4>成长性评估</h4>
             <p>适度考虑未来增长潜力，但格雷厄姆对此<strong>高度谨慎</strong>——他更信任已经发生的数字。</p>
           </div>
-        </div>
+    </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
@@ -725,7 +740,7 @@
           </div>
         </div>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">调研对象</span>
             <h4>客户、供应商、竞争对手、前员工、行业专家</h4>
@@ -742,7 +757,7 @@
 
         <p>费雪强调<strong>人的因素</strong>是投资成功的关键。他认为，再好的商业模式，如果没有优秀的管理者来执行，也无法创造持续的价值。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">品质一</span>
             <h4>诚信与坦诚</h4>
@@ -758,7 +773,7 @@
             <h4>长期导向</h4>
             <p>管理层是否关注<strong>长期价值创造</strong>，而非短期利润操纵。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-4-3">4.3 长期持有哲学</h3>
 
@@ -824,7 +839,7 @@
 
         <p>芒格倡导投资者建立跨学科的<strong>思维框架</strong>，认为单一的财务分析视角远远不够。真正的投资智慧来自于多个学科的思维碰撞。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">心理学</span>
             <h4>理解人类误判心理和市场非理性</h4>
@@ -859,7 +874,7 @@
           <cite>— 查理·芒格</cite>
         </div>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">第一步</span>
             <h4>定义能力圈</h4>
@@ -875,7 +890,7 @@
             <h4>扩展能力圈</h4>
             <p>通过<strong>持续学习</strong>逐步扩大边界，但不可急于求成。能力圈的扩展应该是自然生长的。</p>
           </div>
-        </div>
+    </div>
 
         <div class="callout tip">
           <div class="callout-icon">💡</div>
@@ -896,7 +911,7 @@
 
         <p>巴菲特成功地将三位导师的精华融为一体，创造出了一套独特的投资体系。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">格雷厄姆的基石</span>
             <h4>安全边际 · 市场先生 · 定量分析 · 理性态度</h4>
@@ -912,7 +927,7 @@
             <h4>伟大企业 · 能力圈 · 多元思维 · 集中投资</h4>
             <p>芒格教巴菲特如何<strong>思考</strong>——用跨学科的智慧来做出更高层次的投资决策。</p>
           </div>
-        </div>
+    </div>
 
         <h3 id="section-6-2">6.2 巴菲特的进化轨迹</h3>
 
