@@ -1050,8 +1050,16 @@
         if (sec.offsetTop <= scrollY) current = sec;
       }
       links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
+    let lastActive = null;
     window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
 
     // 平滑滚动
     links.forEach(a => {

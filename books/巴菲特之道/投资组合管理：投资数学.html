@@ -497,13 +497,13 @@
           <a href="购买企业的12个坚定准则.html" class="toc-chapter-title">第3章 购买企业的12个坚定准则</a>
         </li>
         <li class="toc-chapter">
-          <span class="toc-chapter-title">第4章 普通股投资9个案例</span>
+          <a href="普通股投资9个案例.html" class="toc-chapter-title">第4章 普通股投资9个案例</a>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title current-chapter">第5章 投资组合管理：投资数学</span>
         </li>
         <li class="toc-chapter">
-          <span class="toc-chapter-title">第6章 投资心理学</span>
+          <a href="投资心理学.html" class="toc-chapter-title">第6章 投资心理学</a>
         </li>
         <li class="toc-chapter">
           <a href="耐心的价值.html" class="toc-chapter-title">第7章 耐心的价值</a>
@@ -677,7 +677,7 @@
           <cite>— 沃伦·巴菲特</cite>
         </div>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">原则一</span>
             <h4>持股不超过10只</h4>
@@ -768,7 +768,7 @@
 
         <p>每一次新信息的增加，都会改变你原有的可能性，这就是<strong>贝叶斯推理</strong>。在没有大量重复实验的情况下，投资者需要依靠自己对于可能性的主观解读，但必须：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">要求一</span>
             <h4>剔除非理性的部分</h4>
@@ -810,7 +810,7 @@
 
         <p>芒格的关键原则是将资金分为<strong>游戏资金</strong>和<strong>重要资金</strong>两部分。只有当两个条件同时出现时才动用重要资金：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">条件一</span>
             <h4>赛马（投资标的）胜出的信心很高</h4>
@@ -906,28 +906,6 @@
           <cite>— 沃伦·巴菲特</cite>
         </div>
 
-        <h3 id="section-5-3">5.3 活跃股份（Active Share）概念</h3>
-
-        <p><strong>活跃股份</strong>是衡量投资组合中，所持有的不同于其标杆指数持股构成的比例。</p>
-
-        <table class="article-table">
-          <thead>
-            <tr>
-              <th>活跃股份水平</th>
-              <th>投资表现</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>最高</strong></td>
-              <td>最不同于指数，大幅跑赢标杆指数</td>
-            </tr>
-            <tr>
-              <td><strong>最低</strong></td>
-              <td>与指数重叠度高，未能跑赢指数</td>
-            </tr>
-          </tbody>
-        </table>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
@@ -993,7 +971,7 @@
 
         <p>在开始集中投资之前，请确认满足以下条件：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">要求一 · 企业视角</span>
             <h4>始终将股票视为企业的一部分</h4>
@@ -1025,7 +1003,7 @@
 
         <p>除了确定超越平均的增长率之外，长期持有还有另外两个重要益处：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">益处一</span>
             <h4>减少交易费用</h4>
@@ -1065,8 +1043,16 @@
         if (sec.offsetTop <= scrollY) current = sec;
       }
       links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
+    let lastActive = null;
     window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
 
     // 平滑滚动
     links.forEach(a => {

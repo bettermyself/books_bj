@@ -474,7 +474,7 @@
           <a href="购买企业的12个坚定准则.html" class="toc-chapter-title">第3章 购买企业的12个坚定准则</a>
         </li>
         <li class="toc-chapter">
-          <span class="toc-chapter-title">第4章 普通股投资9个案例</span>
+          <a href="普通股投资9个案例.html" class="toc-chapter-title">第4章 普通股投资9个案例</a>
         </li>
         <li class="toc-chapter">
           <a href="投资组合管理：投资数学.html" class="toc-chapter-title">第5章 投资组合管理：投资数学</a>
@@ -534,7 +534,7 @@
 
         <p>11岁的巴菲特与姐姐多丽丝合伙购买了6股 Cities Service 优先股，买入价$38.25。数月后股价跌至$26.95，<strong>跌幅30%</strong>。当股价终于恢复后，巴菲特立即卖出，然而该股随后飙升至$200以上。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">教训一</span>
             <h4>耐心的价值</h4>
@@ -892,7 +892,7 @@
 
         <p>专业赛马投注者拜尔建议将资金分为两部分：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">游戏资金</span>
             <h4>日常小额参与</h4>
@@ -949,7 +949,7 @@
           </div>
         </div>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">要求一</span>
             <h4>企业思维</h4>
@@ -982,13 +982,6 @@
           <cite>— 沃伦·巴菲特</cite>
         </div>
 
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">最终提示</div>
-            <p>第6章告诉我们，后者往往比前者更难，因为它要求你<strong>战胜自己</strong>。</p>
-          </div>
-        </div>
       </section>
 
       <div class="article-footer">— 完 —</div>
@@ -1012,8 +1005,16 @@
         if (sec.offsetTop <= scrollY) current = sec;
       }
       links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
+    let lastActive = null;
     window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
 
     // 平滑滚动
     links.forEach(a => {

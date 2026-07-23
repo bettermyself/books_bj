@@ -483,7 +483,7 @@
           <a href="投资心理学.html" class="toc-chapter-title">第6章 投资心理学</a>
         </li>
         <li class="toc-chapter">
-          <span class="toc-chapter-title">第7章 耐心的价值</span>
+          <a href="耐心的价值.html" class="toc-chapter-title">第7章 耐心的价值</a>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title current-chapter">第8章 最伟大的投资家</span>
@@ -522,11 +522,6 @@
           <span><strong>主题</strong>12项准则 · 投资哲学 · 品格修养 · 全书总结</span>
         </div>
       </header>
-
-      <div class="pull-quote large">
-        我之所以是一个更好的投资者，是因为我是一个商人；而我之所以是一个更好的商人，是因为我是一个投资者。
-        <cite>— 沃伦·巴菲特</cite>
-      </div>
 
       <p>本章对全书核心方法论进行系统性回顾，将巴菲特的投资准则归纳为<strong>四大类12条</strong>，构成其投资方法论的完整框架，并深入描绘了巴菲特作为"人"的维度，揭示其投资成就背后的人格力量。</p>
 
@@ -879,8 +874,16 @@
         if (sec.offsetTop <= scrollY) current = sec;
       }
       links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
+    let lastActive = null;
     window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
 
     // 平滑滚动
     links.forEach(a => {
