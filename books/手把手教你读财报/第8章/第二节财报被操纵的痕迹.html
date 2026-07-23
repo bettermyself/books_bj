@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>财报被操纵的痕迹 · 手把手教你读财报</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-chapter-title.toc-flat::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Math Formula ===== */
+    .math-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 2rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold-dk);
+      letter-spacing: .03em;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+    }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* ===== Nested List in Article ===== */
+    .chapter-article ul, .chapter-article ol {
+      margin: .75rem 0 1rem 1.5rem;
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+    }
+    .chapter-article li {
+      margin-bottom: .35rem;
+    }
+    .chapter-article li strong {
+      color: var(--gold-dk);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../index.html">手把手教你读财报</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第一章 你必须学会看懂财报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1章/第一节 财报是用来排除企业的.html">第一节 财报是用来排除企业的</a></li>
+            <li><a href="../第1章/第二节 财报阅读入门.html">第二节 财报阅读入门</a></li>
+            <li><a href="../第1章/第三节读财报前的准备工作.html">第三节 读财报前的准备工作</a></li>
+            <li><a href="../第1章/第四节 重要提示.html">第四节 重要提示</a></li>
+            <li><a href="../第1章/第五节 财报的结构.html">第五节 财报的结构</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第二章 资产负债表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2章/第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="../第2章/第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="../第2章/第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="../第2章/第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="../第2章/第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第三章 利润表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第3章/第一节利润表的重点_优化版.html">第一节 利润表的重点</a></li>
+            <li><a href="../第3章/第二节创造利润的过程_优化版.html">第二节 创造利润的过程</a></li>
+            <li><a href="../第3章/第三节速读利润表.html">第三节 速读利润表</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第四章 现金流量表</span>
+          <ul class="toc-lectures">
+            <li><a href="../第4章/第一节现金流量表拆解.html">第一节 现金流量表拆解</a></li>
+            <li><a href="../第4章/第二节企业的现金流肖像.html">第二节 企业的现金流肖像</a></li>
+            <li><a href="../第4章/第三节现金流量表速读.html">第三节 现金流量表速读</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第五章 财务指标综合分析</span>
+          <ul class="toc-lectures">
+            <li><a href="../第5章/第一节鸟瞰三大表_优化版.html">第一节 鸟瞰三大表</a></li>
+            <li><a href="../第5章/第二节财务指标分析.html">第二节 财务指标分析</a></li>
+            <li><a href="../第5章/第三节使用财务数据估值.html">第三节 使用财务数据估值</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第六章 所有者权益变动表和财报附注</span>
+          <ul class="toc-lectures">
+            <li><a href="../第6章/第一节所有者权益变动表.html">第一节 所有者权益变动表</a></li>
+            <li><a href="../第6章/第二节财报附注_优化版.html">第二节 财报附注</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第七章 管理层的汇报</span>
+          <ul class="toc-lectures">
+            <li><a href="../第7章/第一节董事会报告_优化版.html">第一节 董事会报告</a></li>
+            <li><a href="../第7章/第二节重要事项.html">第二节 重要事项</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第八章 欺诈与反欺诈</span>
+          <ul class="toc-lectures">
+            <li><a href="第一节常见的操纵财报手法.html">第一节 常见的操纵财报手法</a></li>
+            <li><a href="第二节财报被操纵的痕迹.html" class="active">第二节 财报被操纵的痕迹</a></li>
+          </ul>
+        </li>
+        <!-- 第九章：单讲，扁平链接 -->
+        <li class="toc-chapter">
+          <a href="../第9章/读财报检查清单.html" class="toc-chapter-title toc-flat" style="text-decoration:none;">第九章 附录 · 读财报检查清单</a>
+        </li>
+      </ul>
+
+      <!-- 本讲目录 -->
+      <div class="sidebar-label sidebar-label-sub">本节目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">概述</a></li>
+        <li><a href="#section-2">一、利润表常见操纵痕迹</a></li>
+        <li><a href="#section-2-1" class="sub">1.1 营业收入</a></li>
+        <li><a href="#section-2-2" class="sub">1.2 其他业务收入和营业外收入</a></li>
+        <li><a href="#section-2-3" class="sub">1.3 销售费用和管理费用</a></li>
+        <li><a href="#section-2-4" class="sub">1.4 营业外支出和一次性费用</a></li>
+        <li><a href="#section-2-5" class="sub">1.5 资产减值损失</a></li>
+        <li><a href="#section-3">二、现金流量表常见操纵痕迹</a></li>
+        <li><a href="#section-3-1" class="sub">2.1 经营活动现金流量净额</a></li>
+        <li><a href="#section-3-2" class="sub">2.2 收到其他与经营活动有关的现金</a></li>
+        <li><a href="#section-3-3" class="sub">2.3 投资活动现金流出</a></li>
+        <li><a href="#section-3-4" class="sub">2.4 筹资活动现金流中的利息支出</a></li>
+        <li><a href="#section-4">三、资产负债表常见操纵痕迹</a></li>
+        <li><a href="#section-4-1" class="sub">3.1 应收账款</a></li>
+        <li><a href="#section-4-2" class="sub">3.2 其他应收款</a></li>
+        <li><a href="#section-4-3" class="sub">3.3 预付账款</a></li>
+        <li><a href="#section-4-4" class="sub">3.4 应付账款和应付票据</a></li>
+        <li><a href="#section-4-5" class="sub">3.5 存货</a></li>
+        <li><a href="#section-4-6" class="sub">3.6 在建工程</a></li>
+        <li><a href="#section-4-7" class="sub">3.7 长期待摊费用</a></li>
+        <li><a href="#section-4-8" class="sub">3.8 无形资产和商誉</a></li>
+        <li><a href="#section-4-9" class="sub">3.9 应付职工薪酬</a></li>
+        <li><a href="#section-4-10" class="sub">3.10 坏账准备</a></li>
+        <li><a href="#section-5">四、财报以外的信号</a></li>
+        <li><a href="#section-6">五、总结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">手把手教你读财报 · 第八章 欺诈与反欺诈 · 第二节</div>
+        <h1 class="article-title">财报被操纵的痕迹</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>类别</strong>投资经典</span>
+          <span><strong>核心主旨</strong>从利润表、现金流量表、资产负债表三个维度，识别财报被操纵的痕迹与信号</span>
+        </div>
+      </header>
+
+      <!-- 概述 -->
+      <section id="section-1">
+        <h2>概述</h2>
+
+        <div class="pull-quote">
+          上市公司操纵财报的<strong>主要目的</strong>是美化利润表，<strong>次要目的</strong>是美化经营活动现金流。
+        </div>
+
+        <p>根据会计恒等式：</p>
+
+        <div class="math-block">资产 = 负债 + 所有者权益 + 收入 − 费用</div>
+
+        <p>美化收入和费用带来的所有者权益变动，最终必须通过调整资产和负债科目来体现。俗话说，雁过留声——这些操纵与调整必然会留下痕迹：利润表和现金流量表上会有，而<strong>更多的痕迹则会留在资产负债表上</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、利润表常见操纵痕迹 -->
+      <section id="section-2">
+        <h2>一、利润表常见操纵痕迹</h2>
+      </section>
+
+      <!-- 1.1 营业收入 -->
+      <section id="section-2-1">
+        <h3>1.1 营业收入</h3>
+
+        <p>收入是利润的源头，<strong>虚构收入是上市公司造假的主要方式</strong>。识别线索主要有以下四类：</p>
+
+        <h3>1.1.1 毛利率异常提升</h3>
+
+        <p>虚构收入是为了虚增利润，因此操纵者一般首选<strong>高毛利业务</strong>入手。无论财报操纵还是造假都是系统工程，涉及环节众多，绝非账目上写个数字即可。一笔高毛利造假可抵多笔低毛利造假，既减少工作量，也降低被发现的概率。其代价是：故意增加高毛利产品销售收入，会扭曲正常产品销售结构，<strong>显著改变公司当期毛利率</strong>。</p>
+
+        <p>毛利率提升的可能原因及验证方式如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>提升原因</th><th>验证方式</th><th>是否合理</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>高毛利产品造假</td><td>观察销售结构是否被扭曲</td><td>⚠️ 造假嫌疑</td></tr>
+            <tr><td>销售单价提升</td><td>观察市场状况，证实或证伪</td><td>合理</td></tr>
+            <tr><td>原材料成本下降</td><td>对比同行竞争对手财报</td><td>合理</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>当发现上市公司毛利率<strong>显著高于同行</strong>，且<strong>同比大幅波动</strong>时，应首先排查"单价提升"和"成本下降"两种合理情况。若均无法解释，则很可能存在财报操纵。</p>
+          </div>
+        </div>
+
+        <h3>1.1.2 毛利率与供应链地位不匹配</h3>
+
+        <p>毛利率大幅提升，一般说明产品竞争力增强，企业在供应链上的地位随之提升。与之吻合的财报特征应为：</p>
+
+        <ul>
+          <li><strong>应收账款减少</strong>——在买家面前地位提升</li>
+          <li><strong>应付账款增加</strong>——在上游供应商面前地位提升</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>如果毛利率显著提升，却同时伴随<strong>应收账款增加、应付账款减少</strong>，往往提示需注意造假嫌疑。</p>
+          </div>
+        </div>
+
+        <h3>1.1.3 交易对手可疑</h3>
+
+        <p>虚构收入需要交易对手，关注临时出现的交易对手可能发现疑点：</p>
+
+        <ul>
+          <li>销售以往从未生产或经销过的产品</li>
+          <li>与财报中从未出现的大客户交易，且金额不小、交易方式显示双方具有一定信任度</li>
+          <li>交易标的对该客户不具有合理用途</li>
+          <li>交易价格明显偏离正常市场价格</li>
+        </ul>
+
+        <h3>1.1.4 配套费用的勾稽异常</h3>
+
+        <p>有些细节容易被操纵者忽略，从而暴露破绽：</p>
+
+        <ul>
+          <li>运费或装卸费<strong>增长比例显著低于销售收入增长比例</strong>，且无合理解释</li>
+          <li>出口收入与海关费用之间呈<strong>反向变动</strong></li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>可根据所关注公司产品的特点，梳理产品销售会经过的环节及应产生的费用，观察它们与营业收入之间的关系。日积月累，便能形成自己的"秘密武器"。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1.2 其他业务收入和营业外收入 -->
+      <section id="section-2-2">
+        <h3>1.2 其他业务收入和营业外收入</h3>
+
+        <p>其他业务收入，指营业收入中除主营业务收入以外的收入（参见贵州茅台 2013 年财报第 80 页第一张表）。</p>
+
+        <p>从财务角度看，<strong>操纵其他业务收入比操纵主营业务收入更方便、更隐蔽</strong>，原因在于两者披露要求存在差异：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>收入类型</th><th>披露要求</th><th>操纵空间</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>主营业务收入</td><td>详细</td><td>较小</td></tr>
+            <tr><td>其他业务收入</td><td>简单</td><td>较大</td></tr>
+          </tbody>
+        </table>
+
+        <p>许多上市公司玩弄文字游戏，把模糊业务在"主营业务"与"其他业务"之间随意划转，甚至将一笔收入同时记入两处。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">需警惕的信号</div>
+            <ul>
+              <li>其他业务收入在营业收入中的<strong>占比突然大幅提升</strong>，又无令人信服的解释</li>
+              <li>公司利润主要来自<strong>偶然的营业外收入</strong></li>
+              <li>多年反复发生这种"偶然"</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1.3 销售费用和管理费用 -->
+      <section id="section-2-3">
+        <h3>1.3 销售费用和管理费用</h3>
+
+        <p>销售费用和管理费用通常应与营业收入<strong>同向变动</strong>，并在营业收入变化不大时保持比例相对稳定。该比例可从两个维度对比：</p>
+
+        <ul>
+          <li><strong>纵向</strong>——与公司历史数据对比</li>
+          <li><strong>横向</strong>——与竞争对手对比</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>如果销售费用和管理费用占营业收入的比例某年<strong>同比大幅降低</strong>，且显著低于竞争对手水平，需考虑财报操纵的可能。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1.4 营业外支出和一次性费用 -->
+      <section id="section-2-4">
+        <h3>1.4 营业外支出和一次性费用</h3>
+
+        <p>好公司的财务数据通常很容易理解。而意图隐藏问题的公司，常会创造一些让人不知所云的费用科目，用于藏匿不想被投资者追究的支出，例如：</p>
+
+        <ul>
+          <li>各类"其他 ××"科目</li>
+          <li>"重组""资产清理""商誉清理"等支出</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>财报上出现<strong>金额较大的"其他 ××"</strong>，或一些很少见过的科目名称，都是值得警惕的信号。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1.5 资产减值损失 -->
+      <section id="section-2-5">
+        <h3>1.5 资产减值损失</h3>
+
+        <p>资产减值损失的异常，往往指向"洗大澡"（故意做低盈利基数）：</p>
+
+        <ul>
+          <li>资产减值损失同比大增，同时若按上年同期水平计算，利润同比波动并不大——需考虑"洗大澡"的可能</li>
+          <li>资产负债表上的固定资产、存货、应收账款、金融资产等<strong>大幅计提减值损失，乃至价值归零</strong>——同样需考虑"洗大澡"的可能</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、现金流量表常见操纵痕迹 -->
+      <section id="section-3">
+        <h2>二、现金流量表常见操纵痕迹</h2>
+
+        <p>企业操纵现金流量表受制于银行现金余额，<strong>操纵成本相对较高</strong>。因此，直接伪造银行现金余额或函证单据这类犯罪行为相对偏少。由于操纵的主要目标是<strong>美化经营活动现金流量</strong>，可能显露痕迹的地方主要有：</p>
+      </section>
+
+      <!-- 2.1 经营活动现金流量净额 -->
+      <section id="section-3-1">
+        <h3>2.1 经营活动现金流量净额</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>异常现象</th><th>隐含风险</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>经营活动现金流净额持续优于同行，同时投资活动现金净额持续为大额负数</td>
+              <td>可能将投资活动现金流出转换为经营活动现金流入</td>
+            </tr>
+            <tr>
+              <td>经营活动现金流量净额持续多年为负</td>
+              <td>往往提示财报其他地方存在操纵或造假</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 2.2 收到其他与经营活动有关的现金 -->
+      <section id="section-3-2">
+        <h3>2.2 收到其他与经营活动有关的现金</h3>
+
+        <p>该科目金额通常应偏小。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>如果金额<strong>突然增大</strong>，而附注又无可信解释，需考虑是否有关联企业或利益相关人士打款进来，帮助企业美化经营活动现金流入。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2.3 投资活动现金流出 -->
+      <section id="section-3-3">
+        <h3>2.3 投资活动现金流出</h3>
+
+        <p>一般来说，上市公司的资本支出并非临时起意，而是年初就经董事会商定，并以财务预算方案形式提交年度股东大会讨论。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>如果投资活动现金流出金额<strong>超过年初预算很多</strong>，很可能存在临时救急：将投资活动现金流出化装成经营活动现金流入，虚增营业收入或美化经营活动现金流。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>可用下载财报的方法，在深沪交易所或巨潮网输入"股东大会会议资料"，查找《公司 20×× 年度财务预算方案》进行核对。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2.4 筹资活动现金流中的利息支出 -->
+      <section id="section-3-4">
+        <h3>2.4 筹资活动现金流中的利息支出</h3>
+
+        <p>该项支出可对应资产负债表的有息负债观察：</p>
+
+        <ul>
+          <li>若公司借债<strong>利率偏高</strong>，很可能存在某方面不为人知的问题</li>
+          <li>若将高息借来的债务或增发新股融来的资金，<strong>闲置在银行且收益率明显低于借债利率</strong>，是明显的报警信号</li>
+          <li>若公司本身<strong>货币资金充足，却又高息借债</strong>，造假或操纵财报的可能性非常大</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、资产负债表常见操纵痕迹 -->
+      <section id="section-4">
+        <h2>三、资产负债表常见操纵痕迹</h2>
+      </section>
+
+      <!-- 3.1 应收账款 -->
+      <section id="section-4-1">
+        <h3>3.1 应收账款</h3>
+
+        <p>以下情形均可能预示财报操纵：</p>
+
+        <ul>
+          <li>应收账款大幅增长，且<strong>增幅超过同期收入增幅</strong></li>
+          <li>应收账款周转率<strong>低于同行水平，且呈明显下降趋势</strong></li>
+        </ul>
+
+        <p>其背后既可能是公司临时放宽信用政策以促进短期收入，也可能是提前确认收入甚至虚构收入。</p>
+      </section>
+
+      <!-- 3.2 其他应收款 -->
+      <section id="section-4-2">
+        <h3>3.2 其他应收款</h3>
+
+        <p>应收账款主要指赊销产生的款项；而其他应收款指与销售无关的往来款，可能是委托理财、借款，或使用某种资产、权利的款项等。<strong>与销售无关却要调动资金往来，本身就存疑，当然越少越好</strong>。优秀上市公司的一个特点，就是其他应收款和其他应付款科目数额极小，甚至为零。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>对比维度</th><th>应收账款</th><th>其他应收款</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>业务关联</td><td>与销售相关</td><td>与销售无关</td></tr>
+            <tr><td>所需单据</td><td>发票、仓单、运输等一系列</td><td>无</td></tr>
+            <tr><td>造假难度</td><td>较高，易暴露</td><td>较低，操作空间大</td></tr>
+            <tr><td>价格设定空间</td><td>较小</td><td>较大</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>其他应收款数额较大，即便不是财务操纵的结果，也可能显示资金被控股股东或关联人占用。因此，对该科目金额大的公司，<strong>建议先把它当作坏人对待</strong>。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>由于会计准则变化，阅读 2018 年之后的企业财报时，需自行将"其他应收款"中的"应收股利"和"应收利息"剔除后再观察。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.3 预付账款 -->
+      <section id="section-4-3">
+        <h3>3.3 预付账款</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">需重点关注两类异常</div>
+            <ul>
+              <li>预付账款大幅增加，尤其是<strong>预付工程款、预付专利或非专利技术采购款</strong>大幅增加——可能通过预付款流出资金，最终以营业收入回流，虚增利润</li>
+              <li>预付账款<strong>挂账时间长</strong>——超过一年的预付款大概率有问题。因为金钱有时间价值，现实中很少有商人在不急需提货的情况下，提前很久支付预付款。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.4 应付账款和应付票据 -->
+      <section id="section-4-4">
+        <h3>3.4 应付账款和应付票据</h3>
+
+        <p>应付账款和应付票据，通常是公司需付给上游供货商的款项。这两个科目数额大增，有两种截然相反的解读：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>可能原因</th><th>含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>公司在商业链条上地位大增</td><td>对供应商更加强势（正面）</td></tr>
+            <tr><td>公司资金链出问题</td><td>开始拖欠供应商货款（负面）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>具体属于哪种，需结合对公司和市场的了解判断。至少应通过网络搜索，看看有无该公司供应商拉横幅讨债之类的新闻或信息。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.5 存货 -->
+      <section id="section-4-5">
+        <h3>3.5 存货</h3>
+
+        <p>以下情形提示可能存在财报操纵：</p>
+
+        <ul>
+          <li>存货（尤其是<strong>数量和价值不易确定</strong>的存货）大幅增长，且增幅超过同期营业成本增长</li>
+          <li>存货周转率显著低于同行水平，并呈下降趋势</li>
+        </ul>
+
+        <p>可能的操纵手法包括：</p>
+
+        <ol>
+          <li>虚构存货采购流出资金，最终化装成销售收入返回</li>
+          <li>单纯加大生产，利用更多产品平摊固定成本，降低本期销售产品成本，虚增利润</li>
+          <li>存货积压却不计提存货跌价准备，虚增利润</li>
+        </ol>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p><strong>存货周转率明显下降 + 毛利率显著上升</strong>，通常是很明显的警示信号，基本可按大概率造假考虑。</p>
+          </div>
+        </div>
+
+        <p><strong>推理逻辑</strong>：存货周转率下降表明产品滞销。若不采取措施，会因存货占用资金时间加长而提高成本；若采用降价或增加销售费用促销，则会导致营收下降或费用上升。这几种情况下，毛利率都应<strong>下降</strong>才对。因此毛利率不降反升，逻辑上存在矛盾。</p>
+      </section>
+
+      <!-- 3.6 在建工程 -->
+      <section id="section-4-6">
+        <h3>3.6 在建工程</h3>
+
+        <p>在建工程因<strong>总值高、进度和造价难以准确界定</strong>的特点，成为财报操纵者的"挚爱"。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>在建工程大幅增加，尤其是与生产经营规模和发展规划不相适应地大幅增加，可能存在：</p>
+            <ul>
+              <li>通过在建工程支出将资金转出，最终以销售收入面目回流，虚增利润</li>
+              <li>将本应当期从利润表扣除的费用打进在建工程成本，虚减费用、增加利润</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">普通投资者的判断角度</div>
+            <p>从公司募集资金开始看，当初承诺的项目——</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>观察点</th><th>异常信号及可能原因</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>是否在预定时间内由在建工程转为固定资产</td>
+              <td>迟迟不转固：可能工程本身虚构，或已完工却为避免计提折旧而拒不转固</td>
+            </tr>
+            <tr>
+              <td>是否如期产生效益</td>
+              <td>未如期产生效益需警惕</td>
+            </tr>
+            <tr>
+              <td>是否不断追加资金</td>
+              <td>即便正常追加，也说明管理层规划时专业不足或过于乐观</td>
+            </tr>
+            <tr>
+              <td>刚转固不久是否又需大修或技改</td>
+              <td>通常是提醒注意的信号</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 3.7 长期待摊费用 -->
+      <section id="section-4-7">
+        <h3>3.7 长期待摊费用</h3>
+
+        <p>长期待摊费用大增，通常是公司<strong>不恰当地使用费用资本化手段</strong>的信号。</p>
+      </section>
+
+      <!-- 3.8 无形资产和商誉 -->
+      <section id="section-4-8">
+        <h3>3.8 无形资产和商誉</h3>
+
+        <h3>3.8.1 无形资产</h3>
+
+        <p>无形资产的采购，尤其是<strong>专利或非专利技术的采购</strong>，是向外转移资金的一种常见手段。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>该科目数额较大时，投资者需确认该技术是否与公司生产经营紧密相关（这要求真正理解该行业）。若不相关，则可能是操纵财报的手段。</p>
+          </div>
+        </div>
+
+        <h3>3.8.2 商誉</h3>
+
+        <p>由于商誉<strong>年年进行减值测试而无须摊销</strong>的特点，备受企业并购爱好者青睐。商誉减值测试主观性很强，收购方通常喜欢：</p>
+
+        <ul>
+          <li><strong>压低</strong>收购中可辨认资产的价值</li>
+          <li><strong>做高</strong>商誉的价值</li>
+        </ul>
+
+        <p>如此可减少资产折旧、少产生折旧费用、增加利润；需要降低利润时，又可按需减值——<strong>进可攻，退可守</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>如果公司经常收购并常产生大额商誉，投资者有必要尝试将商誉还原成资产，按资产折旧规则重新考虑公司价值。此外，做高收购商誉，还可能是与卖家合作，借此将投资活动现金流出转化为经营活动现金流入。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.9 应付职工薪酬 -->
+      <section id="section-4-9">
+        <h3>3.9 应付职工薪酬</h3>
+
+        <p>通过应付职工薪酬的预提（尤其是<strong>年终奖金、效益奖金</strong>等非固定工资的预提）来平滑利润，是操纵财报的常见方法。其在财报上的双重特征为：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>特征科目</th><th>表现</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>应付职工薪酬</td><td>余额波动大</td><td>直接体现预提调节</td></tr>
+            <tr><td>递延所得税资产</td><td>数额增加很大</td><td>税务局不认可这笔职工薪酬</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>上述两种情况同时出现，预示公司存在用应付职工薪酬调节年度间利润的可能。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.10 坏账准备 -->
+      <section id="section-4-10">
+        <h3>3.10 坏账准备</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">明显的财报操纵信号</div>
+            <ul>
+              <li>坏账准备计提比例<strong>显著低于同行业竞争对手</strong></li>
+              <li>不考虑账龄因素，甚至不公布账龄结构，只按某固定比例对所有应收账款和其他应收款统一计提坏账准备</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>投资者尤其需要注意：如果恰好知道某欠款单位已明显不可能归还欠款（例如破产，或虽未破产但已资不抵债），而上市公司仍未对该笔应收账款计提 100% 减值，就需怀疑该公司<strong>所有</strong>应收账款都可能存在少计坏账准备的问题。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、财报以外的信号 -->
+      <section id="section-5">
+        <h2>四、财报以外的信号</h2>
+
+        <p>除财报本身的信号外，还有些外部信号也能帮助识别危险公司。常见的警惕信号包括：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类别</th><th>具体信号</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>信息披露</td><td>无法按时发布财报</td></tr>
+            <tr><td>审计机构</td><td>更换甚至再次更换会计师事务所（国资委要求的定期更换除外）</td></tr>
+            <tr><td>股东行为</td><td>控股大股东持续大量减持公司股票</td></tr>
+            <tr><td>高管变动</td><td>财务总监频繁更换；独立董事集体辞职</td></tr>
+            <tr><td>交易对手</td><td>主要供应商或客户可疑（执照未年审、注册地在居民楼、虚假注册地、税务资料缺失等）</td></tr>
+            <tr><td>并购行为</td><td>经常跨行业玩收购，且主要依赖发行股票支付收购款</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、总结 -->
+      <section id="section-6">
+        <h2>五、总结</h2>
+
+        <p>以上要点和技巧，应能过滤掉大部分问题企业。若再叠加你对公司商业模式及行业地位的熟悉，骗子想骗你就不是一件容易的事。</p>
+
+        <div class="pull-quote large">
+          资本市场里，欺诈与反欺诈是永恒的话题。只要牢记<strong>"事反必妖"</strong>——无论突然出奇地好，还是突然出奇地坏，都需探索背后的解释。如果没有可靠的解释，就必须从<strong>收入、费用、现金流</strong>等角度考虑是否存在欺诈可能。如此，方能在市场里长久地避开陷阱。
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+      <p style="text-align:center;font-size:.82rem;color:var(--text3);margin-top:1rem;">
+        <em>本文档基于唐朝《手把手教你读财报》编写，梳理了从利润表、现金流量表、资产负债表三个维度识别财报操纵痕迹的方法。</em>
+      </p>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== 全书目录折叠展开（仅对含子列表的章节生效） =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      const chapter = title.closest('.toc-chapter');
+      if (!chapter.querySelector('.toc-lectures')) return;
+      title.addEventListener('click', () => {
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '手把手教你读财报';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页
+    const relativePath = 'books/' + BOOK_FOLDER + '/第8章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
