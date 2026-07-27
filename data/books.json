@@ -262,6 +262,13 @@
           "id": 18,
           "createdAt": 1779194578159,
           "updatedAt": 1779194578159
+        },
+        {
+          "title": "附录：投资检查清单",
+          "order": 10,
+          "id": 33,
+          "createdAt": 1785153177583,
+          "updatedAt": 1785153177583
         }
       ],
       "cover": "img/巴菲特致股东的信.png"
@@ -292,6 +299,6 @@
     }
   ],
   "nextBookId": 7,
-  "nextChapterId": 33,
+  "nextChapterId": 34,
   "seeded": true
 }
