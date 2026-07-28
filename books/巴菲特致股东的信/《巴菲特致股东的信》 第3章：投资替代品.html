@@ -360,6 +360,20 @@
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
 
+    /* ===== Remedy Grid Column Variants ===== */
+    .remedy-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .remedy-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    @media(max-width: 600px) {
+      .remedy-grid[style*="1fr 1fr"] { grid-template-columns: 1fr !important; }
+    }
+
     /* ===== Poem ===== */
     .poem {
       background: var(--bg3);
@@ -646,7 +660,7 @@
 
         <p><strong>伯克希尔的战略</strong></p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
           <div class="remedy-card">
             <span class="remedy-num">首要选择</span>
             <h4>整体收购</h4>
@@ -657,6 +671,8 @@
             <h4>二级市场买入</h4>
             <p>通过买入流通股，持有部分优秀公司的股权。</p>
           </div>
+        </div>
+        <div class="remedy-grid">
           <div class="remedy-card">
             <span class="remedy-num">最终信念</span>
             <h4>长期制胜</h4>
@@ -762,7 +778,7 @@
 
         <h3 id="section-b4">四、核心投资哲学总结</h3>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">原则 01</span>
             <h4>独立思考</h4>
@@ -886,7 +902,7 @@
 
         <p><strong>关键警示</strong></p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">危险信号</span>
             <h4>警惕以下情形</h4>
@@ -915,22 +931,6 @@
         <h2>D. 优先股</h2>
 
         <h3 id="section-d1">一、优先股投资理念</h3>
-
-        <p><strong>合作伙伴的选择标准</strong></p>
-
-        <p>伯克希尔只与<strong>喜欢的、尊敬的、信任的</strong>人打交道。</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>公司</th><th>管理者</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>所罗门证券</td><td>约翰·古特弗罗因德</td></tr>
-            <tr><td>吉列公司</td><td>小科尔曼·莫克勒</td></tr>
-            <tr><td>美国航空</td><td>艾德·科洛德尼</td></tr>
-            <tr><td>冠军公司</td><td>安迪·西格勒</td></tr>
-          </tbody>
-        </table>
 
         <p><strong>投资回报逻辑</strong></p>
 
@@ -1271,7 +1271,7 @@
 
         <h3 id="section-f7">七、总结：巴菲特的核心观点</h3>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">支持</span>
             <h4>真实贸易</h4>
@@ -1385,7 +1385,7 @@
 
         <p><strong>正确购房原则</strong></p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">原则 01</span>
             <h4>首要动机是居住</h4>
