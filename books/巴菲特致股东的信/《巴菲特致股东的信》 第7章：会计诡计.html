@@ -359,6 +359,10 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 1056px) { .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width: 792px) { .remedy-grid.cols-3, .remedy-grid.cols-2 { grid-template-columns: 1fr; } }
 
     /* ===== Poem ===== */
     .poem {
@@ -768,7 +772,7 @@
 
         <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">方案"成功"的三大前提（讽刺性假设）</h4>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">前提 01</span>
             <h4>审计妥协</h4>
@@ -806,7 +810,7 @@
           投资者应穿透报表数字，关注<strong>自由现金流</strong>与<strong>经济实质</strong>。
         </div>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">✅ 行动 01</span>
             <h4>关注自由现金流与经济实质</h4>
@@ -904,7 +908,7 @@
 
         <p>参议院被收买、证监会失守之后，美国企业界意识到：<strong>在会计处理上可以为所欲为</strong>。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">后果 01</span>
             <h4>"盈利报告至上"的新时代</h4>
@@ -989,7 +993,7 @@
 
         <p><strong>期权并非难以估值</strong>，巴菲特的核心论点：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">论点 01</span>
             <h4>不精确 ≠ 不应确认</h4>
@@ -1067,7 +1071,7 @@
 
         <p>巴菲特与芒格并不反对使用期权，而是主张<strong>合理设计</strong>：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">原则 01</span>
             <h4>合理的行权价格</h4>
@@ -1099,7 +1103,7 @@
           将股票期权处理为无成本，是 CEO 们夸大盈利最重要的会计手法。
         </div>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">本质 01</span>
             <h4>会计原则给了管理层选择权</h4>
@@ -1231,7 +1235,7 @@
 
         <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">财险公司收购案例</h4>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">步骤 1</span>
             <h4>收购完成</h4>
@@ -1293,7 +1297,7 @@
           "如果我们让你失望，我们宁愿你是对我们的盈利失望，而不是对我们的会计失望。"
         </div>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">原则 01</span>
             <h4>精确处理损失</h4>
@@ -1446,7 +1450,7 @@
 
         <p>所有投资者都希望获得超出平均的回报，而"帮忙的人"（顾问、投资经理）也乐于鼓励这种期望。但逻辑上，这是不可能的：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-3">
           <div class="remedy-card">
             <span class="remedy-num">公理</span>
             <h4>投资者整体</h4>
@@ -1470,9 +1474,6 @@
 
         <h3 id="section-e4">四、对投资顾问的警示</h3>
 
-        <div class="pull-quote">
-          "为什么，有时在早饭之前，我已经相信了六件不可能的事情？"<cite>— 《绿野仙踪》皇后</cite>
-        </div>
 
         <div class="callout warn">
           <div class="callout-icon">⚠️</div>
@@ -1537,15 +1538,14 @@
 
         <h4 style="font-size:1rem; color:var(--gold-dk); margin:1.25rem 0 .5rem;">典型场景举例</h4>
 
-        <div class="code-block">
-          <span class="comment">// 假设某年度伯克希尔同时存在以下两项：</span>
-          - 未变现账面所得：<span class="number">100亿美元</span>
-          - 已实现亏损：<span class="number">100亿美元</span>
+	        <div class="code-block">
+	          <span class="comment">// 假设某年度伯克希尔同时存在以下两项：</span>
+	          - 未变现账面所得：<span class="number">100亿美元</span>
+	          - 已实现亏损：<span class="number">100亿美元</span>
 
-          <span class="comment">// 结果</span>
-          净利润仅反映亏损，低于运营利润，但企业真实状况可能已大幅改善。
-        </div>
-
+	          <span class="comment">// 结果</span>
+	          净利润仅反映亏损，低于运营利润，但企业真实状况可能已大幅改善。
+	        </div>
         <div class="callout warn">
           <div class="callout-icon">⚠️</div>
           <div class="callout-body">
