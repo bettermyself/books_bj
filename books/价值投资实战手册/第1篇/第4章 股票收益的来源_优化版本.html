@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第4章 股票收益的来源 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--text);
+      margin: 1.5rem 0 .75rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      text-align: center;
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--text);
+      margin: 1.75rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      font-style: italic;
+    }
+    .poem::before {
+      content: '❝';
+      display: block;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: .75rem;
+      font-style: normal;
+      opacity: .5;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      font-style: normal;
+      letter-spacing: .04em;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* footnote */
+    .fn {
+      font-size: .82rem;
+      color: var(--text3);
+      margin-top: -.25rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="第4章 股票收益的来源_优化版本.html" class="active">第4章 股票收益的来源</a></li>
+            <li><a href="第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-0">引言：双重身份理论</a></li>
+        <li><a href="#section-1">一、企业经营增值</a></li>
+        <li><a href="#section-1-4" class="sub">历史数据验证</a></li>
+        <li><a href="#section-1-5" class="sub">巴菲特投资体系</a></li>
+        <li><a href="#section-2">二、融资增值</a></li>
+        <li><a href="#section-3">三、股价无序波动</a></li>
+        <li><a href="#section-3-3" class="sub">大师的警告</a></li>
+        <li><a href="#section-4">四、我们赚的是哪种钱？</a></li>
+        <li><a href="#section-4-3" class="sub">中国股市长期收益</a></li>
+        <li><a href="#section-4-4" class="sub">国际市场验证</a></li>
+        <li><a href="#section-5">总结</a></li>
+        <li><a href="#section-6">附录：滚动十年收益详表</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 · 第1篇 如何面对股价波动 · 第4章</div>
+        <h1 class="article-title">股票收益的来源</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>主题</strong>股票收益 · 企业经营增值 · 融资增值 · 市场波动</span>
+        </div>
+      </header>
+
+      <!-- ===== 引言 ===== -->
+      <section id="section-0">
+        <h2>引言：格雷厄姆的双重身份理论</h2>
+        <p>本杰明·格雷厄姆在<strong>《聪明的投资者》</strong>中指出：</p>
+
+        <div class="pull-quote">
+          持有上市公司股份的人实际上拥有<strong>双重身份</strong>，并且他可以在两者之间自由选择更有利于自己的方式。
+        </div>
+
+        <p>一方面，他的地位类似于非上市企业的少数股东或匿名合伙人。这时候，他的投资回报完全取决于<strong>企业的利润</strong>或<strong>企业资产价值的变化</strong>。</p>
+
+        <p>另一方面，上市公司股份持有人还拥有一份证书，可以在不同的时间，按不同的价格随时将其卖掉，该价格往往<strong>大幅偏离</strong>资产负债表记录的账面净资产值。</p>
+
+        <h3>股票收益的三大来源</h3>
+        <p>进一步分析，持有上市公司股票的收益来源共有<strong>三种</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>收益来源</th><th>说明</th><th>性质</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① 企业经营增值</td><td>企业盈利能力带来的净资产增长</td><td>确定性收益</td></tr>
+            <tr><td>② 融资增值</td><td>高价增发新股或子公司IPO</td><td>确定性收益</td></tr>
+            <tr><td>③ 股价无序波动</td><td>投资者情绪导致的价格波动</td><td>零和博弈（扣除费用后为负和）</td></tr>
+          </tbody>
+        </table>
+
+        <p>前两项是<strong>目标资产本身的变动</strong>；第三项是<strong>市场参与者之间的博弈</strong>，与企业无关。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 一、企业经营增值 ===== -->
+      <section id="section-1">
+        <h2>一、企业经营增值</h2>
+
+        <h3 id="section-1-1">1.1 GDP与企业盈利的关系</h3>
+
+        <p><strong>GDP（国内生产总值）</strong> = 一个国家或地区一定时期内生产的全部最终产品和服务的交易价格总和。</p>
+
+        <p>推动GDP持续增长的因素：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">因素 1</span>
+            <h4>人口增长</h4>
+            <p>劳动力供给扩大，消费需求增长</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">因素 2</span>
+            <h4>土地等资产的自然产出</h4>
+            <p>自然资源持续创造价值</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">因素 3</span>
+            <h4>分工细化</h4>
+            <p>专业化提升生产效率</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">因素 4</span>
+            <h4>科技发展</h4>
+            <p>技术进步驱动生产力飞跃</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">因素 5</span>
+            <h4>贸易规模扩大</h4>
+            <p>市场边界不断拓展</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">因素 6</span>
+            <h4>劳动生产率提高</h4>
+            <p>单位投入产出持续提升</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关键结论</div>
+            <p>除极端时期外，人类社会创造的产品和服务持续增长。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-2">1.2 财富分配结构</h3>
+
+        <p>GDP的分享主体可大致分为：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>主体</th><th>角色</th><th>分配方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>资本</td><td>以企业为载体创造财富</td><td>企业利润</td></tr>
+            <tr><td>劳动者</td><td>与资本合力创造财富</td><td>工资报酬</td></tr>
+            <tr><td>政府</td><td>类似干股合伙人</td><td>税收分成</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">企业的优势</div>
+            <p>深化分工、专业化协作；配套激励机制和惩罚机制；交易费用更低（科斯《企业的性质》）；<strong>长期盈利能力 ≥ 劳动力回报</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-3">1.3 逻辑推导链条</h3>
+
+        <div class="poem">
+          所有企业平均盈利能力 ≥ GDP增长速度<br/>
+          ↓<br/>
+          上市公司平均盈利能力 &gt; 全社会企业平均水平<br/>
+          ↓<br/>
+          优秀上市公司（ROE&gt;12%）&gt; 上市公司平均水平
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>投资优秀企业组合的长期收益率将超越社会平均财富增长速度。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-4">1.4 历史数据验证</h3>
+
+        <h4>美国市场（巴菲特1977年《财富》杂志文章）</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时期</th><th>道琼斯工业指数ROE</th><th>财富500强ROE</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1945-1955</td><td>12.8%</td><td>—</td></tr>
+            <tr><td>1955-1965</td><td>10.1%</td><td>11.2%</td></tr>
+            <tr><td>1965-1975</td><td>10.9%</td><td>11.8%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特结论</div>
+            <p>无论高通胀还是低通胀时期，净资产收益率基本维持在<strong>12%左右</strong>。</p>
+          </div>
+        </div>
+
+        <h4>中国市场（1995-2014）</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>年均ROE</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>全部企业</td><td>约10%</td></tr>
+            <tr><td>上市公司</td><td>大于12%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">别小看2%的差距</div>
+            <p>20年后，12%收益率资产赚到的利润是10%收益率资产的<strong>150%以上</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-5">1.5 巴菲特投资体系的奥秘</h3>
+
+        <p>巴菲特的投资逻辑非常简单：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">原则 1</span>
+            <h4>优秀企业跑赢平均</h4>
+            <p>优秀企业能跑赢社会财富平均增长速度（就像班上前三名成绩高过全班平均）</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则 2</span>
+            <h4>合理价格买入</h4>
+            <p>以合理乃至偏低的价格参股优秀企业</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则 3</span>
+            <h4>利用"市场先生"</h4>
+            <p>从经常提供错误定价的市场获取机会</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则 4</span>
+            <h4>资金杠杆</h4>
+            <p>利用保险公司资金杠杆（普通投资者难以复制）</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">对普通投资者的启示</div>
+            <p>只要理解前三条，专心寻找优秀企业，等待合理或偏低的价格入股，要想不富也很难。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 二、融资增值 ===== -->
+      <section id="section-2">
+        <h2>二、融资增值</h2>
+
+        <h3 id="section-2-1">2.1 融资特权的价值</h3>
+
+        <p>当上市公司高价增发新股或拆分资产独立上市时，新股东的投入通常会<strong>提升原股东的收益率</strong>。</p>
+
+        <p><strong>融资方式</strong>：</p>
+        <ul>
+          <li>高于净资产价格增发新股</li>
+          <li>拆分子公司独立上市（原股东扮演IPO原始股东角色）</li>
+        </ul>
+
+        <h3 id="section-2-2">2.2 ⚠️ 重要警示：不是所有高价融资都有利</h3>
+
+        <h4>案例：贵州茅台假设性增发分析</h4>
+
+        <p><strong>假设情景（2013年）</strong>：</p>
+        <ul>
+          <li>茅台市价：100元/股</li>
+          <li>每股净资产：40元</li>
+          <li>总股本：10.38亿股</li>
+          <li>拟增发：3亿股，定价120元（高于市价20%）</li>
+        </ul>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>项目</th><th>数据</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>新股东出资</td><td>360亿元</td><td>购买22.42%股权</td></tr>
+            <tr><td>隐含公司估值</td><td>1605.6亿元</td><td>120×13.38亿股</td></tr>
+            <tr><td>2013-2020分红总额</td><td>1035亿元</td><td>新股东获得232亿元</td></tr>
+            <tr><td>2020年末市值</td><td>25752亿元</td><td>新股东持股市值5770亿元</td></tr>
+            <tr><td>新股东总回报</td><td>超6000亿元</td><td>232亿现金+5770亿市值</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心结论</div>
+            <p>只有<strong>明显高于企业内在价值</strong>的融资，才真正对老股东有利。高于净资产或高于市价的融资，不一定对老股东有利。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 三、短期内股价的无序波动 ===== -->
+      <section id="section-3">
+        <h2>三、短期内股价的无序波动</h2>
+
+        <h3 id="section-3-1">3.1 股价波动的本质</h3>
+
+        <p>股价由市场成千上万参与者用真金白银博弈产生，因任何人或群体的情绪波动出现<strong>完全无序的波动</strong>。</p>
+
+        <h3 id="section-3-2">3.2 预测股价波动的徒劳</h3>
+
+        <p><strong>理论诱惑</strong>：如果每月高抛低吸赚10%，10万元本金10年零1个月后变成：</p>
+
+        <div class="poem">
+          10万 × 1.1¹²¹ ≈ 101.98亿元
+        </div>
+
+        <p><strong>残酷现实</strong>：几百年来，无数顶级聪明人尝试，<strong>没有任何有效证据</strong>证明有人通过短期股价波动发家致富。</p>
+
+        <h3 id="section-3-3">3.3 大师的警告</h3>
+
+        <h4>本杰明·格雷厄姆</h4>
+
+        <p><strong>《证券分析》</strong>：</p>
+        <div class="pull-quote">没有任何一名投资者拥有这种时机选择能力。<cite>— 本杰明·格雷厄姆</cite></div>
+
+        <p><strong>《聪明的投资者》</strong>：</p>
+        <div class="pull-quote">这类所谓的"技术面方法"完全违背了商业常识，这种方式几乎不可能在华尔街获得持续的成功。根据我们在股票市场超过50年的经验与观察，我们不曾见过任何人依照这种所谓跟踪趋势的方法获得持续的成功。<cite>— 本杰明·格雷厄姆</cite></div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">历史奇迹</div>
+            <p>这两本书流传几十年，居然没有一位市场人士拿出有效数据和实战案例来驳斥格雷厄姆的结论。</p>
+          </div>
+        </div>
+
+        <h4>约翰·梅纳德·凯恩斯</h4>
+
+        <div class="pull-quote">我们从来没能证明，有人可以利用经济周期的循环，大规模地买卖股票持续获取利润。试图这么做的人，不是卖得太迟，就是买得太迟，或者干脆买卖都太迟。<cite>— 约翰·梅纳德·凯恩斯</cite></div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 四、我们赚的是哪种钱？ ===== -->
+      <section id="section-4">
+        <h2>四、我们赚的是哪种钱？</h2>
+
+        <h3 id="section-4-1">4.1 三种收益来源的本质对比</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>收益来源</th><th>整体结果</th><th>确定性</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>企业经营增值</td><td>确定获利</td><td>✓</td></tr>
+            <tr><td>融资增值</td><td>确定获利</td><td>✓</td></tr>
+            <tr><td>短期无序波动</td><td>零和博弈，扣除费用后必然亏损</td><td>✗</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-2">4.2 投资的底层逻辑</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心原理</div>
+            <p>只要获取前两项利润，投资者如同位于水面不断上升的池塘里，只需平均水平的智商、知识和运气，就能确定：</p>
+          </div>
+        </div>
+
+        <div class="poem">
+          投资收益率 &gt; 全体企业平均收益率 &gt; GDP增长率
+        </div>
+
+        <h3 id="section-4-3">4.3 中国股市长期收益验证</h3>
+
+        <h4>1991-2014年实际收益率（《中国基金报》数据）</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>资产类别</th><th>年化收益率</th><th>1元变成</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>深市股票</td><td>11.2%</td><td>12.81元</td></tr>
+            <tr><td>沪市股票</td><td>10.1%</td><td>10.05元</td></tr>
+            <tr><td>黄金</td><td>2.9%</td><td>1.97元</td></tr>
+            <tr><td>人民币现金</td><td>-4.1%</td><td>0.37元</td></tr>
+          </tbody>
+        </table>
+
+        <h4>易方达沪深300指数基金（510310）</h4>
+
+        <p><strong>统计周期</strong>：2013年3月6日 - 2021年12月31日（8.85年）</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>数值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>起始净值</td><td>1.000元</td></tr>
+            <tr><td>期末净值</td><td>2.292元</td></tr>
+            <tr><td>总收益率</td><td>129.2%</td></tr>
+            <tr><td>年化收益率</td><td>9.83%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>这是扣除管理费、托管费、交易佣金后的<strong>净收益率</strong>，远超同期银行存款或理财产品。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">指数编制说明</div>
+            <p>上证综指、深证综指、沪深300等常见指数，对成分股现金分红按自然下跌处理，因此指数本身<strong>无法反映真实长期回报</strong>。</p>
+          </div>
+        </div>
+
+        <h4>万得全A指数滚动十年期收益率分析</h4>
+
+        <p><strong>指数特点</strong>：</p>
+        <ul>
+          <li>包含沪深两地所有上市公司</li>
+          <li>以自由流通股本为权重</li>
+          <li>包含所有公司分红收益</li>
+          <li>反映全体参与者扣除印花税和佣金前的收益</li>
+        </ul>
+
+        <p><strong>统计周期</strong>：1994年末 - 2021年末（18个滚动十年期）</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>统计结果</th><th>数据</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>盈利周期数</td><td>18/18（100%）</td></tr>
+            <tr><td>最低年化收益率</td><td>1.60%（2007-2017，唯一低于存款利率）</td></tr>
+            <tr><td>最高年化收益率</td><td>21.88%（2005-2015，十年7.2倍）</td></tr>
+            <tr><td>其他高收益期</td><td>16.54%（2004-2014，十年4.6倍）；16.01%（1997-2007，十年4.4倍）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          只要以<strong>十年为期限</strong>，从任何一年开始投资中国股市，都不会亏钱（仅有一个周期低于存款利率）。
+        </div>
+
+        <h3 id="section-4-4">4.4 国际市场验证</h3>
+
+        <p><strong>杰里米·J·西格尔《股市长线法宝》研究（1871-2012，140年）</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>持有期限（年）</th><th>股票优于长债比例</th><th>股票优于短债比例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>61.3%</td><td>66.9%</td></tr>
+            <tr><td>2</td><td>64.1%</td><td>70.4%</td></tr>
+            <tr><td>3</td><td>68.7%</td><td>73.3%</td></tr>
+            <tr><td>5</td><td>69.0%</td><td>74.6%</td></tr>
+            <tr><td>10</td><td>78.2%</td><td>83.8%</td></tr>
+            <tr><td>20</td><td>95.8%</td><td>99.3%</td></tr>
+            <tr><td>30</td><td>99.3%</td><td>100%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>投资时间越长，股票收益优于债券的概率越高，<strong>20年以上接近100%</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 总结 ===== -->
+      <section id="section-5">
+        <h2>总结</h2>
+
+        <h3>✓ 确定性收益路径</h3>
+
+        <p>聚焦前两项收益来源：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 1</span>
+            <h4>选择优秀企业</h4>
+            <p>ROE持续&gt;12%的企业</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 2</span>
+            <h4>合理价格买入</h4>
+            <p>等待市场提供的机会</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤 3</span>
+            <h4>长期持有</h4>
+            <p>让企业经营和复利发挥作用</p>
+          </div>
+        </div>
+
+        <h3>✗ 避开零和陷阱</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">短期股价波动</div>
+            <p>是零和博弈（扣费后负和），历史证明没有人能持续通过预测短期波动获利。</p>
+          </div>
+        </div>
+
+        <h3>🎯 最终启示</h3>
+
+        <div class="pull-quote large">
+          股市投资的本质是分享优秀企业的成长，而非在价格波动中博弈。只要方向正确、价格合理、时间充足，财富增长是大概率事件。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 附录 ===== -->
+      <section id="section-6">
+        <h2>附录：万得全A指数1994-2021年滚动十年收益详表</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>起始年</th><th>年末点位</th><th>滚动十年获利</th><th>年化收益率</th><th>起始年</th><th>年末点位</th><th>滚动十年获利</th><th>年化收益率</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1994</td><td>379.34</td><td>—</td><td>—</td><td>2008</td><td>1430.79</td><td>68.75%</td><td>5.37%</td></tr>
+            <tr><td>1995</td><td>326.26</td><td>—</td><td>—</td><td>2009</td><td>2939.79</td><td>193.98%</td><td>11.39%</td></tr>
+            <tr><td>1996</td><td>687.42</td><td>—</td><td>—</td><td>2010</td><td>2737.57</td><td>74.21%</td><td>5.71%</td></tr>
+            <tr><td>1997</td><td>873.69</td><td>—</td><td>—</td><td>2011</td><td>2123.85</td><td>77.58%</td><td>5.91%</td></tr>
+            <tr><td>1998</td><td>847.86</td><td>—</td><td>—</td><td>2012</td><td>2223.24</td><td>131.40%</td><td>8.75%</td></tr>
+            <tr><td>1999</td><td>1000.00</td><td>—</td><td>—</td><td>2013</td><td>2344.20</td><td>152.82%</td><td>9.72%</td></tr>
+            <tr><td>2000</td><td>1571.39</td><td>—</td><td>—</td><td>2014</td><td>3573.48</td><td>362.20%</td><td>16.54%</td></tr>
+            <tr><td>2001</td><td>1195.97</td><td>—</td><td>—</td><td>2015</td><td>4949.20</td><td>623.50%</td><td>21.88%</td></tr>
+            <tr><td>2002</td><td>960.78</td><td>—</td><td>—</td><td>2016</td><td>4310.22</td><td>197.36%</td><td>11.51%</td></tr>
+            <tr><td>2003</td><td>927.22</td><td>—</td><td>—</td><td>2017</td><td>4522.72</td><td>17.21%</td><td>1.60%</td></tr>
+            <tr><td>2004</td><td>773.14</td><td>103.81%</td><td>7.38%</td><td>2018</td><td>3244.90</td><td>126.79%</td><td>8.53%</td></tr>
+            <tr><td>2005</td><td>684.06</td><td>109.67%</td><td>7.68%</td><td>2019</td><td>4316.49</td><td>46.83%</td><td>3.92%</td></tr>
+            <tr><td>2006</td><td>1449.51</td><td>110.86%</td><td>7.75%</td><td>2020</td><td>5422.20</td><td>98.07%</td><td>7.07%</td></tr>
+            <tr><td>2007</td><td>3858.80</td><td>341.67%</td><td>16.01%</td><td>2021</td><td>5919.40</td><td>178.71%</td><td>10.79%</td></tr>
+          </tbody>
+        </table>
+
+        <p class="fn">数据来源：万得数据库整理</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    const relativePath = 'books/' + BOOK_FOLDER + '/第1篇/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+  </script>
+
+</body>
+</html>

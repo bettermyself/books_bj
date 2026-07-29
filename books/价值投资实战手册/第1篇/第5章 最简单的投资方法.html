@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第5章 最简单的投资方法 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--text);
+      margin: 1.5rem 0 .75rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      text-align: center;
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--text);
+      margin: 1.75rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      font-style: italic;
+    }
+    .poem::before {
+      content: '❝';
+      display: block;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: .75rem;
+      font-style: normal;
+      opacity: .5;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      font-style: normal;
+      letter-spacing: .04em;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* footnote */
+    .fn {
+      font-size: .82rem;
+      color: var(--text3);
+      margin-top: -.25rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="第5章 最简单的投资方法.html" class="active">第5章 最简单的投资方法</a></li>
+            <li><a href="第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-0">核心观点</a></li>
+        <li><a href="#section-1">一、指数基金的由来</a></li>
+        <li><a href="#section-1-1" class="sub">指数基金的运作原理</a></li>
+        <li><a href="#section-1-2" class="sub">常见指数基金类型</a></li>
+        <li><a href="#section-2">二、指数基金的优势</a></li>
+        <li><a href="#section-3">三、为期十年的百万美元赌局</a></li>
+        <li><a href="#section-3-1" class="sub">巴菲特的观点</a></li>
+        <li><a href="#section-3-2" class="sub">赌局设置与结果</a></li>
+        <li><a href="#section-4">四、立足先赢，再求大赢</a></li>
+        <li><a href="#section-4-1" class="sub">复利的力量</a></li>
+        <li><a href="#section-5">五、提升收益率的两大途径</a></li>
+        <li><a href="#section-5-1" class="sub">途径一：资产配置</a></li>
+        <li><a href="#section-5-2" class="sub">途径二：自建优质股票组合</a></li>
+        <li><a href="#section-6">六、巴菲特对投资品的分类</a></li>
+        <li><a href="#section-6-1" class="sub">第一类：类现金资产</a></li>
+        <li><a href="#section-6-2" class="sub">第二类：不产生收益的资产</a></li>
+        <li><a href="#section-6-3" class="sub">第三类：有生产力的资产</a></li>
+        <li><a href="#section-7">总结</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 · 第1篇 如何面对股价波动 · 第5章</div>
+        <h1 class="article-title">最简单的投资方法</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>主题</strong>指数基金 · 资产配置 · 巴菲特投资品分类 · 复利</span>
+        </div>
+      </header>
+
+      <!-- ===== 核心观点 ===== -->
+      <section id="section-0">
+        <h2>核心观点</h2>
+
+        <p>依据前文一系列数据，似乎<strong>最简单、最省事、最稳妥的投资，就是把所有股票全部买下来</strong>！投资有这么简单吗？还真是就这么简单。</p>
+
+        <div class="pull-quote large">
+          "投资这件事有个特点，门外汉只需少许的努力和能力，便可以取得令人敬佩的结果；若试图超越这唾手可得的成就，便需要付出无比的智慧与无数的精力。"
+          <cite>— 本杰明·格雷厄姆《聪明的投资者》</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 一、指数基金的由来 ===== -->
+      <section id="section-1">
+        <h2>一、指数基金的由来</h2>
+
+        <p>在《聪明的投资者》一书里，格雷厄姆建议普通投资者只需要选择<strong>10～30家大型的、杰出的、资产负债率低、具有长期股息发放记录的企业</strong>持有，就可以获得令人满意的回报。</p>
+
+        <p>格雷厄姆的这种思想，后来被金融市场的技术人员发扬光大，成为目前全球最重要的投资品种——<strong>指数基金</strong>。</p>
+
+        <h3 id="section-1-1">指数基金的运作原理</h3>
+
+        <p>所谓指数基金，就好比把格雷厄姆选出来的这30家公司，编制一个"格氏30指数"发布：</p>
+
+        <ul>
+          <li>每一只个股都是公开的</li>
+          <li>每一只个股所占百分比也是公开的</li>
+          <li>任何人按照比例购买这30家公司的股票，就能获得等同于指数的收益率</li>
+        </ul>
+
+        <p>由于交易所对每只股票的单次购买有<strong>最低数量限制</strong>，单个人的资金量可能无法完美模拟指数，于是指数基金就诞生了——<strong>大家把钱凑在一起，买下这些股票，收益按资金比例分享</strong>。</p>
+
+        <h3 id="section-1-2">常见指数基金类型</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指数基金类型</th><th>构成</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>沪深300指数基金</td><td>按沪深300指数比例购买300只成分股</td><td>代表A股市场最优质的大中型企业</td></tr>
+            <tr><td>中证500指数基金</td><td>按中证500指数比例购买500只成分股</td><td>代表A股市场的中小型成长企业</td></tr>
+            <tr><td>标普500指数基金</td><td>按标普500指数比例购买500只成分股</td><td>代表美国市场的主要上市公司</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 二、指数基金的优势 ===== -->
+      <section id="section-2">
+        <h2>二、指数基金的优势</h2>
+
+        <h3 id="section-2-1">1. 管理成本低廉</h3>
+
+        <p>这种操作对基金管理人的能力、学历和经验<strong>几乎无要求</strong>，任何会操作交易程序的普通职员都能胜任，因此无须付出高额提成和管理费。</p>
+
+        <h3 id="section-2-2">2. 费用对比</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>基金类型</th><th>管理费</th><th>业绩提成</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>指数基金</strong></td><td>极低</td><td>无</td><td>挂钩同一指数的产品无差别，只能价格竞争</td></tr>
+            <tr><td><strong>主动型基金</strong></td><td>1%～2%/年</td><td>利润的10%～50%</td><td>依赖基金经理选股和择时能力</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">残酷的事实</div>
+            <p>彼得·林奇在著作里多次指出，<strong>至少有75%的基金经理连市场平均业绩水平都达不到</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-3">3. 交易成本低</h3>
+
+        <p>由于指数成分股并不经常变更，指数基金除了有新资金继续按比例买入外，几乎很少有交易产生。因此：</p>
+
+        <ul>
+          <li><strong>管理费</strong>低廉</li>
+          <li><strong>交易佣金</strong>极少</li>
+          <li><strong>印花税</strong>等税费成本非常低</li>
+        </ul>
+
+        <h3 id="section-2-4">4. 投资理念简单</h3>
+
+        <p>追求的是<strong>搭上全社会经济持续增长的顺风车</strong>，基本不需要投资者费心费力，而事实证明，这种做法的收益已经足以令人惊讶。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 三、为期十年的百万美元赌局 ===== -->
+      <section id="section-3">
+        <h2>三、为期十年的百万美元赌局</h2>
+
+        <h3 id="section-3-1">巴菲特的观点</h3>
+
+        <p>巴菲特多次在公众场合推荐指数基金，他告诉普通投资者：</p>
+
+        <div class="pull-quote">
+          "对于绝大多数没有时间进行充分调研的中小投资者，<strong>成本低廉的指数基金就是投资股市的最佳选择</strong>。我的导师格雷厄姆在很多年前就坚持这样的立场，而此后我经历的一切进一步证实了这一看法的真实可靠性。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <div class="pull-quote">
+          "通过定期投资指数基金，一个什么都不懂的业余投资者<strong>通常能打败大部分专业基金经理</strong>。"
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+
+        <h3 id="section-3-2">赌局设置与结果</h3>
+
+        <p>巴菲特屡次夸赞指数基金、鄙视专业选手，华尔街基金经理们不乐意了。2007年，华尔街某著名基金经理公开向巴菲特发起挑战：</p>
+
+        <h4>赌局设置（2007-2017）</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>对战方</th><th>代表选手</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>华尔街方</strong></td><td>5家知名FOF基金</td><td>可在200家主动型基金中任意选择优秀基金投资</td></tr>
+            <tr><td><strong>巴菲特方</strong></td><td>标普500指数基金</td><td>简单跟踪市场平均水平</td></tr>
+          </tbody>
+        </table>
+
+        <h4>十年后的结果</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>参赛方</th><th>最高年化收益</th><th>十年累计收益</th><th>最低年化收益</th><th>十年累计收益</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>5家FOF基金</td><td>6.5%</td><td>87.71%</td><td>0.3%</td><td>3.04%</td></tr>
+            <tr><td><strong>标普500指数</strong></td><td><strong>8.5%</strong></td><td><strong>125.8%</strong></td><td>-</td><td>-</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>结果</strong>：五家参赌基金<strong>无一例外全部跑输</strong>标普500指数基金！</p>
+
+        <p>巴菲特一边笑纳百万赌资（捐给了慈善机构），一边挖苦这些基金管理人：</p>
+
+        <div class="pull-quote large">
+          "Performance comes, performance goes. Fees never falter."<br/>
+          即"无论赚赔，收费永不客气"。
+          <cite>— 沃伦·巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 四、投资要循序渐进：立足先赢，再求大赢 ===== -->
+      <section id="section-4">
+        <h2>四、投资要循序渐进：立足先赢，再求大赢</h2>
+
+        <h3 id="section-4-0">先赢策略：理解逻辑链</h3>
+
+        <p>能认识到指数基金的价值，普通投资者便完全可以<strong>立足于先赢，而后再去求大赢</strong>。</p>
+
+        <p><strong>收益率逻辑链</strong>：</p>
+
+        <div class="poem">
+          沪深300指数基金收益率<br/>
+          &gt; 全部上市公司平均收益率<br/>
+          &gt; 全国所有企业平均收益率<br/>
+          ≥ 名义GDP增长率<br/>
+          &gt; 实际GDP增长率<br/>
+          &gt; 类现金资产收益率
+        </div>
+
+        <h3>投资建议</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">基础策略</span>
+            <h4>定投沪深300指数基金</h4>
+            <p>以长期视角、定时定额的方式将"睡前收入"的剩余投资于沪深300指数基金</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">进阶学习</span>
+            <h4>挖掘优质企业</h4>
+            <p>在确保获取高于GDP增长速度回报的基础上，再去学习投资，通过挖掘优质企业进一步提升收益率</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-1">复利的力量</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">复利的力量（100万元本金，50年投资生涯）</div>
+            <p>即使1%的收益率提升，在复利作用下也会产生巨大差异。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>年化收益率</th><th>50年后总额</th><th>相比10%的增幅</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>10%</td><td>1.17亿元</td><td>-</td></tr>
+            <tr><td>11%</td><td>1.85亿元</td><td>+6800万元</td></tr>
+            <tr><td>12%</td><td>2.89亿元</td><td>+1.72亿元</td></tr>
+          </tbody>
+        </table>
+
+        <p>这<strong>6800万元或1.72亿元的差额</strong>，就是市场因为你将收益率提高了1%或2%而支付给你的奖学金。它可能比大多数人每天8小时上一辈子班的总收入还高，<strong>当然值得我们付出精力和时间去学习</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 五、提升投资收益率的两大途径 ===== -->
+      <section id="section-5">
+        <h2>五、提升投资收益率的两大途径</h2>
+
+        <h3 id="section-5-1">途径一：资产配置</h3>
+
+        <p><strong>代表人物</strong>：大卫·斯文森（"耶鲁财神"、耶鲁大学捐赠基金管理人）</p>
+
+        <p>在《不落俗套的成功——最好的个人投资方法》一书中，斯文森建议普通投资者按以下比例配置资产：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>资产类别</th><th>配置比例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>美国股票</td><td>30%</td></tr>
+            <tr><td>国外发达国家股票</td><td>15%</td></tr>
+            <tr><td>国外新兴市场股票</td><td>5%</td></tr>
+            <tr><td>房地产</td><td>20%</td></tr>
+            <tr><td>美国长期国债</td><td>15%</td></tr>
+            <tr><td>美国通胀保值国债</td><td>15%</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>动态再平衡</strong>：定时（季度/半年度/年度）强制让各类资产恢复到初始比例。</p>
+
+        <p>斯文森这本书主要论证了三个核心问题：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">问题 1</span>
+            <h4>配置的合理性</h4>
+            <p>如此配置的合理性</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题 2</span>
+            <h4>择时不可靠</h4>
+            <p>择时交易不靠谱</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题 3</span>
+            <h4>基金行业的失败</h4>
+            <p>基金行业性失败的根本原因</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">途径二：自建优质股票组合</h3>
+
+        <p><strong>代表人物</strong>：沃伦·巴菲特</p>
+
+        <p>巴菲特的投资生涯分为前后两个阶段：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>阶段</th><th>投资方法</th><th>核心思想来源</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>前期</strong></td><td>烟蒂投资法</td><td>本杰明·格雷厄姆《证券分析》《聪明的投资者》</td></tr>
+            <tr><td><strong>后期</strong></td><td>与优质企业共成长</td><td>菲利普·费雪、查理·芒格的影响</td></tr>
+          </tbody>
+        </table>
+
+        <p>本书主要侧重对<strong>巴菲特投资体系</strong>的学习和分享。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 六、巴菲特对投资品的分类 ===== -->
+      <section id="section-6">
+        <h2>六、巴菲特对投资品的分类</h2>
+
+        <p>巴菲特将投资品分为三个大类，并进行了详细分析。</p>
+
+        <h3 id="section-6-1">第一类：类现金资产</h3>
+
+        <p><strong>包括</strong>：银行存款、货币基金、债券等</p>
+
+        <p><strong>表面特征</strong>：看起来很安全</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">巴菲特的警告</div>
+            <p>这些资产是<strong>最危险的资产</strong>——因为在"法币"时代，现金及现金等价物是少数"<strong>购买力确定会不断减少的资产</strong>"。</p>
+          </div>
+        </div>
+
+        <p><strong>结论</strong>：持有现金等价物，"<strong>输</strong>"就是确定的，差别只是输多与输少。</p>
+
+        <h3 id="section-6-2">第二类：不产生收益的资产</h3>
+
+        <p><strong>特征</strong>：实际不产生任何收益，但买家认为其他人未来会以更高的价格买走。</p>
+
+        <h4>巴菲特的黄金比喻（2011年致股东信）</h4>
+
+        <p>全球黄金储量约17万吨，熔化重铸的话，可以做成一个<strong>边长21米的立方体</strong>。</p>
+
+        <div class="pull-quote">
+          人们把这个立方体从某处地底挖出来，提炼熔化后，再挖个洞埋起来，然后派一堆人站在周围守着（这个洞指银行的地下金库）。如果让外星人看见，一定会百思不得其解：<strong>这帮地球人挖出来又埋进去，究竟是在玩什么游戏呢？</strong>
+          <cite>— 沃伦·巴菲特，2011年致股东信</cite>
+        </div>
+
+        <h4>黄金 vs 生产性资产（按2011年金价1750美元/盎司计算）</h4>
+
+        <p><strong>17万吨黄金市价</strong>：约9.6万亿美元</p>
+
+        <p><strong>用这笔钱可以买到</strong>：</p>
+        <ul>
+          <li>美国所有的农田</li>
+          <li>16家相当于埃克森美孚的公司</li>
+          <li>还能剩下1万亿美元左右的零花钱</li>
+        </ul>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>资产类型</th><th>价值</th><th>产出能力</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>17万吨黄金</strong></td><td>9.6万亿美元</td><td>规模不会膨胀，不能创造任何产品，甚至你深情地抚摸她，她也不会对你回眸一笑</td></tr>
+            <tr><td><strong>全美农田</strong></td><td>-</td><td>每年都会生产出大量的玉米、小麦、棉花和其他作物</td></tr>
+            <tr><td><strong>16家埃克森美孚</strong></td><td>-</td><td>每年分红就可达上千亿美元，不断增加拥有者的购买能力</td></tr>
+          </tbody>
+        </table>
+
+        <h4>此类资产的特点</h4>
+
+        <p><strong>包括</strong>：黄金、艺术品、收藏品、古董，<strong>以及我国股市绝大部分上市公司</strong></p>
+
+        <p><strong>共同特点</strong>：</p>
+        <ul>
+          <li>资产本身不产生回报或者回报少得可怜</li>
+          <li>唯一的期望就是有更多的人想要它，从而抬升价格让你退出</li>
+          <li><strong>透彻一点说，就是披着各色外衣的庞氏骗局</strong></li>
+        </ul>
+
+        <h4>庞氏骗局的本质</h4>
+
+        <p>依靠后来者的本金给前面的人兑现利润，一旦后来者的数量减少，价格就出现"闪崩"。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">核心问题</div>
+            <p>我们能否在假象被公众认识之前退出游戏？</p>
+          </div>
+        </div>
+
+        <p><strong>自我反思</strong>：</p>
+        <ul>
+          <li>你拥有什么能力，能够让你抢在众人之前进入，并在崩塌之前退出呢？</li>
+          <li>如果答案是"不知道"，那就是注定给前面的人当垫脚石的命</li>
+        </ul>
+
+        <h3 id="section-6-3">第三类：有生产力的资产</h3>
+
+        <p><strong>包括</strong>：农地、公司股票等</p>
+
+        <p><strong>核心特征</strong>：能在通胀时期让产出保持自身的购买力价值</p>
+
+        <h4>抗通胀的逻辑</h4>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">第1步</span>
+            <h4>通胀的表现</h4>
+            <p>通胀的表现是产品和服务涨价</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第2步</span>
+            <h4>企业的角色</h4>
+            <p>这些产品和服务主要是由企业提供的</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第3步</span>
+            <h4>利润的提升</h4>
+            <p>产品或服务涨价会提升企业的利润水平</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第4步</span>
+            <h4>抵消通胀</h4>
+            <p>从而抵消通胀造成的损害</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>投资这类资产，<strong>长期收益将轻松超越无生产力资产和类现金资产</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 总结 ===== -->
+      <section id="section-7">
+        <h2>总结</h2>
+
+        <h3>投资的三个层次</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>层次</th><th>策略</th><th>适合人群</th><th>预期收益</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>入门级</strong></td><td>定投沪深300指数基金</td><td>所有普通投资者</td><td>≥名义GDP增长率</td></tr>
+            <tr><td><strong>进阶级</strong></td><td>资产配置（斯文森模型）</td><td>有一定投资知识者</td><td>市场平均收益+α</td></tr>
+            <tr><td><strong>高级</strong></td><td>自建优质股票组合（巴菲特模型）</td><td>深度学习投资者</td><td>显著超越市场平均</td></tr>
+          </tbody>
+        </table>
+
+        <h3>关键要点</h3>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 1</span>
+            <h4>先赢</h4>
+            <p>通过指数基金确保获取市场平均收益</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 2</span>
+            <h4>再赢</h4>
+            <p>通过学习投资逐步提升收益率</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 3</span>
+            <h4>远离</h4>
+            <p>不产生收益的资产（庞氏骗局）</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 4</span>
+            <h4>选择</h4>
+            <p>有生产力的资产（优质企业股票）</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">✅ 5</span>
+            <h4>理解</h4>
+            <p>即使1%的收益率提升，在复利作用下也会产生巨大差异</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    const relativePath = 'books/' + BOOK_FOLDER + '/第1篇/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+  </script>
+
+</body>
+</html>

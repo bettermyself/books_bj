@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>第1章 什么是投资 · 价值投资实战手册</title>
+  <title>第6章 普通投资者的道路 · 价值投资实战手册</title>
   <link rel="stylesheet" href="../../../assets/style.css" />
   <style>
     html { font-size: 17.6px; }
@@ -71,6 +71,11 @@
     .sidebar-nav .sub {
       font-size: .8rem;
       padding-left: 1.4rem;
+      color: var(--text3);
+    }
+    .sidebar-nav .sub2 {
+      font-size: .78rem;
+      padding-left: 2.2rem;
       color: var(--text3);
     }
 
@@ -221,6 +226,12 @@
       padding-left: .85rem;
       border-left: 3px solid var(--gold);
     }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--text);
+      margin: 1.5rem 0 .75rem;
+      font-weight: 700;
+    }
     .chapter-article p {
       font-size: .95rem;
       color: var(--text);
@@ -229,6 +240,15 @@
     }
     .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
     .chapter-article em { color: var(--text2); }
+
+    .chapter-article ul, .chapter-article ol {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    .chapter-article li { margin-bottom: .35rem; }
 
     .pull-quote {
       background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
@@ -379,6 +399,35 @@
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
 
+    .poem {
+      text-align: center;
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--text);
+      margin: 1.75rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      font-style: italic;
+    }
+    .poem::before {
+      content: '❝';
+      display: block;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: .75rem;
+      font-style: normal;
+      opacity: .5;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      font-style: normal;
+      letter-spacing: .04em;
+    }
+
     .section-divider {
       display: flex;
       align-items: center;
@@ -403,6 +452,32 @@
       color: var(--text3);
       font-size: .82rem;
       letter-spacing: .08em;
+    }
+
+    /* formula display */
+    .formula-block {
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--gold-dk);
+      margin: 1.25rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(201,168,76,.06);
+      border-radius: var(--radius);
+      border: 1px dashed rgba(201,168,76,.3);
+      letter-spacing: .03em;
+      line-height: 1.8;
+    }
+
+    /* matrix image */
+    .matrix-img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1.5rem auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
     }
   </style>
 </head>
@@ -438,12 +513,12 @@
         <li class="toc-chapter open">
           <span class="toc-chapter-title current-chapter">第1篇 如何面对股价波动</span>
           <ul class="toc-lectures">
-            <li><a href="第1章 什么是投资.html" class="active">第1章 什么是投资</a></li>
+            <li><a href="第1章 什么是投资.html">第1章 什么是投资</a></li>
             <li><a href="第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
             <li><a href="第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
             <li><a href="第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
             <li><a href="第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
-            <li><a href="第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="第6章 普通投资者的道路_优化版.html" class="active">第6章 普通投资者的道路</a></li>
             <li><a href="第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
             <li><a href="第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
           </ul>
@@ -452,213 +527,324 @@
 
       <div class="sidebar-label sidebar-label-sub">本讲目录</div>
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li><a href="#section-1">一、投资的本质定义</a></li>
-        <li><a href="#section-2">二、投资与消费的界限</a></li>
-        <li><a href="#section-3">三、股市：参与还是远离？</a></li>
-        <li><a href="#section-4">本章小结</a></li>
+        <li><a href="#section-0">核心问题</a></li>
+        <li><a href="#section-1">一、市值波动的源泉</a></li>
+        <li><a href="#section-1-1" class="sub">股价变化的核心公式</a></li>
+        <li><a href="#section-1-2" class="sub">总量视角：公司市值公式</a></li>
+        <li><a href="#section-1-3" class="sub">市值变化九宫格矩阵</a></li>
+        <li><a href="#section-1-4" class="sub">九宫格分析：钱从哪里来？</a></li>
+        <li><a href="#section-2">二、投资者画像：你属于哪种？</a></li>
+        <li><a href="#section-2-1" class="sub">类型一：花钱打发时间</a></li>
+        <li><a href="#section-2-2" class="sub">类型二：赚市盈率变化的钱</a></li>
+        <li><a href="#section-2-2-a" class="sub2">A型：低估值回归策略</a></li>
+        <li><a href="#section-2-2-b" class="sub2">B型：预测市盈率提升策略</a></li>
+        <li><a href="#section-2-3" class="sub">类型三：赚净利润变化的钱</a></li>
+        <li><a href="#section-2-3-c" class="sub2">C型：伴随企业成长策略</a></li>
+        <li><a href="#section-2-3-d" class="sub2">D型：重组或逆转企业投资者</a></li>
+        <li><a href="#section-3">三、投资类型评估与选择</a></li>
+        <li><a href="#section-3-1" class="sub">各类型对比分析</a></li>
+        <li><a href="#section-3-2" class="sub">成功者的主要分布</a></li>
+        <li><a href="#section-3-3" class="sub">如何选择适合自己的道路？</a></li>
       </ul>
     </aside>
 
     <article class="chapter-article">
 
       <header class="article-header">
-        <div class="article-eyebrow">价值投资实战手册 · 第1篇 如何面对股价波动 · 第1章</div>
-        <h1 class="article-title">什么是投资</h1>
+        <div class="article-eyebrow">价值投资实战手册 · 第1篇 如何面对股价波动 · 第6章</div>
+        <h1 class="article-title">普通投资者的道路</h1>
         <div class="article-meta">
           <span><strong>作者</strong>唐朝</span>
-          <span><strong>主题</strong>投资本质 · 消费与投资 · 股市认知</span>
+          <span><strong>主题</strong>市值波动 · 投资者画像 · 市盈率 · 净利润 · 投资类型评估</span>
         </div>
       </header>
 
-      <div class="pull-quote large">
-        "投资是为了在未来更有能力消费而放弃今天的消费。"
-        <cite>— 沃伦·巴菲特</cite>
-      </div>
+      <!-- ===== 核心问题 ===== -->
+      <section id="section-0">
+        <h2>核心问题</h2>
 
-      <!-- 一、投资的本质定义 -->
-      <section id="section-1">
-        <h2>一、投资的本质定义</h2>
-
-        <h3>投资不是简单的数字游戏</h3>
-
-        <p>有些朋友说，让钱越来越多就是投资。但这种理解过于表面：</p>
-
-        <p>拿 1 万元人民币去换 2 万日元或 50 万津巴布韦币，钱的"数量"确实多了——但这并不意味着投资成功，反而可能是<strong>财富缩水</strong>。</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">核心洞察</div>
-            <p>钱只是一张纸，甚至在电子支付风行的今天，连纸都不是，就是一串电子符号。你爱上它，纯粹是因为它能换来你所需要的东西。</p>
-          </div>
-        </div>
-
-        <h3>投资的真正含义</h3>
+        <p>对于大部分无法对上市公司实施重大影响的投资者而言，无论投资的出发点是获取企业经营回报、上市公司融资增值，还是股价无序波动回报，最终这些回报都直接体现在<strong>股价的变化</strong>和<strong>股票的分红</strong>上。为便于观察，我们可以将股票分红因素叠加回股价变化中去。于是，我们需要直面一个问题：</p>
 
         <div class="pull-quote large">
-          "投资是为了在未来更有能力消费而放弃今天的消费。"
-          <cite>— 沃伦·巴菲特</cite>
+          影响股价变化的核心因素究竟是什么？
         </div>
-
-        <p><strong>真正的投资 = 让你所拥有的购买力增加。</strong></p>
-
-        <p>核心判断标准只有一个：<strong>今天的付出会在未来为你换来更多的购买力吗？</strong></p>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- 二、投资与消费的界限 -->
-      <section id="section-2">
-        <h2>二、投资与消费的界限</h2>
+      <!-- ===== 一、市值波动的源泉 ===== -->
+      <section id="section-1">
+        <h2>一、市值波动的源泉</h2>
 
-        <h3>同一行为的不同属性</h3>
+        <h3 id="section-1-1">股价变化的核心公式</h3>
 
-        <p>同样的行为，可能有些是投资，有些是消费。关键在于能否在未来换来<strong>更多的购买力</strong>。</p>
+        <p>计算股价变化的公式很简单：</p>
+
+        <div class="formula-block">
+          股价(P) = 市盈率(PE) × 每股盈利(EPS)
+        </div>
+
+        <p>这是从"市盈率(PE) = 股价(P) ÷ 每股盈利(EPS)"转换而来的。虽然从计算意义上说只是一个永远也不会错的套套逻辑（Tautology，同义反复），但它提供了一个重要的思考角度。</p>
+
+        <h3 id="section-1-2">总量视角：公司市值公式</h3>
+
+        <p>为了忽略公司股本送转配等因素的干扰，将上面的公式前后同时乘以总股本，变成总量角度：</p>
+
+        <div class="formula-block">
+          公司市值 = 市盈率 × 净利润
+        </div>
+
+        <p>由此可知，<strong>公司市值的变化有两个源头</strong>：</p>
+
+        <ul>
+          <li><strong>市盈率的变化</strong></li>
+          <li><strong>净利润的变化</strong></li>
+        </ul>
+
+        <h3 id="section-1-3">市值变化九宫格矩阵</h3>
+
+        <p>将市盈率和净利润的变化进行组合，可得到以下矩阵：</p>
+
+        <img class="matrix-img" src="assets/image-20260729133300060.png" alt="市值变化九宫格矩阵：市盈率与净利润变化的九种组合" loading="lazy" />
+
+        <h3 id="section-1-4">九宫格分析：钱从哪里来？</h3>
+
+        <p>这张图可以帮助我们思考两个核心问题：</p>
+        <ul>
+          <li><strong>钱从哪里来？</strong></li>
+          <li><strong>我有能力获取哪部分利润？</strong></li>
+        </ul>
+
+        <h4>盈利区域分析</h4>
+
+        <p><strong>💰 来钱之处：①②④区域</strong></p>
 
         <table class="article-table">
           <thead>
-            <tr>
-              <th>场景</th>
-              <th>行为描述</th>
-              <th>属性判断</th>
-              <th>原因分析</th>
-            </tr>
+            <tr><th>区域</th><th>净利润</th><th>市盈率</th><th>投资结果</th><th>吸引力</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>场景一</td>
-              <td>买车跑滴滴</td>
-              <td>✅ 投资</td>
-              <td>通过营运获取持续收入，增加购买力</td>
-            </tr>
-            <tr>
-              <td>场景二</td>
-              <td>买劳斯莱斯幻影展示实力</td>
-              <td>✅ 投资</td>
-              <td>增强合作伙伴信心，促成更大交易</td>
-            </tr>
-            <tr>
-              <td>场景三</td>
-              <td>买车纯粹为了开出去玩</td>
-              <td>❌ 消费</td>
-              <td>支付的购买力再也回不来</td>
-            </tr>
+            <tr><td><strong>① 区域</strong></td><td>↑ 上升</td><td>↑ 上升</td><td><strong>戴维斯双击</strong></td><td>⭐⭐⭐⭐⭐ 最过瘾</td></tr>
+            <tr><td><strong>② 区域</strong></td><td>↑ 上升</td><td>→ 不变</td><td>赚净利润的钱</td><td>⭐⭐⭐⭐</td></tr>
+            <tr><td><strong>④ 区域</strong></td><td>→ 不变</td><td>↑ 上升</td><td>赚市盈率的钱</td><td>⭐⭐⭐</td></tr>
           </tbody>
         </table>
 
-        <p>再看<strong>养儿育女</strong>：抱着"养儿防老"心态的父母，在亲情的背后，也做着<strong>今日投下一口粥，期望未来换回一块肉</strong>的"生意"。</p>
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">戴维斯双击</div>
+            <p>净利润和市盈率双双提高，是投资中最理想的状态。</p>
+          </div>
+        </div>
 
-        <h3>投资 ≠ 必然获利</h3>
+        <h4>亏损区域分析</h4>
+
+        <p><strong>⚠️ 亏损区域：⑥⑧⑨区域（"送财童子"）</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>区域</th><th>净利润</th><th>市盈率</th><th>投资结果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>⑥ 区域</strong></td><td>→ 不变</td><td>↓ 下降</td><td>纯估值损失</td></tr>
+            <tr><td><strong>⑧ 区域</strong></td><td>↓ 下降</td><td>→ 不变</td><td>纯估值损失</td></tr>
+            <tr><td><strong>⑨ 区域</strong></td><td>↓ 下降</td><td>↓ 下降</td><td><strong>戴维斯双杀</strong>（最惨）</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 二、投资者画像：你属于哪种？ ===== -->
+      <section id="section-2">
+        <h2>二、投资者画像：你属于哪种？</h2>
+
+        <p>在九宫格矩阵中，你准备脚踏何处安身立命？根据观察，市场参与者主要有三种选择类型。</p>
+
+        <h3 id="section-2-1">类型一：来股市花钱打发时间的</h3>
+
+        <p><strong>特征：</strong></p>
+        <ul>
+          <li>没有自己的投资体系</li>
+          <li>不知道要在哪里安身立命</li>
+          <li>将股市投资视为赌场</li>
+          <li>主要依赖别人分享代码或跟着感觉走</li>
+          <li>输赢听天由命</li>
+        </ul>
+
+        <p><strong>信息来源：</strong>亲朋好友、传说中的高手、网络神人、电视股评家、券商员工、媒体写手等</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">结果</div>
+            <p>钱确实花了，时间也确实打发了。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-2">类型二：赚取市盈率变化的钱</h3>
+
+        <p><strong>核心特点：</strong></p>
+        <ul>
+          <li>持股期限短（以月或日为单位）</li>
+          <li>一般不预期企业利润会发生大的变动</li>
+          <li>主要意图站在<strong>位置④</strong>，获取市场情绪变化导致的市盈率升高推动股价上升的利润</li>
+        </ul>
+
+        <h4 id="section-2-2-a">A型：低估值回归策略</h4>
+
+        <p><strong>投资逻辑：</strong></p>
+        <ul>
+          <li>选择市盈率<strong>低于甚至远低于</strong>市场平均水平或该公司历史平均水平的公司</li>
+          <li>意图获取市盈率回归平均水平带来的股价上涨</li>
+        </ul>
+
+        <p><strong>代表流派：</strong></p>
+        <ul>
+          <li>师从本杰明·格雷厄姆、沃尔特·施洛斯、约翰·邓普顿</li>
+          <li>网格交易派</li>
+          <li>以PE百分位来决定投资仓位的投资者</li>
+        </ul>
+
+        <p><strong>主要特点：</strong></p>
+        <ul>
+          <li>依赖低估、分散和常识</li>
+          <li>不追求局部得失</li>
+          <li>乐意承受概率损失</li>
+          <li>获取总体上的回归利润</li>
+        </ul>
+
+        <h4 id="section-2-2-b">B型：预测市盈率提升策略</h4>
+
+        <p><strong>投资逻辑：</strong></p>
+        <ul>
+          <li>不在意当前市盈率高低</li>
+          <li>依赖某种判断，认为未来市盈率会提升</li>
+          <li>意图获取市盈率升高带来的股价变化</li>
+        </ul>
+
+        <p><strong>代表流派：</strong></p>
+        <ul>
+          <li>技术图表分析派</li>
+          <li>预测和追逐基本面热点的"赛道派"</li>
+          <li>"新闻联播派"</li>
+          <li>宏观牛熊派</li>
+        </ul>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">提示</div>
+            <p>这是网络上最容易受到追捧、传奇故事最多、最容易吸引粉丝的类型。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-3">类型三：赚取企业净利润变化的钱</h3>
+
+        <h4 id="section-2-3-c">C型：伴随企业成长策略</h4>
+
+        <p><strong>投资逻辑：</strong></p>
+        <ul>
+          <li>以<strong>伴随企业成长</strong>为核心</li>
+          <li>以收获市盈率变化为意外</li>
+          <li>目标是占领<strong>①和②区间</strong></li>
+        </ul>
+
+        <p><strong>细分类型：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类型</th><th>特点</th><th>关注重点</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>价值投资者</strong></td><td>选择低市盈率，更强调安全边际</td><td>估值安全性</td></tr>
+            <tr><td><strong>成长投资者</strong></td><td>更注重企业未来成长，在市盈率方面放得比较松</td><td>企业成长性</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>核心特点：</strong></p>
+        <ul>
+          <li>注重对<strong>行业前景</strong>的深度研究</li>
+          <li>注重对<strong>企业财报</strong>的深度研究</li>
+          <li>注重对<strong>同行竞争</strong>的深度研究</li>
+        </ul>
+
+        <h4 id="section-2-3-d">D型：重组或逆转企业投资者</h4>
+
+        <p><strong>投资逻辑：</strong></p>
+        <ul>
+          <li>以企业利润水平即将发生<strong>根本性逆转</strong>为前提实施投资</li>
+          <li>专业预判和灵通消息需兼而有之</li>
+        </ul>
+
+        <p><strong>两种路径：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">路径 1</span>
+            <h4>专业预判路径</h4>
+            <p>对企业重组或行业逆转的可能性进行研究，通过广泛埋伏于具备重组或逆转可能的目标企业中，守株待兔等待重组发生或宏观环境变化，获取企业净利润大幅变化带来的利润。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">路径 2</span>
+            <h4>灵通消息路径</h4>
+            <p>每一桩重组案里面，几乎不可缺少内部人吃肉的机会。⚠️ 关键问题：是否有资源交换到这样的消息，以及是否有能力承担交换的后果。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- ===== 三、投资类型评估与选择 ===== -->
+      <section id="section-3">
+        <h2>三、投资类型评估与选择</h2>
+
+        <h3 id="section-3-1">各类型对比分析</h3>
+
+        <p><strong>获利概率排序</strong>（从大到小）：</p>
+
+        <div class="formula-block">
+          A型 &gt; C型 &gt; D型 &gt; B型 &gt; 类型一
+        </div>
+
+        <p><strong>学习难度排序</strong>（从易到难）：</p>
+
+        <div class="formula-block">
+          类型一 &lt; D型 &lt; A型 &lt; C型 &lt; B型
+        </div>
+
+        <h3 id="section-3-2">成功者的主要分布</h3>
+
+        <p>无论是从全球以及中国的历史经验上看，还是从背后的逻辑支撑上推理，<strong>成功者主要集中在A型和C型</strong>。</p>
+
+        <h3 id="section-3-3">如何选择适合自己的道路？</h3>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">建议每位朋友都好好花点时间想透这个问题</div>
+            <p>思考清楚自己的定位，比追逐几个涨停板代码重要得多。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>思考维度</th><th>关键问题</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>兴趣爱好</strong></td><td>打破砂锅问到底，理清自己的爱好和优劣势</td></tr>
+            <tr><td><strong>努力方向</strong></td><td>掂量自己乐意在哪方面付出努力</td></tr>
+            <tr><td><strong>竞争优势</strong></td><td>哪方面可能取得对其他人的局部优势</td></tr>
+            <tr><td><strong>生存之道</strong></td><td>哪种方法可以支撑自己在这个市场生存</td></tr>
+          </tbody>
+        </table>
 
         <div class="callout warn">
           <div class="callout-icon">⚠️</div>
           <div class="callout-body">
             <div class="callout-title">重要提醒</div>
-            <p>投资是"意图"获取更多购买力，但这个"意图"是否能变成现实，要受多种因素的限制。买车跑滴滴不一定能获利，买辆幻影做生意不一定能赚到钱，养儿不一定能防老。</p>
-          </div>
-        </div>
-
-        <p><strong>所谓"心想事成"，只是一种祝福，一个梦想里的童话世界。</strong></p>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- 三、股市：参与还是远离？ -->
-      <section id="section-3">
-        <h2>三、股市：参与还是远离？</h2>
-
-        <h3>大众入市的典型路径</h3>
-
-        <p>绝大部分人来到股市，自然是"意图"用现有的购买力去换取未来更多的购买力，但这个"意图"是否能够实现，同样受多种因素的限制。</p>
-
-        <table class="article-table">
-          <thead>
-            <tr>
-              <th>阶段</th>
-              <th>特征描述</th>
-              <th>心理状态</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>初入市场</td>
-              <td>看见股市火热，听见周围人都在谈赚钱经</td>
-              <td>一时心热或好奇，懵懂入市</td>
-            </tr>
-            <tr>
-              <td>初尝甜头</td>
-              <td>见什么涨得好就追什么，"鸡犬升天"都能赚钱</td>
-              <td>误以为财富来自屏幕上跳动的数字</td>
-            </tr>
-            <tr>
-              <td>梦醒时分</td>
-              <td>缺乏新资金推高时，下跌无可避免</td>
-              <td>财富烟消云散，怀疑人生</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="callout info">
-          <div class="callout-icon">📝</div>
-          <div class="callout-body">
-            <div class="callout-title">财主儿子的寓言</div>
-            <p>就像财主儿子经过认真观察和思考后，终于明白大米原来产自米缸一样——这种认知是完全错误的。</p>
-          </div>
-        </div>
-
-        <h3>股市的两面性认知</h3>
-
-        <p>在不少人看来，股市的标签包括：骗局、赌场、碎钞机、销金窟。因此得出结论：<strong>普通人应该"珍爱生命，远离股市"。</strong></p>
-
-        <h3>本书要解答的核心问题</h3>
-
-        <div class="remedy-grid cols-3">
-          <div class="remedy-card">
-            <span class="remedy-num">问题一</span>
-            <h4>这种认识对不对？</h4>
-            <p>股市真的是骗局和赌场吗？远离股市就是明智之举吗？</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">问题二</span>
-            <h4>普通人该不该参与？</h4>
-            <p>股市究竟是有毒的风险陷阱，还是普通人实现财富增长的合法途径？</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">问题三</span>
-            <h4>怎样才能确保财富增长？</h4>
-            <p>如果参与，如何避免在"赌场"里虚度光阴或赔掉血汗钱？</p>
-          </div>
-        </div>
-
-        <p><strong>这本书要聊的就是这个话题。</strong></p>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- 本章小结 -->
-      <section id="section-4">
-        <h2>本章小结</h2>
-
-        <div class="remedy-grid cols-2">
-          <div class="remedy-card">
-            <span class="remedy-num">要点一</span>
-            <h4>投资的本质</h4>
-            <p>为了在未来获取更多的购买力而放弃今天的消费。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">要点二</span>
-            <h4>关键判断标准</h4>
-            <p>今天的付出能否在未来换来更多的购买力？</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">要点三</span>
-            <h4>投资 ≠ 必然成功</h4>
-            <p>投资是意图，结果受多种因素影响，心想未必事成。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">要点四</span>
-            <h4>股市的真相</h4>
-            <p>既非"提款机"也非"碎钞机"，需要正确的认知和方法。</p>
+            <p>要规避做"送财童子"的命运，你必须在这个问题上花时间。相信我，这问题比几个涨停板的代码重要一百倍。本章作者个人走的是<strong>C路线</strong>（伴随企业成长策略）。</p>
           </div>
         </div>
       </section>
