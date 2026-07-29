@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第3章 投资是一件持续终身的事 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--text);
+      margin: 1.5rem 0 .75rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      text-align: center;
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--text);
+      margin: 1.75rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      font-style: italic;
+    }
+    .poem::before {
+      content: '❝';
+      display: block;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: .75rem;
+      font-style: normal;
+      opacity: .5;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      font-style: normal;
+      letter-spacing: .04em;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* footnote */
+    .fn {
+      font-size: .82rem;
+      color: var(--text3);
+      margin-top: -.25rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="第3章 投资是一件持续终身的事.html" class="active">第3章 投资是一件持续终身的事</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-0">引言</a></li>
+        <li><a href="#section-1">一、财富的两种来源</a></li>
+        <li><a href="#section-2">二、不同的选择，不同的结局</a></li>
+        <li><a href="#section-3">三、资产选择</a></li>
+        <li><a href="#section-4">四、股票是最好的资产</a></li>
+        <li><a href="#section-5">五、一定要买在低点吗？</a></li>
+        <li><a href="#section-6">六、留给我们的两个问题</a></li>
+        <li><a href="#section-7">本章核心要点</a></li>
+        <li><a href="#section-8">思考与启示</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 · 第1篇 如何面对股价波动 · 第3章</div>
+        <h1 class="article-title">投资是一件持续终身的事</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>主题</strong>终身投资 · 复利效应 · 资产配置 · 股票收益</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        "从拥有第一笔消费剩余时，投资就开始了，而且365天×24小时从不休息，一直持续到离开人世才算罢手，区别只是投资了不同类型的资产。"
+      </div>
+
+      <!-- 引言 -->
+      <section id="section-0">
+        <h2>引言</h2>
+
+        <p>珍爱生命，远离股市，做起来似乎很简单。然而，<strong>投资是每个人都无法躲避的游戏</strong>。退出股市，并不是不投资，而是将自己用智力、体力或者运气换来的财富，投资了股票之外的其他产品，比如活期存款、定期存款、货币基金、各种债权、房地产、贵金属、金融衍生品、保险产品、外汇等。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、财富的两种来源 -->
+      <section id="section-1">
+        <h2>一、财富的两种来源</h2>
+
+        <h3>1.1 睡前收入 vs 睡后收入</h3>
+
+        <p>人的财富来源，套用一句网络流行语，可以分为"睡前收入"和"睡后收入"两种：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>收入类型</th>
+              <th>定义</th>
+              <th>特点</th>
+              <th>示例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>睡前收入</strong></td>
+              <td>干活就有、睡着了就没有</td>
+              <td>用自己的体力或智力换钱</td>
+              <td>工资、劳务报酬、咨询费</td>
+            </tr>
+            <tr>
+              <td><strong>睡后收入</strong></td>
+              <td>被动性收入</td>
+              <td>哪怕睡着了，也在自动增值</td>
+              <td>股息、房租、利息、版税</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心观点</div>
+            <p>两种收入形态中，"睡后收入"占比越高，你就有越多可供自由支配的时间，做选择时受到的制约也就越少。收入来源若全部由"睡后收入"构成，你就进入了<strong>财务自由状态</strong>。</p>
+          </div>
+        </div>
+
+        <h3>1.2 财富积累的必经之路</h3>
+
+        <p>一个人，只要不是含着金钥匙出生的，财富最初总是靠"睡前收入"来积累。这些财富在满足消费需求后，<strong>必须通过配置在能带来"睡后收入"的资产上，才能实现保值增值</strong>。</p>
+
+        <h4>认知升级路径</h4>
+
+        <div class="poem">
+          活期存款（0.35%）&nbsp;→&nbsp;定期存款（1-2%）&nbsp;→&nbsp;货币基金（2-3%）&nbsp;→&nbsp;理财产品（3-5%）&nbsp;→&nbsp;？
+        </div>
+
+        <p>受限于认知水平，我们最先接触的"睡后收入"，可能都是银行存款——还是年收益率"高"达0.35%的活期存款。其后由于我们多学习了一点点，开始接触定期存款、通知存款、余额宝、零钱通、理财产品……收益率开始从0.35%提升到3%～5%。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警示</div>
+            <p>这个收益率依然远在社会平均财富增长率之下，依然属于将自己辛辛苦苦贡献体力或脑力换来的财富，<strong>无偿地送给别人一部分</strong>。</p>
+          </div>
+        </div>
+
+        <h3>1.3 通货膨胀：合法的窃贼</h3>
+
+        <p>将自己口袋里的财富掏出来送给别人，当然不是难事。甚至由于"合法窃贼"的存在，你连掏的动作也可以省掉——<strong>通货膨胀正日夜不停地将你用汗水或者脑汁换来的财富，一点点偷走</strong>。</p>
+
+        <h4>中国货币扩张数据</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>广义货币总量（M2）</th>
+              <th>增长倍数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1990年末</td>
+              <td>1.53万亿元</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>2020年末</td>
+              <td>218.7万亿元</td>
+              <td><strong>143倍</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这种货币购买力的缩水程度，甚至不需要任何数据来解释说明，生活在其中的普通人都能明显感受到。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>这是"法币"①时代注定的特点：<strong>现金是100%确定亏损的一种资产</strong>。</p>
+          </div>
+        </div>
+
+        <p>如果不想将财富拱手送给别人，或者不想被通货膨胀悄悄偷走，那么，<strong>投资——也就是赚取"睡前收入"的同时，将消费剩余配置成可以产生"睡后收入"的资产——就是每个人都无法躲避、必须持续一生的事</strong>。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">注释</div>
+            <p>① 法币：指法定货币，即本身无价值或价值微不足道，由国家法律规定强制流通，发挥货币职能的货币。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、不同的选择，不同的结局 -->
+      <section id="section-2">
+        <h2>二、不同的选择，不同的结局</h2>
+
+        <p>投资其实就是<strong>将100%确定亏损的现金资产，换成其他具备盈利可能的资产</strong>，就这么简单。然而，选择换成哪种资产，长期来看结果会有巨大的差异，不同的选择可能带来天差地别的人生幸福感和财富值。</p>
+
+        <h3>2.1 复利的力量：50年投资回报对比</h3>
+
+        <p>假设人的一生有50年有效投资时间，1个单位的本金，在不同收益率下的终值：</p>
+
+        <h4>表1：投资回报对比（50年期）</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年化回报率</th>
+              <th>3%</th>
+              <th>5%</th>
+              <th>7%</th>
+              <th>10%</th>
+              <th>12%</th>
+              <th>15%</th>
+              <th>20%</th>
+              <th>25%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>终值</strong></td>
+              <td>4.38</td>
+              <td>11.47</td>
+              <td>29.46</td>
+              <td>117.39</td>
+              <td>289</td>
+              <td>1083.66</td>
+              <td>9100.44</td>
+              <td>70064.92</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">启示</div>
+            <p>收益率的微小差异，经过时间的复利，会产生惊人的差距！</p>
+          </div>
+        </div>
+
+        <h3>2.2 真实案例模拟：三个年轻人的不同命运</h3>
+
+        <h4>假设条件</h4>
+
+        <ul style="font-size:.95rem;color:var(--text);line-height:2;margin:1rem 0 1rem 1.5rem;">
+          <li>甲、乙、丙三人都出生于2000年</li>
+          <li>2022年22岁时都拥有1万元投资本金</li>
+          <li>从22岁到60岁，每年从工资收入中节省出3万元做投资</li>
+          <li>60岁退休后不再增加投入，开始每年抽取100万元用于医疗、养老和消费</li>
+          <li>假设三人均在2080年80岁时离开人世</li>
+        </ul>
+
+        <h4>投资选择</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者</th>
+              <th>投资标的</th>
+              <th>年化收益率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>甲</td>
+              <td>货币基金 / 保本理财</td>
+              <td>3%</td>
+            </tr>
+            <tr>
+              <td>乙</td>
+              <td>股市投资</td>
+              <td>10%</td>
+            </tr>
+            <tr>
+              <td>丙</td>
+              <td>股市投资</td>
+              <td>15%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>表2：甲、乙、丙投资回报差异</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年龄节点</th>
+              <th>甲（3%）</th>
+              <th>乙（10%）</th>
+              <th>丙（15%）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>22岁起点</strong></td>
+              <td>1万元</td>
+              <td>1万元</td>
+              <td>1万元</td>
+            </tr>
+            <tr>
+              <td><strong>22～60岁投入</strong></td>
+              <td>年增加3万元</td>
+              <td>年增加3万元</td>
+              <td>年增加3万元</td>
+            </tr>
+            <tr>
+              <td><strong>60岁财富值</strong></td>
+              <td>207.6万元</td>
+              <td>1126.5万元</td>
+              <td>4230.4万元</td>
+            </tr>
+            <tr>
+              <td><strong>63岁财富值</strong></td>
+              <td>-88.9万元，<strong>破产</strong></td>
+              <td>1135.3万元</td>
+              <td>6034.6万元</td>
+            </tr>
+            <tr>
+              <td><strong>80岁财富值</strong></td>
+              <td>穷困潦倒，老无所依</td>
+              <td>1278.5万元</td>
+              <td><strong>57456.2万元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">残酷现实</div>
+            <p>甲的数据只能让我们眼前浮现出捡瓶子度日的凄凉晚景。他不可能负担年开支100万元的生活，只能在省吃俭用中艰难度日。而乙和丙不仅可以安享晚年，还能在离开人世时，给亲人留下一笔财富。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>这一切差异，<strong>不在于他们工作时赚多少，而在于他们选择将工作期间靠智力和体力换来的财富配置在哪儿</strong>。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">注</div>
+            <p>千万别觉得100万元很多，以每年3%的通胀率推测，2060年的100万元实际购买力也就相当于今天的30万元左右。</p>
+          </div>
+        </div>
+
+        <h3>2.3 时间的价值：投资期限比本金更重要</h3>
+
+        <p>投资持续时间这一要素对于财富终值的影响，<strong>甚至比本金和收益率更大</strong>。</p>
+
+        <h4>时间与收益率的对比</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情景</th>
+              <th>起始本金</th>
+              <th>年化收益率</th>
+              <th>投资时间</th>
+              <th>最终财富值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>情景A</td>
+              <td>10万元</td>
+              <td>25%</td>
+              <td>20年</td>
+              <td>不到900万元</td>
+            </tr>
+            <tr>
+              <td>情景B</td>
+              <td>10万元</td>
+              <td>15%</td>
+              <td>50年</td>
+              <td><strong>超过1亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>投资是需要持续一辈子的事情。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">必须抛弃的错误思想</div>
+            <p>"进入股市是开始投资，退出股市是停止投资"</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">✅</div>
+          <div class="callout-body">
+            <div class="callout-title">正确认知</div>
+            <p>从拥有第一笔消费剩余时，投资就开始了，而且365天×24小时从不休息，一直持续到离开人世才算罢手，<strong>区别只是投资了不同类型的资产</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、资产选择 -->
+      <section id="section-3">
+        <h2>三、资产选择</h2>
+
+        <h3>3.1 美林投资时钟：一个美好但失败的理论</h3>
+
+        <p>我们应该选择什么资产来投资呢？最理想的状况当然是今后几年什么类别的资产会涨就买什么，或者什么类别的资产会跌就避开什么。</p>
+
+        <p>类似的研究中，有个<strong>美林投资时钟</strong>比较权威，常被做大类资产配置的投资者奉为圭臬。</p>
+
+        <img src="assets/image-20260729104222214-1785302864551-1.png" alt="美林投资时钟" style="max-width:100%;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);" />
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">冷笑话</div>
+            <p>然而很可惜，该理论的创始机构美林证券在2008年的次贷危机中损失惨重，最终不得不卖身（被人收购）求生存。这仿佛是个冷笑话，提醒我们<strong>美林投资时钟可能是一口走不准的破钟，连自己的投资也指导不了</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、股票是最好的资产 -->
+      <section id="section-4">
+        <h2>四、股票是最好的资产</h2>
+
+        <p>实际上，<strong>有大量专业和系统的研究证明了在所有投资资产中，长期收益率最高的就是股权</strong>。这类研究汗牛充栋，其中比较权威也比较知名的研究成果是：</p>
+
+        <ul style="font-size:.95rem;color:var(--text);line-height:2;margin:1rem 0 1rem 1.5rem;">
+          <li>沃顿商学院金融学教授杰里米·J. 西格尔的经典著作《股市长线法宝》</li>
+          <li>伦敦商学院的研究成果《投资收益百年史》</li>
+        </ul>
+
+        <h3>4.1 西格尔教授的研究：美国210年数据</h3>
+
+        <p>在《股市长线法宝》里，西格尔教授研究了美国1802—2012年的全部数据后得出结论：</p>
+
+        <h4>表3：1802—2012年美国各项资产投资收益比较</h4>
+        <p class="fn">1美元投入，210年后的终值</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资标的</th>
+              <th>组合终值（美元）</th>
+              <th>年化收益率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>股票</strong></td>
+              <td><strong>13,480,000</strong></td>
+              <td><strong>8.09%</strong></td>
+            </tr>
+            <tr>
+              <td>长期国债</td>
+              <td>33,922</td>
+              <td>5.07%</td>
+            </tr>
+            <tr>
+              <td>短期国债</td>
+              <td>5,379</td>
+              <td>4.16%</td>
+            </tr>
+            <tr>
+              <td>黄金</td>
+              <td>86.4</td>
+              <td>2.14%</td>
+            </tr>
+            <tr>
+              <td>物价指数</td>
+              <td>19.11</td>
+              <td>1.41%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>表4：1802—2012年美国各项资产投资收益比较（扣除通货膨胀后）</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资标的</th>
+              <th>组合终值（美元）</th>
+              <th>年化收益率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>股票</strong></td>
+              <td><strong>704,997</strong></td>
+              <td><strong>6.59%</strong></td>
+            </tr>
+            <tr>
+              <td>长期国债</td>
+              <td>1,778</td>
+              <td>3.61%</td>
+            </tr>
+            <tr>
+              <td>短期国债</td>
+              <td>281</td>
+              <td>2.71%</td>
+            </tr>
+            <tr>
+              <td>黄金</td>
+              <td>4.52</td>
+              <td>0.72%</td>
+            </tr>
+            <tr>
+              <td>美元现金</td>
+              <td>0.05</td>
+              <td>-1.41%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">数据说明</div>
+            <p>这个超过200年的样本，涉及多次经济危机、货币危机、金融危机，经历多次局部战争和两次世界大战。这期间<strong>现金被通货膨胀吞噬了95%的购买力</strong>，而<strong>股票的收益率则远远高于长短期债券及黄金，终值的差异大到令人惊讶</strong>。</p>
+          </div>
+        </div>
+
+        <h3>4.2 伦敦商学院的研究：全球19国百年数据</h3>
+
+        <p>这是不是美国的特例？会不会是因为美国的经济或政治制度导致股市存在某种"幸存者偏差"呢？</p>
+
+        <p>伦敦商学院埃尔罗伊·迪姆森教授、保罗·马什教授和伦敦股票价格数据中心主任迈克·斯汤腾发表了他们的研究成果《投资收益百年史》。</p>
+
+        <h4>研究特点</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>国家范围</strong></td>
+              <td>五大洲19个主要国家</td>
+            </tr>
+            <tr>
+              <td><strong>时间跨度</strong></td>
+              <td>1900—2012年（112年）</td>
+            </tr>
+            <tr>
+              <td><strong>重大事件</strong></td>
+              <td>日俄战争、一战、经济大萧条、二战、朝鲜战争、越南战争、古巴导弹危机、美元危机、滞胀危机、石油危机、冷战、网络股泡沫等</td>
+            </tr>
+            <tr>
+              <td><strong>方法论</strong></td>
+              <td><strong>考虑了"幸存者偏差"</strong>，剔除指数不断选择剔除失败者、纳入胜利者导致的实际收益高估</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">严谨性示例：对1900—1954年英国股市收益率的研究</div>
+            <p>过往权威结论：年化9.7%收益率 → 伦敦商学院剔除"幸存者偏差"后：年化6.2%收益率 → <strong>降幅超过1/3，更接近真实情况</strong></p>
+          </div>
+        </div>
+
+        <h4>研究结论</h4>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">结论一</span>
+            <h4>无一例外</h4>
+            <p>在所有主要国家，股票的长期收益率均远远超过长、短期国债投资。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">结论二</span>
+            <h4>整体相关性</h4>
+            <p>股票收益率低的国家，长期国债和短期国债收益率同样更低。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">结论三</span>
+            <h4>收益溢价</h4>
+            <p>平均来说，股票相对于长期国债的收益溢价为<strong>3.7%</strong>，相对于短期国债的收益溢价为<strong>4.5%</strong>。</p>
+          </div>
+        </div>
+
+        <h3>4.3 收益溢价的威力：复利的惊人差距</h3>
+
+        <p>绝大多数对于复利没有概念的朋友，估计很难想象这个收益溢价导致的终值差异究竟有多大。</p>
+
+        <h4>真实数据对比（100年投资期）</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>国家</th>
+              <th>1元投资股票</th>
+              <th>1元投资长期债券</th>
+              <th>1元投资短期债券</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>澳大利亚</strong>（收益差最大）</td>
+              <td><strong>777,249.7元</strong></td>
+              <td>252元</td>
+              <td>80.7元</td>
+            </tr>
+            <tr>
+              <td><strong>瑞士</strong>（收益差最小）</td>
+              <td><strong>1,136.7元</strong></td>
+              <td>73.2元</td>
+              <td>25.8元</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="fn">注：以上数据均未扣除通货膨胀因素。</p>
+
+        <h3>4.4 全球各大类资产回报对比</h3>
+
+        <p>还有许多对比股票和其他大类资产投资收益率的研究资料，总体而言结果都差不多。各种不同时间段、不同国家的数据都能证明<strong>"长期而言，股票投资收益率最高"</strong>。</p>
+
+        <h4>1964—2013年全球各大类资产年均回报</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>资产类别</th>
+              <th>年均回报率（约）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>股票</td>
+              <td>最高</td>
+            </tr>
+            <tr>
+              <td>房地产</td>
+              <td>中等偏上</td>
+            </tr>
+            <tr>
+              <td>债券</td>
+              <td>中等</td>
+            </tr>
+            <tr>
+              <td>黄金</td>
+              <td>中等偏下</td>
+            </tr>
+            <tr>
+              <td>现金</td>
+              <td>最低</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="fn">数据来源：BIS, Bloomberg, IMF, WB, 兴业证券研究所</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要前提</div>
+            <p>这些研究背后实际有个隐含前提，就是<strong>这个国家及这个资本市场会存在超过百年</strong>。那些短暂存在的市场，数据已经淹没在历史长河里。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资者的信念</div>
+            <p>资本市场能否长存，这属于纯信念的问题，无法给出证据。<strong>投资者是且只能是理性乐观派，以资本市场存续为前提思考</strong>。如果对资本市场的存在没有信心，那只能今朝有酒今朝醉，反正无论投什么都挡不住两手空空的结局。伴随我国资本市场日益开放，沪港通、深港通、沪伦通等多种途径也正在分散和优化投资者配置单一市场的潜在风险。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、一定要买在低点吗？ -->
+      <section id="section-5">
+        <h2>五、一定要买在低点吗？</h2>
+
+        <p>说股票收益率最高，是不是需要买到低点才能获取这样的回报呢？如果一进入市场就遇到大跌怎么办呢？</p>
+
+        <h3>5.1 史上最倒霉投资者的故事</h3>
+
+        <p>西格尔教授在其经典著作《股市长线法宝》开篇第2页给我们讲过一个倒霉鬼的故事。</p>
+
+        <h4>历史背景（1929年）</h4>
+
+        <p><strong>1929年6月</strong>，一位名叫萨缪尔·葛罗瑟的新闻记者采访了当时通用汽车公司的高级财务总监约翰·J. 拉斯科布。访谈内容是关于普通人如何通过股票积累财富的。</p>
+
+        <p><strong>1929年8月</strong>，葛罗瑟将拉斯科布的访谈刊登在杂志上，文章题目叫《人人都能发财》。</p>
+
+        <h4>拉斯科布的建议</h4>
+
+        <div class="pull-quote">
+          "投资者只需要每个月定投15美元到美国股市，未来的20年里，投资者的财富有望稳步增长至8万美元。这样一种年化24%的收益率是前所未有的。"
+        </div>
+
+        <h4>随后发生的灾难</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>事件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1929年9月3日</td>
+              <td>道琼斯指数创下381.17点历史新高</td>
+            </tr>
+            <tr>
+              <td>7周后</td>
+              <td><strong>美国股市崩盘</strong></td>
+            </tr>
+            <tr>
+              <td>34个月后</td>
+              <td>道琼斯指数只剩下41.22点，<strong>市值蒸发89%</strong></td>
+            </tr>
+            <tr>
+              <td>后续影响</td>
+              <td>数百万投资者的毕生积蓄化为乌有，成千上万的融资客破产，美国经济进入历史上最严重的大萧条</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>舆论反应</h4>
+
+        <ul style="font-size:.95rem;color:var(--text);line-height:2;margin:1rem 0 1rem 1.5rem;">
+          <li>拉斯科布的言论遭到了无情嘲讽和抨击</li>
+          <li>印第安纳州的议员亚瑟·罗宾逊公开表示，拉斯科布让普通民众在市场顶部买入股票，应该为股市崩盘承担责任</li>
+          <li>《福布斯》杂志专门刊文讽刺：某些人将股市视为财富积累的安全保障，而拉斯科布就是其中表现最恶劣的一个</li>
+        </ul>
+
+        <h3>5.2 冷冰冰的数字：真相令人震惊</h3>
+
+        <p>传统理论认为，拉斯科布的愚蠢建议体现了华尔街周期性泛滥的盲目狂热。但是，<strong>这种论断公平吗？</strong></p>
+
+        <h4>西格尔教授的计算结果</h4>
+
+        <p>假设一个投资者在1929年按照拉斯科布的建议，每个月坚持定投15美元到美股上：</p>
+
+        <h4>表5：从1929年顶部开始定投的实际结果</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间点</th>
+              <th>投资成果</th>
+              <th>对比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>不到4年后</strong></td>
+              <td>该组合的收益<strong>超过</strong>同样数目资金投入美国短期国债的收益</td>
+              <td>已开始领先债券</td>
+            </tr>
+            <tr>
+              <td><strong>1949年（20年后）</strong></td>
+              <td>累计资金达到9000美元，年化收益<strong>7.86%</strong></td>
+              <td><strong>高出当时债券收益率两倍以上</strong></td>
+            </tr>
+            <tr>
+              <td><strong>30年后</strong></td>
+              <td>投资组合增长至<strong>6万美元以上</strong>，年化收益<strong>12.72%</strong></td>
+              <td>相比同期同等数额资金投资：长期债券<strong>超出8倍以上</strong>，短期债券<strong>超出9倍以上</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心结论</div>
+            <p>即便在市场的顶部实施这一投资计划，<strong>在股票上持续投资也是一种制胜策略</strong>。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">对所有避险者的警告</div>
+            <p>那些从不购买股票并以大崩盘为自己辩护的人，最终会发现他们的收益将<strong>远远低于</strong>那些坚持投资股票的投资者。</p>
+          </div>
+        </div>
+
+        <h3>5.3 拉斯科布的真实动机</h3>
+
+        <p>西格尔教授这段话不是为了给拉斯科布"洗地"，实际上拉斯科布也不值得让人"洗地"，他那时公开建议的方案确实有居心不良的嫌疑。</p>
+
+        <h4>拉斯科布的身份</h4>
+
+        <ul style="font-size:.95rem;color:var(--text);line-height:2;margin:1rem 0 1rem 1.5rem;">
+          <li>通用汽车的财务委员会主席</li>
+          <li>美国纽约帝国大厦的缔造者</li>
+        </ul>
+
+        <h4>时间巧合</h4>
+
+        <p>他鼓吹所有人都应该/也能够通过股票发财的时间，正是自己<strong>为了筹集资金修建帝国大厦而大肆抛售股票的时间前后</strong>。说他居心不良，真没冤枉他。</p>
+
+        <h3>5.4 本节总结</h3>
+
+        <p>西格尔教授只是借用这个例子，用冷冰冰的数字告诉我们：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">结论一</span>
+            <h4>极端情况仍然胜出</h4>
+            <p>即便在最惨的假设下，从美国股市大崩溃的顶部开始，坚持投资股票的长期结果也比投资债券更好。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">结论二</span>
+            <h4>不需要择时</h4>
+            <p>股票收益率更高这个结论，并不需要买在最低点去实现。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、留给我们的两个问题 -->
+      <section id="section-6">
+        <h2>六、留给我们的两个问题</h2>
+
+        <h3>6.1 问题一：统计规律还是逻辑支撑？</h3>
+
+        <p>股票投资收益率更高的结论，只是一种统计规律，还是背后有可信的逻辑支撑呢？</p>
+
+        <h3>6.2 问题二：为什么大多数人都在亏钱？</h3>
+
+        <p>既然投资股票收益率更高，为什么据我们所知大多数人在股市都是赔钱的呢？</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 本章核心要点 -->
+      <section id="section-7">
+        <h2>本章核心要点</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>核心概念</th>
+              <th>关键结论</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资的必然性</strong></td>
+              <td>投资是每个人都无法躲避、必须持续终身的事</td>
+            </tr>
+            <tr>
+              <td><strong>财富来源</strong></td>
+              <td>"睡后收入"占比越高，越接近财务自由</td>
+            </tr>
+            <tr>
+              <td><strong>通货膨胀</strong></td>
+              <td>现金是100%确定亏损的资产</td>
+            </tr>
+            <tr>
+              <td><strong>复利威力</strong></td>
+              <td>收益率的微小差异，经过时间复利，产生惊人差距</td>
+            </tr>
+            <tr>
+              <td><strong>时间价值</strong></td>
+              <td>投资持续时间对财富终值的影响，甚至比本金和收益率更大</td>
+            </tr>
+            <tr>
+              <td><strong>最佳资产</strong></td>
+              <td>长期而言，股票投资收益率最高（200多年、19国数据验证）</td>
+            </tr>
+            <tr>
+              <td><strong>择时误区</strong></td>
+              <td>不需要买在最低点，即使从顶部开始定投，长期仍战胜债券</td>
+            </tr>
+            <tr>
+              <td><strong>投资信念</strong></td>
+              <td>投资者必须是理性乐观派，以资本市场存续为前提思考</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 思考与启示 -->
+      <section id="section-8">
+        <h2>思考与启示</h2>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p><strong>人生所有的努力，就是为了让自己有得选</strong>。我相信没有人希望自己晚景凄凉，在省吃俭用的挣扎中毫无尊严地度过晚年。而究竟是捡瓶子度日还是留下亿万财富，就取决于你今天怎么选。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p><strong>投资持续时间这一要素对于财富终值的影响，甚至比本金和收益率更大</strong>。投资是需要持续一辈子的事情，对于"进入股市是开始投资，退出股市是停止投资"的错误思想，应该坚决抛弃，而且可以说<strong>越早抛弃，人生旅途就会走得越从容</strong>。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>我们需要牢记，<strong>从拥有第一笔消费剩余时，投资就开始了，而且365天×24小时从不休息，一直持续到离开人世才算罢手，区别只是投资了不同类型的资产</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    const relativePath = 'books/' + BOOK_FOLDER + '/第1篇/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+  </script>
+
+</body>
+</html>

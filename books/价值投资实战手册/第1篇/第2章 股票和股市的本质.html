@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第2章 股票和股市的本质 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--text);
+      margin: 1.5rem 0 .75rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      text-align: center;
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--text);
+      margin: 1.75rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      font-style: italic;
+    }
+    .poem::before {
+      content: '❝';
+      display: block;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: .75rem;
+      font-style: normal;
+      opacity: .5;
+    }
+    .poem-author {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      margin-top: .75rem;
+      font-style: normal;
+      letter-spacing: .04em;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="第2章 股票和股市的本质.html" class="active">第2章 股票和股市的本质</a></li>
+            <li><a href="第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、股：船的部分所有权</a></li>
+        <li><a href="#section-2">二、票：交易的媒介</a></li>
+        <li><a href="#section-3">三、股票的两种属性</a></li>
+        <li><a href="#section-4">四、无解的死循环</a></li>
+        <li><a href="#section-5">五、投资者该怎么办？</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 · 第1篇 如何面对股价波动 · 第2章</div>
+        <h1 class="article-title">股票和股市的本质</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>主题</strong>股票本质 · 股与票 · 投资与投机</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        "股票是什么？股市又是什么？让我们抛开教科书枯燥的解释，穿越时空到股票诞生的大航海时代，去看看股票和股市的本质。"
+      </div>
+
+      <!-- 一、股：船的部分所有权 -->
+      <section id="section-1">
+        <h2>一、股：船的部分所有权</h2>
+
+        <h3>大航海时代的暴利与风险</h3>
+
+        <p>在那属于冒险家的时代里，一艘船从欧洲大陆出发，无论是经大西洋到美洲，还是绕印度洋到亚洲，都会给沿途各国人民带来从未见过的稀罕玩意儿，顺带收走当地土产。</p>
+
+        <p><strong>物以稀为贵</strong>，稀罕玩意儿自然不便宜，而当地土产自然不会贵。奇妙的是，此地的土产其实就是彼地的稀罕玩意儿，所以<strong>一趟船跑回来，常常有数百倍的利润</strong>。</p>
+
+        <p>但是，大海风大浪大，常有海盗出没。每十艘船出去，总有那么两三艘要么沉没了，要么被海盗抢了。</p>
+
+        <h3>精妙的解决方案</h3>
+
+        <p>对利润的追求常常驱使人们想出精妙的解决办法。十艘船的船主，放弃原来每人单独拥有一艘船的模式，改为<strong>每人拥有十艘船的10%所有权</strong>，10×10%还是等于1。</p>
+
+        <p>这是一个简单的等式，却带来完全不同的获利模式。这种模式下，哪怕十艘船只回来五艘，只要每艘回来的船能获利百倍，每位船主就能稳稳地获利数十倍。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>模式对比</th>
+              <th>拥有1艘船的100%</th>
+              <th>拥有10艘船的10%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>收益特征</td>
+              <td>赚百倍或血本无归</td>
+              <td>确定赚数十倍</td>
+            </tr>
+            <tr>
+              <td>风险性质</td>
+              <td>令人心惊肉跳的赌博</td>
+              <td>确定能赚的愉快之旅</td>
+            </tr>
+            <tr>
+              <td>投资逻辑</td>
+              <td>单点风险，全有或全无</td>
+              <td>风险分散，稳定收益</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>精明的商人，当然知道这两种选择孰优孰劣，于是，<strong>股的概念就诞生了</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心理解</div>
+            <p>船，就是企业。股，就是船的一部分。持股人享受船的收益，并以出资为上限，承担船只沉没或被抢的风险。将拥有一艘船的100%，变成拥有很多艘船的部分所有权，这就是船主们在大航海时代找到的包赚秘籍。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、票：交易的媒介 -->
+      <section id="section-2">
+        <h2>二、票：交易的媒介</h2>
+
+        <h3>股权转让需求的诞生</h3>
+
+        <p>船主们有了秘籍，夜夜安枕却赚得盆满钵满，自然惹得旁人羡慕。一群或陌生或相识的人，凑在一起写个合约买船雇水手，新企业就有了。</p>
+
+        <p>船出海，很久才能回来。那时候没手机没电报，出海后便是杳无音信。这期间，若有持股人急等钱用，就可以找个见证人，将出资协议附上转让合同，转让给有意购买者。</p>
+
+        <h3>票据的本质</h3>
+
+        <p>成交后，不管船是带着百倍回报返航还是沉入大海，该占的利益，该冒的风险，都由买家承担，与原出资人再无干系。<strong>票，就这样诞生了</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、股票的两种属性 -->
+      <section id="section-3">
+        <h2>三、股票的两种属性</h2>
+
+        <h3>两种获利模式</h3>
+
+        <p>逐渐地，建立在股和票之上，有了两种不同的获利模式：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">股模式</span>
+            <h4>以返航回报为主要获利来源</h4>
+            <p>持有股权，分享企业经营的收益，依靠企业创造财富来获取回报。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">票模式</span>
+            <h4>追求买卖之间价差</h4>
+            <p>将股票视为交易筹码，试图低价买入、高价卖出，赚取差价收益。</p>
+          </div>
+        </div>
+
+        <p>中文的股票是两个字：<strong>股+票</strong>。它正好代表了上述两种属性：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">属性一</span>
+            <h4>股权凭证的属性</h4>
+            <p>代表对企业的部分所有权，享有企业经营成果的分配权。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">属性二</span>
+            <h4>交易票据的属性</h4>
+            <p>作为一种可自由交易的金融工具，价格受市场供需关系影响。</p>
+          </div>
+        </div>
+
+        <p>股权凭证和交易票据的中介市场，就被称为<strong>股票交易所</strong>，俗称股市。</p>
+
+        <h3>正和博弈："股"模式</h3>
+
+        <h4>投资的本质特征</h4>
+
+        <p>对于股权属性而言，投资于股权和自办企业一样，都是一种资本投入行为，<strong>直接创造财富、创造就业、创造税收，提升社会生产力</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>特征维度</th>
+              <th>描述</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>可预测性</td>
+              <td>相对较强，对该行业了解越深，预测的可靠性就越强</td>
+            </tr>
+            <tr>
+              <td>经验价值</td>
+              <td>姜越老越辣，内行优于外行</td>
+            </tr>
+            <tr>
+              <td>风险应对</td>
+              <td>尽可能多地了解行业和企业；入股作价时尽可能保守；适度分散到多个企业乃至多个行业</td>
+            </tr>
+            <tr>
+              <td>失败因素</td>
+              <td>市场环境突变等因素导致的预测失误（如各行各业每天都有人"关门大吉"）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>正和博弈的逻辑</h4>
+
+        <p>以"股"模式进行投资是一个<strong>"正和博弈"</strong>。这其中的逻辑既简单又清晰：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">逻辑一</span>
+            <h4>上市公司相对优质</h4>
+            <p>上市公司整体属于国民经济中相对较好的部分，本身具备创造财富的能力。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">逻辑二</span>
+            <h4>创造财富即拥有财富</h4>
+            <p>上市公司通过向客户提供产品或服务创造财富，而拥有这些公司的人拥有这些财富。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">逻辑三</span>
+            <h4>长期持有的力量</h4>
+            <p>不依赖交易，仅仅靠长期持有股权，就能够获得超过银行理财、信托、债券等类现金资产的收益率。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">为什么股权收益率更高</div>
+            <p>股权代表的是公司的一部分所有权，而公司作为一个以实现利润最大化为目标的组织，在人类社会生产力不断提升的历史长河中，必然会从生产力的提升中获取回报。</p>
+          </div>
+        </div>
+
+        <p><strong>实例</strong>：一家经营不错的非上市公司，比如华为、老干妈、剑南春、西凤酒、江小白、vivo、OPPO等，没有谁去抬高"股价"，甚至根本就没有股票交易，但公司股东仍然会持续赚到钱。这是一个简单的常识，每个人身边都有这样赚到钱的大小老板。</p>
+
+        <h4>巴菲特的猴子实验</h4>
+
+        <p>巴菲特在2020年致股东的信中这样写道：</p>
+
+        <div class="pull-quote">
+          "持有股票在很大程度上是一个'正和博弈'。事实上，一只耐心且头脑冷静的猴子，通过向标普500指数内的上市公司投50支飞镖来构建投资组合，只要它不受诱惑改变原来的选择，随着时间的推移，它也会享受到股息收入和资本利得收入。所有的生产性资产，比如农场、房地产或企业股权，都能产生财富——大量的财富。大多数拥有这些资产的人都会得到回报，<strong>所需要的只是时间的流逝、内心的平静、充足的多元化以及交易和费用的最小化</strong>。"
+          <cite>— 沃伦·巴菲特，2020年致股东的信</cite>
+        </div>
+
+        <h3>零和游戏："票"模式</h3>
+
+        <h4>交易票据的供求逻辑</h4>
+
+        <p>然而，股票除了是代表公司所有权的凭证之外，还是一种交易票据。当其作为交易票据时，和市场上其他自由交易的商品一样，<strong>其价格由短期的供求关系决定</strong>。</p>
+
+        <p>一只股票的供求关系，往往又由市场参与者对它的预期决定：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">看涨预期</span>
+            <h4>需求推动股价上涨</h4>
+            <p>产生更多市场需求，推动股价上涨。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">看跌预期</span>
+            <h4>供应推动股价下跌</h4>
+            <p>产生更多市场供应，推动股价下跌。</p>
+          </div>
+        </div>
+
+        <h4>投机者的行为特征</h4>
+
+        <p>这些市场参与者，通常将股市视为赌场，他们买来股票的主要目的就是<strong>以更高的价格卖给其他人，获取价差</strong>。他们往往受市场传言和情绪的影响，在很短的时间里作出完全不同的决策。</p>
+
+        <p>这一人群的聚合力量，往往使公司的股价及市值（市值=股价×企业股本总数）在一个很大范围内巨幅波动：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>市场情绪</th>
+              <th>市值表现</th>
+              <th>具体描述</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>悲观时</td>
+              <td>远低于重置成本</td>
+              <td>市值可能会远低于新建一家同样的企业所需的资金</td>
+            </tr>
+            <tr>
+              <td>乐观时</td>
+              <td>远高于合理估值</td>
+              <td>高到让企业家发现卖掉企业，将钱存入银行换来的利息收入，居然可以轻松超过每年辛苦经营企业所得利润的数倍甚至数十倍</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>凯恩斯的选美比赛理论</h4>
+
+        <p>宏观经济学的鼻祖约翰·梅纳德·凯恩斯将这种依赖短期价格变化获利的行为称为<strong>"投机"</strong>，并将其比喻为当时流行的选美比赛：</p>
+
+        <p>任何人都可以从报纸或电视上披露的候选人当中，选择6名你认为会成为冠军的美女，如果你选择的6人和最终得票最多的6人完全重合，你就会成为选美大赛的赢家，获得丰厚的奖金。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键洞察</div>
+            <p>在这个活动中，要想成为赢家，重点不是去选择你认为最美的6人，而是要选中可能被大部分投票者认为最美的6人。所以，你不能依据自己的审美来选，而是必须预测其他人会认为谁最美，然后投票给可能收到最多选票的美人——至于她是不是你心中的最美，不重要。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、无解的死循环 -->
+      <section id="section-4">
+        <h2>四、无解的死循环</h2>
+
+        <h3>预测他人想法的困境</h3>
+
+        <p>预测其他人的想法，当然不是一件容易的事情。数以万计的人参与投票，其中甲希望选择乙丙丁眼中的最美，乙丙丁同样希望预测到甲会怎么选，然后调整自己的投票。</p>
+
+        <p><strong>这样，每个人的预测和行动影响着最终的叠加结果，同时又被这个结果影响，构成一个无解的死循环。</strong></p>
+
+        <p>即便是同床共枕的爱人或者血脉相连的父母儿女，我们也很难保证随时猜中对方想什么，更别说市场里千千万万抱着各种心思的陌生人了。所以，股市的投机活动，也就是刚刚说过的"票"模式，逻辑上就是一条死路，几乎不可能走通。</p>
+
+        <h3>顶级智慧者的失败案例</h3>
+
+        <h4>牛顿的南海泡沫惨败</h4>
+
+        <p>天才物理学家、天文学家和数学家，曾担任英国皇家学会主席、皇家造币厂厂长的艾萨克·牛顿爵士，几乎算是人类智商的天花板，结果却在著名的南海股票泡沫中赔得血本无归，并留下那句感叹预测他人想法太难的名言：</p>
+
+        <div class="pull-quote large">
+          "我可以计算出天体运行的轨迹，却无法预测人性的疯狂。"
+          <cite>— 艾萨克·牛顿</cite>
+        </div>
+
+        <h3>投资大师的共识</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资大师</th>
+              <th>核心观点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>本杰明·格雷厄姆<br><span style="font-weight:400;font-size:.78rem;color:var(--text3);">（华尔街教父）</span></td>
+              <td>"投资者和投机者之间最现实的区别，在于他们对待股市波动的态度。投资者的主要兴趣在于按照合适的价格购买并持有合适的证券；投机者的主要兴趣在于预测股价波动，并从中获取差价。<strong>投机并不犯法，也不缺德。它的主要问题只是发不了财</strong>。"</td>
+            </tr>
+            <tr>
+              <td>彼得·林奇<br><span style="font-weight:400;font-size:.78rem;color:var(--text3);">（传奇基金经理）</span></td>
+              <td>"在《福布斯》400大富豪排行榜上，<strong>没有一位是靠预测市场起家的</strong>。"</td>
+            </tr>
+            <tr>
+              <td>沃伦·巴菲特<br><span style="font-weight:400;font-size:.78rem;color:var(--text3);">（股神）</span></td>
+              <td>"投资成功不可能是神秘公式、电脑程序或股价变动所引发屏幕闪烁信号的产物。一个投资者如果想成功，必须将两种能力结合在一起，<strong>一是判断优秀企业的能力，二是将自己的思维和行为与市场里弥漫的传染性情绪隔离开的能力</strong>。"</td>
+            </tr>
+            <tr>
+              <td>沃伦·巴菲特</td>
+              <td>"我从来没有见过能预测市场走势的人。对于未来一年股市的走势，我们不做任何预测。过去不会，现在不会，将来也不会。我觉得<strong>投机是一个不太聪明的做法，你需要非常多的运气才能做成这件事</strong>。当然，投机的盛行，会给投资者更多机会。"</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、投资者该怎么办？ -->
+      <section id="section-5">
+        <h2>五、投资者该怎么办？</h2>
+
+        <h3>"七亏两平一个赚"的市场真相</h3>
+
+        <p>正是因为投机的盛行，股市才长期呈现<strong>"七亏两平一个赚"</strong>的分布。</p>
+
+        <h4>负和游戏的逻辑</h4>
+
+        <p>在"票"模式的交易中，你买我卖，一个人赚的就是另一个人赔的，总体是个零和游戏，并没有"新钱"产生。然而：</p>
+
+        <ul style="font-size:.95rem;color:var(--text);line-height:2;margin:1rem 0 1rem 1.5rem;">
+          <li>原始股东要套现</li>
+          <li>政府要征税</li>
+          <li>交易所要收费</li>
+          <li>券商要抽佣</li>
+          <li>投行会计师律师要分账</li>
+          <li>……</li>
+        </ul>
+
+        <p><strong>无数人依附于这个交易过程求生存，零和游戏变负和游戏，最终必然是赔的多、赢的少。</strong></p>
+
+        <h3>普通投资者的两条路</h3>
+
+        <p>那么，面对这样"七亏两平一个赚"的市场，普通投资者有什么办法可以应对呢？总体无外乎两条路：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">路径一</span>
+            <h4>珍爱生命，远离股市</h4>
+            <p>不与"七亏两平一个赚"的市场产生任何关系，将资金配置于存款、理财、房产等非股权类资产。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">路径二</span>
+            <h4>做大概率成功的"股"模式投资</h4>
+            <p>放弃猜测他人想法的"票"模式投机，踏踏实实做"股"模式投资，赚企业成长的钱。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    const relativePath = 'books/' + BOOK_FOLDER + '/第1篇/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+  </script>
+
+</body>
+</html>
