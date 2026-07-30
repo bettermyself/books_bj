@@ -430,6 +430,46 @@
     }
     .section-divider span { font-size: 1rem; letter-spacing: .3em; }
 
+    .return-chain {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: .35rem .5rem;
+      margin: 1.5rem 0;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: .92rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .return-chain .chain-item {
+      background: rgba(201,168,76,.08);
+      border: 1px solid rgba(201,168,76,.2);
+      border-radius: 20px;
+      padding: .25rem .85rem;
+      white-space: nowrap;
+    }
+    .return-chain .chain-arrow {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .return-chain .chain-q {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
     .article-footer {
       margin-top: 3rem;
       padding-top: 1.5rem;
@@ -512,7 +552,6 @@
         <li><a href="#section-3">三、资产选择</a></li>
         <li><a href="#section-4">四、股票是最好的资产</a></li>
         <li><a href="#section-5">五、一定要买在低点吗？</a></li>
-        <li><a href="#section-6">六、留给我们的两个问题</a></li>
         <li><a href="#section-7">本章核心要点</a></li>
         <li><a href="#section-8">思考与启示</a></li>
       </ul>
@@ -589,8 +628,16 @@
 
         <h4>认知升级路径</h4>
 
-        <div class="poem">
-          活期存款（0.35%）&nbsp;→&nbsp;定期存款（1-2%）&nbsp;→&nbsp;货币基金（2-3%）&nbsp;→&nbsp;理财产品（3-5%）&nbsp;→&nbsp;？
+        <div class="return-chain">
+          <span class="chain-item">活期存款 0.35%</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">定期存款 1-2%</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">货币基金 2-3%</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">理财产品 3-5%</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-q">?</span>
         </div>
 
         <p>受限于认知水平，我们最先接触的"睡后收入"，可能都是银行存款——还是年收益率"高"达0.35%的活期存款。其后由于我们多学习了一点点，开始接触定期存款、通知存款、余额宝、零钱通、理财产品……收益率开始从0.35%提升到3%～5%。</p>
@@ -884,7 +931,7 @@
 
         <p>类似的研究中，有个<strong>美林投资时钟</strong>比较权威，常被做大类资产配置的投资者奉为圭臬。</p>
 
-        <img src="assets/image-20260729104222214-1785302864551-1.png" alt="美林投资时钟" style="max-width:100%;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);" />
+        <img src="assets/image-20260729104222214-1785302864551-1.png" alt="美林投资时钟" style="max-width:100%;margin:1.25rem auto;border-radius:var(--radius);border:1px solid var(--border);display:block;" />
 
         <div class="callout warn">
           <div class="callout-icon">⚠️</div>
@@ -1093,8 +1140,6 @@
           </tbody>
         </table>
 
-        <p class="fn">注：以上数据均未扣除通货膨胀因素。</p>
-
         <h3>4.4 全球各大类资产回报对比</h3>
 
         <p>还有许多对比股票和其他大类资产投资收益率的研究资料，总体而言结果都差不多。各种不同时间段、不同国家的数据都能证明<strong>"长期而言，股票投资收益率最高"</strong>。</p>
@@ -1296,21 +1341,6 @@
             <p>股票收益率更高这个结论，并不需要买在最低点去实现。</p>
           </div>
         </div>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- 六、留给我们的两个问题 -->
-      <section id="section-6">
-        <h2>六、留给我们的两个问题</h2>
-
-        <h3>6.1 问题一：统计规律还是逻辑支撑？</h3>
-
-        <p>股票投资收益率更高的结论，只是一种统计规律，还是背后有可信的逻辑支撑呢？</p>
-
-        <h3>6.2 问题二：为什么大多数人都在亏钱？</h3>
-
-        <p>既然投资股票收益率更高，为什么据我们所知大多数人在股市都是赔钱的呢？</p>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
