@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第10章 格雷厄姆奠定的理论基石 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      line-height: 1.85;
+    }
+    .poem .poem-author {
+      display: block;
+      margin-top: .6rem;
+      font-size: .82rem;
+      color: var(--gold);
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .article-table td:first-child { white-space: normal; }
+    .article-table .nowrap { white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="第10章 格雷厄姆奠定的理论基石.html" class="active">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、混乱的华尔街</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">格雷厄姆的时代背景</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">当时的市场认知</a></li>
+        <li class="sub"><a href="#sub-1-3" class="sub">信息披露的混乱状态</a></li>
+        <li><a href="#section-2">二、革命性思想：股票是一种特殊债券</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">核心观点</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">股票与债券的差异对比</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">组合投资的威力</a></li>
+        <li class="sub"><a href="#sub-2-4" class="sub">经典案例：贵州茅台</a></li>
+        <li><a href="#section-3">三、核心概念：安全边际</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">分散投资的必要性</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">什么是安全边际</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">内在价值的来源</a></li>
+        <li class="sub"><a href="#sub-3-4" class="sub">大萧条的深刻影响</a></li>
+        <li class="sub"><a href="#sub-3-5" class="sub">格雷厄姆的保守策略</a></li>
+        <li><a href="#section-4">四、经典寓言：市场先生</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">市场先生寓言</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">性格特征</a></li>
+        <li class="sub"><a href="#sub-4-3" class="sub">巴菲特的农场比喻</a></li>
+        <li class="sub"><a href="#sub-4-4" class="sub">投资的本质</a></li>
+        <li><a href="#section-5">五、格雷厄姆式投资的标准流程</a></li>
+        <li class="sub"><a href="#sub-5-1" class="sub">投资业绩</a></li>
+        <li class="sub"><a href="#sub-5-2" class="sub">晚年的标准流程</a></li>
+        <li class="sub"><a href="#sub-5-3" class="sub">方法评价</a></li>
+        <li><a href="#section-6">六、被实践证明行之有效</a></li>
+        <li class="sub"><a href="#sub-6-1" class="sub">沃尔特·施洛斯的传奇</a></li>
+        <li class="sub"><a href="#sub-6-2" class="sub">三大核心原则</a></li>
+        <li class="sub"><a href="#sub-6-3" class="sub">格雷厄姆的初心</a></li>
+        <li><a href="#section-7">七、一次例外引发的思辨</a></li>
+        <li class="sub"><a href="#sub-7-1" class="sub">GEICO案例</a></li>
+        <li class="sub"><a href="#sub-7-2" class="sub">收购过程</a></li>
+        <li class="sub"><a href="#sub-7-3" class="sub">违背原则的四个方面</a></li>
+        <li class="sub"><a href="#sub-7-4" class="sub">传奇的开始</a></li>
+        <li class="sub"><a href="#sub-7-5" class="sub">格雷厄姆的辩解</a></li>
+        <li class="sub"><a href="#sub-7-6" class="sub">教育意义</a></li>
+        <li class="sub"><a href="#sub-7-7" class="sub">深层思考</a></li>
+        <li><a href="#section-8">总结</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 · 第2篇 如何估算内在价值 · 第10章</div>
+        <h1 class="article-title">格雷厄姆奠定的理论基石</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>主题</strong>格雷厄姆 · 安全边际 · 市场先生 · 价值投资</span>
+        </div>
+      </header>
+
+      <div class="pull-quote">
+        股票除股价以外，还有一个与股价不完全同步的"<strong>内在价值</strong>"，这个视角来自被称为"华尔街教父""金融分析之父"的<strong>本杰明·格雷厄姆</strong>。
+      </div>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、混乱的华尔街：股票等同于投机的时代 -->
+      <section id="section-1">
+        <h2>一、混乱的华尔街：股票等同于投机的时代</h2>
+
+        <h3 id="sub-1-1">1.1 格雷厄姆的时代背景</h3>
+
+        <p>本杰明·格雷厄姆出生于1894年（清光绪二十年，中日甲午战争爆发）。1914年从哥伦比亚大学毕业后，在华尔街获得一份证券分析工作——当时这种职业被称为"<strong>统计员</strong>"，主要工作是债券投资价值分析。</p>
+
+        <h3 id="sub-1-2">1.2 当时的市场认知</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>类别</th>
+              <th>市场定位</th>
+              <th>投资者类型</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>债券</strong></td>
+              <td>投资者的首选，为了收益</td>
+              <td>绅士、保守投资者</td>
+            </tr>
+            <tr>
+              <td><strong>股票</strong></td>
+              <td>投机者的出没之地，为了差价</td>
+              <td>投机者</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>当时的主流言论明确指出：</p>
+
+        <div class="pull-quote">
+          "绅士们都倾向于债券。债券是为了收益，股票是为了差价。"
+        </div>
+
+        <div class="pull-quote">
+          "只有债券才被当作投资，股票本质上是投机性的。"
+        </div>
+
+        <h3 id="sub-1-3">1.3 信息披露的混乱状态</h3>
+
+        <p>在美国证券交易委员会（SEC）和《证券分析》同时诞生于1934年之前，市场存在严重的信息不对称问题：</p>
+
+        <p><strong>公司披露问题：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">财务报表极其简单（通常只是四页纸对折的小册子）</li>
+          <li style="margin-bottom:.5rem;">大部分版面被公司管理层名单占据</li>
+          <li style="margin-bottom:.5rem;">家族企业通过会计技巧隐藏资产和收益</li>
+          <li style="margin-bottom:.5rem;">部分公司虚报数据使自己看起来更强大</li>
+        </ul>
+
+        <p><strong>投资者获取信息困难：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">需要大费周章去纽约证券交易所图书馆查看</li>
+          <li style="margin-bottom:.5rem;">"统计员"对财务报表数据信心不足</li>
+          <li style="margin-bottom:.5rem;">内幕交易未被禁止，消息比数据更重要</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">当时的市场准则</div>
+            <p><strong>3M原则</strong> — 内幕（Mystery）、操纵（Manipulation）和差价（Margins）</p>
+          </div>
+        </div>
+
+        <p>正如格雷厄姆回忆：</p>
+
+        <div class="pull-quote">
+          "在老华尔街人看来，过分关注枯燥无味的统计数据是非常愚蠢的行为。"
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、革命性思想：股票是一种特殊债券 -->
+      <section id="section-2">
+        <h2>二、革命性思想：股票是一种特殊债券</h2>
+
+        <h3 id="sub-2-1">2.1 核心观点</h3>
+
+        <p>格雷厄姆通过大量思考和整理工作，建立了全新的投资思想：</p>
+
+        <div class="pull-quote large">
+          股票是一种债券，只不过票面利率不固定而已。
+        </div>
+
+        <p>通过科学方法，投资者可以寻找到安全性媲美债券，同时收益率却能比债券更高的股票作为投资对象。</p>
+
+        <h3 id="sub-2-2">2.2 股票与债券的差异对比</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>债券</th>
+              <th>股票</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>利息</strong></td>
+              <td>固定数字，提前约定</td>
+              <td>不确定，取决于公司盈利能力</td>
+            </tr>
+            <tr>
+              <td><strong>期限</strong></td>
+              <td>固定年限</td>
+              <td>持续经营期间</td>
+            </tr>
+            <tr>
+              <td><strong>收益来源</strong></td>
+              <td>利息收入</td>
+              <td>股息+公司留存收益再投资</td>
+            </tr>
+            <tr>
+              <td><strong>不确定性</strong></td>
+              <td>低</td>
+              <td>高（但可通过组合对冲）</td>
+            </tr>
+            <tr>
+              <td><strong>长期回报</strong></td>
+              <td>相对固定</td>
+              <td>受益于经济增长和通胀</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-3">2.3 组合投资的威力</h3>
+
+        <p>格雷厄姆在《探寻证券分析的科学性》中指出：</p>
+
+        <div class="pull-quote">
+          "股票本质上可以看作价值被低估的一种债券，这一观点脱胎于<strong>个体的风险与总体或群体的风险之间存在着根本性的差异</strong>。"
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键洞察</div>
+            <p>虽然单只股票风险高于债券，但从充分分散化的股票组合历史收益看，整体上股票具有明显的向上动力。</p>
+          </div>
+        </div>
+
+        <p><strong>原因：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">国家经济的稳步增长</li>
+          <li style="margin-bottom:.5rem;">公司未分配利润用于稳定再投资</li>
+          <li style="margin-bottom:.5rem;">20世纪以来通货膨胀率不断走高</li>
+        </ul>
+
+        <p>这一思想后来被大量学术研究证明，包括：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">杰里米·J.西格尔的《股市长线法宝》</li>
+          <li style="margin-bottom:.5rem;">伦敦商学院的《投资收益百年史》</li>
+        </ul>
+
+        <h3 id="sub-2-4">2.4 经典案例：贵州茅台</h3>
+
+        <p>2001年贵州茅台上市数据对比：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>债券投资（假设）</th>
+              <th>股权投资（实际）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>初始投资</td>
+              <td>20亿元</td>
+              <td>20亿元（26%股权）</td>
+            </tr>
+            <tr>
+              <td>20年收益</td>
+              <td>本利和（远低于股息）</td>
+              <td>已分配现金股息超1213亿元</td>
+            </tr>
+            <tr>
+              <td>投资者所得</td>
+              <td>固定利息</td>
+              <td>超315亿元（仅现金股息）</td>
+            </tr>
+            <tr>
+              <td>安全性</td>
+              <td>债权保护</td>
+              <td>与债券几乎无差别</td>
+            </tr>
+            <tr>
+              <td>收益差距</td>
+              <td>—</td>
+              <td><strong>云泥之别</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要提醒</div>
+            <p>这种高收益和高安全性，不是建立在对个体公司的判断上，而是建立在"总体或群体"的基础上。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、核心概念：安全边际 -->
+      <section id="section-3">
+        <h2>三、核心概念：安全边际</h2>
+
+        <h3 id="sub-3-1">3.1 分散投资的必要性</h3>
+
+        <p>格雷厄姆投资体系中，<strong>分散组合投资</strong>是非常重要的前提：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者类型</th>
+              <th>持股数量建议</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>格雷厄姆本人</td>
+              <td>经常持有超过75只个股</td>
+            </tr>
+            <tr>
+              <td>普通投资者</td>
+              <td>至少30只以上个股</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这些股票不是随意选择，而是<strong>股价明显低于内在价值的股票</strong>。</p>
+
+        <h3 id="sub-3-2">3.2 什么是安全边际</h3>
+
+        <p><strong>定义</strong>：买入价明显低于股票内在价值的状况。</p>
+
+        <p><strong>内在价值</strong>：大致等于公司作为非上市公司出售给私人产业投资者的价格（不确定的概念，但有可估算范围）。</p>
+
+        <p>格雷厄姆举例说明：</p>
+
+        <div class="pull-quote">
+          "如果我们大致估算出一家企业的内在价值在每股30美元到110美元。这个结果听起来并不怎么样，这个结论能有什么用呢？但如果该公司的股价低于30美元或者高于110美元，这个估算或许就能给你带来一些好处了。"
+        </div>
+
+        <h3 id="sub-3-3">3.3 内在价值的来源</h3>
+
+        <div class="pull-quote large">
+          股票代码代表的是企业部分所有权的有效法律凭证。
+        </div>
+
+        <p><strong>股东享有的权利：</strong></p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>经营良好时</strong>：未来收益分配权</li>
+          <li style="margin-bottom:.5rem;"><strong>破产清算时</strong>：偿还债务后的剩余资产分配权（兜底价值）</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资逻辑</div>
+            <p>在兜底价值以下买入股票：最坏情况可以收回成本略有盈余；非最坏情况则获取丰厚利润。</p>
+          </div>
+        </div>
+
+        <p>格雷厄姆将企业未来经营良好的预期看作"额外的馈赠"，整个分析体系主要锚定破产和清算有关的兜底价值。</p>
+
+        <h3 id="sub-3-4">3.4 大萧条的深刻影响</h3>
+
+        <p>这种思维方式与格雷厄姆在1930年前后美国股市大崩溃中的经历密切相关：</p>
+
+        <p><strong>市场数据：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1929年9月3日</td>
+              <td>道琼斯指数创下381.17点高点</td>
+            </tr>
+            <tr>
+              <td>两个月后</td>
+              <td>暴跌40%以上</td>
+            </tr>
+            <tr>
+              <td>1932年7月</td>
+              <td>最低跌至41.22点，跌幅超过89%</td>
+            </tr>
+            <tr>
+              <td>25年后</td>
+              <td>道琼斯指数才重新回到381.17点</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>社会影响：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">超过10万家企业破产</li>
+          <li style="margin-bottom:.5rem;">近1/4劳动人口失业</li>
+          <li style="margin-bottom:.5rem;">3400万人（约占总人口28%）无法维持生计</li>
+          <li style="margin-bottom:.5rem;">200万人四处流浪</li>
+        </ul>
+
+        <p><strong>对格雷厄姆的影响：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">1930年，基金损失50%</li>
+          <li style="margin-bottom:.5rem;">许多投资者坚持撤资</li>
+          <li style="margin-bottom:.5rem;">合伙人纽曼的岳父注入资金才勉强存活</li>
+        </ul>
+
+        <h3 id="sub-3-5">3.5 格雷厄姆的保守策略</h3>
+
+        <p>正是这样的生存环境，使《证券分析》体系充斥着大萧条的烙印：</p>
+
+        <p><strong>买入标准：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">每只股票的买入价格应<strong>低于有形资产净值<sup>①</sup>的2/3</strong></li>
+          <li style="margin-bottom:.5rem;">最好可以<strong>低于净流动资产<sup>②</sup>的2/3</strong></li>
+        </ul>
+
+        <p><strong>资产配置：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">最多将本金的<strong>75%</strong>投资股票</li>
+          <li style="margin-bottom:.5rem;">剩余<strong>25%以上</strong>购买美国国债</li>
+          <li style="margin-bottom:.5rem;">至少分散到<strong>30家公司以上</strong></li>
+        </ul>
+
+        <p><strong>逻辑</strong>：即便公司破产清算，也可以在偿还全部负债后还有剩余资金足以归还股东本金并产生少量收益。实际上，由于资本的逐利天性，这些低于重置价值或清算价值的公司股票，其市价经常会大幅上涨，绝大部分都无须真的等待清算。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、经典寓言：市场先生 -->
+      <section id="section-4">
+        <h2>四、经典寓言：市场先生</h2>
+
+        <h3 id="sub-4-1">4.1 格雷厄姆的市场先生寓言</h3>
+
+        <p>格雷厄姆用一个精妙的寓言解释了投资者在市场里的优势，说明市场参与者群体永远不变的人性：<strong>贪婪和恐惧交替而来</strong>。</p>
+
+        <div class="pull-quote">
+          投资者应该把市场行情想象成一位亲切的<strong>市场先生</strong>的报价，他是你私人生意中的合作伙伴。市场先生从不失信，他每天定时出现并报出一个清晰的价格，然后由你决定是否按照这个价格买下他手中股份或者将你的股份卖给他。
+        </div>
+
+        <h3 id="sub-4-2">4.2 市场先生的性格特征</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>特征</th>
+              <th>表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>情绪化</strong></td>
+              <td>有无法治愈的精神缺陷</td>
+            </tr>
+            <tr>
+              <td><strong>高兴时</strong></td>
+              <td>只看到有利因素，报出很高价格，担心你买走他的股份</td>
+            </tr>
+            <tr>
+              <td><strong>悲观时</strong></td>
+              <td>认为世界将面临大麻烦，报出很低价格，害怕你把股份甩给他</td>
+            </tr>
+            <tr>
+              <td><strong>可爱性格</strong></td>
+              <td>不在乎被冷落，明天会再报新价格，交易与否完全由你决定</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心原则</div>
+            <p>市场先生的狂躁抑郁症发作得越厉害，对你就越有利。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">铁律</div>
+            <p>市场先生是为你服务的，不是负责指导你。对你有用的是他的口袋，不是他的脑袋。如果他表现得特别愚蠢，你可以忽视他或利用他。如果<strong>你受到他的影响，那将是一场灾难</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-3">4.3 巴菲特的农场比喻</h3>
+
+        <p>2021年5月伯克希尔股东大会上，巴菲特用农场案例进一步阐释：</p>
+
+        <p><strong>假设场景：</strong>你买了6000亩农场，邻居也有6000亩一模一样的地。这个邻居很怪异，每天都来找你报价——"我要把我的地卖给你，或者你把你的地卖给我，多少多少钱一亩。你看行不？"</p>
+
+        <p><strong>投资逻辑：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>正确做法</th>
+              <th>错误做法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>计算这片地能产多少粮食</td>
+              <td>试图预测邻居明天会报什么价</td>
+            </tr>
+            <tr>
+              <td>根据土地产出判断价值</td>
+              <td>让邻居的报价牵着鼻子走</td>
+            </tr>
+            <tr>
+              <td>报价低时买入，报价高时卖出</td>
+              <td>把自己也搞成精神病</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>巴菲特总结：</p>
+
+        <div class="pull-quote">
+          "股票代表的是公司所有权的一部分，不是K线图上的红绿蜡烛。总有邻居扯着嗓子给你报价，让你自由选择买、卖或者不搭理他。这明明是股市的巨大好处，但是在很多人那里，这巨大的好处却变成了一种诅咒。"
+        </div>
+
+        <h3 id="sub-4-4">4.4 投资的本质</h3>
+
+        <p>遵循格雷厄姆投资体系的理性投资者，只要轻松利用市场先生在严重悲观和极度乐观之间的大幅摇摆：</p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">用远低于净有形资产甚至是净流动资产的价格买到股票</li>
+          <li style="margin-bottom:.5rem;">在市场先生报价恢复正常甚至疯到另一边时卖出</li>
+          <li style="margin-bottom:.5rem;">利润就这样收入囊中</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、格雷厄姆式投资的标准流程 -->
+      <section id="section-5">
+        <h2>五、格雷厄姆式投资的标准流程</h2>
+
+        <h3 id="sub-5-1">5.1 投资业绩</h3>
+
+        <p>格雷厄姆本人的投资非常成功：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>1956年退休</strong>：道琼斯指数400～500点间</li>
+          <li style="margin-bottom:.5rem;"><strong>基金存续期</strong>：33年</li>
+          <li style="margin-bottom:.5rem;"><strong>年化收益率</strong>：超过20%</li>
+          <li style="margin-bottom:.5rem;"><strong>经历</strong>：跨越恐怖的大萧条</li>
+        </ul>
+
+        <h3 id="sub-5-2">5.2 晚年的标准流程</h3>
+
+        <p>退休后，格雷厄姆总结毕生经验，提出了一套毫无艺术性、可直接指导普通人投资的操作流程。</p>
+
+        <p><strong>发布时间</strong>：1976年9月20日（次日，82岁的格雷厄姆去世）</p>
+
+        <p><strong>具体步骤：</strong></p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">步骤1</span>
+            <h4>筛选低估值股票</h4>
+            <p>找出所有TTM市盈率小于X倍的股票。<br/><strong>TTM市盈率</strong> = 市值 ÷ 最近四个季度公司净利润</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤2</span>
+            <h4>计算X值</h4>
+            <p>X = 1 ÷ (2 × 无风险收益率)。无风险收益率通常取十年期国债利率与AAA级企业债券利率二者之间的较大值。<br/><strong>示例</strong>：当无风险收益率为4%时，X = 1 ÷ 8% = 12.5</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤3</span>
+            <h4>筛选低负债公司</h4>
+            <p>找出其中资产负债率&lt;50%的股票。<br/><strong>资产负债率</strong> = 总负债 ÷ 总资产</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤4</span>
+            <h4>构建投资组合</h4>
+            <p>选择其中<strong>至少30只股票</strong>，每只投入<strong>不超过总资金的2.5%</strong>，股票投入上限<strong>不超过总资金的75%</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤5</span>
+            <h4>配置无风险资产</h4>
+            <p>剩余的25%资金，加上因选股不足30只导致的剩余资金（若有），买入美国国债或其他无风险收益产品。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤6</span>
+            <h4>设置止盈</h4>
+            <p>任何一只个股上涨<strong>50%</strong>以后卖出，换入新的可选对象或国债。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤7</span>
+            <h4>年度调仓</h4>
+            <p>购买后的第二年年底前，涨幅不到50%的个股也卖出，换入新的可选对象或国债。<br/><strong>例外</strong>：如果该股依然在新的可选对象名单里，放弃卖出。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">步骤8</span>
+            <h4>循环操作</h4>
+            <p>如此周而复始。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-5-3">5.3 方法评价</h3>
+
+        <p>格雷厄姆说：</p>
+
+        <div class="pull-quote">
+          "这是一种以最少的工作量从普通股票中取得满意回报的安全方法。这种方法真好，简直让人难以置信。但我可以用60年的经验保证，它绝对经得起我的任何检验。"
+        </div>
+
+        <p><strong>预期收益率</strong>：长期而言能够获得超过15%的收益率。</p>
+
+        <p><strong>方法特点：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">对投资者的商业能力基本无要求</li>
+          <li style="margin-bottom:.5rem;">关注兜底价值（内在价值最保守的下限）</li>
+          <li style="margin-bottom:.5rem;">关注当前已经存在的资产和负债</li>
+          <li style="margin-bottom:.5rem;">关注已有记录的盈利和分红水平</li>
+          <li style="margin-bottom:.5rem;">很少甚至完全不涉及对前景的判断</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、被实践证明行之有效 -->
+      <section id="section-6">
+        <h2>六、被实践证明行之有效</h2>
+
+        <h3 id="sub-6-1">6.1 沃尔特·施洛斯的传奇</h3>
+
+        <p><strong>背景：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">仅有高中学历</li>
+          <li style="margin-bottom:.5rem;">最初是华尔街经纪公司办公室打杂跑腿的小伙儿</li>
+          <li style="margin-bottom:.5rem;">参加了纽约证券交易机构赞助的格雷厄姆夜校课程</li>
+          <li style="margin-bottom:.5rem;">1946年初，在格雷厄姆-纽曼基金公司工作</li>
+          <li style="margin-bottom:.5rem;">九年半后辞职开创自己的基金</li>
+        </ul>
+
+        <p><strong>投资业绩：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资年限</strong></td>
+              <td>47年</td>
+            </tr>
+            <tr>
+              <td><strong>总收益</strong></td>
+              <td>5456倍</td>
+            </tr>
+            <tr>
+              <td><strong>年化收益率</strong></td>
+              <td>20.1%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>投资方法：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">严格遵守格雷厄姆投资原则</li>
+          <li style="margin-bottom:.5rem;">寻找被市场先生报错价的公司股票</li>
+          <li style="margin-bottom:.5rem;">几乎不做企业调研</li>
+          <li style="margin-bottom:.5rem;">只阅读和统计企业财报数据</li>
+          <li style="margin-bottom:.5rem;">寻找符合格雷厄姆投资要求的公司股票</li>
+          <li style="margin-bottom:.5rem;">买下、等待价值回归、卖出，周而复始</li>
+        </ul>
+
+        <h3 id="sub-6-2">6.2 三大核心原则</h3>
+
+        <p>支撑惊人回报的就是《证券分析》三大原则：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">原则一</span>
+            <h4>股票是企业部分所有权的凭证</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则二</span>
+            <h4>无情地利用市场先生的报价</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则三</span>
+            <h4>坚持买入时的安全边际原则</h4>
+          </div>
+        </div>
+
+        <p>即便今时今日，仍然有很多格雷厄姆的忠实追随者，严格按照三大原则日复一日从市场获取利润。</p>
+
+        <h3 id="sub-6-3">6.3 格雷厄姆的初心</h3>
+
+        <p>格雷厄姆有一颗悲天悯人的心：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">最大的乐趣不是赚到多少钱</li>
+          <li style="margin-bottom:.5rem;">金钱是一种记录成绩的方法（巴菲特也是如此）</li>
+          <li style="margin-bottom:.5rem;">思考如何帮助没有什么天赋的普通人，也能通过证券市场获取满意的回报</li>
+        </ul>
+
+        <p>因此，格雷厄姆《证券分析》介绍的投资体系：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">始终建立在使用者<strong>没有什么商业能力的假设</strong>上</li>
+          <li style="margin-bottom:.5rem;">本质上是一种统计学</li>
+          <li style="margin-bottom:.5rem;">叠加对价值投资基本原理的理解和信赖</li>
+          <li style="margin-bottom:.5rem;">投资者只要具备<strong>足够的耐心</strong>和<strong>一点点阅读财报的基础知识</strong>就足够了</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、一次例外引发的思辨 -->
+      <section id="section-7">
+        <h2>七、一次例外引发的思辨</h2>
+
+        <h3 id="sub-7-1">7.1 GEICO案例</h3>
+
+        <p>格雷厄姆投资生涯中，有一个无法用自己的体系清晰解释的投资对象——<strong>政府雇员保险公司（GEICO，盖可保险）</strong>。</p>
+
+        <p><strong>该投资的特殊性：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">明显违背格雷厄姆投资体系标准</li>
+          <li style="margin-bottom:.5rem;">造就了格雷厄姆投资生涯里最大的一笔获利</li>
+          <li style="margin-bottom:.5rem;">单这一笔投资的获利总额就超过其他所有投资回报总和</li>
+          <li style="margin-bottom:.5rem;">如果去掉这一笔，年化收益率会从超过20%降低为只有约17%</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>或许就是从这个项目开始，格雷厄姆最看重的弟子沃伦·巴菲特的内心，已经悄悄埋下一颗对格雷厄姆体系怀疑的种子。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-7-2">7.2 收购过程</h3>
+
+        <p><strong>时间背景：</strong></p>
+
+        <p>1948年初，格雷厄姆在纽约金融学院对学生讲："保险业对每个人都有利——管理层、代理商、顾客——除了股东。"</p>
+
+        <p><strong>格雷厄姆对保险公司的两点质疑：</strong></p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">不能实现足够多的收益率，投保人的保费最终会因为赔偿而所剩无几</li>
+          <li style="margin-bottom:.5rem;">支付的股利也不够多，既降低了总收益，也给股东增添了压力</li>
+        </ol>
+
+        <p><strong>收购决策：</strong></p>
+
+        <p>尽管有些惴惴不安，格雷厄姆对收购GEICO股权有一种本能的兴趣。他告诉沃尔特·施洛斯：</p>
+
+        <div class="pull-quote">
+          "沃尔特，万一这次收购效果不好，我们随时可以清算它收回投资。"
+        </div>
+
+        <p>最终，格雷厄姆-纽曼基金公司以<strong>71.25万美元</strong>的价格买下了GEICO公司<strong>50%</strong>的股份。</p>
+
+        <h3 id="sub-7-3">7.3 违背原则的四个方面</h3>
+
+        <p>合伙人纽曼在1993年接受采访时感叹：投资中的运气因素实在太重要了。因为这次收购明显违背格雷厄姆一贯的投资原则：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>违规项</th>
+              <th>具体表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. 估值标准</strong></td>
+              <td>按公司账面净资产值作价，违背有形资产净值2/3的出价标准</td>
+            </tr>
+            <tr>
+              <td><strong>2. 尽职调查</strong></td>
+              <td>最终财务报告显示净资产比报价时少5万美元，仍以原协议成交</td>
+            </tr>
+            <tr>
+              <td><strong>3. 仓位控制</strong></td>
+              <td>占基金总资金20%～25%仓位，严重违背单只个股持仓上限</td>
+            </tr>
+            <tr>
+              <td><strong>4. 法律风险</strong></td>
+              <td>交易完成后才发现《投资公司法》规定投资公司拥有保险公司超过10%股份是违法的</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>法律问题解决：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">SEC要求格雷厄姆-纽曼公司取消交易</li>
+          <li style="margin-bottom:.5rem;">卖家拒绝收回股票</li>
+          <li style="margin-bottom:.5rem;">后来获准以避开税收的方法，将超额GEICO股票分给基金持有人</li>
+        </ul>
+
+        <h3 id="sub-7-4">7.4 传奇的开始</h3>
+
+        <p>如得神助，GEICO公司从1949年开始以令人惊讶的速度成长：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>到1972年</strong>：成为全美第五大汽车保险公司</li>
+          <li style="margin-bottom:.5rem;"><strong>收益倍数</strong>：股价上涨到最初购买时的<strong>200多倍</strong></li>
+          <li style="margin-bottom:.5rem;"><strong>超额回报</strong>：涨幅大大超过了利润的实际增长</li>
+        </ul>
+
+        <h3 id="sub-7-5">7.5 格雷厄姆的辩解</h3>
+
+        <p>1973年，在《聪明的投资者》第四版面世时，年迈的格雷厄姆亲自在书末补上了一段后记，带有辩解意味地记录了这笔投资：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资考量</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>行业不受青睐</strong></td>
+              <td>被好几家重要机构拒绝</td>
+            </tr>
+            <tr>
+              <td><strong>估值合理</strong></td>
+              <td>相对于当期利润和资产价值不算高</td>
+            </tr>
+            <tr>
+              <td><strong>重仓投资</strong></td>
+              <td>以手中约五分之一的资金开展并购</td>
+            </tr>
+            <tr>
+              <td><strong>持有理由</strong></td>
+              <td>认为公司从事的是"人们离不开的业务"</td>
+            </tr>
+            <tr>
+              <td><strong>长期持有</strong></td>
+              <td>尽管价格暴涨，仍持有大量股份</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          "出人意料的是，仅从这一笔投资决策中获取的利润，就大大超过了合伙人20年内在专业领域里广泛开展各种业务（通过大量调查、无止境的思考和无数次决策）所获得的其他所有利润的总和。"
+        </div>
+
+        <h3 id="sub-7-6">7.6 教育意义</h3>
+
+        <p>格雷厄姆在《聪明的投资者》中总结：</p>
+
+        <p><strong>明显的意义：</strong> 华尔街存在着各种不同的赚钱和投资方式。</p>
+
+        <p><strong>不太明显的意义：</strong> 一次幸运的机会或一次英明的决策所获得的结果，有可能超过一个熟悉业务的人一辈子的努力。</p>
+
+        <p><strong>但是：</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">在幸运或英明决策的背后，一般都必然存在着有准备和具备专业能力等条件</li>
+          <li style="margin-bottom:.5rem;">人们必须在打下足够的基础并获得足够的认可之后，这些机会之门才会向其敞开</li>
+          <li style="margin-bottom:.5rem;">人们必须具备一定的手段、判断力和勇气，才可能去利用这些机会</li>
+        </ul>
+
+        <h3 id="sub-7-7">7.7 深层思考</h3>
+
+        <p>格雷厄姆下重注的理由分析：</p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">考虑到"离不开的业务"——类似后来巴菲特的"护城河"概念</li>
+          <li style="margin-bottom:.5rem;">考虑到成长因素会导致目前暂时的高价回落为合理甚至低估</li>
+        </ol>
+
+        <p>然而，格雷厄姆对成长股的看法一直是：</p>
+
+        <div class="pull-quote">
+          "我认为那些所谓的成长股投资者或者证券分析师，并不知道应该对成长股支付多少价钱，也不知道应该购买多少股票以获得期望的收益，更不知道股票价格会怎样变化，而这些都是投资的基本问题。所以我认为人们根本不可能应用成长股那套理论来获得合理和可靠的收益。"
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">未解之谜</div>
+            <p>这桩公案，至今没有在任何书籍上读到合理的解释。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 总结 -->
+      <section id="section-8">
+        <h2>总结</h2>
+
+        <p>格雷厄姆奠定的价值投资理论基石包括：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">基石一</span>
+            <h4>股票是特殊债券</h4>
+            <p>通过组合投资可以获得媲美债券的安全性和更高的收益率</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">基石二</span>
+            <h4>安全边际原则</h4>
+            <p>买入价明显低于内在价值，关注兜底价值</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">基石三</span>
+            <h4>市场先生寓言</h4>
+            <p>利用市场的情绪化波动，而不是被其影响</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">基石四</span>
+            <h4>分散投资</h4>
+            <p>至少30只股票，降低个体风险</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">基石五</span>
+            <h4>标准化流程</h4>
+            <p>可复制的投资方法，适合普通投资者</p>
+          </div>
+        </div>
+
+        <p>这些原则经过数十年实践验证，被沃尔特·施洛斯等众多投资者证明行之有效。同时，GEICO案例也为后来巴菲特发展"成长股投资"理论埋下了伏笔。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section style="margin: 1.5rem 0;">
+        <p><strong>注释：</strong></p>
+        <ul style="color:var(--text2); line-height:1.85; font-size:.88rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.3rem;">① <strong>有形资产净值</strong> = 总资产 − 总负债 − 商誉、专利权等无形资产</li>
+          <li style="margin-bottom:.3rem;">② <strong>净流动资产</strong> = 有形资产净值 − 固定资产</li>
+        </ul>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 投资智慧 · 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

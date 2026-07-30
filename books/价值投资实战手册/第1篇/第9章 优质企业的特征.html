@@ -523,6 +523,15 @@
             <li><a href="第9章 优质企业的特征.html" class="active">第9章 优质企业的特征</a></li>
           </ul>
         </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+          </ul>
+        </li>
       </ul>
 
       <div class="sidebar-label sidebar-label-sub">本讲目录</div>
@@ -1666,6 +1675,16 @@
         localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
       }, 300);
     }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
   </script>
 
 </body>

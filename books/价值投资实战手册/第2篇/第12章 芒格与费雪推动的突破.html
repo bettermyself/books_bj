@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第12章 芒格与费雪推动的突破 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      line-height: 1.85;
+    }
+    .poem .poem-author {
+      display: block;
+      margin-top: .6rem;
+      font-size: .82rem;
+      color: var(--gold);
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .article-table td:first-child { white-space: normal; }
+    .article-table .nowrap { white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="第12章 芒格与费雪推动的突破.html" class="active">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、两种风格，究竟哪种更好？</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">一场持续八年的平行实验</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">表12-1 收益比较</a></li>
+        <li class="sub"><a href="#sub-1-3" class="sub">5.4个百分点，八年拉开的差距</a></li>
+        <li><a href="#section-2">二、思想进化的核心：经济商誉</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">进化的推力</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">进化的核心标志</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">什么是"经济商誉"？</a></li>
+        <li class="sub"><a href="#sub-2-4" class="sub">一种"矛盾"：资产越少，价值越高</a></li>
+        <li><a href="#section-3">三、经济商誉在哪里？——顺着ROE去找</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">巴菲特给出的路标</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">大部分投资者对ROE的误解</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">一个小学数学方程式</a></li>
+        <li><a href="#section-4">四、能力圈原则</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">高经济商誉 ≠ 可投资</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">什么是"看得懂"？四个问题</a></li>
+        <li class="sub"><a href="#sub-4-3" class="sub">前三个问题的本质：找护城河</a></li>
+        <li class="sub"><a href="#sub-4-4" class="sub">第四个问题：河能否被填平</a></li>
+        <li class="sub"><a href="#sub-4-5" class="sub">能力圈原则的核心</a></li>
+        <li class="sub"><a href="#sub-4-6" class="sub">如果排除了所有企业……</a></li>
+        <li><a href="#section-5">五、巴菲特心爱企业的特质</a></li>
+        <li class="sub"><a href="#sub-5-1" class="sub">巴菲特原话：确定性优先于高难度</a></li>
+        <li class="sub"><a href="#sub-5-2" class="sub">特质清单汇总</a></li>
+        <li class="sub"><a href="#sub-5-3" class="sub">筛选完成之后，还差一步</a></li>
+        <li><a href="#section-6">六、巴菲特的估值方法</a></li>
+        <li class="sub"><a href="#sub-6-1" class="sub">一碗浓浓的失望之汤</a></li>
+        <li class="sub"><a href="#sub-6-2" class="sub">巴菲特的估值原则原文</a></li>
+        <li><a href="#section-7">七、关键概念（一）：自由现金流</a></li>
+        <li class="sub"><a href="#sub-7-1" class="sub">定义：一个不在财报上的模糊概念</a></li>
+        <li class="sub"><a href="#sub-7-2" class="sub">为什么自由现金流决定企业价值</a></li>
+        <li class="sub"><a href="#sub-7-3" class="sub">为什么不用净利润？</a></li>
+        <li class="sub"><a href="#sub-7-4" class="sub">如何估算：一个保守的模拟公式</a></li>
+        <li><a href="#section-8">八、关键概念（二）：折现与折现模型</a></li>
+        <li class="sub"><a href="#sub-8-1" class="sub">折现：一个常见的金融概念</a></li>
+        <li class="sub"><a href="#sub-8-2" class="sub">理论模型与两种简化</a></li>
+        <li class="sub"><a href="#sub-8-3" class="sub">老唐的判断：一种"精确的错误"</a></li>
+        <li class="sub"><a href="#sub-8-4" class="sub">那它到底有什么用？一种思考方法</a></li>
+        <li class="sub"><a href="#sub-8-5" class="sub">巴菲特本人的回答（2002年股东大会）</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 · 第2篇 如何估算内在价值 · 第12章</div>
+        <h1 class="article-title">芒格与费雪推动的突破</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>主题</strong>芒格 · 费雪 · 经济商誉 · 能力圈 · 自由现金流折现</span>
+        </div>
+      </header>
+
+      <div class="pull-quote">
+        <strong>本章主线</strong>：芒格用一只与巴菲特并行八年、业绩更好的基金，证明了"伴随优质企业成长"是条更宽的路。巴菲特随之把关注点从<strong>账面资产</strong>转向<strong>经济商誉</strong>，顺理成章地演化出<strong>能力圈原则</strong>，并最终把<strong>自由现金流折现</strong>当作一种思维方式（而非计算公式）来筛选企业。
+      </div>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、两种风格，究竟哪种更好？ -->
+      <section id="section-1">
+        <h2>一、两种风格，究竟哪种更好？</h2>
+
+        <h3 id="sub-1-1">1.1 一场持续八年的平行实验</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间节点</th>
+              <th>事件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1957 年</td>
+              <td>巴菲特开始运作合伙基金</td>
+            </tr>
+            <tr>
+              <td>1959 年</td>
+              <td>巴菲特与芒格相识</td>
+            </tr>
+            <tr>
+              <td>1962 年</td>
+              <td>在巴菲特的鼓动下，芒格也成立了一个合伙基金</td>
+            </tr>
+            <tr>
+              <td>1969 年 5 月</td>
+              <td>巴菲特的基金清盘</td>
+            </tr>
+            <tr>
+              <td>1975 年</td>
+              <td>芒格的基金清盘</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>两只基金的存续时间在 <strong>1962—1969 年重合</strong>，我们也因此有了直接比较两种投资风格的机会。</p>
+
+        <p>从基金成立开始，芒格的风格就是<strong>集中持有少数几只优质企业的股票</strong>。在共存的八年里，两人虽然关注重点不同，但业绩都相当惊人。</p>
+
+        <h3 id="sub-1-2">1.2 表 12-1　1962—1969 年巴菲特与芒格基金收益比较</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>道琼斯</th>
+              <th>道琼斯涨跌幅</th>
+              <th>巴菲特基金收益率</th>
+              <th>芒格基金收益率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1962 年</td>
+              <td>646.41</td>
+              <td>-11.3%</td>
+              <td>13.9%</td>
+              <td><strong>30.1%</strong></td>
+            </tr>
+            <tr>
+              <td>1963 年</td>
+              <td>751.91</td>
+              <td>16.3%</td>
+              <td>38.7%</td>
+              <td><strong>71.7%</strong></td>
+            </tr>
+            <tr>
+              <td>1964 年</td>
+              <td>864.43</td>
+              <td>15.0%</td>
+              <td>27.8%</td>
+              <td><strong>49.7%</strong></td>
+            </tr>
+            <tr>
+              <td>1965 年</td>
+              <td>947.60</td>
+              <td>9.6%</td>
+              <td><strong>47.2%</strong></td>
+              <td>8.4%</td>
+            </tr>
+            <tr>
+              <td>1966 年</td>
+              <td>789.75</td>
+              <td>-16.7%</td>
+              <td><strong>20.4%</strong></td>
+              <td>12.4%</td>
+            </tr>
+            <tr>
+              <td>1967 年</td>
+              <td>879.16</td>
+              <td>11.3%</td>
+              <td>35.9%</td>
+              <td><strong>56.2%</strong></td>
+            </tr>
+            <tr>
+              <td>1968 年</td>
+              <td>983.34</td>
+              <td>11.8%</td>
+              <td><strong>58.8%</strong></td>
+              <td>40.4%</td>
+            </tr>
+            <tr>
+              <td>1969 年 5 月</td>
+              <td>949.22</td>
+              <td>-3.5%</td>
+              <td>6.8%</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>1969 年</td>
+              <td>805.04</td>
+              <td>-18.1%</td>
+              <td>—</td>
+              <td><strong>28.3%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>年化收益率</strong></td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>30.2%</strong></td>
+              <td><strong>35.6%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-1-3">1.3 5.4 个百分点，八年拉开的差距</h3>
+
+        <p>芒格在 8 年里有 <strong>5 年超过巴菲特</strong>，年化收益率也比巴菲特高出 <strong>5.4 个百分点</strong>。这 5.4 个百分点的差距，在 8 年跨度里意味着：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资人</th>
+              <th>1 万美元变成</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>巴菲特</td>
+              <td><strong>8.25 万美元</strong></td>
+            </tr>
+            <tr>
+              <td>芒格</td>
+              <td><strong>11.46 万美元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">更关键的不是收益率，而是过程体验</div>
+            <p>芒格使用的是"<strong>伴随优质企业成长</strong>"的思维方式，完全没有经历巴菲特投资"烟蒂"企业时伴随的<strong>处理资产、更换管理层、解雇员工</strong>等一系列烦心事。这对于烦透了"破产清算人"角色的巴菲特，产生了显而易见的吸引力。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、思想进化的核心：经济商誉 -->
+      <section id="section-2">
+        <h2>二、思想进化的核心：经济商誉</h2>
+
+        <h3 id="sub-2-1">2.1 进化的推力：不想做清算人 + 芒格的直言</h3>
+
+        <p>促使巴菲特转变的两股力量：</p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">不想继续扮演"破产清算人"的角色；</li>
+          <li style="margin-bottom:.5rem;">以直言不讳著称的芒格经常在耳边提醒：</li>
+        </ol>
+
+        <div class="pull-quote">
+          "格雷厄姆教的很多东西很愚蠢，你该重新想想对老师那么尊敬是否有必要。"
+        </div>
+
+        <p>格雷厄姆"烟蒂"投资法渐渐无法让巴菲特满意，只有那些立足长远的投资，才能让巴菲特兴奋。那时的巴菲特就已经坦言：</p>
+
+        <div class="pull-quote">
+          "尽管自己是一个格雷厄姆式的低价股猎手，但这些年凡是能真正让我产生激情的，都是那些<strong>更加注重品质</strong>的投资方案。"
+        </div>
+
+        <p>进化水到渠成。巴菲特说：</p>
+
+        <div class="pull-quote">
+          "芒格绝对是独一无二的，他用思想的力量，拓展了我的视野，<strong>让我以非同寻常的速度从猩猩进化为人类</strong>，否则我会比现在贫穷得多。"
+        </div>
+
+        <h3 id="sub-2-2">2.2 进化的核心标志：从账面资产转向经济商誉</h3>
+
+        <p><strong>巴菲特 1983 年致股东信</strong></p>
+
+        <div class="pull-quote">
+          我现在的想法与 35 年前在课堂上学到的东西相比，已经有了明显的改变。当时老师告诉我要注意<strong>有形资产</strong>，避开主要依赖<strong>经济商誉</strong>产生利润的公司。这种偏见虽然让我很少亏损，但却让我错过了很多重要的好机会。<br/><br/>
+          凯恩斯早就指出了这一问题，他说"<strong>困难不在于想出新主意，而在于摆脱旧观念</strong>"。我的摆脱进程之所以比较缓慢，部分原因在于我的老师教的东西一直让我感到非常有价值（未来也会如此）。幸好，直接或间接的企业分析经验，使我现在特别倾向于那些因为<strong>拥有可持续的经济商誉而对有形资产需求很小</strong>的企业。
+        </div>
+
+        <p><strong>巴菲特 1985 年致股东信</strong></p>
+
+        <div class="pull-quote">
+          这三家公司<sup>①</sup>只需运用少量增量资金便能大幅提高盈利能力，它很好地解释了<strong>经济商誉在通胀时期的巨大魅力</strong>。这些公司身上具有的这种特点，让我们可以将它们赚来的利润大部分用在其他用途上。其他美国公司则很难做到这一点：为了大幅提高利润，绝大部分的美国公司需要投入大量的新资本。平均来看，美国公司每创造 1 美元的税前利润大约需要投入 5 美元的新资本。如果套用在我们这个例子上，等于额外需要投入 3 亿多美元才能达到我们这三家公司目前的获利水准。
+        </div>
+
+        <p style="font-size:.85rem; color:var(--text2);">注 ①：指<strong>喜诗糖果、布法罗晚报和内布拉斯加家具商城</strong>。</p>
+
+        <h3 id="sub-2-3">2.3 什么是"经济商誉"？</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>概念</th>
+              <th>定义</th>
+              <th>性质</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>商誉</strong>（会计名词）</td>
+              <td>一家企业收购另一家企业时，成交价超过被收购企业<strong>可辨认净资产公允价值</strong>的部分</td>
+              <td>记录在账面</td>
+            </tr>
+            <tr>
+              <td><strong>经济商誉</strong>（巴菲特借用并创造）</td>
+              <td><strong>没有被记录在一家公司资产负债表里，但却实实在在能够为企业带来利润的隐藏资产</strong></td>
+              <td>不记录在账面</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">最简单的例子——面馆</div>
+            <p><strong>账面记录的资产</strong>：房租、装修、锅碗瓢盆；<strong>账面外的资产</strong>：你做出来的面就是好吃，特别招顾客喜欢。那么，你这个<strong>做面的手艺</strong>，就是面馆的"经济商誉"——"不记录在企业资产负债表里，但却能够为企业带来利润的隐蔽资产"。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-4">2.4 一种"矛盾"：资产越少，价值越高</h3>
+
+        <p>1990 年 4 月 18 日，巴菲特在斯坦福商学院演讲时说：</p>
+
+        <div class="pull-quote">
+          "如果一家企业赚取一定的利润，其他条件相等，这家企业的<strong>资产越少，其价值就越高</strong>，这真是一种矛盾，你不会从账本中看到这一点。真正让人期待的企业，是那种<strong>无须提供任何资本便能运作</strong>的企业。因为已经证实，<strong>仅靠金钱无法在与该企业的竞争中获得优势</strong>，这样的企业就是伟大的企业。"
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">经济商誉之所以宝贵，在于它构成了一条仅靠金钱填不平的护城河。</div>
+            <p>在资本逐利天性的驱使下，<strong>仅靠金钱就可以填平的护城河，一定会被金钱填平</strong>；拥有<strong>金钱无法购买</strong>的经济商誉，企业才有成为伟大企业的可能性。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、经济商誉在哪里？——顺着 ROE 去找 -->
+      <section id="section-3">
+        <h2>三、经济商誉在哪里？——顺着 ROE 去找</h2>
+
+        <h3 id="sub-3-1">3.1 巴菲特给出的路标</h3>
+
+        <p>巴菲特其实已经多次公开告诉我们寻找方法，那就是<strong>顺着净资产收益率（ROE）指标去寻找</strong>。他说：</p>
+
+        <div class="pull-quote">
+          "我选择的公司都是<strong>净资产收益率超过 20%</strong> 的企业。"
+        </div>
+
+        <h3 id="sub-3-2">3.2 ⚠️ 大部分投资者对 ROE 的误解</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>—</th>
+              <th>常见误解</th>
+              <th>正确理解</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>高 ROE 意味着什么</td>
+              <td>ROE 很高的企业，其<strong>账面资产有什么神秘之处</strong>，值得市场以很高的价格购买</td>
+              <td>一定有些什么<strong>能带来收入的东西，没有被记录在财务报表上</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>所以，<strong>ROE 指标实际上需要我们倒过来看</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>观察到</th>
+              <th>应当思考</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>高 ROE</strong></td>
+              <td>这家公司有什么资产<strong>没有记录在账面上</strong></td>
+            </tr>
+            <tr>
+              <td><strong>低 ROE</strong></td>
+              <td>这家公司的什么资产<strong>已经损毁或减值，却还没有从账面上抹去</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-3-3">3.3 一个小学数学方程式</h3>
+
+        <p>"倒过来看"的意思，是首先要从逻辑上作一个假设：</p>
+
+        <div class="pull-quote">
+          由于资本每时每刻的逐利行为，<strong>当下所有资产的收益率实际是一致的，全部是常数 N</strong>，否则会导致套利行为发生，直至达到一致或差异小于套利成本。
+        </div>
+
+        <p><strong>符号约定</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>符号</th>
+              <th>含义</th>
+              <th>取值说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>N</strong></td>
+              <td>无风险收益率</td>
+              <td>国债、AAA 级债券收益率或银行保本理财产品收益率等</td>
+            </tr>
+            <tr>
+              <td><strong>A</strong></td>
+              <td>账面净资产</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>G</strong></td>
+              <td>看不见的经济商誉</td>
+              <td>唯一的未知数</td>
+            </tr>
+            <tr>
+              <td><strong>R</strong></td>
+              <td>净资产收益率 ROE</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>推导过程</strong></p>
+
+        <div class="poem">
+          (A + G) × N = 净利润 = A × R<br/><br/>
+          A + G = A × R ÷ N<br/><br/>
+          G = A × R ÷ N − A<br/><br/>
+          G = (R ÷ N − 1) × A
+        </div>
+
+        <p><strong>结论：G 与 ROE 的对应关系</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>ROE 水平</th>
+              <th>经济商誉 G</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ROE 越大</td>
+              <td><strong>G 值越大</strong></td>
+            </tr>
+            <tr>
+              <td>ROE 越小</td>
+              <td><strong>G 值越小</strong></td>
+            </tr>
+            <tr>
+              <td>ROE &lt; 无风险收益率 N</td>
+              <td><strong>G 值为负</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>因此，巴菲特说投资首选 ROE 指标，意思是 <strong>ROE 就像路标，指引他去发现那些具备高经济商誉以及低有形资产的企业</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、能力圈原则 -->
+      <section id="section-4">
+        <h2>四、能力圈原则</h2>
+
+        <h3 id="sub-4-1">4.1 高经济商誉 ≠ 可投资</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p>是不是只要具有高经济商誉的公司，就是可投资对象呢？<strong>显然不是。</strong> 是否具备某种经济商誉、以及这种经济商誉能否继续存在，这涉及<strong>对具体生意的理解问题</strong>。</p>
+          </div>
+        </div>
+
+        <p>于是，在格雷厄姆投资体系三大原则的基础上，一条新的投资原则顺理成章地演化出来，那就是"<strong>能力圈原则</strong>"：</p>
+
+        <div class="pull-quote large">
+          将自己对企业的<strong>估值和投资决策</strong>，限定于自己<strong>能够理解</strong>的企业。
+        </div>
+
+        <p>通过这个原则，所有企业可以被简单地划分为八类，如图 12-1 所示。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260730094017881.png" alt="图12-1　能力圈原则下的企业分类" style="max-width:100%; height:auto; border-radius:var(--radius);" />
+        </p>
+        <p style="text-align:center; font-size:.85rem; color:var(--text2); margin-top:-.5rem;"><em>图 12-1　能力圈原则下的企业分类</em></p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">棒球的比喻</div>
+            <p>这些企业如同棒球一个一个飞过来，而巴菲特和芒格则手持球棍，<strong>永远等待球进入 ① 和 ② 的甜蜜区才出手</strong>——① 买入，② 卖出，其他的一律放过。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          股市的迷人之处在于，它<strong>从来不会因为你没有行动而惩罚你</strong>，你有绝对权力只在最有把握的时候才出手击球。
+        </div>
+
+        <h3 id="sub-4-2">4.2 什么是"看得懂"？四个问题</h3>
+
+        <p>所谓看得懂，简单说，就是能够理解<strong>高 ROE 企业的生意模式</strong>和<strong>经济商誉的可持续性</strong>。换成通俗的表达，就是能回答以下四个问题：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>问题</th>
+              <th>指向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>①</td>
+              <td>这家公司通过<strong>销售什么商品或服务</strong>获取利润？</td>
+              <td>生意模式</td>
+            </tr>
+            <tr>
+              <td>②</td>
+              <td>它的客户<strong>为何从它这里购买</strong>，而不选其他机构的商品或者服务？</td>
+              <td>竞争优势来源</td>
+            </tr>
+            <tr>
+              <td>③</td>
+              <td>资本的天性是逐利。为什么<strong>其他资本没有提供更高性价比</strong>的商品或服务，抢占它的市场份额或利润空间？</td>
+              <td>护城河存在性</td>
+            </tr>
+            <tr>
+              <td>④</td>
+              <td>假设<strong>同行挟巨资，或者其他产业巨头挟巨资参与竞争</strong>，该公司能否保住乃至继续扩大自己的市场份额？</td>
+              <td>护城河可持续性</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关于"更高性价比"的两种形式</div>
+            <p>同样质量或数量 <strong>+ 更低售价</strong>；同样售价 <strong>+ 更高质量或数量</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-3">4.3 前三个问题的本质：找护城河</h3>
+
+        <p>问题 ①②③ 实际上就是找"<strong>公司究竟靠什么阻挡竞争对手</strong>"，这个"什么"就是投资理论书籍里常用的词语——"<strong>护城河</strong>"。</p>
+
+        <p><strong>常见的护城河类型</strong></p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">差异化的产品或服务</li>
+          <li style="margin-bottom:.5rem;">更低的成本和售价</li>
+          <li style="margin-bottom:.5rem;">受法规保护的专利或资质</li>
+          <li style="margin-bottom:.5rem;">秘不外传的技术</li>
+          <li style="margin-bottom:.5rem;">更高的转换成本</li>
+          <li style="margin-bottom:.5rem;">优越的特殊地理位置</li>
+          <li style="margin-bottom:.5rem;">越多人用越好用的<strong>网络效应</strong></li>
+        </ul>
+
+        <div class="pull-quote">
+          总之，总得有一样或几样东西，是竞争对手需要付出<strong>非常高的代价才能获得</strong>，甚至是<strong>无论付出多高的代价都无法获得</strong>的东西。
+        </div>
+
+        <h3 id="sub-4-4">4.4 第四个问题：河能否被填平</h3>
+
+        <p>找到企业的护城河之后，就代表看懂这家企业了吗？<strong>依然没有。</strong> 历史上企业靠着这条河挡住了其他竞争者，但未来呢？竞争者有没有办法：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>填平</strong>这条河？</li>
+          <li style="margin-bottom:.5rem;">给这条河<strong>搭上桥</strong>？</li>
+          <li style="margin-bottom:.5rem;">甚至用<strong>飞翔空降</strong>的方法绕过这条护城河，直接进入企业的城堡（争夺用户）？</li>
+        </ul>
+
+        <p>也就是说，你能否确定或至少大概率确定，这条护城河未来依然能够阻挡其他竞争者的进攻？这就是问题 ④ 存在的意义。</p>
+
+        <p><strong>判定标准</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>处理方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>能够<strong>逻辑清晰</strong>地回答这四个问题</td>
+              <td>基本意味着<strong>看懂</strong>一家企业了</td>
+            </tr>
+            <tr>
+              <td>无法清晰回答</td>
+              <td>暂时归入<strong>看不懂</strong>的行列，<strong>直接排除</strong>或列入待学习对象</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-5">4.5 能力圈原则的核心</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p><strong>能力圈原则的核心不在于投资者看懂多少企业，而在于如果无法确定自己能够理解该企业，就坚决不去投资，哪怕为此将所有企业均排除在外。</strong></p>
+          </div>
+        </div>
+
+        <p>正如巴菲特所说：</p>
+
+        <div class="pull-quote">
+          "你只需要<strong>待在能力圈里</strong>，专注那些你能看懂的企业。在那些你可以理解并能给出估值的企业中，寻找<strong>价格低于内在价值</strong>的。你可以从一个<strong>相当小的能力圈</strong>开始，慢慢地去理解商业。然后你会发现，有很多公司根本无法给出估值，<strong>忽略它们</strong>。"
+        </div>
+
+        <h3 id="sub-4-6">4.6 如果排除了所有企业，那投资什么？</h3>
+
+        <p>别忘了前面已经谈过的：<strong>普通投资者完全可以立足于先赢，而后再去求大赢。</strong></p>
+
+        <p>首先立足长远，理解沪深 300 指数基金（或沪深港 500 指数基金）代表上市公司群体中相对优质的企业群体，所以存在如下收益率链条：</p>
+
+        <div class="pull-quote large">
+          <strong>沪深 300 指数基金收益率 &gt; 全部上市公司的平均收益率 &gt; 全国所有企业的平均收益率 ≥ 名义 GDP 增长率 &gt; 实际 GDP 增长率 &gt; 类现金资产收益率</strong>
+        </div>
+
+        <p>因此可以大胆投资沪深 300（或沪深港 500）指数基金。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">普通投资者的两步走</div>
+            <p>1. 先<strong>确保能够获取高于 GDP 增长速度的回报</strong>；2. 在此基础上再去学习投资，通过学习和挖掘优质企业<strong>进一步提升投资收益率</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、巴菲特心爱企业的特质 -->
+      <section id="section-5">
+        <h2>五、巴菲特心爱企业的特质</h2>
+
+        <p>看懂企业容易吗？<strong>不容易。</strong> 所以巴菲特一直强调自己喜欢<strong>简单的、变量少的</strong>企业。关于这些企业的特质，巴菲特有如下描述。</p>
+
+        <h3 id="sub-5-1">5.1 巴菲特原话：确定性优先于高难度</h3>
+
+        <div class="pull-quote">
+          投资者应当了解，你的投资成绩与<strong>奥运跳水比赛的计分方式并不相同，高难度并不能得到加分</strong>。<br/><br/>
+          我们偏爱那些<strong>变化不大</strong>的公司与产业。我们寻找的是那些在未来 10 年或 20 年内能够保持竞争优势的公司。快速变化的产业环境或许可以提供赚大钱的机会，但却无法提供我们想要的确定性。<strong>我们宁愿要确定的好结果，也不要"有可能"的伟大结果。</strong><br/><br/>
+          我从那些<strong>简单的产品</strong>里寻找好生意。像甲骨文、莲花、微软这些公司，我搞不懂它们的护城河十年之后会怎样。比尔·盖茨是我遇到的最棒的商业奇才，微软也拥有巨大的领先优势，但我真不知道微软十年后会怎样，无法确切地知道微软的竞争对手十年后会怎样。<br/><br/>
+          我们试着坚守在自认为了解的生意上，这表示它们必须<strong>简单易懂且具有稳定性</strong>。如果生意比较复杂且经常变来变去，我们就很难有足够的智慧去预测其未来现金流。<br/><br/>
+          我知道<strong>口香糖</strong>生意十年后会怎样。互联网再怎么发展，都不会改变我们嚼口香糖的习惯，好像没什么能改变我们嚼口香糖的习惯。肯定会有更多新品种的口香糖出现，但白箭和黄箭会消失吗？不会。你给我 10 亿美元，让我去做口香糖生意，去挫挫箭牌的威风，我做不到。<br/><br/>
+          我就是这么思考生意的。我自己设想，要是我有 10 亿美元，能伤着这家公司吗？给我 100 亿美元，让我在全球和<strong>可口可乐</strong>竞争，我能伤着可口可乐吗？我做不到。这样的生意是好生意。你要说给我一些钱，问我能不能伤着其他行业的一些公司，我知道怎么做。<br/><br/>
+          我<strong>不喜欢门槛低</strong>的生意。生意门槛低，容易招来竞争对手。我喜欢有护城河的生意。我希望拥有一座价值连城的城堡，<strong>守护城堡的公爵德才兼备</strong>。我希望这座城堡周围有宽广的护城河。<br/><br/>
+          好生意，你能看出来它将来会怎样，但是不知道会是什么时候。看一个生意，你就一门心思琢磨它<strong>将来会怎么样，别太纠结什么时候</strong>。把生意的将来能怎么样看透了，到底是什么时候，没多大关系。<br/><br/>
+          只要是好生意，别的什么东西都不重要。只要把生意看懂了，就能赚大钱。<strong>择时很容易掉坑里。</strong> 只要是好生意，我就不管那些新闻热点，也不考虑今年明年会如何之类的问题。
+        </div>
+
+        <h3 id="sub-5-2">5.2 特质清单汇总</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>巴菲特偏好</th>
+              <th>巴菲特回避</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>复杂度</strong></td>
+              <td>简单易懂、变量少</td>
+              <td>复杂且经常变来变去</td>
+            </tr>
+            <tr>
+              <td><strong>变化速度</strong></td>
+              <td>未来 10～20 年变化不大</td>
+              <td>快速变化的产业环境（如高科技）</td>
+            </tr>
+            <tr>
+              <td><strong>确定性</strong></td>
+              <td>确定的好结果</td>
+              <td>"有可能"的伟大结果</td>
+            </tr>
+            <tr>
+              <td><strong>进入门槛</strong></td>
+              <td>有宽广护城河</td>
+              <td>门槛低、容易招来竞争对手</td>
+            </tr>
+            <tr>
+              <td><strong>管理层</strong></td>
+              <td>德才兼备（"守护城堡的公爵"）</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>时点判断</strong></td>
+              <td>只琢磨"将来会怎么样"</td>
+              <td>纠结"什么时候"、择时、新闻热点</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-5-3">5.3 筛选完成之后，还差一步</h3>
+
+        <p>一路筛选下来，巴菲特找到那些"<strong>简单易懂的、具有我们能理解的经济商誉，且由德才兼备的管理层掌管</strong>"的企业。现在是不是可以立刻买入呢？</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p><strong>不。现在需要做的是估值。</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、巴菲特的估值方法 -->
+      <section id="section-6">
+        <h2>六、巴菲特的估值方法</h2>
+
+        <h3 id="sub-6-1">6.1 一碗浓浓的失望之汤</h3>
+
+        <p>好公司也需要一个合理的价格。巴菲特用什么方法对企业进行估值呢？一定有很多朋友满怀期望地等待着巴菲特绝密的估值公式，幻想着输入财报数据、一敲确认键、坐等收钱。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p><strong>很遗憾——巴菲特从来没有给过一个估值公式，他只是说了原则。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="sub-6-2">6.2 巴菲特的估值原则原文</h3>
+
+        <div class="pull-quote">
+          任何股票、债券或企业的价值，都取决于<strong>将资产剩余年限自由现金流以一个适当的利率加以折现</strong>后所得到的数值，它是评估某项生意或者某项投资是否具有吸引力的<strong>唯一合理方法</strong>。<br/><br/>
+          对于任何一项生意，如果我们能够计算出其未来一百年内的自由现金流，然后以一个合适的利率折现回现在，就可以得到一个代表内在价值的数字。这就像一个一百年后到期的债券，在债券的下面会有很多的<strong>息票</strong>。生意也有"息票"，唯一的问题是那些"息票"并不是像债券那样打印在其下面，而是<strong>需要依靠投资者去估算</strong>未来的生意会附带一个多高利率的"息票"。<br/><br/>
+          对于高科技类的生意，或具有类似属性的生意，会附带一个什么样的"息票"，我们基本没有概念。对于我们了解得比较深入的生意，我们试图将其息票"打印"出来。如果你想要计算企业的内在价值，<strong>唯一可以依靠的就是自由现金流</strong>。<br/><br/>
+          你要将现金投入任意一项投资中，你的目的都是期望你投入的生意在此后能够为你带来更多的<strong>现金流入</strong>，而不是期望把它<strong>卖给别人</strong>获利。后者仅仅是<strong>互掏腰包</strong>的游戏。如果你是一个投资者，你的注意力集中在<strong>资产的表现</strong>上；如果你是一个投机者，你的注意力集中在<strong>价格会如何变化</strong>——后者不是我们擅长的游戏。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、关键概念（一）：自由现金流 -->
+      <section id="section-7">
+        <h2>七、关键概念（一）：自由现金流</h2>
+
+        <h3 id="sub-7-1">7.1 定义：一个不在财报上的模糊概念</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p><strong>自由现金流不在财报上。</strong> 财报上只有经营现金流、投资现金流和筹资现金流。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>版本</th>
+              <th>表述</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>学术定义</strong></td>
+              <td>由公司所创造的现金流入量减去公司所有的支出，包括在工厂、设备以及营运资本上的投资等，剩下的净现金流量。这些现金流量是<strong>可以分配给投资者</strong>的</td>
+            </tr>
+            <tr>
+              <td><strong>简化理解</strong></td>
+              <td>从企业通过经营活动获取的现金里，减去<strong>为了维持生意运转必需的资本投入</strong>，余下的那部分现金</td>
+            </tr>
+            <tr>
+              <td><strong>更通俗的说法</strong></td>
+              <td>企业每年的利润中<strong>可以分掉，且分掉后不会影响企业经营</strong>的那部分现金</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p><strong>注意，是"可以分"的现金量。是不是真的分了，不影响自由现金流的数值。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="sub-7-2">7.2 为什么自由现金流决定企业价值</h3>
+
+        <p><strong>自由现金流的数量以及得到的时间早晚，决定了企业价值的大小。</strong></p>
+
+        <p>如果我们将所有股东视为一个整体，你会发现股东回报的"<strong>唯一</strong>"来源，就是企业经营获利减去为了维持企业运转必需的投入，剩下的那部分现金。除此之外，股东们什么也不会得到。</p>
+
+        <div class="pull-quote">
+          所以股东买入企业，本质上买的就是<strong>企业未来能创造的全部自由现金流</strong>。
+        </div>
+
+        <h3 id="sub-7-3">7.3 为什么不用净利润？规避两种情况</h3>
+
+        <p><strong>第一种情况：公司赚的是"假"钱</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>类型</th>
+              <th>表现</th>
+              <th>后果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 利润主要来自<strong>应收账款</strong></td>
+              <td>商品或服务卖出去了，但没收到钱，只是赊账、是欠条</td>
+              <td>按会计规则可产生报表净利润，但<strong>那只是个数字</strong></td>
+            </tr>
+            <tr>
+              <td>② 利润靠<strong>变卖资产或资产重估</strong>获得</td>
+              <td>变卖资产不可持续；资产重估<strong>只见数字不见钱</strong></td>
+              <td>使用报表净利润评估企业会<strong>高估企业价值</strong></td>
+            </tr>
+            <tr>
+              <td>③ 某些<strong>金融企业</strong>的报表利润依赖一大堆参数假设</td>
+              <td>参数的微小波动会导致报表利润乃至公司净资产发生巨大波动，甚至在大赚和大亏之间波动</td>
+              <td>这些参数在很长时间内<strong>既无法证实也无法证伪</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>第二种情况：赚的是真钱，但商业模式需要不断投入资本才能继续</strong></p>
+
+        <p>这种模式，芒格曾经很清楚地表达过：</p>
+
+        <div class="pull-quote">
+          <strong>世界上有两种生意，第一种可以每年赚 12% 的收益，到年底股东可以拿走所有利润；第二种也可以每年赚 12%，但是你不得不把赚来的钱重新投资，然后你指着所有的厂房设备对股东们说："这就是你们的利润。"我讨厌第二种生意。</strong>
+        </div>
+
+        <h3 id="sub-7-4">7.4 如何估算：一个保守的模拟公式</h3>
+
+        <p>因此，自由现金流的数量<strong>无法从财报上直接获得</strong>，只能在你理解公司<strong>售卖什么、如何获利、如何抵御竞争</strong>之后进行估算。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p><strong>不需要很准，但不能错得离谱。</strong></p>
+          </div>
+        </div>
+
+        <p>如果非要找个公式，可以这样保守模拟：</p>
+
+        <div class="poem">
+          自由现金流 ≈ 经营活动产生的现金流量净额<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;− 购建固定资产、无形资产和其他长期资产支付的现金
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">为什么说是"保守"模拟？</div>
+            <p>因为"购建固定资产、无形资产和其他长期资产支付的现金"这一金额，实际包含<strong>部分为业务扩张而实施的资本再投入</strong>，这部分并不属于"为了维持生意运转必需的资本投入"。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          <strong>总之一句话：对于你能理解的公司，你必然能够估出一个大致的自由现金流数字。如果无法作出估算，足以证明你尚未理解这家公司。</strong>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、关键概念（二）：折现与折现模型 -->
+      <section id="section-8">
+        <h2>八、关键概念（二）：折现与折现模型</h2>
+
+        <h3 id="sub-8-1">8.1 折现：一个常见的金融概念</h3>
+
+        <p>如果确定的年收益率为 10%，那么：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>金额</th>
+              <th>关系</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>今天</td>
+              <td>100 万元</td>
+              <td>基准</td>
+            </tr>
+            <tr>
+              <td>一年后</td>
+              <td>110 万元</td>
+              <td>与今天的 100 万元<strong>等价</strong></td>
+            </tr>
+            <tr>
+              <td>两年后</td>
+              <td>121 万元</td>
+              <td>与前两者<strong>等价</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><code>110 ÷ 110%</code> 及 <code>121 ÷ 110%²</code> 的计算过程就叫<strong>折现</strong>，其中的 <strong>10% 就是折现率</strong>。</p>
+
+        <h3 id="sub-8-2">8.2 理论模型与两种简化</h3>
+
+        <p><strong>理论上</strong>：可以将企业未来每年产生的自由现金流，按照某折现率逐笔折现到今天，再把所有的折现值加总，便是该企业的内在价值。</p>
+
+        <p>由于没有人能够准确知道未来每年的自由现金流数据，实践运用中通常有两种简化模型：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>模型</th>
+              <th>结构</th>
+              <th>计算方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>两段式</strong></td>
+              <td>前段（可准确预计）+ 后段（大致估算）</td>
+              <td>前段一般采用 <strong>3 年或 5 年</strong>，逐年估算自由现金流数值；后段直接采用公式 <code>价值 = 自由现金流 ÷ (折现率 − 永续增长率)</code>。然后将前后段分别折现加总</td>
+            </tr>
+            <tr>
+              <td><strong>三段式</strong></td>
+              <td>前段再拆为<strong>高速增长期 + 低速增长期</strong>，加上后段</td>
+              <td>其他不变，依然将<strong>三段分别折现加总</strong>得出企业内在价值</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">永续增长率</div>
+            <p>指投资者个人估算的该企业未来能够持续保持的自由现金流<strong>年化增长率</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-8-3">8.3 ⚠️ 老唐的判断：一种"精确的错误"</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">老唐认为，这些计算方法的可靠程度几乎为零，它更像一种精确的错误。</div>
+            <p>投资者只要调整以下三个变量中的一个、两个或全部，<strong>几乎可以得到想要的任何数据</strong>：1. 企业每年自由现金流估算值；2. 折现率；3. 永续增长率。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-8-4">8.4 那它到底有什么用？一种思考方法</h3>
+
+        <p>在老唐看来，自由现金流折现法其实只是<strong>一种思考方法</strong>，是筛选投资者能够理解的、能够产生大量自由现金的<strong>高确定性企业</strong>的一种工具。这个筛选过程可以用一张流程图表示，如图 12-2 所示。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260730094130999.png" alt="图12-2　自由现金流折现的筛选流程" style="max-width:100%; height:auto; border-radius:var(--radius);" />
+        </p>
+        <p style="text-align:center; font-size:.85rem; color:var(--text2); margin-top:-.5rem;"><em>图 12-2　自由现金流折现的筛选流程</em></p>
+
+        <p><strong>流程图揭示的思路</strong>：现金流折现公式聚焦于寻找那些满足以下条件的企业：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>要求</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>商业模式</td>
+              <td>在可见的未来<strong>没有毁灭性危险</strong></td>
+            </tr>
+            <tr>
+              <td>产业链地位</td>
+              <td>处于<strong>强势地位</strong></td>
+            </tr>
+            <tr>
+              <td>竞争优势趋势</td>
+              <td>预计会<strong>保持强大甚至越来越强大</strong></td>
+            </tr>
+            <tr>
+              <td>现金特征</td>
+              <td>可以<strong>持续产生现金利润</strong>，且<strong>不依赖大量增量资本投入</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">至于精确计算的公式，老唐建议大家还是忘了它吧！</div>
+            <p>全球私募巨头黑石集团的创始人彼得·彼得森说："华尔街有句老话，只要掌握<strong>小学二年级的数学</strong>，就可以在华尔街生存了。"复杂的金融公式，还是忘掉最好。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-8-5">8.5 巴菲特本人的回答（2002 年股东大会）</h3>
+
+        <p>在 2002 年伯克希尔-哈撒韦的股东大会上，有位提问者询问巴菲特："<strong>您平时使用什么估值指标？</strong>"巴菲特的回答是：</p>
+
+        <div class="pull-quote">
+          "生意的合理估值水平与标准普尔 500 指数相比的优劣，取决于生意的<strong>净资产收益率和增量资本收益率</strong>。我不会只盯类似 PE 这样的估值指标看，我不认为 <strong>PE、PB、PS 这些指标能告诉你什么有价值的信息</strong>。人们想要一个计算公式，但这并不容易。想要对某门生意进行估值，你需要知道它<strong>从现在开始直到永远的自由现金流量</strong>，然后把它们以一个合理的折扣率折现回来。<strong>金钱都是一样的（All cash is equal）</strong>，你需要评估的是<strong>这门生意的竞争优势</strong>。"
+        </div>
+
+        <p><strong>巴菲特估值观小结</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>关注</th>
+              <th>不关注</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>净资产收益率（ROE）</td>
+              <td>PE</td>
+            </tr>
+            <tr>
+              <td>增量资本收益率</td>
+              <td>PB</td>
+            </tr>
+            <tr>
+              <td>未来直到永远的自由现金流</td>
+              <td>PS</td>
+            </tr>
+            <tr>
+              <td><strong>生意的竞争优势</strong></td>
+              <td>精确的计算公式</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 投资智慧 · 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
