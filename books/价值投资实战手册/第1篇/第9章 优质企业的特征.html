@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第9章 优质企业的特征 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      line-height: 1.85;
+    }
+    .poem .poem-author {
+      display: block;
+      margin-top: .6rem;
+      font-size: .82rem;
+      color: var(--gold);
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .code-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      font-family: 'Courier New', monospace;
+      font-size: .9rem;
+      line-height: 1.7;
+      color: var(--gold-dk);
+      overflow-x: auto;
+    }
+
+    p img {
+      max-width: 100%;
+      border-radius: var(--radius);
+      margin: 1rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    }
+
+    .article-table td:first-child { white-space: normal; }
+    .article-table .nowrap { white-space: nowrap; }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    @media(max-width: 1056px) {
+      .example-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .example-grid { grid-template-columns: 1fr; }
+    }
+    .example-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .example-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+    }
+    .example-card.moutai::before { background: #c87a2c; }
+    .example-card.power::before { background: #4a78b0; }
+    .example-card.bank::before { background: #7a9a5a; }
+    .example-card h4 { font-size: 1rem; margin-bottom: .5rem; }
+    .example-card p { font-size: .88rem; margin-bottom: .3rem; line-height: 1.6; }
+    .example-card .label { font-size: .75rem; color: var(--text3); display: block; margin-bottom: .1rem; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="第9章 优质企业的特征.html" class="active">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、寻找优质企业的两种路径</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">自上而下式</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">自下而上式</a></li>
+        <li><a href="#section-2">二、优质企业的特点</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">特殊资源</a></li>
+        <li class="sub"><a href="#sub-2-4" class="sub">三大特性</a></li>
+        <li class="sub"><a href="#sub-2-5" class="sub">案例对比</a></li>
+        <li><a href="#section-3">三、波特五力模型</a></li>
+        <li><a href="#section-4">四、茅台应用分析</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">进入壁垒</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">供应商议价</a></li>
+        <li class="sub"><a href="#sub-4-3" class="sub">购买者议价</a></li>
+        <li class="sub"><a href="#sub-4-4" class="sub">替代品威胁</a></li>
+        <li class="sub"><a href="#sub-4-5" class="sub">竞争程度</a></li>
+        <li class="sub"><a href="#sub-4-6" class="sub">分析结论</a></li>
+        <li><a href="#section-5">五、面对无数的可能性</a></li>
+        <li class="sub"><a href="#sub-5-3" class="sub">市盈率约束</a></li>
+        <li class="sub"><a href="#sub-5-5" class="sub">求不败</a></li>
+        <li><a href="#section-6">六、"七亏两平一个赚"的原因</a></li>
+        <li class="sub"><a href="#sub-6-5" class="sub">道与术</a></li>
+        <li><a href="#section-7">七、被误读的巴菲特思想</a></li>
+        <li class="sub"><a href="#sub-7-2" class="sub">富国银行</a></li>
+        <li class="sub"><a href="#sub-7-3" class="sub">德克斯特鞋业</a></li>
+        <li class="sub"><a href="#sub-7-4" class="sub">Tesco</a></li>
+        <li class="sub"><a href="#sub-7-5" class="sub">亏损定义</a></li>
+        <li class="sub"><a href="#sub-7-6" class="sub">小饭馆</a></li>
+        <li><a href="#section-8">八、关于投资的三个要点</a></li>
+        <li class="sub"><a href="#sub-8-1" class="sub">摆脱股价波动</a></li>
+        <li class="sub"><a href="#sub-8-3" class="sub">判断错误</a></li>
+        <li><a href="#section-9">九、本章小结</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 · 第1篇 如何面对股价波动 · 第9章</div>
+        <h1 class="article-title">优质企业的特征</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>主题</strong>优质企业 · 竞争优势 · 波特五力模型</span>
+        </div>
+      </header>
+
+      <div class="pull-quote">
+        投资者应该如何寻找优质企业？通常有两种路径：<strong>自上而下式筛选</strong>与<strong>自下而上式筛选</strong>。
+      </div>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、寻找优质企业的两种路径 -->
+      <section id="section-1">
+        <h2>一、寻找优质企业的两种路径</h2>
+
+        <h3 id="sub-1-1">1.1 自上而下式：先选行业，再选企业</h3>
+
+        <p><strong>思考路线</strong></p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">前瞻性地找出未来发展空间较大的行业——先找到一张<strong>可能越来越大的饼</strong>；</li>
+          <li style="margin-bottom:.5rem;">再在该行业内寻找一家或几家具备优势或潜在优势的企业——即未来可能在这张大饼中<strong>获取较大份额</strong>的企业；</li>
+          <li style="margin-bottom:.5rem;">如有条件，还可以在选择行业之前加上<strong>选择国家</strong>，首选经济增速可能较快的国家，再在其中挑选发展空间大的行业。</li>
+        </ol>
+
+        <p><strong>能力要求</strong></p>
+
+        <p>这种方法对投资者个人的<strong>商业前瞻能力</strong>要求较高，需要具备识别产业机会的能力，能大概率判断出未来某产业的腾飞。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">风口论</div>
+            <p>大部分成功的风险投资家以及大部分成功的企业家，都是因为选择了正确的行业，站在了风口。你是一只天鹅，大风会助你翱翔天空；你是一头笨象，大风也会推你化身飞天神象。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-1-2">1.2 自下而上式：从企业本身出发</h3>
+
+        <p>自下而上式也有两大类投资方法，侧重点截然不同。</p>
+
+        <p><strong>（1）侧重寻找严重低估——格雷厄姆体系</strong></p>
+
+        <p>思想来源于本杰明·格雷厄姆的《证券分析》及《聪明的投资者》两部著作。格雷厄姆在《聪明的投资者》第五章第二节明确提出他给予普通投资者的<strong>四条股票投资建议</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>建议</th>
+              <th>具体标准</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>①</td>
+              <td>充分但不过度的分散投资</td>
+              <td>资金分散在少则 10 只、多则 30 只股票上</td>
+            </tr>
+            <tr>
+              <td>②</td>
+              <td>只选择大型、杰出而且举债保守的公司</td>
+              <td>——</td>
+            </tr>
+            <tr>
+              <td>③</td>
+              <td>购买对象应具有长期持续的股息发放记录</td>
+              <td>——</td>
+            </tr>
+            <tr>
+              <td>④</td>
+              <td>只买低市盈率股票</td>
+              <td>用过去数年的平均净利润计算，市值不超过过去 7 年平均净利润的 25 倍；若用最近四个季度净利润，则买入上限为 20 倍市盈率</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>这套思路的本质</strong>：帮助投资者构建一个<strong>低估值的指数</strong>——通过分散来规避财报数据造假，利用市场情绪，相信悲观过后一定会有乐观，周而复始。</p>
+
+        <p><strong>代表人物：沃尔特·施洛斯</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>投资生涯</td>
+              <td>47 年</td>
+            </tr>
+            <tr>
+              <td>投资手法</td>
+              <td>严格坚守格雷厄姆投资原则，不断寻找严重低估的股票</td>
+            </tr>
+            <tr>
+              <td>累计成绩</td>
+              <td>1 变 5456</td>
+            </tr>
+            <tr>
+              <td>年化收益率</td>
+              <td><strong>20.1%</strong>（世界级大师水平）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>（2）侧重寻找优秀企业——巴菲特体系</strong></p>
+
+        <p>代表人物是沃伦·巴菲特。这种自下而上式选股，一般<strong>从企业的净资产收益率指标开始</strong>。</p>
+
+        <div class="pull-quote">
+          如果只能挑选一个指标来选股，他会选择<strong>净资产收益率</strong>。
+          <cite>—— 沃伦·巴菲特</cite>
+        </div>
+
+        <p><strong>净资产收益率（ROE）</strong></p>
+
+        <div class="code-block">
+          ROE = 净利润 ÷ 净资产
+        </div>
+
+        <p>一家公司如果长时间维持较高的净资产收益率，意味着：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">它赚同样多的利润，相比同行及其他公司<strong>用了更少的资本</strong>；</li>
+          <li style="margin-bottom:.5rem;">或者用了同样的资本，<strong>赚到了更多的利润</strong>。</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意：这与股价无关</div>
+            <p>股价高低是股东之间的交易行为，并不改变公司经营所掌控的资源数量和质量。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、优质企业的特点 -->
+      <section id="section-2">
+        <h2>二、优质企业的特点</h2>
+
+        <h3>2.1 追问：超额利润从何而来？</h3>
+
+        <p>同等投入获取了更多的利润，这不科学，不符合资本的逐利天性！沿着这个现象往下追问：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">凭什么？</li>
+          <li style="margin-bottom:.5rem;">为什么同行或其他资本没有投入资本参与竞争，最终抢走它的超额利润呢？</li>
+        </ul>
+
+        <p>顺着这个思路想下去，最终一定会发现某种<strong>没有被计算在报表净资产里面的特殊资源</strong>，然后恍然大悟：原来超额利润是这种资源带来的。</p>
+
+        <h3 id="sub-2-2">2.2 那种"特殊资源"可能是什么？</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>资源类型</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>优秀管理层</td><td>能干的管理团队</td></tr>
+            <tr><td>独特产品</td><td>很难被模仿</td></tr>
+            <tr><td>品牌及无形资产</td><td>品牌溢价、专利等</td></tr>
+            <tr><td>成本优势</td><td>地理条件或其他原因造成</td></tr>
+            <tr><td>规模门槛</td><td>规模效应形成的进入障碍</td></tr>
+            <tr><td>转换成本</td><td>客户离开会很麻烦的服务</td></tr>
+            <tr><td>网络效应</td><td>越多人用价值越大</td></tr>
+            <tr><td>行政管制</td><td>带来的进入门槛或信息优势</td></tr>
+            <tr><td>特殊关系</td><td>甚至可能是某种"中国式关系"</td></tr>
+          </tbody>
+        </table>
+
+        <h3>2.3 关键的下一步追问</h3>
+
+        <p>发现这种独特资源后，需要继续思考：</p>
+
+        <div class="pull-quote large">
+          这种带来利润的资源，未来是能够保持甚至越来越强大，还是可能被其他行业或者本行业内的同行削弱？
+        </div>
+
+        <p>如果答案是<strong>前者</strong>，那我们就发现了一个<strong>具有竞争优势的企业</strong>。</p>
+
+        <h3 id="sub-2-4">2.4 竞争优势企业产品/服务的三大特性</h3>
+
+        <p>一般来说，具有竞争优势的企业，其提供的产品或服务都具有三个明显特性：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>特性</th>
+              <th>反面推理：若不具备会怎样</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 被需要</strong></td>
+              <td>产品或服务不被需要，肯定没钱赚，结局只能是破产</td>
+            </tr>
+            <tr>
+              <td><strong>② 很难被替代</strong></td>
+              <td>产品没有差异性、容易被替代，同质化产品的结局必然是价格战。杀敌一万、自损八千，生生便宜了买方，企业不死也只能苟活</td>
+            </tr>
+            <tr>
+              <td><strong>③ 价格不受管制</strong></td>
+              <td>价格被政府管制，想获取高额利润就相对比较困难</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-5">2.5 案例对比：茅台 / 国投电力 / 民生银行</h3>
+
+        <p>用贵州茅台、国投电力和民生银行三家公司，从上述三个维度做对比说明。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>贵州茅台</th>
+              <th>国投电力</th>
+              <th>民生银行</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>是否被需要</strong></td>
+              <td>✅ 白酒</td>
+              <td>✅ 电力</td>
+              <td>✅ 资金及财富管理</td>
+            </tr>
+            <tr>
+              <td><strong>替代难度</strong></td>
+              <td><strong>最高</strong>：高端酱香酒，竞品有明显口味差异，品牌附加值天差地别</td>
+              <td><strong>两极</strong>：水电较难替代（替代品生产成本远高于水电）；火电很容易被替代，近于无差异化产品</td>
+              <td><strong>中等</strong>：在水电之后、火电之前。绝大部分资金或服务在其他银行也能获得</td>
+            </tr>
+            <tr>
+              <td><strong>价格管制</strong></td>
+              <td><strong>无管制</strong> ①</td>
+              <td><strong>几乎完全管制</strong>：除极少量市场化交易外，水电火电价格绝大部分属于完全管制</td>
+              <td><strong>部分管制</strong>：存贷款利率基本市场化，但仍接受央行窗口指导，部分服务价格依然有明确管制</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>结论</strong>：从被需要、难以替代、价格管制三个角度评价，<strong>贵州茅台的优势远远大于国投电力和民生银行</strong>。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">注</div>
+            <p>2013 年贵州茅台被发改委罚款，并非出厂价被管制，而是因为茅台公司限定经销商向消费者销售茅台酒的最低价格，涉嫌违反《反垄断法》。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、分析企业的绝佳助手：波特五力模型 -->
+      <section id="section-3">
+        <h2>三、分析企业的绝佳助手：波特五力模型</h2>
+
+        <h3>3.1 模型来源</h3>
+
+        <p>20 世纪 80 年代，哈佛商学院教授<strong>迈克尔·波特</strong>在其经典著作《竞争战略》一书中，将上述思考角度细化并提出，命名为"<strong>波特五力模型</strong>"。</p>
+
+        <h3>3.2 五种力量</h3>
+
+        <p>波特五力模型认为，每个行业中都存在决定<strong>竞争规模</strong>和<strong>竞争惨烈度</strong>的五种力量：</p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">潜在竞争者进入壁垒</li>
+          <li style="margin-bottom:.5rem;">替代品威胁</li>
+          <li style="margin-bottom:.5rem;">买方议价能力</li>
+          <li style="margin-bottom:.5rem;">卖方议价能力</li>
+          <li style="margin-bottom:.5rem;">现存竞争者之间的竞争</li>
+        </ol>
+
+        <p style="text-align:center;">
+          <img src="assets/image-20260729200407864.png" alt="波特五力模型示意图" style="max-width:100%; border-radius:var(--radius); box-shadow:0 4px 12px rgba(0,0,0,.08);" />
+        </p>
+
+        <h3>3.3 对投资者的意义</h3>
+
+        <p>波特五力模型是现代 MBA、EMBA 必修课，对投资者同样重要。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>投资者可以在模型的引导下，努力寻找在这五个方面<strong>尽可能多占据优势</strong>的企业。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、波特五力模型应用：以贵州茅台为例 -->
+      <section id="section-4">
+        <h2>四、波特五力模型应用：以贵州茅台为例</h2>
+
+        <h3 id="sub-4-1">4.1 潜在竞争者进入壁垒</h3>
+
+        <p>对贵州茅台而言，至少存在<strong>四大进入壁垒</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>壁垒</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>①</td>
+              <td>白酒生产许可证</td>
+              <td>目前国家已经不批，潜在竞争者只能通过收购现有白酒企业的许可证进入 ①</td>
+            </tr>
+            <tr>
+              <td>②</td>
+              <td>环境与土地</td>
+              <td>适合酿造酱香型白酒的环境和资源，类似茅台镇这种条件，无论投入多少金钱都无法复制</td>
+            </tr>
+            <tr>
+              <td>③</td>
+              <td>生产条件苛刻</td>
+              <td>酱香型白酒生产周期长，需要资金量大，且对熟练酒师的数量和质量要求都很高</td>
+            </tr>
+            <tr>
+              <td>④</td>
+              <td>老酒储备</td>
+              <td>高档酱香型白酒需要数十年老酒参与勾兑。由于历史原因，竞争者无论用多少金钱也无法买到足量的老酒</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>由此形成的两难困局</strong>：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">想追求类似茅台酒的<strong>质量</strong>，就无法形成有威胁性的<strong>数量</strong>；</li>
+          <li style="margin-bottom:.5rem;">想达到有威胁性的<strong>数量</strong>，就无法实现比肩茅台酒的<strong>质量</strong>。</li>
+        </ul>
+
+        <p>结果是，根本没有办法形成有威胁性的竞争。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <p>① 该项审批已于 2020 年取消。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-2">4.2 供应商议价能力</h3>
+
+        <p>供应高粱和小麦的农民，议价能力<strong>非常弱</strong>：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">能够种植满足要求原料的农民，<strong>播种前</strong>就已经和茅台公司签订了长期供应合同；</li>
+          <li style="margin-bottom:.5rem;">茅台公司历史悠久、资金雄厚、信誉卓著，种植户<strong>没有意愿</strong>为了短期利益终止与茅台公司的合约。</li>
+        </ul>
+
+        <h3 id="sub-4-3">4.3 购买者的议价能力</h3>
+
+        <p>经销商议价能力<strong>近于零</strong>：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">购买产品的经销商需<strong>缴纳保证金</strong>，接受茅台公司管理；</li>
+          <li style="margin-bottom:.5rem;"><strong>提前打款</strong>，按照配额拿货；</li>
+          <li style="margin-bottom:.5rem;">在产品供不应求的状况下，茅台公司有能力按照自己对市场的估计和公司战略，<strong>灵活调整出厂价</strong>，获取超额利润。</li>
+        </ul>
+
+        <h3 id="sub-4-4">4.4 替代品的威胁</h3>
+
+        <p>相同档次内，<strong>没有可以完全替代</strong>茅台酒的酱香型白酒。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>近似替代品</td>
+              <td>五粮液、国窖 1573、梦之蓝 M9、青花郎等</td>
+            </tr>
+            <tr>
+              <td>差距所在</td>
+              <td>无论自饮还是请客，替代品和茅台酒在<strong>口味、档次、情感定位</strong>上均有明显差距</td>
+            </tr>
+            <tr>
+              <td>实际地位</td>
+              <td>只能作为<strong>退而求其次</strong>的备选</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-5">4.5 行业内竞争程度</h3>
+
+        <p>高端白酒市场处于<strong>差异化竞争</strong>状态：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">企业各自有不同的口味和情感定位；</li>
+          <li style="margin-bottom:.5rem;">各自锁定自己的忠实客户；</li>
+          <li style="margin-bottom:.5rem;">全行业均处于<strong>高毛利</strong>状态，竞争程度较低。</li>
+        </ul>
+
+        <h3 id="sub-4-6">4.6 分析结论</h3>
+
+        <p>综上所述，经过波特五力模型分析，<strong>茅台公司在五个方面均占有竞争优势</strong>，可供公司选择的盈利模式很多。</p>
+
+        <p>而如果拿这个模型套用分析<strong>国投电力和民生银行</strong>，会发现他们在某一方面甚至某几方面处于<strong>竞争弱势</strong>，因而可供公司选择的盈利模式有限。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">模型的真正价值</div>
+            <p>学习了波特五力模型后，新接触一个企业时就有了一套章法去应对，不至于"老虎吃天——无处下爪"。通过多次拿模型去"生搬硬套"，不仅能够更加深刻地理解企业竞争力所在，也会慢慢发现：<strong>原来这世界真的存在一些"结果必然如此"的企业</strong>。虽然其数量稀少，而且大多数时候不便宜，但如果能够提前研究并大致确定值得买入的价格，那么某些罕见的、极短时间的大跌，就可能带来买入良机。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、面对无数的可能性，如何正确抉择？ -->
+      <section id="section-5">
+        <h2>五、面对无数的可能性，如何正确抉择？</h2>
+
+        <h3>5.1 81 种可能的矩阵</h3>
+
+        <p>按照波特五力模型将市场上的企业分为<strong>优质、普通、垃圾</strong>三大类，并为它们划分出<strong>高估、合理、低估</strong>三种状态，就可以模拟出一个具有 <strong>81 种可能</strong>的矩阵。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>全部可能组合</td>
+              <td>81 种</td>
+            </tr>
+            <tr>
+              <td>能够导致亏损的情况</td>
+              <td>21 种</td>
+            </tr>
+            <tr>
+              <td>其中与<strong>优质企业</strong>相关的</td>
+              <td><strong>11 种</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>5.2 表9-1 买入优质企业后可能面对的亏损情况</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>买入时企业</th>
+              <th>买入时估值</th>
+              <th>卖出时企业</th>
+              <th>卖出时估值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>优质</td><td>高估</td><td>普通</td><td>合理</td></tr>
+            <tr><td>优质</td><td>高估</td><td>普通</td><td>低估</td></tr>
+            <tr><td>优质</td><td>合理</td><td>普通</td><td>低估</td></tr>
+            <tr><td>优质</td><td>高估</td><td>垃圾</td><td>高估</td></tr>
+            <tr><td>优质</td><td>高估</td><td>垃圾</td><td>合理</td></tr>
+            <tr><td>优质</td><td>高估</td><td>垃圾</td><td>低估</td></tr>
+            <tr><td>优质</td><td>合理</td><td>垃圾</td><td>高估</td></tr>
+            <tr><td>优质</td><td>合理</td><td>垃圾</td><td>合理</td></tr>
+            <tr><td>优质</td><td>合理</td><td>垃圾</td><td>低估</td></tr>
+            <tr><td>优质</td><td>低估</td><td>垃圾</td><td>合理</td></tr>
+            <tr><td>优质</td><td>低估</td><td>垃圾</td><td>低估</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-5-3">5.3 加上一条市盈率约束会怎样？</h3>
+
+        <p>在这 11 种亏损可能中，有 <strong>5 种是"高估买入"造成的</strong>。如果附加一条简单规则：</p>
+
+        <div class="pull-quote">
+          <strong>凡是市盈率高于市场无风险收益率①倒数的，一律不碰。</strong><br/>
+          例如市场无风险收益率为 4% 时，所有市盈率高于 25 倍的股票，一律不碰。
+        </div>
+
+        <p>那么还剩几种亏损可能？答案是 <strong>6 种，且全部由企业变质引起</strong>。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <p>① 无风险收益率通常使用长期国债与 AAA 级企业债券收益率二者之间的较大值。</p>
+          </div>
+        </div>
+
+        <p><strong>表9-2 市盈率约束条件下，投资优质企业亏损的情况</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>买入时</th>
+              <th>卖出时</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>优质 + 合理</td>
+              <td>普通 + 低估、垃圾 + 高估、垃圾 + 合理、垃圾 + 低估</td>
+            </tr>
+            <tr>
+              <td>优质 + 低估</td>
+              <td>垃圾 + 合理、垃圾 + 低估</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>5.4 两条规则的威力</h3>
+
+        <p>仅仅使用两条最简单的规则：</p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">只买具有某种或某几种<strong>显著竞争优势</strong>的公司；</li>
+          <li style="margin-bottom:.5rem;"><strong>市盈率高于市场无风险收益率倒数的一律不买</strong>。</li>
+        </ol>
+
+        <p>投资者就站在了大概率赢的一面——躲过了 21 种赔钱姿势里的 <strong>15 种</strong>。还需要担忧能不能挣到钱吗？</p>
+
+        <h3 id="sub-5-5">5.5 以"求不败"的姿态入手</h3>
+
+        <p>要在股市里生存和获利，个人建议应先以"<strong>求不败</strong>"的姿态入手：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>原则</th>
+              <th>要点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>①</td>
+              <td><strong>择企业</strong></td>
+              <td>只与波特五力模型显示具备某些竞争优势的企业为伍，拒绝与垃圾股、题材股击鼓传花游戏相关的所谓暴利诱惑</td>
+            </tr>
+            <tr>
+              <td>②</td>
+              <td><strong>择价格</strong></td>
+              <td>拒绝在市盈率高于无风险收益率倒数时买入</td>
+            </tr>
+            <tr>
+              <td>③</td>
+              <td><strong>持续跟踪</strong></td>
+              <td>认真跟踪持仓企业信息，对企业竞争优势受损、可能导致变质危险的动态保持敏感</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>难吗？不难。理论上说，一点也不难。</strong></p>
+
+        <p>只要在贵得不明显的价格以下，选择几个净利润含金量高、被替代可能性小的"<strong>印钞机</strong>"，分散各入一小股，然后该吃吃、该喝喝、爱忙什么忙什么，财富自然会以高于社会资金平均收益率的增幅成长。假以时日，静待伟大的<strong>复利规则</strong>发挥威力，金钱自动就来，完全不需要每日被股价波动弄得紧张兮兮。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、"七亏两平一个赚"的原因 -->
+      <section id="section-6">
+        <h2>六、"七亏两平一个赚"的原因</h2>
+
+        <h3>6.1 核心问题：市场会重奖错误</h3>
+
+        <p>既然这么简单，为什么实践中却是"七亏两平一个赚"的残酷分布？核心问题是：</p>
+
+        <div class="pull-quote large">
+          <strong>市场里经常有逻辑明显破成筛子的行为，却居然有大把财富进账。</strong><br/>
+          绝大部分亏损者，都是因为没有抵挡住这样的诱惑。
+        </div>
+
+        <h3>6.2 那些扰乱心智的场景</h3>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">整日里张家长李家短的陈大姐跟上一个网络收费"股神"，只交了 888 元就换到一个必涨代码，<strong>奥拓进去奥迪出来</strong>；</li>
+          <li style="margin-bottom:.5rem;">你从来瞧不起的隔壁老王神神道道地数波浪，转眼间资产后面加上了零；</li>
+          <li style="margin-bottom:.5rem;">一贯智商不在线的小马痴迷电视股评，高抛低吸有乐趣，菜市场卤鸭子生意也不做了，收入超过脚后跟不沾地的高级金领……</li>
+        </ul>
+
+        <p>而你选的优质企业死气沉沉，各类垃圾股、造假股、亏损股、题材股天天暴涨。</p>
+
+        <h3>6.3 流行口号的真实含义</h3>
+
+        <p>此时市场流传的口号是：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">"赚钱才是硬道理"</li>
+          <li style="margin-bottom:.5rem;">"你负责正确，我负责赚钱"</li>
+          <li style="margin-bottom:.5rem;">"你越来越聪明，我越来越有钱"</li>
+        </ul>
+
+        <p><strong>这些话的含义是</strong>：管它投资投机，管它因为什么，只要能赚到钱就是对的，买的股票涨了才是最重要的，账户里的市值增长就是投资的最强逻辑。</p>
+
+        <h3>6.4 ⚠️ 这个逻辑错在哪里</h3>
+
+        <p>听上去很有道理——我们是来股市赚钱的，不是比谁讲得更有道理，也不是比谁的理论更正统。然而，持这种观点的人忘记了：</p>
+
+        <div class="pull-quote large">
+          <strong>如果你手持火把穿过炸药库，即使毫发无损，也改变不了你是一个蠢货的事实。</strong>
+        </div>
+
+        <p>这必将导致投资人妄图在错误的逻辑中，依赖侥幸获取利润。于是<strong>踩中地雷就成了迟早的事，而且越晚踩中危害越大</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>越晚踩雷</th>
+              <th>后果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>投资额越大</td>
+              <td>损失额也越大，压力自然越大</td>
+            </tr>
+            <tr>
+              <td>时间被浪费</td>
+              <td>更要命的是，投资增长的绝密武器——<strong>时间</strong>——也被浪费得越多</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-6-5">6.5 投资的"道"与"术"</h3>
+
+        <div class="pull-quote">
+          投资很简单，但并不容易。
+          <cite>—— 沃伦·巴菲特</cite>
+        </div>
+
+        <p>不容易的核心原因，是<strong>市场经常会重奖错误的行为，以鼓励他们下一次慷慨赴死</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>层次</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>道</strong>（核心）</td>
+              <td>坚持做且只做正确的事，并愿意为此放弃市场颁发给错误行为的奖金——这是股市长久盈利的核心秘诀</td>
+            </tr>
+            <tr>
+              <td><strong>术</strong>（工具）</td>
+              <td>研究公司、财务估值</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>什么是正确的事？</strong></p>
+
+        <p>巴菲特告诉我们：理解并坚信<strong>可持续的投资收益主要来自企业的成长</strong>，而不是市场参与者之间的互摸腰包。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <p>一旦你以这种思路考虑问题，股市绝大多数亏损都会与你无关。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、被误读的巴菲特思想 -->
+      <section id="section-7">
+        <h2>七、被误读的巴菲特思想</h2>
+
+        <h3>7.1 那两条"废话"规则</h3>
+
+        <p>巴菲特给自己定的投资规则里有这么两条：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>规则一</strong>：绝对不要亏损；</li>
+          <li style="margin-bottom:.5rem;"><strong>规则二</strong>：千万别忘了规则一。</li>
+        </ul>
+
+        <p>这听上去有点像废话——难道有谁是明知道会亏损还去投资吗？难道巴菲特就能保证他买进的股票一定不跌吗？</p>
+
+        <p><strong>其实不是。</strong> 如果按照"股价低于买入价就是亏损"的定义，巴菲特也经常亏损，经常处于赔钱的状态。</p>
+
+        <h3 id="sub-7-2">7.2 案例一：富国银行——"亏损"长达三年</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>操作与状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1989 年</strong></td>
+              <td>买进约 85 万股，每股成本约 <strong>70 美元</strong>，市盈率约 7 倍，市净率①约 1.5 倍</td>
+            </tr>
+            <tr>
+              <td><strong>1990 年</strong></td>
+              <td>股价大幅下跌，继续买进 400 多万股，成本约 <strong>55 美元/股</strong>。此时 70 美元买进的部分已"亏损"超过 <strong>20%</strong>，"亏损额"超过千万美元</td>
+            </tr>
+            <tr>
+              <td><strong>1990—1992 年</strong></td>
+              <td>依然在持续买进，且买入价格依然在 70 美元以下</td>
+            </tr>
+            <tr>
+              <td><strong>1993 年</strong></td>
+              <td>股价飙升，这些股票才转为"盈利"状态</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>也就是说，巴菲特在富国银行这笔投资中，持续"亏损"时间<strong>至少长达三年</strong>。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <p>① 市净率简称 PB。PB = 市值 ÷ 账面净资产。</p>
+          </div>
+        </div>
+
+        <p>而这可是他特别有信心、特别有把握的一笔投资：</p>
+
+        <div class="pull-quote">
+          如果我所有的资金只能买入一只股票，那我就全部买入富国银行。
+          <cite>—— 巴菲特，2009 年 5 月 2 日股东大会</cite>
+        </div>
+
+        <p>对于自己特别有信心的一笔投资，亏损长达三年、幅度超过 20%，还说"绝对不要亏损"，这不是打自己的脸吗？</p>
+
+        <p><strong>富国银行案例的性质</strong>：通过常见的"<strong>摊低成本 + 死扛</strong>"熬过大跌，最终盈利，还可以用"浮亏不算亏"来自慰。下面两个案例则是<strong>彻头彻尾的亏损</strong>——一个非上市公司，一个上市公司。</p>
+
+        <h3 id="sub-7-3">7.3 案例二：德克斯特鞋业——最糟糕的决策</h3>
+
+        <p><strong>收购经过</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>时间</td>
+              <td>1993 年</td>
+            </tr>
+            <tr>
+              <td>价格</td>
+              <td>4.33 亿美元（市盈率 15 倍左右）</td>
+            </tr>
+            <tr>
+              <td>当年年报评价</td>
+              <td>"德克斯特是查理和我职业生涯中见过的<strong>最好的公司之一</strong>"</td>
+            </tr>
+            <tr>
+              <td>⚠️ 致命错误</td>
+              <td>没有使用现金支付，而是向德克斯特原股东<strong>发行 25203 股伯克希尔股票</strong>，按市价折合 4.33 亿美元</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>经营恶化轨迹</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>业绩</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>收购后一年起</td>
+              <td>净利润开始持续稳定地<strong>下滑</strong>。主要原因是受到以中国为代表的发展中国家廉价鞋的冲击</td>
+            </tr>
+            <tr>
+              <td>1999 年</td>
+              <td>年度净利润仅 <strong>1100 万美元</strong>，约为 1993 年净利润的 <strong>40%</strong></td>
+            </tr>
+            <tr>
+              <td>2001 年</td>
+              <td>直接爆出 <strong>4500 万美元亏损</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>巴菲特的自我批评</strong></p>
+
+        <p>从 2000 年的致股东信开始，巴菲特很客气地批评自己、向股东承认错误，批评力度随着德克斯特经营恶化的程度不断加强。到 2007 年的致股东信里，他直接把自己骂得狗血淋头：</p>
+
+        <div class="pull-quote">
+          我在 1993 年用价值 4.33 亿美元的伯克希尔股票买下了德克斯特鞋业。我当时认定它具有的持续竞争优势，在后来短短几年内消失了。但那只是开始，使用伯克希尔的股票作为收购对价，令我严重扩大了这个错误。这一次收购花掉的不是 4 亿美元，而是 <strong>35 亿美元</strong>。实际上，我是用一个优秀公司——现在的价值是 2200 亿美元——的 <strong>1.6%</strong>，换来一个毫无价值的烂公司。到目前为止，买进德克斯特公司是我<strong>最糟糕的决策</strong>。
+          <cite>—— 巴菲特，2007 年致股东信</cite>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <p><strong>代价还在继续放大</strong>：到 2021 年底，伯克希尔股价为 <strong>450662 美元/股</strong>，25203 股价值 <strong>113.58 亿美元</strong>——而这 113.58 亿美元换来的德克斯特早就亏光光了。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-7-4">7.4 案例三：Tesco——发现蟑螂就会发现它的亲戚</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>披露出处</td>
+              <td>2014 年致股东信</td>
+            </tr>
+            <tr>
+              <td>买入</td>
+              <td>2012 年前，花费 <strong>23 亿美元</strong>买进 Tesco 股票 <strong>4.15 亿股</strong></td>
+            </tr>
+            <tr>
+              <td>卖出</td>
+              <td>2014 年清仓</td>
+            </tr>
+            <tr>
+              <td>结果</td>
+              <td>亏损合计 <strong>4.44 亿美元</strong>，亏损幅度近 <strong>20%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          如果你在厨房里发现了一只蟑螂，伴随着时间流逝，你一定会继续遇到它的亲戚们。
+          <cite>—— 沃伦·巴菲特</cite>
+        </div>
+
+        <h3 id="sub-7-5">7.5 真相：两种"亏损"定义不同</h3>
+
+        <p>这两个案例是彻头彻尾的"亏损"案例。此时巴菲特怎么解释自己的"绝对不要亏损"规则呢？<strong>其实，这只是理解错误。</strong></p>
+
+        <p>巴菲特从来没吹嘘过自己永远抄大底、永远买了就赚、永远没有判断错误。"绝对不要亏损"的意思也不是要确保买在最低点，只是巴菲特所说的"亏损"和炒股人士的定义<strong>根本不同</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>视角</th>
+              <th>亏损的定义</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>炒股人士</strong></td>
+              <td>股价低于买入价</td>
+            </tr>
+            <tr>
+              <td><strong>巴菲特</strong></td>
+              <td>企业创造的自由现金流，低于同等资本投入次优选择所能带来的现金流</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-7-6">7.6 用小饭馆理解巴菲特的亏损概念</h3>
+
+        <p>假设你家开个小饭馆，怎么样是亏损，怎么样是盈利？</p>
+
+        <p><strong>❌ 不是由</strong>隔壁小馆子或者同城其他饭馆的转让价格决定的。</p>
+
+        <p><strong>✅ 而是由</strong>你家小饭馆每天的营业额、采购的原料、支付的其他成本等因素决定。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>层次</th>
+              <th>计算方式</th>
+              <th>结论</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>会计意义上的盈利</strong></td>
+              <td>每天营业额 − 人工 − 房租 − 材料 − 税收 − 装修及设备折旧等费用，还有<strong>现金剩余</strong></td>
+              <td>这笔现金剩余在投资领域被称为<strong>自由现金流</strong></td>
+            </tr>
+            <tr>
+              <td><strong>投资意义上的盈利</strong></td>
+              <td>饭馆的自由现金流 <strong>></strong> 这笔资本投入次优选择（如存银行、买理财产品）所能带来的现金流</td>
+              <td>才算产生了投资意义上的盈利</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">完整表述</div>
+            <p>如果这家企业（饭馆）能创造的自由现金流，超过投资次优选择所能带来的自由现金流，你就有了投资意义上的盈利。这笔盈利与这家企业（饭馆）的股权、或同类企业的股权在其他人之间以什么价格成交，<strong>完全无关</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、关于投资的三个要点 -->
+      <section id="section-8">
+        <h2>八、关于投资的三个要点</h2>
+
+        <p>从上述巴菲特的亏损案例以及他对"亏损"的定义与认识中，有三个要点对做好投资至关重要。</p>
+
+        <h3 id="sub-8-1">8.1 要点一：摆脱股价波动的影响</h3>
+
+        <p>股市是产生股价的地方，<strong>它的存在是为了服务你，而不是左右你的决定</strong>。</p>
+
+        <div class="pull-quote">
+          对我而言，股市只是一个观察愚蠢行为的地方。
+          <cite>—— 沃伦·巴菲特</cite>
+        </div>
+
+        <p><strong>农场的例子</strong>（巴菲特多次谈到，透彻地表达了股价波动的本质以及投资者应有的态度）：</p>
+
+        <div class="pull-quote">
+          如果有一个喜怒无常的人拥有一个农场并恰好与我的农场相邻，每一天他都提出一个报价，或是想买入我的农场，或是想卖出他自己的农场，价格则随着他的心情好坏而忽上忽下。那么我除了利用他的疯狂还能做些什么呢？<br/><br/>
+          如果他的报价低得可笑，而我又有些闲钱，我就会买入他的农场。如果他的报价高得离谱，我要么把自己的农场卖给他，要么不予理会，继续去种自己的地就是了。
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>邻居报价</th>
+              <th>应对</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>低得可笑</td>
+              <td>若有闲钱，买入他的农场</td>
+            </tr>
+            <tr>
+              <td>高得离谱</td>
+              <td>卖给他，或不予理会，继续种自己的地</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>8.2 要点二：关注企业的未来产出</h3>
+
+        <p>饭馆的盈利由饭馆的营业额和成本决定；投资者的决策，取决于对<strong>企业未来产出及成本</strong>的判断。</p>
+
+        <p><strong>判断标准</strong>：如果这家企业的产出，能够确定持续高于同等金额资本的次优选择带来的产出，那么这笔投资就是合适的，就没有亏损。</p>
+
+        <p><strong>由此推出的选股倾向</strong>：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">应倾向于选择那些在<strong>稳定行业</strong>中、具有<strong>长期竞争优势</strong>的企业，以便自己有能力估算出其大概价值；</li>
+          <li style="margin-bottom:.5rem;">只有能估算出大概价值，才可以通过与"隔壁农场主"的报价对比，确定自己是不是有便宜可捡；</li>
+          <li style="margin-bottom:.5rem;">⚠️ 对于<strong>没有办法估算大概价值</strong>的企业，远离就好——因为你无法确认自己是否在出价的瞬间就已经形成亏损。</li>
+        </ul>
+
+        <h3 id="sub-8-3">8.3 要点三：判断错误时，亏损已经发生</h3>
+
+        <p>一旦发现对企业价值判断错误，企业实际价值低于买入时付出的价格，这就产生了<strong>巴菲特投资体系里的亏损</strong>。</p>
+
+        <p>巴菲特虽被称为"股神"，却并非无所不能的真神。他看中的"持续竞争优势"也会"在后来短短几年内消失"。</p>
+
+        <p><strong>亏损发生的判定链条</strong>：</p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin: 0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">当原本看中的持续竞争优势正在或已经消失，或该行业、企业发生本质变化时；</li>
+          <li style="margin-bottom:.5rem;">企业未来的自由现金流数量就会与原来的预测值产生<strong>巨大偏差</strong>；</li>
+          <li style="margin-bottom:.5rem;">若由此导致依照新判断估算出的<strong>企业价值低于当下市值</strong>；</li>
+          <li style="margin-bottom:.5rem;">则无论市价是高于还是低于买入价，对巴菲特而言，<strong>亏损已经出现</strong>。</li>
+        </ol>
+
+        <p>此时要<strong>尽快认错</strong>，正如对待 Tesco 一样。</p>
+
+        <div class="pull-quote">
+          如果你发现自己已经陷在烂泥里，最重要的是尽快想办法不要再继续下陷。
+          <cite>—— 沃伦·巴菲特</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、本章小结 -->
+      <section id="section-9">
+        <h2>九、本章小结：投资难在哪两点</h2>
+
+        <p>是不是非常违反人性呢？是的，否则市场不会有那么多人赔钱。投资这条路，要说难，也真就难在两点：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>难点</th>
+              <th>人的本能</th>
+              <th>投资的要求</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>一、摆脱股价干扰</strong></td>
+              <td>用股价和买入价的差额衡量赚赔，赚了愉悦，赔了痛苦</td>
+              <td>摆脱股价干扰，关注<strong>企业内在价值</strong>；"<strong>利用</strong>"股价波动，而不是让股价波动来影响自己的情绪和行为</td>
+            </tr>
+            <tr>
+              <td><strong>二、计算内在价值</strong></td>
+              <td>交易发生后听天由命</td>
+              <td>懂得计算企业的内在价值。只有明确内在价值，才有办法判断交易<strong>是否应该发生</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">承上启下</div>
+            <p>那么，这个内在价值究竟是个什么神秘东西，怎样才能算出它的数值呢？让我们进入本书第二篇：<strong>如何估算内在价值</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 投资智慧 · 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
