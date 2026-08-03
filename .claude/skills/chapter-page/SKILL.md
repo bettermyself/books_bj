@@ -1,0 +1,247 @@
+---
+name: chapter-page
+description: 新增章节页步骤与章节页设计规范(页面骨架、布局规则、导航栏、组件库、排版原则、底部脚本、内联 CSS 完整清单)。创建新章节 HTML 阅读页时使用。
+---
+
+## 新增章节页步骤
+
+1. 创建 `books/<书名>/新章节.html` — 按照下方「章节页设计规范」编写，修改正文内容和底部 `BOOK_FOLDER` 常量
+2. 更新同一书籍所有兄弟章节 HTML 中的「全书目录」——按章实际讲数自适应：单讲章保持扁平 `<a class="toc-chapter-title">`，多讲章改用 `.toc-lectures` 子列表 + 折叠脚本。新增章节时，用脚本批量替换所有文件中的 TOC 条目最为稳妥，避免逐个手改遗漏
+3. 如果是新书的第一个章节，创建 `books/<书名>/index.html` 并用 meta-refresh 跳转到默认章节（书级跳转页保留；章级目录不再需要 `index.html`，删除了也不影响功能）
+
+## 章节页设计规范
+
+生成新章节 HTML 时必须严格遵循以下设计风格，确保所有章节页面视觉一致。
+
+### 页面骨架
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>章节标题 · 书名</title>
+  <link rel="stylesheet" href="../../assets/style.css" /> <!-- 或 ../../../ 视嵌套层级而定 -->
+  <style>
+    /* 110% 缩放 */
+    html { font-size: 17.6px; }
+    /* 内联样式块（完整复制，不可删减） */
+  </style>
+</head>
+<body>
+  <header class="site-header">...</header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">...</aside>
+    <article class="chapter-article">...</article>
+  </div>
+  <footer class="site-footer">...</footer>
+  <script>/* 侧边栏高亮 + 阅读位置追踪 */</script>
+</body>
+</html>
+```
+
+### 布局规则
+
+章节页使用 110% 缩放（`html { font-size: 17.6px; }`），所有 rem 值自动放大，px 值需手动按 ×1.1 调整。
+
+| 区域 | 规格 |
+|------|------|
+| 整体布局 | `max-width: 1760px`，CSS Grid 两栏 `352px 1fr`，间距 `2.2rem` |
+| 左侧导航栏 | `position: sticky; top: 88px; height: calc(100vh - 106px)`，隐藏滚动条（`scrollbar-width: none` + `::-webkit-scrollbar { display: none }`） |
+| 右侧正文卡片 | 白底（`var(--bg2)`），`padding: 2.5rem 3rem`，`border-radius: var(--radius)`，微阴影 |
+| 响应式断点 | 1056px 以下单栏，792px 以下正文 padding 缩小 |
+
+### 顶部导航栏
+
+复用主站 `site-header`，导航链接包含「⌂ 首页」和「← 返回书架」，路径根据嵌套层级使用 `../../index.html` 或 `../../../index.html`。
+
+### 左侧导航栏结构（从上到下）
+
+1. **面包屑**（`.breadcrumb`）：`书架 / 书名`
+2. **全书目录**（`.sidebar-label` + `.book-toc`）：列出全书各章，当前章加 `.current-chapter`。**按章实际讲数自适应**——单讲章节直接把 `.toc-chapter-title` 写成 `<a>` 链接（加 `style="text-decoration:none;"`，指向该讲路径），不再套 `.toc-lectures` 子列表、不渲染折叠脚本；只有一章有 2 讲及以上时，才用 `.toc-chapter` 包裹 `.toc-lectures` 子列表（当前讲加 `.active`），并保留折叠展开脚本。
+3. **本讲目录**（`.sidebar-label.sidebar-label-sub` + `#sidebar-nav`）：列出正文各 `<section>` 的锚点链接，二级标题用 `.sub` 类名缩进
+
+### 正文区组件库
+
+生成正文时，根据内容语义选用以下组件，**避免大段纯文字**：
+
+#### 1. 文章头部（`.article-header`）
+```html
+<header class="article-header">
+  <div class="article-eyebrow">书名 · 第X章 章名 · 第X讲</div>
+  <h1 class="article-title">标题</h1>
+  <div class="article-meta">
+    <span><strong>标签名</strong>值</span>
+  </div>
+</header>
+```
+
+#### 2. 章节标题
+- `<h2>` — 一级章节标题，金色下边框（`border-bottom: 2px solid var(--gold)`），`display: inline-block`
+- `<h3>` — 二级标题，左侧金色竖线（`border-left: 3px solid var(--gold)`）
+- 每个 `<h2>` 对应一个 `<section id="section-X">`，`<h3>` 需要有对应 `id` 供侧边栏锚点跳转
+
+#### 3. 引用块（`.pull-quote`）
+```html
+<!-- 普通引用：左侧金色边框 -->
+<div class="pull-quote">"引文内容"<cite>— 作者</cite></div>
+
+<!-- 重点引用：居中，上下金色边框 -->
+<div class="pull-quote large">核心金句<cite>— 作者</cite></div>
+```
+**使用场景**：名人名言、核心观点、关键结论
+
+#### 4. 提示卡片（`.callout`）
+```html
+<div class="callout tip|warn|info">
+  <div class="callout-icon">💡|⚠️|📝</div>
+  <div class="callout-body">
+    <div class="callout-title">标题</div>
+    <p>内容</p>
+  </div>
+</div>
+```
+- `.tip`（金色左边框）：灵感、正面例证、启发
+- `.warn`（橙色左边框）：警示、反面教训、常见错误
+- `.info`（蓝色左边框）：补充说明、背景知识、注释
+
+#### 5. 表格（`.article-table`）
+```html
+<table class="article-table">
+  <thead><tr><th>列1</th><th>列2</th></tr></thead>
+  <tbody><tr><td>数据</td><td>数据</td></tr></tbody>
+</table>
+```
+**使用场景**：对比、分类列举、多维度信息
+
+#### 6. 要点卡片（`.remedy-grid` + `.remedy-card`）
+```html
+<div class="remedy-grid">
+  <div class="remedy-card">
+    <span class="remedy-num">编号标签</span>
+    <h4>卡片标题</h4>
+    <p>简短说明</p>
+  </div>
+</div>
+```
+**使用场景**：核心观点列表、步骤、原则、药方等需要逐条突出的内容。左侧有金色竖条装饰。
+
+**列数规则**（按卡片数量选用固定列类名，最多不超过 3 列）：
+
+| 卡片数 | 类名 | 布局 |
+|--------|------|------|
+| 1–2 张 | 不指定（默认 auto-fit） | 自然宽度 |
+| 3 张 | `cols-3` | 1 行 × 3 列 |
+| 4 张 | `cols-2` | 2 行 × 2 列 |
+| 5 张 | 不指定（默认 auto-fit） | 自适应流式 |
+| 6 张 | `cols-3` | 2 行 × 3 列 |
+| 更多 | `cols-3` | N 行 × 3 列 |
+
+`.cols-3` 响应式：>1056px 三列，792px–1056px 两列，<792px 单列。
+`.cols-2` 响应式：>792px 两列，<792px 单列。
+
+#### 7. 诗歌/长引文块（`.poem`）
+```html
+<div class="poem">
+  诗句第一行<br/>
+  诗句第二行<br/>
+  <span class="poem-author">—— 作者</span>
+</div>
+```
+**使用场景**：诗歌、长段引文需要居中展示时。带装饰性引号。
+
+#### 8. 章节分隔符（`.section-divider`）
+```html
+<div class="section-divider"><span>◆ ◆ ◆</span></div>
+```
+**使用场景**：每个 `<section>` 之间使用，提供视觉呼吸感。
+
+#### 9. 文章结尾（`.article-footer`）
+```html
+<div class="article-footer">— 完 —</div>
+```
+
+### 排版原则
+
+1. **避免大段文字**：连续段落不超过 3 段，之后必须插入组件（引用块、卡片、表格等）打断节奏
+2. **关键词加粗**：使用 `<strong>` 标记核心概念，渲染为 `var(--gold-dk)` 深金色
+3. **层次分明**：h2 → h3 → 正文/组件，不跳级
+4. **组件混搭**：同一节内鼓励混合使用 2-3 种组件类型，避免单调
+5. **间距统一**：组件间距由 CSS 控制（`margin: 1.25rem 0` 至 `1.5rem 0`），不要手动加 `<br>` 撑间距
+
+### 底部脚本（必须包含，不可省略任何部分）
+
+**`lastActive` + `scrollIntoView` 逻辑不可省略**——缺少时侧边栏目录项在滚动过程中不会自动滚入可见区域，用户无法看到当前阅读位置对应的高亮项。
+
+```javascript
+// 侧边栏滚动高亮（激活项切换时自动滚入视野）
+const links = document.querySelectorAll('#sidebar-nav a');
+const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+let lastActive = null;
+
+function onScroll() {
+  const scrollY = window.scrollY + 132;
+  let current = sections[0];
+  for (const sec of sections) {
+    if (sec.offsetTop <= scrollY) current = sec;
+  }
+  links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+  const activeLink = document.querySelector('#sidebar-nav a.active');
+  if (activeLink && activeLink !== lastActive) {
+    lastActive = activeLink;
+    activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// 平滑滚动
+links.forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+    }
+  });
+});
+
+// 阅读位置记忆（BOOK_FOLDER 必须改为当前书名文件夹）
+const BOOK_FOLDER = '穷查理宝典';
+const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+localStorage.setItem(PAGE_KEY, relativePath);
+
+const savedScroll = localStorage.getItem(SCROLL_KEY);
+if (savedScroll && document.referrer.includes('index.html')) {
+  const pos = JSON.parse(savedScroll);
+  if (pos.page === relativePath) window.scrollTo(0, pos.y);
+}
+
+let scrollTimer = null;
+window.addEventListener('scroll', () => {
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => {
+    localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+  }, 300);
+}, { passive: true });
+```
+
+### 内联 CSS 完整清单
+
+每个章节页的 `<style>` 块必须包含以下所有类（直接从参考文件复制，不可省略）：
+
+- 布局：`.chapter-layout`、`.chapter-sidebar`、`.chapter-article`
+- 导航：`.sidebar-label`、`.sidebar-label-sub`、`.sidebar-nav`、`.breadcrumb`、`.crumb-sep`
+- 目录树：`.book-toc`、`.toc-chapter`、`.toc-chapter-title`、`.current-chapter`、`.toc-lectures`
+- 文章头：`.article-header`、`.article-eyebrow`、`.article-title`、`.article-meta`
+- 正文排版：`.chapter-article h2`、`.chapter-article h3`、`.chapter-article p`、`.chapter-article strong`、`.chapter-article em`
+- 引用：`.pull-quote`、`.pull-quote.large`、`.pull-quote cite`
+- 卡片：`.callout`、`.callout-icon`、`.callout-body`、`.callout-title`、`.callout.tip`、`.callout.warn`、`.callout.info`
+- 表格：`.article-table`、`thead`、`th`、`td`
+- 要点卡片：`.remedy-grid`、`.remedy-card`、`.remedy-num`、`.remedy-card h4`
+- 诗歌：`.poem`、`.poem-author`
+- 分隔符：`.section-divider`
+- 页脚：`.article-footer`

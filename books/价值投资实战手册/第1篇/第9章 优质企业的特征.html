@@ -478,6 +478,17 @@
     .example-card h4 { font-size: 1rem; margin-bottom: .5rem; }
     .example-card p { font-size: .88rem; margin-bottom: .3rem; line-height: 1.6; }
     .example-card .label { font-size: .75rem; color: var(--text3); display: block; margin-bottom: .1rem; }
+
+    /* matrix image */
+    .matrix-img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1.5rem auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
   </style>
 </head>
 <body>
@@ -858,9 +869,7 @@
           <li style="margin-bottom:.5rem;">现存竞争者之间的竞争</li>
         </ol>
 
-        <p style="text-align:center;">
-          <img src="assets/image-20260729200407864.png" alt="波特五力模型示意图" style="max-width:100%; border-radius:var(--radius); box-shadow:0 4px 12px rgba(0,0,0,.08);" />
-        </p>
+        <img class="matrix-img" src="assets/image-20260729200407864.png" alt="波特五力模型示意图" loading="lazy" />
 
         <h3>3.3 对投资者的意义</h3>
 
@@ -1285,7 +1294,7 @@
           <tbody>
             <tr>
               <td><strong>1989 年</strong></td>
-              <td>买进约 85 万股，每股成本约 <strong>70 美元</strong>，市盈率约 7 倍，市净率①约 1.5 倍</td>
+              <td>买进约 85 万股，每股成本约 <strong>70 美元</strong>，市盈率约 7 倍，市净率约 1.5 倍</td>
             </tr>
             <tr>
               <td><strong>1990 年</strong></td>
@@ -1303,13 +1312,6 @@
         </table>
 
         <p>也就是说，巴菲特在富国银行这笔投资中，持续"亏损"时间<strong>至少长达三年</strong>。</p>
-
-        <div class="callout info">
-          <div class="callout-icon">📝</div>
-          <div class="callout-body">
-            <p>① 市净率简称 PB。PB = 市值 ÷ 账面净资产。</p>
-          </div>
-        </div>
 
         <p>而这可是他特别有信心、特别有把握的一笔投资：</p>
 
