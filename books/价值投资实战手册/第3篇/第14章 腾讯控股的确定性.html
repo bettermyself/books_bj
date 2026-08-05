@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第14章 腾讯控股的确定性 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html" class="active">第14章 腾讯控股的确定性</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">财报总览：稳</a></li>
+        <li><a href="#section-2">一、游戏业务：板上钉钉的增长</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">1.1 手游强劲增长</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">1.2 《和平精英》现象级表现</a></li>
+        <li class="sub"><a href="#sub-1-3" class="sub">1.3 游戏矩阵全面开花</a></li>
+        <li><a href="#section-3">二、金融科技：处于战略扩张期</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 增长数据</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 业务构成</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 战略定位</a></li>
+        <li><a href="#section-4">三、广告业务：降低预期</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 增长数据</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 影响因素分析</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">3.3 未来增长路径</a></li>
+        <li class="sub"><a href="#sub-3-4" class="sub">3.4 增长潜力</a></li>
+        <li><a href="#section-5">四、投资业务：媲美伯克希尔</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">4.1 市场分歧与确定性</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">4.2 资产结构分析</a></li>
+        <li class="sub"><a href="#sub-4-3" class="sub">4.3 业务模式解读</a></li>
+        <li class="sub"><a href="#sub-4-4" class="sub">4.4 VC基金的四大特点</a></li>
+        <li class="sub"><a href="#sub-4-5" class="sub">4.5 与伯克希尔的对比</a></li>
+        <li class="sub"><a href="#sub-4-6" class="sub">4.6 不确定性的澄清</a></li>
+        <li><a href="#section-6">五、整体确定性评估</a></li>
+        <li><a href="#section-7">六、估值与投资展望</a></li>
+        <li class="sub"><a href="#sub-7-1" class="sub">6.1 当前估值</a></li>
+        <li class="sub"><a href="#sub-7-2" class="sub">6.2 未来三年预测</a></li>
+        <li class="sub"><a href="#sub-7-3" class="sub">6.3 实盘投资记录</a></li>
+        <li><a href="#section-8">结语</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第14章</div>
+        <h1 class="article-title">腾讯控股的确定性</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>发表时间</strong>2019年8月17日</span>
+          <span><strong>主题</strong>腾讯控股 &#xB7; 确定性分析 &#xB7; 财报分析 &#xB7; 企业研究</span>
+        </div>
+      </header>
+
+      <div class="pull-quote">
+        <strong>推荐人戴鑫</strong>：对一家企业未来情况"确定性"的判断直接影响我们的投资决策，这需要我们对企业有深入的学习和理解。本文以腾讯公司为例，站在2019年半年报的时间节点，对企业业务的现状及未来发展进行了评估，从而得出业务未来增长的确定性很高的判断。本文以真实企业为例，展示了如何通过企业看企业未来发展的确定性，值得深入体会和思考。
+      </div>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 财报总览：稳 -->
+      <section id="section-1">
+        <h2>财报总览：稳</h2>
+
+        <p>腾讯2019年半年报的总体特色就一个字：<strong>稳</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间维度</th>
+              <th>收入同比增长</th>
+              <th>归母净利润同比增长</th>
+              <th>非通用会计准则下归母净利润同比增长</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Q2单季</strong></td>
+              <td>21%</td>
+              <td>35%</td>
+              <td>19%</td>
+            </tr>
+            <tr>
+              <td><strong>上半年</strong></td>
+              <td>18%</td>
+              <td>25%</td>
+              <td>17%</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、游戏业务：板上钉钉的增长 -->
+      <section id="section-2">
+        <h2>一、游戏业务：板上钉钉的增长</h2>
+
+        <h3 id="sub-1-1">1.1 手游强劲增长</h3>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>增长率</strong>：手游同比增长 <strong>26%</strong></li>
+          <li style="margin-bottom:.5rem;"><strong>端游趋势</strong>：继续延续萎缩大趋势</li>
+        </ul>
+
+        <h3 id="sub-1-2">1.2 《和平精英》现象级表现</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>关键信息</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>上线时间</td>
+              <td>2019年5月8日</td>
+            </tr>
+            <tr>
+              <td>吸金能力</td>
+              <td>迅速展示强大变现能力</td>
+            </tr>
+            <tr>
+              <td>Q2贡献</td>
+              <td>时间限制，利润贡献有限</td>
+            </tr>
+            <tr>
+              <td>Q3预期</td>
+              <td>影响主要从第三季度开始显现</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p><strong>重要趋势</strong>：近期三个月腾讯"吃鸡"手游（《和平精英》+《PUBG》）流水收入已经<strong>超过《王者荣耀》</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-1-3">1.3 游戏矩阵全面开花</h3>
+
+        <p>热门游戏包揽下载榜和收入榜前列已成常态：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>经典产品</strong>：《王者荣耀》《和平精英》《PUBG》《QQ飞车》</li>
+          <li style="margin-bottom:.5rem;"><strong>新兴产品</strong>：《一起来捉妖》《跑跑卡丁车》《完美世界》《龙族幻想》《权力的游戏：凛冬将至》《王牌战士》</li>
+        </ul>
+
+        <div class="pull-quote">
+          <strong>结论</strong>：第三季度乃至下半年腾讯手游的高增长已经不需要猜测，是<strong>板上钉钉的事</strong>。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、金融科技：处于战略扩张期 -->
+      <section id="section-3">
+        <h2>二、金融科技：处于战略扩张期</h2>
+
+        <h3 id="sub-2-1">2.1 增长数据</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>指标</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>金融科技及企业服务同比增长</td>
+              <td>37%</td>
+            </tr>
+            <tr>
+              <td>不计算备付金利息收入政策性影响</td>
+              <td><strong>57%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-2">2.2 业务构成</h3>
+
+        <p>主要包括：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">微信支付</li>
+          <li style="margin-bottom:.5rem;">理财保险</li>
+          <li style="margin-bottom:.5rem;">腾讯云</li>
+        </ul>
+
+        <p><strong>现状</strong>：目前还没有什么利润贡献。</p>
+
+        <h3 id="sub-2-3">2.3 战略定位</h3>
+
+        <p>金融科技是腾讯从<strong>消费互联网向产业互联网扩张</strong>的重头戏，是未来腾讯的战略方向。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>战略阶段</th>
+              <th>当前重点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>战略扩张期</td>
+              <td>规模和市占率远比利润更重要</td>
+            </tr>
+            <tr>
+              <td>竞争格局</td>
+              <td>阿里巴巴 vs 腾讯两大巨头</td>
+            </tr>
+            <tr>
+              <td>市场前景</td>
+              <td>空间巨大，两家共同高速增长</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          <strong>预期</strong>：未来数年，两家共同取得高速增长的态势不会发生改变。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、广告业务：降低预期 -->
+      <section id="section-4">
+        <h2>三、广告业务：降低预期</h2>
+
+        <h3 id="sub-3-1">3.1 增长数据</h3>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>同比增长</strong>：23%</li>
+          <li style="margin-bottom:.5rem;"><strong>评价</strong>：相比腾讯拥有的资源而言，这个增长只能算一般般</li>
+        </ul>
+
+        <h3 id="sub-3-2">3.2 影响因素分析</h3>
+
+        <h3 id="sub-3-2a">宏观经济因素</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>影响类型</th>
+              <th>具体表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>广告客户</td>
+              <td>对广告费用的缩减</td>
+            </tr>
+            <tr>
+              <td>腾讯自身</td>
+              <td>上半年销售及市场推广费用比上年同期<strong>减少30亿元</strong></td>
+            </tr>
+            <tr>
+              <td>费用占比</td>
+              <td>从上年同期的8%降低为<strong>5%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p><strong>数据解读</strong>：上半年增加的约120亿元经营盈利，缩减的推广费用贡献了<strong>1/4</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-2b">竞争压力</h3>
+
+        <p><strong>头条系产品的挤压</strong>是目前市场看到的主要悲观因素：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>信息流和短视频</strong>：头条系已经对腾讯形成<strong>绝对碾压式领先</strong></li>
+          <li style="margin-bottom:.5rem;"><strong>腾讯反击</strong>：所有反击均脆弱无力，暂时看不到改变的可能</li>
+          <li style="margin-bottom:.5rem;"><strong>类比</strong>：如同腾讯在电商领域一直被阿里巴巴碾压一样</li>
+        </ul>
+
+        <h3 id="sub-3-3">3.3 未来增长路径</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>增长来源</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>传统广告渠道</td>
+              <td>抢夺电视、报纸、杂志、户外、梯媒，甚至传统搜索、网页等份额</td>
+            </tr>
+            <tr>
+              <td>份额分配</td>
+              <td>大块肉会被竞争对手拿走</td>
+            </tr>
+            <tr>
+              <td>腾讯产品</td>
+              <td>微信、QQ、小程序、长视频等产品尽力争取一些份额</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-3-4">3.4 增长潜力</h3>
+
+        <p>相对于腾讯拥有的流量而言，产生的广告收入还<strong>非常低</strong>，有很多可以填充但一直没有被填充的广告位置存在。</p>
+
+        <p><strong>核心原因</strong>：腾讯的日子一直很滋润，对于广告收入没有那么渴求，在收入和用户体验中腾讯<strong>更看重后者</strong>。</p>
+
+        <div class="pull-quote">
+          <strong>结论</strong>：降低预期，获取长期稳定的中速增长还是靠谱的。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、投资业务：媲美伯克希尔 -->
+      <section id="section-5">
+        <h2>四、投资业务：媲美伯克希尔</h2>
+
+        <h3 id="sub-4-1">4.1 市场分歧与确定性</h3>
+
+        <p>投资部分是市场分歧较大的领域。但如果将目光稍微放长远一点，用常识就可以判断出这部分的增长其实恰恰是<strong>最没有悬念、确定性最高的</strong>。</p>
+
+        <h3 id="sub-4-2">4.2 资产结构分析</h3>
+
+        <h3 id="sub-4-2a">总体资产配置（总资产约8000亿元）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>资产类别</th>
+              <th>规模</th>
+              <th>占比</th>
+              <th>构成</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资部分</strong></td>
+              <td>4000亿元</td>
+              <td>50%</td>
+              <td>联营、合营和部分金融资产</td>
+            </tr>
+            <tr>
+              <td><strong>类现金资产</strong></td>
+              <td>2000亿元</td>
+              <td>25%</td>
+              <td>现金、存款、预付账款等</td>
+            </tr>
+            <tr>
+              <td><strong>经营资产</strong></td>
+              <td>2000亿元</td>
+              <td>25%</td>
+              <td>固定资产、土地、存货、应收账款等</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-2b">负债结构（总负债约4000亿元）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>负债类别</th>
+              <th>规模</th>
+              <th>利率/成本</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>有息负债</strong></td>
+              <td>2000亿元</td>
+              <td>约<strong>3%</strong>（千亿元借款年利率&lt;2%，千亿元票据年利率2.9%～4.8%）</td>
+            </tr>
+            <tr>
+              <td><strong>经营性负债</strong></td>
+              <td>2000亿元</td>
+              <td>预收、应付</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p><strong>关键特征</strong>：企业信用良好，现金流持续可观，2000亿元有息负债不仅全部为<strong>无抵押</strong>，而且利率很低。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-3">4.3 业务模式解读</h3>
+
+        <h3 id="sub-4-3a">核心业务</h3>
+
+        <p>以QQ和微信形成的消费者黏性为土壤，以约2000亿元经营资产及2000亿元类现金资产，支撑：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">社交</li>
+          <li style="margin-bottom:.5rem;">游戏</li>
+          <li style="margin-bottom:.5rem;">广告</li>
+          <li style="margin-bottom:.5rem;">内容</li>
+          <li style="margin-bottom:.5rem;">支付</li>
+          <li style="margin-bottom:.5rem;">金融</li>
+          <li style="margin-bottom:.5rem;">云</li>
+        </ul>
+
+        <p><strong>成果</strong>：上半年产生税前利润大约<strong>450亿元</strong>。</p>
+
+        <h3 id="sub-4-3b">风险投资基金（VC）模式</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>基金特征</th>
+              <th>具体内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>资金规模</strong></td>
+              <td>4000亿元</td>
+            </tr>
+            <tr>
+              <td><strong>资金来源</strong></td>
+              <td>利用自身信用优势加杠杆，获取成本约3%的2000亿元有息负债 + 成本为0的2000亿元经营性负债</td>
+            </tr>
+            <tr>
+              <td><strong>投资领域</strong></td>
+              <td>主要投资移动互联网领域</td>
+            </tr>
+            <tr>
+              <td><strong>投资标的</strong></td>
+              <td>几百家从初创到已上市的企业</td>
+            </tr>
+            <tr>
+              <td><strong>上半年收益</strong></td>
+              <td>约150亿元税前利润 + 约150亿元公允价值增长（未计入利润）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-4">4.4 VC基金的四大特点</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>特点</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. 流量优势</strong></td>
+              <td>自身拥有巨大无比的、可以视为<strong>零成本</strong>的闲余流量可供输出</td>
+            </tr>
+            <tr>
+              <td><strong>2. 市场空间</strong></td>
+              <td>行业增长空间巨大（人类还有近于无限多的需求，等待用移动互联网手段去深化和优化）</td>
+            </tr>
+            <tr>
+              <td><strong>3. 操盘团队</strong></td>
+              <td>全世界<strong>最懂互联网</strong>、曾经和正在获得辉煌战绩的领先人群之部分构成</td>
+            </tr>
+            <tr>
+              <td><strong>4. 利益绑定</strong></td>
+              <td>这部分人的绝大部分身家也投在这个VC里</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-5">4.5 与伯克希尔的对比</h3>
+
+        <p>腾讯像不像伯克希尔？<strong>很像</strong>，只不过投资专注领域和巴菲特有区别。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对比维度</th>
+              <th>腾讯VC基金</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>资金成本</td>
+              <td>平均不到<strong>2%</strong></td>
+            </tr>
+            <tr>
+              <td>资金性质</td>
+              <td>长期资金杠杆</td>
+            </tr>
+            <tr>
+              <td>投资基础</td>
+              <td>扎根在微信和QQ提供的土壤里</td>
+            </tr>
+            <tr>
+              <td>投资策略</td>
+              <td>在能力圈范围内，聚焦投资一个前景广阔的行业</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p><strong>核心判断</strong>：无论今天在报表上显示的数字是多少，这4000亿元投资带来的长期投资回报必然<strong>远高于名义GDP增长速度</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-6">4.6 不确定性的澄清</h3>
+
+        <p>所谓腾讯投资的不确定性，只是投资者过于看重某一个具体的项目。</p>
+
+        <div class="pull-quote">
+          <strong>正确视角</strong>：如果将全部投资看作一个专注于投资移动互联网及其相关领域的风险投资基金，腾讯投资部分不仅<strong>历史成绩优异</strong>，未来可以预见会<strong>继续优异</strong>。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 五、整体确定性评估 -->
+      <section id="section-6">
+        <h2>五、整体确定性评估</h2>
+
+        <p>如果能抛开对股价的猜测，退后一步看腾讯：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>业务领域</th>
+              <th>确定性评价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>增值服务</td>
+              <td><strong>相当高</strong></td>
+            </tr>
+            <tr>
+              <td>网络广告</td>
+              <td><strong>相当高</strong></td>
+            </tr>
+            <tr>
+              <td>金融科技</td>
+              <td><strong>相当高</strong></td>
+            </tr>
+            <tr>
+              <td>对外投资</td>
+              <td><strong>相当高</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          <strong>总结</strong>：几乎每一个领域的增长确定性都相当高，这也是喜欢它的原因。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 六、估值与投资展望 -->
+      <section id="section-7">
+        <h2>六、估值与投资展望</h2>
+
+        <h3 id="sub-7-1">6.1 当前估值（2019年8月）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>估值指标</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>预计2019年净利润</td>
+              <td>1000亿元上下</td>
+            </tr>
+            <tr>
+              <td>当前市值</td>
+              <td>约2.8万亿元</td>
+            </tr>
+            <tr>
+              <td>市盈率</td>
+              <td>约<strong>28倍</strong></td>
+            </tr>
+            <tr>
+              <td>无风险收益率</td>
+              <td>3%～4%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>估值判断</strong>：基本就是<strong>合理估值位置</strong>。合理估值，占不到估值上的便宜，只能获取企业成长收益。</p>
+
+        <h3 id="sub-7-2">6.2 未来三年预测（2022年）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>假设场景</th>
+              <th>年均增长速度</th>
+              <th>2022年净利润预测</th>
+              <th>对应合理市值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>悲观</strong></td>
+              <td>20%</td>
+              <td>1700亿元</td>
+              <td>50000亿元</td>
+            </tr>
+            <tr>
+              <td><strong>乐观</strong></td>
+              <td>30%</td>
+              <td>2200亿元</td>
+              <td>60000亿元</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p><strong>关键观点</strong>：至于市场在此基础上究竟给出15倍还是50倍市盈率的股价，就完全不在考虑范围内了——主要是<strong>考虑了也没有用</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-7-3">6.3 实盘投资记录</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资信息</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>买入起始时间</strong></td>
+              <td>2017年1月，197.3港元</td>
+            </tr>
+            <tr>
+              <td><strong>操作策略</strong></td>
+              <td>一直是买家，只有买入从无卖出</td>
+            </tr>
+            <tr>
+              <td><strong>加仓时机</strong></td>
+              <td>借着2021年至2022年互联网企业整体大跌的机会</td>
+            </tr>
+            <tr>
+              <td><strong>当前仓位</strong></td>
+              <td>约<strong>38%</strong>（2022年2月底数据）</td>
+            </tr>
+            <tr>
+              <td><strong>仓位排名</strong></td>
+              <td>实盘<strong>第一重仓股</strong></td>
+            </tr>
+            <tr>
+              <td><strong>平均成本</strong></td>
+              <td>约<strong>465港元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260730161520855.png" alt="腾讯控股实盘投资记录截图" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 结语 -->
+      <section id="section-8">
+        <h2>&#x1F4CA; 结语</h2>
+
+        <div class="pull-quote large">
+          腾讯未来发展如何，这笔投资未来是赚是赔，让我们<strong>静待时间给出的结果</strong>。
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
