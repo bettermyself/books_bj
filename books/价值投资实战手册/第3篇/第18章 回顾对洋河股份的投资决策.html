@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第18章 回顾对洋河股份的投资决策 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html">第14章 腾讯控股的确定性</a></li>
+            <li><a href="第15章 聊聊高端白酒产能及补充.html">第15章 聊聊高端白酒产能及补充</a></li>
+            <li><a href="第16章 高端白酒产能补充篇.html">第16章 高端白酒产能补充篇</a></li>
+            <li><a href="第17章 贵州茅台估值、 买点及卖点计算过程演示.html">第17章 贵州茅台估值、买点及卖点计算过程演示</a></li>
+            <li><a href="第18章 回顾对洋河股份的投资决策.html" class="active">第18章 回顾对洋河股份的投资决策</a></li>
+            <li><a href="第19章 读史可以明智 ——对贵州茅台的全面回顾和展望.html">第19章 读史可以明智 ——对贵州茅台的全面回顾和展望</a></li>
+            <li><a href="第20章 分众传媒投资回顾及周期股估值方法的尝试.html">第20章 分众传媒投资回顾及周期股估值方法的尝试</a></li>
+            <li><a href="第21章 如何从零开始研究一家企业 ——以福寿园为例.html">第21章 如何从零开始研究一家企业 ——以福寿园为例</a></li>
+            <li><a href="第22章 上海机场研究纲要.html">第22章 上海机场研究纲要</a></li>
+            <li><a href="第23章 对上海机场补充协议的理解和判断.html">第23章 对上海机场补充协议的理解和判断</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、一次非常&ldquo;愚蠢&rdquo;的投资决策</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">1.1 五年后的洋河账单</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">1.2 补上半句，你说不定当场吐血</a></li>
+        <li class="sub"><a href="#sub-1-3" class="sub">1.3 换个说法：每 100 股茅台的五年归宿</a></li>
+        <li class="sub"><a href="#sub-1-4" class="sub">1.4 那么当时为何会作出这样的决策？</a></li>
+        <li><a href="#section-2">二、白酒行业实战一线专家的一次集体错判</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 复盘：从寒冬到景气周期</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 高增长是&ldquo;尽在掌握&rdquo;，还是意外之喜？</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 四大名酒掌舵人的原话摘录</a></li>
+        <li class="sub"><a href="#sub-2-4" class="sub">2.4 提炼：六条管理层共识</a></li>
+        <li class="sub"><a href="#sub-2-5" class="sub">2.5 结果：预期与现实完全相反</a></li>
+        <li><a href="#section-3">三、投资的关键是理性、逻辑</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 第一：市场变化很难预测，其发展存在很多偶然性</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 第二：优秀的商业模式具有强大的容错性</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">3.3 第三：投资的关键是理性，是逻辑</a></li>
+        <li><a href="#section-4">四、补充说明</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第18章</div>
+        <h1 class="article-title">回顾对洋河股份的投资决策</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>发表时间</strong>2020年9月5日</span>
+          <span><strong>主题</strong>洋河股份 &#xB7; 投资决策 &#xB7; 白酒行业周期</span>
+        </div>
+      </header>
+
+      <div class="callout info">
+        <div class="callout-icon">&#x1F4DD;</div>
+        <div class="callout-body">
+          <div class="callout-title">推荐人佟鑫</div>
+          <p>本文是站在 2020 年 9 月时间节点，对洋河股份投资所做的总结性回顾。白酒行业复苏是从 2015 年年中以茅台酒、五粮液为代表的高端名酒供不应求开始的。本文首先回到投资思考的起点，展示了以理性、逻辑为基础，事前尽可能多思考各种可能性，在确定性和赔率之间，如何作出正确的投资决策，买入洋河股份的全过程。事后都易，当下最难。形成正确的思维方式是多么重要啊！</p>
+        </div>
+      </div>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、一次非常"愚蠢"的投资决策 -->
+      <section id="section-1">
+        <h2>一、一次非常&ldquo;愚蠢&rdquo;的投资决策</h2>
+
+        <p>说到对洋河股份的业绩判断，老唐给大家抖点儿自己&ldquo;犯错&rdquo;的思考历程。</p>
+
+        <p>&ldquo;唐书房&rdquo;的老朋友可能记得，老唐介入洋河是在 2015 年中报出来后的第一个交易日，也就是 <strong>2015 年 8 月 31 日</strong>首次介入。图 18-1 几乎展示了老唐身处洋河的全部经历。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805154351964-1785915833561-1.png" alt="洋河股份持仓期间股价走势（前复权）" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+
+        <p style="text-align:center; font-size:.85rem; color:var(--text3); margin:.25rem 0 1.5rem;"><strong>图 18-1</strong>　洋河股份持仓期间股价走势（前复权）</p>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p>&#x2460; 收入本书时补充说明：此处 53 元指未复权价格。图中低点 31.73 元是实际低点 47.38 元的前复权。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-1-1">1.1 五年后的洋河账单</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>初始介入价</td>
+              <td>约 <strong>53 元</strong>&#x2460;</td>
+            </tr>
+            <tr>
+              <td>持有时长</td>
+              <td>整五年（2015-08-31 至今）</td>
+            </tr>
+            <tr>
+              <td>当前股价</td>
+              <td>144.81 元</td>
+            </tr>
+            <tr>
+              <td>期间累计每股分红</td>
+              <td>10.571 元</td>
+            </tr>
+            <tr>
+              <td>简单回报</td>
+              <td>(144.81 + 10.57) &divide; 53 &asymp; <strong>2.93 倍</strong></td>
+            </tr>
+            <tr>
+              <td>折合年化收益率</td>
+              <td><strong>24%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p>说明：以上不计分红再投入。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-1-2">1.2 补上半句，你说不定当场吐血</h3>
+
+        <p>听上去似乎还不错，但是老唐如果补上半句，你说不定当场吐血：<strong>2015 年 8 月 31 日，老唐第一次买入洋河的钱，来自卖出 5% 的贵州茅台。</strong></p>
+
+        <p>茅台当天的股价在 190&plusmn;5 元范围活动，就算卖的是全天最高价 195 元：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>卖出价（按最高价算）</td>
+              <td>195 元</td>
+            </tr>
+            <tr>
+              <td>当前股价</td>
+              <td>1770 元</td>
+            </tr>
+            <tr>
+              <td>期间累计每股现金分红</td>
+              <td>55.521 元</td>
+            </tr>
+            <tr>
+              <td>简单回报</td>
+              <td>(1770 + 55.52) &divide; 195 &asymp; <strong>9.36 倍</strong></td>
+            </tr>
+            <tr>
+              <td>折合年化收益率</td>
+              <td><strong>56.4%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>如果当初换成的是五粮液或泸州老窖，简单回报大约是 <strong>8.5 倍</strong>和 <strong>4.5 倍</strong>。</p>
+
+        <h3 id="sub-1-3">1.3 换个说法：每 100 股茅台的五年归宿</h3>
+
+        <p>这么对比可能不够直观，我们换个说法。当时卖出的每 100 股茅台（1.95 万元）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>选择</th>
+              <th>五年后市值</th>
+              <th>相对&ldquo;买洋河&rdquo;的差额</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>买成洋河股份</td>
+              <td><strong>5.71 万元</strong></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>呆坐不换（茅台）</td>
+              <td><strong>18.25 万元</strong></td>
+              <td>+12.54 万元</td>
+            </tr>
+            <tr>
+              <td>换成五粮液</td>
+              <td><strong>16.58 万元</strong></td>
+              <td>+10.87 万元</td>
+            </tr>
+            <tr>
+              <td>换成泸州老窖</td>
+              <td><strong>8.78 万元</strong></td>
+              <td>+3.07 万元</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>老唐卖掉的远远不止 100 股，损失自然也就不止上面这么多。现在看，这当然是一次非常&ldquo;愚蠢&rdquo;的决策。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-1-4">1.4 那么当时为何会作出这样的决策？</h3>
+
+        <p>很多朋友在&ldquo;唐书房&rdquo;问过我，我也答过多次，其中有一条问答如下。</p>
+
+        <div class="pull-quote">
+          既然茅台的确定性、唯一性如此强，为何还要花心洋河呢？赢者通吃啊？
+          <cite>— 某某（读者提问）</cite>
+        </div>
+
+        <div class="pull-quote">
+          你这是未来视角。酱香一定赢，高端一定赢，这是走出来的结果。如果有个平行空间，完全有可能浓香赢、中端赢。在那个空间里，你的留言就变成&ldquo;老唐，你真是个傻子，有洋河、古井，干吗还要花心茅台，赢者通吃啊！&rdquo;。
+          <cite>— 唐朝（2020 年 3 月 19 日&ldquo;唐书房&rdquo;公众号留言区）</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、白酒行业实战一线专家的一次集体错判 -->
+      <section id="section-2">
+        <h2>二、白酒行业实战一线专家的一次集体错判</h2>
+
+        <p>今天，老唐就拆开和大家聊聊，什么叫&ldquo;完全有可能是浓香赢、中端赢&rdquo;。</p>
+
+        <h3 id="sub-2-1">2.1 复盘：从寒冬到景气周期</h3>
+
+        <p>站在此时，我们已经知道了本轮白酒行业性复苏，是从 2015 年年中以茅台、五粮液为代表的高端名酒供不应求开始的。<strong>确认复苏的标志性事件是五粮液带头上调出厂价，从 609 元上调至 659 元。</strong></p>
+
+        <p>2013—2014 年的白酒业寒冬里，除茅台以外的大部分白酒企业都出现了营业收入和净利润的巨额下滑，不得不降价求生存。最惨的是泸州老窖：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>公司</th>
+              <th>2013 年净利润</th>
+              <th>2014 年净利润</th>
+              <th>变化</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>泸州老窖</td>
+              <td>34.4 亿元</td>
+              <td><strong>8.8 亿元</strong></td>
+              <td>暴跌，比 2019 年的分众传媒还惨</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>2014 年 5 月的降价潮</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>公司</th>
+              <th>产品</th>
+              <th>出厂价变化</th>
+              <th>零售指导价变化</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>五粮液</td>
+              <td>普五</td>
+              <td>729 元 &rarr; 609 元</td>
+              <td>1109 元 &rarr; 729 元</td>
+            </tr>
+            <tr>
+              <td>泸州老窖</td>
+              <td>国窖 1573</td>
+              <td>—</td>
+              <td>1589 元 &rarr; <strong>779 元</strong>（一次性）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>更惨的是，当时的市场真实成交价甚至<strong>远低于</strong>这个降过价后的指导价。</p>
+          </div>
+        </div>
+
+        <p>2015 年 8 月，五粮液的市场供求状况逐步逆转，公司出手将出厂价从 609 元上调至 659 元，除茅台以外的各大名酒企业紧跟步伐上调出厂价，<strong>行业性景气周期开始</strong>。这轮景气周期持续至今（2020 年底）未见结束的迹象。</p>
+
+        <h3 id="sub-2-2">2.2 高增长是&ldquo;尽在掌握&rdquo;，还是意外之喜？</h3>
+
+        <p>那么，这轮名酒企业的高增长以及股价的飙升，是管理层预见并规划的&ldquo;一切尽在掌握中&rdquo;，还是只是市场奉上的意外之喜呢？</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>要知道这个不难。在《手把手教你读财报》的第七章第二节，老唐分享了<strong>利用行业里最顶尖的、一直战斗在市场第一线的免费研究员</strong>去了解和判断市场的方法——阅读年报的&ldquo;董事会报告&rdquo;或者叫&ldquo;经营分析&rdquo;章节，理解最贴近行业一线、在行业里摸爬滚打了几十年的真正顶尖专业人士（&ldquo;名酒企业董事会和核心管理层&rdquo;）的观点。</p>
+          </div>
+        </div>
+
+        <p>2015 年三四月份，各大名酒企业 2014 年年报披露。翻看四家名酒企业的年报，我们可以看到各家公司管理层站在 2015 年初，是如何看待当时的市场状况和未来趋势的。由于全文太长，老唐只摘录几句要点，感兴趣的朋友们可以自己翻看财报原文。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>公司</th>
+              <th>2014 年年报披露日期</th>
+              <th>出处页码</th>
+              <th>章节</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>泸州老窖</td>
+              <td>2015 年 3 月 31 日</td>
+              <td>第 20 页</td>
+              <td>行业竞争格局和发展趋势</td>
+            </tr>
+            <tr>
+              <td>五粮液</td>
+              <td>2015 年 4 月 17 日</td>
+              <td>第 14 页</td>
+              <td>行业竞争格局和发展趋势</td>
+            </tr>
+            <tr>
+              <td>贵州茅台</td>
+              <td>2015 年 4 月 18 日</td>
+              <td>第 11 页</td>
+              <td>行业竞争格局和发展趋势</td>
+            </tr>
+            <tr>
+              <td>洋河股份</td>
+              <td>2015 年 4 月 29 日</td>
+              <td>第 23 页</td>
+              <td>行业竞争格局和发展趋势</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-3">2.3 四大名酒掌舵人的原话摘录</h3>
+
+        <p><strong>贵州茅台</strong>（2015-04-18 披露）：</p>
+
+        <div class="pull-quote">
+          <strong>2015 年将是白酒行业发展困难较多的一年，也是发展形势较为严峻的一年。</strong><br />
+          白酒行业将进入新常态：一是进入低速增长的新常态。二是回归大众消费的新常态，大众消费将成为主流。三是互联网实现智能化卖酒的新常态。
+          <cite>— 贵州茅台 2014 年年报</cite>
+        </div>
+
+        <p><strong>五粮液</strong>（2015-04-17 披露）：</p>
+
+        <div class="pull-quote">
+          随着大众消费崛起，未来产品价值诉求将更趋平民化，中低端白酒需求将保持刚性增长，以大众消费市场为主的中低端白酒市场仍蕴含较为积极的上升潜力。<br />
+          依靠高端白酒价格上行拉动整个行业爆发式增长的时代已经一去不复返，加之生产经营成本持续上涨，行业内企业利润普遍呈现下降趋势。<br />
+          &ldquo;互联网+&rdquo;已成为大趋势，以电子商务为代表的新兴渠道不断成熟壮大，白酒行业传统渠道面临重大挑战，业内企业开始以大数据营销、互联网思维等为新营销的理念，推动整个行业渠道多元化发展，更加贴近消费者市场。<br />
+          年轻消费群体快速崛起，消费需求更加多元。
+          <cite>— 五粮液 2014 年年报</cite>
+        </div>
+
+        <p><strong>洋河股份</strong>（2015-04-29 披露）：</p>
+
+        <div class="pull-quote">
+          2014 年白酒行业深度调整，高端酒市场销量紧缩，中低端产品异军突起，市场竞争日趋激烈。<br />
+          2015 年，传统销售渠道市场竞争面临压力，产业结构和销售模式的深入调整将成为行业的巨大挑战，同时主打健康品牌和年轻消费者的市场竞争将进一步加剧。<br />
+          行业龙头企业开始全面消化市场库存，稳定老产品价格体系，新品融入大众和商务消费主流。<br />
+          在&ldquo;短期矫枉过正，中期理性回归，长期商众凸显&rdquo;基础上，白酒行业进入理性竞争新常态，新常态下行业竞争将走向更加理性和平稳的新阶段。
+          <cite>— 洋河股份 2014 年年报</cite>
+        </div>
+
+        <p><strong>泸州老窖</strong>（2015-03-31 披露）：</p>
+
+        <div class="pull-quote">
+          &ldquo;黄金十年&rdquo;的行业整体高速增长短期很难再现。<br />
+          消费者将越来越注重产品性价比。<br />
+          行业高、中、低产品均还供大于求，竞争加剧，中低档产品市场的激烈竞争可能导致部分企业退出加快。
+          <cite>— 泸州老窖 2014 年年报</cite>
+        </div>
+
+        <h3 id="sub-2-4">2.4 提炼：六条管理层共识</h3>
+
+        <p>如果我们仔细阅读上面四家名酒企业掌舵人的观点，可以很轻易地发现大致有这么几个共识：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">&#x4E00;</span>
+            <h4>依然很困难</h4>
+            <p>2015 年及之后<strong>依然很困难</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x4E8C;</span>
+            <h4>市场供大于求</h4>
+            <p>市场仍然<strong>供大于求</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x4E09;</span>
+            <h4>中低速增长</h4>
+            <p>未来将趋向于<strong>中低速增长</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x56DB;</span>
+            <h4>消费年轻化</h4>
+            <p>白酒消费的趋势是<strong>年轻化</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x4E94;</span>
+            <h4>大众消费主导</h4>
+            <p>未来的主要增长将来自<strong>注重性价比的大众消费</strong></p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x516D;</span>
+            <h4>中低端刚性增长</h4>
+            <p><strong>中低端产品刚性增长</strong></p>
+          </div>
+        </div>
+
+        <p><strong>中低端、大众消费、年轻化、互联网销售</strong>，这些字眼让你想起了谁呢？</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>当然是洋河啊！通吃中低端（其中又细分为中高端、中端和中低端）的全国性酒企，一贯走年轻化、现代化路线，注重网络推广的酒企，是谁？<strong>洋河！</strong></p>
+          </div>
+        </div>
+
+        <p>于是，某蠢蛋唐在 2016 年初白纸黑字写下过这样的判断：</p>
+
+        <div class="pull-quote">
+          若五粮液不尽快在股权结构及管理机制上作出重大改革，洋河很可能会在未来三五年内，从营收和净利润上全面超越五粮液，成为中国白酒业浓香老大。
+          <cite>— 唐朝（2016 年初）</cite>
+        </div>
+
+        <h3 id="sub-2-5">2.5 结果：预期与现实完全相反</h3>
+
+        <p>然而，站在 2020 年底回看，我们发现这四家名酒企业管理层居然<strong>集体看走眼</strong>，蠢蛋唐的脸也是被打得啪啪作响。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>2015 年初的一致预期</th>
+              <th>2015—2020 年的实际结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>增长速度</td>
+              <td>中低速增长</td>
+              <td><strong>真正的高速增长</strong></td>
+            </tr>
+            <tr>
+              <td>增长来源</td>
+              <td>中低端带来</td>
+              <td><strong>主要由高端酒供不应求造成</strong></td>
+            </tr>
+            <tr>
+              <td>股价表现</td>
+              <td>（隐含利好中端）</td>
+              <td>主打高端的茅台、五粮液、泸州老窖涨幅<strong>远高于</strong>主打中端的洋河股份</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>实际上，如果我们继续翻看后两年的财报，会发现直到 <strong>2017 年初</strong>，各大名酒企业管理层对市场的看法才算陆续转变过来。老唐就不摘录了，感兴趣的朋友们可以自己查阅。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、投资的关键是理性、逻辑 -->
+      <section id="section-3">
+        <h2>三、投资的关键是理性、逻辑</h2>
+
+        <p>以上这个集体错判，来自国内实战第一线真正的行业专家。在老唐看来，它至少说明三个很有价值的问题。</p>
+
+        <h3 id="sub-3-1">3.1 第一：市场变化很难预测，其发展存在很多偶然性</h3>
+
+        <p>即便是行业内专家也同样可能失之毫厘、谬以千里。今天，贵州茅台、五粮液、泸州老窖的产品供不应求、股价飙升的现状，是<strong>市场不断变化后的结果，并非注定如此的必然</strong>。</p>
+
+        <p>所以，站在今天忏悔自己为什么不在 2015 年全仓贵州茅台，只是犯了<strong>从后视镜看问题</strong>的错误。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>这种反思有害无益，它是从结果倒推出来的，并不能用以指导我们未来的投资决策。同样，谁要站在今天，说自己比四大名酒企业管理层看得更远、更高、更清楚，早在 2015 年初就已经看清高端白酒必然爆发的前途，从而下注高端，获得高额回报，老唐估计他大概率是头脑不清楚，自己骗自己，是<strong>选择性地记住了正确面，将&ldquo;蒙对&rdquo;阐述成&ldquo;看对&rdquo;了</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-2">3.2 第二：优秀的商业模式具有强大的容错性</h3>
+
+        <p>对于具备以下特性的酒企，即便是管理层判断错了，企业也有动态调整的时间和空间：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">特性一</span>
+            <h4>产品差异化</h4>
+            <p>难以被简单替代</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特性二</span>
+            <h4>产品自带提价增量属性</h4>
+            <p>无须扩产也能增长</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特性三</span>
+            <h4>行业变化缓慢</h4>
+            <p>留出纠错的时间窗口</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">特性四</span>
+            <h4>存货不贬值</h4>
+            <p>判断失误不造成硬损失</p>
+          </div>
+        </div>
+
+        <p>高端白酒企业高管们在 2015 年初的集体错判，并没有影响他们成功搭上本轮需求飙升的快车，给股东创造优异的回报。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>即便是没有站在风口的洋河股份，五年里也实现了<strong>年化 24%</strong> 的优异成绩，这成绩甚至超过了《巴芒演义》里绝大多数&ldquo;股神&rdquo;的长期记录。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-3">3.3 第三：投资的关键是理性，是逻辑</h3>
+
+        <div class="pull-quote large">
+          是事前尽可能多思考各种可能，并在确定性和赔率之间，作出符合自己性格特点的选择。
+        </div>
+
+        <p>如同《巴芒演义》第 168～170 页阐述的<strong>索普买入可转债同时卖空等额股票</strong>的例子一样。索普的决策出发点是：未来这家企业无论是变好了还是破产了，甚至是维持原样不动，索普都能 <strong>100% 确保赚钱</strong>。</p>
+
+        <p>如果未来这家企业真的跌破产了，我跑去问索普：&ldquo;为什么你要买可转债呢？要是你只放空股票，不买可转债，你明明可以多赚几百倍的？&rdquo;索普恐怕连一个卫生球也不会抛给我，只会在心中默默地嘀咕一句&ldquo;懒得理你&rdquo;。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>这个思维方式非常重要，但我不确定我是否表述清楚了，或者你是否认真对待了。希望不要因为文章免费，得到个一笑而过的待遇。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、补充说明 -->
+      <section id="section-4">
+        <h2>四、补充说明</h2>
+
+        <p>老唐从 2015 年 8 月 31 日首次介入洋河股份，之后<strong>只有买入没有卖出</strong>。截至 2022 年 2 月底，持有仓位 <strong>22%</strong>，是实盘中仅次于腾讯控股的第二大持股。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805153731458.png" alt="image-20260805153731458" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

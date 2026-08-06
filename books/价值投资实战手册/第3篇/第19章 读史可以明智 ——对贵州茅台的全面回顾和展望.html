@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第19章 读史可以明智 ——对贵州茅台的全面回顾和展望 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html">第14章 腾讯控股的确定性</a></li>
+            <li><a href="第15章 聊聊高端白酒产能及补充.html">第15章 聊聊高端白酒产能及补充</a></li>
+            <li><a href="第16章 高端白酒产能补充篇.html">第16章 高端白酒产能补充篇</a></li>
+            <li><a href="第17章 贵州茅台估值、 买点及卖点计算过程演示.html">第17章 贵州茅台估值、买点及卖点计算过程演示</a></li>
+            <li><a href="第18章 回顾对洋河股份的投资决策.html">第18章 回顾对洋河股份的投资决策</a></li>
+            <li><a href="第19章 读史可以明智 ——对贵州茅台的全面回顾和展望.html" class="active">第19章 读史可以明智 ——对贵州茅台的全面回顾和展望</a></li>
+            <li><a href="第20章 分众传媒投资回顾及周期股估值方法的尝试.html">第20章 分众传媒投资回顾及周期股估值方法的尝试</a></li>
+            <li><a href="第21章 如何从零开始研究一家企业 ——以福寿园为例.html">第21章 如何从零开始研究一家企业 ——以福寿园为例</a></li>
+            <li><a href="第22章 上海机场研究纲要.html">第22章 上海机场研究纲要</a></li>
+            <li><a href="第23章 对上海机场补充协议的理解和判断.html">第23章 对上海机场补充协议的理解和判断</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、清仓事实：三次减仓，只留 3% 观察仓</a></li>
+        <li><a href="#section-2">二、7 年 22 倍的故事</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 起点与终点：两组估值数据</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 22 倍拆解：收益到底来自哪里</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 哪部分是能力，哪部分是运气</a></li>
+        <li><a href="#section-3">三、读史可以明智</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 当下的市盈率高吗？答案很直接</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 为什么要回顾历史</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">3.3 样本：2007 年的超级大牛市</a></li>
+        <li class="sub"><a href="#sub-3-4" class="sub">3.4 2006—2008 年茅台基础数据</a></li>
+        <li class="sub"><a href="#sub-3-5" class="sub">3.5 疯狂与崩塌：茅台两年的真实轨迹</a></li>
+        <li><a href="#section-4">四、知道自己能赚什么钱很重要</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">4.1 如果重演 2007 年，茅台能涨到哪里</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">4.2 可能吗？一切皆有可能</a></li>
+        <li><a href="#section-5">五、老唐能赚到的两种钱</a></li>
+        <li class="sub"><a href="#sub-5-1" class="sub">5.1 第一种钱：没有超级牛市，回归 30 倍后买入</a></li>
+        <li class="sub"><a href="#sub-5-2" class="sub">5.2 第二种钱：真有超级牛市，等它后面的超级熊市</a></li>
+        <li><a href="#section-6">六、完整归结：两条逻辑主线</a></li>
+        <li class="sub"><a href="#sub-6-1" class="sub">6.1 逻辑一：经营利润增长是高确定性的</a></li>
+        <li class="sub"><a href="#sub-6-2" class="sub">6.2 逻辑二：当前估值不支持我继续持股</a></li>
+        <li class="sub"><a href="#sub-6-3" class="sub">6.3 一个承诺</a></li>
+        <li><a href="#section-7">七、补充说明</a></li>
+        <li class="sub"><a href="#sub-7-1" class="sub">7.1 提前披露的买入计划与执行情况</a></li>
+        <li class="sub"><a href="#sub-7-2" class="sub">7.2 最新持仓状态</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第19章</div>
+        <h1 class="article-title">读史可以明智 ——对贵州茅台的全面回顾和展望</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>发表时间</strong>2021年2月25日</span>
+          <span><strong>主题</strong>贵州茅台 &#xB7; 收益归因 &#xB7; 卖出决策</span>
+        </div>
+      </header>
+
+      <div class="callout info">
+        <div class="callout-icon">&#x1F4DD;</div>
+        <div class="callout-body">
+          <div class="callout-title">推荐人姚队</div>
+          <p>老唐实盘公开八年来，贵州茅台一直是第一大重仓股。2021 年初三次卖出近于清仓。与过往剖析茅台投资价值的文章不同，本文重点分析老唐如何在茅台上赚钱，收益从何而来，以及在可见的未来如何继续从茅台身上赚到钱。</p>
+        </div>
+      </div>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、清仓事实：三次减仓，只留 3% 观察仓 -->
+      <section id="section-1">
+        <h2>一、清仓事实：三次减仓，只留 3% 观察仓</h2>
+
+        <p>2021 年 1 月 8 日、2 月 8 日和 2 月 10 日，我在预定卖点将贵州茅台减仓至<strong>仅剩 3%</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>减仓日期</th>
+              <th>对应市值卖点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2021-01-08</td>
+              <td>2.7 万亿元</td>
+            </tr>
+            <tr>
+              <td>2021-02-08</td>
+              <td>2.97 万亿元</td>
+            </tr>
+            <tr>
+              <td>2021-02-10</td>
+              <td>3.24 万亿元</td>
+            </tr>
+            <tr>
+              <td><strong>加权平均</strong></td>
+              <td><strong>略低于 3 万亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>剩下的这 3% 算是<strong>纪念性质的观察仓</strong>，不关心未来涨跌。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、7 年 22 倍的故事 -->
+      <section id="section-2">
+        <h2>二、7 年 22 倍的故事</h2>
+
+        <p>老唐实盘公开 7 年多，贵州茅台从 2014 年初的 1330 亿元市值，到卖出时近 3 万亿元市值，带来了丰厚的回报。可以说老唐的命运因茅台而改变。</p>
+
+        <p>对于茅台，对于所有的茅台人，我都心怀感恩。当然，对于推高市盈率的市场先生群体，我同样心怀感激。</p>
+
+        <h3 id="sub-2-1">2.1 起点与终点：两组估值数据</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时点</th>
+              <th>市值</th>
+              <th>净利润基数</th>
+              <th>静态市盈率</th>
+              <th>动态市盈率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>2014 年初</strong>（买入）</td>
+              <td>约 1330 亿元</td>
+              <td>2013 年 151.4 亿元 / 2014 年 153.5 亿元</td>
+              <td>约 8.8 倍</td>
+              <td>约 8.7 倍</td>
+            </tr>
+            <tr>
+              <td><strong>2021 年初</strong>（卖出）</td>
+              <td>近 3 万亿元</td>
+              <td>2020 年约 460 亿元 / 2021 年约 540 亿元</td>
+              <td>约 65 倍</td>
+              <td>约 55 倍</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p><strong>1330 亿元是怎么算出来的</strong>：2014 年第一个交易日，茅台开盘价 127.99 元。当时总股本 10.3818 亿股，市值为 127.99 &times; 10.3818 &asymp; 1329 亿元。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-2">2.2 22 倍拆解：收益到底来自哪里</h3>
+
+        <p>这个 <strong>7.11 年</strong>（以下简化表述，略称为 7 年）从 1330 亿元到近 3 万亿元的 22 倍故事，实际上由三部分构成：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>收益来源</th>
+              <th>计算过程</th>
+              <th>贡献倍数</th>
+              <th>性质</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>茅台公司<strong>净利润的增长</strong></td>
+              <td>540 &divide; 153.5</td>
+              <td><strong>&asymp; 3.5 倍</strong></td>
+              <td>研究的功劳</td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>市盈率从严重低估的 8.7 倍，<strong>回到无风险收益率对应的估值中枢 30 倍</strong></td>
+              <td>30 &divide; 8.7</td>
+              <td><strong>&asymp; 3.5 倍</strong></td>
+              <td>研究的功劳</td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>从估值中枢 30 倍到<strong>高估的 55 倍</strong></td>
+              <td>55 &divide; 30</td>
+              <td><strong>&asymp; 1.8 倍</strong></td>
+              <td>市场先生的馈赠</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>最终结果</strong>：3.5 &times; 3.5 &times; 1.8 &asymp; <strong>22 倍</strong>（或以静态口径视为 3 &times; 3.4 &times; 2.2 &asymp; 22）。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>这是投资者首先应该搞清楚的事情：<strong>自己赚的钱来自哪里。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-3">2.3 哪部分是能力，哪部分是运气</h3>
+
+        <p><strong>&#x2460; + &#x2461; = 3.5 &times; 3.5 &asymp; 12 倍，是投资者深度研究的功劳</strong>，包含两个层面：</p>
+
+        <ul>
+          <li><strong>&#x2460;</strong> 对企业利润增长的研究；</li>
+          <li><strong>&#x2461;</strong> 对符合老唐估值法三大前提的企业，合理市盈率必然向无风险收益率靠拢的逻辑理解。</li>
+        </ul>
+
+        <p>这 12 倍涨幅，属于按计算器的&ldquo;夹头&rdquo;（对价值投资者的戏称）<strong>有能力赚到，也应该赚到</strong>的钱。</p>
+
+        <p><strong>后面的 1.8 倍</strong>，属于市场先生情绪的馈赠，是风落之财、意外之财（Windfall）。风落之财应归功于运气，以及这个&ldquo;不适合价值投资&rdquo;的 A 股市场。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>它们三者的叠加，才带来了茅台 7 年 22 倍的神话。把运气当能力，是投资中最危险的自我欺骗。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、读史可以明智 -->
+      <section id="section-3">
+        <h2>三、读史可以明智</h2>
+
+        <h3 id="sub-3-1">3.1 当下的市盈率高吗？答案很直接</h3>
+
+        <p>鼠年最后一个交易日，茅台收盘价 <strong>2601 元</strong>，市值 <strong>32674 亿元</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>计算口径</th>
+              <th>净利润基数</th>
+              <th>市盈率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>静态（2020 年）</td>
+              <td>约 460 亿元</td>
+              <td>约 <strong>71 倍</strong></td>
+            </tr>
+            <tr>
+              <td>动态（2021 年）</td>
+              <td>约 540 亿元</td>
+              <td>约 <strong>60 倍</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这个市盈率高吗？老唐历来不喜欢含糊其词，答案简单粗暴：<strong>高了。</strong></p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p><strong>但高了就会跌吗？</strong> 如果市盈率高了就会跌，市盈率低了就会涨，世上就不会有穷人了。投资确实很简单，但还真没简单到如此地步。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-2">3.2 为什么要回顾历史</h3>
+
+        <p><strong>市场先生的情绪只能利用，无法预测</strong>，这是投资最重要的基本法则。</p>
+
+        <p>不过，无法预测不妨碍我们回顾历史，看看之前的一场超级大牛市里，市场先生曾经疯狂到什么程度，后来又是如何发展的。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>历史不会简单重复，却会踏着相同的韵律走来。&ldquo;读史可以明智&rdquo;的意思就是<strong>回顾过去，可以帮我们更好地展望未来</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-3">3.3 样本：2007 年的超级大牛市</h3>
+
+        <p>2007 年，中国股市爆发有史以来最大规模的一次牛市。</p>
+
+        <p><strong>牛市成因与背景</strong>：</p>
+
+        <ul>
+          <li>股权分置改革释放<strong>制度性红利</strong>；</li>
+          <li>以基金为代表的<strong>金融资本第一次登台</strong>与产业资本博弈；</li>
+          <li>通胀持续飙升，经济过热，国内外<strong>流动性过剩</strong>；</li>
+          <li>其间央行<strong>十次提准、五次加息</strong>，甚至是美国次贷危机的逐渐升级，都没能抑制住 A 股疯狂上涨的步伐。</li>
+        </ul>
+
+        <p><strong>指数表现</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>指数</th>
+              <th>2007 年涨幅</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>上证综指</td>
+              <td><strong>94%</strong></td>
+            </tr>
+            <tr>
+              <td>沪深 300 指数</td>
+              <td><strong>161.55%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>满大街是高唱&ldquo;死了都不卖&rdquo;的声音。截至目前，中国 A 股历史上，2007 年牛市依然可以用&ldquo;<strong>前无古人、后无来者</strong>&rdquo;八个字形容。</p>
+
+        <h3 id="sub-3-4">3.4 2006—2008 年茅台基础数据</h3>
+
+        <p>在这段大牛市里，茅台的股价表现如何？先记录几个基本数据：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>净利润</th>
+              <th>同比增长</th>
+              <th>总股本</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2006 年</td>
+              <td>15.4 亿元</td>
+              <td>—</td>
+              <td>9.438 亿股</td>
+            </tr>
+            <tr>
+              <td>2007 年</td>
+              <td>28.3 亿元</td>
+              <td><strong>+83%</strong></td>
+              <td>9.438 亿股</td>
+            </tr>
+            <tr>
+              <td>2008 年</td>
+              <td>38 亿元</td>
+              <td><strong>+34%</strong></td>
+              <td>9.438 亿股</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p>说明：2006—2008 年，茅台总股本未发生变化，均为 9.438 亿股。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-5">3.5 疯狂与崩塌：茅台两年的真实轨迹</h3>
+
+        <p><strong>2007 年（上涨 163.97%）</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>开盘价</td>
+              <td>90.01 元</td>
+            </tr>
+            <tr>
+              <td>最低价</td>
+              <td>83.3 元</td>
+            </tr>
+            <tr>
+              <td>最高价</td>
+              <td>230.1 元</td>
+            </tr>
+            <tr>
+              <td>收盘价</td>
+              <td>230 元</td>
+            </tr>
+            <tr>
+              <td>全年涨幅</td>
+              <td><strong>+163.97%</strong></td>
+            </tr>
+            <tr>
+              <td>对应市值区间</td>
+              <td>786 亿 ~ 2172 亿元</td>
+            </tr>
+            <tr>
+              <td>静态市盈率区间</td>
+              <td><strong>52 ~ 145 倍</strong></td>
+            </tr>
+            <tr>
+              <td>动态市盈率区间</td>
+              <td><strong>28 ~ 77 倍</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>2008 年（下跌 52.57%）</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>开盘价</td>
+              <td>227 元</td>
+            </tr>
+            <tr>
+              <td>最高价</td>
+              <td>230.55 元</td>
+            </tr>
+            <tr>
+              <td>最低价</td>
+              <td>84.2 元</td>
+            </tr>
+            <tr>
+              <td>收盘价</td>
+              <td>108.7 元</td>
+            </tr>
+            <tr>
+              <td>全年跌幅</td>
+              <td><strong>-52.57%</strong></td>
+            </tr>
+            <tr>
+              <td>对应市值区间</td>
+              <td>2176 亿 ~ 795 亿元</td>
+            </tr>
+            <tr>
+              <td>静态市盈率区间</td>
+              <td><strong>77 ~ 28 倍</strong></td>
+            </tr>
+            <tr>
+              <td>动态市盈率区间</td>
+              <td><strong>57 ~ 21 倍</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>以上均为<strong>未复权真实价格</strong>，下同。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、知道自己能赚什么钱很重要 -->
+      <section id="section-4">
+        <h2>四、知道自己能赚什么钱很重要</h2>
+
+        <h3 id="sub-4-1">4.1 如果重演 2007 年，茅台能涨到哪里</h3>
+
+        <p>让我们回看当下：春节前茅台收盘价 2601 元，总股本 12.56 亿股（125619.78 万股），对应市值 32674 亿元。</p>
+
+        <p>假如 2021—2022 年市场能够走出 2007 年那样的超级大牛市，也就是说，我们按照 2007 年茅台的估值上限&ldquo;<strong>静态 145 倍或动态 77 倍</strong>&rdquo;来揣摩市场先生，这意味着：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>测算口径</th>
+              <th>计算过程</th>
+              <th>目标市值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>动态 77 倍（2021 年利润）</td>
+              <td>540 &times; 77</td>
+              <td>&asymp; <strong>4.16 万亿元</strong></td>
+            </tr>
+            <tr>
+              <td>静态 145 倍（2020 年利润）</td>
+              <td>460 &times; 145</td>
+              <td>= <strong>6.67 万亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>结果项</th>
+              <th>数值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>对应股价</td>
+              <td><strong>3300 ~ 5300 元</strong></td>
+            </tr>
+            <tr>
+              <td>相对当前涨幅</td>
+              <td><strong>+27% ~ +104%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-2">4.2 可能吗？一切皆有可能</h3>
+
+        <p>不就是市盈率从 71 倍升到 145 倍，为什么就不可能呢？股市里，市盈率几百上千的公司一大把，凭什么我们茅台就不能享受这待遇呢？</p>
+
+        <p><strong>但是，朋友们，扪心自问，你敢赚这笔钱吗？我先坦白，我不敢。</strong></p>
+
+        <p>别人如果赚到这 27%~104%，那是别人浑身是胆或智慧超群的应享回报。我只能表示&ldquo;仰慕之心犹如滔滔江水连绵不绝，好似黄河决堤一发而不可收拾&rdquo;。我绝对不会羡慕嫉妒恨，我保证。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>因为我知道<strong>自己几斤几两</strong>。这就是能力圈的真正含义——不是知道什么能赚，而是知道什么自己赚不到。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 五、老唐能赚到的两种钱 -->
+      <section id="section-5">
+        <h2>五、老唐能赚到的两种钱</h2>
+
+        <p>我可以赚到什么钱呢？两种钱。</p>
+
+        <h3 id="sub-5-1">5.1 第一种钱：没有超级牛市，回归 30 倍后买入</h3>
+
+        <p>如果后面不是 2007 年那样&ldquo;前无古人、后无来者&rdquo;的超级大牛市，热潮过后，茅台可能会回到 <strong>30 倍合理市盈率以下</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>假设情形</th>
+              <th>净利润</th>
+              <th>30 倍对应市值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2021 年（预估）</td>
+              <td>540 亿元</td>
+              <td><strong>16200 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>2022 年（再增长 25%）</td>
+              <td>675 亿元</td>
+              <td><strong>20250 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>2023 年（利润继续增长 25%）</td>
+              <td>845 亿元</td>
+              <td><strong>25350 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>千亿净利润时</td>
+              <td>1000 亿元</td>
+              <td><strong>30000 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>我买入，继续获取茅台经营利润的确定性增长。这是以老唐的鼠胆，可以赚到的第一种钱。</p>
+
+        <h3 id="sub-5-2">5.2 第二种钱：真有超级牛市，等它后面的超级熊市</h3>
+
+        <p>如果后面是 2007 年那样的超级大牛市，陪伴大牛市的不是还有 2008 年的<strong>静态 28 倍市盈率、动态 21 倍市盈率</strong>的诱人熊市吗？<strong>我等这个。</strong></p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>而且我不需要等 21 倍，我 <strong>30 倍就大方买入</strong>。拿人家的手短，吃人家的嘴软。当初老唐拿过吃过市场先生的馈赠，此时就不好太计较。</p>
+          </div>
+        </div>
+
+        <p>这是按计算器的&ldquo;夹头&rdquo;，能够坦然赚到的第二种钱。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 六、完整归结：两条逻辑主线 -->
+      <section id="section-6">
+        <h2>六、完整归结：两条逻辑主线</h2>
+
+        <h3 id="sub-6-1">6.1 逻辑一：经营利润增长是高确定性的</h3>
+
+        <p>鉴于产品的供不应求，以及出厂价和一批价之间的巨大价差，即便考虑部分收藏和炒作的泡沫因素存在，茅台的经营利润增长依然可以说是<strong>高确定性</strong>的。</p>
+
+        <p>对于企业提出的&ldquo;十四五&rdquo;末（2025 年）利润翻番的目标，<strong>老唐比贵州省委省政府以及茅台管理层更乐观</strong>。我认为提前实现目标的可能性非常大，完全可能在 <strong>2024 年甚至 2023 年</strong>就实现茅台股份公司千亿元净利润。只要打破价格管制政策，提前实现的可能性相当大。</p>
+
+        <p><strong>千亿净利润意味着什么</strong>（相比 2020 年约 460 亿元的基数，增长 117%）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>达成年份</th>
+              <th>折合年化增长率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024 年过千亿</td>
+              <td>约 <strong>22%</strong></td>
+            </tr>
+            <tr>
+              <td>2023 年过千亿</td>
+              <td>可能达 <strong>30%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-6-2">6.2 逻辑二：当前估值不支持我继续持股</h3>
+
+        <p>在静态市盈率 71 倍、动态市盈率 60 倍的今天，<strong>我的认识和能力不足以支持我继续持股</strong>。我只能等待两种机会。</p>
+
+        <p><strong>机会一：未来不是超级大牛市</strong></p>
+
+        <p>茅台伴随着经营利润的增长，市盈率逐步回落。我可能在某年净利润的 30 倍水平重新开始买入。</p>
+
+        <ul>
+          <li>具体是哪年，我也不知道，<strong>经验性地认为三年之内机会很大</strong>；</li>
+          <li>我能获得的，是买入位置低于 3 万亿元卖出后的<strong>市值差</strong>，以及这期间资金的<strong>无风险收益率</strong>。</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>当然，这期间可能投入其他投资对象后亏损。但<strong>这个锅不应由卖出茅台的决策背</strong>——决策的对错要用决策当时的信息和逻辑来评判，而不是用后续无关事件的结果。</p>
+          </div>
+        </div>
+
+        <p><strong>机会二：未来是超级大牛市</strong></p>
+
+        <p>茅台虽然增长率不足 30%，却仍然在市场情绪的推动下达到 145 倍的静态市盈率高度，股价翻倍至 5000 元以上。所有坚守和买入茅台的人，赚得盆满钵满，嘲笑和打脸老唐的声音满网飞。</p>
+
+        <p>在这种超级大牛市的环境里：</p>
+
+        <ul>
+          <li>老唐所有的持股可能都会陆续触碰卖点，<strong>甚至可能连指数基金也被迫清仓</strong>；</li>
+          <li>在别人死了都不卖的翻倍过程中，老唐可能只赚到 <strong>30% 甚至更少的肉渣渣</strong>；</li>
+          <li>逐步变成满仓<strong>债券基金甚至货币基金</strong>的状态，在一片嘲笑声中等待大牛市后必然伴随的大熊市。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p><strong>收入是一连串事件，等待是其中重要的一环。</strong></p>
+          </div>
+        </div>
+
+        <p>这种情况下，老唐或许连打新资格也丧失了，每天点开股票 App 的理由没有了，甚至可能连&ldquo;唐书房&rdquo;也被骂得不更新了。满市场都是&ldquo;股神&rdquo;。但凡看&ldquo;唐书房&rdquo;文章的，一律被耽误了赚钱，更新简直就是在坑人。那时的老唐，或许每天沉迷于阅读、运动、陪我家领导，也或许再跑出去搞几个月自驾游。</p>
+
+        <h3 id="sub-6-3">6.3 一个承诺</h3>
+
+        <p>但是，如果真让我等到大牛之后的大熊，我承诺（请脑补茅台经销商庄严宣誓的场面）：</p>
+
+        <div class="pull-quote large">
+          我会对夺路而逃的卖家<strong>心怀感激</strong>，坚持做到<strong>不杀价、不等底</strong>。我会慷慨大方地给予高达 30 倍市盈率、堪称败家的买入价格，以奖励他们曾经的&ldquo;大无畏精神&rdquo;。
+        </div>
+
+        <p>未来两年，市场会是超级大牛市还是超级大熊市？<strong>我不知道。</strong> 但基于对市场先生他老人家的信心，我相信他会赏我买入机会的，大概率就在三年内。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>注意，这是<strong>纯拍脑袋，没逻辑的</strong>。为了拿到市场先生丰厚的奖金，我已准备好接受嘲笑和挖苦了，如同我持有的其他个股在下跌途中所遭受的待遇那样。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 七、补充说明 -->
+      <section id="section-7">
+        <h2>七、补充说明</h2>
+
+        <p>完全没有想到，市场先生在随后<strong>半年不到</strong>的时间就给了我买入机会。</p>
+
+        <h3 id="sub-7-1">7.1 提前披露的买入计划与执行情况</h3>
+
+        <p>老唐提前设定并在&ldquo;唐书房&rdquo;披露的买入计划：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>股价触发点</th>
+              <th>计划仓位</th>
+              <th>实际执行</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1810 元</td>
+              <td>加至 <strong>8%</strong></td>
+              <td>&#x2705; 已触发</td>
+            </tr>
+            <tr>
+              <td>1685 元</td>
+              <td>加至 <strong>16%</strong></td>
+              <td>&#x2705; 已触发</td>
+            </tr>
+            <tr>
+              <td>1560 元</td>
+              <td>加至 <strong>32%</strong></td>
+              <td>&#x26A0;&#xFE0F; 已触发但资金不足，仅买入 2%，仓位只加至 <strong>18%</strong></td>
+            </tr>
+            <tr>
+              <td>1320 元</td>
+              <td>补齐至个人单只持仓上限 <strong>40%</strong></td>
+              <td>未触发</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>最终前三个买入位置均被触发。唯一可惜的是跌至 1560 元的时候，老唐手中已经没钱。</p>
+
+        <h3 id="sub-7-2">7.2 最新持仓状态</h3>
+
+        <p>截至 <strong>2022 年 2 月底</strong>，茅台以 <strong>19%</strong> 仓位占比（这期间股价涨幅相对领先造成的比例提升）位列老唐实盘<strong>第三大持仓</strong>。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805155843299.png" alt="image-20260805155843299" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

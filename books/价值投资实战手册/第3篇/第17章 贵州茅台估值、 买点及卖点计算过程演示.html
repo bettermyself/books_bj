@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第17章 贵州茅台估值、买点及卖点计算过程演示 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html">第14章 腾讯控股的确定性</a></li>
+            <li><a href="第15章 聊聊高端白酒产能及补充.html">第15章 聊聊高端白酒产能及补充</a></li>
+            <li><a href="第16章 高端白酒产能补充篇.html">第16章 高端白酒产能补充篇</a></li>
+            <li><a href="第17章 贵州茅台估值、 买点及卖点计算过程演示.html" class="active">第17章 贵州茅台估值、买点及卖点计算过程演示</a></li>
+            <li><a href="第18章 回顾对洋河股份的投资决策.html">第18章 回顾对洋河股份的投资决策</a></li>
+            <li><a href="第19章 读史可以明智 ——对贵州茅台的全面回顾和展望.html">第19章 读史可以明智 ——对贵州茅台的全面回顾和展望</a></li>
+            <li><a href="第20章 分众传媒投资回顾及周期股估值方法的尝试.html">第20章 分众传媒投资回顾及周期股估值方法的尝试</a></li>
+            <li><a href="第21章 如何从零开始研究一家企业 ——以福寿园为例.html">第21章 如何从零开始研究一家企业 ——以福寿园为例</a></li>
+            <li><a href="第22章 上海机场研究纲要.html">第22章 上海机场研究纲要</a></li>
+            <li><a href="第23章 对上海机场补充协议的理解和判断.html">第23章 对上海机场补充协议的理解和判断</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、不是幸存者偏差</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">1.1 六年零三个月的实盘数据</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">1.2 失败者额头上的标签</a></li>
+        <li><a href="#section-2">二、站在 2013 年看茅台的估值</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 下注茅台几乎是必然</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 给茅台估值的两个关键知识点</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 2013 年可见数据与推算</a></li>
+        <li class="sub"><a href="#sub-2-4" class="sub">2.4 茅台还有消费者吗？</a></li>
+        <li class="sub"><a href="#sub-2-5" class="sub">2.5 2014 年依葫芦画瓢</a></li>
+        <li><a href="#section-3">三、站在 2020 年看茅台的估值</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 2020 年可见数据</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 分业务板块的估值</a></li>
+        <li class="sub"><a href="#sub-3-2-1" class="sub">3.2.1 财务公司</a></li>
+        <li class="sub"><a href="#sub-3-2-2" class="sub">3.2.2 系列酒</a></li>
+        <li class="sub"><a href="#sub-3-2-3" class="sub">3.2.3 核心部分：茅台酒</a></li>
+        <li><a href="#section-4">四、三年后合理估值及买点和卖点</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">4.1 2023 年预计净利润汇总</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">4.2 合理估值与理想买点</a></li>
+        <li class="sub"><a href="#sub-4-3" class="sub">4.3 2020 年当年净利润预估</a></li>
+        <li class="sub"><a href="#sub-4-4" class="sub">4.4 一年内卖点</a></li>
+        <li class="sub"><a href="#sub-4-5" class="sub">4.5 操作纪律总结</a></li>
+        <li><a href="#section-5">五、补充说明</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第17章</div>
+        <h1 class="article-title">贵州茅台估值、买点及卖点计算过程演示</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>发表时间</strong>2020年4月27日</span>
+          <span><strong>主题</strong>贵州茅台 &#xB7; 估值 &#xB7; 买点 &#xB7; 卖点</span>
+        </div>
+      </header>
+
+      <div class="callout info">
+        <div class="callout-icon">&#x1F4DD;</div>
+        <div class="callout-body">
+          <div class="callout-title">推荐人黄耀金</div>
+          <p>本文以贵州茅台为案例，复盘了茅台的估值逻辑与思考，并手把手演示了茅台估值、买点及卖点的计算过程。投资者只需要掌握小学二年级的数学，拿计算器跟着按一遍，就可以轻松掌握企业估值的技能。毫不夸张地说，只要吃透本文，投资者便可以把茅台当成捡钱的根据地，在里面捡一辈子钱。</p>
+        </div>
+      </div>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、不是幸存者偏差 -->
+      <section id="section-1">
+        <h2>一、不是幸存者偏差</h2>
+
+        <p>今天茅台创历史新高，可喜可贺。今天老唐的个人身家也创了历史新高（虽然 2020 年收益率仅约 0.5%），可喜可贺。这两个"可喜可贺"其实有重大关联：老唐的全部财富里，大概有<strong>超过 1/3 来自对贵州茅台的投资</strong>。</p>
+
+        <p>说茅台改变了我的命运，一点儿夸张成分也没有。也正因为此，但凡在网上遇到"还不是因为押中了一个茅台""一只茅台吹一生""除了茅台之外跟狗屎一样""幸存者偏差而已"等言论，老唐一般会笑着承认：是啊是啊，你说得对。</p>
+
+        <h3 id="sub-1-1">1.1 六年零三个月的实盘数据</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>起点</td>
+              <td>2014 年 1 月公开实盘时，市值低点 1225 亿元</td>
+            </tr>
+            <tr>
+              <td>终点</td>
+              <td>本文发表时，市值 1.6 万亿元</td>
+            </tr>
+            <tr>
+              <td>期间现金分红</td>
+              <td>近 600 亿元（不含 2019 年度拟实施的约 214 亿元）</td>
+            </tr>
+            <tr>
+              <td>股东回报</td>
+              <td><strong>超过 12 倍</strong></td>
+            </tr>
+            <tr>
+              <td>年化收益率</td>
+              <td><strong>超过 50%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这个过程中，老唐这种水准其实算"垃圾"的——年化连 30% 都不到。我知道的 2013 年前后一起热火朝天分析茅台的网友里，真有人全仓茅台持有至今，甚至还有全仓带融资持有至今的。<strong>这些人是幸存者偏差吗？</strong></p>
+
+        <h3 id="sub-1-2">1.2 失败者额头上的标签</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>网络上动辄对别人的成功嗤之以鼻"还不是因为×××"的人真不少。坦率说，这种心态是<strong>滋生失败者的温床</strong>，很轻松就扼杀了自己可能的进步方向。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "还不是因为有钱，还不是因为有后台，还不是因为运气好……"这些短句，简直就是那些注定失败的人额头所贴的标签。
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>识别并远离他们，你的生活一定会更加美好。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、站在 2013 年看茅台的估值 -->
+      <section id="section-2">
+        <h2>二、站在 2013 年看茅台的估值</h2>
+
+        <h3 id="sub-2-1">2.1 下注茅台几乎是必然</h3>
+
+        <p>对茅台的投资，如果像《巴芒演义》里的案例那样拆开的话，你会发现：只要具备一些基础知识，下注于它几乎是必然的。其间的差异，顶多也就是因个人性格和风险观不同，导致的<strong>仓位大小</strong>。</p>
+
+        <p>为什么这么说呢？2013 年 1 月，我在雪球社区发过这样两篇帖子：</p>
+
+        <div class="pull-quote">
+          一个现金流大过利润，毛利率高达九成以上的生意，在十五六倍市盈率下，因为增长只是 50% 而不是 70%，公司市值就大跌。如果在这样的市场里还挣不到钱，只能说自己的书白读了。银行熬了近两年，进入收获期了，现在该是坐茅台冷板凳的时候了，看板凳会不会也冷两年。
+          <cite>— 唐朝（2013-01-25）</cite>
+        </div>
+
+        <div class="pull-quote">
+          2008 年茅台最低 80 多元的时候，也是大约 20 倍市盈率。今天的 180 元，市盈率不到 15 倍，很明显今天的 180 元更便宜，自然该选择这时候买而不是 100 元时买。当然，如果在 100 元的时候，就看出来了四年后的 2012 年茅台可以赚 130 亿元，那时候不买就傻了。很可惜，2008 年的时候，茅台身边的各种负面信息，比今天只多不少。今天能看见四年后茅台利润的人，自然不会放弃在这里下狠手。
+          <cite>— 唐朝（2013-01-29）</cite>
+        </div>
+
+        <p>股价下跌的时候，一个现金流大过净利润、毛利率高达九成以上的生意，十五六倍市盈率照样被人当作垃圾一样丢弃。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">请必须注意</div>
+            <p>老唐说"下狠手"的位置，股价大约 <strong>180 元</strong>左右。后来茅台毫不客气地塞钱一整年，到 2014 年 1 月的低点 <strong>118.01 元</strong>才止住。它证明了<strong>老唐从来不具备"抄底"的能力</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-2">2.2 给茅台估值的两个关键知识点</h3>
+
+        <p>站在 2013 年初 180 元的股价上，四年后的利润是怎么判断的呢？说破了一点儿也不难。2013 年你或许已经错过了，但我估计大家这辈子还会遇到与 2013 年一模一样的机会。届时你能否把握，就是阅读今天这篇文章的意义。</p>
+
+        <p>站在 2013 年，若要把握这次机会，<strong>必需的知识只有两点</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">&#x2460;</span>
+            <h4>可销售量上限</h4>
+            <p>茅台的<strong>可销售量上限与四年前基酒产量成正比</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x2461;</span>
+            <h4>需求不会消失</h4>
+            <p>反腐压力下，茅台的<strong>需求不会消失，只会换一群消费者</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-3">2.3 2013 年可见数据与推算</h3>
+
+        <p>站在 2013—2014 年，我们能够看见的公开数据如下（其中 2013 年数据在 2014 年可见）：</p>
+
+        <p style="text-align:center; font-size:.85rem; color:var(--text3); margin:1.5rem 0 .25rem;"><strong>表 17-1</strong>　2008—2013 年贵州茅台基酒产量与经营数据</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>基酒产量（吨）</th>
+              <th>商品酒销量（吨）</th>
+              <th>营业收入（亿元）</th>
+              <th>归母净利润（亿元）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2008</td>
+              <td>20431</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2009</td>
+              <td>23004</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2010</td>
+              <td>26284</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2011</td>
+              <td>30026</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2012</td>
+              <td>33600</td>
+              <td>15200</td>
+              <td>265</td>
+              <td>133</td>
+            </tr>
+            <tr>
+              <td>2013</td>
+              <td>38452</td>
+              <td>15950</td>
+              <td>309</td>
+              <td>151</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>两个关键数据</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>推算内容</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>销量占四年前基酒的比例</td>
+              <td>15200 &divide; 20431 &times; 100%</td>
+              <td>&asymp; <strong>74%</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>2016 年预计可销售茅台酒</td>
+              <td>33600 &times; 74%</td>
+              <td>约 <strong>2.5 万吨</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>相比 2012 年销量的增幅</td>
+              <td>2.5 &divide; 1.52 &times; 100% &minus; 1</td>
+              <td>&asymp; <strong>64%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>由此任何人都可以得出的结论</strong>（若届时 2.5 万吨茅台酒可以在当前出厂价下销售出去）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>计算过程</th>
+              <th>2016 年预计</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>营业收入</td>
+              <td>265 &times; 1.64</td>
+              <td>&asymp; <strong>435 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>归母净利润</td>
+              <td>133 &times; 1.64</td>
+              <td>&asymp; <strong>218 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>按照<strong>老唐估值体系</strong>，在"无风险收益率为 4%、所有利润均为真金白银、且维持当前盈利无须额外的大额资本投入"的情况下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>估值指标</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>合理估值</td>
+              <td>218 &times; (1 &divide; 4%)</td>
+              <td><strong>5450 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>理想买点</td>
+              <td>5450 &divide; 2</td>
+              <td><strong>2725 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>实际市场低点</td>
+              <td>—</td>
+              <td><strong>1225 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>低于 2725 亿元均为<strong>市场送钱</strong>，低得越多代表送钱越狠，但能狠到 1225 亿元也确实很让人惊喜。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-4">2.4 茅台还有消费者吗？</h3>
+
+        <p>真正的问题实际上落在了"<strong>届时 2.5 万吨茅台酒可以销售出去</strong>"这个假设是否大致靠谱。当时市场之所以如此恐慌，恰恰是大家怀疑这个问题——毕竟茅台的消费者一直以来以政府官员为主，而当时反腐力度非常强大。</p>
+
+        <p><strong>关键争议</strong>：当时茅台的消费者以官员为主，背后的原因究竟是什么？</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>假设</th>
+              <th>逻辑</th>
+              <th>推论</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>前者</strong></td>
+              <td>只有戴上官帽才会变得爱喝茅台</td>
+              <td>&#x26A0;&#xFE0F; 那完蛋了。反腐封杀了官员喝茅台的机会，而官员之外的其他人又不爱喝。茅台将没有消费者，生产出来的是废水，只能破产倒闭</td>
+            </tr>
+            <tr>
+              <td><strong>后者</strong></td>
+              <td>因为做了官导致容易得到茅台，从而满足了自己原本就有的"爱"</td>
+              <td>做官的人作为一个生物群体，和其他人没有什么区别。只是因为他们利用手中权力，抢先获得了消费茅台的资格。<strong>反腐只是将官员群体从抢购队伍里拖出去，给其他人使用其他规则获取茅台创造了机会</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>世间资源均有分配规则：地位优先、种族优先、性别优先、年龄优先、资历优先、出价优先、先来优先，等等。</p>
+          </div>
+        </div>
+
+        <p>究竟是前者还是后者，这是当时的一个判断。<strong>没有这个判断，就不可能下注投资。</strong>面对"茅台就是腐败酒"的质疑时，你的认知决定了你是否能够抓住这个机会。当时老唐的帖子展示的认知是：</p>
+
+        <div class="pull-quote">
+          "腐败酒"这名号，本股东倒是无法反对（话说其他酒可能还不够能力担起这称号）。不过我们要问的问题是：<br />
+          &#x2460; 腐败分子喜欢喝茅台，究竟是因为腐败和茅台臭味相投呢，还是因为腐败分子喜欢好东西？<br />
+          &#x2461; 腐败分子喜欢的东西，非腐败分子会不会喜欢？两种人的人性是趋同还是趋异？<br />
+          &#x2462; 严打腐败，算"虎"口夺酒吧，夺下来的酒是直接烧掉倒掉，还是会被其他非腐败分子拿走？<br />
+          三个问题问通了，是否下注我觉得不难决定。
+          <cite>— 唐朝（2013-03-11）</cite>
+        </div>
+
+        <p>在"消费不会消失，只是会换一群人消费"的判断下，2725 亿元以下作出投资或继续持股的决策，就是顺理成章的必然了。<strong>2725 亿元到 1225 亿元的下挫，就是市场先生一次次地强行塞钱。</strong></p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>边上始终还有人一边给市场先生加油助威，一边讽刺挖苦你笑纳馈赠实在太傻。这一点永远不变，今天和未来，当市场先生再次强行送钱的时候，你一样会遇到他们。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-5">2.5 2014 年依葫芦画瓢</h3>
+
+        <p>2014 年的时候，我们可以看见 2013 年的数据，照样可以依葫芦画瓢：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>推算项</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2013 年基酒产量</td>
+              <td>38452 吨</td>
+            </tr>
+            <tr>
+              <td>2017 年可销售量</td>
+              <td>可能超过 <strong>2.8 万吨</strong></td>
+            </tr>
+            <tr>
+              <td>2017 年净利润</td>
+              <td>可能在 <strong>264 亿元</strong>左右</td>
+            </tr>
+            <tr>
+              <td>届时合理估值</td>
+              <td>应不低于 <strong>6600 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <div class="callout-title">注</div>
+            <p>因潜在股权激励的事情影响，2016 年报表利润只有 167 亿元，并没有达到估计的 218 亿元。部分利润在 2017 年释放，导致 2017 年报表利润 271 亿元，超过了 264 亿元的估算。但这一切不影响投资结果——即便是 167 &times; 25 = 4175 亿元，相对于 180 元股价时不到 1900 亿元的市值，依然满足<strong>三年翻倍</strong>的要求。</p>
+          </div>
+        </div>
+
+        <p>知道了上面的思维过程，就会知道那时<strong>几乎任何价位买入茅台都是合乎逻辑的判断</strong>。这也是那些深度研究的朋友，敢于全仓乃至杠杆下注的依据。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、站在 2020 年看茅台的估值 -->
+      <section id="section-3">
+        <h2>三、站在 2020 年看茅台的估值</h2>
+
+        <div class="pull-quote">
+          事后都易，当下最难。站在今天我们又能得出一些什么结论呢？其实是一样的：同样的知识，同样的判断过程，唯一有差异的就是市场先生的癫狂程度——<strong>这是不可控因素</strong>。
+        </div>
+
+        <h3 id="sub-3-1">3.1 2020 年可见数据</h3>
+
+        <p style="text-align:center; font-size:.85rem; color:var(--text3); margin:1.5rem 0 .25rem;"><strong>表 17-2</strong>　2014—2019 年贵州茅台基酒产量与经营数据</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>基酒产量（吨）</th>
+              <th>商品酒销量（吨）</th>
+              <th>营业收入（亿元）</th>
+              <th>归母净利润（亿元）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2014</td>
+              <td>38745</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2015</td>
+              <td>32179</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2016</td>
+              <td>39313</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2017</td>
+              <td>42823</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2018</td>
+              <td>49672</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2019</td>
+              <td>49923</td>
+              <td>34563</td>
+              <td>888</td>
+              <td>412</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>目前能够知道的公开信息多了两点</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>新增信息</th>
+              <th>具体内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>一</td>
+              <td><strong>产品供不应求</strong></td>
+              <td>出厂价 969 元 与 经销商卖出去的一批价 2000 元以上，存在巨大价格差异</td>
+            </tr>
+            <tr>
+              <td>二</td>
+              <td><strong>系列酒新增长点</strong></td>
+              <td>酱香系列酒年产量 2.5 万吨、年销量 3 万吨、营收 95 亿元、净利润约 20 亿元。2021 年系列酒基酒产量不低于 5.6 万吨，预计 2021 年基酒可于 2023 年投入销售</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>基于上述数据，同样很容易估值和决策。</p>
+
+        <h3 id="sub-3-2">3.2 分业务板块的估值</h3>
+
+        <p>公司业务一共包含三部分，按照贡献从小到大依次为<strong>财务公司、酱香系列酒、茅台酒</strong>。</p>
+
+        <h3 id="sub-3-2-1">3.2.1 财务公司</h3>
+
+        <p>财务公司实际上没有什么业务，但"利润"很丰厚，去年的现金分红就有 9.12 亿元。它的主要"利润"其实就是<strong>存款利息</strong>，2019 年大约 33 亿元：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">大部分是股份公司自有资金的利息</li>
+          <li>小部分为吸收集团内部其他公司存款的利差（放贷收入小到可以忽略）</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>由于金额不大，加上财务公司本身还有运营支出，很难精确计算。粗略按照 33 亿元之外的<strong>收支两抵</strong>计算：</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>计算项</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>归母净利润</td>
+              <td>33 &times; 75% &times; 51%</td>
+              <td>&asymp; <strong>13 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <div class="callout-title">口径说明</div>
+            <p>所得税 25%（故取 75%）、少数股东持股 49%（故取 51%）。2023 年继续按照这个估算不变，即财务公司创造归母净利润 <strong>13 亿元</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-2-2">3.2.2 系列酒</h3>
+
+        <p>系列酒的存储期是<strong>两年</strong>（有部分产品存储期不明，此处一律按照两年考虑），因此 2023 年可销售量与 2021 年基酒产量相关。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>推算步骤</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2021 年基酒产量</td>
+              <td>已知</td>
+              <td>约 <strong>5.6 万吨</strong></td>
+            </tr>
+            <tr>
+              <td>2023 年可销售量</td>
+              <td>5.6 &times; 80% 以内</td>
+              <td>约 <strong>4.3 万吨</strong></td>
+            </tr>
+            <tr>
+              <td>年化销量增幅</td>
+              <td>由 3 万吨 &rarr; 4.3 万吨</td>
+              <td><strong>9.4%</strong>（应该不难达到）</td>
+            </tr>
+            <tr>
+              <td>2023 年营收</td>
+              <td>4.3 &divide; 3 &times; 95</td>
+              <td>&asymp; <strong>136 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>2023 年净利润</td>
+              <td>136 &times; 20% 左右</td>
+              <td>约 <strong>27 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <div class="callout-title">假设前提</div>
+            <p>以 2019 年系列酒销量 3 万吨、营收 95 亿元为基础，假设增量后费用同比增加，且出厂价格不变；净利率按 20% 左右毛估。</p>
+            <p style="margin-top:.5rem;">&#x1F4A1; 系列酒公司（赖茅除外）是股份公司 <strong>100% 控股</strong>，没有少数股东。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-2-3">3.2.3 核心部分：茅台酒</h3>
+
+        <p><strong>（1）增量</strong></p>
+
+        <p>由于目前公司基酒存储量已经约 <strong>23 万吨</strong>，没有继续扩大存储的意义和更充足的酒库空间，可销售量至少可以按照四年前的 <strong>80%~85%</strong> 预估。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2019 年基酒产量</td>
+              <td>4.99 万吨</td>
+            </tr>
+            <tr>
+              <td>2023 年可销售量</td>
+              <td><strong>4 万~4.25 万吨</strong></td>
+            </tr>
+            <tr>
+              <td>相比 2019 年 3.45 万吨销量</td>
+              <td>量的增幅 <strong>16%~23%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>（2）提价</strong></p>
+
+        <p>由于目前一批价在 2000 元以上，<strong>渠道利润过于畸形</strong>，可以预计在未来三年里提高出厂价是确定的事情，只是存在提价幅度究竟多大、以及提价在哪年实现的问题。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>提价时点</th>
+              <th>预期出厂价</th>
+              <th>相对今天涨幅</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>越早提价</td>
+              <td>越接近 1269 元</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>越晚提价</td>
+              <td>越接近 1519 元</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>区间合计</strong></td>
+              <td><strong>1269~1519 元</strong></td>
+              <td><strong>约 30%~56%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>（3）2023 年茅台酒预计营收</strong></p>
+
+        <p>以 2019 年茅台酒营收 <strong>758 亿元</strong>为基础：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>量增</th>
+              <th>价增</th>
+              <th>计算过程</th>
+              <th>营收</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>保守下限</strong></td>
+              <td>16%</td>
+              <td>30%</td>
+              <td>758 &times; 130% + 758 &times; 16% &times; 130%</td>
+              <td>&asymp; <strong>1143 亿元</strong></td>
+            </tr>
+            <tr>
+              <td><strong>乐观上限</strong></td>
+              <td>23%</td>
+              <td>56%</td>
+              <td>758 &times; 156% + 758 &times; 23% &times; 156%</td>
+              <td>&asymp; <strong>1454 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>（4）2023 年茅台酒预计净利润</strong></p>
+
+        <p>先厘清 2019 年的基数。2019 年归母净利润 412 亿元里，包含酱香系列酒约 20 亿元及财务公司约 13 亿元：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>计算项</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>茅台酒归母净利润</td>
+              <td>412 &minus; 33</td>
+              <td><strong>379 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>茅台酒净利率</td>
+              <td>379 &divide; 758 &times; 100%</td>
+              <td><strong>50%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>提价幅度约有 50% 会成为归母净利润</strong>。以提价 300 元为例，其分配链条为：</p>
+
+        <ol style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">征收增值税、消费税以及城建税和教育费附加，合计约 <strong>75 元</strong>；</li>
+          <li style="margin-bottom:.5rem;">去掉小额的销管费用增量，剩下的是<strong>营业利润</strong>；</li>
+          <li style="margin-bottom:.5rem;">政府从营业利润里再征收 <strong>25% 所得税</strong>，得出公司净利润；</li>
+          <li>最后少数股东大约拿走 <strong>6%</strong>，剩余的就是归母净利润。</li>
+        </ol>
+
+        <p>因此可以毛估提价后净利率达 <strong>51.5% 以上</strong>：</p>
+
+        <div style="font-family:'Consolas','Courier New',monospace; background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.2); border-radius:6px; padding:.85rem 1rem; margin:1.25rem 0; font-size:.9rem; color:var(--gold-dk); overflow-x:auto;">(969 &divide; 1.13 &times; 50% + 150) &divide; (1269 &divide; 1.13) &times; 100% &asymp; 51.5%</div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>计算过程</th>
+              <th>2023 年茅台酒净利润</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>保守下限</strong></td>
+              <td>1143 &times; 51.5%</td>
+              <td>&asymp; <strong>588 亿元</strong></td>
+            </tr>
+            <tr>
+              <td><strong>乐观上限</strong></td>
+              <td>1454 &times; 51.5%</td>
+              <td>&asymp; <strong>748 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、三年后合理估值及买点和卖点 -->
+      <section id="section-4">
+        <h2>四、三年后合理估值及买点和卖点</h2>
+
+        <h3 id="sub-4-1">4.1 2023 年预计净利润汇总</h3>
+
+        <p>以上三项业务相加，就是 2023 年茅台公司预计的净利润：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>业务板块</th>
+              <th>下限（亿元）</th>
+              <th>上限（亿元）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>茅台酒</td>
+              <td>588</td>
+              <td>748</td>
+            </tr>
+            <tr>
+              <td>系列酒</td>
+              <td>27</td>
+              <td>27</td>
+            </tr>
+            <tr>
+              <td>财务公司</td>
+              <td>13</td>
+              <td>13</td>
+            </tr>
+            <tr>
+              <td><strong>合计</strong></td>
+              <td><strong>628</strong></td>
+              <td><strong>788</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>628 亿~788 亿元，大约可以记作 <strong>"700 亿 &plusmn; 10%"</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-2">4.2 合理估值与理想买点</h3>
+
+        <p><strong>给予 25~30 倍市盈率的两项事实依据</strong>：</p>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">&#x2460;</span>
+            <h4>无风险收益率下降</h4>
+            <p>目前无风险收益率<strong>持续下降</strong>。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x2461;</span>
+            <h4>自由现金流大于利润</h4>
+            <p>茅台公司一贯<strong>自由现金流大于利润</strong>。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>市盈率区间</td>
+              <td>保守取中值</td>
+              <td><strong>27.5 倍</strong></td>
+            </tr>
+            <tr>
+              <td>2023 年合理估值</td>
+              <td>27.5 &times; 700 &plusmn; 10%</td>
+              <td><strong>19000 亿元 &plusmn; 10%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>理想买点</strong></td>
+              <td>三年后合理估值的一半</td>
+              <td><strong>9500 亿元 &plusmn; 10%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-3">4.3 2020 年当年净利润预估</h3>
+
+        <p>2020 年公司的计划是<strong>不增量</strong>，仍然投放约 3.45 万吨，营收预计增长 10%。由于受到新冠肺炎疫情影响，一季度实际消费量有所降低，全年预计供不应求的程度会减轻，公司压力大大减小，或许可以做到不增加投放。</p>
+
+        <p><strong>不增量情况下，10% 营收增长的两条实现路径</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>路径</th>
+              <th>具体做法</th>
+              <th>效果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>一、调整产品结构</strong></td>
+              <td>降低同等投放量里普茅的占比，增加小批量产品和陈年茅台的投放</td>
+              <td>提升出厂均价（2019 年茅台酒平均含税出厂价 1166 元/瓶）</td>
+            </tr>
+            <tr>
+              <td><strong>二、增加直销和商超投放量</strong></td>
+              <td>依年报披露，直销出厂均价相对于批发大约有 <strong>27%</strong> 的提升</td>
+              <td>一方面变相提升出厂价；另一方面通过商超 1499 元零售价，展示公司在价格控制方面的努力</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>实际上，商超只是曲线利用购酒资格等手段，将<strong>差价部分体现在了别处</strong>，同时助长了黄牛炒货的歪风。</p>
+          </div>
+        </div>
+
+        <p>这两种情况都是提高出厂均价，所以有理由相信<strong>净利润增幅会略高于 10% 的营收增幅</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>计算项</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2020 年归母净利润</td>
+              <td>412 &times; 110%</td>
+              <td>&asymp; 453 亿元，保守视为<strong>约 460 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-4">4.4 一年内卖点</h3>
+
+        <p><strong>卖点规则</strong>：三年后合理估值的 150% 和 一年内 50 倍市盈率位置，<strong>二者中较低的数值</strong>为一年内卖点。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>计算口径</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>三年后合理估值的 150%</td>
+              <td>19000 &times; 110% &times; 150%</td>
+              <td>31350 亿元</td>
+            </tr>
+            <tr>
+              <td>一年内 50 倍市盈率</td>
+              <td>460 &times; 50</td>
+              <td><strong>23000 亿元</strong> &larr; 取较低值</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>结论：未来一年茅台市值如果高于 23000 亿元就卖出。</strong></p>
+
+        <h3 id="sub-4-5">4.5 操作纪律总结</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>市值区间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>低于 <strong>9500 亿元</strong></td>
+              <td><strong>买入</strong></td>
+            </tr>
+            <tr>
+              <td>9500 亿 ~ 23000 亿元</td>
+              <td><strong>持股不动</strong></td>
+            </tr>
+            <tr>
+              <td>高于 <strong>23000 亿元</strong></td>
+              <td><strong>卖出</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>简单吧？其实投资本就是这么简单，否则老唐不会有如此多的时间睡懒觉、追剧、看书、运动、旅游、陪领导、码字、写书、在"唐书房"聊天。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 五、补充说明 -->
+      <section id="section-5">
+        <h2>五、补充说明</h2>
+
+        <p>本文发布后，伴随时间推移、新的财报数据出现，老唐将一年内卖点从 <strong>2.3 万亿元调高至 2.7 万亿元</strong>，并最终在 <strong>2021 年 1 月到 2 月</strong>完成卖出。后文将有记录。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805152213436.png" alt="image-20260805152213436" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

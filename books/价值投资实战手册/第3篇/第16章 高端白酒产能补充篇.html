@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第16章 高端白酒产能补充篇 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html">第14章 腾讯控股的确定性</a></li>
+            <li><a href="第15章 聊聊高端白酒产能及补充.html">第15章 聊聊高端白酒产能及补充</a></li>
+            <li><a href="第16章 高端白酒产能补充篇.html" class="active">第16章 高端白酒产能补充篇</a></li>
+            <li><a href="第17章 贵州茅台估值、 买点及卖点计算过程演示.html">第17章 贵州茅台估值、买点及卖点计算过程演示</a></li>
+            <li><a href="第18章 回顾对洋河股份的投资决策.html">第18章 回顾对洋河股份的投资决策</a></li>
+            <li><a href="第19章 读史可以明智 ——对贵州茅台的全面回顾和展望.html">第19章 读史可以明智 ——对贵州茅台的全面回顾和展望</a></li>
+            <li><a href="第20章 分众传媒投资回顾及周期股估值方法的尝试.html">第20章 分众传媒投资回顾及周期股估值方法的尝试</a></li>
+            <li><a href="第21章 如何从零开始研究一家企业 ——以福寿园为例.html">第21章 如何从零开始研究一家企业 ——以福寿园为例</a></li>
+            <li><a href="第22章 上海机场研究纲要.html">第22章 上海机场研究纲要</a></li>
+            <li><a href="第23章 对上海机场补充协议的理解和判断.html">第23章 对上海机场补充协议的理解和判断</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、为何在高端白酒产能文章中不谈洋河股份？</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">1.1 定位：本质是中高端酒</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">1.2 明清窖池为何不构成优势</a></li>
+        <li class="sub"><a href="#sub-1-3" class="sub">1.3 产能扩张与放量时点</a></li>
+        <li><a href="#section-2">二、泸州老窖的产能计算</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 反推百年以上窖池的优品率</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 基酒与商品酒 1:1.3 的由来</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 反推百年以下窖池的特曲优品率</a></li>
+        <li class="sub"><a href="#sub-2-4" class="sub">2.4 延伸：为什么主流白酒是 52/53 度</a></li>
+        <li><a href="#section-3">三、贵州茅台生产基地的问题</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 三处生产基地</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 茅台酒产品线</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">3.3 系列酒："一曲三茅四酱"</a></li>
+        <li class="sub"><a href="#sub-3-4" class="sub">3.4 贵州大曲的由来：一次失败实验的产物</a></li>
+        <li><a href="#section-4">四、白酒品质区别问题</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">4.1 白酒是怎么造出来的</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">4.2 决定品质的是那不到 2%</a></li>
+        <li><a href="#section-5">五、补充说明：实盘持仓记录</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第16章</div>
+        <h1 class="article-title">高端白酒产能补充篇</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>发表时间</strong>2020年2月21日</span>
+          <span><strong>主题</strong>高端白酒产能 &#xB7; 洋河股份 &#xB7; 泸州老窖 &#xB7; 贵州茅台</span>
+        </div>
+      </header>
+
+      <p>上篇文章发布后，公众号留言区里有几个有趣的问题，可以单独拿出来衍生补充成文。</p>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、为何在高端白酒产能文章中不谈洋河股份？ -->
+      <section id="section-1">
+        <h2>一、为何在高端白酒产能文章中不谈洋河股份？</h2>
+
+        <h3 id="sub-1-1">1.1 定位：本质是中高端酒</h3>
+
+        <p>洋河的优势其实<strong>不在高端酒领域</strong>。洋河在本质上是中高端酒，只是成功地营销了一个高端品牌，让大家以为它和茅台、五粮液、国窖 1573 是一个档次的。</p>
+
+        <p>梦之蓝 M9 及以上品质算高端，但由于<strong>产能太小</strong>，暂时无法取得较大市场份额，对茅台、五粮液、国窖 1573 不构成威胁。</p>
+
+        <h3 id="sub-1-2">1.2 明清窖池为何不构成优势</h3>
+
+        <p>洋河也有 2020 口明清窖池：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年代</th>
+              <th>窖池数量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>明洪武年间</td>
+              <td>89 口</td>
+            </tr>
+            <tr>
+              <td>明万历年间</td>
+              <td>523 口</td>
+            </tr>
+            <tr>
+              <td>清代（主要为光绪年间）</td>
+              <td>1408 口</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">关键问题</div>
+            <p>宿迁所在的区域是抗日战争、解放战争拉锯战最惨烈的区域，这些窖池<strong>几乎可以断定都中断过酿造</strong>。</p>
+          </div>
+        </div>
+
+        <p><strong>微生物群逻辑</strong>：浓香型的酒窖，其实就是地上挖的一个土坑，作用是将粮食捂在里面发酵。真正起决定作用的，是年复一年的酿造过程中，窖泥、粮食、酒精、水等逐步混合，最终产生和自然留存的<strong>有助于发酵的微生物群</strong>。</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;">窖池是<strong>时间这位艺术大师雕琢的艺术品</strong>，独一无二，无法严格复制</li>
+          <li style="margin-bottom:.5rem;">微生物群的<strong>数量、种群构成</strong>决定浓香酒窖的出酒率及品质</li>
+          <li>一个酒窖如果停止酿造，微生物群的发展和组成会受影响；如果很长时间没有酿造，<strong>它和新挖一个土坑的区别就会越来越小</strong></li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <div class="callout-title">由此推论</div>
+            <p>泸州老窖和五粮液等川酒确实在品质和出酒率方面有优势。毕竟地处西南，远离抗日战争及解放战争的主战场，其酿酒过程（或说微生物群体培养过程）没有中断，或中断时期较短。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-1-3">1.3 产能扩张与放量时点</h3>
+
+        <p>洋河这几年大力扩张产能和存储能力，相当于<strong>正在走五粮液 20 世纪八九十年代走过的路</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+              <th>老唐的理解</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>基酒总产能</td>
+              <td>16 万吨</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>可满足 M9 品质</td>
+              <td>约 5%</td>
+              <td>8000 吨可用于 M9 及以上产品</td>
+            </tr>
+            <tr>
+              <td>可满足手工班品质</td>
+              <td>约 2%</td>
+              <td>3000 吨可用于手工班</td>
+            </tr>
+            <tr>
+              <td>仅能生产 M9 级别</td>
+              <td>—</td>
+              <td>8000 − 3000 = 5000 吨</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>放量时点取决于存放期限</strong>：M9 基酒究竟需要存放多少年后灌装，现在的口径说 10 年、15 年、20 年的都有，存放期限<strong>显著高于</strong>五粮液和国窖 1573，估计其中有用存放期限弥补生产品质差异的考虑。</p>
+
+        <p>洋河的主要产能扩张在 <strong>2013 年</strong>完成，据此推算：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>假设存放期</th>
+              <th>M9 具备放量能力的年份</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>10 年</td>
+              <td>2023 年以后</td>
+            </tr>
+            <tr>
+              <td>15 年</td>
+              <td>2028 年以后</td>
+            </tr>
+            <tr>
+              <td>20 年</td>
+              <td>2033 年以后</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <div class="callout-title">老唐的态度</div>
+            <p>究竟哪年现在也不知道（坦率说，估计公司也是看市场情况做调整），我只知道反正<strong>存在那儿就跑不了</strong>，具体啥时候能卖，等能卖的时候再说吧！</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、泸州老窖的产能计算 -->
+      <section id="section-2">
+        <h2>二、泸州老窖的产能计算</h2>
+
+        <p>评论区里假设各种不同优品率计算老窖产能的朋友不少，但老唐觉得思路都有点儿问题。这个事儿，用<strong>芒格老先生"反过来想"的方法</strong>会比较简单。</p>
+
+        <h3 id="sub-2-1">2.1 反推百年以上窖池的优品率</h3>
+
+        <p><strong>两个不变量</strong>：泸州老窖 10086 口老窖池数量一直没有发生变化，每口窖池年产基酒总量约 5 吨也没有发生变化。</p>
+
+        <p>结合 2016 年底之前公司宣称"国窖 1573 只能在百年以上窖池里生产，产量共计 3000 吨"，可以反推：</p>
+
+        <div style="font-family:'Consolas','Courier New',monospace; background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.2); border-radius:6px; padding:.85rem 1rem; margin:1.25rem 0; font-size:.9rem; color:var(--gold-dk); overflow-x:auto;">3000 &divide; (1619 &times; 5) &times; 100% &asymp; 37%</div>
+
+        <p>即：<strong>百年以上窖池能产出国窖 1573 品质基酒的比例约 37%</strong>。</p>
+
+        <p>同时假设剩余 63% 的百年以上老窖里面，有 50% 的量足够做特曲级别的酒。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">说明</div>
+            <p>这个 50% 是示意数据，无资料佐证。若调整该假设，后面的计算跟着调整即可。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-2">2.2 基酒与商品酒 1:1.3 的由来</h3>
+
+        <p>这个比例是老唐自己的理解。浓香酒基酒变商品酒的过程，<strong>数量变化主要由加水降度带来</strong>——将酒精含量 68% 的基酒，通过加水变成 52% 的商品酒：</p>
+
+        <div style="font-family:'Consolas','Courier New',monospace; background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.2); border-radius:6px; padding:.85rem 1rem; margin:1.25rem 0; font-size:.9rem; color:var(--gold-dk); overflow-x:auto;">68 &divide; (100 + 30) &times; 100% &asymp; 52%</div>
+
+        <p>即往 100 毫升 68% 的基酒里加入约 30 毫升水。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>这只是大概数据，并不准确。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-3">2.3 反推百年以下窖池的特曲优品率</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>推算步骤</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460; 特曲 2 万吨商品酒需要多少基酒</td>
+              <td>20000 &divide; 1.3</td>
+              <td>&asymp; <strong>1.54 万吨</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2461; 百年以上窖池贡献的特曲基酒</td>
+              <td>1619 &times; 5 &times; 50%</td>
+              <td>&asymp; <strong>4000 吨</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2462; 百年以下窖池需贡献</td>
+              <td>15400 − 4000</td>
+              <td>&asymp; <strong>1.14 万吨</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2463; 百年以下窖池优品率</td>
+              <td>11400 &divide; (8487 &times; 5) &times; 100%</td>
+              <td>&asymp; <strong>27%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <div class="callout-title">注</div>
+            <p>原文此处窖池数写作 8487 口，与前文"百年以下窖池 8467 口"略有出入（10086 − 1619 = 8467），不影响约 27% 这一结论的量级。</p>
+          </div>
+        </div>
+
+        <p>至于 2017 年到现在，老窖池优品率的提升比例，或者说腾挪特曲基酒产量为国窖 1573 生产服务，这些相关变动和影响，<strong>朋友们可以自己提假设、自己计算</strong>。</p>
+
+        <h3 id="sub-2-4">2.4 延伸：为什么主流白酒是 52/53 度</h3>
+
+        <p>市场上主流白酒度数大部分在 52 度或 53 度，原因据说是<strong>这个比例的酒精和水分子结合最紧密</strong>。</p>
+
+        <div class="pull-quote">
+          据说有个实验：标准环境下，53.94 毫升的乙醇加入 49.83 毫升的水，混合物的体积是 <strong>100 毫升</strong>，而不是 103.77 毫升，此时酒精度数为 53 度。
+        </div>
+
+        <p>水分子和酒精分子结合紧密带来三个好处：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>好处</th>
+              <th>具体表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>口感好</strong></td>
+              <td>白酒在口腔里比较"规矩"，酒精分子不会乱窜，顺滑、可控</td>
+            </tr>
+            <tr>
+              <td><strong>不易口渴</strong></td>
+              <td>酒精更少地从人体里抢夺水分，饮用后口渴感觉轻微</td>
+            </tr>
+            <tr>
+              <td><strong>易于保存</strong></td>
+              <td>酒精分子更难挥发，能够更好地长期保存</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">对其他度数要公平</div>
+            <p>加水降度并不是外行人想象的"水龙头一开就可以了"，它的<strong>科技含量挺高</strong>，技术水平不够，酒很容易变浑浊、变苦。所以不要以为 45 度、42 度、38 度、32 度的酒就差劲，它们只是<strong>不太适合长期保存</strong>，就饮用来说还是各有特色的。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、贵州茅台生产基地的问题 -->
+      <section id="section-3">
+        <h2>三、贵州茅台生产基地的问题</h2>
+
+        <h3 id="sub-3-1">3.1 三处生产基地</h3>
+
+        <p>茅台公司一共有三处生产基地，<strong>沿赤水河排开，各自相距二三十公里</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>基地</th>
+              <th>主要职能</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>茅台镇</strong></td>
+              <td>生产茅台酒基酒</td>
+            </tr>
+            <tr>
+              <td><strong>二合镇</strong></td>
+              <td>生产系列酒基酒</td>
+            </tr>
+            <tr>
+              <td><strong>习酒镇</strong></td>
+              <td>生产系列酒基酒（含原习酒公司酱香酒生产线）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>具体如何分布，老唐目前也没有准确掌握。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-2">3.2 茅台酒产品线</h3>
+
+        <p>茅台酒的基酒在茅台镇生产，主要产品包括：</p>
+
+        <ul style="color:var(--text); line-height:1.85; font-size:.95rem; margin:0 0 1rem 1.5rem;">
+          <li style="margin-bottom:.5rem;"><strong>53 度普通茅台系列</strong>（大家谈论的一般是"普茅"，分<strong>飞天牌</strong>和<strong>五星牌</strong>两种商标，<strong>品质一样</strong>）</li>
+          <li style="margin-bottom:.5rem;"><strong>43 度低度茅台系列</strong></li>
+          <li style="margin-bottom:.5rem;"><strong>陈年茅台系列</strong>（15 年、30 年、50 年、80 年）</li>
+          <li>各种小批量勾调和不同包装的产品</li>
+        </ul>
+
+        <h3 id="sub-3-3">3.3 系列酒："一曲三茅四酱"</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>分类</th>
+              <th>品牌</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>一曲</strong></td>
+              <td>贵州大曲</td>
+              <td>起源于一次失败的实验（详见下文）</td>
+            </tr>
+            <tr>
+              <td><strong>三茅</strong></td>
+              <td>赖茅、华茅、王茅</td>
+              <td>复活了新中国成立初期构成茅台酒厂原班底的<strong>三家作坊</strong>品牌</td>
+            </tr>
+            <tr>
+              <td><strong>四酱</strong></td>
+              <td>汉酱、仁酒、王子、迎宾</td>
+              <td>王子酒是公司<strong>仅次于茅台酒的第二大单品</strong>，2019 年销售额约 40 亿元</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>茅台王子酒的产能来源</strong>：基酒产于<strong>习酒镇的原习酒公司酱香酒生产线</strong>（和郎酒生产车间隔河相望），这部分产能是茅台股份公司上市之初从习酒公司手中收购的。生产流程和茅台<strong>一模一样</strong>，只是基酒<strong>只存储两年</strong>。</p>
+
+        <h3 id="sub-3-4">3.4 贵州大曲的由来：一次失败实验的产物</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>事件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1958—1963 年</strong></td>
+              <td>"大跃进"时期，茅台酒厂探索"人有多大胆、地有多大产"，大力提高产量。结果<strong>产量确实上去了，但品质下来了</strong>，共产出低品质基酒 <strong>1750 吨</strong></td>
+            </tr>
+            <tr>
+              <td><strong>1965 年</strong></td>
+              <td>这 1750 吨酒由仁怀县商业部门以"<strong>红粮窖酒</strong>"的名义，以 <strong>1.4 元/斤</strong> 的价格面向社会销售</td>
+            </tr>
+            <tr>
+              <td><strong>此后</strong></td>
+              <td>一些不能满足茅台酒标准的酒，就专门用来做"红粮窖酒"</td>
+            </tr>
+            <tr>
+              <td><strong>1976 年</strong></td>
+              <td>改名为"<strong>贵州大曲</strong>"，留在了老一辈贵州人的味觉和记忆最深处</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <div class="callout-title">茅台的产品哲学</div>
+            <p>茅台酒有个特色，一直以来<strong>顾客不是"上帝"，顾客是"上级"</strong>。所以从 1949 年开始的约四十年时间里，普通人一般是喝不到茅台酒的。茅台酒<strong>可以不赚钱，可以生产不出来，但绝对不能将不合格的产品装瓶供应给顾客</strong>。</p>
+          </div>
+        </div>
+
+        <p>这些"红粮窖酒"虽然没达到茅台的标准，但依然<strong>远胜于其他白酒</strong>，备受贵州人追捧，也成为当地政府机构、企事业单位的职工福利。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、白酒品质区别问题 -->
+      <section id="section-4">
+        <h2>四、白酒品质区别问题</h2>
+
+        <h3 id="sub-4-1">4.1 白酒是怎么造出来的</h3>
+
+        <p>千万别把白酒的生产想复杂了。简单地说，就是<strong>将发酵过的粮食放在锅里蒸</strong>（记得苹果放久了会有酒味吗）。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>环节</th>
+              <th>原理</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>加热</strong></td>
+              <td>酒精沸点 78 度，<strong>低于水的沸点</strong>。加热至 78～100 度时，大量富含酒精的蒸汽会出来</td>
+            </tr>
+            <tr>
+              <td><strong>冷凝</strong></td>
+              <td>蒸汽遇到外面的冷凝装置后变成液体，即为<strong>基酒</strong></td>
+            </tr>
+            <tr>
+              <td><strong>分类</strong></td>
+              <td>经验丰富的酒师根据<strong>流出来的时间</strong>、<strong>酒花</strong>（基酒落入容器时泛起的泡沫）的大小形状，就可以对酒的品质进行初步分类</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-2">4.2 决定品质的是那不到 2%</h3>
+
+        <p>白酒的 <strong>98% 以上是乙醇和水</strong>，这部分都是一样的。决定白酒品质不同、口感不同、体验不同的物质，是<strong>只有不到 2% 的其他成分</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <div class="callout-title">一个精妙的类比</div>
+            <p>这就好像人和猩猩的 DNA 相似度是 98.5% 一样。那些瘪着嘴巴以不屑的口吻说"茅台、二锅头还不都是乙醇+水"的人，其实相当于说"<strong>人和猩猩也没啥区别</strong>"。</p>
+          </div>
+        </div>
+
+        <p>对某些朋友而言，这些可能显得太无趣了——不就炒个股，搞得跟要去开酒厂一样。其实也没说错，<strong>在老唐眼里，买股票和开工厂大致就是一码事</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 五、补充说明：实盘持仓记录 -->
+      <section id="section-5">
+        <h2>五、补充说明：实盘持仓记录</h2>
+
+        <p>本文发表时（2020 年 2 月），老唐实盘持有 <strong>40% 贵州茅台、12% 洋河股份</strong>。此后操作如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>操作</th>
+              <th>均价</th>
+              <th>调整后仓位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>2021 年初</strong></td>
+              <td>贵州茅台<strong>减仓</strong></td>
+              <td>约 2366 元</td>
+              <td>3%</td>
+            </tr>
+            <tr>
+              <td><strong>2021 年内</strong></td>
+              <td>贵州茅台<strong>加仓</strong></td>
+              <td>约 1730 元</td>
+              <td>19%</td>
+            </tr>
+            <tr>
+              <td><strong>2021 年内</strong></td>
+              <td>洋河股份<strong>加仓</strong></td>
+              <td>约 159 元</td>
+              <td>22%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805131423608.png" alt="图 16-1　贵州茅台、五粮液、泸州老窖、洋河股份股价走势（前复权）" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+
+        <p style="text-align:center; font-size:.85rem; color:var(--text3);"><strong>图 16-1</strong>　贵州茅台、五粮液、泸州老窖、洋河股份股价走势（前复权）</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

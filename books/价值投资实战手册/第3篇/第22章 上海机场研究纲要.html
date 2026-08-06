@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第22章 上海机场研究纲要 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+    .chapter-article pre{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;overflow-x:auto;font-size:.82rem;line-height:1.7;color:var(--text2);margin:1.5rem 0;white-space:pre}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html">第14章 腾讯控股的确定性</a></li>
+            <li><a href="第15章 聊聊高端白酒产能及补充.html">第15章 聊聊高端白酒产能及补充</a></li>
+            <li><a href="第16章 高端白酒产能补充篇.html">第16章 高端白酒产能补充篇</a></li>
+            <li><a href="第17章 贵州茅台估值、 买点及卖点计算过程演示.html">第17章 贵州茅台估值、买点及卖点计算过程演示</a></li>
+            <li><a href="第18章 回顾对洋河股份的投资决策.html">第18章 回顾对洋河股份的投资决策</a></li>
+            <li><a href="第19章 读史可以明智 ——对贵州茅台的全面回顾和展望.html">第19章 读史可以明智 ——对贵州茅台的全面回顾和展望</a></li>
+            <li><a href="第20章 分众传媒投资回顾及周期股估值方法的尝试.html">第20章 分众传媒投资回顾及周期股估值方法的尝试</a></li>
+            <li><a href="第21章 如何从零开始研究一家企业 ——以福寿园为例.html">第21章 如何从零开始研究一家企业 ——以福寿园为例</a></li>
+            <li><a href="第22章 上海机场研究纲要.html" class="active">第22章 上海机场研究纲要</a></li>
+            <li><a href="第23章 对上海机场补充协议的理解和判断.html">第23章 对上海机场补充协议的理解和判断</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、如何抓住一家企业的基本特点</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">1.1 第一张表：简化资产负债表</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">1.2 第二张表：百分比利润表</a></li>
+        <li><a href="#section-2">二、上海机场的核心特征</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 特点一：区位和定位带来更高单价</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 特点二：利润与增长主要来自非航收入</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 特点三：新增非航收入有合同保底</a></li>
+        <li><a href="#section-3">三、动态跟踪和观察</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 两类外部风险的现状</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 我们相对于市场主流机构的优势</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">3.3 一个只能靠信念的概率问题</a></li>
+        <li><a href="#section-4">四、投资者需要解决的五个问题</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">4.1 关于第五个问题的背景：机场扩建的内在驱动力</a></li>
+        <li><a href="#section-5">五、从问题到估值：只剩一道数学题</a></li>
+        <li class="sub"><a href="#sub-5-1" class="sub">5.1 2023 年利润的估算三步法</a></li>
+        <li class="sub"><a href="#sub-5-2" class="sub">5.2 可选项：航空及其他收入的增长</a></li>
+        <li class="sub"><a href="#sub-5-3" class="sub">5.3 唯一的未知数</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第22章</div>
+        <h1 class="article-title">上海机场研究纲要</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>发表时间</strong>2020 年 11 月 11 日</span>
+          <span><strong>主题</strong>上海机场 &#xB7; 企业研究方法 &#xB7; 估值</span>
+        </div>
+      </header>
+
+      <div class="callout info">
+        <div class="callout-icon">&#x1F4DD;</div>
+        <div class="callout-body">
+          <div class="callout-title">推荐人李政乾</div>
+          <p>本文以上海机场为基础，针对怎么理解一家企业提供了非常全面的研究纲要。其中既有对阅读财报时面临"提不出有价值的问题"困境的建议，又展示了对企业的特性进行细致概括的思路。</p>
+        </div>
+      </div>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、如何抓住一家企业的基本特点 -->
+      <section id="section-1">
+        <h2>一、如何抓住一家企业的基本特点</h2>
+
+        <p>很多朋友都遇到过这样的难题：阅读财报时，提不出有价值的问题。正好，本章基本都是在提问题。老唐认为，通过阅读上海机场的财报，<strong>如果把本文的问题都回答了，估值和买卖点自然就出来了</strong>。当然，回答这些问题不是那么简单的。</p>
+
+        <p>拿到一家企业，老唐的习惯是先做两张表。</p>
+
+        <h3 id="sub-1-1">1.1 第一张表：简化资产负债表</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>要点</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>怎么做</strong></td>
+              <td>合并同类项，并将数字改成方便阅读的量级（比如以亿元为单位）</td>
+            </tr>
+            <tr>
+              <td><strong>为什么</strong></td>
+              <td>避免让自己迷失在数字的细节里</td>
+            </tr>
+            <tr>
+              <td><strong>看什么</strong></td>
+              <td>通过观察简化资产负债表，可以看出一家企业的基本特点</td>
+            </tr>
+            <tr>
+              <td><strong>动手建议</strong></td>
+              <td>自己也做一个，数据参考 2019 年年报或 2020 年中报都行</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>所谓"<strong>特</strong>"点，就是<strong>不同点</strong>。如果你总共就看过一家企业，那就可能很难迅速看出特点——很显然，一家没法"不同"，只有看过多家后，你才可能迅速发现不同。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-1-2">1.2 第二张表：百分比利润表</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>要点</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>怎么做</strong></td>
+              <td>以合并利润表的营业收入为 100，将各个分项所占比例标出来</td>
+            </tr>
+            <tr>
+              <td><strong>看什么</strong></td>
+              <td>便于观察企业从营业收入到净利润的变化过程中，主要影响因素是哪些，各自的权重有多大</td>
+            </tr>
+            <tr>
+              <td><strong>动手建议</strong></td>
+              <td>鉴于 2020 年受新冠肺炎疫情冲击，不是正常态，建议使用 <strong>2018 年和 2019 年</strong>合并利润表数据制作</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、上海机场的核心特征 -->
+      <section id="section-2">
+        <h2>二、上海机场的核心特征</h2>
+
+        <p>通过阅读年报，我们可以发现上海机场有以下三个核心特点。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>核心特点</th>
+              <th>一句话概括</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>第一</td>
+              <td>具有区位和定位优势</td>
+              <td>机场可以对<strong>单人单机</strong>收取更高费用</td>
+            </tr>
+            <tr>
+              <td>第二</td>
+              <td>以非航收入为主</td>
+              <td>航空收入、油料销售及广告业务为辅</td>
+            </tr>
+            <tr>
+              <td>第三</td>
+              <td>新增非航收入<strong>有保底</strong></td>
+              <td>有合同保证的兜底收入，有明确数据</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-1">2.1 特点一：区位和定位带来更高单价</h3>
+
+        <p>上市公司上海机场主要运营<strong>上海浦东机场</strong>，其定位是：<strong>国际航空枢纽，航班以国际航班为主</strong>。这条定位带来一串连锁效应：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>环节</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>机型</td>
+              <td>国际航班的飞行距离决定了航班<strong>以大飞机为主</strong></td>
+            </tr>
+            <tr>
+              <td>替代品竞争</td>
+              <td>受高铁、客车和自驾等其他交通方式的影响<strong>很小</strong></td>
+            </tr>
+            <tr>
+              <td>收费标准</td>
+              <td>航空收入里涉及的飞机起降费、旅客服务费、安检费等各项收费，民航局制定的标准就是<strong>国际航班高于国内航班，大飞机高于小飞机</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>这意味着：<strong>与其他机场相近的资源投入，浦东机场能够带来更高的航空收入。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-2">2.2 特点二：利润与增长主要来自非航收入</h3>
+
+        <p>虽然航空相关收入可观，但上海机场的<strong>利润及增长主要来源却是非航收入</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>收入类别</th>
+              <th>具体构成</th>
+              <th>地位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>非航收入</strong></td>
+              <td>免税店销售提成；机场各种零售和餐饮店租金</td>
+              <td><strong>主要</strong>来源</td>
+            </tr>
+            <tr>
+              <td>航空收入</td>
+              <td>飞机起降费、旅客服务费、安检费等</td>
+              <td>次要来源</td>
+            </tr>
+            <tr>
+              <td>油料销售</td>
+              <td>—</td>
+              <td>次要来源</td>
+            </tr>
+            <tr>
+              <td>广告业务</td>
+              <td>—</td>
+              <td>次要来源</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-3">2.3 特点三：新增非航收入有合同保底</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>部分</th>
+              <th>收入依据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>原有</strong>非航收入</td>
+              <td>既有<strong>合同数据</strong>，也有<strong>历史记录</strong></td>
+            </tr>
+            <tr>
+              <td><strong>新增</strong>非航收入（卫星厅于 2019 年 9 月投入使用）</td>
+              <td>新增免税分成<strong>有保底</strong>；场地出租（国际零售、国内零售、餐饮）<strong>也有保底</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>其中<strong>免税品销售分成是大头</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>在这三个前提下，如果没有不可抗力，<strong>上海机场未来五年的收入和利润都不难预测</strong>，这是研究上海机场的优势。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、动态跟踪和观察 -->
+      <section id="section-3">
+        <h2>三、动态跟踪和观察</h2>
+
+        <p>基于对以上基本特点的认知，针对上海机场的<strong>重大分歧</strong>在于：<strong>国际航线受疫情和国际冲突影响较大。</strong></p>
+
+        <h3 id="sub-3-1">3.1 两类外部风险的现状</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>风险类型</th>
+              <th>当前状况</th>
+              <th>直接结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>国际关系</td>
+              <td>目前暂时<strong>看不到</strong>国际关系剧烈变化到影响人员往来的情况</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>疫情</td>
+              <td>国内受控、<strong>欧美严重</strong></td>
+              <td>今年以国际航班为主的机场<strong>受挫更为严重</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>疫情究竟什么时候可控，<strong>没人知道</strong>。也许一年，也许两年，也许更久。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-2">3.2 我们相对于市场主流机构的优势</h3>
+
+        <p>相对于市场主流机构而言，我们的优势在于：<strong>我们可以直接跳过 2021 年和 2022 年，一眼看到 2023 年去。</strong></p>
+
+        <p>这里的"我们"，指同时具备以下三大条件的人：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">&#x2460;</span>
+            <h4>自有闲余资金</h4>
+            <p>投入的是不影响日常生活的自有闲钱。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x2461;</span>
+            <h4>没有业绩评比压力</h4>
+            <p>无须向任何人定期汇报业绩，不怕短期波动。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">&#x2462;</span>
+            <h4>能够承受股价波动</h4>
+            <p>能够接受股价大幅波动而不被迫卖出。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-3">3.3 一个只能靠信念的概率问题</h3>
+
+        <p>2023 年疫情影响是否会消除，国际人员和货物往来是否能恢复正常？<strong>这依然是个概率问题，没有 100% 确定的证据，只能靠信念。</strong></p>
+
+        <p>老唐主观认为大概率用不了那么久。两种判断对应两种截然不同的结论：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>你的判断</th>
+              <th>对应结论</th>
+              <th>理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>认为 2023 年<strong>依然无法</strong>恢复正常（2022 年前无法控制疫情）</td>
+              <td>上海机场<strong>并不适宜下注</strong></td>
+              <td>在疫情的不可抗力下，<strong>即便有非航保底收入合同，依然可以不执行</strong>，这是商业惯例</td>
+            </tr>
+            <tr>
+              <td>反之</td>
+              <td><strong>则可以试试</strong></td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>昨天传出的<strong>疫苗利好</strong>是一把双刃剑：它降低了疫情相关问题的不确定性，但同时也<strong>使我们获得理想价格的可能性降低了</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、投资者需要解决的五个问题 -->
+      <section id="section-4">
+        <h2>四、投资者需要解决的五个问题</h2>
+
+        <p>在"<strong>利润及增长主要观察非航收入，尤其是免税品销售分账</strong>"这一前提下，老唐认为投资者需要解决的问题主要有 5 个。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>议题</th>
+              <th>具体追问</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>第一</td>
+              <td><strong>免税牌照政策走向</strong></td>
+              <td>免税品销售作为一个有牌照控制的管制行业，在政策上，是趋向于批出更多牌照，还是维持现有状态不变？<br />如果是批出更多，能多到什么程度？对机场免税品销售会产生多大影响？</td>
+            </tr>
+            <tr>
+              <td>第二</td>
+              <td><strong>免税市场整体容量</strong></td>
+              <td>你认为我国免税品的整体市场会是增长、维持还是缩水？</td>
+            </tr>
+            <tr>
+              <td>第三</td>
+              <td><strong>替代渠道的竞争</strong></td>
+              <td>跨境电商能不能抢走免税店的市场？<br />市内及岛内免税店对机场免税店会产生多大程度的竞争？<br />它们是否会导致机场免税店丧失竞争优势？</td>
+            </tr>
+            <tr>
+              <td>第四</td>
+              <td><strong>关联交易与失血风险</strong></td>
+              <td>国内各大机场的土地基本都租自大股东，为什么？<br />对于上海机场，巨额关联交易（<strong>场地租赁</strong>和<strong>委托建设</strong>）是否隐藏着失血通道或其他风险？</td>
+            </tr>
+            <tr>
+              <td>第五</td>
+              <td><strong>持续的资本投入</strong></td>
+              <td>你如何看待机场这种持续的资本投入？<br />它是否影响你的投资决策？为什么？</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>上述每一个问题，老唐都追加了同一句拷问：<strong>你作出上述判断的依据是什么？</strong> 这正是研究工作与主观猜测的分界线。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-1">4.1 关于第五个问题的背景：机场扩建的内在驱动力</h3>
+
+        <p>第五个问题背后有一条清晰的利益链条，值得单独说明：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>环节</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>成本承担方</strong></td>
+              <td>机场建设的成本由<strong>上市公司</strong>承担</td>
+            </tr>
+            <tr>
+              <td><strong>收益分享方</strong></td>
+              <td>带来的人流和物流却可能让<strong>当地各行各业</strong>都分到一杯羹</td>
+            </tr>
+            <tr>
+              <td><strong>必然结果</strong></td>
+              <td>地方政府始终会有要求机场<strong>扩大吞吐能力</strong>的强烈愿望</td>
+            </tr>
+            <tr>
+              <td><strong>传导机制</strong></td>
+              <td>一旦各大上市机场客货流量接近饱和，<strong>甚至不等接近饱和</strong>，政府就会启动新的基建，需要持续投入大笔资金</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p><strong>现实案例</strong>：目前上海机场仍在进行<strong>三期扩建工程</strong>，但市政府已经规划了浦东机场 <strong>T3 航站楼</strong>（2025 年前建成）的建设。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 五、从问题到估值：只剩一道数学题 -->
+      <section id="section-5">
+        <h2>五、从问题到估值：只剩一道数学题</h2>
+
+        <p>老唐认为，能够清楚回答上述几个问题后，估算工作就变得相当机械了。</p>
+
+        <h3 id="sub-5-1">5.1 2023 年利润的估算三步法</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>动作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>考虑 <strong>2023 年相对于 2019 年</strong>至少会增加多少<strong>非航收入</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>同时考虑因 <strong>2019 年新增固定资产</strong>带来的<strong>年度折旧成本</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>然后依照 <strong>2019 年的财报数据结构</strong>，即可大致估算上海机场 <strong>2023 年可能的利润数据</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-5-2">5.2 可选项：航空及其他收入的增长</h3>
+
+        <p>至于因<strong>第五跑道及卫星厅</strong>投入使用，带来的机场吞吐能力增加，从而拉动的<strong>航空收入、油料销售收入和广告业务收入</strong>的增长：</p>
+
+        <ul>
+          <li><strong>愿意估的</strong>，可以做做估算；</li>
+          <li><strong>不愿意估的</strong>，直接<strong>按照安全边际</strong>看待也不是什么大事。</li>
+        </ul>
+
+        <h3 id="sub-5-3">5.3 唯一的未知数</h3>
+
+        <p>想清楚上述问题，并作出 2023 年可能的利润估算后，<strong>合理估值及买卖点其实就是一个极简单的数学题。</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>要点</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>老唐估值法的性质</td>
+              <td>是个<strong>死公式</strong></td>
+            </tr>
+            <tr>
+              <td>全部未知数</td>
+              <td>只有一个 —— <strong>三年后的预计利润</strong></td>
+            </tr>
+            <tr>
+              <td>结论</td>
+              <td>唯一的未知数解决了，<strong>任何具备小学三年级数学水平的朋友</strong>，都有能力计算出三年后合理估值及当下的买卖点</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

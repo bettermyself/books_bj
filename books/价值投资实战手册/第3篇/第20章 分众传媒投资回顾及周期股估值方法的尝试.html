@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第20章 分众传媒投资回顾及周期股估值方法的尝试 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html">第14章 腾讯控股的确定性</a></li>
+            <li><a href="第15章 聊聊高端白酒产能及补充.html">第15章 聊聊高端白酒产能及补充</a></li>
+            <li><a href="第16章 高端白酒产能补充篇.html">第16章 高端白酒产能补充篇</a></li>
+            <li><a href="第17章 贵州茅台估值、 买点及卖点计算过程演示.html">第17章 贵州茅台估值、买点及卖点计算过程演示</a></li>
+            <li><a href="第18章 回顾对洋河股份的投资决策.html">第18章 回顾对洋河股份的投资决策</a></li>
+            <li><a href="第19章 读史可以明智 ——对贵州茅台的全面回顾和展望.html">第19章 读史可以明智 ——对贵州茅台的全面回顾和展望</a></li>
+            <li><a href="第20章 分众传媒投资回顾及周期股估值方法的尝试.html" class="active">第20章 分众传媒投资回顾及周期股估值方法的尝试</a></li>
+            <li><a href="第21章 如何从零开始研究一家企业 ——以福寿园为例.html">第21章 如何从零开始研究一家企业 ——以福寿园为例</a></li>
+            <li><a href="第22章 上海机场研究纲要.html">第22章 上海机场研究纲要</a></li>
+            <li><a href="第23章 对上海机场补充协议的理解和判断.html">第23章 对上海机场补充协议的理解和判断</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、一个错判案例的全过程</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">1.1 七个关键节点</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">1.2 为何此刻回顾</a></li>
+        <li><a href="#section-2">二、分众持续两年亏损的根源</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 错误一：对广告客户行为特点的误判</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 错误的连锁后果：把周期股当成了稳定增长型企业</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 错误二：对客户结构的疏忽</a></li>
+        <li><a href="#section-3">三、发现认知错误后，为何选择呆坐而不是认错卖出？</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 代价已经支付，就无须再纳入考虑</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 决策的唯一标准</a></li>
+        <li><a href="#section-4">四、如何给周期股估值？</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">4.1 理论源头：格雷厄姆的"正常产出"</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">4.2 理论发展：席勒市盈率（CAPE）</a></li>
+        <li class="sub"><a href="#sub-4-3" class="sub">4.3 实战演算：分众传媒的周期股估值</a></li>
+        <li class="sub"><a href="#sub-4-4" class="sub">4.4 "三年后五折"与"当年七折"为何是一码事</a></li>
+        <li class="sub"><a href="#sub-4-5" class="sub">4.5 12% 这个数字从哪儿来</a></li>
+        <li class="sub"><a href="#sub-4-6" class="sub">4.6 一个诚实的补白：为什么 565 亿元时没有买入</a></li>
+        <li><a href="#section-5">五、补充说明</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第20章</div>
+        <h1 class="article-title">分众传媒投资回顾及周期股估值方法的尝试</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>发表时间</strong>2020年8月22日</span>
+          <span><strong>主题</strong>分众传媒 &#xB7; 周期股估值 &#xB7; 错误反思</span>
+        </div>
+      </header>
+
+      <div class="callout info">
+        <div class="callout-icon">&#x1F4DD;</div>
+        <div class="callout-body">
+          <div class="callout-title">推荐人汤家华</div>
+          <p>伯克希尔是巴菲特认为最失败的一笔投资，最终却变成他成功的投资平台。投资是一生的事业，如何面对错误，是每一位投资者都要学习的功课。本文是老唐对公开实盘后唯一的错判案例的回顾和思考。面对分众传媒的浮亏，全面阐述如何分析、解决、补救，最终实现盈利。本文还提出适用于周期股的估值依据和方法，是弥足珍贵的学习案例。</p>
+        </div>
+      </div>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、一个错判案例的全过程 -->
+      <section id="section-1">
+        <h2>一、一个错判案例的全过程</h2>
+
+        <p>本文是对一个错判案例的回顾和思考。下面这张周线图是老唐介入分众传媒至今的股价波动。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805162656107-1785918418136-1.png" alt="图 20-1 分众传媒股价走势（前复权）" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+        <p style="text-align:center; font-size:.82rem; color:var(--text2); margin-bottom:1.5rem;"><strong>图 20-1　分众传媒股价走势（前复权）</strong></p>
+
+        <h3 id="sub-1-1">1.1 七个关键节点</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>节点</th>
+              <th>时间</th>
+              <th>对应市值 / 价格</th>
+              <th>事件与决策</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>2018 年 8 月</td>
+              <td>目标区间 2100 亿～2500 亿元</td>
+              <td>首次介入分众。当时结论：<strong>"三年后合理估值 2100 亿~2500 亿元，对折买入，目标配置 10%~15% 仓位"</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>下跌途中</td>
+              <td>均价约 <strong>7.6 元</strong>（两次分红后约 7.4 元），折合市值约 <strong>1090 亿元</strong></td>
+              <td>伴随股价下跌不断买入，最终建成约 <strong>13%</strong> 仓位</td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>2019-04-25</td>
+              <td>约 <strong>960 亿元</strong></td>
+              <td>一季报发布后发现自己思维有误区，但<strong>尚未想清错在何处</strong>，发布《不再买入，暂时也不会卖出》</td>
+            </tr>
+            <tr>
+              <td>&#x2463;</td>
+              <td>2019-05-16</td>
+              <td>约 <strong>830 亿元</strong></td>
+              <td><strong>想清了错误所在</strong>，继续呆坐</td>
+            </tr>
+            <tr>
+              <td>&#x2464;</td>
+              <td>2019 年 10 月</td>
+              <td>买点 600 亿元 / 卖点 1400 亿元</td>
+              <td>反复思考后作出并发布新的估值判断：<strong>600 亿元以下可买，1400 亿元以上可卖，其间呆坐不动</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2465;</td>
+              <td>2020 年 4 月</td>
+              <td>最低 <strong>565 亿元</strong></td>
+              <td>因手头没有现金、信心也不足以支撑调仓换股，呆坐至今</td>
+            </tr>
+            <tr>
+              <td>&#x2466;</td>
+              <td>2020 年中报后</td>
+              <td>回到 <strong>1000 亿元以上</strong></td>
+              <td>市值重回千亿元区域</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-1-2">1.2 为何此刻回顾</h3>
+
+        <p>之所以要在目前刚刚突破千亿元时回顾这次投资，原因有两点：</p>
+
+        <ul>
+          <li>这次跨度两年的投资，截至目前<strong>仍亏损约 5%</strong>，是老唐所有持股中最糟糕的一只。如果考虑机会成本，持股至今的收获大致等于<strong>腰斩</strong>。</li>
+          <li>它也是老唐实盘公开近七年来<strong>唯一的亏损股</strong>（仓位低于 1% 的观察仓不计）。若是再不聊，等涨上去就成嘚瑟和马后炮了。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>通过系统回顾，本文主要想阐述清楚三个问题：</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>问题</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>第一</td>
+              <td>分众持续两年亏损的<strong>根源</strong>是什么？</td>
+            </tr>
+            <tr>
+              <td>第二</td>
+              <td>发现认知有误后的<strong>处理方式</strong>是否合理？判断依据是什么？</td>
+            </tr>
+            <tr>
+              <td>第三</td>
+              <td>600 亿元以下买入、1400 亿元以上卖出的估值判断是如何作出的？或者说老唐估值体系里，<strong>如何对周期股做估值</strong>？</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、分众持续两年亏损的根源 -->
+      <section id="section-2">
+        <h2>二、分众持续两年亏损的根源</h2>
+
+        <p>分众持续两年亏损的原因十分清晰明白，老唐已经在 2019 年 5 月 18 日发布于"唐书房"的《散打投资⑥》里写过了：</p>
+
+        <div class="pull-quote">
+          对于分众传媒，我有两个知识错误，是可以改正也应该改正的。这两个错误，一个涉及<strong>对广告客户行为特点的误判</strong>，另一个涉及<strong>对分众客户结构的疏忽</strong>。
+        </div>
+
+        <h3 id="sub-2-1">2.1 错误一：对广告客户行为特点的误判</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>原先的错误认知</th>
+              <th>实际情况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>宏观不景气时企业行为</td>
+              <td>企业应会更注重国内市场，<strong>增加</strong>广告预算抢夺消费者</td>
+              <td>以品牌展示为主要广告形式的分众，是客户支出<strong>首选的削减对象</strong></td>
+            </tr>
+            <tr>
+              <td>分众的处境</td>
+              <td>甚至可能因此受益，至少能保证不受太大冲击</td>
+              <td>遭遇经济形势下滑时<strong>受到实质冲击</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-2">2.2 错误的连锁后果：把周期股当成了稳定增长型企业</h3>
+
+        <p>正因为这个错误，老唐将本来随着宏观周期波动的<strong>周期股</strong>，误当作<strong>稳定增长型企业</strong>做了估值。</p>
+
+        <p>按照"宏观好，分众会更好；宏观不好，分众也可以稳住甚至可能增长"的思路，直接<strong>以当年净利润为起点</strong>考虑，<strong>忽略了净利润向下波动的可能</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>错误估值下的预期</th>
+              <th>以 2020 年眼光重估</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2021—2022 年净利润</td>
+              <td>百亿元左右</td>
+              <td>恢复到 <strong>50 亿元左右</strong>就已是相当可观的成果</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>这个错误直接导致了<strong>过高的估值</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-3">2.3 错误二：对客户结构的疏忽</h3>
+
+        <p>属于<strong>非原则性问题</strong>，此处略过。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、发现认知错误后，为何选择呆坐而不是认错卖出？ -->
+      <section id="section-3">
+        <h2>三、发现认知错误后，为何选择呆坐而不是认错卖出？</h2>
+
+        <p>这个问题其实没有标准答案，<strong>要取决于发现错误时的公司市值</strong>。</p>
+
+        <h3 id="sub-3-1">3.1 代价已经支付，就无须再纳入考虑</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>认知状态</th>
+              <th>市值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2019 年 4 月底</td>
+              <td>意识到思维有误区，但<strong>没想明白问题在哪里</strong></td>
+              <td>约 960 亿元</td>
+            </tr>
+            <tr>
+              <td>2019 年 5 月中旬</td>
+              <td><strong>想明白了错误所在</strong></td>
+              <td>约 830 亿元</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>从 1090 亿元到 830 亿元的 <strong>260 亿元跌幅</strong>，是老唐为自己的错误判断所支付的代价。</p>
+
+        <p>代价已经支付了，就无须将其纳入考虑范围，只需要将 830 亿元市值的股票和等值现金摆上<strong>天平的两端</strong>，比较哪个更划算即可。依照新的认识，830 亿元属于<strong>基本合理的估值范围</strong>——用合理估值的股权去交换等价的货币，没有道理。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>其实，"等价交换"是个错误的经济学概念。真实世界里所有的自愿交易，都是在<strong>交易双方均认为自己获益</strong>的情况下实现的。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-2">3.2 决策的唯一标准</h3>
+
+        <p>如果 2019 年 5 月中旬想通错误所在时，市值在千亿元以上，或许老唐就卖掉了。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>不构成买卖依据</th>
+              <th>真正的决策依据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>股票是浮盈还是浮亏</td>
+              <td><strong>确定错误时，股票市值与等值现金之间的比较</strong></td>
+            </tr>
+            <tr>
+              <td>在它上面耗费过多少时间和精力</td>
+              <td>同上</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、如何给周期股估值？ -->
+      <section id="section-4">
+        <h2>四、如何给周期股估值？</h2>
+
+        <p>当认识到分众的经营情况会随宏观周期波动，后面的事情就简单了。</p>
+
+        <h3 id="sub-4-1">4.1 理论源头：格雷厄姆的"正常产出"</h3>
+
+        <p>格雷厄姆在《证券分析》里写过：对于周期性波动的企业盈利，可以采用 <strong>10 年的平均利润</strong>去模拟近似的"正常"收益。他在《证券分析》第六版里写道：</p>
+
+        <div class="pull-quote">
+          1923—1932 年的 10 年平均收益，近似基于相当确切的"正常"产出和利润率而得出的理论数值，而股票数量的增加使得这一"正常数值"不会超过 10 年期的平均值。尽管该计算存在大量误差，但它至少为合理地估计未来收益提供了一个起点。<br/><br/>
+          在大多数情况下，应该利用 <strong>5～10 年的年平均收益</strong>来计算普通股的投资价值。
+        </div>
+
+        <p>早在 1934 年第一版的《证券分析》里，格雷厄姆已经谈及这个"正常产出"下的市盈率概念，只是老唐手头没有第一版书籍。</p>
+
+        <h3 id="sub-4-2">4.2 理论发展：席勒市盈率（CAPE）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>提出者</td>
+              <td>罗伯特 · 席勒（耶鲁大学教授，2013 年诺贝尔经济学奖得主）</td>
+            </tr>
+            <tr>
+              <td>出处</td>
+              <td>1998 年论文《估值比率和股票市场长期前景》</td>
+            </tr>
+            <tr>
+              <td>指标名称</td>
+              <td><strong>周期调整市盈率（CAPE）</strong>，又称<strong>席勒市盈率</strong>（Shiller's PE）</td>
+            </tr>
+            <tr>
+              <td>计算方式</td>
+              <td>沿用格雷厄姆建议的周期调整，采用<strong>十年平均盈利</strong>与股价做对比</td>
+            </tr>
+            <tr>
+              <td>核心结论</td>
+              <td>&#x2460; 当时美国股市已整体高估，处于"非理性繁荣"<br/>&#x2461; 股票市场<strong>长期收益率</strong>普遍与 CAPE 存在较为显著的<strong>负相关</strong>关系</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>2000 年 3 月，席勒教授将研究成果汇集出版，即著名的《非理性繁荣》。该书出版之后的<strong>一个月</strong>，美国互联网泡沫破裂，纳斯达克崩盘。自此，席勒市盈率迅速成为全球股市指数周期分析和周期股分析的可靠利器之一。</p>
+
+        <h3 id="sub-4-3">4.3 实战演算：分众传媒的周期股估值</h3>
+
+        <p>站在巨人的肩膀上，事情就变得很简单。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">数据陷阱提示</div>
+            <p>分众传媒是 <strong>2015 年借壳上市</strong>的公司，各类股票软件里显示的 <strong>2014 年及以前的净利润不对</strong>。需查分众传媒公司在<strong>美国上市期间</strong>披露的净利润及相关新闻报道，然后根据当时的汇率折算为人民币。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>计算过程</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460; 统计十年净利润</td>
+              <td>2010—2018 年实际数据 + 2019 年预估 20 亿元（实际年报为 18.8 亿元）</td>
+              <td>10 年累计约 <strong>303 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2461; 求"正常产出"</td>
+              <td>303 &divide; 10</td>
+              <td>年均约 <strong>30 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2462; 取合理市盈率</td>
+              <td>按老唐估值法，无风险收益率处于 3%～4% 时取 25～30 倍</td>
+              <td><strong>25～30 倍</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2463; 得合理估值</td>
+              <td>30 &times; 25 ～ 30 &times; 30</td>
+              <td><strong>750 亿～900 亿元</strong>，即 <strong>825 &plusmn; 10%</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2464; 算买点</td>
+              <td>825 &times; 70%</td>
+              <td>&asymp; <strong>578 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2465; 算卖点</td>
+              <td>825 &times; 110% &times; 150%</td>
+              <td>&asymp; <strong>1360 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p>说明：因判断不了三年，且本就使用的是十年平均数估出的合理估值，故直接<strong>借用当年合理估值</strong>数据——按当年合理估值的<strong>七折买入</strong>，合理估值上限的 <strong>150% 卖出</strong>。</p>
+          </div>
+        </div>
+
+        <p>这就是 2019 年 10 月 30 日发表如下结论的思考过程：</p>
+
+        <div class="pull-quote">
+          一年内市值在 600 亿～1400 亿元波动，持股不动。高于 1400 亿元拟出售，低于 600 亿元拟增持。<cite>——摘自"唐书房"2019 年 10 月 30 日《分众 2019 三季报及估值调整》</cite>
+        </div>
+
+        <h3 id="sub-4-4">4.4 "三年后五折"与"当年七折"为何是一码事</h3>
+
+        <p>必然有朋友会询问：老唐估值法不是<strong>三年后合理市值的 50% 买入</strong>吗？怎么又经常使用<strong>当年合理市值的 70%</strong> 呢？</p>
+
+        <p>这两者在数学上其实是一码事，只是背后隐含了一个<strong>正常年化增长 12%</strong> 的假设罢了：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>假设</th>
+              <th>数值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>当前净利润</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>年化 12% 增长三年后净利润</td>
+              <td>140</td>
+            </tr>
+            <tr>
+              <td>等式</td>
+              <td><strong>100 &times; 70% = 140 &times; 50% = 70</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>也就是说，<strong>当年合理估值的七折，就是假设 12% 增长下、三年后合理估值五折的简化计算</strong>。12% 的取值，是老唐心目中优质企业应有的可持续增长水平。</p>
+
+        <h3 id="sub-4-5">4.5 12% 这个数字从哪儿来</h3>
+
+        <p><strong>（1）巴菲特的历史统计</strong></p>
+
+        <p>1977 年 5 月，巴菲特公开发表在《财富》杂志上的《通货膨胀如何欺诈投资者》一文里，曾经这样写道：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>统计口径</th>
+              <th>时间段</th>
+              <th>年均净资产收益率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>道琼斯 30 种工业股票</td>
+              <td>二战结束后第一个 10 年（至 1955 年前）</td>
+              <td><strong>12.8%</strong></td>
+            </tr>
+            <tr>
+              <td>道琼斯 30 种工业股票</td>
+              <td>第二个 10 年</td>
+              <td>10.1%</td>
+            </tr>
+            <tr>
+              <td>道琼斯 30 种工业股票</td>
+              <td>第三个 10 年</td>
+              <td>10.9%</td>
+            </tr>
+            <tr>
+              <td>《财富》500 强</td>
+              <td>1965 年前的 10 年</td>
+              <td>11.2%</td>
+            </tr>
+            <tr>
+              <td>《财富》500 强</td>
+              <td>此后 10 年</td>
+              <td>11.8%</td>
+            </tr>
+            <tr>
+              <td>《财富》500 强（特殊高点）</td>
+              <td>1974 年</td>
+              <td>14.1%</td>
+            </tr>
+            <tr>
+              <td>《财富》500 强（特殊低点）</td>
+              <td>1958 年、1970 年</td>
+              <td>9.5%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          不过，纵观这些年，总体来看，净资产收益率有<strong>回归至 12% 左右</strong>的趋势。在通货膨胀的年份里，没有迹象显示出该数据会大幅超过这一水平，物价稳定的年份也是如此。
+        </div>
+
+        <p><strong>（2）芒格的"刺猬"原则</strong></p>
+
+        <p>查理 · 芒格曾这样表述伯克希尔的投资原则：</p>
+
+        <div class="pull-quote">
+          我们就像刺猬，只会一招，就是寻找<strong>利率低于 3%</strong> 的浮存金，并把它投向能产生 <strong>13% 回报</strong>的企业。
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>他这里用的 13%，所代表的含义就是"比（能够获得 12% 回报率的）普通优质企业<strong>还要好一点点</strong>的企业"。</p>
+          </div>
+        </div>
+
+        <p><strong>（3）A 股的历史验证</strong></p>
+
+        <p>这个 12% 究竟是统计结果（巧合），还是背后有深层逻辑支撑，老唐暂时还没彻底想明白。但它在我国股市同样得到了历史数据验证：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>沪深 300 指数基点</td>
+              <td>2004-12-31 = 1000 点</td>
+            </tr>
+            <tr>
+              <td>至今时长</td>
+              <td>15.65 年</td>
+            </tr>
+            <tr>
+              <td>沪深 300 <strong>全收益</strong>指数收盘点位（含分红）</td>
+              <td>6139.26</td>
+            </tr>
+            <tr>
+              <td>折合年化收益率</td>
+              <td><strong>12.29%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>说破了，简单到令人不敢相信，对吧？<strong>投资本来就不复杂，复杂的是判断。</strong> 如此简陋的估值法，会不会遭到你的嘲笑呢？</p>
+
+        <h3 id="sub-4-6">4.6 一个诚实的补白：为什么 565 亿元时没有买入</h3>
+
+        <p>需要补充的是，2020 年 4 月分众传媒最低跌至 <strong>565 亿元</strong>市值，并在 600 亿元市值以下待了<strong>三天</strong>，然而老唐并没有买入。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>原因层级</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>表面原因</td>
+              <td>当时没有闲余资金</td>
+            </tr>
+            <tr>
+              <td>深层原因</td>
+              <td>三四月份面对网络上大量的质疑、抱怨甚至谩骂，<strong>自己信心动摇了</strong>；或者说在曾经信心满满的股票上犯了严重错误，所导致的<strong>自我怀疑</strong>（好在是轻度）才是主因</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>否则，从家用里抠搜抠搜，或者从所投资的指数基金里做做腾挪，增加几十万元乃至一百多万元的分众还是可以做到的。</p>
+
+        <p>从这个角度看，这四个多月<strong>近 70% 的涨幅</strong>没有拿到，老唐也不遗憾。它再次证明一句话：</p>
+
+        <div class="pull-quote large">
+          &#x1F4A1; <strong>财富是思考的副产品。如果思想滑了坡，黄金奉上也不敢摸。</strong>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 五、补充说明 -->
+      <section id="section-5">
+        <h2>五、补充说明</h2>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805162724725-1785918445699-3.png" alt="图 20-2 分众传媒股价走势（前复权）" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+        <p style="text-align:center; font-size:.82rem; color:var(--text2); margin-bottom:1.5rem;"><strong>图 20-2　分众传媒股价走势（前复权）</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>操作</th>
+              <th>均价</th>
+              <th>仓位变动</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2021 年 1—2 月</td>
+              <td>因股价触及预设卖点，卖出</td>
+              <td>11.26 元</td>
+              <td><strong>-3%</strong></td>
+            </tr>
+            <tr>
+              <td>2021 年 1—2 月</td>
+              <td>卖出</td>
+              <td>12.39 元</td>
+              <td><strong>-4%</strong></td>
+            </tr>
+            <tr>
+              <td>2021 年 7 月</td>
+              <td>买入</td>
+              <td>7.25 元</td>
+              <td><strong>+3%</strong></td>
+            </tr>
+            <tr>
+              <td>其间</td>
+              <td>零碎小额资金买回</td>
+              <td>平均 7.6 元</td>
+              <td><strong>+1% 出头</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>剩余 4% 仓位原计划在 <strong>1980 亿元</strong>市值卖出，但实际最高到达 <strong>1936 亿元</strong>市值后即转头下跌。</p>
+
+        <p>截至 <strong>2022 年 2 月底</strong>，老唐实盘继续持有分众 <strong>9%</strong> 的仓位（与上表加减差额为所有持股股价涨跌不同步造成的），为实盘<strong>第四大持股</strong>。</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

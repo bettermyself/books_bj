@@ -1,0 +1,2650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第21章 如何从零开始研究一家企业 ——以福寿园为例 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+    .chapter-article pre{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;overflow-x:auto;font-size:.82rem;line-height:1.7;color:var(--text2);margin:1.5rem 0;white-space:pre}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html">第14章 腾讯控股的确定性</a></li>
+            <li><a href="第15章 聊聊高端白酒产能及补充.html">第15章 聊聊高端白酒产能及补充</a></li>
+            <li><a href="第16章 高端白酒产能补充篇.html">第16章 高端白酒产能补充篇</a></li>
+            <li><a href="第17章 贵州茅台估值、 买点及卖点计算过程演示.html">第17章 贵州茅台估值、买点及卖点计算过程演示</a></li>
+            <li><a href="第18章 回顾对洋河股份的投资决策.html">第18章 回顾对洋河股份的投资决策</a></li>
+            <li><a href="第19章 读史可以明智 ——对贵州茅台的全面回顾和展望.html">第19章 读史可以明智 ——对贵州茅台的全面回顾和展望</a></li>
+            <li><a href="第20章 分众传媒投资回顾及周期股估值方法的尝试.html">第20章 分众传媒投资回顾及周期股估值方法的尝试</a></li>
+            <li><a href="第21章 如何从零开始研究一家企业 ——以福寿园为例.html" class="active">第21章 如何从零开始研究一家企业 ——以福寿园为例</a></li>
+            <li><a href="第22章 上海机场研究纲要.html">第22章 上海机场研究纲要</a></li>
+            <li><a href="第23章 对上海机场补充协议的理解和判断.html">第23章 对上海机场补充协议的理解和判断</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、研究框架：如何看懂一家企业</a></li>
+        <li><a href="#section-2">二、企业概览：从资产负债表开始</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 第一道筛子：ROE</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 三个口径的 ROE：第一个疑点</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 简化资产负债表</a></li>
+        <li class="sub"><a href="#sub-2-4" class="sub">2.4 顺理成章的三个疑问</a></li>
+        <li><a href="#section-3">三、供应端：迥异于房地产</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 五大区别总览</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 土地权属：卖的是"租约"不是"产权"</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">3.3 后续黏性：物业费才是真正的差异</a></li>
+        <li class="sub"><a href="#sub-3-4" class="sub">3.4 囤地待涨：房地产的禁区，墓园的正道</a></li>
+        <li class="sub"><a href="#sub-3-5" class="sub">3.5 捂地：账面 ROE 不高的真正原因</a></li>
+        <li class="sub"><a href="#sub-3-6" class="sub">3.6 土地获取：划拨方式形成的天然护城河</a></li>
+        <li class="sub"><a href="#sub-3-7" class="sub">3.7 土地供应量：数量锁定的生意</a></li>
+        <li><a href="#section-4">四、需求端：增长空间显著</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">4.1 三种增长途径的可靠性排序</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">4.2 从业务端看需求：钱到底从哪里来</a></li>
+        <li class="sub"><a href="#sub-4-3" class="sub">4.3 层面一：人口老龄化趋势</a></li>
+        <li class="sub"><a href="#sub-4-4" class="sub">4.4 层面二：城镇化比率逐年提升</a></li>
+        <li class="sub"><a href="#sub-4-5" class="sub">4.5 层面三：人均收入快速提升</a></li>
+        <li class="sub"><a href="#sub-4-6" class="sub">4.6 层面四：经营性公墓的市场空间</a></li>
+        <li class="sub"><a href="#sub-4-7" class="sub">4.7 经营性公墓卖的是"舒坦、体面和差异化"</a></li>
+        <li><a href="#section-5">五、面临的竞争：几乎不存在</a></li>
+        <li class="sub"><a href="#sub-5-1" class="sub">5.1 较为稳定的政策环境</a></li>
+        <li class="sub"><a href="#sub-5-2" class="sub">5.2 经营性公墓行业的增长空间</a></li>
+        <li class="sub"><a href="#sub-5-3" class="sub">5.3 行业整体增速：约年化 8.8%</a></li>
+        <li class="sub"><a href="#sub-5-4" class="sub">5.4 几乎没有竞争对手的福寿园</a></li>
+        <li class="sub"><a href="#sub-5-5" class="sub">5.5 为什么说"分流口不等于竞争"</a></li>
+        <li class="sub"><a href="#sub-5-6" class="sub">5.6 隔离带：一串并排的佛龛</a></li>
+        <li class="sub"><a href="#sub-5-7" class="sub">5.7 降维打击：福寿园是行业的"黄埔军校"</a></li>
+        <li><a href="#section-6">六、风险：六假三真</a></li>
+        <li class="sub"><a href="#sub-6-1" class="sub">6.1 假风险①：客户未来不续费</a></li>
+        <li class="sub"><a href="#sub-6-2" class="sub">6.2 假风险②：被灵骨塔、海葬等新方式抢夺市场</a></li>
+        <li class="sub"><a href="#sub-6-3" class="sub">6.3 假风险③：行业暴利带来的舆论风险</a></li>
+        <li class="sub"><a href="#sub-6-4" class="sub">6.4 假风险④：价格管制风险</a></li>
+        <li class="sub"><a href="#sub-6-5" class="sub">6.5 假风险⑤：墓地审批放开，导致市场供应大量增加</a></li>
+        <li class="sub"><a href="#sub-6-6" class="sub">6.6 假风险⑥：土地续期风险</a></li>
+        <li class="sub"><a href="#sub-6-7" class="sub">6.7 真风险①：异地扩张风险</a></li>
+        <li class="sub"><a href="#sub-6-8" class="sub">6.8 真风险②：政商关系过于紧密</a></li>
+        <li class="sub"><a href="#sub-6-9" class="sub">6.9 真风险③：利益输送风险</a></li>
+        <li class="sub"><a href="#sub-6-10" class="sub">6.10 三种真风险的总结与评价</a></li>
+        <li><a href="#section-7">七、给一家企业"定性"的方法</a></li>
+        <li class="sub"><a href="#sub-7-1" class="sub">7.1 不必刻意区分定性与定量</a></li>
+        <li class="sub"><a href="#sub-7-2" class="sub">7.2 给进一步研究者的"枯燥"作业</a></li>
+        <li><a href="#section-8">八、补充说明</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第21章</div>
+        <h1 class="article-title">如何从零开始研究一家企业 ——以福寿园为例</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>连载时间</strong>2020 年 10 月 20 日至 11 月 23 日（本章由 6 篇文章构成）</span>
+          <span><strong>主题</strong>福寿园 &#xB7; 企业研究方法 &#xB7; 六假三真</span>
+        </div>
+      </header>
+
+      <div class="callout info">
+        <div class="callout-icon">&#x1F4DD;</div>
+        <div class="callout-body">
+          <div class="callout-title">推荐人朱轶</div>
+          <p>面对复杂的财报和海量的信息，我们如何才能抽丝剥茧，看懂一家企业呢？本文以福寿园为例，手把手教大家如何从零开始研究一家企业，数据来源公开可查，逻辑清晰，结论明确，是我们学习研究企业的经典范例。其最大的价值，不是找到了一家可以投资的公司，而是在一起学习的过程中，我们所锻炼出来的<strong>研究方法和研究能力</strong>。</p>
+        </div>
+      </div>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、研究框架：如何看懂一家企业 -->
+      <section id="section-1">
+        <h2>一、研究框架：如何看懂一家企业</h2>
+
+        <p>在"唐书房"2017 年 5 月发布的《看得懂与看不懂》一文中，老唐曾写道：<strong>当你能够回答下面四个问题时，就代表看懂了这家企业。</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>问题</th>
+              <th>实质指向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>这家公司靠销售什么商品和服务获取利润？</td>
+              <td>业务与利润来源</td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>它的客户为何从它这里采购，而不选其他机构的商品或者服务？</td>
+              <td>客户为什么选它</td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>资本的天性是逐利。眼看这家公司坐享丰厚利润，为什么其他资本没有提供更高性价比<sup>&#x2460;</sup>的商品或服务，抢占它的市场份额，或逼迫它降低利润空间呢？</td>
+              <td>护城河是否存在</td>
+            </tr>
+            <tr>
+              <td>&#x2463;</td>
+              <td>假设同行挟巨资，或者其他产业巨头挟巨资参与竞争，该公司能否保住甚至继续扩大自己的市场份额？</td>
+              <td>护城河能否持续</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <div class="callout-title">注&#x2460;</div>
+            <p>更高性价比，既可以是<strong>同样质量/数量 + 更低价格</strong>，也可以是<strong>同样价格 + 更高质量/数量</strong>。</p>
+          </div>
+        </div>
+
+        <p>其实这四个问题就是很多高人喜欢说的"<strong>商业模式</strong>"，老唐只是把它说得过于简单，显得稍微不那么"高大上"了。</p>
+
+        <p>当我们能够回答以上四个问题后，就可以给企业<strong>估值</strong>了（可以视为问题⑤）。也就是说在老唐看来，研究一家企业的框架，就是回答上述①②③④⑤几个问题。不管从哪个角度切入具体某家企业，<strong>万变不离其宗</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、企业概览：从资产负债表开始 -->
+      <section id="section-2">
+        <h2>二、企业概览：从资产负债表开始</h2>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">阅读提示</div>
+            <p>老唐也是刚刚接触这家企业的财报，所以本章主要谈<strong>框架和方法</strong>，是示范老唐所用的<strong>捕鱼之法</strong>（且不见得有多高明），而不是介绍这条鱼。尤其是文章中完全可能包含老唐错误或片面的认识，请朋友们千万不要将本文理解为老唐建议在此位置买入福寿园，<strong>切记切记</strong>！</p>
+          </div>
+        </div>
+
+        <p>接下来，老唐以福寿园为例，分享一下从接触一家企业到得出研究结论，应该做的工作和大体的步骤，供朋友们参考。</p>
+
+        <h3 id="sub-2-1">2.1 第一道筛子：ROE</h3>
+
+        <p>一般来说，老唐喜欢投<strong>过去已经被证明能够赚到丰厚利润，且经过分析后认为未来将继续赚到更丰厚利润</strong>的企业；不喜欢那些"虽然现在不赚钱，但是未来可能非常美好"的"梦想窒息"类企业。</p>
+
+        <p>因此，我通常用 ROE 作为筛选企业的第一项标准。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>要点</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>定义</strong></td>
+              <td>净利润与账面净资产的比值</td>
+            </tr>
+            <tr>
+              <td><strong>含义</strong></td>
+              <td>代表企业对所掌控资源的<strong>运用能力</strong></td>
+            </tr>
+            <tr>
+              <td><strong>高 ROE 说明</strong></td>
+              <td>企业利用当前掌控的资源，获取了<strong>远超社会无风险收益率</strong>的回报水平</td>
+            </tr>
+            <tr>
+              <td><strong>真正的用处</strong></td>
+              <td>高 ROE 是投资者的<strong>路标和指示牌</strong>，作用是指引我们去发现某种没有被记录在资产负债表、却能给公司带来收入的"<strong>经济商誉</strong>"资产</td>
+            </tr>
+            <tr>
+              <td><strong>推论</strong></td>
+              <td>具备高经济商誉的企业，往往都有某种<strong>竞争优势</strong>，值得投资的概率很大</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-2">2.2 三个口径的 ROE：第一个疑点</h3>
+
+        <p>以福寿园 2019 年年报为例（为行文简单，数据四舍五入，下同）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>口径</th>
+              <th>净资产</th>
+              <th>净利润</th>
+              <th>ROE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>全部</td>
+              <td>46 亿元</td>
+              <td>7.4 亿元</td>
+              <td>约 <strong>16%</strong></td>
+            </tr>
+            <tr>
+              <td>归母</td>
+              <td>40 亿元</td>
+              <td>5.8 亿元</td>
+              <td>约 <strong>15%</strong></td>
+            </tr>
+            <tr>
+              <td>少数股东</td>
+              <td>5.4 亿元</td>
+              <td>约 1.6 亿元</td>
+              <td>&asymp; 1.6 &divide; 5.4 &#xD7; 100% &asymp; <strong>30%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>粗看还不错，但也不算特别出彩。真正值得注意的是<strong>少数股东的 ROE 约为归母 ROE 的两倍</strong>。这意味着两种可能：</p>
+
+        <ul>
+          <li>要么有<strong>关联人掏公司腰包</strong>；</li>
+          <li>要么是少数股东带有某种<strong>没有体现在财报上的特殊资源</strong>。</li>
+        </ul>
+
+        <p>究竟是什么，暂且存疑。</p>
+
+        <h3 id="sub-2-3">2.3 简化资产负债表</h3>
+
+        <p>老唐在《手把手教你读财报》第 32 页第一行写道：</p>
+
+        <div class="pull-quote">
+          经验丰富的投资者，首先看的报表一定是<strong>资产负债表</strong>。实际上，他们也许会翻阅利润表和现金流量表来进行印证，但最终总是聚焦在资产负债表上。
+        </div>
+
+        <p>长期跟踪"唐书房"的朋友们都知道，几乎分析任何企业，老唐都会首先搞出一份简化的资产负债表，福寿园也不例外。</p>
+
+        <p style="text-align:center; font-size:.85rem; color:var(--text3); margin:1.5rem 0 .25rem;"><strong>表 21-1</strong>　福寿园简化资产负债表（单位：亿元）</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>资产</th>
+              <th>金额</th>
+              <th>负债及股东权益</th>
+              <th>金额</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>固定资产</td>
+              <td>6.7</td>
+              <td>有息负债</td>
+              <td><strong>0.8</strong></td>
+            </tr>
+            <tr>
+              <td>墓园资产</td>
+              <td>15.2</td>
+              <td>经营负债</td>
+              <td><strong>13.2</strong></td>
+            </tr>
+            <tr>
+              <td>存货</td>
+              <td>4.8</td>
+              <td>　— 应付</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>类现金</td>
+              <td><strong>25</strong></td>
+              <td>　— 预收</td>
+              <td>3.8</td>
+            </tr>
+            <tr>
+              <td>商誉</td>
+              <td>4.4</td>
+              <td>　— 其他</td>
+              <td>3.4</td>
+            </tr>
+            <tr>
+              <td>应收</td>
+              <td><strong>1</strong></td>
+              <td>负债合计</td>
+              <td><strong>14</strong></td>
+            </tr>
+            <tr>
+              <td>其他</td>
+              <td>3</td>
+              <td>股东权益</td>
+              <td><strong>46</strong></td>
+            </tr>
+            <tr>
+              <td><strong>资产总计</strong></td>
+              <td><strong>60</strong></td>
+              <td><strong>负债及股东权益合计</strong></td>
+              <td><strong>60</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>读过《手把手教你读财报》的朋友，看到这份简化报表后，头脑里至少应该想到以下<strong>五个企业特征</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>报表现象</th>
+              <th>指向的企业特征</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>有息负债仅 0.8 亿元</td>
+              <td>企业<strong>几乎没有有息负债</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>应付 6 亿元 + 预收 3.8 亿元</td>
+              <td>既占用上游资金，也占用下游资金，<strong>在产业链上相对强势</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>应收账款仅 1 亿元<sup>&#x2460;</sup></td>
+              <td>企业销售主要是<strong>预收或现款现货</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2463;</td>
+              <td>类现金 25 亿元</td>
+              <td>有大量现金沉淀，<strong>账面类现金资产超过净资产的一半</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2464;</td>
+              <td>商誉 4.4 亿元</td>
+              <td>企业发生过一次或多次<strong>溢价收购</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <div class="callout-title">注&#x2460;</div>
+            <p>当年企业有 18.5 亿元营收，只有 1 亿元应收账款。在阅读财报过程中会发现，这少量的应收款，是因为<strong>火化机销售、园林和景观设计以及向地方民政主管部门提供服务</strong>所产生的。创造公司年度营业利润 <strong>97%</strong> 的墓地业务，几乎不产生应收账款。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-4">2.4 顺理成章的三个疑问</h3>
+
+        <p>沿着这五个要点展开思考，就会产生以下问题：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>疑问</th>
+              <th>解答方向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>企业的主营业务是卖墓穴，类似于房地产卖房子。为什么房地产企业普遍<strong>高负债、高杠杆</strong>运营，而福寿园却近于<strong>无杠杆</strong>状态运营？它们之间存在什么样的差异呢？</td>
+              <td>见第三部分「供应端」</td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>净资产回报率超过 15%、盈利几乎全部为现金的生意，为什么要<strong>保留大量资金在手，且几乎完全不借款</strong>？是什么制约着企业利用更多资本去获取更多利润的能力？</td>
+              <td>见第三部分「囤地待涨」与「土地供应量」</td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>企业为什么通过<strong>溢价收购</strong>来扩张？收购的出价是否有损害小股东利益的情况？在上市公司下属非全资子公司中占少数股份的合作伙伴，凭什么可以得到比上市公司股东更高的回报率呢？</td>
+              <td>见第六部分「真风险」</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>接下来就可以带着这些问题去阅读财报全文了。<strong>解开上述疑问的过程，就是我们通常所谈到的"企业研究"。</strong> 后文我不再一一引用财报原文，直接说我在财报阅读过程中的思考，涉及供应端、需求端、行业竞争、政策风险、发展空间、管理层风险以及估值前要做的工作等不同层面。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、供应端：迥异于房地产 -->
+      <section id="section-3">
+        <h2>三、供应端：迥异于房地产</h2>
+
+        <p>从供应端看，这门生意和房地产似乎很像，都是从政府手中拿地，然后加工，卖给客户。但它和房地产生意比较，至少有以下<strong>五大区别</strong>。</p>
+
+        <h3 id="sub-3-1">3.1 五大区别总览</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>房地产</th>
+              <th>福寿园（经营性公墓）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>&#x2460; 土地权属</strong></td>
+              <td>买下 50~70 年土地使用权，建房后将<strong>土地使用权和房屋一起卖给客户</strong>；续期由客户缴费，土地归客户</td>
+              <td>获得土地使用权，建墓穴后将<strong>墓穴使用权租给客户</strong>；土地使用权<strong>不转让</strong>，续期由福寿园缴费，土地仍属福寿园</td>
+            </tr>
+            <tr>
+              <td><strong>&#x2461; 后续黏性</strong></td>
+              <td>收钱卖房后与土地、房产及居住者<strong>切断联系</strong>；物业服务近于无差别竞争，本身不赚钱甚至赔钱</td>
+              <td>后续物业服务<strong>只能由福寿园提供</strong>；逝者及其后人长期、<strong>无可选择地</strong>与福寿园保持商业往来</td>
+            </tr>
+            <tr>
+              <td><strong>&#x2462; 囤地待涨</strong></td>
+              <td>囤地（捂地、捂盘）是政府<strong>禁止和打击</strong>的行为</td>
+              <td>捂地几乎是<strong>政府要求的</strong>——政策严格限制提前购买墓穴，土地却一次性划拨/出售给经营者</td>
+            </tr>
+            <tr>
+              <td><strong>&#x2463; 土地获取方式</strong></td>
+              <td>土地拍卖是地方政府主要财源，竞争者众多，<strong>政策监管严格、地价高昂</strong></td>
+              <td>殡葬用地为受限制用地，绝大部分仍以<strong>划拨</strong>方式取得，拍卖挂牌占比极小，基本无须高价获得</td>
+            </tr>
+            <tr>
+              <td><strong>&#x2464; 土地供应量</strong></td>
+              <td>供应<strong>源源不断</strong>；每一块土地的开发本身还在"催熟"隔壁地块，给自己招来竞争对手</td>
+              <td>按死亡人数预期规划，一次释放后在满足需求的时间跨度内<strong>很难再释放新地</strong>；投入只提升自家土地附加值，<strong>不增加竞争压力</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-3-2">3.2 土地权属：卖的是"租约"不是"产权"</h3>
+
+        <p>绝大部分城市的商品房，客户支付的购房款名义上是购"房"款，实际上主要款项是购买房子脚下的土地。以清水房论，房屋的<strong>建安成本大多介于 800~3000 元/平方米</strong>，地区差异不大。严格地说，收钱卖掉房子后，房地产公司和这块地、地上的房产及其中的居住者就已经切断联系，分道扬镳了。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>福寿园则完全不同：<strong>客户购买的墓穴是不附带土地证的。</strong></p>
+          </div>
+        </div>
+
+        <p>如果同样用房子来类比说明，福寿园的客户相当于只是<strong>一次性交清了 20 年房租及物业费</strong>。房子和脚下的土地，法律上的所有权依然属于开发商（福寿园）。</p>
+
+        <h3 id="sub-3-3">3.3 后续黏性：物业费才是真正的差异</h3>
+
+        <p>正因为上述土地权属问题，无论是躺在墓穴里的逝者还是其后人，将长期、无可选择地与福寿园保持紧密的联系和商业往来。如果未来不再续交租金，房东（福寿园）是有权利将租客（骨灰盒）驱逐，并将房子重新租给其他房客的。</p>
+
+        <p>墓园的维护工作<strong>变量很少</strong>——享受此项服务的客户基本不提新要求，大体标准化且极少有紧急事件发生。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对比项</th>
+              <th>住宅物业</th>
+              <th>墓园物业</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>服务提供者</td>
+              <td>任何主体都可提供，红海无差别竞争</td>
+              <td><strong>只能由福寿园提供</strong></td>
+            </tr>
+            <tr>
+              <td>服务复杂度</td>
+              <td>琐碎复杂，对人力资源需求很大</td>
+              <td>变量很少，大体标准化</td>
+            </tr>
+            <tr>
+              <td>收费方式</td>
+              <td>按月/按年收取</td>
+              <td>办理"入住"手续时<strong>一次性预缴 10~20 年</strong></td>
+            </tr>
+            <tr>
+              <td>单位收费水平</td>
+              <td>基准</td>
+              <td>因墓穴通常仅占地 1~3 平方米，<strong>每平方米收费常常是住宅物业标准的数倍甚至数十倍</strong></td>
+            </tr>
+            <tr>
+              <td>利润空间</td>
+              <td>很难有巨大利润空间，甚至赔钱</td>
+              <td>少部分由监管部门监管专项使用，<strong>大部分收下就是利润</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>该笔费用少则数百元每年，多则数千元每年，看似不高，但换算成单位面积收费后就相当可观。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-4">3.4 囤地待涨：房地产的禁区，墓园的正道</h3>
+
+        <ul>
+          <li><strong>房地产</strong>：2020 年 9 月成都市高新区财政局下发文件，禁止区内金融机构向李嘉诚旗下的和记黄埔成都公司及其项目提供新增融资、贷款，禁止为其重大资产重组提供帮助，原因就是该公司存在<strong>捂地、捂盘</strong>等不良行为。</li>
+          <li><strong>墓园</strong>：几乎所有地区都有限制顾客购买墓穴资格的政策——去世后才能买，年龄超过 70 岁或 80 岁才能买，重病才能买，一人去世提前预留其他家庭成员墓穴才能买，等等。</li>
+        </ul>
+
+        <div class="pull-quote">
+          <strong>政策原则</strong>：只有在被证明有需要的时候才允许购买，尽可能地<strong>禁止提前购买</strong>，同时也<strong>禁止转让</strong>。
+        </div>
+
+        <p>而墓园土地（标准用语为"<strong>殡葬用地</strong>"）是政府一次性划拨或出售给墓园经营者的。这就必然导致一种房地产行业里被禁止的获利模式，在墓园却是合理合法的，那就是：<strong>捂地</strong>。</p>
+
+        <p>而且奇妙的是，<strong>墓园土地可以超出土地使用权最后期限销售</strong>。比如福寿园有些墓地的使用权已经卖超（假设土地使用权截止日期是 2020 年 12 月 31 日，但公司可以今天把墓穴卖给顾客，且将管理费用收到 2030 年），但政府相关部门出具书面函件确认不违规。</p>
+
+        <p>基本可以确定，未来土地到期后，适当续费就可以继续使用。正因为这样，<strong>福寿园的土地大部分是未开发状态（捂地）</strong>。毕竟伴随着收入水平的提高，未来墓穴的价格几乎可以预期必然上涨。成本不变、售价上涨，无疑会给公司带来更多利润。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <div class="callout-title">给愿意动手的朋友</div>
+            <p>可以统计公司上市以来各个墓园墓穴平均售价的数据，并画出走势图。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-5">3.5 捂地：账面 ROE 不高的真正原因</h3>
+
+        <p>这正是前文疑问②的答案。举个简化的例子：公司买下 <strong>100 单位</strong>土地。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>收益类型</th>
+              <th>来源</th>
+              <th>是否进利润表</th>
+              <th>是否计入 ROE 分子</th>
+              <th>是否计入 ROE 分母</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>明的</strong></td>
+              <td>当年销售（租）出去的 <strong>5 份</strong>土地</td>
+              <td>&#x2705; 记录在利润表</td>
+              <td>&#x2705; 是</td>
+              <td>&#x2705; 全部 100 单位成本计入</td>
+            </tr>
+            <tr>
+              <td><strong>暗的</strong></td>
+              <td>手中所捂的 <strong>95 份</strong>土地当年的增值</td>
+              <td>&#x274C; 不记录</td>
+              <td>&#x274C; 否</td>
+              <td>&#x2705; 全部 100 单位成本计入</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>企业扩张过程中，不断有资本从产生利息收入的货币基金或金融资产，<strong>沉淀为只产生暗收益的墓地资产</strong>。正是这个原因，导致即使在超高毛利率的销售数据下，企业的 ROE 看上去却并不怎么诱人。</p>
+
+        <h3 id="sub-3-6">3.6 土地获取：划拨方式形成的天然护城河</h3>
+
+        <p>今天我们登录自然资源部不动产登记中心旗下的<strong>中国土地市场网</strong>，查询殡葬用地，会发现绝大部分依然是<strong>划拨</strong>方式，拍卖和挂牌出让占比至今仍然极小。</p>
+
+        <p>正因为以划拨方式为主，市场参与者基本上就是<strong>现有的业内人士</strong>——说透彻一点，就是围绕在民政部门周围、长期与殡葬行业相关的团体。这形成了一道双重壁垒：</p>
+
+        <ol>
+          <li>其他投资主体根本<strong>无法预期</strong>自己能否获得经营原材料（殡葬用地），不可能提前进入这个行业去等地；</li>
+          <li>结果就是真有地的时候，其他市场主体也很难有<strong>信息渠道及知识储备、人才储备</strong>去及时参与竞争。</li>
+        </ol>
+
+        <p>由于土地的划拨方式，加上殡葬用地主要以<strong>不适宜用于其他用途</strong>的土地为主，所以大部分土地价格低廉得超乎想象。查询中国土地市场网的殡葬用地成交价，会发现很多<strong>每平方米几元至几百元</strong>不等的最新成交记录。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>当然，地价还受区域购买力和土地等级差异影响，但与拍卖土地的价格差异不可能夸张到数百倍。<strong>区域购买力和土地等级解释不了的价差部分，只能归结为拿地模式的差异。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="sub-3-7">3.7 土地供应量：数量锁定的生意</h3>
+
+        <p>殡葬用地的供应逻辑与房地产完全不同：</p>
+
+        <ol>
+          <li>每个地区人口的<strong>年度死亡人数</strong>，有基本稳定的历史统计数据；</li>
+          <li>未来的预期，也可以根据<strong>年龄结构和平均寿命</strong>做大致准确的计算；</li>
+          <li>政府据此在土地规划中规划出未来 N 年需要的殡葬用地，通过划拨或出售的方式释放，<strong>此时土地成本被提前锁定</strong>；</li>
+          <li>然后在该规划基本满足需求的时间跨度里，该城市<strong>很难再释放新的殡葬土地</strong>。</li>
+        </ol>
+
+        <p>因此，墓园经营者的每一分投入，除了提高自己所捂土地的附加值外，<strong>不会给自己增加竞争压力</strong>。从土地供应量角度看行业格局，墓园和房地产行业的原材料供应有天壤之别，这也决定了两者的经营方式有着巨大的差别。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">但这并不意味着杜绝了竞争</div>
+            <p>农村荒地、同区域其他墓园，甚至包括一些灵骨塔、庙宇、道观、商品房或小产权房屋以及天葬、海葬、不葬等多种方式，都有可能成为曲线的行业竞争对手。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、需求端：增长空间显著 -->
+      <section id="section-4">
+        <h2>四、需求端：增长空间显著</h2>
+
+        <p>在《手把手教你读财报》第 151 页，老唐分享过这样一段话：</p>
+
+        <div class="pull-quote">
+          作为投资者，首选的企业是营业收入增长、增长、增长，过去增长，现在增长，预计在可见的未来将继续保持增长的企业。如果不考虑收购兼并式的增长，企业收入的增长通常有三种途径，即<strong>潜在需求增长、市场份额扩大和价格提升</strong>。不同增长途径的可靠性不同。
+        </div>
+
+        <h3 id="sub-4-1">4.1 三种增长途径的可靠性排序</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>排序</th>
+              <th>增长途径</th>
+              <th>代价承担者</th>
+              <th>可靠性</th>
+              <th>需要评估的要点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>潜在需求增长</td>
+              <td>无受损者（仅受益程度不同）</td>
+              <td><strong>最高</strong></td>
+              <td>不会遭遇反击</td>
+            </tr>
+            <tr>
+              <td><strong>2</strong></td>
+              <td>市场份额扩大</td>
+              <td>竞争对手受损</td>
+              <td>中</td>
+              <td>竞争对手的<strong>反击力度</strong>及反击下增长的可持续性</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td>价格提升</td>
+              <td>客户付出更多</td>
+              <td>较低</td>
+              <td>消费的<strong>替代性强弱</strong>（可能迫使客户减少消费或寻找替代品）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>企业面对需求缺口巨大的市场，更容易赚到钱。同样，投资者持有这样的企业，赚钱的难度也会小很多。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-2">4.2 从业务端看需求：钱到底从哪里来</h3>
+
+        <p>研究需求，首先要明确企业所从事的业务，也就是看懂企业四个问题里的第一个。面对一家陌生公司时，可以直接从财报的"<strong>管理层讨论与分析</strong>"里获得答案。以福寿园 2019 年年报为例，在第 12 页和第 17 页可以看到企业的收入构成及主要利润来源。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>业务板块</th>
+              <th>收入贡献</th>
+              <th>营业利润贡献</th>
+              <th>定位与判断</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>墓园服务</strong></td>
+              <td>与殡仪合计占总收入 <strong>97% 以上</strong></td>
+              <td><strong>约 97%</strong></td>
+              <td>公司真正的利润来源，也是研究重点</td>
+            </tr>
+            <tr>
+              <td><strong>殡仪服务</strong></td>
+              <td>收入不少</td>
+              <td>利润率偏低</td>
+              <td>劳动密集型，人力成本偏高，主要作用类似<strong>给墓园引流的配套服务</strong></td>
+            </tr>
+            <tr>
+              <td><strong>其他</strong>（环保火化机、设计服务）</td>
+              <td>占比很小</td>
+              <td>极小</td>
+              <td>见下文</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>环保火化机业务</strong>：福寿园投资 1.8 亿元、于 2015 年 2 月建成的环保火化机生产企业位于安徽省广德市，据说年设计产能 300 台，是国内至今为止<strong>唯一</strong>产品达到国内环保标准、同时达到欧盟环保标准的火化机企业。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>要点</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>市场空间</td>
+              <td>截至 2019 年末，我国现有火化炉 <strong>6400 台</strong>，绝大部分不符合国家环保标准（环保不达标的火化机会产生令人非常不舒服的气味）</td>
+            </tr>
+            <tr>
+              <td>产品竞争力</td>
+              <td>环保排放达标的同时保持绝对竞争力的价格：进口火化机售价一般 <strong>300 万~1000 万元</strong>，福寿园的只售约 <strong>200 万元/台</strong></td>
+            </tr>
+            <tr>
+              <td>销售基数</td>
+              <td>2018 年 <strong>12 套</strong>，2019 年 <strong>18 套</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">老唐的处理方式</div>
+            <p>投资者对火化机业务的期望值不应太高，可直接将其增长视为<strong>安全边际的组成部分，估值时不予考虑</strong>。原因有二：</p>
+          </div>
+        </div>
+
+        <ol>
+          <li>殡仪馆本身并没有花钱更换的需求，需求只能来自<strong>环保部门的压力</strong>；</li>
+          <li>该项业务目前销售基数很小，即便能有迅速增长，按照常识理解，这个<strong>产能利用率在很长一段时间里几乎不可能产生什么利润</strong>。</li>
+        </ol>
+
+        <p>至于墓园和殡仪馆的<strong>设计业务</strong>，直接看作公司自己养的设计施工团队，在完成公司自身业务的闲时"搂草打兔子"捎带做的业务即可，直接忽略。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4CC;</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>我们关注的需求，主要是<strong>对墓地的需求</strong>。其涉及老龄化、城镇化、人均收入的提升及经营性公墓市场份额四个层面。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-3">4.3 层面一：人口老龄化趋势</h3>
+
+        <p>按照民政部披露的数据，截至 2019 年底：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>指标</th>
+              <th>人口数</th>
+              <th>占总人口比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>60 周岁及以上老年人口</td>
+              <td>25388 万人</td>
+              <td><strong>18.1%</strong></td>
+            </tr>
+            <tr>
+              <td>65 周岁及以上老年人口</td>
+              <td>17603 万人</td>
+              <td><strong>12.6%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>老龄化在不断加速</strong>（老龄人口增速远远高于人口平均增速）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间段</th>
+              <th>老龄化程度年均增加</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2001—2010 年</td>
+              <td>每年 <strong>0.2</strong> 个百分点</td>
+            </tr>
+            <tr>
+              <td>2011—2018 年</td>
+              <td>每年 <strong>0.4</strong> 个百分点</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>老龄化程度加深，带来的是<strong>年度去世人数的增加</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间段</th>
+              <th>年度去世人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2000—2009 年</td>
+              <td>年均基本在 <strong>850 万</strong>左右</td>
+            </tr>
+            <tr>
+              <td>2010—2019 年</td>
+              <td>年均 <strong>950 万以上</strong>且逐年小幅增长</td>
+            </tr>
+            <tr>
+              <td>2019 年（全年）</td>
+              <td><strong>998 万</strong></td>
+            </tr>
+            <tr>
+              <td>2025—2030 年（联合国人口署预测）</td>
+              <td>将提升至 <strong>1293 万人</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-4-4">4.4 层面二：城镇化比率逐年提升</h3>
+
+        <p>城镇化主要影响的是<strong>火化率</strong>及对公墓的需求。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>农村无论土葬还是火葬，基本上由荒山荒地提供墓园，<strong>不构成对墓地的需求</strong>（有少量殡仪需求）。火化、殡仪及墓地需求的主要来源是<strong>城镇居民</strong>。</p>
+          </div>
+        </div>
+
+        <p>我国城镇化比率在持续提升，这一点无须数据支撑也可以被感知。按照国家统计局的数据：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>常住人口城镇化率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1979 年</td>
+              <td>20%</td>
+            </tr>
+            <tr>
+              <td>1989 年</td>
+              <td>26.2%</td>
+            </tr>
+            <tr>
+              <td>1999 年</td>
+              <td>30.9%</td>
+            </tr>
+            <tr>
+              <td>2009 年</td>
+              <td>48.3%</td>
+            </tr>
+            <tr>
+              <td>2019 年</td>
+              <td><strong>首次突破 60%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>伴随城镇化的推进，火化率的趋势也是同步提升。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805204451266.png" alt="图 21-1 2015—2019 年火化遗体数量与火化率" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+        <p style="text-align:center; font-size:.82rem; color:var(--text2); margin-bottom:1.5rem;"><strong>图 21-1　2015—2019 年火化遗体数量与火化率</strong></p>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p><strong>数据来源</strong>：《中国民政统计年鉴》（2019）。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-5">4.5 层面三：人均收入快速提升</h3>
+
+        <p>2019 年中国人均 GDP 第一次突破 1 万美元，达到 <strong>10261 美元</strong>，居世界第 80 位，距离全球平均水平 11428 美元仅一步之遥。这是一个值得感恩同时也让人惊讶的数据。老唐读《全球科技通史》一书时，看到这样一段话：</p>
+
+        <div class="pull-quote">
+          在欧洲科学启蒙时代之后，人类迎来了技术的大爆发，从而引发了工业革命，世界文明的进程瞬间加速，整个世界为之一变。今天，我们所有人都在享受工业革命的成果。中国在农耕文明时期，人均收入在长达 2000 年的时间里没有本质的变化。中国在 1978 年改革开放之前还是一个农业国，按照世界银行的统计指标，当时的人均 GDP 只有 156 美元，低于历史上大部分和平时期，甚至只有撒哈拉以南非洲国家的 1/3，这也是邓小平同志讲再不努力就要被开除球籍的原因。但是到了 2016 年，中国的人均 GDP 已经高达 8100 美元。其根本原因就是在工业革命中，起主导作用的是科学技术，而在农耕文明社会，经济总量很大程度上取决于人口的数量，技术的作用相对次要，甚至气候的作用都比科技的作用要大。
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>感恩这个时代！我们的命真是好，在几千年苦难史里选中人均收入提升最快的一小段时间，生活标准及财富增长都是几千年未曾有过的速度。</p>
+          </div>
+        </div>
+
+        <p><strong>关于"死不起"的辨析</strong>：目前情况下，国家财政相对富足，不少城市对于户籍居民基本殡葬费用是<strong>全免或予以补贴</strong>的。这些基本服务包括遗体运送、消毒防腐、火化及一定年限的骨灰寄存等。如果单纯是这些基本消费，丧事的支出基本上<strong>不会超过 2000 元</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>所以，在当前环境下，所谓"死不起"更多的是<strong>吸引眼球的媒体话术</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-6">4.6 层面四：经营性公墓的市场空间</h3>
+
+        <p>政府只能为支付能力最差的这部分人兜底，没有义务也没有能力为所有人承担费用。民政部数据显示，近年民政部门管理的公墓总体数量是<strong>不断缩减</strong>的：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时点</th>
+              <th>民政部门管理的公墓数量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2014 年底</td>
+              <td>1598 个</td>
+            </tr>
+            <tr>
+              <td>2019 年底</td>
+              <td><strong>1431 个</strong>（缩减）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>住建部、发改委、民政部 2017 年发布了《城市性公墓建设标准》，对公益性公墓的供应上限也做了明确要求。骨灰安置总量的计算公式为：</p>
+
+        <div class="pull-quote">
+          <strong>骨灰安置总量 = 公益性公墓服务区域常住人口数量 &#xD7; 人口年死亡率 &#xD7; 20 &#xD7; 50%</strong><br/><br/>
+          其中，系数 20 表示服务年限为 20 年。
+        </div>
+
+        <p style="text-align:center; font-size:.85rem; color:var(--text3); margin:1.5rem 0 .25rem;"><strong>表 21-2</strong>　城市性公墓建设标准</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>类别</th>
+              <th>骨灰安置总量（个）</th>
+              <th>服务人口（万人）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>一类</td>
+              <td>75001~90000</td>
+              <td>&gt;100</td>
+            </tr>
+            <tr>
+              <td>二类</td>
+              <td>45001~75000</td>
+              <td>60~100</td>
+            </tr>
+            <tr>
+              <td>三类</td>
+              <td>15001~45000</td>
+              <td>20~60</td>
+            </tr>
+            <tr>
+              <td>四类</td>
+              <td>5000~15000</td>
+              <td>&lt;20</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>以百万人口城市测算</strong>（城市公益性公墓的最大建设规模不宜超过一类上限）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>测算</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>建设规模</td>
+              <td>按一类上限</td>
+              <td>公墓 7.5 万个</td>
+            </tr>
+            <tr>
+              <td>年均可安置</td>
+              <td>7.5 万 &divide; 20 年</td>
+              <td>约 <strong>3600 个/年</strong></td>
+            </tr>
+            <tr>
+              <td>年度死亡人数</td>
+              <td>按约 0.71% 死亡率（14 亿人口，年度平均死亡约 1000 万人）</td>
+              <td>约 <strong>7100 人/年</strong></td>
+            </tr>
+            <tr>
+              <td>公益性覆盖比例</td>
+              <td>3600 &divide; 7100</td>
+              <td><strong>约一半</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">一个容易误读的地方</div>
+            <p>人口超过 100 万的城市，依然可以按照这个比例建设<strong>多个</strong>公益性墓地。是<strong>单个公墓</strong>限制上限为 9 万个，不是总数限制为 9 万个。单个公墓设上限的主要目的是防止单个公墓规模过大，造成清明祭扫期间人流、车流过度集中（统计数据显示，<strong>一位逝者平均有 4.5 人拜祭</strong>），给交通管理带来不便。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-4-7">4.7 经营性公墓卖的是"舒坦、体面和差异化"</h3>
+
+        <p>实际的城市管理中，另外一半需求通常是依赖<strong>经营性公墓</strong>解决的。同时，作为靠政府补贴甚至提供免费服务的公益性公墓，自然别期望产品和服务的质量有多好，这是市场规律。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对比</th>
+              <th>公益性公墓</th>
+              <th>经营性公墓</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>定位</td>
+              <td>保障基本民生需求</td>
+              <td>提供丧事及长眠之地的<strong>舒坦、体面和差异化</strong></td>
+            </tr>
+            <tr>
+              <td>环境预期</td>
+              <td>可能阴森恐怖、交通不便、杂草丛生</td>
+              <td>花园一般</td>
+            </tr>
+            <tr>
+              <td>产品形态</td>
+              <td>单一</td>
+              <td>足够多形态的差异化产品，既可以有"豪宅"，也可以有毫无负担压力的壁葬</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>当人们不具备支付能力的时候，舒坦、体面以及差异化不重要，甚至根本不在考虑范围。但当人们具备了支付能力之后，它们就变得越来越重要了。</p>
+
+        <p><strong>行业的一个特殊消费心理</strong>：因为我们的文化里一直缺乏坦然面对死亡的相关教育，所以这个行业有个特点——<strong>人们几乎不会提前去了解这个行业的价格标准及产品规格</strong>，通常都是在刚需出现后，在支付承受力范围内<strong>仓促之间</strong>作出产品选择。</p>
+
+        <p>在以下心理的共同作用下，客户总是倾向于在<strong>支付能力之内尽可能选择较高价位</strong>的产品：</p>
+
+        <ul>
+          <li><strong>孝道文化</strong></li>
+          <li><strong>歉疚心理</strong>（工作忙碌、陪伴老人较少造成的）</li>
+          <li><strong>"反正就这一次"</strong></li>
+        </ul>
+
+        <p><strong>生前契约业务</strong>：福寿园最近几年新开发的生前契约业务，正是这种支付能力的体现。人们越来越重视自己身后走得是否体面和舒适，愿意在生前按照自己的支付能力，付费自选多个环节里自己所期望享受到的服务水准。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>生前契约签约人数</th>
+              <th>增速</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2017 年</td>
+              <td>1174</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>2018 年</td>
+              <td>2485</td>
+              <td>约 +112%</td>
+            </tr>
+            <tr>
+              <td>2019 年</td>
+              <td>4873</td>
+              <td>约 +96%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>这项业务和<strong>保险业的浮存金</strong>有点类似。其原创企业、美国上市公司 <strong>SCI</strong> 账面上可以沉淀远超净资产数倍、金额高达数十亿美元的预收款项。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          2016 年，甚至有位客户在身故后将位于上海市区的一套大约 97 平方米、时价 344 万元的房产赠送给福寿园（目前市价翻倍了）。这也从侧面体现了逝者对<strong>临终关怀价值</strong>的认可。
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4CC;</div>
+          <div class="callout-body">
+            <div class="callout-title">需求端小结</div>
+            <p><strong>老龄化 + 城镇化</strong> &#x2192; 支撑了整体市场的增长；<strong>支付能力提升 + 公益性公墓的数量及服务质量约束</strong> &#x2192; 共同支撑了经营性公墓的未来增长空间。</p>
+          </div>
+        </div>
+
+        <p>但其中又能有多少是福寿园可以拿下的呢？</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 五、面临的竞争：几乎不存在 -->
+      <section id="section-5">
+        <h2>五、面临的竞争：几乎不存在</h2>
+
+        <h3 id="sub-5-1">5.1 较为稳定的政策环境</h3>
+
+        <p>通过阅读福寿园年报里谈及的殡葬相关政策，以及查阅民政部殡葬管理条例，我们能够发现政府对于殡葬管理的政策实际上算是<strong>前后一贯的，可预期性挺强</strong>。大致有以下三个方面。</p>
+
+        <p><strong>第一，进入殡葬行业的门槛设置，趋势是从严。</strong></p>
+
+        <p>无论是殡仪馆还是经营性墓地，进入难度总体趋势是提高。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>政策文件</th>
+              <th>核心要求</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>民政部《殡葬管理条例（征求意见稿）》</td>
+              <td>县级以上地方人民政府应当根据设置规划，<strong>优先</strong>建立公益性骨灰堂，<strong>统筹</strong>建设公益性公墓，<strong>从严审批</strong>建设经营性公墓</td>
+            </tr>
+            <tr>
+              <td>《上海市公墓管理办法》（2018 年 1 月修订发布）</td>
+              <td>&#x2460; 本市对建设公墓施行<strong>总量控制</strong>；&#x2461; 对建立公墓实行<strong>许可制度</strong>，未经批准，不得建立公墓；&#x2462; <strong>不得新建</strong>公益性公墓；&#x2463; 经营性公墓占地面积<strong>不得超过 150 亩</strong>，不得设立分公墓或分墓区；&#x2464; 公益性埋葬地占地面积不得超过 2 亩；&#x2465; 不得扩大公益性公墓的用地……</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>第二，政府不能无限兜底。</strong></p>
+
+        <p>政府既没有能力也没有义务给全体城镇居民兜底，只能从保证中低收入群体"死得起"的角度去考虑。而且这些给中低收入者兜底的费用，不能全靠财政拨款，很大部分需要让中高收入者——经营性墓地购买者——承担。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>原因</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>取之于民，用之于民</strong></td>
+              <td>满足广大人民群众不同层次的需求——和从商品房销售中抽税收费，用于安置房、廉租房建设同理</td>
+            </tr>
+            <tr>
+              <td><strong>财政本身缺钱</strong></td>
+              <td>民政部门手心向上去向财政讨要，不如"自收自支"来得容易</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4CC;</div>
+          <div class="callout-body">
+            <p>因此，殡葬行业<strong>公益性和经营性企业长期共存</strong>的局面，看不见打破的可能，无外乎比例问题。民众整体收入下滑、承受力降低、社会舆论反应强烈，比例会略略倾向于更多公益性；反之会倾向于更多经营性。<strong>这是可以揣摩的大方向。</strong></p>
+          </div>
+        </div>
+
+        <p><strong>第三，不断提升火化率，加强规范化安葬管理。</strong></p>
+
+        <p>目前我国火化率约 <strong>50%</strong>。不断提高火化率，远景目标是火化率<strong>无限趋近于 100%</strong>，这也是大方向。其中主要原因是<strong>为子孙后代节约土地</strong>。</p>
+
+        <h3 id="sub-5-2">5.2 经营性公墓行业的增长空间</h3>
+
+        <p>在行业进入壁垒高、现有格局变化不大、火化率和规范安葬增加的大环境下，经营性公墓行业整体有多大的空间呢？</p>
+
+        <p>从《中国民政统计年鉴》（2019）披露的数据里，老唐选取了 2018 年给福寿园带来主要收入的<strong>前五大省市</strong>做个示意：上海（53%）、辽宁（11%）、安徽（10%）、河南（6%）、山东（4%）。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p><strong>注</strong>：因民政部 2020 年版统计年鉴还没有出版，无法取得 2019 年详细数据，故采用 2018 年数据。不过一年内总体趋势变化很小，不影响本文要表达的内容。</p>
+          </div>
+        </div>
+
+        <p style="text-align:center; font-size:.85rem; color:var(--text3); margin:1.5rem 0 .25rem;"><strong>表 21-3</strong>　2018 年 5 省市及全国死亡、火化及安葬统计</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>地区</th>
+              <th>当年火化（具）</th>
+              <th>当年销售墓穴（个）</th>
+              <th>当年安葬（人）</th>
+              <th>节地生态葬（人）</th>
+              <th>当年死亡（万人）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>上海</td>
+              <td>126581</td>
+              <td>83250</td>
+              <td>63133</td>
+              <td>10273</td>
+              <td>13</td>
+            </tr>
+            <tr>
+              <td>辽宁</td>
+              <td>331958</td>
+              <td>81705</td>
+              <td>54357</td>
+              <td>1144</td>
+              <td>33</td>
+            </tr>
+            <tr>
+              <td>安徽</td>
+              <td>289143</td>
+              <td>20537</td>
+              <td>42971</td>
+              <td>3014</td>
+              <td>37.5</td>
+            </tr>
+            <tr>
+              <td>河南</td>
+              <td>131009</td>
+              <td>7037</td>
+              <td>12214</td>
+              <td>277</td>
+              <td>74</td>
+            </tr>
+            <tr>
+              <td>山东</td>
+              <td>659823</td>
+              <td>8820</td>
+              <td>56904</td>
+              <td>26282</td>
+              <td>72</td>
+            </tr>
+            <tr>
+              <td><strong>全国</strong></td>
+              <td><strong>5016890</strong></td>
+              <td><strong>696687</strong></td>
+              <td><strong>1213463</strong></td>
+              <td><strong>402538</strong></td>
+              <td><strong>993</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>通过表 21-3 的相关数据，我们可以看出以下几点。</p>
+
+        <p><strong>&#x2460; 全国火化率约 50.5%（当年火化数 &divide; 当年死亡人数），但各地差异较大。</strong></p>
+
+        <p>既有近于 100% 的省市，比如上海和辽宁；也有类似河南这样的农业大省，火化率不足 20%。</p>
+
+        <p><strong>&#x2461; 火化的逝者里，能够在公墓安葬的占比约 32%</strong>，计算式为 (1213463 + 402538) &divide; 5016890 &#xD7; 100% &asymp; 32%，但同样存在巨大的地区差异：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>地区</th>
+              <th>火化逝者进入公墓的比例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>上海</td>
+              <td>高达 <strong>58%</strong></td>
+            </tr>
+            <tr>
+              <td>辽宁</td>
+              <td>16.7%</td>
+            </tr>
+            <tr>
+              <td>安徽</td>
+              <td>15.9%</td>
+            </tr>
+            <tr>
+              <td>山东</td>
+              <td>12.6%</td>
+            </tr>
+            <tr>
+              <td>河南</td>
+              <td>仅 <strong>9.5%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这些火化但没有进公墓的逝者，一般有四种去向：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>去向</th>
+              <th>说明</th>
+              <th>占比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A</td>
+              <td>火葬区的农民<strong>回村安葬</strong></td>
+              <td>主要去向</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>城市居民<strong>违规</strong>到农村公益性墓地下葬，或直接购买农民的荒坡荒地下葬</td>
+              <td>主要去向</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>骨灰<strong>暂时存放</strong>，不下葬</td>
+              <td>主要去向</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>海葬、河葬或其他自主处理方式</td>
+              <td>较少</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>&#x2462; 相对富裕和开放的地方，对节地生态葬接受度较高</strong>（草坪葬、树葬、花坛葬、壁葬、塔葬等方式），例如上海、山东；而相对贫穷落后的地区接受度较差，如河南、辽宁接受生态葬的人数都很少，主要还是倾向于墓穴安葬。</p>
+
+        <div class="pull-quote">
+          篇幅关系，其他省份不再一一展示，总体趋势都差不多。
+        </div>
+
+        <h3 id="sub-5-3">5.3 行业整体增速：约年化 8.8%</h3>
+
+        <p>观察表 21-3 的数据可知，能够给经营性公墓带来增长的空间主要有两块：<strong>火化率的提高</strong>，以及<strong>对城市居民违规下葬农村墓地的打击</strong>。这部分增速有多大呢？数据显示并不乐观。</p>
+
+        <p>这些事情过去十多年政府一直在推进，但效果并不明显。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>指标（2006—2018 年，民政部统计范围内的墓地）</th>
+              <th>年化增长率</th>
+              <th>含义拆解</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>墓穴<strong>销售数量</strong></td>
+              <td><strong>2.7%</strong></td>
+              <td>&asymp; 年度死亡人数增长 + 火化率提升 + 对城市居民违规下葬的打击</td>
+            </tr>
+            <tr>
+              <td>墓穴<strong>销售收入</strong></td>
+              <td><strong>8.8%</strong></td>
+              <td>数量 2.7% + <strong>价格增长约年化 6%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p><strong>数据来源</strong>：该统计数据来自华金研究员。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>如果没有什么特别的契机推动，我们看不到 2.7% 这个数字突变的理由。将心比心，<strong>若非上级强行要求，民政部门哪位基层员工愿意去和死者家属较劲呢？</strong> 所以，单独这部分带来的增长规模预计不会大。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4CC;</div>
+          <div class="callout-body">
+            <p>这两部分暂时都看不到改变因素，因此依然可以采信历史数据去推测未来，即行业整体可能因<strong>数量 + 价格</strong>，合计带来<strong>年化约 8.8% 的整体增长</strong>。</p>
+          </div>
+        </div>
+
+        <p>接下来要考虑的问题是：整体增长年化 8.8% 之下，行业内部的竞争有多激烈？经营性公墓以及具体到福寿园这家企业预期能实现什么样的增长速度呢？</p>
+
+        <h3 id="sub-5-4">5.4 几乎没有竞争对手的福寿园</h3>
+
+        <p>关于竞争，老唐的观点可能稍有点冲击性：<strong>福寿园面对的竞争非常弱，甚至可以说福寿园真正的对手只有自己。</strong> 先别着急批评老唐乐观，我们先看数据，再说理由。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>指标（2018 年）</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>福寿园有业务分布的 13 个省、直辖市和自治区，当年销售墓穴总数</td>
+              <td>467170 个</td>
+            </tr>
+            <tr>
+              <td>福寿园当年销售墓穴数量</td>
+              <td>20912 个</td>
+            </tr>
+            <tr>
+              <td><strong>福寿园占比</strong></td>
+              <td><strong>不到 4.5%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这代表什么含义呢？让我们从 2018 年全国死亡人数 993 万开始（假设为基点 1000），重新捋一遍本文的数据，会发现这样一个<strong>逐步分流</strong>的过程。</p>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805204554582.png" alt="图 21-2 死亡人口殡葬选择分布" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+        <p style="text-align:center; font-size:.82rem; color:var(--text2); margin-bottom:1.5rem;"><strong>图 21-2　死亡人口殡葬选择分布</strong></p>
+
+        <p><strong>分流过程还原</strong>（以 1000 人为基点）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>分流环节</th>
+              <th>剩余人数</th>
+              <th>依据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>全国死亡人数</td>
+              <td><strong>1000</strong></td>
+              <td>2018 年 993 万人</td>
+            </tr>
+            <tr>
+              <td>其中选择火化</td>
+              <td><strong>约 505</strong></td>
+              <td>全国火化率约 50.5%</td>
+            </tr>
+            <tr>
+              <td>火化后进入公墓（含墓穴安葬与节地生态葬）</td>
+              <td><strong>约 163</strong></td>
+              <td>占火化人数约 32%</td>
+            </tr>
+            <tr>
+              <td>其中购买墓穴</td>
+              <td><strong>约 70</strong></td>
+              <td>对应当年全国销售墓穴 696687 个</td>
+            </tr>
+            <tr>
+              <td>所在省市有福寿园业务</td>
+              <td><strong>约 47</strong></td>
+              <td>福寿园业务覆盖 13 个省、直辖市、自治区</td>
+            </tr>
+            <tr>
+              <td><strong>最终成为福寿园客户</strong></td>
+              <td><strong>约 2</strong></td>
+              <td>福寿园销售墓穴占其覆盖省市的比例不到 4.5%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <p><strong>注</strong>：图中从①之后的数据口径略有偏差。这里的 70 人对应的是当年全国销售墓穴 696687 个，但它不一定刚好等于当年安葬人数。实际情况里，既有以前年份买下墓穴、今年用于安放逝者的情况；也有当年买墓穴备用、当年并不下葬的。因无法取得更精确的数据，这里模糊地将两种情况相抵。这样做一定会有误差，但估计数字很小，不影响结论。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-5-5">5.5 为什么说"分流口不等于竞争"</h3>
+
+        <p>图 21-2 中每一面小旗都是一个分流口。但这几个分流口，直到"47 人在福寿园有业务的省市"之前，对福寿园来说<strong>根本就不存在竞争</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>如同从来不存在散酒抢走茅台客户一样：<strong>被散酒抢走的，本就不是茅台的客户。</strong></p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>分流人群</th>
+              <th>判断</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>选择土葬的</td>
+              <td>原本就不可能是福寿园客户</td>
+            </tr>
+            <tr>
+              <td>选择火化后回农村的</td>
+              <td>原本就不可能是福寿园客户</td>
+            </tr>
+            <tr>
+              <td>选择进公益性墓地的低收入人群</td>
+              <td>原本就不可能是福寿园客户</td>
+            </tr>
+            <tr>
+              <td>所在省市没有福寿园墓地的</td>
+              <td>原本就不可能是福寿园客户</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>只有<strong>同时满足以下三个条件</strong>，才可能是福寿园的潜在客户，才可能轮到考虑竞争问题：</p>
+
+        <ol>
+          <li>福寿园在当地<strong>有墓园</strong>；</li>
+          <li>逝者家庭为该城市<strong>中高收入家庭</strong>；</li>
+          <li>家庭<strong>愿意为更好的环境和管理支付溢价</strong>。</li>
+        </ol>
+
+        <h3 id="sub-5-6">5.6 隔离带：一串并排的佛龛</h3>
+
+        <p>公墓一般以<strong>区县</strong>为单位。哪怕是同一个省内，即便某地公墓竞争力更强大、价格更优惠，试图吸引异地客户安葬的难度还是挺高的（包括福寿园想吸引异地安葬其实也挺难）。但一旦确定进入某个区县，对本地中高收入家庭就构成<strong>某种事实上的垄断</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>不同区域的经营性公墓，表面上看着像对手，但其实它们之间有着巨大的隔离带，更像<strong>一串并排的佛龛</strong>，各自待在自己的区域里，虽鸡犬之声相闻，但老死不相往来，并无竞争。</p>
+          </div>
+        </div>
+
+        <p><strong>同区域内部也是错位的</strong>：即便同区域有其他经营性公墓存在，由于总量和人口总数及年度预计逝世人数有比例配比，这些经营性公墓大部分也是<strong>错位</strong>的，并不构成直接竞争。一旦客户需求属于自己所覆盖的定位区间，客户<strong>并没有第二选择</strong>——或许仅有处于不同阶层交界处的少量人群例外。</p>
+
+        <p><strong>收购环节已经过滤掉了同质化竞争</strong>。福寿园管理层曾这样谈及公司 2015 年的收购活动：</p>
+
+        <div class="pull-quote">
+          我们一年看了 120 个项目，能通过第一阶段筛选的可能只剩二三十个项目，我们再根据一些指标打分进一步筛选。这二三十个项目最后能否签约，关键在于对方愿不愿意降价到我们的预期。如果对方愿意降到我们的预期价格，那肯定就签。反之，就只能等待或放弃。
+        </div>
+
+        <p>一年看了 120 个项目，能进入视线的只有二三十个。那淘汰的近百个项目是因为什么呢？<strong>区域内供应过剩或同质化竞争激烈，必然是一个淘汰选项。</strong></p>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4CC;</div>
+          <div class="callout-body">
+            <p>从这个意义上说，当福寿园确定进入某区县时，假想中的竞争其实并不存在。福寿园要做的就是<strong>坚持将环境、品质、价格和定位持续瞄准那 2&#8240; 的家庭，用价格隔离非目标客户，静静等待目标客户在没有次优选择的情况下作出选择。</strong></p>
+          </div>
+        </div>
+
+        <h3 id="sub-5-7">5.7 降维打击：福寿园是行业的"黄埔军校"</h3>
+
+        <p>更有意思的是，即使有竞争，本身也是一种<strong>不公平竞争</strong>，是带有某种<strong>降维打击</strong>含义的竞争。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>福寿园的行业角色</th>
+              <th>具体事实</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>行业培训者</td>
+              <td>担负着引领和提高行业经营水平的重任，多年来持续开办<strong>全国现代公墓建设培训班</strong>。按公司披露，2019 年已经举办到<strong>第 40 期和第 41 期</strong></td>
+            </tr>
+            <tr>
+              <td>行业规则编制者</td>
+              <td>承担部分行业规则的编制工作，比如<strong>京津冀三地统一使用</strong>的《骨灰节地生态安葬规范》，就是由福寿园总工<strong>杨宝祥</strong>先生主持编写的</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>培训的老师、标准的编写者对比学生、标准的接受者，这样的竞争角度似乎有点不公平。但没有办法，因为这个行业在我国还比较初级，<strong>绝大部分同行还处于"菜鸡"状态</strong>。</p>
+
+        <p><strong>行业平均水平有多低？</strong> 按照民政部数据，截至 2018 年底：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>机构类型</th>
+              <th>数量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>殡仪馆</td>
+              <td>1730 个</td>
+            </tr>
+            <tr>
+              <td>公墓</td>
+              <td>1367 个</td>
+            </tr>
+            <tr>
+              <td>殡葬管理机构</td>
+              <td>946 个</td>
+            </tr>
+            <tr>
+              <td><strong>合计</strong></td>
+              <td><strong>4043 个</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>主体性质</th>
+              <th>2018 年合计收入</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>企业单位</td>
+              <td>123.8 亿元</td>
+            </tr>
+            <tr>
+              <td>事业单位</td>
+              <td>153.4 亿元</td>
+            </tr>
+            <tr>
+              <td>非营利机构</td>
+              <td>2.6 亿元</td>
+            </tr>
+            <tr>
+              <td><strong>加总</strong></td>
+              <td><strong>279.8 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>平摊一下，大约一家机构<strong>年收入不到 692 万元，月收入不足 60 万元</strong>。这个平均水平，大概也就是能够支付员工工资和维持机构运转的最低费用吧。</p>
+          </div>
+        </div>
+
+        <p><strong>即便是少数龙头，差距仍然巨大</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>公司</th>
+              <th>关键数据</th>
+              <th>与福寿园对比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>福成股份</strong>（国内唯一有殡葬业务的 A 股上市公司）</td>
+              <td>2019 年殡葬业务营业收入仅 1.85 亿元</td>
+              <td>仅仅是福寿园的 <strong>10%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>安贤园</strong>（港股）</td>
+              <td>总市值仅 3.5 亿港元</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>中国生命集团</strong>（港股）</td>
+              <td>总市值仅 1 亿港元</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>福寿园</strong></td>
+              <td>年度营收超 18 亿元，归母净利润近 6 亿元，市值约 <strong>180 亿港元</strong></td>
+              <td>完全不是一个级别的对手</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4CC;</div>
+          <div class="callout-body">
+            <div class="callout-title">竞争小结</div>
+            <p>鉴于<strong>地域限制、供应总量控制、产品定位以及竞争对手的弱小</strong>等多种因素，福寿园的经营几乎没有什么竞争存在。</p>
+          </div>
+        </div>
+
+        <p>如此说来，投资福寿园岂不是高枕无忧、躺着赢钱？<strong>当然不是。</strong> 对于福寿园来说，风险也是明明白白摆着的。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 六、风险：六假三真 -->
+      <section id="section-6">
+        <h2>六、风险：六假三真</h2>
+
+        <p>福寿园面临什么样的风险这个问题并不深奥，大部分朋友都可以看得见，<strong>差异只是每个人对这些风险的理解</strong>。老唐将福寿园的潜在风险分为<strong>六假三真，共计九种</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>风险类别</th>
+              <th>定义</th>
+              <th>清单</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>假风险</strong>（6 种）</td>
+              <td>实际上出现概率极小或影响可以忽略的风险</td>
+              <td>&#x2460; 客户放弃续费风险<br/>&#x2461; 被灵骨塔、海葬等新方式抢夺市场的风险<br/>&#x2462; 行业暴利带来的舆论风险<br/>&#x2463; 价格管制风险<br/>&#x2464; 墓地审批放开，导致供应大量增加的风险<br/>&#x2465; 土地续期风险</td>
+            </tr>
+            <tr>
+              <td><strong>真风险</strong>（3 种）</td>
+              <td>看上去像风险，实际也存在，而且无解，只能承受的风险</td>
+              <td>&#x2460; 异地扩张风险<br/>&#x2461; 政商关系过于紧密的风险<br/>&#x2462; 利益输送风险</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-6-1">6.1 假风险①：客户未来不续费</h3>
+
+        <p>由于墓穴出售时是一次性收取十年或者二十年的管理费用，这笔费用类似于物管费，那么就存在一种到期后是否有人继续缴费的风险。之所以将其视为假风险，因为它是<strong>一层窗户纸，一戳就破</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>层次</th>
+              <th>理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>第一</strong></td>
+              <td>购买类似福寿园这种高端墓穴的家庭，尤其是花费几十万元甚至更高的价格以艺术墓、定制墓模式安葬长辈的家庭，一定是属于整个社会里收入较高的群体。从概率的角度说，他们十年二十年后沦落到付不起一年几百元或者几千元祖坟物管费的可能性较小</td>
+            </tr>
+            <tr>
+              <td><strong>第二</strong></td>
+              <td>如果真出现上述情况，在墓地位置没有开发完毕的情况下，这些不缴费的少数墓穴对公司的经营也没有什么影响。公司的主要收入是<strong>几万元乃至几十万元销售一个墓穴</strong>带来的，而不是一年几百元的物管费带来的。在土地未开发完毕的情况下，不缴费的墓穴其实类似于游戏里的免费玩家，起到了"没钱的捧个人场"的作用</td>
+            </tr>
+            <tr>
+              <td><strong>第三</strong></td>
+              <td>假设到了墓地开发后期，真有极少数人无法取得联系，公墓管理方也很容易处理（见下方处置阶梯）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>开发后期的处置阶梯</strong>：</p>
+
+        <ol>
+          <li>在墓碑上或墓碑旁边<strong>放置缴费提醒</strong>；</li>
+          <li>数年后无人回应的，<strong>更换为空白墓碑</strong>；</li>
+          <li>数年后依然无人回应的，将<strong>骨灰盒取出，库房单独保存</strong>；</li>
+          <li>数年后依然无人回应的，可<strong>重新出售墓穴</strong>。</li>
+        </ol>
+
+        <p>若几十年后有后人找来，缴清拖欠的管理费用后，重新购买墓穴安葬或带走骨灰均可。如此仁至义尽，完全站在道义和法理的一边，用户应该没有什么可说的。<strong>整个过程，公墓经营方增加的成本无外乎一间库房，风险可以忽略。</strong></p>
+
+        <h3 id="sub-6-2">6.2 假风险②：被灵骨塔、海葬等新方式抢夺市场</h3>
+
+        <p>其他骨灰存放方式，比如灵骨塔、骨灰塔、小产权房屋改造祠堂、海葬、天葬等，会不会抢夺福寿园墓穴的市场呢？<strong>两句话就可以戳破这个风险。</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>理由</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>第一，客户群本就不同</strong></td>
+              <td>中华文化里<strong>入土为安</strong>始终是主流。福寿园的目标客户主要是愿意入土为安且有支付能力的这部分人群，并不希望吸引那些看重低价的客户群</td>
+            </tr>
+            <tr>
+              <td><strong>第二，若成主流，福寿园反而更强</strong></td>
+              <td>若真是类似灵骨塔等低价集中存放方式成为主流需求，以福寿园的经验和已经打造的环境，做灵骨塔、壁葬、室内集中存放等方式，<strong>不仅没有障碍，甚至更具竞争力</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>例如上海福寿园目前就提供<strong>几十种</strong>殡葬方式，包括塔葬、墓葬、亭葬、别墅葬、树葬、草坪葬、长廊壁葬等，只是部分方式不作为主推品种。因此，这个风险是伪风险。</p>
+
+        <h3 id="sub-6-3">6.3 假风险③：行业暴利带来的舆论风险</h3>
+
+        <p>这个比较容易理解，时不时就会有社会新闻炒作天价墓地，或者有财经媒体挖掘殡葬业暴利黑幕，引发社会舆论的关注和讨论。</p>
+
+        <p>这种风险倒没有什么好讨论的，<strong>就是一时的冲击</strong>。媒体热点来得猛、去得快。而且这类"成本才 10 块，售价 100 块"之类的分析，大部分都是缺乏经济学常识导致的瞎忽悠，稍微有点理解能力的专业人士基本上一笑了之。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>不仅墓地如此，<strong>高端白酒、iPhone、眼镜</strong>等多种产品都有类似的媒体吸睛大法，我们慢慢习惯就好。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-6-4">6.4 假风险④：价格管制风险</h3>
+
+        <p>我国的商品或服务价格体系分为三种：<strong>政府定价、政府指导价、市价</strong>。殡葬行业价格体系制定的依据是《国家发展改革委、民政部关于进一步加强殡葬服务收费管理有关问题的指导意见》（发改价格〔2012〕673 号），基本精神可以概括如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>服务类别</th>
+              <th>具体项目</th>
+              <th>定价方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>最基本民生保障</strong></td>
+              <td>遗体运送、冷藏、火化及骨灰寄存</td>
+              <td><strong>政府定价</strong>，企业按照定价执行</td>
+            </tr>
+            <tr>
+              <td><strong>衍生服务</strong></td>
+              <td>遗体基本整容化妆、防腐、吊唁场地及设备租赁、殡仪用品及相关服务</td>
+              <td><strong>政府指导价</strong>：政府设定基准价格及上下波动范围，或设置最高/最低限价，企业在规定范围内定价</td>
+            </tr>
+            <tr>
+              <td><strong>公益性墓地</strong></td>
+              <td>收费标准</td>
+              <td>地方政府以<strong>成本调查</strong>为基础，按照<strong>非营利原则</strong>兼顾居民支付能力核定</td>
+            </tr>
+            <tr>
+              <td><strong>其他墓园（经营性）</strong></td>
+              <td>墓穴售价</td>
+              <td><strong>企业自主定价</strong>。但主管部门要加强指导和规范，对价格明显偏高的，必要时依法干预，遏制虚高定价</td>
+            </tr>
+            <tr>
+              <td><strong>墓园年度维护管理费</strong></td>
+              <td>按年收取部分</td>
+              <td>当地物价部门按照<strong>实际成本 + 合理利润</strong>核定</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这个价格体系的思路非常清晰：<strong>政府兜底，保障城镇居民基本民生需求；若希望在此基础上获得更好的服务，则由企业和居民按照市场原则自主交易。</strong></p>
+
+        <p>有人担心政府会不会某天对经营性墓地也实施政府定价或者政府指导价，从而导致经营性墓地丧失生存空间。对于这种担心，老唐可以很明确地说：<strong>不可能。</strong> 逻辑有三：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>论证</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>没有必要性</strong></td>
+              <td>政府既没有动机去堵死有支付能力的消费需求，也不可能想办法去减少自己的收入、增加自己的支出。即便有舆论压力，主管部门完全有能力通过打招呼方式，要求企业适度注意价格的合理性，消化舆论压力</td>
+            </tr>
+            <tr>
+              <td><strong>没有普遍性</strong></td>
+              <td>即便偶有过高定价，行业特色也决定了不可能有大量消费者同时提出反对意见（见下方测算）</td>
+            </tr>
+            <tr>
+              <td><strong>没有可行性</strong></td>
+              <td>殡葬是一种带有多种配套服务的刚需。若政府管制了墓穴价格，价格完全可能通过石材材质、做工、雕刻、书写、描金、时间、法事、位置、环境乃至各种莫名其妙的风水行为来体现，<strong>政府不可能对所有行为一一实施定价</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          <strong>监管实践佐证</strong>：福寿园总裁王计生分享过上海物价局对福寿园的管理，主要就是盯着<strong>服务量和投诉量</strong>两个指标。当服务量过少或者投诉量过高，物价部门就会对福寿园的定价提出意见。
+        </div>
+
+        <p><strong>"没有普遍性"的量化测算</strong>（百万常住人口城市）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>环节</th>
+              <th>人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>年度死亡人数</td>
+              <td>约 7000 人</td>
+            </tr>
+            <tr>
+              <td>其中进公墓的</td>
+              <td>仅约 1140 人</td>
+            </tr>
+            <tr>
+              <td>其中进经营性公墓的（含墓地及生态葬等各种方式）</td>
+              <td>不足 780 人</td>
+            </tr>
+            <tr>
+              <td><strong>折合日均</strong></td>
+              <td><strong>2～3 人</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>对于一个百万常住人口的城市，日均两三个人所涉及的事情（且其中可能只有极少部分人对定价不满），很难成为政府办公会议日程表上的事情。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>如果政府定价行为真的能压低市场成交价格，那几十年的计划经济就不会搞到"国民经济濒临崩溃"了。所以，<strong>所谓政府管制墓地售价的风险，是一种假风险</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-6-5">6.5 假风险⑤：墓地审批放开，导致市场供应大量增加</h3>
+
+        <p>这种政策风险老唐无法打包票说肯定没有，但我国的土地政策、殡葬用地的管理方向，是<strong>趋向于引导更多人使用节约用地的安葬方式，而不是增加土地去满足这种需求</strong>。也就是说，殡葬用地的总体方向是保持<strong>土地供应小于真实需求</strong>，用行政和市场两种手段，协同达到减少用地的效果。</p>
+
+        <p><strong>目前墓地的审批，至少需要三个部门的合力</strong>：</p>
+
+        <ol>
+          <li><strong>规划部门</strong> — 土地的规划必须是墓园用途；</li>
+          <li><strong>民政部门</strong> — 审批经营资格；</li>
+          <li><strong>国土部门</strong> — 最后落地。</li>
+        </ol>
+
+        <p>目前看，严格审批达到减少用地这个大原则，看不到发生改变的可能。因而，审批权放开导致市场供应大量增加的风险也是一种伪风险。<strong>局部或许有个案，但不大可能成为趋势。</strong></p>
+
+        <h3 id="sub-6-6">6.6 假风险⑥：土地续期风险</h3>
+
+        <p>所谓土地续期风险，简单而言就是公司现有土地到期后<strong>是否可以续期，以及用什么价格续期</strong>的问题。</p>
+
+        <p>福寿园用于经营的土地，无论以划拨形式还是以出售模式，价格都相当便宜（其他同行亦如是）。因而也导致公司出售墓穴的成本构成里，<strong>土地成本甚至远低于建墓穴的石板成本</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>数据</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>招股说明书披露的上市时土地成本</td>
+              <td>最低 <strong>44 元/平方米</strong>，最高 <strong>562 元/平方米</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>因而，一个显而易见的风险就浮现在眼前了：土地到期后会不会被要求支付高昂地价，否则不予续期？这个问题目前法律上还没有明确说明，只能靠判断。<strong>老唐的判断是：这种风险发生的可能性极小。</strong></p>
+
+        <p><strong>（1）我国未来土地政策的两种可能</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>可能性</th>
+              <th>内容</th>
+              <th>老唐判断</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>第一种</strong></td>
+              <td>不等土地到期，卖地模式就发生根本性改变：从一次性支付几十年租金的卖地模式，转化为<strong>每年支付房地产市值一定比例的房地产税（物业税）</strong>模式</td>
+              <td><strong>可能性较大</strong>，且模式变化针对一切土地——住宅、工业、商业、特殊用途用地</td>
+            </tr>
+            <tr>
+              <td><strong>第二种</strong></td>
+              <td>土地到期继续以<strong>原价或者微增的价格</strong>续期</td>
+              <td>亦有可能</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>我国政府从 20 世纪 80 年代末至今的三十多年里，已经利用<strong>土地批租</strong>这一模式获取了约 <strong>60 万亿元</strong>收入，它们支撑了地方政府主导下的城市扩张和发展。但城市的扩张终究会有边界。伴随城市的发展，存量房地产和增量房地产之间的比例会发生变化。<strong>当存量远大于增量时，从存量资产上获取财税收入将是政府必然要走的道路。</strong> 届时，所谓土地能否续期的问题，就成为了一个伪问题。</p>
+
+        <p><strong>（2）若续期是一定的，会以什么价格续期？</strong></p>
+
+        <p>答案依然是：<strong>概率很小</strong>（狮子大开口）。</p>
+
+        <ul>
+          <li>毕竟每个城市的墓地数量不大，抬高墓地价格给政府带来的<strong>绝对收入金额很小</strong>；</li>
+          <li>而且墓地更多地被视为事关每一个城市家庭的<strong>刚需产品</strong>，政府大幅提高土地价格势必传导给市民，从而引发舆论压力。</li>
+        </ul>
+
+        <p><strong>（3）三项佐证</strong></p>
+
+        <p><strong>佐证一：招股说明书的法律意见。</strong> 在招股说明书第 171 页，公司披露：已售墓地中有大约 <strong>19%</strong> 墓地服务销售合同截止期限超过了土地所有权的最后期限。原文如下：</p>
+
+        <div class="pull-quote">
+          我们可依法提供任意年期的有关服务，包括超过相关墓园土地使用权期限的年期。我们的中国法律顾问华诚律师事务所向我们表示，销售期限超过墓园现有土地使用权期限的保管服务并不违反任何适用中国法律或法规。我们亦已收到墓园所在地区的地方民政部门发出的确认函，当中确认我们的墓园已遵守有关墓地服务业的所有适用法律及法规，且并无从事任何违反上述法律及法规的活动。
+        </div>
+
+        <p><strong>佐证二：法理逻辑——卖的是"服务"而非"地"。</strong> 地方民政部门出函确认，销售墓地超过土地证截止年限并不违法，这背后依据的是什么呢？是因为福寿园出售的<strong>并不是地</strong>，而是"我在我的地上挖了一个坑，用石材围起来，让你放置骨灰"的<strong>服务</strong>。</p>
+
+        <p>纯法理角度说，福寿园收了费，如果这块地到期政府不给用了，福寿园在别的地块上挖个坑，照样可以提供原合同约定的服务。所以超出土地证期限收"有个坑帮客户存放和保管骨灰"的费用，并不违法。</p>
+
+        <p>但若真的发生土地到期而无法续期，<strong>被动的就是民政部门而不是公墓经营者</strong>。这相当于民政部门为了钱，刨了老百姓的祖坟，逼迫他们换个地方安埋。这种利益没多少、招骂一大堆的事情，不可能大面积实施。</p>
+
+        <p><strong>佐证三：行业实例——到期原价续期。</strong> 最近网上就有位于济南边上的一座占地 1640 亩的大型公墓寻求转让的信息。转让资料里清楚地写着：</p>
+
+        <div class="pull-quote">
+          土地期限 2000 年 12 月—2030 年 12 月，土地款 188.5 万元已付清，<strong>合同到期继续延续 30 年，土地款同样是 188.5 万元</strong>。
+        </div>
+
+        <p>这段话很可能说明在行业内已经有明确规则：<strong>到期原价续期</strong>。因此，老唐更倾向于认为墓园土地续期问题也是个伪风险。</p>
+
+        <h3 id="sub-6-7">6.7 真风险①：异地扩张风险</h3>
+
+        <p>由于土地政策限制，目前新批经营性墓地的难度极大，所以<strong>福寿园的扩张主要有三种模式</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>扩张模式</th>
+              <th>风险与可得性</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>一</td>
+              <td><strong>收购已有的经营性公墓</strong></td>
+              <td>手持重金的福寿园目前<strong>最可靠的主动扩张模式</strong>，但风险也集中于此</td>
+            </tr>
+            <tr>
+              <td>二</td>
+              <td>部分城市政府<strong>招标改造</strong>当地的殡葬设施</td>
+              <td>风险基本可控，但<strong>可遇而不可求</strong>，很难主动寻找</td>
+            </tr>
+            <tr>
+              <td>三</td>
+              <td>利用 <strong>PPP、BOT 及混改</strong>等方式和当地政府合作，获得殡葬用地及经营资格</td>
+              <td>同上</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>核心疑问：能持续轻松赚钱的生意，为什么要卖掉？</strong></p>
+
+        <p>由于墓地生意具备"地域限制和供应总量限制，土地获取成本极低，客户可选择范围极小，客户多在匆忙中作出选择"等特点，各地的经营性公墓理论上讲都属于能持续轻松赚钱的生意。以常识理解，愿意出售主要有两种情况：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情况</th>
+              <th>内容</th>
+              <th>老唐评估</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>买家出价很高</strong></td>
+              <td>公墓业主觉得卖掉比自己经营更划算。比如福寿园认为自己拿来后通过重新定位、环境改造、专业经营等手段可大幅提升盈利能力</td>
+              <td>理论上有可能，双方或许能在某个合适价格达成一致</td>
+            </tr>
+            <tr>
+              <td><strong>原股东被迫出售</strong></td>
+              <td>单个地区的小规模经营者既没有多地扩张的能力和人才储备，也很难通过营销或大量投入在本地墓地上获得快速增长，<strong>大概率会有其他生意存在</strong>。当其他生意遇到困境时，墓地可能成为融资工具甚至变现对象</td>
+              <td>&#x26A0;&#xFE0F; <strong>可能埋藏隐患</strong>：这些墓地可能附带台面以下的或有债务，从而成为收购者吞下的<strong>毒资产</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>两个真实案例</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>公司</th>
+              <th>事件</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>福成股份</strong>（国内 A 股唯一涉及殡葬行业的上市公司）</td>
+              <td>2020 年 9 月 23 日公告：收购湖南韶山天德福地陵园时，原股东提供<strong>虚假财务资料、隐瞒部分负债</strong>，骗取福成股份签订《增资与股权转让协议》</td>
+              <td>已就原股东的<strong>合同诈骗</strong>行为报案，公安局已立案侦查</td>
+            </tr>
+            <tr>
+              <td><strong>福寿园</strong></td>
+              <td>2014 年收购婺源万寿山陵园后，发现原股东涉及<strong>数十起民间借贷</strong>（也可能是非法集资）案件</td>
+              <td>官司一直打到 2020 年中，<strong>依然有三宗诉讼未解决</strong>，涉及索赔金额共 <strong>5230 万元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>一旦扯上这种事情，不仅仅是公司发展停滞、导致资本投入不产生收益，还有可能<strong>承担连带赔偿责任</strong>。这是在企业通过收购扩张的过程中，<strong>始终可能存在且无法彻底避免</strong>的真实风险。</p>
+
+        <h3 id="sub-6-8">6.8 真风险②：政商关系过于紧密</h3>
+
+        <p>公司控制人的相关履历让我担心：<strong>政商关系太过紧密，从而存在潜在的政治和法律风险。</strong></p>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4C4;</div>
+          <div class="callout-body">
+            <p>本条风险具体内容请参看"唐书房"2020 年 11 月 23 日发布的文章《如何从零开始研究一家企业 05》。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-6-9">6.9 真风险③：利益输送风险</h3>
+
+        <p>利益输送风险，指公司管理层利用专业知识和实际控制之便，将上市公司利益输送给管理层或管理层控制实体的风险。这个风险从<strong>历史、现实和未来</strong>三个角度看待。</p>
+
+        <p><strong>（1）历史角度：实际控制人白晓江的一次历史污点</strong></p>
+
+        <p>2003 年 8 月，白晓江曾因涉嫌<strong>贪污、挪用公款</strong>被捕，在看守所待了两年后<strong>无罪释放</strong>。事情大致是这样的：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>事件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>2000 年</strong></td>
+              <td>上海市要修建卢浦大桥。在中福公司白晓江等人的牵线搭桥下，中国船舶工业集团公司、中福等 <strong>6 家单位</strong>共同组建了卢浦大桥项目公司。中国船舶工业集团公司为最大出资人，占 <strong>40%</strong>；中福以子公司<strong>中福城投</strong>的名义出资 <strong>26%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>过程中</strong></td>
+              <td>中福城投以建设大桥的名义从上海市工商银行南市支行<strong>贷款 6000 万元</strong>，以暂借款名义汇至卢浦大桥项目公司；然后再以归还暂借款为由，以白晓江等人出资的名义，用于私企<strong>鸿福</strong>成立时的验资，鸿福就这样成立了</td>
+            </tr>
+            <tr>
+              <td><strong>再后来</strong></td>
+              <td>通过一系列复杂的操作，<strong>中福变成了鸿福的全资子公司</strong>（而由中国船舶持大股的项目公司居然就配合了）。白晓江当时被捕就是因为挪用这笔 6000 万元的贷款</td>
+            </tr>
+            <tr>
+              <td><strong>2005 年出狱后</strong></td>
+              <td>再次通过复杂操作，将鸿福变成两家非企业组织各持 50% 的股权结构</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>当前财报上呈现的控制链条</strong>：</p>
+
+        <pre>NGO1（上海中民老龄事业开发服务中心）50%  ┐
+                                          ├─→ 鸿福 ──100%──→ 中福 ──→ 福寿园第一大股东
+NGO2（上海中民老龄事业咨询服务中心）50%  ┘</pre>
+
+        <p>以招股说明书披露的两家 NGO 的发起人推测，<strong>这依然是白晓江控制的实体</strong>。<sup>[1]</sup></p>
+
+        <p><strong>（2）现实角度：股权激励对小股东略有不公</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>上市时间</td>
+              <td>2013 年 12 月</td>
+            </tr>
+            <tr>
+              <td>上市前总股本</td>
+              <td>15 亿股</td>
+            </tr>
+            <tr>
+              <td>发行价 / 发行数量</td>
+              <td><strong>3.33 港元/股</strong> &#xD7; <strong>5.75 亿股</strong></td>
+            </tr>
+            <tr>
+              <td>出让股权比例</td>
+              <td>5.75 &divide; 20.75 &#xD7; 100% &asymp; <strong>27.71%</strong></td>
+            </tr>
+            <tr>
+              <td>融资额</td>
+              <td>3.33 &#xD7; 5.75 &asymp; <strong>19.15 亿港元</strong></td>
+            </tr>
+            <tr>
+              <td>折合上市估值</td>
+              <td>19.15 &divide; 27.71% &asymp; <strong>69 亿港元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>管理层股权激励情况</strong>（白晓江、王计生、谈理安及其他人等）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>累计获得激励股份</td>
+              <td>超过 <strong>2.16 亿股</strong></td>
+            </tr>
+            <tr>
+              <td>认购价格区间</td>
+              <td>最低 <strong>3.126 港元</strong>，最高 <strong>5.824 港元</strong></td>
+            </tr>
+            <tr>
+              <td>综合认购价格</td>
+              <td><strong>4.63 港元/股</strong></td>
+            </tr>
+            <tr>
+              <td>按当前股价约 8 港元计算的额外所得</td>
+              <td>（8 &#x2212; 4.63）&#xD7; 2.163 亿股 &asymp; <strong>7.3 亿港元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>股权激励过程中，市价与行权价之间的差异，相当于公司<strong>为购买员工劳动而支付的工资</strong>。它意味着上市七年来，管理层除了工资、花红、董事津贴等收入之外，至少还额外拿走了约 7.3 亿港元。</p>
+          </div>
+        </div>
+
+        <p><strong>与二级市场股东的收益对比</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>主体</th>
+              <th>出资</th>
+              <th>持股比例</th>
+              <th>七年所得</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>IPO 二级市场股东</strong>（整体）</td>
+              <td>19.15 亿港元</td>
+              <td>5.75 &divide; 22.9 &#xD7; 100% &asymp; <strong>25%</strong></td>
+              <td>30 &#xD7; 25% = <strong>7.5 亿元</strong>净利润</td>
+            </tr>
+            <tr>
+              <td><strong>原控制人及管理层团队</strong></td>
+              <td>—</td>
+              <td>约 75%</td>
+              <td><strong>22.5 亿元</strong>净利润 + 约 <strong>7.3 亿港元</strong>股权激励奖金</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          <strong>上市至今公司给股东创造的净利润约 30 亿元。</strong> 七年里，管理层通过股权激励给自己发放了约 7.3 亿港元奖金，同期出资 19.15 亿元的二级市场股东获得的净利润是 7.5 亿元。这个数据，很难让我给管理层一个厚道的评价。
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">注意表述边界</div>
+            <p>我不是说二级市场股东没赚到钱，也不是说管理层不应该拿，而是说<strong>管理层通过股权激励模式给自己发放的奖金偏多了</strong>。这些钱本质上是由全体股东承担的。</p>
+          </div>
+        </div>
+
+        <p><strong>（3）未来角度：并购基金的潜在隐患</strong></p>
+
+        <p>2019 年 1 月福寿园成立一家殡葬并购基金，基金规模 <strong>8.002 亿元</strong>。结构如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>参与方</th>
+              <th>出资</th>
+              <th>角色</th>
+              <th>收益安排</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>永赢</strong>（资产规模 226 亿元的基金管理公司）</td>
+              <td>承诺 <strong>4 亿元</strong></td>
+              <td>优先级出资</td>
+              <td>每年确保得到实际出资 <strong>8.5%</strong> 的收益，<strong>不足部分由福寿园补齐</strong></td>
+            </tr>
+            <tr>
+              <td><strong>福寿园</strong></td>
+              <td>承诺 <strong>3.992 亿元</strong></td>
+              <td>出资方</td>
+              <td>扣掉永赢应得的 8.5% 后，得 <strong>80%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>上海临信资产管理公司</strong></td>
+              <td><strong>100 万元</strong></td>
+              <td><strong>管理人</strong></td>
+              <td>扣掉永赢应得的 8.5% 后，得 <strong>20%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>很明显，<strong>临信是包赚不赔的大赢家</strong>。投资者势必要问：为什么要出让这么大的利益让临信去管理？是福寿园缺钱还是没有殡葬行业并购能力呢？</p>
+          </div>
+        </div>
+
+        <p><strong>关联关系疑点</strong>：公司公告里说临信是和公司及任何高管或主要股东"概无任何关联的独立第三方"。可是工商资料显示：</p>
+
+        <ul>
+          <li>白晓江担任董事长的<strong>中福持有临信 29% 的股份</strong>；</li>
+          <li>临信的董事长是 <strong>NGO1 的发起人之一吕小平</strong>（中福的雇员）。</li>
+        </ul>
+
+        <p>所以这个"概无关联的独立第三方"表述，<strong>显然有问题</strong>。</p>
+
+        <p><strong>公司的补充说明</strong>（2019 年 3 月 11 日补充公告，大体表达四方面意思）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>公司解释</th>
+              <th>老唐评价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>目前殡葬行业的并购目标大部分由国有企业拥有和经营。这些国企与私企（比如福寿园，或许还涉及外资问题）合伙或合作时一般倾向于谨慎。由拥有强大实力、具备大量与国企合作经验的临信管理的并购基金出面，可以大大增加收购成功率</td>
+              <td>在中国殡葬业当前环境下<strong>说得通</strong></td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>某些收购活动可能有些不太符合上市公司监管标准的行动。由基金处理并将其完全合规化后，再由上市公司接手，比较容易满足监管要求</td>
+              <td>同上</td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>同等条件下，福寿园拥有<strong>优先收购</strong>基金并购项目的权利</td>
+              <td>同上</td>
+            </tr>
+            <tr>
+              <td>&#x2463;</td>
+              <td>中福的确拥有临信的股权，但<strong>不参与经营</strong>；白晓江的确是中福的董事长，但中福由两家 NGO 拥有，<strong>白晓江不享有权益</strong></td>
+              <td>&#x26A0;&#xFE0F; <strong>非常勉强</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>至今为止，这个并购基金<strong>尚没有实质行动</strong>。所以，在上市公司以外建立收购主体，会不会是为了便于输送利益？上市公司会不会扮演项目的<strong>高价接盘侠</strong>？这类问题目前没有答案，<strong>只能观察</strong>。</p>
+
+        <h3 id="sub-6-10">6.10 三种真风险的总结与评价</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>真风险</th>
+              <th>老唐的认识与应对</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>&#x2460; 异地扩张风险</strong></td>
+              <td><strong>始终存在</strong>。我们只能寄希望于管理层的专业和尽可能详尽的尽职调查，并承担可能出问题的后果</td>
+            </tr>
+            <tr>
+              <td><strong>&#x2461; 政商关系风险</strong></td>
+              <td>截至目前只是一种<strong>无证据的推测</strong>。目的是提醒自己存在这种风险可能，有必要在持股过程中作为一个<strong>观察点</strong></td>
+            </tr>
+            <tr>
+              <td><strong>&#x2462; 利益输送风险</strong></td>
+              <td><strong>历史</strong>回顾说明管理层有利益输送的<strong>能力和可能</strong>；<strong>并购基金</strong>尚未发生任何事实，只能作为观察点；<strong>唯一确定的</strong>是股权激励方案对小股东略有不公</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>总体结论</strong>：</p>
+
+        <div class="pull-quote large">
+          对福寿园潜在九种风险的分析，<strong>均不足以排除这家企业</strong>。对于潜在的真风险，或许可以通过<strong>给合理估值更大的折扣</strong>来应对。<br/><br/>
+          所以，老唐的结论是：<strong>福寿园是一家值得关注、价格合适可以持有的企业。</strong>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 七、给一家企业"定性"的方法 -->
+      <section id="section-7">
+        <h2>七、给一家企业"定性"的方法</h2>
+
+        <p>本文的分析路径可以概括为四步，其最终目的是回答开篇提出的"看懂一家企业必须回答的四个问题"。通常这个思考过程被称为<strong>"定性"</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>分析内容</th>
+              <th>对应本文</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>分析福寿园的<strong>企业特性</strong>（从简化资产负债表切入）</td>
+              <td>第二部分</td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>分析企业面临的<strong>市场需求变化趋势</strong></td>
+              <td>第四部分</td>
+            </tr>
+            <tr>
+              <td>&#x2462;</td>
+              <td>分析<strong>供应与竞争情况</strong></td>
+              <td>第三、五部分</td>
+            </tr>
+            <tr>
+              <td>&#x2463;</td>
+              <td>逐项分析企业面临的<strong>真假共 9 种风险</strong></td>
+              <td>第六部分</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-7-1">7.1 不必刻意区分定性与定量</h3>
+
+        <p>老唐不太习惯去区分所谓的定性和定量。在我看来，<strong>二者相辅相成，在理解企业的过程中缺一不可</strong>：</p>
+
+        <ul>
+          <li>既没有脱离企业经营数据分析的拍脑袋"定性"；</li>
+          <li>也没有不考虑行业环境、企业竞争力，单纯统计财务数字的所谓"定量"。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>在理解了企业特性、需求变化趋势、供应竞争趋势以及深入思考了企业面临的风险之后，<strong>估值其实是一件并不是很重要，也没什么难度的事情</strong>。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>鉴于福寿园市值较小、交投清淡，我接受"唐书房"部分朋友的建议，<strong>暂时不披露我自己的估值及买卖点</strong>。若我后期有超过 0.5% 比例的买入，我会在周记的估值表里披露。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-7-2">7.2 给进一步研究者的"枯燥"作业</h3>
+
+        <p>对于有进一步研究意愿的朋友，老唐建议可以去做一些"枯燥"的统计工作——<strong>统计福寿园财报披露的每一块墓地的数据</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>类别</th>
+              <th>需统计的数据项</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>基础属性</strong></td>
+              <td>所处城市、墓地面积、单位成本</td>
+            </tr>
+            <tr>
+              <td><strong>开发进度</strong></td>
+              <td>已售面积、可开发面积</td>
+            </tr>
+            <tr>
+              <td><strong>收购定价</strong></td>
+              <td>收购前营收和净利、收购作价、作价对应的估值水平</td>
+            </tr>
+            <tr>
+              <td><strong>收购成效</strong></td>
+              <td>收购后三年营收和净利变化、收购价格相对收购后第三年净利润显示的估值水平</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          挽起袖子将一份份财报翻开，将一项项数据做好统计，<strong>这家企业就会逐步成为你能力圈内的企业</strong>。最后，估算三年后净利润乃至计算合理估值和买卖点，根本就不是什么难事。
+        </div>
+
+        <p>希望本文让你有所收获，而不仅仅是让你得到一个代码、打发了一阵无聊时光。我相信这样的深度分享，对于希望提升企业分析能力的朋友来说，是有价值的。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 八、补充说明 -->
+      <section id="section-8">
+        <h2>八、补充说明</h2>
+
+        <p style="text-align:center; margin:1.5rem 0;">
+          <img src="assets/image-20260805204704194.png" alt="福寿园观察仓买入记录" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        </p>
+
+        <p>老唐以均价 <strong>6.92 港元</strong>买入了 <strong>1 万股观察仓</strong>。至 2021 年 12 月 16 日，福寿园触及预设买点 <strong>5.70 港元</strong>，但当时手中没有现金，因此没有买入，截至 2022 年 2 月底，老唐仍持有 1 万股观察仓。</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第23章 对上海机场补充协议的理解和判断 · 价值投资实战手册</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html{font-size:17.6px}
+    .chapter-layout{max-width:1760px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:352px 1fr;gap:2.2rem;align-items:stretch}
+    @media(max-width:1056px){.chapter-layout{grid-template-columns:1fr;padding:1.5rem 1rem;gap:1.5rem}}
+    .chapter-sidebar{position:sticky;top:88px;align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.25rem;height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:none}
+    .chapter-sidebar::-webkit-scrollbar{display:none}
+    @media(max-width:1056px){.chapter-sidebar{position:static;height:auto}}
+    .sidebar-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+    .sidebar-label-sub{margin-top:1.5rem}
+    .sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+    .sidebar-nav a{display:block;font-size:.85rem;color:var(--text2);padding:.45rem .65rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .sidebar-nav a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .sidebar-nav a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .sidebar-nav .sub{font-size:.8rem;padding-left:1.4rem;color:var(--text3)}
+    .breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+    .breadcrumb a{color:var(--text2)}.breadcrumb a:hover{color:var(--gold)}.crumb-sep{color:var(--text3);opacity:.6}
+    .book-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+    .toc-chapter{font-size:.85rem}
+    .toc-chapter-title{display:block;padding:.4rem .65rem;color:var(--text3);border-radius:6px;line-height:1.45;cursor:pointer;user-select:none}
+    .toc-chapter-title:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-chapter-title.current-chapter{color:var(--text);font-weight:700;background:rgba(201,168,76,.06)}
+    .toc-chapter-title::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(-45deg);transition:transform .25s,border-color .25s;float:right;margin-top:.4rem}
+    .toc-chapter.open>.toc-chapter-title::after{transform:rotate(45deg);border-color:var(--gold)}.toc-chapter-title:hover::after{border-color:var(--gold)}
+    .toc-lectures{display:none;list-style:none;margin:.15rem 0 .35rem .5rem;padding-left:.65rem;border-left:1px dashed var(--border);flex-direction:column;gap:.1rem}
+    .toc-chapter.open>.toc-lectures{display:flex}
+    .toc-lectures a{display:block;font-size:.82rem;color:var(--text2);padding:.35rem .6rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s;line-height:1.45}
+    .toc-lectures a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+    .toc-lectures a.active{color:var(--gold);background:rgba(201,168,76,.12);border-left-color:var(--gold);font-weight:600}
+    .chapter-article{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    @media(max-width:792px){.chapter-article{padding:2rem 1.5rem}}
+    .article-header{padding-bottom:1.75rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}.article-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+    .article-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.3;color:var(--text);margin-bottom:1.25rem}
+    .article-meta{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.82rem;color:var(--text2)}.article-meta span strong{color:var(--gold);margin-right:.35rem;font-weight:600}
+    .chapter-article h2{font-size:1.4rem;color:var(--text);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:2px solid var(--gold);display:inline-block}
+    .chapter-article h2:first-of-type{margin-top:0}.chapter-article h3{font-size:1.08rem;color:var(--text);margin:2rem 0 .9rem;padding-left:.85rem;border-left:3px solid var(--gold)}
+    .chapter-article p{font-size:.95rem;color:var(--text);line-height:1.85;margin-bottom:1rem}.chapter-article strong{color:var(--gold-dk);font-weight:700}.chapter-article em{color:var(--text2)}
+    .pull-quote{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:1rem;font-style:italic;color:var(--text);line-height:1.75}
+    .pull-quote.large{font-size:1.15rem;padding:1.5rem 1.75rem;text-align:center;font-weight:600;border-left:none;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);border-radius:0;background:rgba(201,168,76,.05)}
+    .pull-quote cite{display:block;font-size:.82rem;color:var(--gold);font-style:normal;margin-top:.6rem;letter-spacing:.04em}
+    .callout{display:flex;gap:1rem;padding:1.1rem 1.25rem;margin:1.25rem 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3)}.callout-icon{font-size:1.25rem;flex-shrink:0;line-height:1.5}.callout-body{flex:1}.callout-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}.callout-body p{margin-bottom:0;font-size:.9rem}
+    .callout.tip{border-left:4px solid var(--gold)}.callout.warn{border-left:4px solid #c87a2c;background:rgba(200,122,44,.04)}.callout.info{border-left:4px solid #4a78b0;background:rgba(74,120,176,.04)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .article-table thead{background:rgba(201,168,76,.1)}.article-table th{text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--gold-dk);font-size:.82rem;letter-spacing:.05em;border-bottom:2px solid var(--gold)}
+    .article-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}.article-table tbody tr:last-child td{border-bottom:none}.article-table tbody tr:hover{background:rgba(201,168,76,.04)}.article-table td:first-child{font-weight:600;color:var(--text)}
+    .remedy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin:1.5rem 0}
+    .remedy-grid.cols-2{grid-template-columns:repeat(2,1fr)}@media(max-width:792px){.remedy-grid.cols-2{grid-template-columns:1fr}}
+    .remedy-grid.cols-3{grid-template-columns:repeat(3,1fr)}@media(max-width:1056px){.remedy-grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:792px){.remedy-grid.cols-3{grid-template-columns:1fr}}
+    .remedy-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .remedy-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}.remedy-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(2px)}
+    .remedy-num{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold);background:rgba(201,168,76,.1);padding:.2rem .65rem;border-radius:20px;border:1px solid rgba(201,168,76,.25);margin-bottom:.65rem}
+    .remedy-card h4{font-size:1.02rem;color:var(--text);margin-bottom:.6rem}.remedy-card p{font-size:.9rem;margin-bottom:0}
+    .poem{text-align:center;font-style:italic;color:var(--text2);padding:1.25rem 1.5rem;margin:1.5rem 0;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);line-height:1.85}
+    .poem .poem-author{display:block;margin-top:.6rem;font-size:.82rem;color:var(--gold)}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 2rem;color:var(--gold)}
+    .section-divider::before,.section-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .section-divider span{font-size:1rem;letter-spacing:.3em}.article-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:.82rem;letter-spacing:.08em}
+    .article-table td:first-child{white-space:normal}
+    .chapter-article pre{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;overflow-x:auto;font-size:.82rem;line-height:1.7;color:var(--text2);margin:1.5rem 0;white-space:pre}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">&#x2302; 首页</a>
+        <a href="../../../index.html" class="nav-home">&#x2190; 返回书架</a>
+      </nav>
+    </div>
+  </header>
+  <div class="chapter-layout">
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../index.html">价值投资实战手册</a>
+      </div>
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第1篇 如何面对股价波动</span>
+          <ul class="toc-lectures">
+            <li><a href="../第1篇/第1章 什么是投资.html">第1章 什么是投资</a></li>
+            <li><a href="../第1篇/第2章 股票和股市的本质.html">第2章 股票和股市的本质</a></li>
+            <li><a href="../第1篇/第3章 投资是一件持续终身的事.html">第3章 投资是一件持续终身的事</a></li>
+            <li><a href="../第1篇/第4章 股票收益的来源_优化版本.html">第4章 股票收益的来源</a></li>
+            <li><a href="../第1篇/第5章 最简单的投资方法.html">第5章 最简单的投资方法</a></li>
+            <li><a href="../第1篇/第6章 普通投资者的道路_优化版.html">第6章 普通投资者的道路</a></li>
+            <li><a href="../第1篇/第7章 投资无须&ldquo;接盘侠&rdquo;.html">第7章 投资无须"接盘侠"</a></li>
+            <li><a href="../第1篇/第8章 股权与其他投资品的对比.html">第8章 股权与其他投资品的对比</a></li>
+            <li><a href="../第1篇/第9章 优质企业的特征.html">第9章 优质企业的特征</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title">第2篇 如何估算内在价值</span>
+          <ul class="toc-lectures">
+            <li><a href="../第2篇/第10章 格雷厄姆奠定的理论基石.html">第10章 格雷厄姆奠定的理论基石</a></li>
+            <li><a href="../第2篇/第11章 巴菲特的继承与思考.html">第11章 巴菲特的继承与思考</a></li>
+            <li><a href="../第2篇/第12章 芒格与费雪推动的突破.html">第12章 芒格与费雪推动的突破</a></li>
+            <li><a href="../第2篇/第13章 应用于实战的快速估值法.html">第13章 应用于实战的快速估值法</a></li>
+            <li><a href="../第2篇/总结：准备出发.html">总结：准备出发</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第3篇 企业分析实战案例</span>
+          <ul class="toc-lectures">
+            <li><a href="第14章 腾讯控股的确定性.html">第14章 腾讯控股的确定性</a></li>
+            <li><a href="第15章 聊聊高端白酒产能及补充.html">第15章 聊聊高端白酒产能及补充</a></li>
+            <li><a href="第16章 高端白酒产能补充篇.html">第16章 高端白酒产能补充篇</a></li>
+            <li><a href="第17章 贵州茅台估值、 买点及卖点计算过程演示.html">第17章 贵州茅台估值、买点及卖点计算过程演示</a></li>
+            <li><a href="第18章 回顾对洋河股份的投资决策.html">第18章 回顾对洋河股份的投资决策</a></li>
+            <li><a href="第19章 读史可以明智 ——对贵州茅台的全面回顾和展望.html">第19章 读史可以明智 ——对贵州茅台的全面回顾和展望</a></li>
+            <li><a href="第20章 分众传媒投资回顾及周期股估值方法的尝试.html">第20章 分众传媒投资回顾及周期股估值方法的尝试</a></li>
+            <li><a href="第21章 如何从零开始研究一家企业 ——以福寿园为例.html">第21章 如何从零开始研究一家企业 ——以福寿园为例</a></li>
+            <li><a href="第22章 上海机场研究纲要.html">第22章 上海机场研究纲要</a></li>
+            <li><a href="第23章 对上海机场补充协议的理解和判断.html" class="active">第23章 对上海机场补充协议的理解和判断</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、对补充协议的基本判断</a></li>
+        <li class="sub"><a href="#sub-1-1" class="sub">1.1 事件背景</a></li>
+        <li class="sub"><a href="#sub-1-2" class="sub">1.2 投资上海机场的四种情景</a></li>
+        <li class="sub"><a href="#sub-1-3" class="sub">1.3 补充协议改变了什么</a></li>
+        <li><a href="#section-2">二、补充协议内容详解</a></li>
+        <li class="sub"><a href="#sub-2-1" class="sub">2.1 原协议："下有保底，上不封顶"</a></li>
+        <li class="sub"><a href="#sub-2-2" class="sub">2.2 补充协议的核心分界线</a></li>
+        <li class="sub"><a href="#sub-2-3" class="sub">2.3 情况一：客流 ≤ 256.76 万人次，原约定保底失效</a></li>
+        <li class="sub"><a href="#sub-2-4" class="sub">2.4 情况二：客流 > 256.76 万人次，按"对应年度保底"折月</a></li>
+        <li class="sub"><a href="#sub-2-5" class="sub">2.5 "绕口令"实例演算</a></li>
+        <li class="sub"><a href="#sub-2-6" class="sub">2.6 2022 年起的面积调节：×1.2411</a></li>
+        <li><a href="#section-3">三、容易引发误解的协议内容</a></li>
+        <li class="sub"><a href="#sub-3-1" class="sub">3.1 分歧点：上方到底封不封顶</a></li>
+        <li class="sub"><a href="#sub-3-2" class="sub">3.2 老唐的判断：下不保底，上有封顶</a></li>
+        <li class="sub"><a href="#sub-3-3" class="sub">3.3 判断依据</a></li>
+        <li><a href="#section-4">四、总结</a></li>
+        <li class="sub"><a href="#sub-4-1" class="sub">4.1 机构与老唐的分歧</a></li>
+        <li class="sub"><a href="#sub-4-2" class="sub">4.2 民航界对国际客流恢复的基本判断</a></li>
+        <li><a href="#section-5">五、补充说明</a></li>
+      </ul>
+    </aside>
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">价值投资实战手册 &#xB7; 第3篇 企业分析实战案例 &#xB7; 第23章</div>
+        <h1 class="article-title">对上海机场补充协议的理解和判断</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>唐朝</span>
+          <span><strong>发表时间</strong>2021 年 1 月 30 日</span>
+          <span><strong>主题</strong>上海机场 &#xB7; 免税协议 &#xB7; 投资决策</span>
+        </div>
+      </header>
+
+      <div class="callout info">
+        <div class="callout-icon">&#x1F4DD;</div>
+        <div class="callout-body">
+          <div class="callout-title">推荐人李政乾</div>
+          <p>本文以上海机场为例，展示了在持续跟踪一家企业时，面对企业经营环境发生变化，该如何应对的思考。本文对企业的经营情况进行了非常客观的分析讲解，堪称教科书，值得反复学习。</p>
+        </div>
+      </div>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 一、对补充协议的基本判断 -->
+      <section id="section-1">
+        <h2>一、对补充协议的基本判断</h2>
+
+        <h3 id="sub-1-1">1.1 事件背景</h3>
+
+        <p>本周五（2021 年 1 月 29 日），上海机场同时披露了两件事：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>事项</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>预亏公告</strong></td>
+              <td>预计 2020 年亏损 <strong>十二三亿元</strong></td>
+            </tr>
+            <tr>
+              <td><strong>补充协议</strong></td>
+              <td>公司与<strong>日上上海</strong>就机场免税店分成问题签署补充协议</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这个倒是预料之中的事情。早在去年 11 月，老唐就提出如下观点：</p>
+
+        <div class="pull-quote">
+          如果没有不可抗力，上海机场未来五年的收入和利润都不难预测。但如果在疫情的不可抗力下，<strong>非航保底收入合同依然是可以不执行的</strong>。这是商业惯例。
+        </div>
+
+        <h3 id="sub-1-2">1.2 投资上海机场的四种情景</h3>
+
+        <p>因此，投资上海机场的情景其实就两种可下手、两种无法下手：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>疫情</th>
+              <th>股价</th>
+              <th>能否下手</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>受控</td>
+              <td>还没涨上去</td>
+              <td>&#x2705; <strong>可以下手</strong></td>
+            </tr>
+            <tr>
+              <td>不受控</td>
+              <td>悲观情绪下跌得很便宜</td>
+              <td>&#x2705; <strong>可以下手</strong></td>
+            </tr>
+            <tr>
+              <td>受控</td>
+              <td>股价已经上去了</td>
+              <td>&#x274C; 无法下手</td>
+            </tr>
+            <tr>
+              <td>不受控</td>
+              <td>但股价就是不下来</td>
+              <td>&#x274C; 无法下手</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-1-3">1.3 补充协议改变了什么</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>按照老唐对今天这份补充协议的理解，<strong>即便疫情受控，上海机场向上的空间也被锁死了</strong>。投资上海机场只能在一种情况下，那就是：<strong>股价被悲观情绪摧毁时</strong>。</p>
+          </div>
+        </div>
+
+        <p>在这个判断下，周一开盘，我会卖掉 2020 年 11 月 6 日以 <strong>66.66 元</strong>买入的 <strong>1000 股观察仓</strong>——再少的金钱也值得被尊重。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 二、补充协议内容详解 -->
+      <section id="section-2">
+        <h2>二、补充协议内容详解</h2>
+
+        <h3 id="sub-2-1">2.1 原协议："下有保底，上不封顶"</h3>
+
+        <p>原协议规定的是：<strong>保底销售提成</strong>对比<strong>实际销售比例提成</strong>，上海机场按照其中<strong>较高</strong>的数字收，即"下有保底，上不封顶"模式。</p>
+
+        <p style="font-weight:700;color:var(--gold-dk);margin-bottom:.5rem">表 23-1　2019—2025 年上海机场预计每年保底销售提成（单位：亿元）</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>合同期间</th>
+              <th>预计每年保底销售提成</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2019</td>
+              <td>35.25</td>
+            </tr>
+            <tr>
+              <td>2020</td>
+              <td>41.58</td>
+            </tr>
+            <tr>
+              <td>2021</td>
+              <td>45.59</td>
+            </tr>
+            <tr>
+              <td>2022</td>
+              <td>62.88</td>
+            </tr>
+            <tr>
+              <td>2023</td>
+              <td>68.59</td>
+            </tr>
+            <tr>
+              <td>2024</td>
+              <td>74.64</td>
+            </tr>
+            <tr>
+              <td>2025</td>
+              <td>81.48</td>
+            </tr>
+            <tr>
+              <td><strong>合计</strong></td>
+              <td><strong>410</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <p>这种情况下，上海机场每年<strong>最坏情况</strong>下能够获得多少净利润是可以大致计算出的。至于<strong>最好情况</strong>，当作<strong>安全边际</strong>对待就好。而昨天披露的补充协议，则改变了这个情况。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-2">2.2 补充协议的核心分界线</h3>
+
+        <p>补充协议写得有点绕，老唐尝试"中翻中"做个说明。首先，补充协议将<strong>国际客流量</strong>（含港澳台地区）分为两种情况：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情况</th>
+              <th>协议原文表述</th>
+              <th>换算后的直白表述</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>情况一</strong></td>
+              <td>当月实际国际客流量 <strong>&#x2264;</strong> 2019 年月均国际客流量的 80%</td>
+              <td>当月实际国际客流量 <strong>&#x2264; 256.76 万人次</strong></td>
+            </tr>
+            <tr>
+              <td><strong>情况二</strong></td>
+              <td>当月实际国际客流量 <strong>&gt;</strong> 2019 年月均国际客流量的 80%</td>
+              <td>当月实际国际客流量 <strong>&gt; 256.76 万人次</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>换算依据（据老唐积累的数据）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>指标</th>
+              <th>2019 年实际数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>国际客流量</td>
+              <td><strong>3851.36 万人次</strong></td>
+            </tr>
+            <tr>
+              <td>全部旅客吞吐量</td>
+              <td>7615.35 万人次</td>
+            </tr>
+            <tr>
+              <td>国际客流占比</td>
+              <td>约 <strong>50.6%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="sub-2-3">2.3 情况一：客流 ≤ 256.76 万人次，原约定保底失效</h3>
+
+        <p>此时<strong>原约定保底失效</strong>，改为按人头计费：</p>
+
+        <div class="pull-quote">
+          <strong>上海机场所得 = 135.28 元 &#xD7; 月实际国际客流量 &#xD7; 客流调节系数 &#xD7; 面积调节系数</strong>
+        </div>
+
+        <p>两个调节系数的设置规则如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>系数</th>
+              <th>挂钩指标</th>
+              <th>取值区间与方向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>客流调节系数</strong></td>
+              <td>月实际国际客流量与 <strong>2019 年同一月份</strong>实际国际客流量的比率（注意：<strong>不是月均，是 2019 年同月实际值</strong>）</td>
+              <td>从 <strong>30% 到 120%</strong>，设置了从高到低<strong>递减</strong>的系数</td>
+            </tr>
+            <tr>
+              <td><strong>面积调节系数</strong></td>
+              <td>实际开业面积占合同总面积的比例</td>
+              <td>从<strong>低于 10%</strong> 至<strong>高于 70%</strong>，设置了从高到低<strong>递减</strong>的系数</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>系数的设计意图与解读：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>要点</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>递减设计的目的</strong></td>
+              <td>在实际客流没有归零（国际航班依然运营）的情况下，实现<strong>客流量越少，上海机场从单个客人身上提取的比例越高</strong></td>
+            </tr>
+            <tr>
+              <td><strong>极端情形</strong></td>
+              <td>如果日上上海到了<strong>关门停业</strong>的地步，上海机场也就<strong>不收钱</strong>了，双方共渡难关</td>
+            </tr>
+            <tr>
+              <td><strong>数据披露情况</strong></td>
+              <td>这两个系数的具体数据<strong>没有披露</strong></td>
+            </tr>
+            <tr>
+              <td><strong>中免的说法</strong></td>
+              <td>系数是"<strong>拍脑袋</strong>"定下的，核心是双方一致认可：绝对不可以让上海机场<strong>连续两年亏损</strong>被 ST，即保证上海机场 <strong>2021 年不能亏损</strong><sup>&#x2460;</sup></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>对投资者而言，这个系数的准确数字是多少<strong>并不重要</strong>。真正用到这个系数的时候，上海机场一定是<strong>负增长</strong>（相比 2019 年），而且<strong>净利润也少得可怜</strong>。届时，对于公司的投资价值和股价表现而言，<strong>都是朝下的推动力</strong>，系数大点儿或小点儿，程度差异不会太大。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">&#x1F4DD;</div>
+          <div class="callout-body">
+            <div class="callout-title">注&#x2460;</div>
+            <p>收入本书时补充说明——2021 年 11 月出台的 <strong>ST 新规</strong>规定，上市公司即使连续两年亏损，但只要年度<strong>主营业务收入高于 1 亿元</strong>，也不会被 ST。这个兜底条款<strong>不需要考虑了</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-4">2.4 情况二：客流 > 256.76 万人次，按"对应年度保底"折月</h3>
+
+        <p>此时计费公式很简单：</p>
+
+        <div class="pull-quote">
+          <strong>日上上海支付给上海机场的费用 = 对应年度保底销售提成 &#xF7; 12</strong>
+        </div>
+
+        <p>但是，"<strong>对应年度</strong>"究竟是哪一年，双方约定了一个细致化的对应表——<strong>它由当年实际国际客流量落在哪个区间决定，与自然年份无关</strong>。</p>
+
+        <p style="font-weight:700;color:var(--gold-dk);margin-bottom:.5rem">表 23-2　不同实际国际客流量对应的保底销售提成</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>年实际国际客流（X）（万人次）</th>
+              <th>年保底销售提成（亿元）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2019</td>
+              <td>X &#x2264; 4172</td>
+              <td>35.25</td>
+            </tr>
+            <tr>
+              <td>2020</td>
+              <td>4172 &lt; X &#x2264; 4404</td>
+              <td>41.58</td>
+            </tr>
+            <tr>
+              <td>2021</td>
+              <td>4404 &lt; X &#x2264; 4636</td>
+              <td>45.59</td>
+            </tr>
+            <tr>
+              <td>2022</td>
+              <td>4636 &lt; X &#x2264; 4868</td>
+              <td>62.88</td>
+            </tr>
+            <tr>
+              <td>2023</td>
+              <td>4868 &lt; X &#x2264; 5100</td>
+              <td>68.59</td>
+            </tr>
+            <tr>
+              <td>2024</td>
+              <td>5100 &lt; X &#x2264; 5360</td>
+              <td>74.64</td>
+            </tr>
+            <tr>
+              <td>2025</td>
+              <td>5360 &lt; X</td>
+              <td>81.48</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">&#x1F4A1;</div>
+          <div class="callout-body">
+            <div class="callout-title">关键理解</div>
+            <p>2021 年，如果当年实际国际客流量高于 4404 万人次，则"对应年度保底销售提成"就是 2021 年的 45.59 亿元；但如果 2021 年实际客流量<strong>落在 2020 年的数据区间</strong>，则 2021 年的"对应年度保底销售提成"就是 2020 年对应的 <strong>41.58 亿元</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-5">2.5 "绕口令"实例演算</h3>
+
+        <p>举个例子来说明这个"绕口令"。比如 <strong>2021 年 3 月，国际客流量 260 万人次</strong>，满足大于 256.76 万人次的条件，日上上海当月应付上海机场的销售提成怎么计算呢？</p>
+
+        <p>依然还要看 <strong>2021 年结束后</strong>实际的国际客流量数据。这之前双方是否预支预付不重要，反正都是跑不了的大企业，最后<strong>轧差</strong>就是了。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>2021 年全年实际国际客流量</th>
+              <th>落入区间</th>
+              <th>对应年度保底</th>
+              <th>2021 年 3 月应结费用</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>4500 万人次</td>
+              <td>2021 年区间</td>
+              <td>45.59 亿元</td>
+              <td>45.59 &#xF7; 12 &#x2248; <strong>3.8 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>4300 万人次</td>
+              <td>2020 年区间（4172 万～4404 万）</td>
+              <td>41.58 亿元</td>
+              <td>41.58 &#xF7; 12 &#x2248; <strong>3.5 亿元</strong></td>
+            </tr>
+            <tr>
+              <td>4100 万人次</td>
+              <td>2019 年区间（&#x2264; 4172 万）</td>
+              <td>35.25 亿元</td>
+              <td>35.25 &#xF7; 12 &#x2248; <strong>2.9 亿元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <p>注意最后一行：<strong>即便 2021 年 3 月当月的客流量超过了 256.76 万人次</strong>，只要全年实际客流量落回 2019 年区间，当月应结费用就只能按 35.25 亿元的年度保底折算。</p>
+          </div>
+        </div>
+
+        <h3 id="sub-2-6">2.6 2022 年起的面积调节：×1.2411</h3>
+
+        <p>2022—2025 年合同所涉及的面积要比 2019—2021 年的大 <strong>24.11%</strong>，原因是原 T1 航站楼合计 <strong>3286 平方米</strong>续约。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2022 年之前合同涉及面积</td>
+              <td>13629 平方米</td>
+            </tr>
+            <tr>
+              <td>T1 航站楼续约新增面积</td>
+              <td>3286 平方米</td>
+            </tr>
+            <tr>
+              <td>增幅计算</td>
+              <td>3286 &#xF7; 13629 &#xD7; 100% &#x2248; <strong>24.11%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>因此有一条<strong>追加规则</strong>：</p>
+
+        <div class="pull-quote">
+          如果 2022—2025 年的实际国际客流量落在表 23-2 中的 <strong>2019—2021 年区间</strong>，则上海机场分成 = <strong>对应年份保底分成 &#xD7; 1.2411</strong>。
+        </div>
+
+        <p><strong>示例</strong>：2022 年若年度实际客流量 4350 万人次，落在 2020 年的约定区间，那么如果 2022 年 8 月实际客流量超过 256.75 万人次，则当月应结费用 = 41.58 &#xD7; 1.2411 &#xF7; 12 &#x2248; <strong>4.3 亿元</strong>。其他同理。</p>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 三、容易引发误解的协议内容 -->
+      <section id="section-3">
+        <h2>三、容易引发误解的协议内容</h2>
+
+        <p>这个补充协议有个问题<strong>披露得不够清楚</strong>，或者说容易引发误解。</p>
+
+        <h3 id="sub-3-1">3.1 分歧点：上方到底封不封顶</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>协议版本</th>
+              <th>计费模式</th>
+              <th>明确程度</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>原合同</strong></td>
+              <td>月实际销售提成和月保底销售提成，<strong>两者取其高</strong> &#x2192; "下有保底，上不封顶"</td>
+              <td>明确</td>
+            </tr>
+            <tr>
+              <td><strong>补充协议</strong></td>
+              <td><strong>没有再提</strong>"如果实际销售提成比保底提成高"时应该怎么计算</td>
+              <td><strong>不明确</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>也就是说，现在究竟是"<strong>下不保底，上不封顶</strong>"，还是"<strong>下不保底，上有封顶</strong>"，并不明确。</p>
+
+        <h3 id="sub-3-2">3.2 老唐的判断：下不保底，上有封顶</h3>
+
+        <p>按照我对现有披露信息的理解，我认为签署补充协议后，变成了对上海机场<strong>非常不利</strong>的"<strong>下不保底，上有封顶</strong>"。</p>
+
+        <p>也就是说，合同期内，<strong>年度销售提成的上限，就是表 23-2 里对应的当年保底</strong>。</p>
+
+        <div class="pull-quote">
+          <strong>举例</strong>：2021 年哪怕有 <strong>1 亿老外</strong>飞到浦东，年度销售提成也只能按照"当年度对应的年保底销售提成"即 <strong>45.59 亿元</strong>计算，而<strong>不是</strong>原合同约定的"实际销售额 &#xD7; 提成比例（42.5%）"。
+        </div>
+
+        <h3 id="sub-3-3">3.3 判断依据</h3>
+
+        <p>支持我作出这个判断的原因有两点：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>依据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&#x2460;</td>
+              <td>公司披露的补充协议条款对国际客流量<strong>只分了两种情况</strong>：小于等于 2019 年实际月均国际客流量的 80%；大于 2019 年实际月均国际客流量的 80%。严谨地说，<strong>哪怕是 500%，也属于"大于 80%"的一种情况</strong>，这在法律意义上并没有歧义</td>
+            </tr>
+            <tr>
+              <td>&#x2461;</td>
+              <td>这么<strong>重大的信息</strong>，公告出错的可能性很小</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 四、总结 -->
+      <section id="section-4">
+        <h2>四、总结</h2>
+
+        <p>根据现有信息，我认为这是一份<strong>利空上海机场、利多中国中免</strong>的协议。<strong>上海机场未来五年的确定性丧失，投资逻辑需要推倒重来。</strong></p>
+
+        <h3 id="sub-4-1">4.1 机构与老唐的分歧</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>事项</th>
+              <th>情况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>信息暴露时点</td>
+              <td>补充协议的相关信息在本周三（1 月 27 日）的<strong>中信券商调研记录</strong>里已经暴露</td>
+            </tr>
+            <tr>
+              <td>市场反应</td>
+              <td>上海机场股价正是从<strong>周三中午</strong>开始上涨的</td>
+            </tr>
+            <tr>
+              <td>机构隐含看法</td>
+              <td>似乎反映了机构认为该补充协议是"<strong>利好上海机场</strong>"</td>
+            </tr>
+            <tr>
+              <td>老唐的决定</td>
+              <td>仍计划<strong>周一将手头 1000 股观察仓卖出</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>我认为对上海机场的投资逻辑，需要按照民航界对疫情及国际客流量的判断，<strong>重新估算后再考虑</strong>。</p>
+
+        <h3 id="sub-4-2">4.2 民航界对国际客流恢复的基本判断</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情景</th>
+              <th>恢复到 2019 年水平的时点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>中性</strong>情况</td>
+              <td>2023 年</td>
+            </tr>
+            <tr>
+              <td><strong>悲观</strong>情况</td>
+              <td>2025 年</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+          <div class="callout-body">
+            <div class="callout-title">免责声明</div>
+            <p>以上观点仅为个人看法，<strong>不保证正确</strong>，也不为任何人的操作负责。请<strong>独立思考，自主决策，并承担决策后果</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>&#x25C6; &#x25C6; &#x25C6;</span></div>
+
+      <!-- 五、补充说明 -->
+      <section id="section-5">
+        <h2>五、补充说明</h2>
+
+        <img src="assets/image-20260805211949477.png" alt="图 23-1　上海机场股价走势（前复权）" style="max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); display:block; margin:0 auto;" />
+        <p style="text-align:center; color:var(--text2); font-size:.85rem; margin-top:.75rem"><strong>图 23-1　上海机场股价走势（前复权）</strong></p>
+
+        <p>本文发表时间 2021 年 1 月 30 日是<strong>周六</strong>。周一（2021 年 2 月 1 日）早晨 <strong>9:13</strong>，老唐以<strong>跌停板价格 71.1 元</strong>委托，将所持上海机场观察仓<strong>抢跑卖出</strong>，<strong>9:25 成交</strong>。</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&#x00A9; 2026 投资智慧 &#xB7; 阅读笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '价值投资实战手册';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
