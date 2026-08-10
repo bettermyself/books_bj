@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第四章 应该买什么样的股票 · 怎样选择成长股</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    /* 尚未生成阅读页的章节（不可点击） */
+    .toc-lectures .no-link {
+      display: block;
+      font-size: .82rem;
+      color: var(--text3);
+      padding: .35rem .6rem;
+      line-height: 1.45;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Lists ===== */
+    .chapter-article ul, .chapter-article ol {
+      margin: .25rem 0 1.25rem;
+      padding-left: 1.7rem;
+    }
+    .chapter-article li {
+      font-size: .92rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: .45rem;
+    }
+    .chapter-article li strong { color: var(--gold-dk); }
+    .chapter-article ul li::marker { color: var(--gold); }
+    .chapter-article ol li::marker { color: var(--gold); font-weight: 700; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">怎样选择成长股</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一部分：普通股和不普通的利润</span>
+          <ul class="toc-lectures">
+            <li><a href="第一章 往事中提供的线索.html">第一章 往事中提供的线索</a></li>
+            <li><a href="第二章 “闲聊”的妙处.html">第二章 "闲聊"的妙处</a></li>
+            <li><a href="第三章 买入什么股票——寻找优良普通股的十五个原则.html">第三章 买入什么股票——寻找优良普通股的十五个原则</a></li>
+            <li><a href="第四章 应该买什么样的股票.html" class="active">第四章 应该买什么样的股票</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- 本章目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、先破除一个危险的误解</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 大众心中的"投资专家"形象</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 本书的立场：不罗列所有方法，只指出最好的方法</a></li>
+        <li><a href="#section-2">二、统计选股 vs 成长股投资</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 "便宜"的两重陷阱</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 5年期的公平对比</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 简单算术：差距为何如此之大</a></li>
+        <li><a href="#section-3">三、成功选股所需的个人条件</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 时间与性格</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 判断力</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 地理位置</a></li>
+        <li><a href="#section-4">四、条件不足怎么办：如何挑选投资顾问</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 投资不必事事亲为</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 为什么挑选投资顾问既容易又困难</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 关键差异：投资业绩可被验证</a></li>
+        <li><a href="#section-4-4" class="sub">4.4 三类具有误导性的漂亮业绩</a></li>
+        <li><a href="#section-4-5" class="sub">4.5 最终标准：投资理念是否契合</a></li>
+        <li><a href="#section-5">五、天平的两端：两类成长股</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 一端：机构型大型成长股</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 案例：陶氏化学、杜邦与IBM（1946—1956）</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 另一端：小型初创成长股</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 案例：安培斯公司</a></li>
+        <li><a href="#section-5-5" class="sub">5.5 风险与回报的根本差异</a></li>
+        <li><a href="#section-6">六、资金配置：如何在两端之间分配</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 基本原则</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 三个配置案例</a></li>
+        <li><a href="#section-6-3" class="sub">6.3 配置的两个补充认识</a></li>
+        <li><a href="#section-7">七、小额投资者的特殊处境</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 核心取舍</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 前提：必须是真正的闲置资金</a></li>
+        <li><a href="#section-7-3" class="sub">7.3 因人而异的选择</a></li>
+        <li><a href="#section-7-4" class="sub">7.4 作者的个人倾向</a></li>
+        <li><a href="#section-8">八、技巧与运气</a></li>
+        <li><a href="#section-9">九、35年研究的最终结论：高股利 vs 高成长</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">怎样选择成长股 · 第一部分：普通股和不普通的利润 · 第四章</div>
+        <h1 class="article-title">第四章：应该买什么样的股票</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>菲利普·A·费舍</span>
+          <span><strong>主题</strong>大型成长股 vs 小型成长股 · 如何取舍</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        即使是最符合"十五个原则"的股票，其投资特性也可能天差地别。在<strong>大型成熟成长股</strong>与<strong>小型初创成长股</strong>这两个极端之间，投资者究竟该如何取舍？
+      </div>
+
+      <!-- 一、先破除一个危险的误解 -->
+      <section id="section-1">
+        <h2>一、先破除一个危险的误解</h2>
+
+        <h3 id="section-1-1">1.1 大众心中的"投资专家"形象</h3>
+
+        <p>大多数投资者在投资领域并非专业人士。与本职工作或日常家务相比，他们能投入投资的时间和精力都非常少。结果就是慢慢吸收了大量<strong>半真半假的陈述、错误的看法乃至完完全全的假话</strong>，对如何在投资中获得成功一知半解。</p>
+
+        <p>如果做一次民意调查，大众印象中的投资专家大致是这样一个人：</p>
+
+        <ul>
+          <li>深思熟虑的学者，擅长处理财务数据</li>
+          <li>终日与世隔绝地坐在办公桌前</li>
+          <li>刻苦研究资产负债表、企业利润表以及股票交易的统计数字</li>
+          <li>凭非凡的智慧与对数据的深入理解，获得寻常人无法获得的资讯，从而知道哪些股票才是优秀的投资目标</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">这个形象相当危险</div>
+            <p>和其他很多常见的理解偏差一样，这个形象不仅<strong>勾勒得不够准确，而且可以说相当危险</strong>，对于想通过投资普通股获得长期最大利润的投资者极为不利。正如讲述十五个原则时所谈到的，除了运气之外，决定谁是投资大赢家的众多原因中，<strong>靠埋头进行数学运算而确定的只占一小部分</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-2">1.2 本书的立场：不罗列所有方法，只指出最好的方法</h3>
+
+        <p>投资者若具备足够的技能，在长期投资生涯中获利、甚至有时赚到巨额利润的方法<strong>不只一种</strong>。本书的目的不在于把所有获利方法都罗列出来，而在于指出<strong>最好的</strong>那一种。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">"最好"的定义</div>
+            <p>以<strong>最低的风险</strong>获得<strong>最高的利润</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、统计选股 vs 成长股投资 -->
+      <section id="section-2">
+        <h2>二、统计选股 vs 成长股投资</h2>
+
+        <h3 id="section-2-1">2.1 "便宜"的两重陷阱</h3>
+
+        <p>普通投资者往往认为财务和数据统计是成功投资的核心技能，只要在这些方面投入足够精力，就能找到价格非常低廉的股票。其中某些可能真的很适合投资，但陷阱同样存在：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>陷阱类型</th>
+              <th>具体表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>假便宜</strong></td>
+              <td>某些低价股所代表的公司，未来经营可能陷入困境，而这些问题<strong>仅通过统计数字是看不出来的</strong>。这类股票不但不算便宜，与几年后的价格比起来，<strong>目前的价格其实很高</strong></td>
+            </tr>
+            <tr>
+              <td><strong>真便宜也有限</strong></td>
+              <td>即使是真正便宜的股票，它便宜的程度毕竟有限；而且股价通常需要<strong>很长的时间</strong>才能回归到反映公司真实价值的程度</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-2">2.2 5年期的公平对比</h3>
+
+        <p>在一段足以做出公平对比的时间期限内（比如5年之内），作者的观察结论是：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者类型</th>
+              <th>核心方法</th>
+              <th>所需能力</th>
+              <th>5年后收益</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>统计型低估值猎手</strong></td>
+              <td>运用统计数据发掘低估值股票</td>
+              <td>极其擅长数据分析</td>
+              <td><strong>少很多</strong></td>
+            </tr>
+            <tr>
+              <td><strong>成长股投资者</strong></td>
+              <td>买进管理优秀的成长型公司股票</td>
+              <td>仅需一般的智慧</td>
+              <td><strong>高得多</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">失误已一并计入</div>
+            <p>这一对比<strong>已经把双方的失误一并计入</strong>：既考虑了成长型股票投资者所买股票未能获得预期利润并发生亏损的情况，也考虑了低估值猎手买到"并不便宜的便宜股"时产生的损失。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-3">2.3 简单算术：差距为何如此之大</h3>
+
+        <p>成长型股票的股价似乎<strong>每10年就能增值100%</strong>。而从寻求低估值的角度，能获得同等收益的标的，是一种<strong>股价低于正常价值50%</strong>的股票。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">累计效果</div>
+            <p>这种简单算术的<strong>累计效果</strong>是很明显的——低估值机会只能兑现一次，而成长的复利可以一轮接一轮地重复。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、成功选股所需的个人条件 -->
+      <section id="section-3">
+        <h2>三、成功选股所需的个人条件</h2>
+
+        <p>即将踏上投资之路的人，必须修正自己关于"投资需要花多少时间"的看法，正确选股所需的个人特质更是需要重新考虑。他也许觉得每星期花上几个小时舒舒服服地在家里研究一定量的文字资料，就能开启获利的大门——事实并非如此。</p>
+
+        <h3 id="section-3-1">3.1 时间与性格</h3>
+
+        <p>若想使股票投资利润最大化，明智的方法是<strong>与各种各样的人接触交谈</strong>。但这道门槛拦住了很多人：</p>
+
+        <ul>
+          <li>很多人<strong>抽不出时间</strong>去进行这样的交谈</li>
+          <li>有的人或许有时间，但<strong>从性格上不喜欢和之前不熟的人谈话</strong></li>
+          <li>仅仅和对方谈话还不够，必须把对方对所谈话题的<strong>兴趣和信心激发到一定程度</strong>，他们才会把自己所知道的事情倾囊相告</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">成功投资者的天性</div>
+            <p>成功的投资者往往有一种与生俱来的本性：<strong>对企业经营问题有很大兴趣</strong>。因此当他想向某人探听资料时，他谈论问题的方式本身就很容易引发对方的兴趣。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-2">3.2 判断力</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">不可或缺的判断力</div>
+            <p>他必须具备<strong>非常良好的判断力</strong>。否则，即便得到再多的资料也没有任何用处。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-3">3.3 地理位置</h3>
+
+        <p>投资者可能拥有充足的时间、善于与人交谈获取资料、也有良好判断力，但仍然无法在普通股上获得很高利润——因为<strong>地理位置也是一个重要的影响因素</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>所在位置</th>
+              <th>机会状况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>底特律市内或附近</strong></td>
+              <td>有很多机会了解汽车零配件公司的消息</td>
+            </tr>
+            <tr>
+              <td><strong>俄勒冈州</strong></td>
+              <td>即使有同样的勤奋和才干，也没有这样的机会</td>
+            </tr>
+            <tr>
+              <td><strong>大型商业中心或附近</strong></td>
+              <td>大多数大公司的分销组织都遍布全国（生产基地不见得如此）并分布在大城市，因此<strong>有很多机会练习寻找优秀投资对象的技艺</strong></td>
+            </tr>
+            <tr>
+              <td><strong>远离商业中心的偏远地区</strong></td>
+              <td>不易获得这么多类似机会</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、条件不足怎么办：如何挑选投资顾问 -->
+      <section id="section-4">
+        <h2>四、条件不足怎么办：如何挑选投资顾问</h2>
+
+        <h3 id="section-4-1">4.1 投资不必事事亲为</h3>
+
+        <p>身处偏远地区、没有充足研究时间、判断力也不算出色——这些真的就注定投资无法获利吗？并非如此。</p>
+
+        <p>投资是专业性很强而又错综复杂的事情，<strong>并不是非要自己亲自处理</strong>，就像没有必要强迫一个人当自己的律师、医生、建筑师或汽车修理工一样。如果一个人对这些领域怀有兴趣，不妨试一试；不然的话，根本没有必要成为这方面的专家。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">必须了解的法则</div>
+            <p>但有一点非常重要：他必须<strong>对相关的法则有足够的了解</strong>，这样才能找到真正的专家为其服务，避免让那些一窍不通或一知半解的人来误人误己。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 为什么挑选投资顾问既容易又困难</h3>
+
+        <p><strong>困难的一面</strong>——投资领域缺乏专业规范：</p>
+
+        <ul>
+          <li>近年来投资领域发展得比其他专业领域都快，但<strong>规范化的理念还没有形成</strong>，缺乏统一标准来区分真正的投资知识和故弄玄虚的谎言</li>
+          <li>不像法律或医学那样有一道门槛，可以排除不学无术和能力不佳的人</li>
+          <li>就连投资管理机构之间也<strong>没有就投资人才的衡量标准达成共识</strong>，因此不可能像名校讲授法律或医学那样设立训练投资专家的学校</li>
+          <li>政府管理机构也无法像各州给律师、医生发放执业牌照那样，向具备必要投资理财知识的人发放执照</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">牌照形同虚设</div>
+            <p>美国很多州的确给投资顾问发放执业牌照，但我们只听说过一个领不到牌照的人——原因是<strong>有过诈欺行为或未能履行债务</strong>，而不是因为欠缺必要的训练和投资技能。</p>
+          </div>
+        </div>
+
+        <p><strong>容易的一面</strong>——存在补偿性因素。虽然不合格投资顾问的比率可能高于法律或医疗领域，但一个对投资很外行的人如果<strong>足够认真仔细</strong>，选到优秀投资顾问的概率其实要比选到同样优秀的医生或律师<strong>大得多</strong>。</p>
+
+        <h3 id="section-4-3">4.3 关键差异：投资业绩可被验证</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>职业</th>
+              <th>能否用记录衡量水平</th>
+              <th>原因</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>医生</strong></td>
+              <td>❌ 不能</td>
+              <td>观察哪位医生患者死亡率最低，并不是选出优秀医生的办法——<strong>大部分医疗救治并非一定关乎生死</strong></td>
+            </tr>
+            <tr>
+              <td><strong>律师</strong></td>
+              <td>❌ 不能</td>
+              <td>辩护案件的胜诉败诉记录看不出相对水平——<strong>好的律师可能根本不需要开庭断案</strong></td>
+            </tr>
+            <tr>
+              <td><strong>投资顾问</strong></td>
+              <td>✅ 能</td>
+              <td>只要经过一段较长时间，就会有<strong>足够多的投资交易记录</strong>可以用来看出其投资能力</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>验证方法与硬性门槛：</strong></p>
+
+        <ol>
+          <li><strong>时间门槛</strong>：少数情况下可能需要5年才能看出投资顾问的真正能力，通常不需要这么长。⚠️ 但把资金托付给<strong>经验不到5年</strong>的所谓投资顾问（无论他是自己当老板还是在别人公司当职员），一般来说都是一种<strong>愚鲁至极的行为</strong>。</li>
+          <li><strong>查阅记录</strong>：一定要阅读他的投资记录，且内容一定要翔实。</li>
+          <li><strong>横向对照</strong>：将他的投资记录与<strong>同时期的证券价格</strong>进行比较，才能了解其能力究竟如何。</li>
+        </ol>
+
+        <p>决定让某人或某家机构理财之前，还有两件必不可少的事情：</p>
+
+        <ul>
+          <li>确定这个投资顾问<strong>诚信正直</strong>，不存在信誉品质上的问题</li>
+          <li>识破那些"看起来很美"的业绩记录——这一件稍复杂一些，详见下文</li>
+        </ul>
+
+        <h3 id="section-4-4">4.4 三类具有误导性的漂亮业绩</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>类型</th>
+              <th>表面现象</th>
+              <th>真实原因</th>
+              <th>隐患</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>熊市明星</strong></td>
+              <td>熊市期间业绩远高于市场平均水平</td>
+              <td>并非才智非凡，而是把所管理的<strong>大部分资金投向了高等级债券</strong></td>
+              <td>牛市中将大幅落后</td>
+            </tr>
+            <tr>
+              <td><strong>牛市明星</strong></td>
+              <td>长期牛市中成绩高于市场平均水平</td>
+              <td>偏好买入<strong>投资风险较高的公司</strong></td>
+              <td>前文讨论利润率时已说明：这类公司通常只在牛市有好表现，<strong>牛市之后相当疲软</strong></td>
+            </tr>
+            <tr>
+              <td><strong>全天候型</strong></td>
+              <td>牛市、熊市时期都有好业绩</td>
+              <td>总会用尽一切方法来<strong>判断股票市场的未来走势</strong></td>
+              <td>可能让他在一段时间内业绩很好，但在真实的投资世界中<strong>不可能永远这样</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-5">4.5 最终标准：投资理念是否契合</h3>
+
+        <p>挑选投资顾问时，应该设法了解他的<strong>基本投资理念</strong>是什么，然后挑选与自己投资理念相符合的人。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">理念差异</div>
+            <p>作者认为，本书所阐述的投资理念，正是一个合格的投资顾问所应该遵守的。⚠️ 需要留意的是，从过去那个金融时代走过来的许多人都信奉<strong>"低买高卖"</strong>的理念，这与本书阐述的理念有很大不同。</p>
+          </div>
+        </div>
+
+        <p><strong>但有一件事无法外包。</strong> 长期获得优厚利润是所有操作普通股投资者的共同目标；若真想做到这一点，那么无论他是聘请投资顾问还是自己操作，有一件事<strong>必须由他自己决定</strong>——因为最符合十五个原则的那些股票，投资特性可能有非常大的变化。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、天平的两端：两类成长股 -->
+      <section id="section-5">
+        <h2>五、天平的两端：两类成长股</h2>
+
+        <h3 id="section-5-1">5.1 一端：机构型大型成长股</h3>
+
+        <p>这类公司的特征：</p>
+
+        <ul>
+          <li>规模大，具有<strong>进一步大幅成长</strong>的光明前景</li>
+          <li>财务状况非常好</li>
+          <li><strong>深深地植根于经济土壤</strong>之中</li>
+        </ul>
+
+        <p>它们属于<strong>"机构型股票"</strong>，即保险公司、专业受托人以及类似机构型买家倾向于买入的种类。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">机构为何偏爱它们</div>
+            <p>这些机构型投资者觉得自己对市场价格可能产生误判，所以在股价走低时只能卖出股票、损失一部分本金；但买进这一类股票，<strong>不会因公司的竞争地位出现下滑而导致大幅度的损失</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">5.2 案例：陶氏化学、杜邦与IBM（1946—1956）</h3>
+
+        <p>第一章曾提到，1946—1956年这10年间<strong>高等级债券的投资报酬率非常不尽人意</strong>。同期这三只股票的表现如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>考察维度</th>
+              <th>表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>股价</strong></td>
+              <td>1956年末股价约为1946年的<strong>5倍</strong></td>
+            </tr>
+            <tr>
+              <td><strong>当期收益</strong></td>
+              <td>持有这些股票的投资者<strong>未曾受到利益损害</strong></td>
+            </tr>
+            <tr>
+              <td><strong>初始股利回报率</strong></td>
+              <td>以陶氏化学为例，买入时仅约<strong>2.5%</strong>（而这段时间内所有股票的股利回报率都处于较高水平），股利相对市场价格之低几乎人尽皆知</td>
+            </tr>
+            <tr>
+              <td><strong>10年后的实际回报</strong></td>
+              <td>通过股利发放以及若干次除权，<strong>按10年前买入价计算</strong>，投资者享有的整体投资年回报率已高达 <strong>8%～9%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">并非这10年的特例</div>
+            <p>更值得一提的是：对于以这三家公司为代表的优秀公司而言，<strong>这10年与其他时间段并无不同之处</strong>。在好几十年之中，除1929—1932年的大熊市以及第二次世界大战等偶发的暂时性利空因素之外，这些股票一直表现得相当出色。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-3">5.3 另一端：小型初创成长股</h3>
+
+        <p>这类公司在长期投资中同样十分值得关注：</p>
+
+        <ul>
+          <li>规模小、往往<strong>非常年轻</strong>，每年总销售额可能只有<strong>100万到六七百万美元</strong></li>
+          <li>为达到十五个原则的要求，它们往往拥有<strong>市场需求广阔的产品</strong></li>
+          <li>拥有非常优秀的<strong>经营管理人才和科技人才</strong></li>
+          <li><strong>抢先进入</strong>了前景看好的新行业或利润率较高的行业</li>
+        </ul>
+
+        <h3 id="section-5-4">5.4 案例：安培斯公司</h3>
+
+        <p>1953年首次公开发行股票上市的安培斯公司，是这类公司的一个很好案例——<strong>股价在4年内上涨了7倍之多</strong>。</p>
+
+        <h3 id="section-5-5">5.5 风险与回报的根本差异</h3>
+
+        <p>1953年的年轻高风险公司安培斯，与如今树大根深的陶氏化学、杜邦、IBM，构成了天平的两个极端；在这两端之间，还有许多未来前景光明的成长型公司。那么究竟应该买入哪一种？</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对比维度</th>
+              <th>小型初创成长股</th>
+              <th>大型成熟成长股</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>获利潜力</strong></td>
+              <td>最有可能让投资者获利，<strong>有时10年内涨幅可达10倍</strong></td>
+              <td>长期升值潜力<strong>远低于</strong>小型初创公司</td>
+            </tr>
+            <tr>
+              <td><strong>失误后果</strong></td>
+              <td>⚠️ 一旦发生失误，投资所用的<strong>每一块钱都可能亏得无影无踪</strong></td>
+              <td>即使因市场整体走势不好而蒙受损失，<strong>那也只是暂时的</strong></td>
+            </tr>
+            <tr>
+              <td><strong>保底表现</strong></td>
+              <td>无保底</td>
+              <td>即便是最保守的成长股，其<strong>高峰期股价至少也会涨到发行价的若干倍</strong></td>
+            </tr>
+            <tr>
+              <td><strong>总体评价</strong></td>
+              <td>高风险高回报，需极高技巧</td>
+              <td>总的来说算是<strong>非常值得投资的对象</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">高手也会犯错</div>
+            <p>即便是技巧最熟练的投资者也难免有时会犯错。这正是两类股票"失误后果"差异如此关键的原因。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、资金配置：如何在两端之间分配 -->
+      <section id="section-6">
+        <h2>六、资金配置：如何在两端之间分配</h2>
+
+        <h3 id="section-6-1">6.1 基本原则</h3>
+
+        <p>如果投资者拿着一笔对自己和家人非常重要的钱去冒险，很明显应该遵守这样的原则：</p>
+
+        <div class="pull-quote">
+          "<strong>大部分</strong>资金所投的公司，即使不是陶氏化学、杜邦或IBM这样大的公司，<strong>至少也应该是接近这种类型的公司</strong>，而不应该是小规模的初创型公司。"
+        </div>
+
+        <p>那么"大部分"究竟是投资总额的60%还是100%？这要看每个人不同的需求和偏好。</p>
+
+        <h3 id="section-6-2">6.2 三个配置案例</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者情况</th>
+              <th>可投资资金</th>
+              <th>建议配置</th>
+              <th>配置理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>无子女的寡妇</strong></td>
+              <td>总资产50万美元</td>
+              <td><strong>100%</strong> 投向比较保守的成长股</td>
+              <td>无继承人需求，不必承担额外风险</td>
+            </tr>
+            <tr>
+              <td><strong>带三个孩子的寡妇</strong></td>
+              <td>投资总额100万美元</td>
+              <td>85% 保守成长股 + <strong>15%</strong> 精挑细选的小规模初创公司</td>
+              <td>希望资金增值，但不希望家人目前的生活水平下降</td>
+            </tr>
+            <tr>
+              <td><strong>商人（有妻子及两个小孩）</strong></td>
+              <td>现有40万美元；税后年结余1万美元</td>
+              <td>现有40万美元<strong>全部</strong>投向较为保守的成长股；<strong>每年1万美元新增存款</strong>用于购买风险更高、收益更大的初创型公司股票</td>
+              <td>用增量资金而非存量本金承担风险</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-6-3">6.3 配置的两个补充认识</h3>
+
+        <ol>
+          <li><strong>保守部分必须挑起大梁</strong>：在所有这些例子中，投资于较为保守股票的资金，其<strong>长期增值幅度必须大到足以弥补</strong>高风险、高收益股票所带来的损失。</li>
+          <li><strong>高风险部分可能"毕业"</strong>：若选股得当，这些风险较高的股票可能大幅提高投资收益总额。💡 同样值得注意的是，初创型高风险公司本身也在不断发展壮大——它们会变得成熟，一段时间之后就<strong>不再带有之前那么高的风险</strong>，甚至可能发展到<strong>吸引机构投资者开始购买其股票</strong>的地步。</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、小额投资者的特殊处境 -->
+      <section id="section-7">
+        <h2>七、小额投资者的特殊处境</h2>
+
+        <h3 id="section-7-1">7.1 核心取舍</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者类型</th>
+              <th>股利回报问题</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>资金充足者</strong></td>
+              <td>可以<strong>完全忽视</strong></td>
+              <td>可动用全部资金致力于取得最高的价值成长；投资之后仍能从股票上获得足够股利收入以达到理想生活水平，或者股利收入加上其他常规收入足以支撑理想生活</td>
+            </tr>
+            <tr>
+              <td><strong>资金量较少者</strong></td>
+              <td><strong>必须正面面对</strong></td>
+              <td>不管收益率多么高，绝大多数小额投资者都无法靠投资回报生活得舒服，因为<strong>持有的股票总量太少</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>因此小额投资者通常必须在两种情况中做出选择：</p>
+
+        <ul>
+          <li><strong>要么</strong>：从现在开始，每年有<strong>几百美元</strong>的收入</li>
+          <li><strong>要么</strong>：在未来的某一天，得到<strong>数倍于此</strong>的投资回报</li>
+        </ul>
+
+        <h3 id="section-7-2">7.2 前提：必须是真正的闲置资金</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">先正视这个问题</div>
+            <p>在做出上述决策之前，小额投资者必须先正视一个问题：<strong>用于投资普通股的资金必须是生活开支以外的闲置资金</strong>。</p>
+          </div>
+        </div>
+
+        <p>这并不意味着把日常生活开销之外的钱都用于投资：</p>
+
+        <ul>
+          <li>除非特殊情况，手头应该保留<strong>几千美元的应急资金</strong>，以便在发生急病或意外紧急事故时充当花费——留出这笔钱之后才能考虑购买普通股等风险资产</li>
+          <li>打算花在<strong>某种特定用途</strong>上的资金（比如送孩子上大学的钱），<strong>绝对不应该</strong>投资于股票这种风险型资产</li>
+        </ul>
+
+        <h3 id="section-7-3">7.3 因人而异的选择</h3>
+
+        <p>把上述问题考虑充分之后，小额投资者对闲置资金的运用方式，就成了他在特殊处境下的一种个人选择，其中包括<strong>其他收入的多少和来源</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者画像</th>
+              <th>典型倾向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>年轻人；有子女或有其他特别喜爱继承人的中老年投资者</strong></td>
+              <td>可能愿意牺牲每个月 <strong>30～40美元</strong>的股利收入，以图在<strong>15年后得到10倍于此</strong>的收入</td>
+            </tr>
+            <tr>
+              <td><strong>没有继承人的老年人</strong></td>
+              <td>当然希望以<strong>最快的速度</strong>得到较多的收入</td>
+            </tr>
+            <tr>
+              <td><strong>常规收入较少且财务负担很重的人</strong></td>
+              <td>只得把全部精力用于应付<strong>当前的生活需要</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-7-4">7.4 作者的个人倾向</h3>
+
+        <p>对绝大多数小额投资者而言，是否将短期内获得收入作为目标纯属个人问题，不同的人会有不同的心理动机和需求。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">作者观点</div>
+            <p>短期内从股票投资上获得少量的税后额外收入，与在未来几年获得很高的收入让子女富有起来——二者相比，<strong>当然是后者有着明显的吸引力</strong>。其他人对这个问题的看法也许不尽相同。</p>
+          </div>
+        </div>
+
+        <p>本书所讲述的投资程序，适用于两类人：</p>
+
+        <ol>
+          <li>拥有<strong>较多资金</strong>的投资者</li>
+          <li>在这个问题上<strong>与作者看法一致</strong>的小额投资者——他们希望根据本书描述的原则找到合适方法，从而实现在未来几年获得高收入的目标</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、技巧与运气 -->
+      <section id="section-8">
+        <h2>八、技巧与运气</h2>
+
+        <p>任何人运用这些原则能否成功，取决于两个方面：</p>
+
+        <ol>
+          <li>运用这些原则的<strong>熟练程度</strong></li>
+          <li><strong>运气的好坏</strong></li>
+        </ol>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">无法预见的变量</div>
+            <p>目前这个时代，某个研究实验室明天可能就会有前所未有的重大发现，但这个实验室和你已投资的公司并无关系；一些当下看起来和你投资的公司毫无关联的研究项目，也许在5年后让你投资的公司<strong>盈利增长3倍，或者减至现值的一半</strong>。</p>
+          </div>
+        </div>
+
+        <p>因此就任何一笔<strong>单独</strong>的投资来说，运气好坏显然扮演着重要的角色。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">中等资金投资者的优势</div>
+            <p><strong>这正是资金规模中等的投资者相较于资金很少的投资者占有优势的原因</strong>：如果你能精挑细选<strong>几家</strong>公司，则运气好坏大致可以相互抵消。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、35年研究的最终结论：高股利 vs 高成长 -->
+      <section id="section-9">
+        <h2>九、35年研究的最终结论：高股利 vs 高成长</h2>
+
+        <p>对于希望几年后获得较高收入、而不求马上获得最高回报的大额投资者和中小投资者，最好记住过去35年里各种金融机构通过无数研究得出的结论：</p>
+
+        <div class="pull-quote large">
+          <strong>购买提供高股利公司的普通股，远不及购买低股利但注重增长和资产再投资公司股票的收益。</strong> 据作者所知，所有这些研究都表明了相同的趋势：在未来的5～10年内，<strong>成长型股票的资本增值幅度要高得多</strong>。
+        </div>
+
+        <p>更令人吃惊的是<strong>股利本身的表现</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>考察角度</th>
+              <th>成长型股票的表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>股利绝对额</strong></td>
+              <td>同一时间段内，成长型股票通常会<strong>提高股利</strong></td>
+            </tr>
+            <tr>
+              <td><strong>相对当期股价的回报率</strong></td>
+              <td>由于股价已经上涨，股利跟上涨后的股价比起来，回报<strong>仍然偏低</strong></td>
+            </tr>
+            <tr>
+              <td><strong>相对原始投资成本的回报率</strong></td>
+              <td>⭐ 和当初仅仅根据收益率所挑选出的股票相比，此时它们的<strong>原始投资股利回报已经是比较高的了</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          <strong>结论：</strong>成长股不仅在<strong>资本增值</strong>方面体现出优势，而且在一定时间段内，随着公司的不断成长，<strong>股利回报同样也有着优异的表现</strong>。
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    let lastActive = null;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '怎样选择成长股';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页（含子目录路径）
+    const relativePath = 'books/' + BOOK_FOLDER + '/第一部分：普通股和不普通的利润/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
