@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第五章 什么时候买进股票 · 怎样选择成长股</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    /* 尚未生成阅读页的章节（不可点击） */
+    .toc-lectures .no-link {
+      display: block;
+      font-size: .82rem;
+      color: var(--text3);
+      padding: .35rem .6rem;
+      line-height: 1.45;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Lists ===== */
+    .chapter-article ul, .chapter-article ol {
+      margin: .25rem 0 1.25rem;
+      padding-left: 1.7rem;
+    }
+    .chapter-article li {
+      font-size: .92rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: .45rem;
+    }
+    .chapter-article li strong { color: var(--gold-dk); }
+    .chapter-article ul li::marker { color: var(--gold); }
+    .chapter-article ol li::marker { color: var(--gold); font-weight: 700; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">怎样选择成长股</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一部分：普通股和不普通的利润</span>
+          <ul class="toc-lectures">
+            <li><a href="第一章 往事中提供的线索.html">第一章 往事中提供的线索</a></li>
+            <li><a href="第二章 “闲聊”的妙处.html">第二章 "闲聊"的妙处</a></li>
+            <li><a href="第三章 买入什么股票——寻找优良普通股的十五个原则.html">第三章 买入什么股票——寻找优良普通股的十五个原则</a></li>
+            <li><a href="第四章 应该买什么样的股票.html">第四章 应该买什么样的股票</a></li>
+            <li><a href="第五章 什么时候买进股票.html" class="active">第五章 什么时候买进股票</a></li>
+            <li><a href="第六章 什么时候卖出，什么时候不要卖出.html">第六章 什么时候卖出，什么时候不要卖出</a></li>
+            <li><a href="第七章 股利的喧嚣.html">第七章 股利的喧嚣</a></li>
+            <li><a href="第八章 投资者的“五个不要”.html">第八章 投资者的"五个不要"</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- 本章目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、买入时机究竟重要吗</a></li>
+        <li><a href="#section-2">二、传统择时方法为何"貌似有道理，实则愚不可及"</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 传统方法的操作流程</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 反对的理由：不是理论不合理，而是知识不够</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 一个可自行验证的实验</a></li>
+        <li><a href="#section-2-4" class="sub">2.4 精力错配：从"针尖上的天使"说起</a></li>
+        <li><a href="#section-3">三、正确答案：买点藏在成长股自身的特质里</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 理想投资对象的运作方式</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 从投资者立场看，两件事至关重要</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 最值得密切关注的时点：新工厂投入商业化生产</a></li>
+        <li><a href="#section-4">四、股价的典型四阶段轨迹</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 为什么第 ④ 阶段的低价正是买点</a></li>
+        <li><a href="#section-5">五、案例一：美国氰胺公司</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 第一版原文：1954 年国会选举前夕的买入</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 第一版原文：此后发生了什么</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 修订版补记：金融界评价持续提高</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 诚恳的记录：那些基金其实已经卖出了</a></li>
+        <li><a href="#section-6">六、案例二：食品机械化学公司</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 当时的市场态度</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 背景环境回顾</a></li>
+        <li><a href="#section-6-3" class="sub">6.3 化学业务部门的真实成色</a></li>
+        <li><a href="#section-6-4" class="sub">6.4 金融行业由此得出的"十分肯定的结论"</a></li>
+        <li><a href="#section-6-5" class="sub">6.5 管理层同时在做什么</a></li>
+        <li><a href="#section-6-6" class="sub">6.6 为什么利润爆发已在眼前</a></li>
+        <li><a href="#section-6-7" class="sub">6.7 第一版的预测</a></li>
+        <li><a href="#section-6-8" class="sub">6.8 修订版：预测得到验证</a></li>
+        <li><a href="#section-6-9" class="sub">6.9 旁证：麦格劳·希尔化学业杰出管理成就奖</a></li>
+        <li><a href="#section-6-10" class="sub">6.10 这件事对长期投资为何重要</a></li>
+        <li><a href="#section-7">七、案例三：买点 A 与买点 B —— 中西部电子公司</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 危机如何形成</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 两个买点的形成过程</a></li>
+        <li><a href="#section-7-3" class="sub">7.3 收益测算（刻意采用保守价格）</a></li>
+        <li><a href="#section-7-4" class="sub">7.4 一段发人深省的插曲</a></li>
+        <li><a href="#section-7-5" class="sub">7.5 更重要的是前景</a></li>
+        <li><a href="#section-7-6" class="sub">7.6 由此得出的买入原则</a></li>
+        <li><a href="#section-8">八、案例四：不是所有买点都源于坏消息 —— 扩产的算术</a></li>
+        <li><a href="#section-9">九、买点的统一定义</a></li>
+        <li><a href="#section-10">十、要不要担心经济萧条？分两类投资者讨论</a></li>
+        <li><a href="#section-10-1" class="sub">10.1 已持有精选好股的投资者：可以完全忽略这种风险</a></li>
+        <li><a href="#section-10-2" class="sub">10.2 判断力应该用在哪里：两个优势</a></li>
+        <li><a href="#section-10-3" class="sub">10.3 处境不利的投资者：分批建仓，用几年时间铺开</a></li>
+        <li><a href="#section-10-4" class="sub">10.4 分批建仓的附加价值：留出试错与纠错的机会</a></li>
+        <li><a href="#section-11">十一、结语：影响股价的五种强大力量</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">怎样选择成长股 · 第一部分：普通股和不普通的利润 · 第五章</div>
+        <h1 class="article-title">第五章：什么时候买进股票</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>菲利普·A·费舍</span>
+          <span><strong>主题</strong>选股与择时 · 成长股的买点</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        <strong>核心命题</strong>：选对股票决定了<strong>能不能赚钱</strong>，选对时机决定了<strong>能赚多少钱</strong>。买到正确的股票并长期持有，通常总会获利，甚至可观；但若要获取那种<strong>惊人的利润</strong>，就必须考虑买卖时机。
+      </div>
+
+      <!-- 一、买入时机究竟重要吗 -->
+      <section id="section-1">
+        <h2>一、买入时机究竟重要吗</h2>
+
+        <p>前几章说明了投资成功的核心：找到未来几年<strong>每股收益能够大幅增长</strong>的少数股票。既然选股是核心，那么讨论"何时买"还有意义吗？只要确认是好股票，任何时候不都是好的买入机会？</p>
+
+        <p>答案取决于两点：<strong>投资者的投资目的</strong>，以及<strong>他的性格</strong>。</p>
+
+        <p>用近代金融史上的极端例子对比（事后认知）：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>买入时点</th>
+              <th>选股水准</th>
+              <th>是否讲究买点</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1929 年夏（美国史上最严重股灾前不久）</td>
+              <td>精选几家优秀公司</td>
+              <td>未考虑</td>
+              <td>一段时间内<strong>也许仍有不错收益</strong></td>
+            </tr>
+            <tr>
+              <td>25 年之后</td>
+              <td>竭尽所能挑出优秀公司</td>
+              <td>稍花精力学习成长股买点的几个简单原则</td>
+              <td>涨幅<strong>远远高过</strong> 1929 年夏买进者</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>好公司 + 长期持有 = 大概率赚钱；好公司 + 正确买点 = 惊人利润。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、传统择时方法为何"貌似有道理，实则愚不可及" -->
+      <section id="section-2">
+        <h2>二、传统择时方法为何"貌似有道理，实则愚不可及"</h2>
+
+        <h3 id="section-2-1">2.1 传统方法的操作流程</h3>
+
+        <ol>
+          <li>搜集大量经济材料；</li>
+          <li>从资料中判断企业的<strong>中短期景气状况</strong>；</li>
+          <li>更老练者还会进一步预测<strong>未来的资本利率情况</strong>；</li>
+          <li>若所有预测都表明整体投资环境没有明显恶化，便得出"可以放手买股"的结论；</li>
+          <li>若出现预示暴风雨来临的疑云，则延缓买进或干脆取消买入计划。</li>
+        </ol>
+
+        <h3 id="section-2-2">2.2 反对的理由：不是理论不合理，而是知识不够</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">我反对这种方法</div>
+            <p><strong>并非因为它在理论上不合理</strong>，而是因为目前可用于预测未来经济趋势的知识<strong>不甚充足</strong>，还不可能应用于实际操作。它的正确率不足够高，不适合作为投入自己储蓄、承担风险的依据。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>论点</th>
+              <th>具体说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>现状类比</td>
+              <td>如今的经济趋势预测，如同<strong>中世纪的炼金术</strong>——化学的基本原理刚从神秘符咒中显现，但尚不完善，还不能作为行动依据</td>
+            </tr>
+            <tr>
+              <td>未来可能改观</td>
+              <td>情况或许不会永远如此，5 年或 10 年内就可能出现重大改观；已有编程能力较强的人试图用电脑建立错综复杂的"已知—求解"分析模型</td>
+            </tr>
+            <tr>
+              <td>极端年份的可测性</td>
+              <td>经济偶尔会像 1929 年那样脱离正常轨道、投机热情空前，即使以现有手段也<strong>可能相当准确地预测出即将发生的事</strong></td>
+            </tr>
+            <tr>
+              <td>命中率</td>
+              <td>但我怀疑猜对的年头能否超过 <strong>1/10</strong>，而未来猜对的比率可能更低</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-3">2.3 一个可自行验证的实验</h3>
+
+        <p>如果投资者已经过度信任经济预测，建议去翻阅<strong>二次世界大战结束后任意一年的《商业金融年鉴》</strong>——即使明知这些预测事后被证明是错的，翻阅档案仍然有益。</p>
+
+        <ul>
+          <li>不论翻看哪一年，都能找到大量知名经济与金融权威人士对未来经济状况的展望文章；</li>
+          <li>该刊编辑似乎刻意将乐观与悲观看法交织，以显得不偏不倚，因此<strong>很容易找到相反的预测意见</strong>；</li>
+          <li><strong>真正令人称奇的是</strong>：这些专家观点的分歧程度极大；</li>
+          <li><strong>更令人吃惊的是</strong>：有些论点论证有力、条理清晰、令人叹服，但后来的事实却证明它们是错的。</li>
+        </ul>
+
+        <h3 id="section-2-4">2.4 精力错配：从"针尖上的天使"说起</h3>
+
+        <p>金融行业长期试图依据<strong>随机且可能不完整</strong>的事实资料推测未来经济形势，并为此投入巨大努力。这让人不禁想问：若把其中一小部分努力用在<strong>更有实效</strong>的事情上，会有什么成果？</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时代</th>
+              <th>精力投向</th>
+              <th>代价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>中世纪</td>
+              <td>争论"针尖上可以站多少个天使"</td>
+              <td>大多数西方居民生活于物资严重匮乏、苦难深重的环境</td>
+            </tr>
+            <tr>
+              <td>中世纪（假设）</td>
+              <td>若把一半精力用于思考如何消除饥饿、疾病、贪婪</td>
+              <td>结果将截然不同</td>
+            </tr>
+            <tr>
+              <td>今日投资界</td>
+              <td>大量精力用于预测未来经济周期与形势</td>
+              <td>若将其中一部分转向更有建设性的目标，势必得到更令人欣喜的成就</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、正确答案：买点藏在成长股自身的特质里 -->
+      <section id="section-3">
+        <h2>三、正确答案：买点藏在成长股自身的特质里</h2>
+
+        <p>既然对近期经济形势的传统研究无法确定最恰当的买入时机，那靠什么？<strong>答案在于成长型股票本身的特质。</strong></p>
+
+        <h3 id="section-3-1">3.1 理想投资对象的运作方式</h3>
+
+        <p>这类公司通常在<strong>技术方面走在行业前沿</strong>：</p>
+
+        <ul>
+          <li>通过实验室开发各种新产品与新工艺；</li>
+          <li>通过初步的试验生产，为全面进军市场做好铺垫；</li>
+          <li>这些都需要成本，<strong>在所难免地会耗损其他业务的利润</strong>；</li>
+          <li>商业生产早期，为使新产品产量足以达到目标利润率，势必增加额外销售费用，<strong>这笔费用甚至可能高于试验生产的花费</strong>。</li>
+        </ul>
+
+        <h3 id="section-3-2">3.2 从投资者立场看，两件事至关重要</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>关键事实</th>
+              <th>含义</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>新产品开发的时间进度不可能完全按既定时间表进行</td>
+              <td>延期是常态，不是例外</td>
+            </tr>
+            <tr>
+              <td>即便经营管理最好的企业也有项目开发失败的时候</td>
+              <td>这部分花费必须计入公司整体经营成本</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          拿体育比赛作比喻：就算是棒球联盟中最杰出的冠军球队，也有输掉比赛的时候。
+        </div>
+
+        <h3 id="section-3-3">3.3 最值得密切关注的时点：新工厂投入商业化生产</h3>
+
+        <p>谈到买入时机，在开发新工艺方面最值得关注的，就是<strong>企业全面商业化生产的工厂何时开始投入生产</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>试生产周期与代价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>采用<strong>原有工艺、原有产品</strong>的新工厂</td>
+              <td>试生产也要 <strong>6～8 个星期</strong>，花费相当不菲。至少需要这么长时间才能把设备调试到理想运转效率，并消除原先未察觉的弊病（现代化设备错综复杂，不经试运行极易产生各类弊病）</td>
+            </tr>
+            <tr>
+              <td>采用<strong>革命性新工艺</strong>的工厂</td>
+              <td>试产期所需时间，<strong>可能比公司中最保守的工程师估计的还要长很多</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">问题解决也不代表马上有利润</div>
+            <p>即便生产问题终于解决，不胜其烦的持股人<strong>仍无法在短期内获得利润</strong>——还需再等好几个月，因为公司必须把原有产品线的一部分利润投入新产品的营销攻势，才能让新产品被市场接受。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、股价的典型四阶段轨迹 -->
+      <section id="section-4">
+        <h2>四、股价的典型四阶段轨迹</h2>
+
+        <p>在上述过程中，公司原有产品的营业收入可能仍在增长，使一般持股者<strong>发现不了利润的流失</strong>。但现实往往与此相反，股价会走出一条固定套路：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>阶段</th>
+              <th>发生的事</th>
+              <th>市场情绪</th>
+              <th>股价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 消息传出</td>
+              <td>经营良好的公司，实验室正在研发一项好的新产品</td>
+              <td>如饥似渴的买家蜂拥而至</td>
+              <td>推升至新高</td>
+            </tr>
+            <tr>
+              <td>② 试生产成功</td>
+              <td>试生产工厂运转成功</td>
+              <td>更加乐观</td>
+              <td><strong>涨得更高</strong></td>
+            </tr>
+            <tr>
+              <td>③ 量产受挫</td>
+              <td>月复一月，商业化量产的困难慢慢显现，超预期费用支出使每股利润大幅下滑；工厂陷入困境的消息传开，没人确定问题何时能解决</td>
+              <td>原先如饥似渴的买家转为悲观失望，大量卖出</td>
+              <td>下跌，<strong>困难期持续越久跌得越多</strong></td>
+            </tr>
+            <tr>
+              <td>④ 利好反弹后再创新低</td>
+              <td>工厂终于顺畅运营的好消息出现，股价连涨几天；但接下来一个季度，额外销售费用导致净利润进一步下滑，同时管理层"犯下经营错误"的消息在整个金融界传得人尽皆知</td>
+              <td>彻底失望</td>
+              <td>应声跌至<strong>几年来最低价位</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">一个很少有人想到的比喻</div>
+            <p>正在运转的试生产工厂，像在崎岖乡间小路上以 10 公里时速开着的车；而正式步入量产阶段的工厂，则像在同样的道路上以 <strong>100 公里时速</strong>开着的车。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-1">4.1 为什么第 ④ 阶段的低价正是买点</h3>
+
+        <p>当股票处于这个价位时，也许你会感觉它很值得买进——原因在于后续的连锁效应：</p>
+
+        <ol>
+          <li>一旦营销上的巨大努力营造出足够销售量，工厂凭此获得利润，此后<strong>只需正常的销售努力</strong>就足以推动营业收入上升好多年；</li>
+          <li>因为使用相同技术，第二座、第三座、第四座、第五座厂房可以立即以同样方法建设，<strong>不必再承担第一座工厂那漫长试生产期的额外花费</strong>；</li>
+          <li>到第五座工厂正常运转时，公司规模已相当壮大，业务如日中天；</li>
+          <li>此时推出另一种新产品，虽可如法炮制，但<strong>公司整体净利润不会因此受到拖累，股价也不会出现第一次那样的下跌走势</strong>。</li>
+        </ol>
+
+        <div class="pull-quote">
+          投资者已经在正确的时机进行了投资，并且能够在未来享受好几年的高增长。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、案例一：美国氰胺公司 -->
+      <section id="section-5">
+        <h2>五、案例一：美国氰胺公司（American Cyanamid）</h2>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">版本说明</div>
+            <p>以下引号内为本书<strong>第一版</strong>原文，使用的是当时刚刚发生的实例。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-1">5.1 第一版原文：1954 年国会选举前夕的买入</h3>
+
+        <div class="pull-quote">
+          "就在 1954 年国会选举前夕，一些投资基金充分利用了当时的形势。在那之前好几年内，美国氰胺公司在市场上的市盈率要远低于其他大多数大型化学品公司。"
+        </div>
+
+        <p><strong>当时金融界的普遍看法（表面情况）：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>市场认知</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>优点</td>
+              <td>利达（Lederle）业务部是全球最优秀的制药组织之一</td>
+            </tr>
+            <tr>
+              <td>缺点</td>
+              <td>同时拥有规模较大的工业和农业化学部门</td>
+            </tr>
+            <tr>
+              <td>结论</td>
+              <td>纷乱的业务部构成一个大杂烩，整体费用支出沉重、效率低下——这是经济景气度极高的 20 年代股市并购热潮所造成的；一般人都认为这家公司<strong>不具备理想投资对象的特质</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>大多数人忽视的事实（深层动态）：</strong></p>
+
+        <ul>
+          <li>新上任的管理层<strong>稳健而不张扬地</strong>缩减生产成本、裁汰冗员、精简组织机构；</li>
+          <li>人们注意到的只是：公司在路易斯安那州的霍提尔（Fortier）花费巨资修建了一座<strong>非常大型的有机化学新工厂</strong>——相对其公司规模而言无疑是一次豪赌；</li>
+          <li>该厂工程设计非常复杂，公司比原计划<strong>滞后好几个月</strong>才达到收支平衡点（这并不奇怪）；</li>
+          <li>霍提尔工厂的问题持续存在，对备受关注的美国氰胺股票无疑是<strong>雪上加霜</strong>。</li>
+        </ul>
+
+        <p><strong>买入动作</strong>：正是在这个时期，前述投资基金认为已到买点，以平均价 <strong>45.75 美元</strong>大举买进。该股于 1957 年按 <strong>2:1</strong> 拆股后，价格变为每股约 <strong>22.875 美元</strong>。</p>
+
+        <h3 id="section-5-2">5.2 第一版原文：此后发生了什么</h3>
+
+        <div class="pull-quote">
+          "经过一段较长时间，公司在采取各种耗费巨资的经营措施之后，终于从 1954 年开始在霍提尔工厂的经营中获利。"
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>每股收益（1954 年）</td>
+              <td>1.48 美元</td>
+            </tr>
+            <tr>
+              <td>每股收益（1956 年）</td>
+              <td>2.10 美元</td>
+            </tr>
+            <tr>
+              <td>1957 年展望</td>
+              <td>有望再略微提升（而此时大部分化学类企业，非制药业，利润都已不如往年）</td>
+            </tr>
+            <tr>
+              <td><strong>至少同样重要的变化</strong></td>
+              <td>华尔街已看清：工业与农业化学这两个业务部门<strong>值得机构投资者投资</strong>，该股市盈率因此显著改观</td>
+            </tr>
+            <tr>
+              <td>不到 3 年的成果</td>
+              <td>利润增长 <strong>37%</strong>，公司市值增加约 <strong>85%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-3">5.3 修订版补记：金融界评价持续提高</h3>
+
+        <p>写下上文之后，金融界对美国氰胺的评价逐渐提高，且这种势头仍在持续：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>情况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1959 年每股收益</td>
+              <td>有希望超过 1957 年每股 <strong>2.42 美元</strong>的历史最高纪录</td>
+            </tr>
+            <tr>
+              <td>当前股价</td>
+              <td>已达 <strong>60 美元</strong></td>
+            </tr>
+            <tr>
+              <td>自第一版推荐买进算起（5 年）</td>
+              <td>利润增加约 <strong>70%</strong>，总市值上升 <strong>163%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-4">5.4 诚恳的记录：那些基金其实已经卖出了</h3>
+
+        <p>非常高兴能以这种快乐的口吻结束对美国氰胺的探讨。不过，修订版前言中我曾说过：修订版要做<strong>诚恳的记录</strong>，而不是只记录到目前为止看起来最有利的情况。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">事实是</div>
+            <p>1954 年买入的"某些基金"<strong>已不再持有这只股票</strong>——它们在 1959 年春以约 <strong>49 美元</strong>的平均价格卖出。这个价格当然远低于目前市价，但它们仍有大约 <strong>110%</strong> 的利润。</p>
+          </div>
+        </div>
+
+        <p><strong>这种获利的规模和卖出决定并无任何关系。</strong> 卖出决策背后有两个动机：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>动机</th>
+              <th>事后评价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>从长期角度看，另外一家公司的发展貌似更好</td>
+              <td>下一章的讨论会显示这是一个<strong>令人信服的原因</strong>；尚无足够时间形成结论，但就目前比较两只股票的市价，卖出似乎是正确的</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>相对于同行业最出色的企业，美国氰胺的<strong>化学</strong>业务（相比其制药业务）并未如期望般在扩大利润、建立可获利新生产线方面取得长足进步；此外公司还企图打入竞争极为激烈的纺织业丙烯酸纤维市场，前景非常不明朗且可能增加很多成本</td>
+              <td>这种想法或许正确，但事后来看<strong>可能仍是个错误的投资决策</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>为什么第二个动机站不住脚？因为<strong>利达制药业务部的发展前景更加明朗</strong>，卖出之后其远景反而更清楚。从中期看，利达的获利能力有可能进一步飞跃，主要因为：</p>
+
+        <ol>
+          <li>推出了一种市场前景非常好的<strong>新型抗生素</strong>；</li>
+          <li>口服"天然"<strong>小儿麻痹疫苗</strong>在不久的将来有望出现巨大市场需求，而该公司是这一领域的市场领导者。</li>
+        </ol>
+
+        <p>这些情况使局势错综复杂，只有将来才能看清抛售美国氰胺是否正确。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">作者建议</div>
+            <p>回顾起来可发现，研究中出现错误的几率比获得成功的几率更多。我即使有出言狂妄的嫌疑，还是建议那些真正有志于丰富自己投资技巧的人<strong>把上面几段话标注出来</strong>，在读完下一章《什么时候卖出，什么时候不卖出》之后，再回来重看这几段。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、案例二：食品机械化学公司 -->
+      <section id="section-6">
+        <h2>六、案例二：食品机械化学公司（Food Machinery and Chemical Corporation）</h2>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">版本说明</div>
+            <p>以下引号内同为第一版原文，是一个时间上离现在更近的例子。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-1">6.1 当时的市场态度</h3>
+
+        <div class="pull-quote">
+          "1957 年下半年，食品机械化学公司的情况有些类似。一些大型机构投资者看好这只股票已有一段时间，但似乎更多人觉得：虽然对这只股票有兴趣，<strong>但必须看到有利于说明股价即将上涨的证据，才会真的买入</strong>。"
+        </div>
+
+        <h3 id="section-6-2">6.2 背景环境回顾</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时期</th>
+              <th>业务演变</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>二战以前</td>
+              <td>只生产各类机械类产品。凭借出色的经营管理和工程开发设计，成为<strong>战前获利最为可观的投资对象之一</strong></td>
+            </tr>
+            <tr>
+              <td>战争期间</td>
+              <td>除制造最擅长的军用机械产品外，还建立起多元化的化学工业。目的是通过生产消费性产品，缓解机械事业在行业生命周期衰退期的不利态势——既然在机械和军需品业务上已十分成功，就可将类似的研究方式用于消费品生产，而消费性产品的销售能够持续扩张很多年</td>
+            </tr>
+            <tr>
+              <td>到 1952 年</td>
+              <td>收购另外四家公司，改成四个（现在是五个）事业部</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>销售结构</strong>：把军需品部门加进去，合起来的销售额<strong>略低于</strong>总销售额的一半；如果只考虑正常的非国防事业，则<strong>略高于</strong>一半。</p>
+
+        <h3 id="section-6-3">6.3 化学业务部门的真实成色（收购前后几年变化很大）</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>类型</th>
+              <th>具体状况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>优质资产</td>
+              <td>其中之一在某个迅速增长的细分行业<strong>居市场领导者地位</strong>，具备极高利润率和业界领先的技术能力</td>
+            </tr>
+            <tr>
+              <td>劣质资产</td>
+              <td>另一个被收购后仍是<strong>生产设施老旧、利润率低、员工情绪低落</strong></td>
+            </tr>
+            <tr>
+              <td>结构缺陷</td>
+              <td>有些只生产中间产品、不生产基本原材料；有些生产很多种低利润原材料，却<strong>不运用这些原材料去生产利润率较高的产品</strong></td>
+            </tr>
+            <tr>
+              <td>客观结论</td>
+              <td>这几个化学业务部门与真正在化学行业处于市场领导者地位的公司<strong>还有很大距离</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-6-4">6.4 金融行业由此得出的"十分肯定的结论"</h3>
+
+        <ul>
+          <li><strong>机械业务部</strong>：每年国内增长率 9%～10%（与整个化学行业水平相当）；年复一年地证明有能力设计并销售创意十足、商业价值极高的产品；在各自细分行业建成了成本最低的工厂——这些都说明公司可以获得最高的投资评价。</li>
+          <li><strong>但是</strong>：在化学业务部创出更高的整体利润并展现出其他内在价值之前，<strong>几乎没有人愿意投资这家公司</strong>。</li>
+        </ul>
+
+        <h3 id="section-6-5">6.5 管理层同时在做什么</h3>
+
+        <ol>
+          <li>通过<strong>内部提拔与对外招募</strong>建立起高级管理层团队；</li>
+          <li>新团队把资金投入到：旧工厂现代化、筹建新厂、新的实验与研究发展；</li>
+          <li>若不在厂房支出方面进行常规化的资本投入，根本不可能在不提高当前支出水平的前提下推行大规模生产现代化与扩张计划。</li>
+        </ol>
+
+        <div class="pull-quote">
+          <strong>颇令人称奇的一点</strong>：1955、1956、1957 年异常的费用支出，<strong>并没有降低</strong>那段时间化学业务方面的利润。利润的稳定，明确说明公司过去所做的举措很有价值。
+        </div>
+
+        <h3 id="section-6-6">6.6 为什么利润爆发已在眼前</h3>
+
+        <div class="pull-quote">
+          "在任何情况下，如果计划制订得当，则已完成的工作形成的<strong>累积利润效果，迟早会超过那些所花费的异常支出</strong>。"
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>观察点</th>
+              <th>具体内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>研究费用的拖累</td>
+              <td>如果 1956 年的研究费用支出没有比 1955 年高出约 <strong>50%</strong>，那么很有可能使利润超过成本支出</td>
+            </tr>
+            <tr>
+              <td>研发投入的相对水平</td>
+              <td>1955 年，化学业务的研究费用支出也不是远低于业界平均水平；机械业务部门的研究费用支出则<strong>远高于</strong>业界平均水平</td>
+            </tr>
+            <tr>
+              <td>关键项目</td>
+              <td>年中时，位于西弗吉尼亚州南查尔斯顿（South Charleston）的现代化氯制品工厂原本预计可投入生产</td>
+            </tr>
+            <tr>
+              <td>意外与全局</td>
+              <td>虽出现预料之外的麻烦和一些化学行业常见的意外，但公司其他多数现代化改造与扩张计划<strong>大多已完成</strong></td>
+            </tr>
+            <tr>
+              <td>结论</td>
+              <td>尽管研究费用连续处于较高水平，1957 年下半年利润仍有望爆发；<strong>1958 年第一季度</strong>的利润有望出现爆发性增长</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-6-7">6.7 第一版的预测</h3>
+
+        <div class="pull-quote">
+          "我猜测在该公司利润改善、化学业务利润出现增长并在一段时间内持续上升之前，广大机构投资者往往<strong>不能预见到表面情况下的深层动态</strong>，大多都不会买入这只股票。"
+        </div>
+
+        <p>预测的路径是：</p>
+
+        <ol>
+          <li>情况明朗后，金融界人士的看法会发生改变，认识到公司基本面<strong>在几年前就已开始大幅改善</strong>；</li>
+          <li>届时股价上涨，原因之一是<strong>每股利润攀升</strong>；</li>
+          <li><strong>更重要的原因</strong>是投资者普遍重新定义这家公司的内在价值，使<strong>市盈率发生改变</strong>；</li>
+          <li>股价有望出现<strong>几年的持续上涨</strong>。</li>
+        </ol>
+
+        <h3 id="section-6-8">6.8 修订版：预测得到验证</h3>
+
+        <p>广大投资者首次普遍意识到表面之下的深层状况，也许是在经济萧条的 <strong>1958 年</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>行业背景</td>
+              <td>1958 年化学和机械行业几乎所有公司利润都大幅衰减</td>
+            </tr>
+            <tr>
+              <td>该公司表现</td>
+              <td>财务报表每股利润达到创历史新高的 <strong>2.39 美元</strong>，高于前几年总体经济形势更好时的平均水平</td>
+            </tr>
+            <tr>
+              <td>认知转变</td>
+              <td>人们认为化学业务部门的利润终于<strong>与机械业务部门旗鼓相当</strong>——它不再是微不足道的投资，而是非常理想的投资</td>
+            </tr>
+            <tr>
+              <td>1959 年前 9 个月</td>
+              <td>获利能力与 1958 年同期相比<strong>急剧增长</strong>，进一步说明化学业务长期的组织结构调整终于显现效果，收获颇丰（全年数据在写书时未公布）</td>
+            </tr>
+            <tr>
+              <td>军需品业务</td>
+              <td>主要产品装甲车和轻型两栖坦克由钢铁生产<strong>转为铝制品生产</strong>，坦克因此可用降落伞投放，1959 年利润出现很大增幅；就眼前与不远的将来而言，该部门虽对 1959 年总利润没有重大贡献，但<strong>一个重要的全新获利高峰已经显现</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>市场的反应：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时点</th>
+              <th>股价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1957 年 9 月底（第一版完成时）</td>
+              <td>25.25 美元</td>
+            </tr>
+            <tr>
+              <td>如今</td>
+              <td>51 美元</td>
+            </tr>
+            <tr>
+              <td>涨幅</td>
+              <td><strong>102%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>事实证明第一版所言非虚：金融界确实"认识到了公司基本面在几年前就已经开始改善"。</p>
+
+        <h3 id="section-6-9">6.9 旁证：麦格劳·希尔化学业杰出管理成就奖</h3>
+
+        <p>1959 年，麦格劳·希尔出版公司（McGraw-Hill Publications）决定每年评出一个<strong>化学业杰出管理成就奖</strong>。</p>
+
+        <p><strong>评审构成（十名声望卓著、知识渊博的专家）：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>来源</th>
+              <th>人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>知名大学企业管理研究所</td>
+              <td>4 人</td>
+            </tr>
+            <tr>
+              <td>持有大量化学板块股票的大型投资机构</td>
+              <td>3 人</td>
+            </tr>
+            <tr>
+              <td>著名化学行业顾问公司的高级管理者</td>
+              <td>3 人</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>结果</strong>：22 家公司获得提名，14 家最终提交评审。有些化学行业巨头的管理层出于某些理由一直受到华尔街极力推崇，但这个奖项<strong>没有落在这些巨头身上</strong>，而是由<strong>食品机械化学公司的化学业务部门</strong>获此殊荣——而仅仅两年前，大多数机构投资者还认为这家公司不是理想的投资对象，许多机构投资者之后<strong>仍然持此观点</strong>！</p>
+
+        <h3 id="section-6-10">6.10 这件事对长期投资为何重要</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>它能确保<strong>不论整体经济态势如何</strong>，这样一家公司未来的利润都会保持好几年的持续增长。若一家公司没有专门的研究部门、无法持续开发出高价值新产品，消息灵通的化学行业人士是不会把这一奖项授予它的</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>这一奖项让获奖公司在投资界<strong>留下好印象</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          正如第一版对这家公司的结论：利润上升对股价产生正面影响，<strong>加上每一美元的收益受金融市场重视的程度与日俱增</strong>——对投资者而言，再也没有其他事比这更值得向往的了。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、案例三：买点 A 与买点 B —— 中西部电子公司 -->
+      <section id="section-7">
+        <h2>七、案例三：买点 A 与买点 B —— 中西部电子公司</h2>
+
+        <p>除了新产品推出和复杂工厂正式投产，还有其他事件可能预示买进优秀公司股票的良机。</p>
+
+        <h3 id="section-7-1">7.1 危机如何形成</h3>
+
+        <p>美国中西部有一家电子公司，<strong>向来以劳资关系融洽著称</strong>，但规模成长到一定程度时不得不调整对待员工的方式。</p>
+
+        <p>不幸的是，连锁反应随之而来：</p>
+
+        <ol>
+          <li>人员之间的相互影响导致<strong>劳资关系摩擦、怠工与罢工、生产士气低落</strong>——而这家公司前不久才因劳资关系良好、生产效率高而受到普遍好评；</li>
+          <li>与此同时，公司正在探索一个新产品的潜在市场，在此过程中犯下一个<strong>平日里几乎根本不会犯的错误</strong>；</li>
+          <li>结果：公司利润急剧下挫，股价同时下跌。</li>
+        </ol>
+
+        <h3 id="section-7-2">7.2 两个买点的形成过程</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>买点</th>
+              <th>触发事件</th>
+              <th>时间特征</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>买点 A</strong></td>
+              <td>非常能干、才智卓越的管理层马上着手拟订改善计划。计划<strong>几个星期内</strong>即可完成，但从付诸实施到产生效果所需时间远不止于此。当计划成果开始反映到利润上时，股价到达买点 A 的价位；而全部效果充分体现到利润报表上，则需约<strong>一年半</strong></td>
+              <td>计划成果开始反映到利润上时</td>
+            </tr>
+            <tr>
+              <td><strong>买点 B</strong></td>
+              <td>一年半临近结束时，公司发生<strong>第二次罢工</strong>——解决这次罢工是公司恢复竞争效率的最后一个关键步骤。罢工持续时间并不长、损失不大，但消息传到金融界后，有流言称该公司劳资纠纷愈演愈烈。尽管<strong>公司高管大量买进本公司股票</strong>，股价仍持续下跌（下跌时间也并不长）</td>
+              <td>罢工流言引发下跌期间</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          愿意深入研究公司到底发生了什么事的人，可以在便宜的价格买到<strong>股价会上涨好几年</strong>的股票。
+        </div>
+
+        <h3 id="section-7-3">7.3 收益测算（刻意采用保守价格）</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">测算方法说明</div>
+            <p>我不打算使用最低价格来衡量。只要看每月的价格范围表，就能看出两个买点附近股价曾跌到什么价位——但在价格最低点，股票成交量只有几百股，<strong>买在最低点更多是出于运气</strong>。因此我在一个例子中使用<strong>稍微高于</strong>最低价位的价格，在另一个例子中使用<strong>高于最低价位几美元</strong>的价格，两个价位都有几千股成交量，<strong>只使用那些重视实际研究的人真正能够买到的价格</strong>。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>买点</th>
+              <th>此前跌幅</th>
+              <th>买入后表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>买点 A</strong></td>
+              <td>短短几个月内从之前高点下跌约 <strong>24%</strong></td>
+              <td>市场价值在一年内增加 <strong>55%～60%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>买点 B</strong></td>
+              <td>罢工潮带来的下跌约 <strong>20%</strong>（奇怪的是，罢工结束后股价还在那个价位盘桓了几个星期）</td>
+              <td>写下这段文字时（几个月后）已从买点 B 上涨 <strong>50%</strong>，相当于比买点 A 涨了 <strong>90% 以上</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-7-4">7.4 一段发人深省的插曲</h3>
+
+        <p>在买点 B 附近，一家大型投资信托公司的一位优秀员工对我说：他认为此时情势再好不过，<strong>十拿九稳</strong>地认为接下来股价必然上涨。</p>
+
+        <p>但他<strong>没有向公司财务委员会推荐买入</strong>。他的理由是：委员会的一些成员一定会向华尔街的朋友查证情况，最后不仅会驳回他的建议，还会指责他"害得大家在一家管理松散、劳资关系毫无改善希望的公司上浪费时间"！</p>
+
+        <h3 id="section-7-5">7.5 更重要的是前景</h3>
+
+        <p>这家公司的前景一片光明，无论从哪个角度看，它在未来几年都将出现很高的成长率——就像催生出买点 A 和 B 的那些<strong>短暂而突如其来的利空消息</strong>出现之前的几年那样。凡是在买点 A 和买点 B 买入的人，<strong>都在正确的时机选择了正确的公司</strong>。</p>
+
+        <h3 id="section-7-6">7.6 由此得出的买入原则</h3>
+
+        <p>简而言之，投资者应该买入的公司，是那些<strong>在非常能干的管理层领导下运营的公司</strong>。他们所做的一些事情最终会失败，一些事情在成功之前会遇到预料之外的麻烦，但投资者心里一定要清楚：</p>
+
+        <div class="pull-quote large">
+          <strong>这些问题都只是暂时的，不会永远存在。</strong> 如果这些问题导致股价大幅下挫，但仍可在<strong>几个月内</strong>好转起来，而不是要低迷好几年，那么可以认为此时买入非常安全。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、案例四：不是所有买点都源于坏消息 —— 扩产的算术 -->
+      <section id="section-8">
+        <h2>八、案例四：不是所有买点都源于坏消息 —— 扩产的算术</h2>
+
+        <p>并非所有买点都出现在公司经营出问题的时候。在某些行业（比如化学行业），需要投入大量资金才能创造一美元销售额，此时会出现另一种买入机会。</p>
+
+        <p><strong>这种情况下的数学运算：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 初始投资</td>
+              <td>建设一座或几座新厂需花费 <strong>1000 万美元</strong></td>
+            </tr>
+            <tr>
+              <td>② 全面运转后一两年</td>
+              <td>公司工程师前往现场详细检讨，建议再支出 <strong>150 万美元</strong></td>
+            </tr>
+            <tr>
+              <td>③ 工程师的结论</td>
+              <td>总资本投资增加 <strong>15%</strong>，工厂产量将比以前的产能提高 <strong>40%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>为什么这构成买点：</strong></p>
+
+        <ul>
+          <li>新工厂已经开始获利；</li>
+          <li>产量增加 40%，销售成本只增加 15%；</li>
+          <li>几乎没有增加额外的经常性费用；</li>
+          <li>因此 40% 的产量增加将使<strong>利润率变得更高</strong>。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">同样是"正确的时间买到正确的公司"</div>
+            <p>如果这个项目规模足够大、足以影响公司整体利润，那么在<strong>获利能力提升反映到股票市场价格之前</strong>买入这家公司的股票，同样是在正确的时间买到了正确的公司。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、买点的统一定义 -->
+      <section id="section-9">
+        <h2>九、买点的统一定义</h2>
+
+        <p>上述所有例子有什么共同点？</p>
+
+        <div class="pull-quote large">
+          <strong>好的投资标的都具有这样的特点：利润即将大幅改善，但对利润增加的预期还没有造成公司股票价格的大幅拉升。</strong>
+        </div>
+
+        <p>我相信，这样的情况出现时，就是这些适合投资的公司处于好买点的时候。</p>
+
+        <p><strong>如果这样的事暂时不会发生怎么办？</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>条件</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>买入的是一家优秀的公司，但没有遇到上述催化剂</td>
+              <td>从长线而言<strong>仍能赚到利润</strong></td>
+            </tr>
+            <tr>
+              <td>代价</td>
+              <td>他最好多一点儿耐心：获利所需时间更长，而且相对最初投资金额的<strong>获利率远不如</strong>前面描述的那种</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、要不要担心经济萧条？分两类投资者讨论 -->
+      <section id="section-10">
+        <h2>十、要不要担心经济萧条？分两类投资者讨论</h2>
+
+        <h3 id="section-10-1">10.1 已持有精选好股的投资者：可以完全忽略这种风险</h3>
+
+        <p>如果在比较长的一段时期内，投资者手中所持有的股票都是精挑细选出来的好股，那么对经济萧条的风险<strong>可以完全忽略</strong>。理由是：如果这些持股都是正确挑选出来的，那么在经济萧条来临之时，它们应该已经有比较大的上涨利润。</p>
+
+        <p><strong>现实中的买入触发场景</strong>：他认为手上某种证券应该卖出，或者拿到一笔新资金，有钱购买新股票。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">例外情形（唯一需要警惕的两种）</div>
+            <ol>
+              <li>股票市场中出现<strong>大量投机性购买、市场热情高涨</strong>的奇怪年份；</li>
+              <li><strong>连续出现重大的经济风暴来临的信号</strong>（就像 1928 年和 1929 年时的情形）。</li>
+            </ol>
+          </div>
+        </div>
+
+        <p>除此之外，我相信投资者应该<strong>忽略对整体经济态势或股市趋势的一切猜测</strong>，一旦出现合适的买进机会，就应该投入适当的资金买入股票。</p>
+
+        <h3 id="section-10-2">10.2 判断力应该用在哪里：两个优势</h3>
+
+        <p>投资者不应去猜测整体经济或股市未来的方向，而应发挥判断能力，较为准确地判断出<strong>他想买入的公司相对于整体经济会出现怎样的表现</strong>。这样从一开始他就具备两个优势：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>优势</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>赌注压在<strong>十分了解的事情</strong>上</td>
+              <td>而不是放在主要靠猜测的事情上</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>只买入<strong>中短期获利能力出于某种理由将大幅提升</strong>的公司</td>
+              <td>这是他得到的第二种支撑力量</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>两种情形下的结果：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>经济保持良好运行态势</td>
+              <td>公司新显现的获利能力最终得到市场肯定时，他持有的股票会<strong>比一般股票涨得多一些</strong></td>
+            </tr>
+            <tr>
+              <td>运气不好，在大盘下跌之前不久买入</td>
+              <td>这种新的获利能力也能<strong>阻止他的股票像其他股票一样出现大跌</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-10-3">10.3 处境不利的投资者：分批建仓，用几年时间铺开</h3>
+
+        <p>大多数投资者的处境并不乐观——手中股票并非精挑细选，也不是以低于目前价格买入的。典型情形有两类：</p>
+
+        <ul>
+          <li>这是他们<strong>第一次</strong>用资金进行投资；</li>
+          <li>他们以投资组合形式持有<strong>债券和相对静态的非成长型股票</strong>，想在一段时间后将其转化为能带来更多收益的股票。</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">真正的风险</div>
+            <p>如果这类投资者拿到新资金，或是在长期经济繁荣、多年股价上涨之后想转向成长股，他们能忽视萧条风险吗？若后来发现自己<strong>全部或大部分资金</strong>是在长期上涨后的高点、或大跌前不久买进的，那么他们将一筹莫展。</p>
+          </div>
+        </div>
+
+        <p><strong>解决方法并不特别困难——跟股市中很多其他事情一样，只要多花点儿耐心：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>做法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 立即开始</td>
+              <td>一旦确信找到了一只或多只适合买入的普通股，就应该开始买入</td>
+            </tr>
+            <tr>
+              <td>② 规划加仓节奏</td>
+              <td>买入之后，进一步加仓的时机把握值得认真思考。应认真做好计划，<strong>几年之后</strong>再将最后一部分可投资金投入进去</td>
+            </tr>
+            <tr>
+              <td>③ 保留购买力</td>
+              <td>这样即使市场在这段时间出现巨大下跌，仍能保持一定购买力，从而<strong>在跌势的底部趁机买进</strong></td>
+            </tr>
+            <tr>
+              <td>④ 若股价没跌</td>
+              <td>只要先前买入的股票选得比较恰当，至少手中持有了一些涨幅可观的股票</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>这套做法提供的安全垫：</strong> 真遇上最糟的事情——最后一部分资金投入之后股价碰巧暴跌——即使先前买入的股票所获利润不能完全弥补新买入股票的损失，<strong>至少也能抵消一部分</strong>，投资本金便不会出现严重损失。</p>
+
+        <h3 id="section-10-4">10.4 分批建仓的附加价值：留出试错与纠错的机会</h3>
+
+        <p>投资表现尚不如意的投资者，以及有足够资金可以再买入股票的投资者，都应该这么做。</p>
+
+        <p>原因是：此类投资者在<strong>用完自己的所有资金之前</strong>，有机会以实际行动来证明——他们自己或他们的投资顾问，是否擅长以合理的效率运用各种投资技巧。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">纠错窗口</div>
+            <p>要是仍不能取得满意的投资业绩，那么投资者就得<strong>修改自己的投资技巧，或者寻找其他专业人士替他理财</strong>，以避免自己的资金全部损失。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十一、结语：影响股价的五种强大力量 -->
+      <section id="section-11">
+        <h2>十一、结语：影响股价的五种强大力量</h2>
+
+        <p>所有类型的普通股投资者大概都在心中保持着一个基本的想法，金融界也有类似的忧虑：<strong>担心发生经济衰退，使很多有价值的投资活动失去原本应有的价值。</strong></p>
+
+        <p>但在 20 世纪中叶，<strong>当前的经济态势只不过是影响股市的五种强大力量中的一种</strong>。这些力量有的通过影响大众心理来影响股价，有的直接通过经济体系的运行对整体股价水平产生重大影响。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>力量</th>
+              <th>备注</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>当前经济态势</td>
+              <td>投资者最常忧虑、也最常被过度看重的一种</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>利率趋势</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>政府对投资和私人企业的整体态度</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>通货膨胀的长期趋势</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><strong>新发明和新技术对传统行业的影响力</strong></td>
+              <td>或许是所有力量中<strong>最重要</strong>的一种</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>这五种力量的行为特征：</strong></p>
+
+        <ul>
+          <li>它们<strong>很少在同一时间</strong>把股价往同一个方向拉动；</li>
+          <li>其中<strong>没有任何一种力量</strong>的重要性就长期而言总是远高于其他种类；</li>
+          <li>这些影响力非常复杂和多样化。</li>
+        </ul>
+
+        <div class="pull-quote large">
+          <strong>最终结论</strong>：正因如此，<strong>看上去似乎风险最高的做法却是最安全的做法</strong>——当你认为一家公司值得投资时就放手去做，不要因为猜测而出现恐惧或贪婪的情绪，也不要由于猜测而妄下结论、止步不前。
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    let lastActive = null;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '怎样选择成长股';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页（含子目录路径）
+    const relativePath = 'books/' + BOOK_FOLDER + '/第一部分：普通股和不普通的利润/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

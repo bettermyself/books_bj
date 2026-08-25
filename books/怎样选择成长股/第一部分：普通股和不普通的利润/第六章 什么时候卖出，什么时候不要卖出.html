@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第六章 什么时候卖出，什么时候不要卖出 · 怎样选择成长股</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    /* 尚未生成阅读页的章节（不可点击） */
+    .toc-lectures .no-link {
+      display: block;
+      font-size: .82rem;
+      color: var(--text3);
+      padding: .35rem .6rem;
+      line-height: 1.45;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Lists ===== */
+    .chapter-article ul, .chapter-article ol {
+      margin: .25rem 0 1.25rem;
+      padding-left: 1.7rem;
+    }
+    .chapter-article li {
+      font-size: .92rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: .45rem;
+    }
+    .chapter-article li strong { color: var(--gold-dk); }
+    .chapter-article ul li::marker { color: var(--gold); }
+    .chapter-article ol li::marker { color: var(--gold); font-weight: 700; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">怎样选择成长股</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一部分：普通股和不普通的利润</span>
+          <ul class="toc-lectures">
+            <li><a href="第一章 往事中提供的线索.html">第一章 往事中提供的线索</a></li>
+            <li><a href="第二章 “闲聊”的妙处.html">第二章 "闲聊"的妙处</a></li>
+            <li><a href="第三章 买入什么股票——寻找优良普通股的十五个原则.html">第三章 买入什么股票——寻找优良普通股的十五个原则</a></li>
+            <li><a href="第四章 应该买什么样的股票.html">第四章 应该买什么样的股票</a></li>
+            <li><a href="第五章 什么时候买进股票.html">第五章 什么时候买进股票</a></li>
+            <li><a href="第六章 什么时候卖出，什么时候不要卖出.html" class="active">第六章 什么时候卖出，什么时候不要卖出</a></li>
+            <li><a href="第七章 股利的喧嚣.html">第七章 股利的喧嚣</a></li>
+            <li><a href="第八章 投资者的“五个不要”.html">第八章 投资者的"五个不要"</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- 本章目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、先划清讨论的边界</a></li>
+        <li><a href="#section-2">二、卖出的三个理由——而且仅有三个</a></li>
+        <li><a href="#section-3">三、理由一：当初的买入就是一个错误</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 普通股投资的两个重要特点</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 及早认识错误，能带来三重收益</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 ⚠️ 最大的障碍：自尊心</a></li>
+        <li><a href="#section-3-4" class="sub">3.4 不愿承担小损失，虽是人性却不合逻辑</a></li>
+        <li><a href="#section-3-5" class="sub">3.5 对待亏损的正确态度</a></li>
+        <li><a href="#section-4">四、理由二：公司基本面已经变化</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 走下坡路的两种原因</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 为什么"产品市场枯竭"未必是管理层的错</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 💡 一个实用的检测方法</a></li>
+        <li><a href="#section-5">五、理由三：为了更好的机会而换股</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 这个理由为何存在</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 换股的判断标准</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 ⚠️ 但对"随时准备换股"要慎之又慎</a></li>
+        <li><a href="#section-6">六、一个少有人懂的基本原则</a></li>
+        <li><a href="#section-7">七、错误一：因为害怕熊市而卖出</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 与上一章同样的逻辑</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 ⚠️ 代价更昂贵的理由：你不知道何时买回</a></li>
+        <li><a href="#section-8">八、错误二：因为"股价过高"而卖出</a></li>
+        <li><a href="#section-8-1" class="sub">8.1 "过高"的两种含义</a></li>
+        <li><a href="#section-8-2" class="sub">8.2 ⚠️ 问题在于：这种精确度根本做不到</a></li>
+        <li><a href="#section-8-3" class="sub">8.3 一个假设：35 倍市盈率的贵，重要吗</a></li>
+        <li><a href="#section-8-4" class="sub">8.4 老朋友：资本利得税再次登场</a></li>
+        <li><a href="#section-9">九、错误三："涨得太多了，该换没涨的"——最荒谬的论点</a></li>
+        <li><a href="#section-9-1" class="sub">9.1 同学合约的假设实验</a></li>
+        <li><a href="#section-9-2" class="sub">9.2 十年之后</a></li>
+        <li><a href="#section-9-3" class="sub">9.3 同学与普通股的唯一差别，反而强化了结论</a></li>
+        <li><a href="#section-10">十、本章小结</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">怎样选择成长股 · 第一部分：普通股和不普通的利润 · 第六章</div>
+        <h1 class="article-title">第六章：什么时候卖出，什么时候不要卖出</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>菲利普·A·费舍</span>
+          <span><strong>主题</strong>卖出决策 · 持股纪律</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        <strong>核心命题</strong>：如果当初买进普通股时各项选择工作都做得很对，那么<strong>卖出的时间几乎永远不会到来</strong>。
+      </div>
+
+      <!-- 一、先划清讨论的边界 -->
+      <section id="section-1">
+        <h2>一、先划清讨论的边界</h2>
+
+        <p>投资者决定卖出普通股时，总是有很多听上去很合理的理由——他可能是要盖一栋新房子，或是给自己准备创业的儿子筹备资金。从追求幸福生活的角度来说，出于类似理由而卖出普通股都是合情合理的。</p>
+
+        <p>但在这些情况下卖出持仓，都是出于<strong>个人的动机</strong>，而不是出于<strong>金融操作方面的考虑</strong>，这就超出了本书的讨论范畴。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>卖出动因</th>
+              <th>性质</th>
+              <th>是否属本章讨论范围</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>盖新房子、为子女创业筹资等</td>
+              <td>个人生活需要</td>
+              <td>❌ 不讨论</td>
+            </tr>
+            <tr>
+              <td>运用可用的投资资金取得最大的利益</td>
+              <td>金融操作考虑</td>
+              <td>✅ 本章唯一目标</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、卖出的三个理由 -->
+      <section id="section-2">
+        <h2>二、卖出的三个理由——而且仅有三个</h2>
+
+        <p>作者相信，<strong>有三个理由，而且仅有三个理由</strong>，足以让投资者卖出根据前文所阐述过的投资原则所选出并买入的普通股。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>卖出理由</th>
+              <th>触发条件</th>
+              <th>处理的关键</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>理由一</strong></td>
+              <td>最初的买入行为本身就是一个错误</td>
+              <td>当下盈利的情况越来越清楚地表明，所买入公司的实际情况并不像原先所想象的那么优秀</td>
+              <td>主要靠<strong>对情绪的控制</strong>，也取决于投资者能不能坦诚地面对自己</td>
+            </tr>
+            <tr>
+              <td><strong>理由二</strong></td>
+              <td>公司基本面随时间推移而发生变化</td>
+              <td>与第三章所述"十五个原则"的契合度不再那么高</td>
+              <td><strong>时刻提高警惕</strong>，密切留意持股公司相关情况的发展</td>
+            </tr>
+            <tr>
+              <td><strong>理由三</strong></td>
+              <td>发现了明显更好的投资机会</td>
+              <td>有充分把握断定另一家公司的发展前景远优于现有持仓</td>
+              <td>极少出现，<strong>必须非常有把握</strong>才能执行</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、理由一：当初的买入就是一个错误 -->
+      <section id="section-3">
+        <h2>三、理由一：当初的买入就是一个错误</h2>
+
+        <h3 id="section-3-1">3.1 普通股投资的两个重要特点</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>特点</th>
+              <th>含义</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>回报特点</strong></td>
+              <td>如果处理得法，它能带来<strong>丰厚的利润</strong></td>
+            </tr>
+            <tr>
+              <td><strong>门槛特点</strong></td>
+              <td>若想把普通股投资做好，就必须有<strong>高超的技能、知识以及判断力</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>由于获得这些如梦似幻的利润的过程极为复杂，所以<strong>买入股票的过程中难免会犯下这样或那样的错误</strong>。好在从那些真正优秀的普通股中所获得的利润，应该足够弥补正常犯错所造成的损失，弥补损失之后仍然应该有很大的涨幅。</p>
+
+        <h3 id="section-3-2">3.2 及早认识错误，能带来三重收益</h3>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">收益一</span>
+            <h4>损失幅度更小</h4>
+            <p>远低于买入错误的股票后长期持股所造成的损失。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">收益二</span>
+            <h4>资金被盘活</h4>
+            <p>将被困在不利状况中的资金解放出来。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">收益三</span>
+            <h4>利润更多</h4>
+            <p>把盘活的资金用于购买其他精心挑选出来的好股票。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-3">3.3 ⚠️ 最大的障碍：自尊心</h3>
+
+        <p>有个很复杂的因素，使得对投资失误的处理更加困难——这种困难源于<strong>我们每个人的自尊心，没有人喜欢承认自己犯下的错误</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>卖出结果</th>
+              <th>投资者的真实心理</th>
+              <th>判断是否理性</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>买入是错的，但卖出时获得<strong>一点点利润</strong></td>
+              <td>不会觉得自己当初的买入是错的</td>
+              <td>❌ 自我安慰</td>
+            </tr>
+            <tr>
+              <td>卖出时有<strong>小的损失</strong></td>
+              <td>对整个操作过程相当不满意</td>
+              <td>❌ 情绪化</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这种反应其实是人之常情，但在操作中却可能十分危险，因为它会让我们在整个投资过程中<strong>任性妄为</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">最常见的一种赔钱理由</div>
+            <p>投资者死守一只本来不想再持有的股票，只因为希望有一天能够"<strong>至少回本</strong>"，却因此损失了更多的资金——这种赔钱的理由，在投资中可能多于其他任何一种赔钱的理由。</p>
+          </div>
+        </div>
+
+        <p>如果在认识到发生错误时能够果断处理，认赔卖出，腾出资金转而投资于更合适的股票并获得相应利润，这么算下来，<strong>失去机会的成本更高</strong>。</p>
+
+        <h3 id="section-3-4">3.4 不愿承担小损失，虽是人性却不合逻辑</h3>
+
+        <p>如果投资于普通股的真正目标是在几年内获得<strong>数倍于本金</strong>的利润，那么 20% 的损失和 5% 的利润之间的差距，就显得不那么重要了。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对象</th>
+              <th>是否真正重要</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>会不会偶尔发生损失</td>
+              <td>并不重要</td>
+            </tr>
+            <tr>
+              <td>投资者是不是<strong>经常没能赚得可观的利润</strong></td>
+              <td><strong>真正重要</strong> — 若真是这样，投资者或他的投资顾问的理财能力一定会遭到质疑</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-3-5">3.5 对待亏损的正确态度</h3>
+
+        <ul>
+          <li>❌ 不该因为亏损而<strong>强烈地自责或出现情绪失控</strong>；</li>
+          <li>❌ 也不应该<strong>完全漠然视之</strong>；</li>
+          <li>✅ 投资中若发生亏损就应该<strong>仔细审视</strong>，以便从每次的错误中获得教训。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">从错误中获得教训</div>
+            <p>如果能透彻地了解在买入普通股时出现判断失误的成因，投资者就不会在下一次的投资行为中因为同样的原因而再次犯错。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、理由二：公司基本面已经变化 -->
+      <section id="section-4">
+        <h2>四、理由二：公司基本面已经变化</h2>
+
+        <p>如果一家公司的基本面情况随着时间的推移而发生变化，与第三章所述的十五个原则的契合度不再那么高，这时就应该卖出此公司的股票。这也是投资者<strong>必须时刻提高警惕</strong>的原因，也说明为什么持有一家公司的股票时，密切留意该公司相关情况的发展是多么的重要。</p>
+
+        <h3 id="section-4-1">4.1 走下坡路的两种原因</h3>
+
+        <p>一家公司的经营状况走下坡路往往出于两种原因：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>原因</th>
+              <th>具体表现</th>
+              <th>处理速度</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>A. 管理层的松懈退化</strong></td>
+              <td>经营的成功冲昏了一个或多个重要管理人员的头脑，<strong>沾沾自喜和懒惰松懈</strong>取代了之前的干劲和创造力；或新的高级管理层达不到前任所设置的绩效标准——既没有继续奉行那些曾经让公司经营得十分出色的政策，也没有能力提出新政策让经营持续向好</td>
+              <td>⚠️ <strong>马上卖出</strong>，不管股市总体情况看起来有多好，或资本收益税有多高</td>
+            </tr>
+            <tr>
+              <td><strong>B. 产品市场不再扩大</strong></td>
+              <td>公司经历多年惊人成长后到达<strong>瓶颈阶段</strong>，继续成长的可能性几近枯竭，此后只能保持和行业内同类公司齐平的发展势头，增长率只能和全国的经济增长率保持同步</td>
+              <td>卖出行动<strong>可以稍微放缓</strong>，一部分持仓可以保留直到找到更合适的投资对象再行卖出</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-2">4.2 为什么"产品市场枯竭"未必是管理层的错</h3>
+
+        <p>这种变化可能<strong>不是源于管理层退化</strong>：</p>
+
+        <ul>
+          <li>很多公司的管理层非常擅长在<strong>行业内</strong>开发相关或近似的产品，以便充分利用所在行业的发展机会；</li>
+          <li>但他们通常<strong>不会进入一个不相干的行业</strong>，因为他们在那里根本没有任何独特优势可言。</li>
+        </ul>
+
+        <p>因此，如果一家公司在一个新型的成长性行业中连续多年有非常成功的表现，但在时过境迁之下市场成长潜力几近枯竭，其股票无法再达到十五个原则的要求时，就应该果断卖出。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">税金不能成为不换股的理由</div>
+            <p>无论如何都<strong>不能再将这家公司视为合适的投资标的</strong>。至于资本收益税，不管税金有多高，都不能让它作为阻止你调仓换股的理由——因为换股买入新股票之后，新股票未来几年的成长情况也许会跟被换掉的股票从前的表现一样出色。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-3">4.3 💡 一个实用的检测方法</h3>
+
+        <p>谈及公司未来会不会出现预期中的进一步增长、是否不再适合投资时，可以用下面这个方法自问：</p>
+
+        <div class="pull-quote">
+          <strong>在下一个经济周期的顶部到来之时</strong>（不管此前会发生什么事），这家公司的每股利润和目前的水平相比，其增幅<strong>是不是至少和"上一个已知的经济周期高峰期 → 目前水平"的增幅一样大</strong>？
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>计算口径</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✅ 需要算入</td>
+              <td>股利因素、股票拆分</td>
+            </tr>
+            <tr>
+              <td>❌ 不必考虑</td>
+              <td>用于筹措新增资本的发行新股</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>答案</th>
+              <th>应采取的行动</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>肯定</strong></td>
+              <td>也许该股票就应<strong>继续持有</strong></td>
+            </tr>
+            <tr>
+              <td><strong>否定</strong></td>
+              <td>或许就应该<strong>卖出</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、理由三：为了更好的机会而换股 -->
+      <section id="section-5">
+        <h2>五、理由三：为了更好的机会而换股</h2>
+
+        <h3 id="section-5-1">5.1 这个理由为何存在</h3>
+
+        <p>如果当初买入股票时是按照正确的原则买入的，因为第三个理由而卖出的情况<strong>会极少出现</strong>，而且只有在投资者非常有把握的情况下才能执行。</p>
+
+        <p>这个理由之所以存在，是因为<strong>好的投资机会往往是千载难逢的</strong>。从买卖时机的角度，这种机会很少在刚好获得可供投资的资金时可以找到。</p>
+
+        <p>典型情形是：投资者拥有一笔可供长期投资的资金，找到一只值得投资的股票，于是把部分或全部资金投入这家他觉得成长潜力非常广阔、管理非常优秀的公司。但和之后发现的一些似乎更有吸引力的公司相比，这家公司的<strong>平均年度成长率相形见绌</strong>，在其他一些重要因素上也缺乏吸引力。</p>
+
+        <h3 id="section-5-2">5.2 换股的判断标准</h3>
+
+        <p>如果<strong>证据十分明显</strong>，并且投资者对自己的判断有<strong>十足的把握</strong>，则卖出原有持仓、买入发展前景可能更好的股票，所带来的收益即使扣除资本利得税之后，可能仍然非常可观。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>公司类型</th>
+              <th>长期平均年增长率</th>
+              <th>对持股人的意义</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>现有持仓</td>
+              <td>12%</td>
+              <td>财富增长虽然也是很好</td>
+            </tr>
+            <tr>
+              <td>更优标的</td>
+              <td><strong>20%</strong></td>
+              <td>投资者应该<strong>不怕麻烦</strong>，也不必为资本利得税的问题而忧心，坚决执行换股操作</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-3">5.3 ⚠️ 但对"随时准备换股"要慎之又慎</h3>
+
+        <p>作者对"投资者随时准备卖出持仓的某只普通股、希望把资金投向更好的股票"这一做法<strong>持谨慎态度</strong>：</p>
+
+        <ul>
+          <li>在决策过程中往往会<strong>误判某些重要因素</strong>，这种风险时刻存在。一旦发生误判，换股操作很可能达不到预期效果；</li>
+          <li>相反，警觉的投资者如果<strong>持续持有某只股票一段时间</strong>，一般就会熟悉它的优势与劣势。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">换股前必须评估所有因素</div>
+            <p>为了将资金转向更好的股票而卖出一只<strong>令人相当满意</strong>的股票，必须谨慎而准确地评估整个形势中的<strong>所有</strong>影响因素。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、一个少有人懂的基本原则 -->
+      <section id="section-6">
+        <h2>六、一个少有人懂的基本原则</h2>
+
+        <p>说到这里，眼光独到的读者可能已经看出一个基本的投资原则——这个原则似乎也只有<strong>极少数成功的投资者</strong>才能够了解：</p>
+
+        <div class="pull-quote large">
+          <strong>某只股票如果是精挑细选出来的，而且经历过时间的考验，则很少能够找到卖出它的理由。</strong>
+        </div>
+
+        <p>可是金融界总是会不断提出推荐和评论，给出各种卖出优秀普通股的理由。这些理由真的正确吗？下面逐一检验三种最常见的错误理由。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>常见的卖出理由</th>
+              <th>结论</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>错误一</td>
+              <td>担心整体股市即将出现某种幅度的下跌（熊市）</td>
+              <td>❌ 不成立</td>
+            </tr>
+            <tr>
+              <td>错误二</td>
+              <td>这只优秀股票的<strong>价格涨幅过大、股价过高</strong></td>
+              <td>❌ 不成立</td>
+            </tr>
+            <tr>
+              <td>错误三</td>
+              <td>股价已有很大涨幅，上涨潜力"已被释放"，应换入还没上涨的股票</td>
+              <td>❌ <strong>最荒谬</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、错误一：因为害怕熊市而卖出 -->
+      <section id="section-7">
+        <h2>七、错误一：因为害怕熊市而卖出</h2>
+
+        <h3 id="section-7-1">7.1 与上一章同样的逻辑</h3>
+
+        <p>前一章已说过：如果由于担心大盘出现整体性下跌而推迟购买有吸引力的股票，那么从长期来看这种做法将会<strong>损失惨重</strong>。原因在于投资者的注意力错配：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>影响走势的力量</th>
+              <th>判断依据</th>
+              <th>投资者的实际反应</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>较强因素</strong></td>
+              <td>依靠自己的知识<strong>能做出明确判断</strong></td>
+              <td>被忽视</td>
+            </tr>
+            <tr>
+              <td><strong>较弱因素</strong></td>
+              <td>大致上只能依赖于<strong>猜测</strong></td>
+              <td>反而担心</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>买入值得投资的普通股时，不应该因为担心熊市的来临而受到过多影响。如果这个论点是正确的，那么<strong>不能因为害怕熊市而卖出优秀的股票就更加有道理</strong>——前一章提到的所有论点在此同样适用。</p>
+
+        <p>此外，考虑到<strong>资本利得税</strong>的因素，投资者正确卖出所持优秀股票的概率则进一步降低：优秀的股票在持有若干年后将会产生很大的利润，资本利得税将使出售持股的成本显得更为沉重。</p>
+
+        <h3 id="section-7-2">7.2 ⚠️ 代价更昂贵的理由：你不知道何时买回</h3>
+
+        <p>如果最初所选的股票的确很好，那么出现下一次牛市的时候，这只股票一定会创出<strong>新的股价高点，且远高于迄今为止的最高点</strong>。</p>
+
+        <p>那么投资者如何知道什么时候应该买回股票呢？理论上应该在下跌出现之后买回——但这种说法的前提是<strong>投资者知道跌势在什么时候结束</strong>。</p>
+
+        <p>作者的实际观察：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>观察结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>因担心熊市而抛售</td>
+              <td>见过许多投资者抛售了<strong>将在未来几年有巨大涨幅</strong>的股票，结果熊市往往没有预期而至，整个大盘却一路高歌猛进</td>
+            </tr>
+            <tr>
+              <td>熊市真的来临</td>
+              <td>能够在<strong>当初卖价以下</strong>买回当初卖出股票的投资者，<strong>不足 1/10</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>未能买回的两种典型原因：</p>
+
+        <ol>
+          <li>要么是在<strong>苦苦等待股价跌得更多</strong>；</li>
+          <li>要么是股价的确继续下跌，但他们却<strong>担心会发生一些别的事情</strong>阻碍股价回升，因此一直没有将股票买回。</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、错误二：因为"股价过高"而卖出 -->
+      <section id="section-8">
+        <h2>八、错误二：因为"股价过高"而卖出</h2>
+
+        <p>这种思维方式使得本性淳朴但投资经验尚浅的投资者错过未来庞大利润：<strong>一只优秀的股票价格涨幅过大，因此应该将其卖出</strong>。还有什么比这种说法更有道理吗？如果一只股票的价格过高，为什么要坚持持股而不是将其卖出呢？</p>
+
+        <p>在草率地得出结论前，我们要深入探讨这种说法的正确性：<strong>价格到底多高才算是过高？</strong></p>
+
+        <h3 id="section-8-1">8.1 "过高"的两种含义</h3>
+
+        <p>任何真正优秀的股票，其价格与市盈率都会稍高于那些获利能力稳定但尚未出现获利能力提升趋势的股票。毕竟，<strong>要想参与分享企业持续成长所带来的利益，显然需要付出得更多一些</strong>。</p>
+
+        <p>我们说某只股票"价格过高"时，指的可能是：</p>
+
+        <ol>
+          <li>它的股价相对于其<strong>预期获利能力</strong>，高于我们预期其应有的水平；</li>
+          <li>它的<strong>市盈率</strong>高于发展潜力与其类似的同行业公司。</li>
+        </ol>
+
+        <h3 id="section-8-2">8.2 ⚠️ 问题在于：这种精确度根本做不到</h3>
+
+        <p>这些说法都在试图以<strong>超出可能范围的精确度</strong>来衡量一些东西，实际上我们不能做到。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>主体</th>
+              <th>能做到的判断</th>
+              <th>做不到的判断</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>投资者</strong></td>
+              <td>只能用定性描述：<strong>"大致相同""略有上涨""上涨很多""大幅上涨"</strong></td>
+              <td>不能准确确定一家公司两年后的每股收益是多少</td>
+            </tr>
+            <tr>
+              <td><strong>公司高级管理人员</strong></td>
+              <td>判断几年后每股利润会不会大幅上升，能做的<strong>和普通投资者基本类似</strong></td>
+              <td>具体增加多少、到底什么时候出现这种增幅，通常包含了<strong>很多的猜测</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-8-3">8.3 一个假设：35 倍市盈率的贵，重要吗</h3>
+
+        <p>假设目前某只股票的市盈率不是通常的 <strong>25 倍</strong>，而是 <strong>35 倍</strong>：</p>
+
+        <ul>
+          <li>该公司也许在近期推出新产品，但金融界人士还无法知晓这种新产品真正的市场价值；</li>
+          <li>或许公司并没有这样的新产品，但<strong>公司的成长性很高，10 年之后规模将达到当前规模的 4 倍</strong>。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">高估 35% 还重要吗</div>
+            <p>那么"目前的股价是否被高估了 <strong>35%</strong>"，还有那么重要吗？真正需要注意的是——<strong>不要轻易卖出未来价值将出现大幅提高的股票</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-8-4">8.4 老朋友：资本利得税再次登场</h3>
+
+        <p>成长型股票之所以被人认为价格过高而建议卖出，部分原因就是出售时持股人必须按规定缴纳金额很大的资本利得税。因此如果卖出股票，代价是<strong>双重的</strong>：</p>
+
+        <ol>
+          <li>失去这家公司的股票，从而无法在未来的几年继续分享其较高的成长；</li>
+          <li>还必须缴纳<strong>很大一笔税赋</strong>。</li>
+        </ol>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>提问</th>
+              <th>作者的回答</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>如果坚定相信这只股票的价格可能在一定时期内还能继续上涨，继续持有是不是更安全、更省钱？</td>
+              <td>✅ 是。我们在所投资的那只股票上可以赚得更可观的利润</td>
+            </tr>
+            <tr>
+              <td>如果股价在一段时间内下跌了 35%，这算是什么严重的事情吗？</td>
+              <td>并不算</td>
+            </tr>
+            <tr>
+              <td>如果能保持长久盈利的地位，暂时地失去小部分利润又能怎么样呢？</td>
+              <td>无关大局</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、错误三："涨得太多了，该换没涨的" -->
+      <section id="section-9">
+        <h2>九、错误三："涨得太多了，该换没涨的" —— 最荒谬的论点</h2>
+
+        <p>投资者有时还持有另一种论点，使他们错失原本可以赚到的那部分利润，这个论点也是<strong>所有错误看法中最荒谬的</strong>：</p>
+
+        <div class="pull-quote">
+          自己所持仓的股票已经有了很大的涨幅，因此<strong>仅仅因为股价有一定的涨幅</strong>，就断定此股票大部分的上涨潜力已经被释放出来了，所以应该将其卖出，并将资金转向其他还没上涨的股票。
+        </div>
+
+        <p>作者认为投资者只应该买入优秀的公司，而<strong>真正优秀公司的股票根本不会以这种方式运作</strong>。</p>
+
+        <h3 id="section-9-1">9.1 同学合约的假设实验</h3>
+
+        <p>假定今天是你大学毕业的日子（如果你没上大学，就把今天当作高中毕业的那一天——是大学还是高中毕业并不重要）。</p>
+
+        <p><strong>交易条款：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>对方</strong></td>
+              <td>你班上的所有男同学，他们所有人都很急需用钱</td>
+            </tr>
+            <tr>
+              <td><strong>你付出</strong></td>
+              <td>给他们每人一笔资金，金额相当于<strong>他们毕业开始工作后一年之内总收入的 10 倍</strong></td>
+            </tr>
+            <tr>
+              <td><strong>你得到</strong></td>
+              <td>他们今后<strong>每年收入的 1/4</strong></td>
+            </tr>
+            <tr>
+              <td><strong>你的约束</strong></td>
+              <td>虽然你认为这种交易方式非常好，但你拥有的资金<strong>只能够与三位同学</strong>做此交易</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>此时你的推理方式，与投资者运用有效的投资原则选择股票的方式极为类似：</strong></p>
+
+        <ul>
+          <li>你会马上开始分析这些同学，<strong>不是</strong>看他们的社交能力有多强、或在哪些方面富于才华，<strong>只看他们日后能够赚多少钱</strong>；</li>
+          <li>如果班上有很多同学，可能其中大多数人<strong>一开始就会被排除</strong>——因为你对他们了解程度并不够，没办法判断他们的赚钱能力到底有多强。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">与明智的普通股购买非常类似</div>
+            <p>从这一点来看，这又和<strong>明智的普通股购买</strong>非常类似。</p>
+          </div>
+        </div>
+
+        <h3 id="section-9-2">9.2 十年之后</h3>
+
+        <p>最终你选出了三位同学进行交易，因为你觉得他们几个人在未来会赚到最多的钱。10 年过去了，其中一位表现非常出色：</p>
+
+        <ul>
+          <li>他在一家大公司工作，不断地得到晋升；</li>
+          <li>公司内部人员已经传出消息，说总裁非常欣赏他，并准备让他在 <strong>10 年之后接任总裁</strong>的位置；</li>
+          <li>到那时候，他将拥有高额的薪水、股票期权和退休金。</li>
+        </ul>
+
+        <p><strong>现在请那些总是建议投资者卖出"涨得过高"的好股票获利了结的股市评论家们想一想：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>摆在你面前的选择</th>
+              <th>你的反应</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>有人愿意给你相当于<strong>原始投资金额 6 倍</strong>的资金，买你和这位同学的合约</td>
+              <td>你会怎么做？</td>
+            </tr>
+            <tr>
+              <td>有人建议你卖出这份合约，转而去和另一位<strong>年收入仍跟 10 年前刚毕业时基本相同</strong>的同学签订合约</td>
+              <td>⚠️ 你一定会觉得提出这种建议的人是<strong>脑子有问题</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>有人可能觉得"已经取得成功的同学收入已经达到顶峰，而财务上不成功的同学未来的成长空间还很大"——这样的说法显得<strong>相当愚蠢</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">卖出好股票的建议一样愚蠢</div>
+            <p>如果你对自己所持的股票了解得非常清楚，一定会认为时常听到的那些<strong>卖出好股票的建议也是一样愚蠢</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-9-3">9.3 同学与普通股的唯一差别，反而强化了结论</h3>
+
+        <p>你可能认为这些论点听起来也不无道理，毕竟同学跟普通股是有所区别的。两者之间的确有着一个很大的不同点：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对象</th>
+              <th>时间限制</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>同学</strong></td>
+              <td>生命是有限的，最终会离开人世</td>
+            </tr>
+            <tr>
+              <td><strong>普通股</strong></td>
+              <td><strong>没有类似的时间限制</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这个不同点<strong>更加强化</strong>了下面这一论点：</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">绝对不要因为涨幅而卖出</div>
+            <p><strong>绝对不要因为股价涨幅已经很大、而且在短期内股价过高，就卖出优秀的普通股。</strong></p>
+          </div>
+        </div>
+
+        <p>原因在于：发行普通股的公司能够<strong>全面地甄选优秀的管理人才</strong>，并且在公司的策略、运用方法和技术方面训练这些人才，使得这家公司能够<strong>基业长青、传承数代</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>实证案例</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>杜邦公司</strong></td>
+              <td>已经传承了<strong>两个世纪</strong></td>
+            </tr>
+            <tr>
+              <td><strong>陶氏化学公司</strong></td>
+              <td>在其才华横溢的创始人<strong>去世多年后</strong>依然表现良好</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>在这个人类欲望无穷无尽、市场潜力惊人的时代，<strong>企业的成长是无止境的</strong>，而不像人类一样受到寿命的限制。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、本章小结 -->
+      <section id="section-10">
+        <h2>十、本章小结</h2>
+
+        <p><strong>卖出的完整决策地图：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>该不该卖</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>买入本身就是错误，公司实况远不如预期</td>
+              <td>✅ 果断认赔卖出，盘活资金</td>
+            </tr>
+            <tr>
+              <td>管理层松懈退化</td>
+              <td>✅ 马上卖出，不问大盘与税负</td>
+            </tr>
+            <tr>
+              <td>产品市场成长潜力枯竭，不再符合十五个原则</td>
+              <td>✅ 卖出，节奏可稍缓</td>
+            </tr>
+            <tr>
+              <td>有把握发现远优于现有持仓的标的（如 12% vs 20%）</td>
+              <td>✅ 可换股，但需慎之又慎</td>
+            </tr>
+            <tr>
+              <td>担心大盘要跌、熊市要来</td>
+              <td>❌ 不卖</td>
+            </tr>
+            <tr>
+              <td>觉得市盈率太高、股价"过高"</td>
+              <td>❌ 不卖</td>
+            </tr>
+            <tr>
+              <td>涨得太多了，想换成"还没涨的"</td>
+              <td>❌ 绝对不卖</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          💡 <strong>一句话概括本章思想</strong>：如果当初买进普通股时各项选择工作都做得很对，那么<strong>卖出的时间几乎永远不会到来</strong>。
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    let lastActive = null;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '怎样选择成长股';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页（含子目录路径）
+    const relativePath = 'books/' + BOOK_FOLDER + '/第一部分：普通股和不普通的利润/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

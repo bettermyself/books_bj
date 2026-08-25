@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第八章 投资者的"五个不要" · 怎样选择成长股</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    /* 尚未生成阅读页的章节（不可点击） */
+    .toc-lectures .no-link {
+      display: block;
+      font-size: .82rem;
+      color: var(--text3);
+      padding: .35rem .6rem;
+      line-height: 1.45;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Lists ===== */
+    .chapter-article ul, .chapter-article ol {
+      margin: .25rem 0 1.25rem;
+      padding-left: 1.7rem;
+    }
+    .chapter-article li {
+      font-size: .92rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: .45rem;
+    }
+    .chapter-article li strong { color: var(--gold-dk); }
+    .chapter-article ul li::marker { color: var(--gold); }
+    .chapter-article ol li::marker { color: var(--gold); font-weight: 700; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">怎样选择成长股</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一部分：普通股和不普通的利润</span>
+          <ul class="toc-lectures">
+            <li><a href="第一章 往事中提供的线索.html">第一章 往事中提供的线索</a></li>
+            <li><a href="第二章 “闲聊”的妙处.html">第二章 "闲聊"的妙处</a></li>
+            <li><a href="第三章 买入什么股票——寻找优良普通股的十五个原则.html">第三章 买入什么股票——寻找优良普通股的十五个原则</a></li>
+            <li><a href="第四章 应该买什么样的股票.html">第四章 应该买什么样的股票</a></li>
+            <li><a href="第五章 什么时候买进股票.html">第五章 什么时候买进股票</a></li>
+            <li><a href="第六章 什么时候卖出，什么时候不要卖出.html">第六章 什么时候卖出，什么时候不要卖出</a></li>
+            <li><a href="第七章 股利的喧嚣.html">第七章 股利的喧嚣</a></li>
+            <li><a href="第八章 投资者的“五个不要”.html" class="active">第八章 投资者的"五个不要"</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- 本章目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、不要买创业阶段公司的股票</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 表面上的吸引力从何而来</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 老公司与创业公司：可观察性的天壤之别</a></li>
+        <li><a href="#section-1-3" class="sub">1.3 创业团队的结构性缺口</a></li>
+        <li><a href="#section-1-4" class="sub">1.4 💡 结论：把创业公司留给能补位的专业机构</a></li>
+        <li><a href="#section-2">二、不要忽视在"场外市场"交易的好股票</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 混淆的来源</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 25 年间市场结构的四重变化</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 进步的代价：流通性下降</a></li>
+        <li><a href="#section-2-4" class="sub">2.4 经纪人与销售员：两种截然不同的商业模式</a></li>
+        <li><a href="#section-2-5" class="sub">2.5 场外市场的报价机制</a></li>
+        <li><a href="#section-2-6" class="sub">2.6 买卖价差是怎么构成的</a></li>
+        <li><a href="#section-2-7" class="sub">2.7 这套制度会被滥用吗</a></li>
+        <li><a href="#section-2-8" class="sub">2.8 真正的优势在卖出端：流通性</a></li>
+        <li><a href="#section-2-9" class="sub">2.9 流通性横向对比</a></li>
+        <li><a href="#section-2-10" class="sub">2.10 上市与未上市的界线正在模糊</a></li>
+        <li><a href="#section-2-11" class="sub">2.11 💡 本节结论：两条原则，与上市股票并无不同</a></li>
+        <li><a href="#section-3">三、不要因为你喜欢某公司年报的"语调"而去购买该公司的股票</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 一种未被察觉的影响</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 广告牌的比喻</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 反过来用行不行？一个重要的例外</a></li>
+        <li><a href="#section-4">四、不要认为一家公司的市盈率很高，就必然表示未来的收益成长空间已经反映在了价格上</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 XYZ 公司的假设案例</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 ⚠️ 那个流行却错误的推论</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 错误究竟在哪里</a></li>
+        <li><a href="#section-4-4" class="sub">4.4 更难的变体：ABC 公司与"背景发生变化"</a></li>
+        <li><a href="#section-4-5" class="sub">4.5 判定标准：增长源是"一次性"还是"可持续"</a></li>
+        <li><a href="#section-5">五、不要计较蝇头小利</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 一个 50 美元换来的教训</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 小额投资者：规则非常简单</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 大额投资者：问题没有这么简单</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 💡 如果你不信任你的经纪人</a></li>
+        <li><a href="#section-6">六、本章小结</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 五条禁令速查</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 贯穿五条禁令的两条主线</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">怎样选择成长股 · 第一部分：普通股和不普通的利润 · 第八章</div>
+        <h1 class="article-title">第八章：投资者的"五个不要"</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>菲利普·A·费舍</span>
+          <span><strong>主题</strong>五个投资禁令 · 避开昂贵的陷阱</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        <strong>核心命题</strong>：投资的成败不仅取决于"做对什么"，也取决于<strong>避开哪些看似合理、实则昂贵的陷阱</strong>。本章列出五条禁令，它们分别对应对象选择、市场场所、信息来源、估值判断与交易执行五个环节。
+      </div>
+
+      <table class="article-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>禁令</th>
+            <th>要防范的错误直觉</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>不要买创业阶段公司的股票</td>
+            <td>"上市即占据有利地位"</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>不要忽视在"场外市场"交易的好股票</td>
+            <td>"没上交易所就没有流通性"</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>不要因为喜欢年报的"语调"而买股票</td>
+            <td>"文风好=管理层好"</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>不要认为高市盈率必然已反映未来成长</td>
+            <td>"2 倍市盈率 = 提前吃掉 5 年收益"</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>不要计较蝇头小利</td>
+            <td>"省下的每一分钱都是赚到的"</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 一、不要买创业阶段公司的股票 -->
+      <section id="section-1">
+        <h2>一、不要买创业阶段公司的股票</h2>
+
+        <h3 id="section-1-1">1.1 表面上的吸引力从何而来</h3>
+
+        <p>有一个比较接近成功投资核心的说法：要在投资中找到<strong>正在开发新的产品与工艺，或者正在开发新市场</strong>的公司。而刚刚成立或即将成立的公司，往往正在尝试做这些事。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>创业公司的卖点</th>
+              <th>具体表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>开发新产品</strong></td>
+              <td>许多这类公司的成立，为的就是开发各种各样的新产品</td>
+            </tr>
+            <tr>
+              <td><strong>进入高成长行业</strong></td>
+              <td>很多公司的创立，是为了到一个成长潜力巨大的行业中去掘金，比如<strong>电子行业</strong></td>
+            </tr>
+            <tr>
+              <td><strong>博取资源类暴利</strong></td>
+              <td>还有很多新公司意图在<strong>矿物开采或其他自然资源</strong>领域有所斩获，一旦成功十分诱人</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>基于以上理由，乍看之下，这些<strong>尚未盈利的初创公司貌似颇具投资价值</strong>。</p>
+
+        <p>还有一种说法往往很能提高投资者对此类公司的兴趣：只有在公司股票<strong>首次公开上市时就买入</strong>，才有机会"占据有利地位"。一家经营成功的公司，其股票首次公开上市的市盈率仅有几倍而已，为什么要让别人来把钱赚走呢？我们为什么不使用像寻找优秀老牌公司的办法，通过询问和调查去找出正在推销股票的优秀创业型公司呢？</p>
+
+        <h3 id="section-1-2">1.2 老公司与创业公司：可观察性的天壤之别</h3>
+
+        <p>从投资的观点，我相信那些<strong>业务运营不足两三年、盈利年份不足一年</strong>的公司，根本无法与盈利稳定、根基稳固的老公司相比——<strong>即使这家老公司规模很小，年营业额不超过 100 万美元。</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>考察维度</th>
+              <th>根基稳固的老公司</th>
+              <th>创业阶段的公司</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>经营部门运转</strong></td>
+              <td>生产、销售、成本会计核算、管理团队的团队合作、业务运营等<strong>一切问题均在正常运营中，可被观察</strong></td>
+              <td>只能通过<strong>业务规划蓝图</strong>去猜测可能出现什么问题、可能具备什么优点</td>
+            </tr>
+            <tr>
+              <td><strong>第三方意见</strong></td>
+              <td>能了解到其他<strong>有真知灼见的观察者</strong>的意见，因为这些人会定期观察该公司局部或所有的相对优势与劣势</td>
+              <td>缺乏长期跟踪者，无从交叉验证</td>
+            </tr>
+            <tr>
+              <td><strong>判断难度</strong></td>
+              <td>以观察为基础</td>
+              <td>靠猜，<strong>困难得多，做出错误结论的可能性也高很多</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">成功率极低</div>
+            <p>实际上，无论投资者的技巧多么好，这事做起来都是极为困难的。与以老公司作为判断对象相比，从创业期的公司中挑选出能达到"<strong>安打</strong>"（棒球术语）的优秀公司，成功率极低。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-3">1.3 创业团队的结构性缺口</h3>
+
+        <p>年轻的创业型公司往往由<strong>一两个在业务经营方面具备高超才能的人</strong>所主导，但难免会欠缺其他一些不可或缺的才能。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>常见的人才组合</th>
+              <th>缺失的能力</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>卓越的<strong>推销员</strong></td>
+              <td>缺乏其他经营能力</td>
+            </tr>
+            <tr>
+              <td>优秀的<strong>发明家或生产高手</strong></td>
+              <td>完全不知道即使是最好的产品也需要<strong>高超的营销方法</strong>来赢得市场</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">沟通层面的两道墙</div>
+            <p>更棘手的是沟通层面的两道墙：</p>
+            <ol>
+              <li>投资者基本上<strong>无法使这些人相信</strong>，他们自身或他们年轻的公司缺乏其他的技能；</li>
+              <li>投资者更不可能向他们<strong>指出哪里能找到</strong>所需要的人才。</li>
+            </ol>
+          </div>
+        </div>
+
+        <h3 id="section-1-4">1.4 💡 结论：把创业公司留给能补位的专业机构</h3>
+
+        <p>不管创业公司第一眼看上去多么吸引人，我认为这些公司应留给<strong>专业机构</strong>去投资。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>主体</th>
+              <th>能否胜任创业期投资</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>专业机构</strong></td>
+              <td>✅ 具备优秀的管理人才，在创业公司业务开展之初，一旦公司暴露出弱点便能<strong>及时提供支援</strong></td>
+            </tr>
+            <tr>
+              <td><strong>一般投资者</strong></td>
+              <td>❌ 无法提供这种人才，更无法<strong>说服公司管理层</strong>相信有必要利用这种支援</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>如果一定要投资于创业公司，往往会是<strong>一段梦想破灭的经历</strong>。在老公司当中有很多尚好的投资机会，普通投资者应该把"<strong>绝不要买入创业公司</strong>"当作一条原则来遵守，不管这些创业公司看起来多么吸引人。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、不要忽视在"场外市场"交易的好股票 -->
+      <section id="section-2">
+        <h2>二、不要忽视在"场外市场"交易的好股票</h2>
+
+        <div class="pull-quote">
+          本节的落点是<strong>市场流通性</strong>：未上市交易的股票相对于已在证券交易所上市股票的吸引力，与两类股票各自的流通性有极为密切的关系。
+        </div>
+
+        <h3 id="section-2-1">2.1 混淆的来源</h3>
+
+        <p>每个人都应该认识到市场流通性的重要性。通常情况下，绝大多数的买入行为都是针对那些<strong>由于某种原因而卖出</strong>的股票，这个原因可能与金融市场有关，也可能是由于个人因素。</p>
+
+        <p>关于哪些股票可以为投资者带来足够的保护、哪些不能，投资者的心中会有一些混乱。对于没有在任何交易所上市交易的股票（通常被称为"<strong>场外交易</strong>"股票）来说，市场对它们的需求反过来又产生了更多的混乱。</p>
+
+        <h3 id="section-2-2">2.2 25 年间市场结构的四重变化</h3>
+
+        <p>出现这种混乱的根本原因在于：25 年来，普通股的买入从根本上发生了变化，这些变化使得 <strong>20 世纪 50 年代</strong>的市场和 <strong>20 年代</strong>那令人难忘的市场有很大的不同。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>20 年代及以前</th>
+              <th>50 年代（当下）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>客户结构</strong></td>
+              <td>股票经纪人服务的客户都是<strong>有钱人</strong>，而且数量相当少</td>
+              <td>一次性大量买入的买方逐渐减少，<strong>每次少量买入</strong>的买方大量增加</td>
+            </tr>
+            <tr>
+              <td><strong>单笔规模</strong></td>
+              <td>大部分客户买入数量相当大，往往一买就是<strong>几千股</strong></td>
+              <td>小额为主</td>
+            </tr>
+            <tr>
+              <td><strong>行为性质</strong></td>
+              <td>买主的目的通常是以更高的价格卖给另一个人，与其说是投资，<strong>不如说是赌博</strong></td>
+              <td>更适合作为<strong>追求长期增长</strong>的投资标的</td>
+            </tr>
+            <tr>
+              <td><strong>支付方式</strong></td>
+              <td><strong>融资买入</strong>（借钱买股票）为人们所接受</td>
+              <td>大多数买入都是<strong>现金支付</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>驱动这些变化的力量有三类：</p>
+
+        <p><strong>① 财富分布的变化</strong></p>
+
+        <ul>
+          <li>较高的<strong>所得税和遗产税</strong>；</li>
+          <li>更重要的是美国各个阶层的<strong>收入差距逐渐缩小</strong>——非常富有和非常贫穷的人数量都在逐年减少，<strong>中产阶级人数逐渐增加</strong>。</li>
+        </ul>
+
+        <p><strong>② 机构买方的崛起</strong></p>
+
+        <p>投资信托、养老基金和分红信托，甚至某些大银行信托部门，<strong>不再代表少数的大资金买方</strong>；相反，他们是职业经理人，受托处理<strong>无数小规模买方聚集起来的资金</strong>。</p>
+
+        <p><strong>③ 法律与监管的重塑</strong>（与机构变化互为因果）</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>举措</th>
+              <th>目的与效果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>证券交易委员会</strong>的建立</td>
+              <td>阻止过去发生的一些猖獗行为，比如引发股票市场投机交易的<strong>联合操纵</strong></td>
+            </tr>
+            <tr>
+              <td>现行法律法规</td>
+              <td>相比以前的习惯性做法，<strong>限制了融资买入</strong></td>
+            </tr>
+            <tr>
+              <td>公司自身的演变（最重要）</td>
+              <td>如今的企业比以前更适合作为<strong>长期增长</strong>的投资标的，而不是仅作为随时买卖的投机工具</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-3">2.3 进步的代价：流通性下降</h3>
+
+        <p>所有这些情况都深刻改变了市场环境。尽管以<strong>牺牲市场流通性</strong>为代价，但毫无疑问，这种改变是一种<strong>市场化的进步</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>观察项</th>
+              <th>实际变化</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>大多数股票的流动性</td>
+              <td><strong>降低</strong>了，而不是增加</td>
+            </tr>
+            <tr>
+              <td>纽约股票交易所成交量</td>
+              <td>虽然经济取得了惊人的增长，再加上似乎无休止的<strong>拆股</strong>行为，成交量还是<strong>减少</strong>了</td>
+            </tr>
+            <tr>
+              <td>小规模交易所成交量</td>
+              <td><strong>基本消失</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">一个不容忽视的事实</div>
+            <p>赌徒、高频交易的投机者，甚至"容易受骗的傻瓜"都试图猜透那些不利于经济发展的联合操纵，但他们<strong>却构成了一个真实的市场</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-4">2.4 经纪人与销售员：两种截然不同的商业模式</h3>
+
+        <p>我不想玩弄文字游戏。不过，我们必须知道这些事情会导致<strong>股票经纪人数量日益减少，而股票销售员数量日趋增加</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对比项</th>
+              <th>股票经纪人（broker）</th>
+              <th>股票销售员（salesman）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>工作场所</strong></td>
+              <td>在<strong>竞价市场</strong>中工作</td>
+              <td>主要服务场外交易</td>
+            </tr>
+            <tr>
+              <td><strong>工作内容</strong></td>
+              <td>接受一个<strong>已经决定好</strong>投资行为的买入指令，然后将这张委托单与自己或其他经纪人的卖出委托单<strong>撮合</strong></td>
+              <td>必须花费<strong>较长时间</strong>才能说服客户采取某些投资行为</td>
+            </tr>
+            <tr>
+              <td><strong>耗时</strong></td>
+              <td>这个过程不会花很长时间</td>
+              <td>一天中能够运用的时间就那么多</td>
+            </tr>
+            <tr>
+              <td><strong>收费模式</strong></td>
+              <td>每次交易只收取<strong>很低的手续费</strong>，靠成交量取胜；只要委托单交易量很多，全年下来仍有可观利润</td>
+              <td>必须收取<strong>较高的服务佣金</strong></td>
+            </tr>
+            <tr>
+              <td><strong>客户构成</strong></td>
+              <td>大额委托单更划算</td>
+              <td>在今天的经济环境下，<strong>小客户是大部分销售员的服务对象</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>证券交易所的运营方式主要仍需依赖股票经纪人，而不是股票销售员。他们的佣金比例提高了，但<strong>涨幅只和其他大多数的服务差不多</strong>。</p>
+
+        <h3 id="section-2-5">2.5 场外市场的报价机制</h3>
+
+        <p>相对而言，场外交易市场的运营原理则完全不同。<strong>全国证券商协会</strong>的指定会员们，天天都会在地区性报纸上刊登一长串未上市而又有吸引力的证券行情报价，当地的股票交易者对买卖这些股票很有兴趣。他们和每一种证券的场外交易机构联系都很密切，从而编纂出这些行情报价。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>报价性质</th>
+              <th>证券交易所</th>
+              <th>场外交易市场</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>数字含义</strong></td>
+              <td>实际交易的价格范围</td>
+              <td>⚠️ <strong>并非</strong>实际成交价，而是<strong>买价和卖价</strong></td>
+            </tr>
+            <tr>
+              <td><strong>理论定义</strong></td>
+              <td>—</td>
+              <td>任何有兴趣的金融机构<strong>愿意买入</strong>每种股票的最高价格，以及<strong>愿意卖出</strong>股票的最低价格</td>
+            </tr>
+            <tr>
+              <td><strong>为何如此</strong></td>
+              <td>有集中结算机构</td>
+              <td><strong>缺乏一个可以报告交易价格的集中结算机构</strong>，做不到这一点</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-6">2.6 买卖价差是怎么构成的</h3>
+
+        <p>通过仔细的检查几乎总是能够发现，买方或卖方的报价总是<strong>很接近提供报价时股票的实际价格</strong>。卖方的报价比买方报价要高，差价通常是证券交易所中以同样价格所售股票收取手续费的<strong>数倍</strong>。</p>
+
+        <p>这个差价的用途被明确设计过：</p>
+
+        <ol>
+          <li>让场外交易商能够<strong>以买价买入</strong>；</li>
+          <li>支付给花时间推销证券的销售员一定的<strong>手续费</strong>；</li>
+          <li>再去除一些<strong>日常费用</strong>后仍能获得<strong>合理的利润</strong>。</li>
+        </ol>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">另一面同样重要</div>
+            <p>如果客户（<strong>特别是大客户</strong>）主动找到同一家金融机构出价买入某只股票，这时就<strong>不需支付销售员的手续费</strong>，通常能以买价加上相当于证券交易所手续费的价格买到股票。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          "买入的一边，我们有个市场。卖出的一边，我们有两个市场。我们有<strong>零售和批发市场</strong>，部分取决于买进的数量，部分取决于卖出的数量和包含的服务。"
+          <cite>— 一位场外交易商</cite>
+        </div>
+
+        <h3 id="section-2-7">2.7 这套制度会被滥用吗</h3>
+
+        <p>如果碰到<strong>厚颜无耻的交易商</strong>，这套制度明显会遭到滥用——其他的制度也是如此。但是，如果投资者挑选场外交易商时，和选择其他任何为他服务的专家一样谨慎，这种制度就会<strong>运营得非常好</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>现实约束</th>
+              <th>制度的应对</th>
+              <th>投资者的收获</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="white-space:normal;">一般的投资者没有时间，也没有能力为自己挑选证券</td>
+              <td>交易商在<strong>严密的监督</strong>之下，只允许其销售员销售<strong>某些证券种类</strong></td>
+              <td>这种做法实际上等于让销售员扮演了<strong>投资咨询顾问</strong>的角色</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">值得投入的成本</div>
+            <p>因此，投资者投入一定的成本是值得的。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-8">2.8 真正的优势在卖出端：流通性</h3>
+
+        <p>从更加老练投资者的观点来看，这套制度的<strong>真正优势不在于买进股票方面</strong>，而是它能够<strong>提高未上市股票的流动性或市场性</strong>。</p>
+
+        <p>这些股票能够给交易商带来足够高的利润，因此其行为模式是：</p>
+
+        <ul>
+          <li>大量的场外交易商会<strong>保有一定库存量</strong>的流通性非常好的股票，他们一点儿也不介意在市场上<strong>多买 500 股或 1000 股</strong>；</li>
+          <li>如果他们喜欢的股票所供销售的数量较大，往往会<strong>开一次销售会议</strong>，多花点儿心思去推动这些股票在市场上流通（正常情况下会要求特别的销售手续费）。</li>
+        </ul>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>条件</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="white-space:normal;">某只场外股票通常有<strong>两家或更多优良的场外交易商</strong>进行买卖</td>
+              <td>✅ 通常会有充足的流通性，以满足大部分投资者的需求</td>
+            </tr>
+            <tr>
+              <td>供售数量较多时</td>
+              <td>交易商可能要求获得<strong>特别的销售手续费</strong>，以便在市场上交易大量的股票</td>
+            </tr>
+            <tr>
+              <td>手续费水平</td>
+              <td>只相当于销售价格的<strong>一个相当低的比率</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">投资者的目标</div>
+            <p>由此，投资者希望卖出的股票<strong>能在不使市场价格下跌的情况下转换成现金</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-9">2.9 流通性横向对比</h3>
+
+        <p>与在证券交易所上市的股票相比，场外交易的股票流动性如何？答案主要取决于<strong>哪种股票</strong>以及<strong>在哪家证券交易所</strong>上市。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>股票所在场所</th>
+              <th>市场流通性评价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="white-space:normal;"><strong>纽交所</strong>中发行数量较多、交易较活跃的股票</td>
+              <td>即使在今天的环境下，依然存在一个足够大的<strong>竞价市场</strong>，几乎所有股票都能以较低手续费交易而不致压低市场价格</td>
+            </tr>
+            <tr>
+              <td style="white-space:normal;"><strong>纽交所</strong>中交投较清淡的股票</td>
+              <td>市场性依然不错，但当<strong>巨量卖出委托单</strong>出现并收取正常手续费时，有时<strong>价格会大跌</strong></td>
+            </tr>
+            <tr>
+              <td style="white-space:normal;"><strong>小型交易所</strong>上市的普通股</td>
+              <td>⚠️ 依我之见，市场性问题往往<strong>相当严重</strong></td>
+            </tr>
+            <tr>
+              <td style="white-space:normal;"><strong>较好的场外交易股票</strong></td>
+              <td>流动性往往<strong>高于</strong>美国证券交易所和各区域性证券交易所上市的大多数公司股票</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>交易所的应对措施：</strong>"特别卖出"机制</p>
+
+        <p>各大证券交易所已经认识到了这种状况，并采取了相应措施。如今，交易所要是认为上市股票的某笔卖出委托单<strong>数量太大，不能以正常方式交易</strong>时，可能会允许使用"<strong>特别卖出</strong>"机制：</p>
+
+        <ol>
+          <li>所有的会员都将<strong>知道本笔卖出委托单的报价</strong>；</li>
+          <li>卖出这些证券可以<strong>收取较高的手续费</strong>。</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">换个身份来卖</div>
+            <p>换句话说，如果卖出数量过大、经纪人没办法以<strong>经纪人</strong>的身份处理，便以足够高的手续费以<strong>销售员</strong>的身份来卖出这些股票。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-10">2.10 上市与未上市的界线正在模糊</h3>
+
+        <p>如今所有这些举措都在一定时间内<strong>拉近了上市和未上市股票市场之间的差距</strong>，比如越来越多的买入是由销售员而不是由只接受交易指令的经纪人处理。</p>
+
+        <p>从市场流通的观点来看，这并不表示在纽交所里交易活跃的热门股票比那些较好的场外交易股票更有优势。我想那些与规模较小的证券交易所颇有渊源的人士一定十分不同意我的说法；不过我相信，如果做一次<strong>立场公正的研究</strong>，那么研究结果会证明我的看法是正确的。</p>
+
+        <p>这也解释了近年来的一个现象：许多中小规模的公司在经历成长之后，<strong>不愿在小规模的交易所上市</strong>。它们的路径是——</p>
+
+        <ol>
+          <li>先选择在<strong>场外交易市场</strong>上市；</li>
+          <li>等公司规模成长到某个适合在"<strong>大盘</strong>"（也就是纽约证券交易所）上市时，再选择上市交易。</li>
+        </ol>
+
+        <h3 id="section-2-11">2.11 💡 本节结论：两条原则，与上市股票并无不同</h3>
+
+        <p>简而言之，关于场外交易证券，投资者应遵守的投资原则和对上市证券的投资原则<strong>并没有太大的不同</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>顺序</th>
+              <th>原则</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>第一</strong></td>
+              <td>十分肯定选到的是<strong>正确的证券</strong></td>
+            </tr>
+            <tr>
+              <td><strong>第二</strong></td>
+              <td>确定你找到了<strong>能干而恪守职责的经纪人</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>如果投资者把这两件事都做好了，就<strong>无需在乎自己所买的股票是在场外交易，还是在交易所里上市交易</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、不要因为你喜欢某公司年报的"语调"而去购买该公司的股票 -->
+      <section id="section-3">
+        <h2>三、不要因为你喜欢某公司年报的"语调"而去购买该公司的股票</h2>
+
+        <h3 id="section-3-1">3.1 一种未被察觉的影响</h3>
+
+        <p>投资者通常都没有仔细分析为什么他们会买进某只股票而不买进另一只。如果仔细分析，可能会惊讶地发现：自己的买入行为通常受到公司<strong>致股东年报</strong>中那些概括性评论的<strong>用词和格式</strong>的影响。</p>
+
+        <p>年报的语调是一把双面刃：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>年报可能反映的东西</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="white-space:normal;"><strong>管理层的经营哲学、策略或目标</strong></td>
+              <td>其精确程度不亚于经过审计的财务报表对一段期间公司业绩的反映</td>
+            </tr>
+            <tr>
+              <td style="white-space:normal;">⚠️ <strong>公共关系部门的能力</strong></td>
+              <td>即在大众心目中<strong>营造公司形象</strong>的能力</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">两个无法核实的细节</div>
+            <ul>
+              <li>我们无法判断那些<strong>总裁署名</strong>的文章是真的出于他本人之手，还是公共关系部门的员工代为执笔；</li>
+              <li>那些<strong>具有诱惑力的照片和色彩绚丽的图表</strong>，不一定能反映出管理团队的才能出众、同心协力和激情饱满。</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 id="section-3-2">3.2 广告牌的比喻</h3>
+
+        <p>让年报里的遣词造句和语调影响买入普通股的决策，就如同<strong>因为见到广告牌上的广告很吸引人而去买某种商品</strong>。或许这件商品买回家后，用起来的确像广告中说得那么好，但也有可能并非如此。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>购买对象</th>
+              <th>凭广告冲动购买的后果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>低价的商品</strong></td>
+              <td>也许还算说得过去——买了之后才知道买得对不对，即便买错，<strong>损失也不会很大</strong></td>
+            </tr>
+            <tr>
+              <td><strong>普通股</strong></td>
+              <td>⚠️ 很少人可以有钱到<strong>凭一时冲动</strong>而购买股票的地步</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>我们最好记住：如今的公司年报通常都是<strong>经过精心加工</strong>的，以便赢得股东的青睐。所以不能只看外表，重要的是应该<strong>深入探究事实</strong>。其他的销售工具也都倾向于只展示出公司最好的一面，它们<strong>很少平衡而完整地讨论公司经营中的真正问题和困难</strong>，通常总是会过于乐观。</p>
+
+        <h3 id="section-3-3">3.3 反过来用行不行？一个重要的例外</h3>
+
+        <p>那么，如果投资者不想让自己对年报语调的好感过度影响后续的投资行为，<strong>反其道而行之</strong>——让不利的内容影响他，行不行呢？</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>判断</th>
+              <th>理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="white-space:normal;">一般情况下以负面语调作为卖出/回避依据</td>
+              <td>❌ 通常不可以</td>
+              <td>这就好像试图通过<strong>外部的包装</strong>来评价一个盒子里面东西的好坏</td>
+            </tr>
+            <tr>
+              <td style="white-space:normal;">⚠️ <strong>重要的例外</strong></td>
+              <td>✅ 可以作为负面信号</td>
+              <td>当年报<strong>未能针对投资者真正有意义的问题给出合适的信息</strong>，以及<strong>未曾适当揭露</strong>投资者觉得很重要的资讯或问题时</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>这么做的公司，通常<strong>不能够为投资者提供投资成功所需要的必要背景资料</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、不要认为一家公司的市盈率很高，就必然表示未来的收益成长空间已经反映在了价格上 -->
+      <section id="section-4">
+        <h2>四、不要认为一家公司的市盈率很高，就必然表示未来的收益成长空间已经反映在了价格上</h2>
+
+        <div class="pull-quote">
+          有一种常见的错误投资推理值得我们特别注意，因为它会<strong>使投资者付出惨重的代价</strong>。
+        </div>
+
+        <h3 id="section-4-1">4.1 XYZ 公司的假设案例</h3>
+
+        <p>假设有一家叫作 <strong>XYZ</strong> 的公司，多年来一直十分符合前文所述的<strong>十五个原则</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>状况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>历史业绩</strong></td>
+              <td><strong>30 年</strong>来销售额和利润不断增长</td>
+            </tr>
+            <tr>
+              <td><strong>新产品</strong></td>
+              <td>一直都在开发多种多样的新产品，强烈预示着未来也能获得这种成长速度</td>
+            </tr>
+            <tr>
+              <td><strong>市场声誉</strong></td>
+              <td>金融界人士<strong>普遍称赞</strong>这家公司的优异表现</td>
+            </tr>
+            <tr>
+              <td><strong>估值水平</strong></td>
+              <td>股价一直是当期收益的 <strong>20～30 倍</strong>，大约是道琼斯 30 种工业股票价格指数平均市盈率的 <strong>2 倍</strong></td>
+            </tr>
+            <tr>
+              <td><strong>最新指引</strong></td>
+              <td>管理层刚刚公布预测：收益将在<strong>未来 5 年后增长为现在的 2 倍</strong>；从目前已有的证据来看，这个预测看上去是<strong>可信的</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-2">4.2 ⚠️ 那个流行却错误的推论</h3>
+
+        <p>得出错误结论的投资者数量非常之多，简直多得令人咋舌。他们的推理链条是：</p>
+
+        <ol>
+          <li>XYZ 公司的市盈率是一般股票的 <strong>2 倍</strong>；</li>
+          <li>而 XYZ 公司的收益需要 <strong>5 年</strong>时间才会翻倍；</li>
+          <li>所以 XYZ 公司目前的股价<strong>已经反映了未来的收益</strong>；</li>
+          <li>结论：他们非常确信<strong>股价已经涨得过高了</strong>。</li>
+        </ol>
+
+        <h3 id="section-4-3">4.3 错误究竟在哪里</h3>
+
+        <p>如果一只股票的价格已经反映了 5 年后的收益，那么股价很可能已经被高估，对此<strong>没人能反驳</strong>。但他们这种推理的错误之处在于——</p>
+
+        <div class="pull-quote">
+          ⚠️ 他们<strong>假设 5 年后 XYZ 公司的市盈率会和道琼斯指数的平均市盈率一样</strong>。
+        </div>
+
+        <p>而事实链条应该是这样的：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>推理</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 历史事实</td>
+              <td>30 年来，这家公司在很多因素的共同作用下经营得非常出色，市盈率<strong>一直是其他股票的 2 倍</strong>，这个记录使那些对它充满信心的投资者获得了利益</td>
+            </tr>
+            <tr>
+              <td>② 若政策不变</td>
+              <td>5 年之后公司管理层会推出<strong>另一组新产品</strong>，然后接下来 10 年的收益成长情况，就会像如今的新产品那样提高公司的收益——也像其他产品在 5 年前、10 年前、15 年前或 20 年前所做的贡献那样</td>
+            </tr>
+            <tr>
+              <td>③ 由此追问</td>
+              <td>如果事实果真如此，为什么这只股票 <strong>5 年后的市盈率不能仍是一般股票的 2 倍</strong>，就像今天和从前那么多年一样？</td>
+            </tr>
+            <tr>
+              <td>④ 数量结果</td>
+              <td>如果所有股票的市盈率都保持在原来的水平，XYZ 公司 5 年后收益翻倍，也会使它 <strong>5 年后的市场价格增长到现在的 2 倍</strong></td>
+            </tr>
+            <tr>
+              <td>⑤ 结论</td>
+              <td>💡 从这个角度看，这只股票<strong>目前的价格完全处在正常的市盈率水平上，根本不能说已经反映了未来的收益</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>这是很明显的，难道不是吗？但是，回头看看你身边的人，有多少貌似精明老练的投资者在运用市盈率来衡量公司未来的成长时<strong>把自己搞得晕头转向</strong>，不知所以。</p>
+
+        <h3 id="section-4-4">4.4 更难的变体：ABC 公司与"背景发生变化"</h3>
+
+        <p>如果赶上<strong>公司的背景发生变化</strong>，情况则更为严重。现在我们抛开 XYZ 公司来谈另一家叫 <strong>ABC</strong> 的公司。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>对比项</th>
+              <th>XYZ 公司</th>
+              <th>ABC 公司</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>基本面</strong></td>
+              <td>优秀</td>
+              <td>各方面情况<strong>基本完全相同</strong></td>
+            </tr>
+            <tr>
+              <td><strong>公司年龄</strong></td>
+              <td>30 年记录</td>
+              <td><strong>要年轻得多</strong></td>
+            </tr>
+            <tr>
+              <td><strong>被认可的时间</strong></td>
+              <td>长期被称赞</td>
+              <td>仅<strong>过去 2 年</strong>金融界人士才认为其基本面非常出色</td>
+            </tr>
+            <tr>
+              <td><strong>当前市盈率</strong></td>
+              <td>道指均值的 2 倍</td>
+              <td>同样是道指均值的 <strong>2 倍</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">许多投资者意识不到</div>
+            <p>一只股票<strong>过去的市盈率并不高、而现在的市盈率却很高</strong>，这反映出的可能是它的<strong>内在价值</strong>，并且合理地反映了公司未来进一步成长的可能。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-5">4.5 判定标准：增长源是"一次性"还是"可持续"</h3>
+
+        <p>关于这个问题，最重要的是<strong>彻底了解一家公司的内在特质</strong>，特别是要参考<strong>几年后</strong>可能发生的情况。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>公司类型</th>
+              <th>内在特质</th>
+              <th>未来市盈率走向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>一次性增长型</strong></td>
+              <td>收益的急剧增长只出现了一次，从内在特质上说目前的收益增长<strong>已经完全得到释放</strong>，尚未开发出新的增长来源</td>
+              <td>⚠️ 目前的高速增长结束之后，<strong>股价将发生回撤</strong>，市盈率会下降到与其他普通股一样的水平</td>
+            </tr>
+            <tr>
+              <td><strong>持续再造型</strong></td>
+              <td><strong>谨慎而持续地开发新的获利来源</strong>，而且公司所处行业未来有望保持和现在相近似的成长动力</td>
+              <td>✅ 公司 <strong>5～10 年后的市盈率肯定会远高于一般股票</strong>，就像如今的情形一样</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote">
+          💡 这类股票的市盈率所反映出的未来收益，往往<strong>远高于大多数投资者所期待的水平</strong>。这也是为什么有些股票乍看之下价格貌似过高，但仔细分析之后，却会发现<strong>它们价格非常便宜</strong>。
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、不要计较蝇头小利 -->
+      <section id="section-5">
+        <h2>五、不要计较蝇头小利</h2>
+
+        <div class="pull-quote">
+          之前阐述各类问题时用的都是虚拟的例子，这次要用一个<strong>真实的例子</strong>。
+        </div>
+
+        <h3 id="section-5-1">5.1 一个 50 美元换来的教训</h3>
+
+        <p>25 年前，有位在很多方面都展现出了高超投资能力的绅士，他想买入 <strong>100 股</strong>纽约证券交易所上市的某种股票。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>环节</th>
+              <th>事实</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>决定买入当日收盘</strong></td>
+              <td>买盘 <strong>35 美元</strong>、卖盘 <strong>35.50 美元</strong></td>
+            </tr>
+            <tr>
+              <td><strong>第二天</strong></td>
+              <td>依然如此，但这位绅士<strong>不愿以 35.50 美元买入</strong></td>
+            </tr>
+            <tr>
+              <td><strong>他的动作</strong></td>
+              <td>为了节省 <strong>50 美元</strong>，把买入委托单价格定在 <strong>35 美元</strong>，并且<strong>拒绝提高买价</strong></td>
+            </tr>
+            <tr>
+              <td><strong>此后走势</strong></td>
+              <td>⚠️ 这只股票<strong>此后从未跌到过 35 美元</strong></td>
+            </tr>
+            <tr>
+              <td><strong>25 年后的今天</strong></td>
+              <td>成长前景似乎依然一片大好；如果把<strong>股利和股票拆分</strong>都算入在内，目前的股价已经<strong>超过 500 美元</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>换算一下这笔账：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>金额</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>意图节省</td>
+              <td><strong>50 美元</strong></td>
+            </tr>
+            <tr>
+              <td>实际少赚</td>
+              <td><strong>46 500 美元</strong></td>
+            </tr>
+            <tr>
+              <td>倍数关系</td>
+              <td>46 500 ÷ 50 = <strong>930 倍</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>也就是说，这位投资者需要<strong>成功省下 50 美元 930 次</strong>，才能弥补这一次的损失。（不过这位投资者仍然赚得了 46 500 美元，因为他<strong>曾以更低的价格买入过</strong>这家公司的股票。）</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">明显的愚蠢</div>
+            <p>很明显，在投资上采取这种对自己极为不利的行为是<strong>非常愚蠢的</strong>。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">这还不是极端情况</div>
+            <p>这个例子绝对不是极端情况。我<strong>故意选了一只多年来涨势落后于大盘的股票</strong>，而没有选领先于大盘的股票。如果投资者选择了纽约证券交易所上市的<strong>前 50 只成长股</strong>里面的任意一只，那么为了节省下 50 美元而错失了每股价值 <strong>3500 美元</strong>的股票，损失将比 46 500 美元大得多。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">5.2 小额投资者：规则非常简单</h3>
+
+        <p>对于只想购买<strong>几百股</strong>股票的小额投资者而言：</p>
+
+        <ol>
+          <li>如果想买的股票看起来是个<strong>正确的选择</strong>，且目前价位处于<strong>很吸引人的水平</strong>，那么<strong>以市价买入即可</strong>；</li>
+          <li>多花 <strong>1/8、1/4 或 1/2 美元</strong>，与没买到这只股票所错失的利润相比，根本就是微不足道的。</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">一条反向的自检</div>
+            <p>如果一只股票<strong>没有这种长期增长的潜力</strong>，我认为投资者<strong>一开始就不应该考虑买入它</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-3">5.3 大额投资者：问题没有这么简单</h3>
+
+        <p>至于想要买入<strong>数千股</strong>的大额投资者，问题则复杂得多。除了极少数的股票，大部分股票的<strong>供应量是有限的</strong>，即使按当时的市价只买入想买数量的一半，也很可能会引发<strong>市价的大幅上涨</strong>。</p>
+
+        <p>⚠️ 价格的突然上涨又反过来产生了两种<strong>使买入更加困难</strong>的连锁反应：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>连锁反应</th>
+              <th>机制</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>引来竞争买盘</strong></td>
+              <td>价格大幅上涨可能促使别人也对这只股票感兴趣，从而<strong>争相买进</strong></td>
+            </tr>
+            <tr>
+              <td><strong>抽走潜在卖盘</strong></td>
+              <td>可能让一些本来计划卖出的投资者<strong>转向继续持有</strong>，希望涨势持续下去</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>正确的委托方式：三条授权</strong></p>
+
+        <p>他应该去找自己的股票经纪人或证券交易商，<strong>准确告诉他们自己到底想买入多少数量</strong>的股票，并给出以下授权：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>授权内容</th>
+              <th>目的</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>①</td>
+              <td>尽可能<strong>多地买入</strong>股票</td>
+              <td>完成目标数量</td>
+            </tr>
+            <tr>
+              <td>②</td>
+              <td>授权经纪人<strong>忽略较小数量的卖盘供给</strong></td>
+              <td>以免买入之后引来很多买家争相抬高价格买入</td>
+            </tr>
+            <tr>
+              <td>③</td>
+              <td><strong>最重要</strong>：完全允许经纪人以<strong>高于最近价格的某个价位</strong>买进</td>
+              <td>避免因僵守限价而彻底错失</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>至于具体高出多少，就要<strong>和经纪人或证券交易商协商</strong>，协商时需要考虑：</p>
+
+        <ul>
+          <li>想要买入的<strong>数量</strong>；</li>
+          <li>那只股票<strong>通常的成交量</strong>；</li>
+          <li><strong>许多买家是否急着买进</strong>股票；</li>
+          <li>以及其他任何有关的影响因素。</li>
+        </ul>
+
+        <h3 id="section-5-4">5.4 💡 如果你不信任你的经纪人</h3>
+
+        <p>投资者可能会认为，自己没有一位具有良好判断力和辨别能力的经纪人或证券交易商可以托付此等大事。如果真是这样，他应该<strong>马上去找一位值得信赖的经纪人或证券交易商</strong>——毕竟，处理这种事<strong>正是经纪人或证券交易商的专业所在</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、本章小结 -->
+      <section id="section-6">
+        <h2>六、本章小结</h2>
+
+        <h3 id="section-6-1">6.1 五条禁令速查</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>禁令</th>
+              <th>核心理由</th>
+              <th>正确做法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>不要买创业阶段公司的股票</td>
+              <td>运营不足两三年、盈利不足一年的公司<strong>无从观察</strong>，只能靠猜；创业团队常存在结构性能力缺口，且<strong>说不通、也补不上</strong></td>
+              <td>把创业期投资留给能<strong>补位管理人才</strong>的专业机构；在老公司中寻找机会</td>
+            </tr>
+            <tr>
+              <td><strong>2</strong></td>
+              <td>不要忽视场外市场的好股票</td>
+              <td>场外报价是<strong>买价/卖价</strong>而非成交价，价差覆盖销售员佣金；但较好的场外股票流动性<strong>优于</strong>美交所和区域性交易所多数股票</td>
+              <td>选对证券 + 选对<strong>能干而恪守职责</strong>的经纪人，之后不必在意交易场所</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td>不要因年报"语调"而买入</td>
+              <td>语调可能反映管理层哲学，也可能只反映<strong>公共关系部门的能力</strong>；年报经过精心加工，很少完整讨论真正的困难</td>
+              <td>深入探究事实；⚠️ 唯一可作负面信号的例外是年报<strong>回避了真正重要的问题</strong></td>
+            </tr>
+            <tr>
+              <td><strong>4</strong></td>
+              <td>不要认为高市盈率必然已反映未来成长</td>
+              <td>错误假设在于"<strong>几年后市盈率会回落到市场平均水平</strong>"；30 年保持 2 倍市盈率的公司，若政策不变，5 年后没有理由不是 2 倍</td>
+              <td>判定增长源是<strong>一次性释放</strong>还是<strong>持续再造</strong>；后者 5～10 年后市盈率仍将远高于一般股票</td>
+            </tr>
+            <tr>
+              <td><strong>5</strong></td>
+              <td>不要计较蝇头小利</td>
+              <td>为省 50 美元而错失一只<strong>落后于大盘</strong>的股票，少赚 46 500 美元，相当于要省对 <strong>930 次</strong>才能补回</td>
+              <td>小额投资者以<strong>市价买入</strong>；大额投资者向经纪人给出<strong>数量、忽略零星卖盘、允许溢价</strong>三项授权</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-6-2">6.2 贯穿五条禁令的两条主线</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>主线</th>
+              <th>体现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>可观察性优先于故事性</strong></td>
+              <td>禁令 1、3 都在提醒：宁要可被检验的经营事实，不要蓝图、文案与包装</td>
+            </tr>
+            <tr>
+              <td><strong>不要为省小钱牺牲大机会</strong></td>
+              <td>禁令 2、4、5 都在提醒：交易场所的价差、貌似偏高的市盈率、几分之一美元的报价差，与真正优秀企业的长期复利相比都微不足道</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          💡 <strong>一句话概括本章思想</strong>：五个"不要"守住的是同一件事——把判断建立在<strong>可核实的企业质地</strong>上，而不要让直觉、文案与几十美元的精打细算，把你从最好的长期机会里赶出去。
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    let lastActive = null;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '怎样选择成长股';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页（含子目录路径）
+    const relativePath = 'books/' + BOOK_FOLDER + '/第一部分：普通股和不普通的利润/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

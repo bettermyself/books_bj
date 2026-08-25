@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第七章 股利的喧嚣 · 怎样选择成长股</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    /* accordion arrow */
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    /* 尚未生成阅读页的章节（不可点击） */
+    .toc-lectures .no-link {
+      display: block;
+      font-size: .82rem;
+      color: var(--text3);
+      padding: .35rem .6rem;
+      line-height: 1.45;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    /* ===== Lists ===== */
+    .chapter-article ul, .chapter-article ol {
+      margin: .25rem 0 1.25rem;
+      padding-left: 1.7rem;
+    }
+    .chapter-article li {
+      font-size: .92rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: .45rem;
+    }
+    .chapter-article li strong { color: var(--gold-dk); }
+    .chapter-article ul li::marker { color: var(--gold); }
+    .chapter-article ol li::marker { color: var(--gold); font-weight: 700; }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">怎样选择成长股</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第一部分：普通股和不普通的利润</span>
+          <ul class="toc-lectures">
+            <li><a href="第一章 往事中提供的线索.html">第一章 往事中提供的线索</a></li>
+            <li><a href="第二章 “闲聊”的妙处.html">第二章 "闲聊"的妙处</a></li>
+            <li><a href="第三章 买入什么股票——寻找优良普通股的十五个原则.html">第三章 买入什么股票——寻找优良普通股的十五个原则</a></li>
+            <li><a href="第四章 应该买什么样的股票.html">第四章 应该买什么样的股票</a></li>
+            <li><a href="第五章 什么时候买进股票.html">第五章 什么时候买进股票</a></li>
+            <li><a href="第六章 什么时候卖出，什么时候不要卖出.html">第六章 什么时候卖出，什么时候不要卖出</a></li>
+            <li><a href="第七章 股利的喧嚣.html" class="active">第七章 股利的喧嚣</a></li>
+            <li><a href="第八章 投资者的“五个不要”.html">第八章 投资者的"五个不要"</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- 本章目录 -->
+      <div class="sidebar-label sidebar-label-sub">本章目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">一、混淆从词汇开始</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 混淆的根源：同一笔留存利润，对不同股东的意义完全不同</a></li>
+        <li><a href="#section-2">二、持股者什么时候无法从留存利润中获得好处</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 类型 A：不必要的流动储备金</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 类型 B：建立一个庞大而低效的王国</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 💡 十五个原则如何天然规避这两种陷阱</a></li>
+        <li><a href="#section-3">三、必需的留存利润，为什么有时也提不高股票价值</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 原因一：竞争性支出——花了钱却不增加业务量</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 原因二：会计法则的缺陷——用二维几何算三维世界</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 💡 为什么成长型公司受这一影响最小</a></li>
+        <li><a href="#section-4">四、谁从股利中获益最多——一个流传最广的误解</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 XYZ 公司的虚构案例</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 ⚠️ 那句最常见的似是而非之论</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 实际情况：关键变量不是税率，而是"是否愿意再投资"</a></li>
+        <li><a href="#section-5">五、把算术做一遍：提高股利的三重漏损</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 那些例外的持股者</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 比省税更重要的一层：留在公司的资金效率更高</a></li>
+        <li><a href="#section-6">六、股利的真正意义：它并没有那么重要</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 ⚠️ 破除"高股利=安全"的迷思</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 区分两个不同的问题</a></li>
+        <li><a href="#section-7">七、最重要却最少被谈及的问题：规律性与可靠性</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 明智的股东关系政策长什么样</a></li>
+        <li><a href="#section-8">八、股利政策的基本原则与理想形态</a></li>
+        <li><a href="#section-8-1" class="sub">8.1 不同发展阶段的常见比例</a></li>
+        <li><a href="#section-8-2" class="sub">8.2 股东真正希望的形态</a></li>
+        <li><a href="#section-8-3" class="sub">8.3 提高与降低股利的纪律</a></li>
+        <li><a href="#section-9">九、餐馆的比喻：一致性胜过政策本身的优劣</a></li>
+        <li><a href="#section-9-1" class="sub">9.1 餐馆老板的成功与失败</a></li>
+        <li><a href="#section-10">十、实证：洛姆哈斯公司</a></li>
+        <li><a href="#section-10-1" class="sub">10.1 该股票的来历与初始条件</a></li>
+        <li><a href="#section-10-2" class="sub">10.2 后来发生了什么</a></li>
+        <li><a href="#section-11">十一、本章小结</a></li>
+        <li><a href="#section-11-1" class="sub">11.1 核心结论</a></li>
+        <li><a href="#section-11-2" class="sub">11.2 全章要点速查</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+      <header class="article-header">
+        <div class="article-eyebrow">怎样选择成长股 · 第一部分：普通股和不普通的利润 · 第七章</div>
+        <h1 class="article-title">第七章：股利的喧嚣</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>菲利普·A·费舍</span>
+          <span><strong>主题</strong>股利政策 · 留存收益</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">
+        <strong>核心命题</strong>：对追求最大收益的投资者而言，股利远没有金融界所说的那么重要；股利政策真正要紧的不是"发多少"，而是<strong>规律性与可靠性</strong>。
+      </div>
+
+      <!-- 一、混淆从词汇开始 -->
+      <section id="section-1">
+        <h2>一、混淆从词汇开始</h2>
+
+        <p>关于普通股投资的很多方面，都有古怪的想法和被大众普遍接受的似是而非的陈述。但每每谈及<strong>股利的重要意义</strong>，大多数投资者的混淆就会变得更加严重。</p>
+
+        <p>这种混淆甚至蔓延到人们平常用来描述股利所用的<strong>词汇</strong>上。一家公司以前从不发放股利，或者发放很少的股利，后来公司董事长要求董事会发放大量的股利，该公司也真的这么做了。谈到发放股利这件事的时候，董事长或董事常常会说：是时候该为持股人"<strong>做些事情</strong>"了。</p>
+
+        <p>言下之意是：如果不发放或不提高股利，公司就等于没为股东做什么事。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>说法</th>
+              <th>是否成立</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>发放或提高股利是为股东做事</td>
+              <td>或许正确</td>
+            </tr>
+            <tr>
+              <td><strong>没有发放股利就等于没为股东做事</strong></td>
+              <td>❌ 不能这样推论</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>如果公司利润不以股利的形式发放，而是用于<strong>建造新厂房、建成新的产品线，或是在原有厂房的基础上安装一些能够大幅节省成本的设施</strong>，那么管理层为股东创造的利益，有可能会远高于将利润作为股利发放给股东所带来的利益。</p>
+
+        <p>然而在金融界的习惯语汇里：</p>
+
+        <ul>
+          <li>不管未作为股利发放的利润被用来做什么，只要所做出的行为能够增加股利，都被投资者看成"<strong>受欢迎的</strong>"股利行为；</li>
+          <li>出于对公司运作更重要的原因减少发放股利或不发放股利，总是被投资者看成"<strong>不受欢迎的</strong>"行为。</li>
+        </ul>
+
+        <h3 id="section-1-1">1.1 混淆的根源：同一笔留存利润，对不同股东的意义完全不同</h3>
+
+        <p>大众投资者常常在对股利的看法上出现混乱，主要原因之一就是：每次当利润没有发放给股东、而是保留在企业内部时，<strong>股东之间获得的利益差距很大</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>对持股人的实际效果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>留存利润被高效使用</td>
+              <td>大受裨益</td>
+            </tr>
+            <tr>
+              <td>留存利润对某些投资者毫无益处</td>
+              <td>没有收益</td>
+            </tr>
+            <tr>
+              <td>有些时候此举甚至带来<strong>负效应</strong></td>
+              <td>受损</td>
+            </tr>
+            <tr>
+              <td>同一公司<strong>不同类别的股东</strong></td>
+              <td>所得到的利益大不相同</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">一种容易被忽略的不对称</div>
+            <p>如果利润没有留存下来，他所持有股票的价值就会下降；但保留利润<strong>并不必然提高</strong>他所持股票的价值，因此它对持股人似乎并没有什么好处。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">结论</div>
+            <p>每当利润没有以股利的形式发放给投资者时，就<strong>必须检查这种行为的用意</strong>，看看到底发生了什么事。有必要透过表层深入观察，并详细讨论其中的一些差别。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、持股者什么时候无法从留存利润中获得好处 -->
+      <section id="section-2">
+        <h2>二、持股者什么时候无法从留存利润中获得好处</h2>
+
+        <p>留存利润<strong>完全无益于股东</strong>的情形，主要有两种。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>类型</th>
+              <th>表现</th>
+              <th>严重程度</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>A. 现金囤积过度</strong></td>
+              <td>管理层储存的现金和流动资产远远超过了目前跟未来经营所需的量</td>
+              <td>危害性已减轻</td>
+            </tr>
+            <tr>
+              <td><strong>B. 管理层能力不足</strong></td>
+              <td>回报率低于行业正常水平，留存利润被用来扩大原本没效率的运营</td>
+              <td>⚠️ <strong>更严重</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-1">2.1 类型 A：不必要的流动储备金</h3>
+
+        <p>管理层这么做或许并没有什么不良的动机。有些高级管理层需要从这种稳定积累起来的、不必要的流动储备金中获得<strong>信心和安全感</strong>。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">安全感的代价</div>
+            <p>他们似乎没有了解到：自己获得这种安全感的代价是<strong>不能为股东创造出财富</strong>，而广大股东本有权利以他们认为合适的方式来支配这笔财富。</p>
+          </div>
+        </div>
+
+        <p>尽管目前仍然会发生这种不良情况，但是我们有办法来控制它的出现，所以它的<strong>危害性不再像以前那么大了</strong>。</p>
+
+        <h3 id="section-2-2">2.2 类型 B：建立一个庞大而低效的王国</h3>
+
+        <p>当管理层的能力不足，使得企业经营的回报率<strong>低于行业内正常回报率</strong>的时候，留存下来的利润被用来扩大原本就没什么效率的日常企业运营，而不是设法让其向更好的方向发展。</p>
+
+        <p>这条链条通常这样运转：</p>
+
+        <ol>
+          <li>管理层适时地建立起一个<strong>规模庞大但缺乏效率的王国</strong>；</li>
+          <li>然后以他们"做了更多的事情"为由，从公司成功地领取到<strong>更高的薪水</strong>；</li>
+          <li>结果是持股者最终所得到的利润<strong>微乎其微，或者根本没有利润</strong>。</li>
+        </ol>
+
+        <h3 id="section-2-3">2.3 💡 十五个原则如何天然规避这两种陷阱</h3>
+
+        <p>如果投资者按照本书所描述的原则去做，就<strong>不可能受到这种情况的影响</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者的做法</th>
+              <th>产生的保护作用</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>买进某只股票是<strong>因为它是一家优秀的公司</strong>，而不仅因它价格低廉</td>
+              <td>从源头排除低效企业</td>
+            </tr>
+            <tr>
+              <td>管理层能力欠佳、运营缺乏效率的公司</td>
+              <td><strong>无法满足十五个原则</strong>，自然被筛掉</td>
+            </tr>
+            <tr>
+              <td>能够满足十五个原则的公司</td>
+              <td>管理层<strong>一定会为多余的现金找到适宜的使用方式</strong>，而不是只顾着将现金储存起来</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、必需的留存利润，为什么有时也提不高股票价值 -->
+      <section id="section-3">
+        <h2>三、必需的留存利润，为什么有时也提不高股票价值</h2>
+
+        <p>即便留存利润是<strong>企业经营所必需</strong>的，有时候也可能无法提高股东所持股票的价值。这里面包含两种原因。</p>
+
+        <h3 id="section-3-1">3.1 原因一：竞争性支出——花了钱却不增加业务量</h3>
+
+        <p>当顾客或大众的需求改变时，每家公司出于竞争的需要，必须在购置某些资产上产生一定的花费。这些资产<strong>本身无法提高业务量</strong>，但是不花这些钱却非常可能导致顾客的流失。</p>
+
+        <p><strong>典型例子：零售店纷纷安装昂贵的空调系统。</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>假设情形</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>每家商店都因相互竞争而安装空调</td>
+              <td>净营业收入并没有因此而增加</td>
+            </tr>
+            <tr>
+              <td>某家商店<strong>没有像竞争对手一样安装</strong></td>
+              <td>炎热的夏日顾客数量会少得可怜</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">会计制度和税法不加区分</div>
+            <p>因为某些奇怪的理由，我们现行的<strong>会计制度和税法</strong>根本不对这种"资产"和真正能够提高业务价值的资产加以区分。所以持股人在发现利润没有发放到他们手中、并且看不出留存在企业中的利润使得他们的持股价值有所增加的时候，往往会觉得<strong>受到了不公平的对待</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-2">3.2 原因二：会计法则的缺陷——用二维几何算三维世界</h3>
+
+        <p>这是更重要的一个原因。在我们如今这个<strong>货币购买力剧烈而快速地变化</strong>着的世界里，标准的会计处理方式却似乎将每一美元的价值看成<strong>固定不变</strong>的。</p>
+
+        <p>会计师会说，会计处理本来就是这样处理事情的。这种说法有可能是对的。但是，如果用资产负债表来体现其上所说资产的<strong>真实价值</strong>，则会因此产生混淆——就好像工程师、科学家在我们的三维空间世界里做运算时，却只用二维空间的平面几何一样。</p>
+
+        <p><strong>折旧为什么不够用：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>环节</th>
+              <th>理论假设</th>
+              <th>现实情况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>折旧的作用</td>
+              <td>当现有的资产不再具有其经济价值时，折旧费应足以<strong>置换</strong>现有的资产</td>
+              <td>成立的前提是折旧率计算正确，<strong>且资产的重置成本在其使用年限内保持不变</strong></td>
+            </tr>
+            <tr>
+              <td>成本走势</td>
+              <td>—</td>
+              <td>⚠️ 随着成本的节节攀升，总的<strong>累积折旧额很少能足以置换过时的资产</strong></td>
+            </tr>
+            <tr>
+              <td>由此产生的后果</td>
+              <td>—</td>
+              <td>公司若还想继续拥有以前那种规模和数量的资产，就必须<strong>从利润中多预留出一些资金</strong>，用以补足二者的差额</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-3-3">3.3 💡 为什么成长型公司受这一影响最小</h3>
+
+        <p>这类事情虽然对所有的投资者都有影响，但对<strong>成长型公司持股者</strong>的影响，往往会低于对其他任何类别投资者的影响。</p>
+
+        <p>原因在于资产结构的年龄分布：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>资产构成</th>
+              <th>成长型公司的特点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>新购置的资产</strong>（有别于仅仅置换现有的和濒临淘汰的资产）</td>
+              <td>购买速度往往非常之快，因此<strong>更多的折旧属于最近购置的资产</strong>，而这些资产的价值比较接近当前的价值</td>
+            </tr>
+            <tr>
+              <td><strong>几年前的资产</strong></td>
+              <td>折旧部分<strong>比例较小</strong>，其成本远低于当前</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、谁从股利中获益最多 -->
+      <section id="section-4">
+        <h2>四、谁从股利中获益最多——一个流传最广的误解</h2>
+
+        <p>如果将留存利润用于建设新厂房和推出新产品，会在哪些地方对投资者产生巨大的利益，这一话题已经反复阐述过了。但谈及<strong>某类投资者相对于另一类投资者获益是多还是少</strong>，则值得继续深入探讨，这里有两个原因：</p>
+
+        <ol>
+          <li>整个金融界一直对这个问题<strong>有所误解</strong>；</li>
+          <li>如果能够正确了解这件事，就能<strong>轻易而正确地评估股利的真正意义</strong>。</li>
+        </ol>
+
+        <h3 id="section-4-1">4.1 XYZ 公司的虚构案例</h3>
+
+        <p>过去几年中 XYZ 公司的运营状况一向良好，利润保持稳定增长，而<strong>股利率维持不变</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>发放同等股利所需占用的利润比例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>4 年前</td>
+              <td><strong>50%</strong></td>
+            </tr>
+            <tr>
+              <td>如今（获利能力提高后）</td>
+              <td><strong>25%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>董事会由此产生分歧：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>阵营</th>
+              <th>主张</th>
+              <th>理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>主张提高股利</strong></td>
+              <td>应当提高股利发放</td>
+              <td>获利能力已大幅提升</td>
+            </tr>
+            <tr>
+              <td><strong>主张维持股利</strong></td>
+              <td>维持原有股利，不予提高</td>
+              <td>公司现在可以运用留存利润去投资，而且<strong>所面临的投资机会数量之多、机会之好，都是前所未有的</strong>；只有维持而非提高，才能充分把握这些机会，享受到<strong>最高的成长率</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-2">4.2 ⚠️ 那句最常见的似是而非之论</h3>
+
+        <p>这个时候一定会有一位董事会成员讲出金融界最常见的一种似是而非的观点：</p>
+
+        <div class="pull-quote">
+          XYZ 公司如果不提高股利，就会<strong>伤及小股东的利益，而对大股东有利</strong>。
+        </div>
+
+        <p>这个观点背后的逻辑是：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>股东类型</th>
+              <th>税率</th>
+              <th>税后剩余占所享股利的比例</th>
+              <th>推断出的偏好</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>大股东</strong></td>
+              <td>较高</td>
+              <td>远低于小股东</td>
+              <td>不喜欢提高股利</td>
+            </tr>
+            <tr>
+              <td><strong>小股东</strong></td>
+              <td>较低</td>
+              <td>较高</td>
+              <td>非常希望股利增加</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-4-3">4.3 实际情况：关键变量不是税率，而是"是否愿意再投资"</h3>
+
+        <p>实际上，XYZ 公司的任何一位股东对股利是否增加、以及是否愿意将更多的钱投入到能使公司继续成长中去的态度，与其<strong>个人所得税的多少并无多大关系</strong>，更多的是取决于<strong>每位股东是不是愿意拿出部分收入来进行额外的投资</strong>。</p>
+
+        <p>所得税率较低的数百万持股者们，不管数量多少，每年都会拿出一些资金以增加投资。如果他们这样做，而且需要支付所得税的话（实际情况很可能如此），那么用基本的算术也能算得出来：<strong>当有机会运用公司的留存利润抓住良机进行投资的时候，如果董事会提高股利，反而会损害他们的利益。</strong></p>
+
+        <p>另一方面，提高股利可能对某些<strong>急着用钱</strong>的大股东有利——任何人都难免遇上急需用钱的时候。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、把算术做一遍 -->
+      <section id="section-5">
+        <h2>五、把算术做一遍：提高股利的三重漏损</h2>
+
+        <p>让我们看一下为什么会出现这种情况。任何人只要有足够的额外资金投资于普通股，<strong>至少就会产生足以支付最低税率等级的税金收益</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>漏损环节</th>
+              <th>具体损耗</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 所得税</strong></td>
+              <td>至少 <strong>20%</strong></td>
+              <td>扣除股利收入中免税的 50 美元之后的部分，即使是持股数量最少的股东，也必须为其所得股利的剩余部分缴纳最低 20% 的所得税</td>
+            </tr>
+            <tr>
+              <td><strong>② 经纪佣金</strong></td>
+              <td>视交易规模而定</td>
+              <td>他还必须为买进的所有股票向证券经纪公司支付佣金。由于<strong>买入零散股票的佣金较高、存在最小佣金</strong>等因素，这些成本在小额交易中占据的比例<strong>远高于大额交易</strong></td>
+            </tr>
+            <tr>
+              <td><strong>③ 更高税率等级</strong></td>
+              <td>进一步递减</td>
+              <td>如果持股人所处的税率等级较高，股利增加部分可用于再投资的百分率也会随之降低</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">综合来看</div>
+            <p>实际上可用于再投资的资金会<strong>远低于所得股利的 80%</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-1">5.1 那些例外的持股者</h3>
+
+        <p>当然，有些特殊类别的股东情况有所不同：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>特殊持股者</th>
+              <th>情况</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>大学、养老基金</strong>等机构</td>
+              <td>不必缴纳所得税</td>
+            </tr>
+            <tr>
+              <td><strong>持股极少的个人</strong>（股利收入低于 50 美元）</td>
+              <td>也不必为此纳税</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>但对绝大多数持股者而言，不管持股量多少，都<strong>没办法避免为股利而缴税</strong>这件事。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">对所有投资者更有利的选择</div>
+            <p>如果他们能把所得股利收入都存下来而不是花掉，同时将自己任何一部分的收入正确地投资于普通股，则所投资企业的管理层把增加的利润用于<strong>再投资</strong>、而不是提高股利的发放量，对<strong>所有投资者</strong>来说都更为有利。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">5.2 比省税更重要的一层：留在公司的资金效率更高</h3>
+
+        <p>股东获得的好处不仅是避免缴纳所得税和经纪商的各项佣金，还在于<strong>资金 100% 留在公司将发挥更高效的作用</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>两种路径</th>
+              <th>承担的风险</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>自己被迫去发现新的、同样有吸引力的投资标的</td>
+              <td>冒着犯下<strong>重大投资错误</strong>的风险</td>
+            </tr>
+            <tr>
+              <td>同意优秀公司的管理层将留存收益用于再投资</td>
+              <td><strong>风险通常小于前者</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>而正在考虑将收益留存还是派发给股东的这家公司<strong>越优秀</strong>，上述观点就越正确、越重要。</p>
+
+        <p>这就是为什么即便是下面这两类股东，也会发现同意优秀公司留存收益以抓住新的有价值的投资机会所获得的收益，<strong>不逊于</strong>派发股利缴税后的再投资收益：</p>
+
+        <ul>
+          <li>不必缴纳个人所得税的股东；</li>
+          <li>并没有将所有收入用于投资的股东。</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+      <!-- 六、股利的真正意义 -->
+      <section id="section-6">
+        <h2>六、股利的真正意义：它并没有那么重要</h2>
+
+        <p>基于以上分析，股利的真正意义开始显现出来。对那些希望运用资金来获取<strong>最大收益</strong>的投资者来说，股利并不像金融界的许多人所说的那么重要。</p>
+
+        <p>这一点对两类投资者同样成立：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者类型</th>
+              <th>适用性</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>买入了<strong>机构式成长股</strong>的保守型投资者</td>
+              <td>✅ 成立</td>
+            </tr>
+            <tr>
+              <td>愿意并且有能力为获得更高报酬而<strong>冒更大风险</strong>的投资者</td>
+              <td>✅ 成立</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-6-1">6.1 ⚠️ 破除"高股利=安全"的迷思</h3>
+
+        <p>这个观点在某种意义上表示：<strong>高股利报酬率是一种安全因素</strong>。这种说法所蕴含的理论是——既然高收益的股票已经提供了高于平均水平的报酬，所以其价格不可能高估，也不可能跌得太多。</p>
+
+        <p><strong>没有什么事情能与事实抗衡。</strong>关于这个问题我可以说：看过的所有研究报告都表示，<strong>发放高股利的股票中价格表现不佳者，在数量上远多于发放低股利的股票</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">一个比喻</div>
+            <p>原本非常优秀的管理层，如果选择增加股利的发放、而不是把增加的利润用于企业的再投资，白白错失投资的大好良机，就如同<strong>一位农场主急着把最好的牲畜送到市场上卖掉，而不是把它们继续养到能卖到最高价格的时候</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-2">6.2 区分两个不同的问题</h3>
+
+        <p>前面谈的都是针对<strong>是否应该提高股利发放水平</strong>，而不是<strong>应该发放多少股利</strong>。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>事实</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>有个别投资者不需要获得任何股利收入</td>
+              <td>属少数</td>
+            </tr>
+            <tr>
+              <td>几乎绝大部分的投资者还是<strong>需要股利收入</strong>的</td>
+              <td>属多数</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>极少数非常优秀的公司在遇到非常好的成长契机时，管理层即使在发放一定的股利之后，仍有能力取得足够的资金来把握当下良好的成长契机——方式是：</p>
+
+        <ol>
+          <li>利用其余的<strong>留存利润</strong>；</li>
+          <li>或是通过<strong>发行优先证券</strong>募集资金。</li>
+        </ol>
+
+        <p>每个投资者都必须自己决定，需要把多少资金投入于那些成长性很高但不发放股利的公司。然而，<strong>最重要的是所买的股票不能因为过于注重发放股利，以至于限制了实现进一步成长的机会</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、规律性与可靠性 -->
+      <section id="section-7">
+        <h2>七、最重要却最少被谈及的问题：规律性与可靠性</h2>
+
+        <p>这就让我们接触到股利问题中<strong>最为重要、但很少有人谈及</strong>的问题，即<strong>规律性或可靠性</strong>的问题。</p>
+
+        <p>聪明的投资者会为自己的事情做好规划，他会用一种有前瞻性的眼光去规划应该拿自己的资金做什么事、不做什么事。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>投资者的真实诉求</th>
+              <th>优先级</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>收入会不会<strong>立刻增加</strong></td>
+              <td>或许并不在意</td>
+            </tr>
+            <tr>
+              <td>保障其收入<strong>不会减少</strong></td>
+              <td>✅ 真正在意</td>
+            </tr>
+            <tr>
+              <td>自己的计划<strong>不受突发因素的冲击</strong></td>
+              <td>✅ 真正在意</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>此外，他还需要自己决定投资于哪类公司：</p>
+
+        <ul>
+          <li>把<strong>大部分或全部</strong>留存利润用于再投资的公司；</li>
+          <li>还是成长性良好但速度略慢、<strong>利润再投资比率较小</strong>的公司。</li>
+        </ul>
+
+        <h3 id="section-7-1">7.1 明智的股东关系政策长什么样</h3>
+
+        <p>基于以上这些理由，制定明智的股东关系政策，在这种政策的刺激下享有较高市盈率公司里的财务人员和财务副总裁，通常可以避免陷入混乱的思考。他们的做法是：</p>
+
+        <ol>
+          <li>确定了股利政策之后<strong>就不会改变</strong>；</li>
+          <li>会让股东<strong>知道政策的内容</strong>；</li>
+          <li>可能对<strong>股利</strong>做出大幅的调整，但<strong>极少调整政策</strong>本身。</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">关键区分</div>
+            <p><strong>调整股利金额 ≠ 调整股利政策</strong>。前者可以随利润变化，后者应当长期稳定。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、股利政策的基本原则与理想形态 -->
+      <section id="section-8">
+        <h2>八、股利政策的基本原则与理想形态</h2>
+
+        <p><strong>利润应该以一个什么比率来进行保留，才能使公司获得最高的成长</strong>——这是股利发放政策判定的基本原则。</p>
+
+        <h3 id="section-8-1">8.1 不同发展阶段的常见比例</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>公司类型</th>
+              <th>典型股利安排</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>成立时间较短、成长迅速的公司</strong></td>
+              <td>也许持续多年都不会发放股利；但当资产规模达到足以让折旧金额提高的时候，利润中的 <strong>25%～40%</strong> 会发放给股东</td>
+            </tr>
+            <tr>
+              <td><strong>历史较为悠久的公司</strong></td>
+              <td>股利派发比例会因公司的不同而有<strong>很大的差异</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">实际支付比例并不固定</div>
+            <p>然而，上述两种情况中实际的支付比例并不是那么固定，<strong>每一年的实际股利发放金额都会不同于往年</strong>——这正是广大股东所不愿意见到的，因为如此一来，他们很难根据股利做出长期规划。</p>
+          </div>
+        </div>
+
+        <h3 id="section-8-2">8.2 股东真正希望的形态</h3>
+
+        <p>他们希望能够依照一个<strong>固定的发放比例定期发放</strong>股利，比如每季度、半年或一年发放一次。</p>
+
+        <p>随着利润的增长，派发金额有时会提高，可以提高到早期的发放比率，但<strong>只有在下述情况才会这么做</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>条件</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 机会已被满足</strong></td>
+              <td>有足够的资金可以用来投资管理层发现的那些良好的成长机会</td>
+            </tr>
+            <tr>
+              <td><strong>② 可持续性已被确认</strong></td>
+              <td>有充分的理由相信这种新的定期股利发放率<strong>可以维持下去</strong>，即使随后可能出现经济衰退或是其他的一些成长机会</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-8-3">8.3 提高与降低股利的纪律</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>操作</th>
+              <th>应遵循的纪律</th>
+              <th>效果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>提高股利</strong></td>
+              <td>一直都以十分谨慎的态度提高，而且只有在股利政策可能继续维持下去的时候才提高</td>
+              <td>这样的股利政策在<strong>有眼光的投资者</strong>中会赢得广泛支持</td>
+            </tr>
+            <tr>
+              <td><strong>降低股利</strong></td>
+              <td>只有在<strong>最紧急的情况</strong>下才能降低</td>
+              <td>维持可靠性</td>
+            </tr>
+            <tr>
+              <td><strong>一次性大幅提高</strong></td>
+              <td>⚠️ 许多企业的财务主管同意这种做法，非常令人吃惊</td>
+              <td>即使这些预料之外的发放股利行为通常不会对股票价格产生长远影响，但由此可以看出，这样的政策<strong>和大部分长期投资者的愿望是对立的</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、餐馆的比喻 -->
+      <section id="section-9">
+        <h2>九、餐馆的比喻：一致性胜过政策本身的优劣</h2>
+
+        <p>无论公司的股利政策制定得<strong>明智还是拙劣</strong>，只要公司一如既往地坚持这种政策，总会引来一群喜欢这种政策的投资者。</p>
+
+        <p><strong>投资者的偏好本就五花八门：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>偏好类型</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>坚持偏好<strong>高股利发放率</strong></td>
+              <td>不论这种政策是否对自己最为有利</td>
+            </tr>
+            <tr>
+              <td>喜欢<strong>较低的股利发放率</strong></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>不喜欢</strong>发放股利</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>喜欢较低的股利发放率，即每年定期分红送股<strong>少量的股票股利</strong></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>根本不喜欢股票发放股利，<strong>只希望分红送股</strong></td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>如果公司管理层按照自己的需求定下某种股利政策，通常就会吸引到一群喜欢并希望这种政策持续下去的股东。</p>
+
+        <div class="pull-quote">
+          💡 <strong>聪明的管理层如果希望为公司赢得良好的投资声望，则应尊重投资者的期望，让这种政策持续下去。</strong>
+        </div>
+
+        <h3 id="section-9-1">9.1 餐馆老板的成功与失败</h3>
+
+        <p>制定股利政策和制定一家餐馆的经营策略颇为类似。一个优秀的餐馆老板可能通过多种方式取得经营上的成功：</p>
+
+        <ul>
+          <li>以<strong>低廉的价格</strong>提供美味的菜肴吸引客人；</li>
+          <li>或者提供<strong>匈牙利菜、中国菜、意大利菜</strong>等特色菜品。</li>
+        </ul>
+
+        <p>每一种特色菜都有可能引来一批<strong>特定的客户</strong>，客户们来到餐馆的时候，总是期望吃到某种特色菜。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>餐馆的做法</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>长期坚持一种定位</td>
+              <td>建立起稳定的客户群</td>
+            </tr>
+            <tr>
+              <td>某天供应价格昂贵的菜肴，第二天又卖价格便宜的，然后又在没有预兆的情况下经营异国风味</td>
+              <td>⚠️ 即使餐馆老板的才能再强，也<strong>很难建立起稳定的客户群</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">同样的道理</div>
+            <p>一家公司的股利政策如果<strong>不断地变动</strong>，就很难吸引到稳定的股东群，这样的股票也<strong>不是最好的长线投资对象</strong>。</p>
+          </div>
+        </div>
+
+        <p>只要股利政策能够始终如一，投资者便能够在有保障的情况下做好未来的投资计划。这样在整个投资过程中，<strong>股利情况如何就没有那么重要了</strong>，自然不必浪费口舌去讨论各种股利政策孰好孰坏。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、实证：洛姆哈斯公司 -->
+      <section id="section-10">
+        <h2>十、实证：洛姆哈斯公司</h2>
+
+        <p>金融界一定有很多人并不认同上述观点，但他们没办法解释：为什么不少股票预计在未来几年只能提供<strong>低于平均水平的收益股利</strong>，但是其持股者却<strong>从中获利颇多</strong>。</p>
+
+        <p>前面已经提到过几只这样的股票，另一个典型的投资案例是<strong>洛姆哈斯（Rohm &amp; Hass）</strong>。</p>
+
+        <h3 id="section-10-1">10.1 该股票的来历与初始条件</h3>
+
+        <p>这只股票于 <strong>1949 年</strong>首次公开发行。一群投资银行家通过<strong>外国财产管理处（Alien Property Custodian）</strong>大量买入这家公司的股票，并向公众转售。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>公开上市价格</strong></td>
+              <td>41.25 美元</td>
+            </tr>
+            <tr>
+              <td><strong>现金股利</strong></td>
+              <td>每股仅 1.00 美元，再加上一些送股</td>
+            </tr>
+            <tr>
+              <td><strong>当时的市场评价</strong></td>
+              <td>许多投资者认为此股票的收益较低，<strong>不能算是理想的保守型投资对象</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-10-2">10.2 后来发生了什么</h3>
+
+        <p>但是，从发行的那天起，这家公司的做法是：</p>
+
+        <ol>
+          <li><strong>连续派发股票</strong>作为股利；</li>
+          <li>并<strong>经常每隔一段时间就提高现金股利</strong>。</li>
+        </ol>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>股利收益率</strong></td>
+              <td>尽管此时的收益<strong>仍然较低</strong></td>
+            </tr>
+            <tr>
+              <td><strong>股价</strong></td>
+              <td>却远高于 <strong>400 美元</strong></td>
+            </tr>
+            <tr>
+              <td><strong>股票股利（1949—1955 年）</strong></td>
+              <td>最早的持股人每年能够领到 <strong>4%</strong> 的股票股利</td>
+            </tr>
+            <tr>
+              <td><strong>股票股利（1956 年）</strong></td>
+              <td><strong>3%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>总的投资回报率</strong></td>
+              <td><strong>10 倍以上</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十一、本章小结 -->
+      <section id="section-11">
+        <h2>十一、本章小结</h2>
+
+        <h3 id="section-11-1">11.1 核心结论</h3>
+
+        <p>实际上，如果想要挑选出优秀的股票，就要<strong>尽可能少地考虑股利问题</strong>，不可在股利上花太多精力。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">最奇特的地方</div>
+            <p>股利这个备受人们关注和热议的问题，其最奇特的地方或许就在于：<strong>考虑这个问题最少的人，最后却能得到最高的投资回报。</strong></p>
+          </div>
+        </div>
+
+        <p>有必要再说一遍：</p>
+
+        <div class="pull-quote">
+          <strong>5～10 年的时间里，最高的股利回报不是来自高股利发放率的股票，而是来自低股利发放率的股票。</strong>
+        </div>
+
+        <p>其内在机制是：能力优秀的管理层在公司业务经营中取得了很大的成功，虽然继续实施原来的股利政策、只从当期利润中派发较低比例的股利，但<strong>股利的金额却渐渐超过了高股利发放率的股票</strong>。</p>
+
+        <p>这种既合乎情理、又自然而然的趋势，将来又有什么理由不能持续下去呢？</p>
+
+        <h3 id="section-11-2">11.2 全章要点速查</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>议题</th>
+              <th>结论</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>不发股利就是"没为股东做事"</td>
+              <td>❌ 若用于新厂房、新产品线、降本设施，股东利益可能远高于收到股利</td>
+            </tr>
+            <tr>
+              <td>留存利润何时<strong>无益</strong>于股东</td>
+              <td>① 现金囤积远超经营所需；② 管理层能力不足，扩张低效王国</td>
+            </tr>
+            <tr>
+              <td>如何规避上述两种陷阱</td>
+              <td>✅ 坚守十五个原则——买优秀公司而非仅买便宜货</td>
+            </tr>
+            <tr>
+              <td>必需的留存利润为何有时不增值</td>
+              <td>① 竞争性支出（如空调）不增业务量；② 会计法则把美元视为恒值，累积折旧不足以重置资产</td>
+            </tr>
+            <tr>
+              <td>谁受折旧缺口影响最小</td>
+              <td>成长型公司持股者——新购资产占比高，折旧成本接近当前价值</td>
+            </tr>
+            <tr>
+              <td>"不提高股利伤害小股东"</td>
+              <td>❌ 关键变量是<strong>是否愿意再投资</strong>，而非个人税率</td>
+            </tr>
+            <tr>
+              <td>提高股利的漏损</td>
+              <td>至少 20% 所得税 + 经纪佣金（小额交易更吃亏）；可再投资资金远低于股利的 80%</td>
+            </tr>
+            <tr>
+              <td>"高股利 = 安全"</td>
+              <td>❌ 研究表明高股利股票中价格表现不佳者远多于低股利股票</td>
+            </tr>
+            <tr>
+              <td>股利政策最重要的属性</td>
+              <td>✅ <strong>规律性与可靠性</strong>——政策极少变，金额可调</td>
+            </tr>
+            <tr>
+              <td>提高股利的前置条件</td>
+              <td>① 成长机会的资金已足；② 新发放率确信可长期维持</td>
+            </tr>
+            <tr>
+              <td>政策的一致性 vs 优劣</td>
+              <td>一致性更重要；政策频繁变动的股票不是最好的长线投资对象</td>
+            </tr>
+            <tr>
+              <td>实证</td>
+              <td>洛姆哈斯：低收益率起步，股价 41.25 → 400+ 美元，总回报 10 倍以上</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">
+          💡 <strong>一句话概括本章思想</strong>：股利的喧嚣多属噪音；把注意力放在企业的成长能力和股利政策的可靠性上，收益自会跟来。
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    let lastActive = null;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(onScroll); // 初始状态高亮并滚动到可视区域
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
+    const BOOK_FOLDER = '怎样选择成长股';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+
+    // 记录当前页面为该书最后阅读页（含子目录路径）
+    const relativePath = 'books/' + BOOK_FOLDER + '/第一部分：普通股和不普通的利润/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    // 恢复上次滚动位置
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) {
+        window.scrollTo(0, pos.y);
+      }
+    }
+
+    // 滚动时防抖保存位置
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({
+          page: relativePath,
+          y: window.scrollY
+        }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
