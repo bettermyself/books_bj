@@ -147,6 +147,10 @@ h2{font-family:var(--serif);font-weight:900;font-size:29px;letter-spacing:.03em}
 .twrap{overflow-x:auto;margin:8px 0 12px;border:1px solid var(--line);background:rgba(255,255,255,.4);transition:box-shadow .25s}
 .twrap:hover{box-shadow:0 10px 28px -20px rgba(32,48,42,.7)}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:600px}
+.vtable{min-width:0}
+.vtable td{overflow-wrap:break-word;word-break:break-word}
+.vwrap{overflow-x:visible;overflow-y:visible}
+.vwrap table{min-width:0}
 thead th{background:var(--gold);color:#ffffff;font-size:11.5px;letter-spacing:.14em;font-weight:600;padding:10px 14px;text-align:left;border-bottom:2px solid var(--gold3)}
 thead th.ckh{width:52px;text-align:center;background:var(--gold3);color:#ffffff}
 .vtable thead th.ckh{background:var(--red)}
@@ -354,8 +358,8 @@ const SECTIONS=[
   ["确认货币资金与短期债务、经营需要相匹配","过小 → 偿债不足；过大 → 运用能力弱或性质有问题"],
   ["反常信号：货币资金远小于短期负债","偿债危机"],
   ["反常信号：存贷双高","资金充裕却借高息负债——大概率虚构 / 挪用 / 被冻结"],
-  ["反常信号：定期存款 / 其他货币资金巨大却缺可动用流动资金","资产受限或被质押的嫌疑"],
-  ["反常信号：其他货币资金巨大且无合理解释","先要解释，再谈估值"],
+  ["反常信号：定期存款 / 其他货币资金巨大却缺可动用流动资金","资金可能已被冻结，多因被控股股东「借」走"],
+  ["反常信号：其他货币资金巨大且无合理解释","可能存在大额投资预付款、意向金、保证金等，导致资金被控股股东或关联人占用"],
   ["反常信号：利息收入显著低于存款利率","资金可能只在报表日短暂停留"],
   ["警惕控股股东「集团资金管理协议」归集资金池","资金被归集 = 挪用与冻结的便利通道"],
   ["检查货币冗余","账面留存数倍于投资支出及分红所需现金 → 运用能力低下，估值扣分"],
@@ -392,8 +396,8 @@ const SECTIONS=[
  ["co","warn","最高优先级的逻辑矛盾","存货周转率明显下降 + 毛利率显著上升 = 高概率造假——滞销本应毛利率下降，两者同时出现，只剩一种解释。",""],
  ["h","3.6","生产类资产"],
  ["t",{"m":"check","c":["科目","核查要点"],"r":[
-  ["固定资产","查折旧政策，警惕突然变更；识别账面归零但实际增值资产（大坝、酒窖、城区房产）；警惕「先减值后出售」（成交价显著高于账面）；减值一经计提不可转回"],
-  ["在建工程 / 工程物资","警惕数额巨大持续多年不转固（避折旧或虚构工程转移资金）；投入增加但进度停滞"],
+  ["固定资产","查折旧政策，警惕突然变更；方向即试金石：加速折旧（延迟纳税＝免息贷款）为优，减折旧做大利润（提前纳税）为劣；识别账面归零但实际增值资产（大坝、酒窖、城区房产）；警惕「先减值后出售」（成交价显著高于账面）；减值一经计提不可转回"],
+  ["在建工程 / 工程物资","警惕数额巨大持续多年不转固（避折旧、虚构工程转移资金，制造虚假收入）；投入增加但进度停滞"],
   ["无形资产 / 开发支出","查研发资本化 / 费用化倾向（全费用化更可靠）；外购价格是否公平；减值不可转回"],
   ["商誉","关注爆雷风险；商誉占收购对价超高（如 90% 以上）、仅笼统称「未减值」无详细信息——警惕；经常收购产生大额商誉时应还原重估"],
   ["长期待摊费用","数字越大资产质量越差（无变现价值，用于减费增利）"],
@@ -654,7 +658,7 @@ function renderBlock(b,sid,bi){
   if(T==="rl")return `<ol class="rules">${b[1].map(r=>`<li><div><b>${r[0]}</b><p>${r[1]}</p></div></li>`).join("")}</ol>`;
   if(T==="t"){
     const {c,r,m}=b[1],cls=m==="veto"?"vtable":"";
-    let h=`<div class="twrap"><table class="${cls}"><thead><tr>${m?`<th class="ckh">${m==="veto"?"否决":"核"}</th>`:""}${c.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>`;
+    let h=`<div class="twrap${m==="veto"?" vwrap":""}"><table class="${cls}"><thead><tr>${m?`<th class="ckh">${m==="veto"?"否决":"核"}</th>`:""}${c.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>`;
     r.forEach((row,ri)=>{
       const id=`${sid}.${bi}.${ri}`;
       const st=state[id]?(m==="veto"?" class=\"clickable veto-on\"":" class=\"clickable done\""):(m?" class=\"clickable\"":"");
