@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投资检查清单 · 《巴菲特致股东的信》附录</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#f5f2ec; --paper2:#faf8f4; --paper3:#f0ece3;
+  --ink:#2c2416; --ink2:#6b5e4a; --ink3:#a89880;
+  --gold:#a07828; --gold2:#c9a84c; --gold3:#7a5a10;
+  --red:#a63a2e; --red2:#c04a3c;
+  --green:#1c5c43; --gdeep:#123f2e;
+  --line:#e0d8cc;
+  --serif:'Noto Serif SC',serif;
+  --sans:'Noto Sans SC',sans-serif;
+  --mono:'IBM Plex Mono','Noto Sans SC',monospace;
+  --disp:'Fraunces','Noto Serif SC',serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);font-size:14.5px;color:var(--ink);
+  background:#f5f2ec;
+  background-attachment:fixed;
+}
+::selection{background:var(--gold2);color:#2c2416}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#f5f2ec}
+::-webkit-scrollbar-thumb{background:#e0d8cc;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+
+/* ── 顶部行情带 ── */
+.ticker{overflow:hidden;white-space:nowrap;background:#faf8f4;border-bottom:1px solid #e0d8cc}
+.tk{display:inline-block;padding:9px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--gold);animation:tick 80s linear infinite}
+.ticker:hover .tk{animation-play-state:paused}
+.tk b{color:#a89880;margin:0 22px;font-weight:400}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ── 骨架 ── */
+.shell{display:grid;grid-template-columns:284px 1fr;max-width:1460px;margin:0 auto;box-shadow:0 0 80px rgba(0,0,0,.4)}
+.side{position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 30px;background:#ffffff;border-right:1px solid #e0d8cc}
+.side::-webkit-scrollbar{width:5px}
+.brand{display:flex;gap:12px;align-items:center;padding-bottom:18px;border-bottom:1px solid #e0d8cc;margin-bottom:16px}
+.mc{width:46px;height:46px;flex:0 0 46px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-family:var(--disp);font-weight:900;color:var(--gold);font-size:13px;position:relative}
+.mc::before{content:"";position:absolute;inset:4px;border:1px dashed rgba(160,120,40,.5);border-radius:50%;animation:spin 50s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.brand b{color:#2c2416;font-family:var(--serif);font-size:14.5px;display:block}
+.brand i{color:#a07828;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em}
+.ov{margin-bottom:14px}
+.lab{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:#a07828;margin-bottom:7px;display:flex;justify-content:space-between}
+.bar{height:6px;background:#f0ece3;position:relative}
+.bar u{position:absolute;inset:0;right:auto;width:0;background:var(--gold);transition:width .6s cubic-bezier(.3,1,.3,1)}
+nav a.nv{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:9px 10px;text-decoration:none;color:#6b5e4a;border-left:2px solid transparent;transition:.2s}
+.nv:hover{background:rgba(160,120,40,.09);color:#2c2416}
+.nv.act{border-left-color:var(--gold);background:rgba(160,120,40,.13);color:#2c2416}
+.nv-num{font-family:var(--serif);font-weight:900;font-size:15px;color:var(--gold);text-align:center}
+.nv b{font-size:12.5px;font-weight:500;display:block;line-height:1.4}
+.mini{display:block;height:2px;background:#f0ece3;margin-top:5px;position:relative}
+.mini u{position:absolute;inset:0;right:auto;background:var(--gold);width:0;transition:width .4s}
+.nv-ct{font-family:var(--mono);font-size:10px;color:#a07828;white-space:nowrap}
+.side-foot{margin-top:18px;padding:13px;border:1px dashed #e0d8cc;font-size:11.5px;color:#6b5e4a;line-height:1.8;font-family:var(--serif)}
+
+/* ── 纸面 ── */
+main{min-width:0}
+.page{min-height:100vh;background:var(--paper);
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0"/></filter><rect width="140" height="140" filter="url(%23n)"/></svg>');
+  box-shadow:inset 0 0 0 1px #e0d8cc}
+
+/* ── 证书式刊头 ── */
+.masthead{margin:34px 48px 0;padding:32px 40px 26px;border:2px solid var(--gold3);position:relative;outline:1px solid rgba(184,147,63,.4);outline-offset:5px;
+  background:
+   repeating-radial-gradient(circle at 115% -30%, transparent 0 10px, rgba(184,147,63,.055) 10px 11px),
+   repeating-radial-gradient(circle at -15% 130%, transparent 0 10px, rgba(184,147,63,.055) 10px 11px),
+   rgba(255,255,255,.45)}
+.cnr{position:absolute;width:20px;height:20px;border:2px solid var(--gold)}
+.c1{top:9px;left:9px;border-right:none;border-bottom:none}
+.c2{top:9px;right:9px;border-left:none;border-bottom:none}
+.c3{bottom:9px;left:9px;border-right:none;border-top:none}
+.c4{bottom:9px;right:9px;border-left:none;border-top:none}
+.mh-top{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--gold3);border-bottom:1px solid rgba(184,147,63,.4);padding-bottom:12px;margin-bottom:24px}
+.mh-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:center}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(42px,5.4vw,66px);line-height:1.15;letter-spacing:.07em;color:var(--ink)}
+.mh-eng{font-family:var(--disp);font-weight:600;font-size:11.5px;letter-spacing:.44em;color:var(--gold3);margin-top:12px}
+.mh-motto{margin-top:20px;font-family:var(--serif);font-size:15px;color:var(--ink2);line-height:1.95;border-left:3px solid var(--gold);padding-left:14px;max-width:54ch}
+.mh-meta{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.mh-meta span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1px solid var(--line);padding:5px 11px;color:var(--ink2);background:rgba(255,255,255,.55)}
+.mh-side{display:flex;flex-direction:column;gap:18px}
+.pipeline{border:1px solid rgba(184,147,63,.5);background:rgba(255,255,255,.5);padding:16px 18px}
+.pl-label{font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--gold3);margin-bottom:12px}
+.pl-steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-family:var(--serif);font-weight:700;font-size:13.5px}
+.pl-steps span{border:1.5px solid var(--gold3);color:var(--gold3);padding:6px 10px;background:rgba(160,120,40,.06);transition:.2s}
+.pl-steps span:hover{background:var(--gold3);color:var(--paper)}
+.pl-steps i{color:var(--gold);font-style:normal}
+.pipeline p{margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.75}
+.mh-stamp{align-self:flex-end;transform:rotate(-6deg);border:3px double var(--red);color:var(--red);padding:11px 18px;font-family:var(--serif);font-weight:900;font-size:16px;letter-spacing:.2em;line-height:1.7;text-align:center;background:rgba(166,58,46,.045);animation:stampIn .7s cubic-bezier(.3,1.6,.4,1) .6s both}
+@keyframes stampIn{from{opacity:0;transform:rotate(-6deg) scale(2.2)}to{opacity:1;transform:rotate(-6deg) scale(1)}}
+.mh-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:26px;padding-top:14px;border-top:1px dashed rgba(184,147,63,.55);font-size:11.5px;color:var(--ink2);font-family:var(--mono)}
+.sw{display:inline-block;width:11px;height:11px;border:2px solid var(--ink2);background:#fff;vertical-align:-1px;margin-right:7px}
+.sw.ck{background:var(--gold);border-color:var(--gold)}
+.sw.vt{background:var(--red);border-color:var(--red)}
+.sw.nt{border-color:var(--gold);background:rgba(184,147,63,.2)}
+
+/* ── 凡例 ── */
+.preface{margin:26px 48px 0;padding:18px 24px;border:1px dashed rgba(184,147,63,.6);background:rgba(255,255,255,.42);font-size:13.5px;color:var(--ink2);line-height:1.95}
+.preface b{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--gold3);display:block;margin-bottom:8px}
+
+/* ── 工具条 ── */
+.toolbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 48px;background:var(--paper);border-bottom:3px double var(--gold3)}
+.tb-bar{width:170px;height:9px;background:var(--paper3);border:1px solid var(--line);position:relative}
+.tb-bar u{position:absolute;inset:0;right:auto;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .6s cubic-bezier(.3,1,.3,1)}
+#tbText{font-family:var(--mono);font-size:11.5px;color:var(--ink2);white-space:nowrap}
+.tb-veto{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:5px 11px;border:1.5px solid var(--gold);color:var(--gold);white-space:nowrap;transition:.3s}
+.tb-veto.hot{border-color:var(--red);color:#fff;background:var(--red);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(166,58,46,.14)}}
+#q{flex:1;min-width:150px;max-width:250px;margin-left:auto;background:#fff;border:1px solid var(--line);padding:8px 12px;font-family:var(--sans);font-size:13px;color:var(--ink);outline:none;transition:.2s}
+#q:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,147,63,.16)}
+#qCount{font-family:var(--mono);font-size:10.5px;color:var(--gold3);white-space:nowrap}
+#reset{background:none;border:1px solid var(--line);padding:8px 14px;font-family:var(--mono);font-size:11.5px;color:var(--ink2);cursor:pointer;transition:.2s}
+#reset:hover{border-color:var(--red);color:var(--red)}
+.vbanner{display:none;position:sticky;top:51px;z-index:55;background:var(--red);color:#fdf6ec;padding:10px 48px;font-size:13.5px;font-family:var(--serif);font-weight:700;letter-spacing:.05em;box-shadow:0 8px 20px -8px rgba(166,58,46,.55)}
+.vbanner.on{display:block}
+
+/* ── 章节 ── */
+.sec{padding:54px 56px 42px;border-bottom:1px solid var(--line);scroll-margin-top:78px;transition:opacity .3s,filter .3s}
+.sec.dim{opacity:.12;filter:grayscale(.7)}
+.sec-head{display:grid;grid-template-columns:88px 1fr auto;gap:20px;align-items:start;border-bottom:4px double var(--ink);padding-bottom:18px}
+.sec-num{font-family:var(--serif);font-weight:900;font-size:56px;line-height:1;color:rgba(184,147,63,.13);-webkit-text-stroke:1.2px rgba(184,147,63,.55)}
+h2{font-family:var(--serif);font-weight:900;font-size:29px;letter-spacing:.03em}
+.sec-q{font-family:var(--serif);font-size:15px;color:var(--ink2);margin-top:7px}
+.sec-src{font-family:var(--mono);font-size:10.5px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);padding:5px 10px;letter-spacing:.1em;background:rgba(184,147,63,.07);white-space:nowrap}
+.sp{display:flex;align-items:center;gap:12px;margin:16px 0 2px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.sp i{flex:0 0 150px;height:5px;background:var(--paper3);position:relative}
+.sp i u{position:absolute;inset:0;right:auto;background:var(--gold);width:0;transition:width .5s}
+.sp.spv i u{background:var(--red)}
+
+.sub{display:flex;align-items:center;gap:12px;margin:36px 0 14px;font-family:var(--serif);font-weight:700;font-size:19px}
+.sub::before{content:"";width:9px;height:9px;background:var(--gold);transform:rotate(45deg);flex:0 0 9px}
+.sub .n{font-family:var(--mono);font-size:11.5px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);padding:2px 8px;letter-spacing:.06em;font-weight:500}
+.lead{font-size:14px;color:var(--ink2);line-height:1.95;margin:12px 0}
+
+/* ── 账本表格 ── */
+.twrap{overflow-x:auto;margin:8px 0 12px;border:1px solid var(--line);background:rgba(255,255,255,.4);transition:box-shadow .25s}
+.twrap:hover{box-shadow:0 10px 28px -20px rgba(32,48,42,.7)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:600px}
+thead th{background:var(--gold);color:#ffffff;font-size:11.5px;letter-spacing:.14em;font-weight:600;padding:10px 14px;text-align:left;border-bottom:2px solid var(--gold3)}
+thead th.ckh{width:52px;text-align:center;background:var(--gold3);color:#ffffff}
+.vtable thead th.ckh{background:var(--red)}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.8}
+tbody tr:last-child td{border-bottom:none}
+tbody td:first-child{font-weight:700;font-family:var(--serif)}
+tbody tr:nth-child(even){background:rgba(32,48,42,.03)}
+td.ckc{text-align:center;width:52px}
+.ctl{width:16px;height:16px;border:2px solid var(--ink2);display:inline-block;position:relative;background:#fff;vertical-align:middle;transition:.2s}
+.ctl::after{content:"✓";position:absolute;left:1px;top:-5px;font-size:14px;font-weight:900;color:#fff;opacity:0;transform:scale(.3);transition:.22s cubic-bezier(.5,1.9,.4,1)}
+.vtable .ctl{border-color:var(--red)}
+.vtable .ctl::after{content:"✕"}
+tr.clickable{cursor:pointer;transition:background .18s,box-shadow .18s}
+tr.clickable:hover{background:rgba(184,147,63,.11);box-shadow:inset 3px 0 0 var(--gold)}
+tr.done{background:rgba(28,92,67,.09)!important}
+tr.done td{color:var(--ink2)}
+tr.done .ctl{background:var(--gold);border-color:var(--gold)}
+tr.done .ctl::after{opacity:1;transform:scale(1)}
+tr.veto-on{background:rgba(166,58,46,.09)!important}
+tr.veto-on td:first-child{color:var(--red)}
+tr.veto-on .ctl{background:var(--red);border-color:var(--red)}
+tr.veto-on .ctl::after{opacity:1;transform:scale(1)}
+td.stc{position:relative;padding-right:112px}
+.stamp{position:absolute;right:10px;top:50%;transform:translateY(-50%) rotate(-8deg) scale(2.3);opacity:0;border:2.5px solid var(--red);color:var(--red);font-family:var(--serif);font-weight:900;font-size:11.5px;letter-spacing:.18em;padding:3px 8px;pointer-events:none;white-space:nowrap;background:rgba(245,240,225,.75);transition:.25s cubic-bezier(.4,1.6,.4,1)}
+tr.veto-on .stamp{opacity:.92;transform:translateY(-50%) rotate(-8deg) scale(1)}
+
+/* ── 卡片 / 箴言 / 准则 ── */
+.cards{display:grid;gap:14px;margin:16px 0}
+.c2{grid-template-columns:repeat(2,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);background:rgba(255,255,255,.42);padding:18px 18px 16px;position:relative;transition:.25s}
+.card::before{content:"";position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 26px -16px rgba(32,48,42,.6);background:rgba(255,255,255,.65)}
+.cd-n{font-family:var(--disp);font-weight:900;font-size:13px;color:var(--gold3);letter-spacing:.16em;display:block;margin-bottom:9px}
+.card b{font-family:var(--serif);font-size:16px;display:block;margin-bottom:7px;line-height:1.5}
+.card p{font-size:12.5px;color:var(--ink2);line-height:1.75}
+.qt{margin:24px 0;padding:4px 0 4px 26px;border-left:3px solid var(--gold);position:relative}
+.qt::before{content:"「";position:absolute;left:-4px;top:-30px;font-family:var(--serif);font-size:54px;color:rgba(184,147,63,.28)}
+.qt p{font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.95}
+.qt.big p{font-size:22px}
+.qt cite{display:block;margin-top:9px;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--gold3);letter-spacing:.12em}
+.co{margin:18px 0;padding:16px 18px 14px;border-left:4px solid;background:rgba(255,255,255,.35)}
+.co.warn{border-color:var(--red);background:linear-gradient(90deg,rgba(166,58,46,.08),rgba(255,255,255,.35) 68%)}
+.co.tip{border-color:var(--gold);background:linear-gradient(90deg,rgba(184,147,63,.13),rgba(255,255,255,.35) 68%)}
+.co.note{border-color:#4a7296;background:linear-gradient(90deg,rgba(74,114,150,.1),rgba(255,255,255,.35) 68%)}
+.co-t{font-family:var(--serif);font-weight:900;font-size:15px;display:block;margin-bottom:7px}
+.co.warn .co-t{color:var(--red)}.co.tip .co-t{color:var(--gold3)}.co.note .co-t{color:#3d6285}
+.co p{font-size:13.5px;line-height:1.85}
+.co .src{display:block;margin-top:9px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink3)}
+.formula{margin:18px 0;border:1px solid rgba(160,120,40,.55);background:var(--gold3);color:#ffffff;padding:22px 24px;font-family:var(--mono);font-size:13.5px;line-height:2.1;position:relative;overflow:hidden}
+.formula::after{content:"§ 6.E";position:absolute;right:14px;bottom:8px;font-size:10px;letter-spacing:.24em;color:rgba(217,185,104,.6)}
+.formula b{color:var(--gold2);font-size:15px}
+.formula .fc{color:#eba08f}
+.formula .fn{display:block;font-size:11px;color:rgba(239,232,210,.65);margin-top:8px;letter-spacing:.05em}
+.rules{list-style:none;counter-reset:r;margin:14px 0}
+.rules li{counter-increment:r;display:grid;grid-template-columns:44px 1fr;gap:16px;padding:15px 0;border-bottom:1px dashed var(--line)}
+.rules li::before{content:counter(r,decimal-leading-zero);font-family:var(--disp);font-weight:900;font-size:19px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);width:42px;height:42px;display:grid;place-items:center;background:rgba(184,147,63,.06)}
+.rules b{font-family:var(--serif);font-size:15.5px;display:block;margin-bottom:5px}
+.rules p{font-size:13px;color:var(--ink2);line-height:1.8}
+
+/* ── 尾章 ── */
+.colophon{background:var(--bg2);color:var(--text2);padding:72px 56px 60px;text-align:center;border-top:3px double var(--gold)}
+.seal{width:96px;height:96px;margin:0 auto 28px;border:2px solid var(--gold2);border-radius:50%;display:grid;place-items:center;font-family:var(--disp);font-weight:900;font-size:20px;color:var(--gold2);position:relative}
+.seal::before{content:"";position:absolute;inset:6px;border:1px dashed var(--gold2);border-radius:50%;animation:spin 40s linear infinite}
+.seal small{position:absolute;bottom:16px;font-size:8px;letter-spacing:.3em;font-family:var(--mono);font-weight:400}
+.colophon h3{font-family:var(--mono);font-size:11px;letter-spacing:.4em;color:var(--gold2);margin-bottom:20px;font-weight:500}
+.colophon .big{font-family:var(--serif);font-weight:900;font-size:clamp(21px,2.8vw,30px);line-height:1.75;max-width:26em;margin:0 auto 16px}
+.colophon .sub2{font-family:var(--serif);color:rgba(239,232,210,.75);font-size:15px;line-height:1.9}
+.colophon .rule{width:64px;height:2px;background:var(--gold2);margin:28px auto}
+.colophon .small{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:rgba(217,185,104,.6)}
+
+#toTop{position:fixed;right:26px;bottom:26px;width:46px;height:46px;background:var(--gold3);color:#ffffff;border:1px solid var(--gold);font-size:15px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:80;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+#toTop.on{opacity:1;pointer-events:auto}
+#toTop:hover{background:var(--gold);color:#ffffff}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+@media(max-width:1100px){
+  .shell{grid-template-columns:1fr}
+  .side{display:none}
+  .sec{padding:44px 24px}
+  .toolbar,.vbanner{padding-left:20px;padding-right:20px}
+  .masthead{margin:22px 14px 0;padding:26px 22px 22px}
+  .preface{margin:20px 14px 0}
+  .mh-grid{grid-template-columns:1fr}
+  .sec-head{grid-template-columns:1fr;gap:8px}
+  .sec-num{font-size:40px}
+  .sec-src{justify-self:start}
+}
+@media(max-width:820px){.c3,.c4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.c2,.c3,.c4{grid-template-columns:1fr}#q{max-width:none;flex-basis:100%}td.stc{padding-right:14px}.stamp{position:static;display:inline-block;margin-left:8px;transform:rotate(-4deg)}}
+@media print{
+  .ticker,.side,.toolbar,#toTop,.vbanner{display:none}
+  body{background:#fff}.page{box-shadow:none}
+  .rv{opacity:1;transform:none}
+  .shell{display:block}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker"><div class="tk" id="tk"></div></div>
+
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mc">BRK</span><div><b>致股东的信 · 附录</b><i>INVESTMENT CHECKLIST</i></div></div>
+    <div class="ov">
+      <div class="lab"><span>总核查进度</span><span id="ovPct">0%</span></div>
+      <div class="bar"><u id="ovBar"></u></div>
+    </div>
+    <nav id="nav"></nav>
+    <div class="side-foot">清单不是打分表——<br>「宁要模糊的正确，也不要精确的错误。」<br>多数条目是否决项，而非加权项。</div>
+  </aside>
+
+  <main><div class="page">
+
+    <header class="masthead rv">
+      <i class="cnr c1"></i><i class="cnr c2"></i><i class="cnr c3"></i><i class="cnr c4"></i>
+      <div class="mh-top"><span>《巴菲特致股东的信》 · 附录</span><span>No. BRK-1965 · OMAHA, NEB.</span></div>
+      <div class="mh-grid">
+        <div>
+          <h1>投资检查清单</h1>
+          <div class="mh-eng">THE VALUE-INVESTING CHECKLIST</div>
+          <p class="mh-motto">「回避问题，而非解决问题——我们专注于寻找可以跨越的1英尺跨栏，而非挑战7英尺跨栏。」</p>
+          <div class="mh-meta"><span id="mTotal">十六节</span><span>先筛生意 · 再看人 · 再查账 · 最后谈价格</span><span>出处可回溯原书章节</span></div>
+        </div>
+        <div class="mh-side">
+          <div class="pipeline">
+            <div class="pl-label">执行顺序</div>
+            <div class="pl-steps"><span>① 筛生意</span><i>→</i><span>② 看人</span><i>→</i><span>③ 查账</span><i>→</i><span>④ 谈价格</span></div>
+            <p>第一至二节任一项不过关，后面全部不必看——倾向于避开怪兽，而不是杀死它。</p>
+          </div>
+          <div class="mh-stamp">宁要模糊的正确<br>不要精确的错误</div>
+        </div>
+      </div>
+      <div class="mh-legend">
+        <span><i class="sw ck"></i>点击行 ＝ 已核查</span>
+        <span><i class="sw vt"></i>否决项点击 ＝ 触发 → 直接放弃</span>
+        <span><i class="sw nt"></i>进度自动保存于本机</span>
+      </div>
+    </header>
+
+    <div class="preface rv">
+      <b>凡例 · 使用说明</b>
+      本清单把全书九章中散落的判断标准，重排为一条可按顺序执行的分析流水线：先筛生意，再看人，再查账，最后谈价格；每一条均可回溯原书出处章节。清单的作用是防止遗漏与自欺，不是把判断压缩成一个总分——「宁要模糊的正确，也不要精确的错误。」
+    </div>
+
+    <div class="toolbar">
+      <div class="tb-bar"><u id="tbFill"></u></div>
+      <span id="tbText">已核查 0 / 0 项</span>
+      <span class="tb-veto" id="tbVeto">否决触发 0</span>
+      <input id="q" placeholder="搜索清单…（按 / 聚焦）">
+      <span id="qCount"></span>
+      <button id="reset">重置记录</button>
+    </div>
+    <div class="vbanner" id="vb">⛔ 已触发 <span id="vc">0</span> 项否决 —— 按清单原则：回避问题，而非解决问题。直接放弃，后面全部不必看。</div>
+
+    <div id="content"></div>
+
+    <footer class="colophon">
+      <div class="seal">BRK<small>· 1965 ·</small></div>
+      <h3>通过全部检查之后的最后一问</h3>
+      <p class="big">「灌木丛里到底有几只鸟，我现在付的是几只鸟的钱？」</p>
+      <p class="sub2">「任何买入行为若不是在寻找物有所值的机会，就不是投资。」</p>
+      <div class="rule"></div>
+      <p class="small">逐项打勾，方能安心下注 · 据《巴菲特致股东的信》附录整理</p>
+    </footer>
+
+  </div></main>
+</div>
+
+<button id="toTop" title="回到封面">▲</button>
+
+<script>
+const CN=["壹","贰","叁","肆","伍","陆","柒","捌","玖","拾","拾壹","拾贰","拾叁","拾肆","拾伍","拾陆"];
+const ICON={warn:"⚠",tip:"✦",note:"✎"};
+
+/* ── 全部十六节数据 ── */
+const SECTIONS=[
+{id:"s1",t:"能力圈与生意质地",q:"我看得懂吗？这是好生意吗？",src:"第2章 · 第3章",b:[
+ ["h","1.1","能力圈边界自测"],
+ ["t",{m:"check",c:["检查事项","合格标准","不合格信号"],r:[
+  ["能否说清这家公司怎么赚钱","业务模式简明，可用自己的话讲完","需要借助行业术语才能自圆其说"],
+  ["能否预测10年后的经济效益","能判断它还能不能赚钱、能赚多少","只看得懂产品，看不懂十年后的盈利"],
+  ["是否清楚自己能力圈的边界","圈子大小不重要，清楚知道边界才关键","为了不错过机会而临时扩圈"],
+  ["是否涉及自己无洞见的领域","回避高科技、专利评估、制造工艺、地质勘探","「学习一下就能懂」的自我说服"],
+  ["是否属于快速变化的行业","变化缓慢、根本理由数十年不变","行业迅速膨胀、格局年年重排"]]}],
+ ["q","问题不在于理解它们生产的产品、使用的分销渠道，而在于我们能否预测出这家公司10年后的经济效益。","第2章 E"],
+ ["co","note","泰德·威廉姆斯的击球区","把机会想象成77个格子的击球区，只挥击落在「最佳」格子里的球。投资者的特权是放过差球不会被三振出局——但「日复一日扛着球棒等待完美一击，也绝非易事」。","第2章 E"],
+ ["h","1.2","生意质地否决项"],
+ ["t",{m:"veto",c:["否决项","说明","出处"],r:[
+  ["01 · 捡烟蒂式便宜货","以极低价格买资质不佳的公司。问题公司「祸不单行」，最初看似便宜的价格因问题持续涌现而并不便宜。除非你是能立刻处置资产的专业清算师。","第2章 F"],
+  ["02 · 商品型低边际回报生意","成本控制决定生死，「销售普通商品型产品，不可能比最愚蠢的对手聪明多少」。在低边际回报行业，成长反而损害股东利益。","第2章 D · 第3章 D"],
+  ["03 · 需持续巨额再投资","所有同行同时投资，成本下降被价格战抵消，整体回报不变——如人群中踮脚看游行，都更累了，视野未改善。","第1章 C"],
+  ["04 · 成本高企且极难降低","美国航空的教训：买入前「完全没有关注到运输公司无可避免的困扰」。管制取消后，低成本对手的低票价迫使守旧公司无法维持。","第3章 D"],
+  ["05 · 困境反转型 / 依赖预测","只看已验证的盈利能力，对未来预测与困境反转型公司毫无兴趣。卖方财务预测「娱乐价值大于教育价值」。","第5章 D"],
+  ["06 · 行业基本面正在恶化","纺织、报业的教训：「管理技能的杰出依然敌不过大环境基本面的恶化」。船长期漏水，换船比修补更有效。","第1章 C"]]}],
+ ["cd",4,[["Ⅰ","我们能理解","坚守能力圈，只投资看得懂的生意"],["Ⅱ","具有良好的长期前景","未来10~20年竞争优势确定"],["Ⅲ","诚实且能干的管理层","德才兼备，以股东利益为导向"],["Ⅳ","非常有吸引力的价格","足够安全边际；仅比价值略高时毫无兴趣"]]],
+ ["co","tip","目标是「价格合理的杰出公司」","不是「价格便宜的平庸公司」。「巧妇难为无米之炊」——先拿到丝绸，才能织出丝绸钱包。时间是优秀企业的朋友，是平庸企业的敌人。","第2章 D · F"]
+]},
+{id:"s2",t:"护城河与确定性",q:"10~20年后它还赚钱吗？",src:"第1章 · 第2章 · 第5章",b:[
+ ["h","2.1","护城河来源核查"],
+ ["t",{m:"check",c:["护城河来源","核查要点","书中例证"],r:[
+  ["消费特许权","客户心中的品牌认同，产品价值超越成本；能否说清「人们为什么在众多选择中仍选它」","禧诗糖果、可口可乐（全球软饮44%份额）"],
+  ["政府特许权","不受利润管制的许可授权；是否受管制决定了税收红利归谁","电视台"],
+  ["持久低成本地位","是否长期保持行业最低成本生产商地位","——"],
+  ["品牌 + 产品属性 + 分销系统","市场份额是否多年来仍在提升","吉列（刀片市场按价值超60%）"],
+  ["护城河是否在加宽","提升客户体验、削减不必要成本、改进产品服务的日常坚持","伯克希尔对经理人的日常要求"]]}],
+ ["co","warn","最大的护城河风险：失去专注","当杰出公司的管理层无视核心业务、去收购平庸企业时，投资者的痛苦将极为漫长。真实案例：可口可乐养过虾，吉列搞过石油。这是巴芒最为担心的风险。","第2章 E"],
+ ["co","note","「永远不变」的检验法","分两栏列出：已经变化的（糖果种类、机器、分销渠道、销售人员规模）与从未改变且未来20~50年亦然的（人们购买盒装巧克力的根本理由、可乐的竞争优势与经济特质）。第二栏若写不出来，确定性就不存在。","第2章 E"],
+ ["co","warn","「看似无敌」的历史教训","通用汽车、IBM、西尔斯百货都曾长期看似无敌，最终证明并非如此。因此不存在「漂亮50」名单，一生也只能鉴别出极少数「注定成功」的伟大公司。","第2章 E"],
+ ["h","2.2","通胀承受力双标准"],
+ ["p","能同时通过以下两条测试的企业极为稀少，但这是抵御通胀的唯一结构性优势："],
+ ["cd",2,[["标准一","容易提价的能力","即便需求平平、产能未充分开工，也无惧提价带来的市场份额或销售量下降。（第5章 A）"],["标准二","低增量资本扩容能力","只需投入少量增量资本，即可容纳因通胀带来的业务量大幅增加。（第5章 A）"]]],
+ ["t",{c:["通胀情景对比","禧诗糖果（轻资产+强商誉）","平凡公司（重资产）"],r:[
+  ["原有形净资产","800万美元","1800万美元"],
+  ["价格水平翻倍需追加资本","800万美元","1800万美元"],
+  ["翻倍后盈利","400万美元","400万美元"],
+  ["企业估值（按原倍数）","约5000万美元","约3600万美元"],
+  ["每1美元追加投资获得的名义价值","3美元","1美元"]]}],
+ ["co","warn","推翻常识：重资产不抗通胀","传统观念认为有形资产（自然资源、厂房机器）可抵御通胀，实际上资产庞大的企业回报率低下；拥有持久无形资产、有形资产需求少的企业，才能在通胀中创造不成比例的财富。「少即是多。」","第6章 D"]
+]},
+{id:"s3",t:"管理层与治理",q:"掌舵的人诚实、能干、为股东着想吗？",src:"第1章 · 第7章",b:[
+ ["h","3.1","管理层品行与能力"],
+ ["t",{m:"check",c:["检查事项","合格标准","风险信号"],r:[
+  ["诚信","德才兼备，是「你愿意将女儿嫁给他的那种人」","与不值得尊敬的经理人为伍——「无论公司前景多么诱人，我们从未成功过」"],
+  ["资本配置能力","能明智运用现金流；懂得把现金从低回报业务转向高回报业务","许多CEO上任前从未做过资产配置决策（难度堪比让音乐家去当美联储主席）"],
+  ["是否回报股东","把利润回馈股东，而非优先自我利益","把富余现金投入回报平平甚至很差的项目"],
+  ["是否报盈利预测","坦诚承认不知道下季度盈利","大肆鼓吹盈利成长预测；总能「精准」达标者应「彻头彻尾地怀疑」"],
+  ["是否直面坏消息","立即通报任何重大坏消息","拖延掩盖——所罗门证券可轻易解决的小问题因此几乎令8000人公司消亡"],
+  ["是否受「惯性驱使」支配","对机构强迫症保持警惕","抗拒改变、项目耗尽所有现金、下属为愚蠢项目备好论证、盲目模仿同行"],
+  ["是否被「动物精神」驱动","把回购与不作为视为合法选项","为激情与版图而收购；薪酬以规模而非盈利能力衡量"]]}],
+ ["co","warn","机构强迫症的四种表现","①抗拒当前方向上的任何改变（如受牛顿第一定律控制）；②项目与收购像工作填满时间一样耗尽所有现金；③领导人渴望的项目无论多愚蠢总有下属精心准备的论证支持；④同行的扩张、收购、薪酬被不加思考地模仿。令公司误入歧途的是惯性的力量，而非腐败或愚蠢。","第2章 F"],
+ ["co","tip","检验管理层的三个模拟情景","要求经理人像以下三种所有者一样运营：①你拥有100%股份；②公司是家族在世界上拥有的唯一资产；③至少100年内不可出售或合并。","第1章 B"],
+ ["h","3.2","董事会与「独立性」"],
+ ["t",{c:["治理情形","股权结构特征","有效性判断"],r:[
+  ["情形 1","无控股股东（大多数上市公司）","⚠ 容易被「长期」一词滥用，董事缺乏诚信或独立思考能力"],
+  ["情形 2","控股股东同时是公司高管（伯克希尔）","取决于控股股东品质；外部董事除反对外别无他法"],
+  ["情形 3","控股股东不参与管理（好时食品、道琼斯）","✓ 逻辑上最为有效——外部董事可向大股东直接反映不满"]]}],
+ ["cd",3,[["条件 01","丰富的商业经验","尤为难得，缺乏则其他两项作用有限。许多聪明、知名的社会人物对企业没有充足了解，不适合待在董事会内。"],["条件 02","以股东利益为导向","核心立场，确保决策站在股东一边。"],["条件 03","在公司拥有真正的利益","「如果你们赢，他们就大赢；如果你们输，他们就大输。」"]]],
+ ["t",{m:"check",c:["董事会结构检查项","理想状态（针对情形1）"],r:[
+  ["人数","十个或更少"],
+  ["构成","多数来自公司外部"],
+  ["CEO考核","外部董事制定CEO业绩衡量标准"],
+  ["会议机制","定期召开没有CEO参与的会议评判其业绩"],
+  ["成员特质","精通业务、乐于本职、股东利益导向"],
+  ["选任依据","✗ 不以社会名声或多元化因素挑选"],
+  ["持股与保险","持有重大身家、非期权或赠予取得；不安排责任保险"]]}],
+ ["co","warn","最不独立的董事","依赖董事报酬生活的人——「更可笑的是，恰恰正是这些人被归类为『独立』董事」。历时62年的投资公司董事会案例显示：他们从未换过投资经理，也从未真正为投资者谈判降低管理费用。","第1章 B"],
+ ["co","warn","「先射箭后画靶」","基层员工有清晰可量化标准、失职即刻解雇；CEO与董事的衡量标准几乎不存在，落箭之点被匆忙圈为靶心。「在董事会议上，对CEO成绩表现的批评就像打嗝一样无关痛痒。」","第1章 B"],
+ ["h","3.3","高管薪酬与期权设计"],
+ ["rl",[["剔除「自动扶梯」效应","留存利润自动增长不是管理成就。储蓄账户本金10万、利率8%、留存75%，十年后盈利从$8,000涨到$13,515——纯粹来自复利，无人会为此夸奖你。"],["警惕固定价格期权","漠视资本成本，创造「正面我赢、反面股东输」的不对等赌局。期权持有人偏好不分红，因每派一分股息就降低其期权价值。"],["与可控业绩挂钩","喜诗干得好不奖励新闻公司，反之亦然。优秀表现即便股价下跌也该奖励；平庸表现即便股价飙升也不该特别奖励。"],["资本必须计入成本","增量资本回报高于费用成本则奖金增加，低于则差价扣减——双向对称，而非「正面我赢、反面你输」。"],["董事会必须代表股东","薪酬委员会不应「像滑雪道上的小狗」乖乖跟着顾问建议。无杰出表现时就该喊出「减少薪酬」。"],["期权的合理设计","①行权价合理；②行权价随留存利润调整；③获得期权后不得立刻抛售股票。（第7章 C）"]]],
+ ["t",{c:["不对称维度","股东","固定价格期权持有人"],r:[
+  ["资本成本","承担全部","无负担"],
+  ["下行风险","参与全部下跌","无下跌风险"],
+  ["分红偏好","希望合理分红","不分红更有利"],
+  ["利益对齐","公司真实价值成长","股价波动与留存复利"]]}],
+ ["co","warn","「弗莱德·徒劳」案例","停滞公司CEO，十年内全部盈利用于回购，业务毫无增长，仅凭留存利润回购，期权价值达1.58亿美元；即便十年利润下滑20%，仍可获利超1亿美元。「吃谁的面包，唱谁的歌。」","第1章 F"],
+ ["h","3.4","信息披露质量"],
+ ["t",{m:"check",c:["披露检查项","✗ 反面做法","✓ 应有做法"],r:[
+  ["年报内容","人物、工厂、产品照片；引用EBITDA；模糊会计技巧；公关部代笔","CEO用自己的语言解释所发生的事情，坦诚、清晰、无修饰"],
+  ["发布时机","选择性透露给分析师或大股东","周五收盘后或次日早晨发布，留足消化时间，全体股东同时获取"],
+  ["选择性披露","「指引」分析师预期，提供正好或略低于真实预期的数据","平等对待所有股东"],
+  ["注脚可读性","看不懂的注释与管理解释——「CEO可能不想让你明白」","注脚清晰，重大运营数据均给出解读"],
+  ["增长预期","宣称维持15%年复合增长（200家最赚钱公司中20年内能做到的不超过10家）","承认无法预知下一季度盈利"]]}],
+ ["co","warn","给投资者的三个警惕","①警惕弱会计的公司——没有费用选项、养老金假设天马行空；「厨房里如果有蟑螂，绝不可能只有一只」。②警惕不知所云的注脚——安然的某些交易描述至今令巴菲特困惑。③警惕大肆鼓吹的盈利成长预测——所有盈利都不是简单顺利可预知的。","第1章 A"],
+ ["co","warn","盈利预测腐蚀行为的三级滑坡","不切实际的增长预期 → 为达成宣布过的目标参与不经济的运作 → 玩会计游戏「制造数字」 → 盈利跨期转移形成滚雪球，需要更多操纵，「愚蠢就变成了欺诈」。","第1章 A"],
+ ["h","3.5","风险、声誉与审计委员会"],
+ ["t",{m:"check",c:["检查事项","标准"],r:[
+  ["风险控制责任归属","CEO对风险控制负绝对责任，不可推给风险委员会或首席风险官；董事会若不确保这一点即属玩忽职守"],
+  ["失控的个人代价","CEO与董事本人应付出巨大代价，且不能由公司或保险公司补偿"],
+  ["声誉底线","「可以承受金钱的损失，甚至大笔金钱，但无法承受名誉的损失，甚至一丝一毫」"],
+  ["头版测试","若此行为被「不友好却聪明的记者」写在国家报纸头版，我们是否还能愉快面对？"],
+  ["「大家都这么干」检验","当一项决策需要靠「每个人都这么干」来辩解，它几乎必然存在问题"],
+  ["「迫近底线」处置","心存疑虑就直接放弃，就当这笔钱不属于你"],
+  ["文化 vs 文件","「是文化，而不是文件，更能决定一个企业的行为」；在最细微的不良气息出现时消灭问题"]]}],
+ ["p","审计委员会应向审计师提出的四个关键质询——核心任务是让审计师敢于披露真相，并明确瞒报将面临巨额罚金："],
+ ["t",{m:"check",c:["#","质询问题","防范的问题"],r:[
+  ["1","若审计师全权负责编制财务报表，成果是否与现管理层准备的不同？","揭示管理层的会计选择偏差（含非实质性区别）"],
+  ["2","若审计师本人是投资者，他们是否已收到了解报告期财务表现的全部重要信息？","验证披露充分性，确认无隐瞒"],
+  ["3","若审计师本人是CEO，公司是否严格遵循了本应遵守的内部审计流程？","检查内控的实际执行，而非书面制度"],
+  ["4","审计师是否察觉任何将营业收入或成本在不同报告期之间转移的行为？","专防跨期调节盈余的舞弊"]]}],
+ ["co","note","审计师的立场偏差","审计师惯于视CEO为客户，为保住业务不敢冒犯管理层——「吃谁的饭，唱谁的歌」。大型机构或许能指出会计把戏，但来自高层的推动力「常常使一流人才屈从于三流战略」。","第1章 G · 第7章 D"]
+]},
+{id:"s4",t:"财务科目核查",q:"报表上每一个科目是否讲了真话？",src:"第6章 · 第7章 · 第8章",b:[
+ ["p","本节按报表位置排列全书提到的每一个需要专门警惕的科目：左列为科目，中列为该科目的操纵/失真方式，右列为核查动作。"],
+ ["h","4.1","资产负债表科目"],
+ ["t",{m:"check",c:["科目","失真方式","核查动作"],r:[
+  ["存货","并购时按现值增记（斯科特·费泽增记3,730万，含LIFO储备2,290万），后续以非现金成本形式冲减盈利；极端造假可记为$1，制造超高毛利","对比行业惯例与周转率；核查计价方法是否变更（LIFO/FIFO）；识别并购后的存货增记及其逐年递减的费用尾巴"],
+  ["固定资产（厂房设备）","并购时增记（增记6,800万→额外折旧每年505万，持续约12年）；极端造假可减值至负值使折旧变「增值」","核查资产实际使用年限与残值；注意折旧政策的异常变更；负资产违背基本准则"],
+  ["商誉（会计商誉）","1970年11月前可永久留存不摊销；之后须40年内均摊（管理层通常选最长期限）；权益合并法则完全不产生商誉","区分真实经济商誉与冲动收购产生的「虚假商誉」（被资本化的肾上腺素）；分析时可忽略摊销，但须把买入的商誉全额计为成本"],
+  ["递延所得税负债","经济上等同财政部的无息贷款：零利息、到期日由企业自定、只能用于持有升值股票、随市价与税率波动","既不能等同15天应付账款，也不能因「无出售意愿」而忽略——负债客观存在且重大；若国会将课税提前至未实现阶段，优势消失"],
+  ["未实现资本利得","税率口径变化直接影响净值（1990年统一按34%计提使净值减约7,100万；1993年再减约7,000万）","核算「若按市价全部卖出」的应缴税款（当年超11亿美元）作为或有负债参考"],
+  ["损失准备金（保险）","收购后立即大幅提高，声称「反映之前准备金不足」，日后释放为利润","若交易完成时负债即刻大幅上升，逻辑上必有一错：准备金原本不足，或买家在为未来注入「盈利」铺路"],
+  ["各类准备金 / 应急储备金","大额准备金频繁计提与转回；极端造假中用$10亿储备金吸收存货减值与经营亏损，制造「永不枯竭」幻觉","追踪计提/转回的合理性与时间点；警惕资产负债表科目间的转移掩盖真实盈利能力"],
+  ["退休金负债","旧准则用现金发生制掩盖累计负债；退休后健康福利成本在1993年前被完全忽略","「预期寿命延长 + 医疗成本上升 = 无上限承诺即无上限负债」；并购时主动回避背负高额退休福利负债的企业"],
+  ["股东权益 / 账面净资产","购买法下因资产增记而虚高（斯科特·费泽：1.72亿 → 3.15亿）；权益合并法下掩盖买价","账面价值只是内在价值的追踪指标，不是内在价值本身"],
+  ["子公司负债与担保","子公司负债并入合并报表，但母公司是否担保决定真实风险归属","确认母公司层面是否对子公司债务提供担保（伯克希尔对中美能源明确不担保）"],
+  ["普通股面值 / 股本结构","降低面值为期权方案腾挪空间；A/B双层股权的经济权益与投票权比例差异","核查投票权与经济权益是否错配（B股：1/30经济权益，仅1/200投票权）"]]}],
+ ["h","4.2","利润表科目"],
+ ["t",{m:"check",c:["科目","失真方式","核查动作"],r:[
+  ["营业收入","跨报告期转移收入或成本","这正是审计委员会第4问要专门追查的行为"],
+  ["销货成本 / 毛利","并购调整使同一家企业的毛利凭空变化（O公司327,769 vs N公司317,736，千美元）","比较「若未被收购」的独立报表口径；同一经济现实不应产生两个毛利"],
+  ["薪酬费用","以股票期权支付而不计入成本，是CEO夸大盈利最重要的会计手法","把期权当报酬、报酬当费用；通用再保险案例显示期权改现金激励即多出6,300万成本，而经济效果完全相同"],
+  ["折旧费用","被与摊销混为一谈；被EBITDA/EBDIT直接抹去","折旧是真实经济成本，如同工资、原材料、税金，不可忽视；「我们喜欢那些无法支付资本支出的竞争对手」"],
+  ["商誉摊销费用","强制40年均摊，与经济商誉走势完全相反（禧诗：会计商誉从3600万递减，经济商誉却从245%涨到1000%有形资产回报率）","分析运营成果与评价收购行为时均可忽略摊销；摊销不是真实经济成本"],
+  ["重组费用 / 特殊费用","把本应分摊数年的成本倾泻到已注定令人失望的单一季度；或提前计提、日后释放为「利润」","1998年统计：1,369起特殊费用事件、721亿美元，相当于《财富》500强年度盈利总和的22%"],
+  ["债务重组收益","债券折价赎回的差价被计入当期利润（零息债券按50%面值赎回，年「利润」5,400万）","严格区分经营性收益与一次性利得"],
+  ["累计利息（零息债券）","在评估交易时连不断累计的复利利息也忽略不计——一家年入1亿的公司能「创造」1.5亿「盈利」","把当年新增的累计利息还原进费用；这类账目如「盗用」——被发现前挪用者变富，失主未觉变穷"],
+  ["已实现 / 未实现投资盈亏","已实现盈亏进净利润，未实现不进——管理层可通过控制变现时机合法调节净利润","看运营利润，忽略净利润；核查是否临近财报期集中变现证券"],
+  ["退休金费用（回报假设）","假设回报率虚高（标普500中363家公司2006年平均8%）","倒推所需权益回报：28%债券现金（≤5%）+72%权益 ⇒ 权益须净赚9.2%，远超历史成绩（毛回报约7.3%，扣0.5%成本后上限约7%）"],
+  ["非美国地区退休金假设","同一公司海外假设明显低于美国，且从未得到合理解释","直接质问：若美国的高假设合理，为何不把美国经理人派去海外「提高」那些资产的回报？"],
+  ["净利润（Bottom Line）","媒体最关注、最易被操纵与误读","在伯克希尔「几乎毫无意义」；同年若有100亿未变现所得与100亿已实现亏损，净利润只反映亏损"]]}],
+ ["co","note","O 公司 vs N 公司：同一家企业的两套账","斯科特·费泽公司在独立口径（O）下净利润4,023万，在被伯克希尔收购后的合并口径（N）下仅2,861万。销售收入、工资、税金、创造的现金完全相同，差额纯粹来自四项收购调整费用共1,160万：非现金存货成本498万（逐年递减至消失）、额外折旧505万（约12年）、商誉摊销60万（约39年）、非现金递延税调整100万（约12年）。","第6章 E"],
+ ["h","4.3","现金流与资本支出"],
+ ["f","<b>股东盈余</b> ＝ (a) 财报盈利 ＋ (b) 折旧、摊销等非现金成本 <span class=\"fc\">－ (c) 维持长期竞争地位与单位产量所必需的年均资本化开支</span><span class=\"fn\">不应在没有减去 (c) 的情况下加上 (b) —— (c) 是估算值，却是决定企业真实价值的关键变量</span>"],
+ ["t",{m:"check",c:["检查事项","要点"],r:[
+  ["(c) 是否被估算","(c) 是估算值而非精确数字，但它才是决定企业真实价值的关键变量"],
+  ["(c) 与 (b) 的关系","禧诗糖果每年资本支出超出折旧50~100万美元，仅为维持竞争地位——(c) > (b) 的典型，股东盈余低于GAAP盈利"],
+  ["华尔街「现金流」定义","通常为 (a)+(b)，故意忽略 (c)，严重高估企业价值"],
+  ["误用场景识别","①垃圾债融资：GAAP盈利不足覆盖债务时改用(a)+(b)粉饰偿债能力；②高价股票发行；③并购推介材料暗示「永不需要更新改进」"],
+  ["(a)+(b) 的适用边界","✓ 仅适用于拥有单一长寿命资产的企业（桥梁、长寿命气田、特定房地产/公用事业）；✗ 不适用于制造业、零售业、天然生产业、普通公用事业"],
+  ["观察周期","企业可在单一年份推迟资本支出，但以5~10年为周期看，忽视(c)必将导致竞争力持续衰退"],
+  ["基本纪律","不应在没有减去 (c) 的情况下加上 (b)"]]}],
+ ["h","4.4","表外与或有事项"],
+ ["t",{m:"check",c:["事项","风险点"],r:[
+  ["衍生品合约","无初始现金换手，巨额盈亏记入损益表，履约依赖信誉，期限可达20年甚至100年；通用再保险清算时发现一份期限100年的合约，从23,218份减至2,890份累计税前损失4.04亿美元"],
+  ["信用降级触发条款","困境→降级→触发担保→被要求提供巨额现金担保→流动性危机→可能触发新一轮下调，「雪上加霜」"],
+  ["对手方风险累积","与股票债券几天结算不同，衍生品跨越数年数十年，形成巨额难以量化的「纸上」债权债务，机构间高度纠葛"],
+  ["「公式结算」报酬","交易员报酬与账面「盈利」挂钩，多个变量与遥远结算日为不实假设提供机会；错误非对称地有利于交易员和CEO"],
+  ["再保险类长尾责任","如「地狱」，进去容易出来极难；大部分支付义务发生在数十年后，账面盈利被夸大"],
+  ["保险赔付承诺","永久性损伤的投保客户，承保支付可能延续50年或更久——须在任何极端情况下都能履行"],
+  ["未实现利得的潜在税负","按市价全部卖出的应缴税款是真实或有负债"],
+  ["披露与监管的失效","「更高的透明度」是无效良方——没有报告机制能准确描述巨额复杂衍生品组合的风险，「审计师无法审计，监管机构无法监管」"]]}],
+ ["co","warn","监管机构的背书不可依赖","两房案例：国会专设「联邦住房企业监管办公室」、百余名员工专职监督，2003年盛赞两房「财务状况坚强，管理完善」——9天后房地美高管丑闻爆发；2006年又发布340页报告斥责房利美大量会计假账。","第3章 E"]
+]},
+{id:"s5",t:"关键指标",q:"该看什么、绝不看什么？",src:"第6章 · 第7章",b:[
+ ["h","5.1","该看的指标"],
+ ["t",{m:"check",c:["指标","为什么看","计算 / 使用口径"],r:[
+  ["ROE（净资产回报率）","评估企业质地的核心指标，重于EPS","剔除商誉摊销后、无杠杆情况下的净资产获利能力"],
+  ["股东盈余","与估值目标相关的核心指标","(a)+(b)−(c)，见 4.3"],
+  ["有形资产回报率","验证经济商誉是否真实存在","禧诗：1983年约245% → 1995年约1000%"],
+  ["运营利润","较合理地反映企业运营状况","剔除已实现/未实现投资盈亏的影响"],
+  ["增量资本回报率","决定成长是创造还是毁灭价值","每投入1美元资本，能否创造超过1美元的市场价值"],
+  ["净资产回报率（低负债前提）","收购标准之一","须在负债极少或无负债的情况下实现"],
+  ["盈利覆盖利息倍数","负债安全性","多元化盈利来源比单一保守负债结构更重要（中美能源示例为2:1）"],
+  ["总资产回报率（银行）","银行业专用","富国银行案例：ROE超20%，总资产回报率1.25%"],
+  ["贷款月供 / 实际月收入","信贷类资产的核心指标","按实际收入而非「希望收入」衡量（《借款须知101》）"],
+  ["摩擦成本占净资产比","衡量交易对回报的侵蚀","100%换手率下约2%，相当于对12% ROE公司额外征税16.66%"],
+  ["每股内在价值增长率","最终检验标准","账面价值变动比例可作为近似追踪指标；注意基期选择（避免异常低基期）"]]}],
+ ["h","5.2","该弃用或慎用的指标"],
+ ["t",{m:"check",c:["指标","问题","原书态度"],r:[
+  ["EBITDA / EBDIT","把折旧这种真实、必要的长期费用视为可忽略项；对95%的美国公司，折旧和劳动力成本一样必需","✗ 不是有意义的业绩评价方法；引用它令巴芒「不寒而栗」——难道资本开支由牙齿仙女承担？"],
+  ["「现金流」= (a)+(b)","忽略维持性资本支出","✗ 谬论，严重高估价值"],
+  ["EPS（每股盈利）","受商誉摊销扭曲；并购中「未稀释EPS」可能同时损害内在价值","⚠ 参考性有限，不可作为并购合理性的唯一判据"],
+  ["净利润","可通过控制变现时机合法调节","✗ 可忽略（仅因监管要求披露）"],
+  ["贝塔（β）","只看历史股价，不问产品、竞争力、负债；股价越低「风险」反而越大","✗ 无法区分卖宠物石头与拥有芭比娃娃的玩具公司的内在风险"],
+  ["市盈率（P/E）","忽视资本投入与产出的时间差","⚠ 单独使用无效；「在股票估值中，有比市盈率更有价值的东西」"],
+  ["市净率（P/B）","账面价值不等于内在价值","⚠ 单独使用无效"],
+  ["股息率","未反映未来现金流全貌","⚠ 单独使用无效"],
+  ["成长率","脱离现金流语境毫无意义","⚠ 成长仅是价值公式的一个组成部分，可正可负"],
+  ["账面价值（单独看）","大学教育类比：账面=学费+放弃的工作收入，内在=毕业后终身收入增量","⚠ 并非内在价值的可靠指示器"],
+  ["布莱克-斯科尔斯模型（长期）","用短期历史波动率推断百年价值区间","✗ 长期误差极大——「躁郁症邻居的每日报价」不能用来预测农场一个世纪后的价值"]]}],
+ ["co","warn","真正的风险定义（替代贝塔的五因素）","风险 = 在预期持股期间，税后总收益能否至少保持初始购买力并加上合理利率回报。评估：①长期经济特征的确定性；②管理层能力的确定性；③管理层是否回报股东；④购买价格（安全边际）；⑤通货膨胀与税务水平。","第2章 C"]
+]},
+{id:"s6",t:"会计红旗",q:"厨房里有蟑螂吗？",src:"第1章 · 第7章",b:[
+ ["h","6.1","十四类会计红旗"],
+ ["t",{m:"check",c:["#","红旗","核查动作"],r:[
+  ["1","折旧政策异常变更 / 固定资产减值幅度反常","核查资产实际使用年限与残值"],
+  ["2","薪酬结构突变（以期权替代现金）","分析稀释效应与行权条件；期权调整常令EPS减少5%~10%"],
+  ["3","存货计价方法调整","对比行业惯例与周转率"],
+  ["4","债务重组收益计入利润","区分经营性收益与一次性利得"],
+  ["5","大额准备金频繁计提/转回","追踪计提与转回的时点合理性"],
+  ["6","重组费用集中于「注定失望」的季度","识别「大洗澡」策略——之后连续超预期"],
+  ["7","并购后损失准备金立即大幅上调","准备金原本不足，或为未来注入「盈利」铺路，二者必有一错"],
+  ["8","期权成本不入账","「如果期权不是报酬，那它是什么？如果这种报酬不是费用，那它是什么？」"],
+  ["9","退休金假设回报率脱离现实","倒推权益类所需回报；对比同一公司的海外假设"],
+  ["10","养老金/费用假设「天马行空」、无费用选项","属「弱会计」——厨房里不会只有一只蟑螂"],
+  ["11","注脚或管理层解释看不懂","CEO可能不想让你明白（安然式描述）"],
+  ["12","反复宣传EBITDA / EBDIT","投资银行家开始大谈EBDIT即为危险信号，立刻合上钱包"],
+  ["13","盈利被跨期转移","一旦开始转移，未来需要更多操纵，滚雪球至欺诈"],
+  ["14","用复杂会计包装平庸公司为杰出企业","「金融上的炼金术终将失败」"]]}],
+ ["h","6.2","六大造假手法原型（美国钢铁公司讽刺方案）"],
+ ["p","巴菲特引用的这份1930年代讽刺提案，不改变任何生产或营销政策，仅靠会计「创新」就宣称能在经营不佳的1935年做出每股近50美元盈利、合计提升约6.2亿美元。它是所有会计诡计的原型目录："],
+ ["t",{c:["#","手法","操作","宣称年度收益提升"],r:[
+  ["1","固定资产负值化","厂房设备账户减至 −10亿美元，折旧变「增值」（5%×10亿=5,000万）","+9,700万"],
+  ["2","股票面值微型化","普通股面值降至 $0.01，为期权方案腾挪空间","间接收益"],
+  ["3","薪酬期权化","全员薪酬以期权支付，工资账单归零；行权收入计入资本盈余而非损益表","+2.5亿（现金流由年流出2.5亿变为流入2.5亿）"],
+  ["4","存货象征化","全部存货以 $1 入账，销售时产生超高毛利，年末由储备金「补平」","+1.5亿"],
+  ["5","债务置换术","优先股换成按50%面值折扣赎回的零息债券，股息支出归零","+7,900万"],
+  ["6","储备金缓冲","建立 $10亿 应急储备金吸收减值与亏损，由期权行权的资本盈余持续补充","亏损「对冲」"]]}],
+ ["co","warn","方案「成功」的三大前提","①审计妥协：接受负资产、$1存货等违背准则的处理；②市场盲从：投资者仅关注EPS，忽视现金流与资产质量；③监管缺位：允许资产负债表科目间无限制转移。三者中只要有一个不成立，方案即崩塌——反向即为投资者的三道防线。","第7章 A"],
+ ["co","note","高尔夫记分卡：两种造假节奏","策略一 先「大洗澡」：第1轮报140杆（倾泻所有坏洞），随后四轮均报80杆，华尔街把140杆归类为「不持续」，从此视其为「80分稳定型球手」。策略二 先虚报佳绩：连报四场80杆赢得掌声，第五场亮出140杆——而之前舞弊所得的不义之财绝不退还。「喜欢篡改记分卡的CEO往往会上瘾——毕竟篡改记分卡比苦练容易得多。」","第7章 D"],
+ ["h","6.3","危险词汇与话术黑名单"],
+ ["t",{m:"check",c:["话术","真实含义"],r:[
+  ["「EBITDA / EBDIT」","请把折旧当成不存在"],
+  ["「现金流」（未减资本支出）","请把维持竞争力的开支当成不存在"],
+  ["「重组费用」","本季反正已注定难看，顺手把未来的成本也倒进来"],
+  ["「反映之前准备金不足」","为日后释放利润预留水库"],
+  ["「这次并购会有巨额费用……我们可以把费用做得更大」","费用规模本身就是做这笔并购的动机（两位银行CEO的真实对话）"],
+  ["「未稀释每股盈利」","回避内在价值是否被稀释这一真问题"],
+  ["「我们必须成长」","准备用股东的钱扩大版图"],
+  ["「管理之吻能把癞蛤蟆变王子」","愿意付两倍价格换取「亲吻的权力」"],
+  ["「巨大负债能让管理层更专注」","在方向盘上装匕首——一次微小坑洞就足以致命"],
+  ["「每个人都这么干」","该行为几乎必然存在问题"],
+  ["「仅此一次，下不为例」","市场反应如在沙拉中发现虫子，无论解释如何需求依然下降"],
+  ["「低成本复制某成功策略」的信托产品","高佣金、高管理费、限量炒作、追逐历史业绩"],
+  ["投行的「书」（精确预测多年盈利）","问他自己公司下个月盈利，他会说「变数太多不敢预测」"],
+  ["「这匹马有时走起来没问题」","兽医的建议是「当它走路没问题的时候，赶快卖了它」"]]}],
+ ["h","6.4","审计与准则环境的检查"],
+ ["t",{m:"check",c:["检查事项","要点"],r:[
+  ["准则本身是否被政治绑架","FASB以7:0通过期权费用化，参议院却以88:9投票反对；SEC主席事后坦承妥协是任内最大遗憾"],
+  ["游说资金的来源","用于游说的钱本属股东，却被用作政治献金"],
+  ["「荣誉系统」的结果","标普500中498家选择较不理想的方法美化账面，仅2家遵循费用化——「FASB得到了荣誉，CEO们赢得了整个系统」"],
+  ["审计机构的立场变迁","安达信PSG曾坚持期权费用化，后被「呼风唤雨」的合伙人推动180°转向——他们深知客户真正想要的是更高账面盈利"],
+  ["格雷欣法则的子规则","劣会计驱逐良会计"],
+  ["丑闻的本质","「所谓丑闻，并不在于非法的勾当，而是在于合法的勾当。」"],
+  ["会计的定位","会计的职能是记录，不是评估；GAAP数字是起点不是终点；「会计有助于商业思考，但永远不能替代思考」"],
+  ["终极检验","「如果一只狗连尾巴也算在内，总共有几条腿？」——四条。会计处理改变不了经济现实"]]}]
+]},
+{id:"s7",t:"资本配置",q:"赚到的钱被怎么用了？",src:"第4章 · 第5章",b:[
+ ["h","7.1","留存 vs 分红"],
+ ["t",{c:["收益属性","定义","处理原则"],r:[
+  ["受限定收益","因通胀侵蚀，财报显示但实际无法用于分红的部分；常见于高资产/利润比公司","必须留存以维持经济竞争地位——无论其再投资回报多低，都不能用于分红；持续派发且无新资本注入，企业注定衰落"],
+  ["非限定收益","超出维持竞争地位所需资本之外的可自由支配利润","择优处理：留存再投资或向股东分红，以股东利益最大化为准"]]}],
+ ["q","一美元原则：每一美元的留存利润，必须至少为股东创造一美元的市值。","第4章 C"],
+ ["t",{m:"check",c:["检查事项","风险信号"],r:[
+  ["留存的门槛","增量资本回报低于投资者自行可得的回报，却仍然留存"],
+  ["「精神分裂式」决策","在子公司层面要求5%回报的A厂把钱上缴给15%的B厂，在母公司层面自身仅5%回报却拒绝分红"],
+  ["核心业务光环","整体ROE看起来不错，但富余现金被投入回报平平的项目——如职业与业余选手组成的高尔夫球队，业余选手的糟糕表现被掩盖"],
+  ["「黄金变铅」仍继续","联合爱迪生股价跌至账面值1/4，留存1美元只转化为0.25美元市值，大部分收益依然被再投资"],
+  ["永续债类比","10%票息永续债：市场利率5%应选再投资，15%应选收现金。公司留存决策同理"]]}],
+ ["h","7.2","股票回购"],
+ ["cd",2,[["前提 01","资金充足","拥有满足日常运营与流动性需求之外的富余现金。"],["前提 02","价格远低于内在价值","按保守计算的内在价值衡量，而非略低即可。"]]],
+ ["t",{m:"check",c:["回购动机","判定","理由"],r:[
+  ["以低于内在价值的价格回购（1美元换2美元）","✓ 正当","数学上直接增加继续持有股东的每股价值，并购中很难做到"],
+  ["向市场证明管理层关心股东财富","✓ 正当","信号效应推动股价趋近内在价值"],
+  ["为抵消期权稀释而回购","✗ 错误","期权授予与回购各有独立逻辑，不能因此以高于内在价值的价格回购"],
+  ["为推高或支撑股价而回购","✗ 错误","让卖出者受益、持有者受损（1.1美元换1美元价值）；「永远不会为阻止股价下跌而回购」"]]}],
+ ["co","tip","长期股东应希望回购期间股价低迷","IBM示例：500亿美元回购，若均价200美元可回购2.5亿股，伯克希尔持股比例升至7.0%；若均价300美元只能回购1.67亿股，比例为6.5%。第五年盈利200亿时，利润份额相差1亿美元，持股价值额外多出15亿美元。为股价上涨而开心，「如同一个日常通勤的人为刚加满油后油价上涨而喜悦」。","第4章 C"],
+ ["h","7.3","增发新股（作为投资者要盯的稀释检查）"],
+ ["q","除非取得的内在价值至少与付出的代价相等，否则不发行股票。","第5章 A"],
+ ["t",{m:"check",c:["管理层借口","反驳"],r:[
+  ["「收购的公司未来将更值钱」","被卖掉的老公司权益同样更值钱；双方估值同时翻番后，价值不平衡依然存在"],
+  ["「我们必须成长」","发行新股稀释了现有股东对优质资产的持股比例"],
+  ["「我们已将股票比例降至最低」","如果发行100%新股有害，发行51%同样造成等比例伤害"]]}],
+ ["co","warn","用低估的货币买足值的资产","当买家股票市价仅为内在价值一半时，整体出售可谈到完整内在价值，但发行部分股票只能得到市场标价——实际付出2元得到1元。「不应用被估值成铅的金子，去购买被估值成金子的金子。」农庄比喻：你家120英亩、邻居60英亩，50:50合并后管理面积扩至180英亩，但你家权益缩水25%。","第5章 A"],
+ ["co","warn","不负责任增发的双重打击","第一重：并购直接引发的内在价值损失。第二重：股票市场对稀释后企业价值的向下理性修正。一旦管理层显示出对股东利益的迟钝，股东将长期承受价格/价值比的痛苦。","第5章 A"],
+ ["p","三种不破坏价值的合并方式：①双方以真正内在价值等值交换；②收购方股票市价≥内在价值；③收购后回购等量股票，把「股票对股票」转化为「现金对股票」。"]
+]},
+{id:"s8",t:"估值",q:"灌木丛里有几只鸟，我付了几只鸟的钱？",src:"第6章",b:[
+ ["h","8.1","伊索三问（一鸟在手，胜过两鸟在林）"],
+ ["cd",3,[["问 01","灌木丛里有鸟吗？","未来是否确实存在现金流入？"],["问 02","鸟儿何时出现、有多少只？","现金流的时间节点与数量规模。"],["问 03","无风险资本利率是多少？","通常采用美国长期国债利率作为折现率。"]]],
+ ["t",{m:"check",c:["检查事项","标准"],r:[
+  ["估值公式的普适性","适用于农地、油田、债券、股票、彩票、工厂、企业；蒸汽机、电力、汽车、互联网都不改变它"],
+  ["威廉姆斯定义","今日价值 = 预期存续期内以合适利率贴现的现金流入与流出"],
+  ["权益「票息」的特殊性","债券现金流确定性强；权益票息极大倚赖管理层品质"],
+  ["成长的方向性","只有每投入1美元资本能创造超过1美元市场价值时，成长才有利；早期投入超过未来现金流折现值时，成长在毁灭价值"],
+  ["是投资还是投机","投资关注资产能产出多少现金；投机关注下一个买家愿出多少价"],
+  ["保守性","采用保守估算，关注意外发生时不会引发股东浩劫的公司"],
+  ["超额回报的时机","只在整个资本市场极其悲观时出现"]]}],
+ ["co","warn","灰姑娘效应：舞会现场的时钟没有指针","股价飙升→投资者被催眠蜂拥入市→理性丧失→高估值公司被热捧→明知风险仍不舍错过→人人计划「最后一秒离场」。1999年潘恩·韦伯-盖洛普调查：投资者预期年回报平均19%；把整个美国企业视为一个灌木丛，到2009年也容纳不下这么多小鸟。「既然两手空空地去参加舞会，凭什么要指望满载而归？」","第6章 A"],
+ ["h","8.2","内在价值 / 账面价值 / 市场价格"],
+ ["t",{c:["概念","定义","使用注意"],r:[
+  ["内在价值","公司存续期间产生现金流的折现值","是估计值而非精确数字；随利率与预期修正而变；同样信息不同人得出不同数值"],
+  ["账面价值","资产负债表上的净资产值","易计算、定期报告，但可能高估或低估；仅作追踪指标（变动比例接近内在价值变动比例）"],
+  ["市场价格","实际成交价","受情绪影响；只有与内在价值一致时，股东进出才被公平对待"]]}],
+ ["co","warn","会计规则的「精神分裂症」","少数股权：盈利仅在获得分红时记账，资产按市值更新。全资控股：全部盈利进损益表，但资产账面价值购入后从不变动、不反映价值增长。1987年案例：少数股权持股市值超20亿美元，财报税后利润仅记录1,100万（实际税后盈利远超1亿）。应对：忽略GAAP数字，专注控股与非控股公司的未来盈利能力。","第6章 B"],
+ ["p","内在价值计算的难度来源：①公司未来不确定性越高，偏差越大；②业务规模与复杂性（从单一纺织厂到68家跨行业公司）；③多元业务加巨额投资使合并报表难以直接估算。降低难度的条件：多元化且相对稳定的现金流、极佳流动性、极少债务。分析框架：把业务分类分别评估，再判断整体是否大于各部分之和——取决于各部分运营是否更好，以及母公司管理下资本配置是否更优。"],
+ ["h","8.3","商誉：经济 vs 会计"],
+ ["t",{c:["对比维度","会计商誉","经济商誉"],r:[
+  ["变动趋势","收购后逐年递减（均匀摊销）","随品牌价值增长，通常不断上升"],
+  ["通胀影响","不受影响，固定摊销","名义价值随通胀上升"],
+  ["反映现实","反映历史收购价格，具任意性","反映真实竞争优势与盈利能力"],
+  ["摊销意义","会计规则强制要求","不代表真实经济成本"],
+  ["投资决策参考","参考价值有限","核心价值评估依据"]]}],
+ ["co","warn","虚假商誉（No-Will）","管理层头脑发热以愚蠢价格收购时，产生的是虚假会计商誉——「被资本化的肾上腺素」，仅为收购溢价的账面记录，用于掩盖并购失误。真实经济商誉则「是持续给予的礼物」。","第6章 D"],
+ ["p","并购会计方法的两种口径及其偏好：购买法（现金或股票均可、产生商誉需摊销、管理层通常排斥、更接近真实交易）vs 权益合并法（仅限股票、无商誉无摊销、管理层普遍偏好、掩盖买卖关系）。理想方案：以公平市价列示投资成本，经济商誉保留在账上不做分年摊销，仅在确有减损时按一般资产减值方式计减。"],
+ ["h","8.4","期权与模型估值的极端情形检验"],
+ ["t",{m:"check",c:["检查事项","要点"],r:[
+  ["模型输入是否可靠","布莱克-斯科尔斯依赖到期日、行权价、波动率预期、利率、分红；历史波动率的有效性随期限拉长迅速消失"],
+  ["是否读过原始警告","布莱克与斯科尔斯本人在原论文中就警告长期使用可能得出荒谬结论，追随者将其忽略"],
+  ["极端情形试算","百年期标普500卖空期权名义10亿美元，公式算出溢价仅250万；通胀2%/年使今天1美元百年后仅值0.14美元，加上留存利润（20世纪道指涨约175倍），指数百年后低于今天的概率远低于1%"],
+  ["为何仍在用","行业惯例、审计合规压力、监管偏好「精确」数字；审计师面对买卖双方用同一公式却估出悬殊价值，无法同时证明双方正确"],
+  ["方法论结论","宁要模糊的正确，也不要精确的错误；极端情形是检验理论有效性的最佳试金石"]]}],
+ ["co","note","思想惰性的警惕","加尔布雷思的观察：经济学家是思想上最「经济」的群体，从大学学一些知识然后一辈子吃老本。有效市场理论支持者把有力的反驳事实一律斥为「异常」现象——「地平协会的学者可能会认为，轮船可以环球航行是非常讨厌的说法」。","第6章 F"]
+]},
+{id:"s9",t:"负债与流动性",q:"会不会被一个零抹平？",src:"第2章 G",b:[
+ ["q","无论多么长的一串数字，只要乘上一个零，其结果一定等于零。","第2章 G",1],
+ ["t",{m:"check",c:["检查事项","标准 / 风险点"],r:[
+  ["是否假设债务可再融资","这个假设通常有效，但一旦失效将生死攸关；失效来自企业内部特别原因或市场正常的资金短缺——届时只有现金才能解决问题"],
+  ["盈利来源的多元化","从风险角度看，盈利来源多元化远比单一的保守负债结构更重要；单一公用事业即便负债保守，一次灾难即可资不抵债"],
+  ["母公司是否担保子公司债务","子公司负债并入合并报表，但母公司层面不担保则风险隔离"],
+  ["流动性底线","绝对底线100亿美元、常规需求200亿美元；主要持有美国国债——极端环境下唯一可靠的流动性工具"],
+  ["极端情景压力测试","须能承受金融危机、股市关门（如1914年）、本土遭核弹或生化攻击等情形下的赔付承诺"],
+  ["杠杆的成瘾性","阶段一获利（配偶觉得你聪明、邻居羡慕）→ 阶段二成瘾（很少有人愿回到保守）→ 阶段三归零"],
+  ["99:1 的赌局是否接受","1965年若用高杠杆，99%概率获得远高于23.8%的年回报，1%概率违约——「我们不喜欢这种99:1的发生概率，永远不会。一个小的丢脸或痛苦，不能被一个大的额外回报所抵消」"],
+  ["杠杆的真实作用","「在绝大多数情况下，杠杆只会加速事情的运动」"],
+  ["信用的性质","信用就像氧气——充足时没人注意，消失时一切窒息；2008年9月很多部门的信用一夜消失"],
+  ["银行业的特殊性","约20倍于权益的高杠杆，微小的资产配置错误即可吞噬大部分净资产；不以「便宜」价买糟糕的银行，宁以合理价格买管理优良的银行"],
+  ["过度负债的社会成本","「空麻袋难以直立」；财务实力强的公司才能充当减震器，保护员工、供货商与顾客"]]}],
+ ["co","note","富国银行的压力测试范式（1990年）","以2.9亿美元买入10%股份，价格低于税后盈利5倍、税前盈利3倍。风险分三类核查：①特殊风险（地震等）概率较低；②系统性风险（金融恐慌）所有高负债机构共担；③市场主要担忧（房地产泡沫）——假设贷款总额10%出问题，仍能勉强盈亏平衡。「导致股价低迷的悲观主义，才是我们作为理性买家的朋友。」","第3章 B"]
+]},
+{id:"s10",t:"并购与对手",q:"交易结构里谁在占谁的便宜？",src:"第5章",b:[
+ ["h","10.1","作为收购方：标的的六个特征"],
+ ["cd",3,[["特征 1","规模够大","税前盈利不少于7,500万美元"],["特征 2","持续盈利能力","已验证的盈利能力；对未来预测、困境反转型公司毫无兴趣"],["特征 3","良好的净资产回报率","在负债极少或无负债的情况下实现"],["特征 4","具备管理层","收购方无法提供管理人员"],["特征 5","业务简明","科技成分过多则可能无法理解"],["特征 6","明确的报价","不在不确定价格的情况下浪费时间讨价还价"]]],
+ ["t",{m:"check",c:["高价收购的真实动机（须自省）","表现"],r:[
+  ["动物精神","领导者精力旺盛，渴望激情与挑战，收购满足情感需求；CEO正因动物精神与自负而登顶，到顶后这些特点不会消失"],
+  ["规模崇拜","薪酬与排名以销售规模衡量，而非盈利能力"],
+  ["童话幻觉","深信自己的「管理之吻」能把癞蛤蟆变王子——投资者本可按市价直接买癞蛤蟆，付两倍价格换「亲吻的权力」要求这些吻真有魔力"]]}],
+ ["co","warn","大型收购的受益方通常不是收购方股东","受益方是：被收购方股东、收购方管理层、投资银行家与职业顾问。「够了，你们就是在玩反向的连锁信游戏。」多元化顾问的悲剧：「一开始盈利100%来自原来的公司；收购十年以后，盈利150%来自原来的公司。」","第5章 A · D"],
+ ["p","并购语言的措辞陷阱：不要说「A公司收购B公司」，而应说「出售部分A公司以收购B公司」——「在一笔交易中，你所付出的与你所获得的同等重要」。稀释与否应以内在价值为标准，而非账面净资产或当期EPS：许多并购在EPS意义上「未稀释」却即刻损害内在价值，另一些稀释了近期EPS却提升了长期价值。"],
+ ["h","10.2","作为出售方：如何筛选买家"],
+ ["t",{c:["买家类型","行为特征","风险"],r:[
+  ["同行业 / 类似公司","认为自己很懂你的运营；大公司有成群管理层，当年被招聘时就被许诺去管理日后收购的公司","迟早伸出「援助」之手干预；即便你做得更好，人性也会让他们觉得自己的方法更好"],
+  ["金融投资商","用大量借来的钱操作，一有机会就转手；主要贡献是改变会计方法","高财务风险、缺乏长期承诺、可能粉饰报表使盈利在脱手前最耀眼"]]}],
+ ["co","warn","卖企业的三个认知前提","①这是一生一次的交易，且常在中间经纪人推动下于情绪化气氛中完成，一旦犯错不可逆转；②价格重要但不是最重要的方面——若公司会随岁月增值，就该花时间选买家；③「在出售生意之后，你将会和现在一样富有，但不可能更富」——出售只改变财富形式，不改变数量。","第5章 E"],
+ ["p","好卖家的正面信号：热爱自家公司而非仅热爱金钱、不做假账、以产品为荣、尊重客户、团队忠诚有方向感。反面信号：对公司兴趣缺失只关注价格、公司经过「打扮」后出售、缺乏对员工的尊重、负面态度传染整个公司。"],
+ ["h","10.3","LBO / PE 对手识别"],
+ ["t",{m:"check",c:["检查事项","要点"],r:[
+  ["LBO 成功的真实来源","大部分来自所得税效应：90%负债+10%股本的结构使税前盈利不再与税务征收者分享；很多情况下此前每年税收拿走的比分给股东的还多"],
+  ["后续标准动作","①削减成本（大部分是人力成本）与表现不佳的部门；②以超高价出售几个业务（有时卖给直接竞争对手）"],
+  ["一般合伙人的激励扭曲","几乎不用自己的钱冒险（考虑各种费用后更少），有盈利却能获可观分成——「谁见过哪个赌场里的服务生不希望自己的赌客下大注？」"],
+  ["PE 换名不换实","由「杠杆收购运作者」改称「私募股权基金」，运作方式、收费结构、对杠杆的热爱均未改变"],
+  ["PE 收购后的资本结构","权益部分几乎必然大幅减少；许多企业因巨额债务陷入生死困境（银行债务以低于面值70%出售，公共债务更低）"],
+  ["是否在需要时注资","PE「并非在企业需要时注入资本，而是将钱攥得死死的」"],
+  ["竞价环境影响","LBO运作者成群出现抬高整体收购价格，伤害不打算用最大负债换税务优惠的参与方"],
+  ["绿色邮件式回购","三方角色：①名为「股东」的敲诈者传达「要钱还是要命」；②不惜代价买和平的内部人（花的是股东的钱）；③无辜的长期股东默默付账"]]}],
+ ["co","note","利奇湖钓狗鱼的寓言","「这个湖抓到的北美狗鱼比明尼苏达州任何湖都多，以狗鱼闻名。」「你在这里捕鱼多少年了？」「19年。」「你抓到过多少？」「一条也没有。」——好公司的收购本就不容易。安慰是：一系列巨大的、无法纠错的、没有救助的收购问题，肯定不是由持这种观点的人引发的。","第5章 C"]
+]},
+{id:"s11",t:"套利专项",q:"承诺会兑现吗？资金占用多久？",src:"第2章 C",b:[
+ ["cd",2,[["问 01","承诺的事情发生的概率有多大？","评估交易完成的确定性。阿克塔案例：KKR过往记录良好，融资条件虽有退出风险但不特别担忧。"],["问 02","资金会被占用多久？","影响年化回报率的关键。阿克塔起初预计1982年1月付清，实际拖到6月。"],["问 03","出现更好报价的可能性？","潜在上行空间。即使KKR退出，管理层与董事会已坚决出售，会有其他买家，但报价可能更低。"],["问 04","若预期事件未发生，后果如何？","下行风险：反垄断、财务差错、融资失败。阿克塔的红杉林索赔价值在零到全部之间。"]]],
+ ["t",{m:"check",c:["纪律项","标准"],r:[
+  ["信息来源","仅依据公开信息，不凭谣言或猜测接管方"],
+  ["出手频率","每年很少但单笔规模很大；仅在胜券在握时出手，不为套利而套利"],
+  ["多元化程度","套利活动本身适合广泛多元化，通过多个相互独立的交易用概率优势获利"],
+  ["定位","作为短期现金等价物的替代，回报高于国债，同时「让我们面对放松长期投资标准的诱惑时冷静下来」"],
+  ["环境判断","并购浪潮泛滥、贷款与买家双方放纵乐观时退出——「天使都害怕交易的地方，傻瓜却蜂拥而入」"],
+  ["业绩参照","1988年平均投资1.47亿、税前获利0.78亿；1926—1988年去杠杆后年化约20%，同期市场约10%"]]}],
+ ["co","warn","套利不是高回报保证","「在很多时间里市场是有效的，许多套利机会因价格合理而被放弃。投资者不可能仅凭一种特定方法或风格获得超额利润，只能通过认真评估事实并持续执行纪律来实现。」","第2章 C"]
+]},
+{id:"s12",t:"其他资产类别",q:"钱该放在哪类资产里？",src:"第3章",b:[
+ ["h","12.1","三类资产总览"],
+ ["cd",3,[["第一类","基于货币的投资","货币基金、债券、银行存款。高风险：表面安全，长期受通胀严重侵蚀购买力（1965—2011年47年美元累计贬值86%）。态度：不喜好，除非作为流动性储备或异常回报机会。"],["第二类","无产出的资产","黄金等。投机驱动：依赖接盘侠心态，价格靠恐惧与贪婪支撑，无自我繁殖能力。态度：不看好，远逊于生产性资产。"],["第三类","可生产性资产","公司、农场、房地产。最为安全：通胀时期保持购买力，长期回报遥遥领先。态度：最看好。"]]],
+ ["co","warn","通胀税是所得税的三倍多","免税机构需年化4.3%债券收益率才能维持购买力。同期滚动投资国债年化名义回报5.7%，对平均所得税率25%的投资者，扣除税费与通胀后真实收益为零——通胀税（约4.3个百分点）的侵蚀效应是所得税的三倍多。「债券在被推销时说是提供无风险的回报，现在的定价却只剩下无回报的风险。」","第3章 A"],
+ ["co","note","9.6万亿美元的思考实验","立方体A：全球17万公吨存量黄金（边长68英尺），百年后体积不变、无任何产出。立方体B：美国全部4亿英亩农田（年产值约2,000亿）+16个埃克森美孚+约1万亿现金剩余，百年后农田持续产粮、石油公司派发上万亿分红。恐惧货币崩溃驱人买金，恐惧经济崩溃驱人持现——两者在恐惧顶峰时都是代价沉重的随大流之举。2008年人人高呼「现金为王」时，恰是应动用现金之时。","第3章 A"],
+ ["h","12.2","债券与垃圾债"],
+ ["t",{c:["对比维度","「堕落天使」（可考虑）","新发行垃圾债（回避）"],r:[
+  ["管理层目标","设法使债券恢复投资等级","像「吸毒者」一样寻求下一次融资以缓解危机"],
+  ["信托责任感","相对成熟","通常较差"],
+  ["投资逻辑","基于企业基本面改善的困境反转","基于统计模型的多元化投机"]]}],
+ ["co","warn","违约率的错误外推","用老派「堕落天使」的违约率预测新发行垃圾债券的未来——「好比在琼斯镇惨案发生前，用历史死亡率来证明『酷爱』饮料的安全性」。华尔街推销一个主意的热情，不取决于优点，而取决于带来的利益。广泛多元化购买垃圾债券反而导致凄惨结果。","第3章 B"],
+ ["p","零息债券专项检查：①企业估值标准的三级恶化（自由现金流覆盖利息及还本 → 仅够支付利息 → 以新债还旧债）；②是否忽略累计利息（第一年税前盈利1亿、现金利息9,000万，零息债当年累计利息6,000万，第二年起超6,900万复利增长，却宣称EBDIT完全能覆盖）；③检验推销方诚意的方法——「建议推销员及其团队，只有在零息债券被按期足额兑付后才能获取酬金」。另注：息票剥离国债本身是良性创新，解决了附息债券的再投资风险，使投资者在购买时即可锁定整个持有期的年复合回报率。"],
+ ["h","12.3","优先股与衍生品"],
+ ["t",{m:"check",c:["检查事项","标准"],r:[
+  ["优先股价值构成","固定收益价值 + 转换选择权价值；结构应能在几乎任何条件下收回本金"],
+  ["超额回报的唯一来源","被投资公司普通股表现良好——若看好，应直接买普通股（吉列案例：买优先股而非普通股是「最大的错误，但永远不会显现在财务报表上」）"],
+  ["下行保护条款","核查是否有「惩罚性分红」条款（美国航空：违约后正常分红率加5%，可在任何违约欠款上累计）"],
+  ["行业结构性成本","美国航空的教训：不要忽视行业结构性成本问题；1990—1994年累计亏损24亿，几乎抹去全部普通股账面净资产"],
+  ["衍生品定性","视为「定时炸弹」，对交易双方与整个经济体系；宏观上系统性危险，微观上偶有错误定价可利用"],
+  ["系统性传导","风险从A传导至B直至Z；保险与衍生品行业没有类似美联储的中央银行阻止多米诺效应（LTCM：数百名员工的公司迫使美联储干预）"],
+  ["「大而不倒」的逆向激励","与更多人发生关联反而对大型交易商有利——政府最终会因惧怕连锁反应而出手拯救"],
+  ["问题的处理时机","「当一个问题发生时，行动的最佳时机就是马上行动」——巴菲特的「吮拇指癖」导致股东损失大笔金钱"]]}],
+ ["h","12.4","外汇与房产"],
+ ["t",{m:"check",c:["检查事项","要点"],r:[
+  ["宏观预测的可靠性","「预言家的墓地中，宏观经济分析师占了大半」；外汇操作属例外情况，绝大部分资产仍以美国资产为主"],
+  ["预算赤字 vs 经常账户赤字","预算赤字不影响国民产出归属；经常账户赤字导致产出逐步流向外国债权人，形成「佃农社会」、父债子偿"],
+  ["会计处理差异","长期外汇仓位每日按汇率变动计入损益表；海外权益的价值变动计入资产负债表"],
+  ["购房四原则","①首要动机是居住，不作升值或再融资手段；②至少10%首付且实打实支付；③收入应轻松负担月供且经仔细审核；④正确目标是让购房者能待在房屋里不毁约"],
+  ["违约的真实原因","不是房价低于房贷金额，而是还不起月供；主因依次为失业（最主要）、死亡、离婚、医疗费用、没有储蓄缓冲"],
+  ["信用评分的局限","克莱顿贷款人平均FICO 644（全国723）、35%低于620分，表现依然良好；许多出问题的房贷证券化产品背后的贷款人评分反而更好"]]}],
+ ["co","warn","泡沫的共同前提假设","房贷灾难的核心前提是「房屋的价格肯定会随着时间上升，任何下降都是可以忽略不计的」。核查任何投资论证是否隐含类似的单向价格假设。","第3章 G"]
+]},
+{id:"s13",t:"税务",q:"税负的红利归谁？",src:"第8章",b:[
+ ["t",{m:"check",c:["检查事项","要点"],r:[
+  ["税率下降的红利归谁","取决于两个变量：商业特许权的强弱与特许权利润率是否受监管"],
+  ["—— 受监管 + 强特许权","归消费者（监管机构要求降价回馈），如电力公司"],
+  ["—— 充分竞争 + 弱特许权","归消费者（市场竞争发挥监管作用），如铝业、汽车、百货"],
+  ["—— 不受监管 + 强特许权","归公司与股东——类比：最优秀的脑科医生或律师，个人税率从50%降到28%时会降低收费吗？"],
+  ["税负能否转嫁","财产险/灾害险业是例外：行业内边际税率差异极大（最小税务额法规、巨额损失抵减额、保险与非保险业务合并核算），增加的税负无法传导至消费者"],
+  ["纳税时点前移的隐性成本","不改变全年应税总额但压缩递延时间价值——「若一名21岁的年轻人被要求立即为其一生全部收入缴税，其终身财富将大幅缩水」"],
+  ["持股形式的税务差异","100%控股：子公司利润全额归属、分红免税、出售时税务成本含留存利润，政府「合伙」1次。持10%可流通证券：分红缴约14%、资本利得缴35%~40%，政府「合伙」2次"],
+  ["递延 × 复利的量级","1美元每年翻番：频繁交易每年缴35%，20年后约2.24万美元；单笔持有27.5年仅末期缴税，税前约2亿、缴税约7,000万、税后约1.3亿美元"],
+  ["清算价值的税务影响","《通用公用事业法案》废止后清算税负翻番（公司+股东双重征税），石油天然气、相关媒体、房地产公司即使经营未变，股东清算价值也已大幅缩水"],
+  ["常见误解自查","①资本利得并无特别优势（伯克希尔统一35%，比个人同等利得税率高出75%）；②分红抵扣比例低于通常认知（一般公司70%、保险公司59.5%不计入应税收入）"],
+  ["长期趋势判断","1952年公司所得税占联邦税收峰值32%，2003年降至7.4%；巴菲特预计五年内出现更高税率或更高通胀率，或两者兼具"]]}],
+ ["co","tip","「瑞普·范·温克尔」式投资的绝对税务优势","长期持有、极少交易相较频繁短线操作具有重要的绝对税务优势。但选择长期持有并非单纯因税务算术，更因已与优秀的商业伙伴建立了深厚、可信赖的合作关系。","第8章 C"]
+]},
+{id:"s14",t:"执行与持有纪律",q:"怎么买、怎么拿、何时走开？",src:"第2章 · 第4章",b:[
+ ["h","14.1","摩擦成本核查"],
+ ["t",{m:"check",c:["成本来源（四个「帮手」）","对回报的影响"],r:[
+  ["经纪人","增加交易费用，鼓励频繁交易"],
+  ["职业经理人","频繁调整持仓，进一步放大交易费用"],
+  ["财务规划师 / 顾问","增加间接成本，无助于整体回报"],
+  ["对冲 / 私募基金","固定费用+高额业绩奖励；盈利时分走大部分，亏损时由投资者承担"]]}],
+ ["co","warn","摩擦成本的量级","四类「帮手」的摩擦成本已占美国全部公司盈利的20%——投资者最终只能拿到本应属于他们的80%。活跃股票的摩擦成本常达公司净利润的10%或更多。100%换手率下摩擦成本约占净资产2%，对12% ROE的公司相当于额外征税16.66%：若政府新增这样一个税种必然引发抗议，而投资者正在自我施加同等税负。","第4章 A · D"],
+ ["q","牛顿的第四定律：投资者的整体回报，随着交易频率的上升而减少。","第4章 A"],
+ ["p","基本事实：股东作为一个整体从公司获得的长期回报，等于该公司存续期内创造的全部收益——所有上市公司股东的财富增量不可能超过公司本身的盈利总和。参照：道指1899年12月31日65.73点 → 1999年11,497.12点，年化复合回报（含分红）仅5.3%；若21世纪要维持同样回报率，2099年底需达约200万点。"],
+ ["h","14.2","买入、持有与卖出"],
+ ["t",{m:"check",c:["动作","准则"],r:[
+  ["买入的仓位大小","符合条件的公司少之又少，一旦出现应大幅买入，而非小赌怡情"],
+  ["集中 vs 分散","具备深入知识时集中投资5至10家价格合理的优质公司，分散反而拉低收益提高风险；对具体公司不甚了解时应持有大量股票并分批买入（如定期投资指数基金）；套利活动则适合广泛多元化"],
+  ["持有期检验","「如果不打算持有一只股票10年，那就连10分钟都不必考虑持有」"],
+  ["永久持有的三个条件","①资产回报前景令人满意；②管理层能力优秀且诚实；③市场没有出现高估"],
+  ["正当的卖出理由","①市场高估公司价值，安全边际消失；②需要资金抓住更具吸引力的机会；③极端必需情况（弥补保险业务的异常损失）"],
+  ["不正当的卖出理由","股价上涨、持有时间过长、占比过重（「公牛队因乔丹得分太多而卖掉他」）、利率预期变化、华尔街观点变化"],
+  ["最愚蠢的格言","「只要能赚钱，就不会破产」——不能用这个理由说服董事会出售明星子公司"],
+  ["默认最优解","大多数投资者（机构与个人）持有低成本指数基金是最好的方法，可注定战胜绝大多数专业投资者的净回报"],
+  ["两门必修课","①如何评估一家公司的价值；②如何对待市场价格。抛弃贝塔、有效市场理论、现代投资组合理论"]]}],
+ ["t",{m:"check",c:["投资者亏损的三个原因","具体表现"],r:[
+  ["高成本","交易过于频繁，或支付过多管理费"],
+  ["跟风决策","以股评、市场时尚为依据，而非深思熟虑的企业定量分析"],
+  ["择时错误","常常牛市进入，熊市退出"]]}],
+ ["h","14.3","心理与行为纪律"],
+ ["t",{m:"check",c:["检查事项","标准"],r:[
+  ["市场先生的定位","服务于你，而非指导你；他的钱袋比智慧更有用。关键前提：若无法比市场先生更准确地评估公司价值，就不应参与这场游戏"],
+  ["净买家心态","若未来五年预期成为净储蓄者，应希望股市下跌：留存利润再投资成本更低，持股公司回购同等资金可注销更多股份"],
+  ["常见认知错误","「投资者因股市大跌而亏损」——实际是撤资者亏损，投资者（净买家）在获益"],
+  ["贪婪与恐惧","「亢奋与成本是敌人」；若尝试择时，应在别人贪婪时恐惧，在别人恐惧时贪婪"],
+  ["被迫卖出的风险","只有因财务或心理压力而被迫在市场艰难时卖出的人，才会被波动所伤害"],
+  ["自我认知","「当一个『傻』钱承认自己的局限，它就不再傻了」"],
+  ["合作对象","只与自己喜欢、信任、尊敬的人做生意——这不能保证成功，但与不值得尊敬的经理人为伍「我们从未成功过」"],
+  ["最贵的错误类型","不是买错，而是错过完全在能力圈内、送上门来的大机会——「这种错误的代价极其巨大」"],
+  ["不必事事聪明","「对自己仅仅要求次数有限的聪明，而不是过分聪明。我们现在每年只落实一个好主意」"],
+  ["拒绝多动症","把频繁买卖的机构称为「投资者」，「就像将喜欢一夜情的人称为浪漫主义者一样可笑」"],
+  ["格雷厄姆的寓言","石油勘探员明知是自己编的谣言，仍要跟大家一起去地狱——「谣言也可能是真的」。即便专业投资者也难抵群体非理性的裹挟"]]}],
+ ["co","warn","机械化止损与投资组合保险的连锁风险","1986—1987年流行的投资组合保险本质是高级版止损单：股价越跌越要自动抛售，导致1987年10月约有600亿至900亿美元股票处于连锁抛售触发状态。「当一个农场主看到隔壁农场被低价贱卖时，会要求自己的农场也以低价出售吗？」","第2章 C"]
+]},
+{id:"s15",t:"行业风险复盘",q:"标的会否重演行业恶化剧本？",src:"第1章 C",b:[
+ ["p","这些案例是「行业基本面恶化」这一抽象风险的具体形态，用于比对标的公司是否正在重演同一剧本。"],
+ ["t",{c:["行业 / 公司","结构性风险","数据与结局"],r:[
+  ["纺织（伯克希尔本业）","资本再投资的非理性循环：单个公司理性投资可降本，所有公司同时投资则被价格战抵消","1965年收购时账面净资产2,200万但内在价值远低；前九年销售5.3亿、累计亏损1,000万；1979年后持续消耗现金，1985年彻底关闭"],
+  ["伯灵顿工业","巨额再投资无法抵挡行业恶化","销售额12亿→28亿，再投资约30亿，股价60→34美元（拆股调整），CPI涨3倍以上，股东购买力缩水至1/3"],
+  ["报业","「一城一报」垄断被光纤、卫星电视、互联网瓦解；免费替代资源使盈利潜力远低于纸质时代；固定成本高，发行量下降加剧亏损","1993年即警告「媒体行业将被证明大不如前」，但许多报业高管视而不见；「没有规定保证收入不会低于成本」"],
+  ["航空（美国航空）","成本高企且极难降低；管制取消后低成本对手的低票价迫使守旧公司无法维持","1990—1994年累计亏损24亿，几乎抹去全部普通股账面净资产；1989年3.58亿优先股投资一度减值75%至8,950万"],
+  ["造纸（冠军公司）","商品型行业，巴芒「从未看好过造纸行业」","投资六年税后收益19%（靠优先股结构而非行业）"],
+  ["银行业","约20倍权益杠杆，微小配置错误即吞噬大部分净资产","因此只以合理价格买管理优良的银行，不以便宜价买糟糕的银行"],
+  ["受管制公用事业 / 铁路","大量长期负债支持的受管制资产，须持续大规模投资，回报被管制","属「社会契约」型资产：BNSF每年维护改进支出超20亿美元且定期超出折旧额；未完全符合三类资产的双重标准，但仍优于货币类与无产出类资产"],
+  ["制造 / 零售 / 天然生产业","(c) 维持性资本支出始终是重要且持续的支出","因此绝不能用 (a)+(b) 的「现金流」给这类企业估值"]]}],
+ ["q","你上了什么样的船，比你划船的效率更重要。如果你想得到一个好名声，一定要从事一个好行业。","第1章 C"]
+]},
+{id:"s16",t:"否决清单（速查）",q:"任一项成立，直接放弃",src:"全书第一原则",b:[
+ ["p","以下任一项成立，直接放弃，不进入后续分析——这是全书「回避问题而非解决问题」原则的操作化。点击行即标记触发。"],
+ ["t",{m:"veto",c:["#","否决条件","依据"],r:[
+  ["1","无法预测该公司10年后的经济效益","第2章 E"],
+  ["2","需要靠「学习一下」才能进入的领域（科技、专利、地质、制造工艺）","第2章 E"],
+  ["3","管理层不诚实，或不值得尊敬","第2章 D · F"],
+  ["4","依赖卖方/管理层的盈利预测才能成立的论证","第5章 D"],
+  ["5","困境反转型、尚未验证盈利能力","第5章 D"],
+  ["6","报表注脚看不懂，或披露刻意含混","第1章 A"],
+  ["7","管理层反复用 EBITDA / EBDIT 讲故事","第1章 A · 第3章 C"],
+  ["8","期权成本不入账，或期权行权价不随留存利润调整","第7章 C"],
+  ["9","重组费用/准备金的计提与转回时点可疑","第7章 D"],
+  ["10","并购后损失准备金立即大幅上调","第7章 D"],
+  ["11","退休金假设回报率脱离现实，或与海外假设不一致且无解释","第7章 E"],
+  ["12","估值依赖 (a)+(b) 而未减去 (c)","第6章 E"],
+  ["13","资本结构中利息明显超出企业支付能力","第3章 C"],
+  ["14","债务到期需靠再融资才能存续","第2章 G"],
+  ["15","行业基本面正在恶化，且靠管理能力对冲","第1章 C"],
+  ["16","商品型生意，成本无优势","第3章 D"],
+  ["17","管理层无视核心业务，去收购不相关的平庸企业","第2章 E"],
+  ["18","以高于内在价值的价格增发股票做收购","第5章 A"],
+  ["19","为抵消期权稀释或托市而回购","第4章 C"],
+  ["20","论证隐含「价格只会上涨」的单向假设","第3章 G · 第6章 A"],
+  ["21","安全边际不足——股价仅比价值略高","第2章 D"],
+  ["22","需要用「每个人都这么干」来辩解的任何环节","第1章 G"]]}],
+ ["q","回避问题，而非解决问题；寻找可以跨越的1英尺跨栏，而非挑战7英尺跨栏；倾向于避开怪兽，而不是杀死它。","全书反复申明的第一原则",1],
+ ["co","tip","通过全部检查之后的最后一问","把估值、管理层、账目全部核完，仍要回到伊索：灌木丛里到底有几只鸟，我现在付的是几只鸟的钱？「任何买入行为若不是在寻找物有所值的机会，就不是投资。」","第2章 D · 第6章 A"]
+]}
+];
+
+/* ── 渲染 ── */
+let state={}; try{state=JSON.parse(localStorage.getItem("brk-checklist")||"{}")}catch(e){}
+const save=()=>localStorage.setItem("brk-checklist",JSON.stringify(state));
+const $=s=>document.querySelector(s);
+const content=$("#content"),nav=$("#nav");
+let TOTAL_CHECK=0,TOTAL_VETO=0;
+
+function renderBlock(b,sid,bi){
+  const T=b[0];
+  if(T==="h")return `<h3 class="sub"><span class="n">${b[1]}</span>${b[2]}</h3>`;
+  if(T==="p")return `<p class="lead">${b[1]}</p>`;
+  if(T==="q")return `<blockquote class="qt${b[3]?" big":""}"><p>${b[1]}</p>${b[2]?`<cite>—— ${b[2]}</cite>`:""}</blockquote>`;
+  if(T==="f")return `<div class="formula">${b[1]}</div>`;
+  if(T==="co")return `<aside class="co ${b[1]}"><b class="co-t">${ICON[b[1]]} ${b[2]}</b><p>${b[3]}</p>${b[4]?`<span class="src">—— ${b[4]}</span>`:""}</aside>`;
+  if(T==="cd")return `<div class="cards c${b[1]}">${b[2].map(c=>`<div class="card"><span class="cd-n">${c[0]}</span><b>${c[1]}</b><p>${c[2]}</p></div>`).join("")}</div>`;
+  if(T==="rl")return `<ol class="rules">${b[1].map(r=>`<li><div><b>${r[0]}</b><p>${r[1]}</p></div></li>`).join("")}</ol>`;
+  if(T==="t"){
+    const {c,r,m}=b[1],cls=m==="veto"?"vtable":"";
+    let h=`<div class="twrap"><table class="${cls}"><thead><tr>${m?`<th class="ckh">${m==="veto"?"否决":"核"}</th>`:""}${c.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>`;
+    r.forEach((row,ri)=>{
+      const id=`${sid}.${bi}.${ri}`;
+      const st=state[id]?(m==="veto"?" class=\"clickable veto-on\"":" class=\"clickable done\""):(m?" class=\"clickable\"":"");
+      h+=`<tr${st} data-id="${id}"${m?" title=\"点击切换状态\"":""}>${m?`<td class="ckc"><span class="ctl"></span></td>`:""}${row.map((cell,ci)=>{
+        const last=ci===row.length-1;
+        return `<td${last&&m==="veto"?" class=\"stc\"":""}>${cell}${last&&m==="veto"?"<span class=\"stamp\">触发 · 放弃</span>":""}</td>`;
+      }).join("")}</tr>`;
+    });
+    return h+"</tbody></table></div>";
+  }
+  return "";
+}
+
+SECTIONS.forEach((s,si)=>{
+  const cc=s.b.filter(b=>b[0]==="t"&&b[1].m==="check").reduce((a,b)=>a+b[1].r.length,0);
+  const vc=s.b.filter(b=>b[0]==="t"&&b[1].m==="veto").reduce((a,b)=>a+b[1].r.length,0);
+  TOTAL_CHECK+=cc;TOTAL_VETO+=vc;s.vc=vc;
+  nav.insertAdjacentHTML("beforeend",`<a class="nv" href="#${s.id}"><span class="nv-num">${CN[si]}</span><span><b>${s.t}</b><i class="mini"><u></u></i></span><span class="nv-ct">—</span></a>`);
+  const sec=document.createElement("section");
+  sec.className="sec rv";sec.id=s.id;
+  let h=`<header class="sec-head"><div class="sec-num">${CN[si]}</div><div><h2>${s.t}</h2><p class="sec-q">「${s.q}」</p></div><div class="sec-src">${s.src}</div></header>`;
+  if(cc)h+=`<div class="sp"><i><u></u></i><span class="sp-t">核查进度 0/${cc}</span></div>`;
+  if(vc)h+=`<div class="sp spv" data-vc="${vc}"><i><u></u></i><span class="sp-t">否决项 ${vc} · 任一触发即放弃</span></div>`;
+  h+='<div class="sec-body">'+s.b.map((b,bi)=>renderBlock(b,s.id,bi)).join("")+"</div>";
+  sec.innerHTML=h;content.appendChild(sec);
+  sec.querySelectorAll("tr.clickable").forEach(tr=>{
+    tr.addEventListener("click",()=>{
+      const isV=tr.closest("table").classList.contains("vtable");
+      tr.classList.toggle(isV?"veto-on":"done");
+      if(tr.classList.contains(isV?"veto-on":"done"))state[tr.dataset.id]=1;else delete state[tr.dataset.id];
+      save();refresh();
+    });
+  });
+});
+
+$("#mTotal").textContent=`十六节 · ${TOTAL_CHECK} 项核查 · ${TOTAL_VETO} 项否决`;
+
+function refresh(){
+  let doneAll=0,vetoAll=0;
+  SECTIONS.forEach(s=>{
+    const sec=document.getElementById(s.id);
+    let done=0,total=0,v=0;
+    sec.querySelectorAll("table").forEach(tb=>{
+      const isV=tb.classList.contains("vtable");
+      tb.querySelectorAll("tbody tr").forEach(tr=>{
+        if(isV){if(tr.classList.contains("veto-on"))v++;}
+        else if(tr.classList.contains("clickable")){total++;if(tr.classList.contains("done"))done++;}
+      });
+    });
+    doneAll+=done;vetoAll+=v;
+    const spCheck=sec.querySelector(".sp:not(.spv)");
+    if(spCheck){
+      const u=spCheck.querySelector("u"),t=spCheck.querySelector(".sp-t");
+      u.style.width=total?(done/total*100)+"%":"0%";
+      t.textContent=`核查进度 ${done}/${total}`;
+    }
+    const spVeto=sec.querySelector(".sp.spv");
+    if(spVeto){
+      const u=spVeto.querySelector("u"),t=spVeto.querySelector(".sp-t");
+      u.style.width=v?"100%":"0%";
+      t.textContent=v?`已触发 ${v} / ${spVeto.dataset.vc} 项否决`:`否决项 ${spVeto.dataset.vc} · 任一触发即放弃`;
+    }
+    const nv=document.querySelector(`.nv[href="#${s.id}"]`);
+    if(nv){
+      nv.querySelector(".mini u").style.width=total?(done/total*100)+"%":"0%";
+      let ctText="—";
+      if(total&&v) ctText=`${done}/${total} ⛔${v}`;
+      else if(total) ctText=`${done}/${total}`;
+      else if(v) ctText=`⛔${v}`;
+      nv.querySelector(".nv-ct").textContent=ctText;
+      nv.querySelector(".nv-ct").style.color=v?"var(--red2)":"";
+    }
+  });
+  const pct=TOTAL_CHECK?Math.round(doneAll/TOTAL_CHECK*100):0;
+  $("#tbFill").style.width=pct+"%";
+  $("#tbText").textContent=`已核查 ${doneAll} / ${TOTAL_CHECK} 项 · ${pct}%`;
+  $("#ovBar").style.width=pct+"%";$("#ovPct").textContent=pct+"%";
+  const tv=$("#tbVeto");tv.textContent=`否决触发 ${vetoAll}`;tv.classList.toggle("hot",vetoAll>0);
+  $("#vb").classList.toggle("on",vetoAll>0);$("#vc").textContent=vetoAll;
+}
+refresh();
+
+/* ── 行情带 ── */
+const QUOTES=["回避问题，而非解决问题","宁要模糊的正确，不要精确的错误","时间是优秀企业的朋友，是平庸企业的敌人","一鸟在手，胜过两鸟在林","厨房里如果有蟑螂，绝不可能只有一只","吃谁的面包，唱谁的歌","信用就像氧气——充足时没人注意，消失时一切窒息","空麻袋难以直立","你上了什么样的船，比你划船的效率更重要","寻找可以跨越的1英尺跨栏，而非挑战7英尺跨栏","别人贪婪时恐惧，别人恐惧时贪婪","当一个「傻」钱承认自己的局限，它就不再傻了"];
+const line=QUOTES.map(q=>q+"<b>◆</b>").join("");
+$("#tk").innerHTML=line+line;
+
+/* ── 观察器 ── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}}),{threshold:.06});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+const io2=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    document.querySelectorAll(".nv").forEach(a=>a.classList.remove("act"));
+    const a=document.querySelector(`.nv[href="#${e.target.id}"]`);if(a)a.classList.add("act");
+  }
+}),{rootMargin:"-25% 0px -65% 0px"});
+document.querySelectorAll(".sec").forEach(s=>io2.observe(s));
+
+/* ── 交互 ── */
+const q=$("#q");
+q.addEventListener("input",()=>{
+  const v=q.value.trim().toLowerCase();let n=0;
+  document.querySelectorAll(".sec").forEach(sec=>{
+    const hit=!v||sec.textContent.toLowerCase().includes(v);
+    sec.classList.toggle("dim",!hit);if(hit)n++;
+  });
+  $("#qCount").textContent=v?`${n} 节匹配`:"";
+});
+addEventListener("keydown",e=>{if(e.key==="/"&&document.activeElement!==q){e.preventDefault();q.focus();}});
+$("#reset").addEventListener("click",()=>{
+  if(!confirm("清空全部核查与否决记录？"))return;
+  state={};save();
+  document.querySelectorAll("tr.done,tr.veto-on").forEach(tr=>tr.classList.remove("done","veto-on"));
+  refresh();
+});
+const toTop=$("#toTop");
+addEventListener("scroll",()=>toTop.classList.toggle("on",scrollY>600),{passive:true});
+toTop.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
+</script>
+</body>
+</html>

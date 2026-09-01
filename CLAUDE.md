@@ -16,12 +16,17 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 
 设置 `SERVER_LOG=1` 环境变量可将输出重定向到 `server.log`（后台静默运行模式）。日志中只打印 `/api/` 路径的请求，静态文件请求不记录。
 
+Windows 下后台运维使用 `启动服务.bat`（静默启动、自动开浏览器、输出写入 `server.log`，关窗口不影响服务）和 `停止服务.bat`（按 8000 端口结束进程），两者分别调用 `start.ps1` / `stop.ps1`；端口已占用时启动脚本只开浏览器、不重复起进程。
+
 ### 目录结构
 
 ```
 ├── index.html              # 主书架页
 ├── server.py               # 本地开发服务器
+├── start.ps1 / stop.ps1    # 后台服务启动/停止脚本（由 .bat 调用）
+├── 启动服务.bat / 停止服务.bat
 ├── CLAUDE.md
+├── .claude/skills/         # 项目级技能（见「项目级 Skills」）
 ├── assets/
 │   ├── data.js             # 数据持久化层（必须最先加载）
 │   ├── app.js              # 主书架 UI 逻辑
@@ -31,9 +36,11 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 │   └── books.json          # 服务端持久化数据（权威数据源）
 ├── img/                    # 封面图片（jpg/png），通过相对路径引用
 ├── books/                  # 每本书一个子文件夹，含独立 HTML 章节页
-│   └── <书名>/
-│       ├── index.html      # meta-refresh 跳转到默认章节
-│       └── *.html          # 各章节阅读页
+│   ├── <书名>/
+│   │   ├── index.html      # meta-refresh 跳转到默认章节
+│   │   ├── *.html          # 各章节阅读页（平铺或按 <章号>/ 子目录嵌套）
+│   │   └── *.md            # 部分书籍的笔记源稿，与 html 并存
+│   └── <清单>.html         # 独立检查清单页（create-investment-checklist 产物）
 └── memory/                 # Claude Code 持久记忆（勿手动编辑）
 ```
 
@@ -63,6 +70,15 @@ python server.py   # 启动本地服务，自动打开 http://localhost:8000
 - **阅读位置追踪**：底部 `<script>` 将滚动位置和当前页面路径保存到 `localStorage`
 
 每本书文件夹内有一个 `index.html`，使用 `<meta http-equiv="refresh">` 跳转到默认/第一个章节。
+
+另有独立于书籍文件夹的**检查清单页**（如 `books/《巴菲特致股东的信》 附录：投资检查清单.html`），用 `create-investment-checklist` 技能创建，不遵循章节页结构。
+
+## 项目级 Skills
+
+`.claude/skills/` 下有两个项目级技能，**创建新页面时必须通过 Skill 工具调用**，其规范优先于本文档的简述：
+
+- **chapter-page** — 新增章节阅读页的完整规范：页面骨架、布局规则、导航栏、组件库、排版原则、底部脚本、内联 CSS 清单，以及新增章节时如何批量同步同一本书所有兄弟页面的全书目录 TOC（比逐页手改更稳妥）。
+- **create-investment-checklist** — 创建投资检查清单页（金色账本风，样式提取自《巴菲特致股东的信》附录清单），以 `assets/template.html` 为唯一模板，内容编码为 `SECTIONS` 数据渲染；每份清单必须设置唯一 `localStorage` 键，否则勾选进度互相覆盖。
 
 ### 阅读位置记忆系统
 

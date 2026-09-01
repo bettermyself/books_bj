@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>读财报检查清单 · 手把手教你读财报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#f5f2ec; --paper2:#faf8f4; --paper3:#f0ece3;
+  --ink:#2c2416; --ink2:#6b5e4a; --ink3:#a89880;
+  --gold:#a07828; --gold2:#c9a84c; --gold3:#7a5a10;
+  --red:#a63a2e; --red2:#c04a3c;
+  --green:#1c5c43; --gdeep:#123f2e;
+  --line:#e0d8cc;
+  --serif:'Noto Serif SC',serif;
+  --sans:'Noto Sans SC',sans-serif;
+  --mono:'IBM Plex Mono','Noto Sans SC',monospace;
+  --disp:'Fraunces','Noto Serif SC',serif;
+  --bg2:#203026; --text2:#efe8d2;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);font-size:14.5px;color:var(--ink);
+  background:#f5f2ec;
+  background-attachment:fixed;
+}
+::selection{background:var(--gold2);color:#2c2416}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#f5f2ec}
+::-webkit-scrollbar-thumb{background:#e0d8cc;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+
+/* ── 顶部行情带 ── */
+.ticker{overflow:hidden;white-space:nowrap;background:#faf8f4;border-bottom:1px solid #e0d8cc}
+.tk{display:inline-block;padding:9px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--gold);animation:tick 80s linear infinite}
+.ticker:hover .tk{animation-play-state:paused}
+.tk b{color:#a89880;margin:0 22px;font-weight:400}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ── 骨架 ── */
+.shell{display:grid;grid-template-columns:284px 1fr;max-width:1460px;margin:0 auto;box-shadow:0 0 80px rgba(0,0,0,.4)}
+.side{position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 30px;background:#ffffff;border-right:1px solid #e0d8cc}
+.side::-webkit-scrollbar{width:5px}
+.brand{display:flex;gap:12px;align-items:center;padding-bottom:18px;border-bottom:1px solid #e0d8cc;margin-bottom:16px}
+.mc{width:46px;height:46px;flex:0 0 46px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-family:var(--disp);font-weight:900;color:var(--gold);font-size:13px;position:relative}
+.mc::before{content:"";position:absolute;inset:4px;border:1px dashed rgba(160,120,40,.5);border-radius:50%;animation:spin 50s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.brand b{color:#2c2416;font-family:var(--serif);font-size:14.5px;display:block}
+.brand i{color:#a07828;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em}
+.ov{margin-bottom:14px}
+.lab{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:#a07828;margin-bottom:7px;display:flex;justify-content:space-between}
+.bar{height:6px;background:#f0ece3;position:relative}
+.bar u{position:absolute;inset:0;right:auto;width:0;background:var(--gold);transition:width .6s cubic-bezier(.3,1,.3,1)}
+nav a.nv{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:9px 10px;text-decoration:none;color:#6b5e4a;border-left:2px solid transparent;transition:.2s}
+.nv:hover{background:rgba(160,120,40,.09);color:#2c2416}
+.nv.act{border-left-color:var(--gold);background:rgba(160,120,40,.13);color:#2c2416}
+.nv-num{font-family:var(--serif);font-weight:900;font-size:15px;color:var(--gold);text-align:center}
+.nv b{font-size:12.5px;font-weight:500;display:block;line-height:1.4}
+.mini{display:block;height:2px;background:#f0ece3;margin-top:5px;position:relative}
+.mini u{position:absolute;inset:0;right:auto;background:var(--gold);width:0;transition:width .4s}
+.nv-ct{font-family:var(--mono);font-size:10px;color:#a07828;white-space:nowrap}
+.side-foot{margin-top:18px;padding:13px;border:1px dashed #e0d8cc;font-size:11.5px;color:#6b5e4a;line-height:1.8;font-family:var(--serif)}
+
+/* ── 纸面 ── */
+main{min-width:0}
+.page{min-height:100vh;background:var(--paper);
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0"/></filter><rect width="140" height="140" filter="url(%23n)"/></svg>');
+  box-shadow:inset 0 0 0 1px #e0d8cc}
+
+/* ── 证书式刊头 ── */
+.masthead{margin:34px 48px 0;padding:32px 40px 26px;border:2px solid var(--gold3);position:relative;outline:1px solid rgba(184,147,63,.4);outline-offset:5px;
+  background:
+   repeating-radial-gradient(circle at 115% -30%, transparent 0 10px, rgba(184,147,63,.055) 10px 11px),
+   repeating-radial-gradient(circle at -15% 130%, transparent 0 10px, rgba(184,147,63,.055) 10px 11px),
+   rgba(255,255,255,.45)}
+.cnr{position:absolute;width:20px;height:20px;border:2px solid var(--gold)}
+.c1{top:9px;left:9px;border-right:none;border-bottom:none}
+.c2{top:9px;right:9px;border-left:none;border-bottom:none}
+.c3{bottom:9px;left:9px;border-right:none;border-top:none}
+.c4{bottom:9px;right:9px;border-left:none;border-top:none}
+.mh-top{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--gold3);border-bottom:1px solid rgba(184,147,63,.4);padding-bottom:12px;margin-bottom:24px}
+.mh-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:center}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(42px,5.4vw,66px);line-height:1.15;letter-spacing:.07em;color:var(--ink)}
+.mh-eng{font-family:var(--disp);font-weight:600;font-size:11.5px;letter-spacing:.44em;color:var(--gold3);margin-top:12px}
+.mh-motto{margin-top:20px;font-family:var(--serif);font-size:15px;color:var(--ink2);line-height:1.95;border-left:3px solid var(--gold);padding-left:14px;max-width:54ch}
+.mh-meta{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.mh-meta span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1px solid var(--line);padding:5px 11px;color:var(--ink2);background:rgba(255,255,255,.55)}
+.mh-side{display:flex;flex-direction:column;gap:18px}
+.pipeline{border:1px solid rgba(184,147,63,.5);background:rgba(255,255,255,.5);padding:16px 18px}
+.pl-label{font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--gold3);margin-bottom:12px}
+.pl-steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-family:var(--serif);font-weight:700;font-size:13.5px}
+.pl-steps span{border:1.5px solid var(--gold3);color:var(--gold3);padding:6px 10px;background:rgba(160,120,40,.06);transition:.2s}
+.pl-steps span:hover{background:var(--gold3);color:var(--paper)}
+.pl-steps i{color:var(--gold);font-style:normal}
+.pipeline p{margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.75}
+.mh-stamp{align-self:flex-end;transform:rotate(-6deg);border:3px double var(--red);color:var(--red);padding:11px 18px;font-family:var(--serif);font-weight:900;font-size:16px;letter-spacing:.2em;line-height:1.7;text-align:center;background:rgba(166,58,46,.045);animation:stampIn .7s cubic-bezier(.3,1.6,.4,1) .6s both}
+@keyframes stampIn{from{opacity:0;transform:rotate(-6deg) scale(2.2)}to{opacity:1;transform:rotate(-6deg) scale(1)}}
+.mh-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:26px;padding-top:14px;border-top:1px dashed rgba(184,147,63,.55);font-size:11.5px;color:var(--ink2);font-family:var(--mono)}
+.sw{display:inline-block;width:11px;height:11px;border:2px solid var(--ink2);background:#fff;vertical-align:-1px;margin-right:7px}
+.sw.ck{background:var(--gold);border-color:var(--gold)}
+.sw.vt{background:var(--red);border-color:var(--red)}
+.sw.nt{border-color:var(--gold);background:rgba(184,147,63,.2)}
+
+/* ── 凡例 ── */
+.preface{margin:26px 48px 0;padding:18px 24px;border:1px dashed rgba(184,147,63,.6);background:rgba(255,255,255,.42);font-size:13.5px;color:var(--ink2);line-height:1.95}
+.preface b{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--gold3);display:block;margin-bottom:8px}
+
+/* ── 工具条 ── */
+.toolbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 48px;background:var(--paper);border-bottom:3px double var(--gold3)}
+.tb-bar{width:170px;height:9px;background:var(--paper3);border:1px solid var(--line);position:relative}
+.tb-bar u{position:absolute;inset:0;right:auto;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .6s cubic-bezier(.3,1,.3,1)}
+#tbText{font-family:var(--mono);font-size:11.5px;color:var(--ink2);white-space:nowrap}
+.tb-veto{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:5px 11px;border:1.5px solid var(--gold);color:var(--gold);white-space:nowrap;transition:.3s}
+.tb-veto.hot{border-color:var(--red);color:#fff;background:var(--red);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(166,58,46,.14)}}
+#q{flex:1;min-width:150px;max-width:250px;margin-left:auto;background:#fff;border:1px solid var(--line);padding:8px 12px;font-family:var(--sans);font-size:13px;color:var(--ink);outline:none;transition:.2s}
+#q:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,147,63,.16)}
+#qCount{font-family:var(--mono);font-size:10.5px;color:var(--gold3);white-space:nowrap}
+#reset{background:none;border:1px solid var(--line);padding:8px 14px;font-family:var(--mono);font-size:11.5px;color:var(--ink2);cursor:pointer;transition:.2s}
+#reset:hover{border-color:var(--red);color:var(--red)}
+.vbanner{display:none;position:sticky;top:51px;z-index:55;background:var(--red);color:#fdf6ec;padding:10px 48px;font-size:13.5px;font-family:var(--serif);font-weight:700;letter-spacing:.05em;box-shadow:0 8px 20px -8px rgba(166,58,46,.55)}
+.vbanner.on{display:block}
+
+/* ── 章节 ── */
+.sec{padding:54px 56px 42px;border-bottom:1px solid var(--line);scroll-margin-top:78px;transition:opacity .3s,filter .3s}
+.sec.dim{opacity:.12;filter:grayscale(.7)}
+.sec-head{display:grid;grid-template-columns:88px 1fr auto;gap:20px;align-items:start;border-bottom:4px double var(--ink);padding-bottom:18px}
+.sec-num{font-family:var(--serif);font-weight:900;font-size:56px;line-height:1;color:rgba(184,147,63,.13);-webkit-text-stroke:1.2px rgba(184,147,63,.55)}
+h2{font-family:var(--serif);font-weight:900;font-size:29px;letter-spacing:.03em}
+.sec-q{font-family:var(--serif);font-size:15px;color:var(--ink2);margin-top:7px}
+.sec-src{font-family:var(--mono);font-size:10.5px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);padding:5px 10px;letter-spacing:.1em;background:rgba(184,147,63,.07);white-space:nowrap}
+.sp{display:flex;align-items:center;gap:12px;margin:16px 0 2px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.sp i{flex:0 0 150px;height:5px;background:var(--paper3);position:relative}
+.sp i u{position:absolute;inset:0;right:auto;background:var(--gold);width:0;transition:width .5s}
+.sp.spv i u{background:var(--red)}
+
+.sub{display:flex;align-items:center;gap:12px;margin:36px 0 14px;font-family:var(--serif);font-weight:700;font-size:19px}
+.sub::before{content:"";width:9px;height:9px;background:var(--gold);transform:rotate(45deg);flex:0 0 9px}
+.sub .n{font-family:var(--mono);font-size:11.5px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);padding:2px 8px;letter-spacing:.06em;font-weight:500}
+.lead{font-size:14px;color:var(--ink2);line-height:1.95;margin:12px 0}
+
+/* ── 账本表格 ── */
+.twrap{overflow-x:auto;margin:8px 0 12px;border:1px solid var(--line);background:rgba(255,255,255,.4);transition:box-shadow .25s}
+.twrap:hover{box-shadow:0 10px 28px -20px rgba(32,48,42,.7)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:600px}
+thead th{background:var(--gold);color:#ffffff;font-size:11.5px;letter-spacing:.14em;font-weight:600;padding:10px 14px;text-align:left;border-bottom:2px solid var(--gold3)}
+thead th.ckh{width:52px;text-align:center;background:var(--gold3);color:#ffffff}
+.vtable thead th.ckh{background:var(--red)}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.8}
+tbody tr:last-child td{border-bottom:none}
+tbody td:first-child{font-weight:700;font-family:var(--serif)}
+tbody tr:nth-child(even){background:rgba(32,48,42,.03)}
+td.ckc{text-align:center;width:52px}
+.ctl{width:16px;height:16px;border:2px solid var(--ink2);display:inline-block;position:relative;background:#fff;vertical-align:middle;transition:.2s}
+.ctl::after{content:"✓";position:absolute;left:1px;top:-5px;font-size:14px;font-weight:900;color:#fff;opacity:0;transform:scale(.3);transition:.22s cubic-bezier(.5,1.9,.4,1)}
+.vtable .ctl{border-color:var(--red)}
+.vtable .ctl::after{content:"✕"}
+tr.clickable{cursor:pointer;transition:background .18s,box-shadow .18s}
+tr.clickable:hover{background:rgba(184,147,63,.11);box-shadow:inset 3px 0 0 var(--gold)}
+tr.done{background:rgba(28,92,67,.09)!important}
+tr.done td{color:var(--ink2)}
+tr.done .ctl{background:var(--gold);border-color:var(--gold)}
+tr.done .ctl::after{opacity:1;transform:scale(1)}
+tr.veto-on{background:rgba(166,58,46,.09)!important}
+tr.veto-on td:first-child{color:var(--red)}
+tr.veto-on .ctl{background:var(--red);border-color:var(--red)}
+tr.veto-on .ctl::after{opacity:1;transform:scale(1)}
+td.stc{position:relative;padding-right:112px}
+.stamp{position:absolute;right:10px;top:50%;transform:translateY(-50%) rotate(-8deg) scale(2.3);opacity:0;border:2.5px solid var(--red);color:var(--red);font-family:var(--serif);font-weight:900;font-size:11.5px;letter-spacing:.18em;padding:3px 8px;pointer-events:none;white-space:nowrap;background:rgba(245,240,225,.75);transition:.25s cubic-bezier(.4,1.6,.4,1)}
+tr.veto-on .stamp{opacity:.92;transform:translateY(-50%) rotate(-8deg) scale(1)}
+
+/* ── 卡片 / 箴言 / 准则 ── */
+.cards{display:grid;gap:14px;margin:16px 0}
+.c2{grid-template-columns:repeat(2,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);background:rgba(255,255,255,.42);padding:18px 18px 16px;position:relative;transition:.25s}
+.card::before{content:"";position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 26px -16px rgba(32,48,42,.6);background:rgba(255,255,255,.65)}
+.cd-n{font-family:var(--disp);font-weight:900;font-size:13px;color:var(--gold3);letter-spacing:.16em;display:block;margin-bottom:9px}
+.card b{font-family:var(--serif);font-size:16px;display:block;margin-bottom:7px;line-height:1.5}
+.card p{font-size:12.5px;color:var(--ink2);line-height:1.75}
+.qt{margin:24px 0;padding:4px 0 4px 26px;border-left:3px solid var(--gold);position:relative}
+.qt::before{content:"「";position:absolute;left:-4px;top:-30px;font-family:var(--serif);font-size:54px;color:rgba(184,147,63,.28)}
+.qt p{font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.95}
+.qt.big p{font-size:22px}
+.qt cite{display:block;margin-top:9px;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--gold3);letter-spacing:.12em}
+.co{margin:18px 0;padding:16px 18px 14px;border-left:4px solid;background:rgba(255,255,255,.35)}
+.co.warn{border-color:var(--red);background:linear-gradient(90deg,rgba(166,58,46,.08),rgba(255,255,255,.35) 68%)}
+.co.tip{border-color:var(--gold);background:linear-gradient(90deg,rgba(184,147,63,.13),rgba(255,255,255,.35) 68%)}
+.co.note{border-color:#4a7296;background:linear-gradient(90deg,rgba(74,114,150,.1),rgba(255,255,255,.35) 68%)}
+.co-t{font-family:var(--serif);font-weight:900;font-size:15px;display:block;margin-bottom:7px}
+.co.warn .co-t{color:var(--red)}.co.tip .co-t{color:var(--gold3)}.co.note .co-t{color:#3d6285}
+.co p{font-size:13.5px;line-height:1.85}
+.co .src{display:block;margin-top:9px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink3)}
+.formula{margin:18px 0;border:1px solid rgba(160,120,40,.55);background:var(--gold3);color:#ffffff;padding:22px 24px;font-family:var(--mono);font-size:13.5px;line-height:2.1;position:relative;overflow:hidden}
+.formula::after{content:"§";position:absolute;right:14px;bottom:8px;font-size:10px;letter-spacing:.24em;color:rgba(217,185,104,.6)}
+.formula b{color:var(--gold2);font-size:15px}
+.formula .fc{color:#eba08f}
+.formula .fn{display:block;font-size:11px;color:rgba(239,232,210,.65);margin-top:8px;letter-spacing:.05em}
+.rules{list-style:none;counter-reset:r;margin:14px 0}
+.rules li{counter-increment:r;display:grid;grid-template-columns:44px 1fr;gap:16px;padding:15px 0;border-bottom:1px dashed var(--line)}
+.rules li::before{content:counter(r,decimal-leading-zero);font-family:var(--disp);font-weight:900;font-size:19px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);width:42px;height:42px;display:grid;place-items:center;background:rgba(184,147,63,.06)}
+.rules b{font-family:var(--serif);font-size:15.5px;display:block;margin-bottom:5px}
+.rules p{font-size:13px;color:var(--ink2);line-height:1.8}
+
+/* ── 尾章 ── */
+.colophon{background:var(--bg2);color:var(--text2);padding:72px 56px 60px;text-align:center;border-top:3px double var(--gold)}
+.seal{width:96px;height:96px;margin:0 auto 28px;border:2px solid var(--gold2);border-radius:50%;display:grid;place-items:center;font-family:var(--disp);font-weight:900;font-size:20px;color:var(--gold2);position:relative}
+.seal::before{content:"";position:absolute;inset:6px;border:1px dashed var(--gold2);border-radius:50%;animation:spin 40s linear infinite}
+.seal small{position:absolute;bottom:16px;font-size:8px;letter-spacing:.3em;font-family:var(--mono);font-weight:400}
+.colophon h3{font-family:var(--mono);font-size:11px;letter-spacing:.4em;color:var(--gold2);margin-bottom:20px;font-weight:500}
+.colophon .big{font-family:var(--serif);font-weight:900;font-size:clamp(21px,2.8vw,30px);line-height:1.75;max-width:26em;margin:0 auto 16px}
+.colophon .sub2{font-family:var(--serif);color:rgba(239,232,210,.75);font-size:15px;line-height:1.9}
+.colophon .rule{width:64px;height:2px;background:var(--gold2);margin:28px auto}
+.colophon .small{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:rgba(217,185,104,.6)}
+
+#toTop{position:fixed;right:26px;bottom:26px;width:46px;height:46px;background:var(--gold3);color:#ffffff;border:1px solid var(--gold);font-size:15px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:80;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+#toTop.on{opacity:1;pointer-events:auto}
+#toTop:hover{background:var(--gold);color:#ffffff}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+@media(max-width:1100px){
+  .shell{grid-template-columns:1fr}
+  .side{display:none}
+  .sec{padding:44px 24px}
+  .toolbar,.vbanner{padding-left:20px;padding-right:20px}
+  .masthead{margin:22px 14px 0;padding:26px 22px 22px}
+  .preface{margin:20px 14px 0}
+  .mh-grid{grid-template-columns:1fr}
+  .sec-head{grid-template-columns:1fr;gap:8px}
+  .sec-num{font-size:40px}
+  .sec-src{justify-self:start}
+}
+@media(max-width:820px){.c3,.c4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.c2,.c3,.c4{grid-template-columns:1fr}#q{max-width:none;flex-basis:100%}td.stc{padding-right:14px}.stamp{position:static;display:inline-block;margin-left:8px;transform:rotate(-4deg)}}
+@media print{
+  .ticker,.side,.toolbar,#toTop,.vbanner{display:none}
+  body{background:#fff}.page{box-shadow:none}
+  .rv{opacity:1;transform:none}
+  .shell{display:block}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker"><div class="tk" id="tk"></div></div>
+
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mc">财报</span><div><b>读财报 · 检查清单</b><i>FINANCIAL CHECKLIST</i></div></div>
+    <div class="ov">
+      <div class="lab"><span>总核查进度</span><span id="ovPct">0%</span></div>
+      <div class="bar"><u id="ovBar"></u></div>
+    </div>
+    <nav id="nav"></nav>
+    <div class="side-foot">清单不是打分表——<br>「疑罪从有，事反必妖。」<br>多数判断强调连续数年，而非单年。</div>
+  </aside>
+
+  <main><div class="page">
+
+    <header class="masthead rv">
+      <i class="cnr c1"></i><i class="cnr c2"></i><i class="cnr c3"></i><i class="cnr c4"></i>
+      <div class="mh-top"><span>《手把手教你读财报》 · 读书笔记清单</span><span>No. CFR-01 · READING NOTES</span></div>
+      <div class="mh-grid">
+        <div>
+          <h1>读财报检查清单</h1>
+          <div class="mh-eng">THE FINANCIAL-REPORT CHECKLIST</div>
+          <p class="mh-motto">「先做排除性筛查，再逐表逐科目核查，然后算指标、读附注、做估值，最后过一遍造假信号。」</p>
+          <div class="mh-meta"><span id="mTotal"></span><span>先排除 · 再核查 · 算指标 · 后排雷</span><span>阈值均为书中原始标准</span></div>
+        </div>
+        <div class="mh-side">
+          <div class="pipeline">
+            <div class="pl-label">执行顺序</div>
+            <div class="pl-steps"><span>① 排除筛查</span><i>→</i><span>② 逐表核查</span><i>→</i><span>③ 指标附注</span><i>→</i><span>④ 估值排雷</span></div>
+            <p>壹、贰与拾壹节均为否决闸门：任一信号触发，后面全部不必看——疑罪从有，事反必妖。</p>
+          </div>
+          <div class="mh-stamp">事反必妖<br>疑罪从有</div>
+        </div>
+      </div>
+      <div class="mh-legend">
+        <span><i class="sw ck"></i>点击行 ＝ 已核查</span>
+        <span><i class="sw vt"></i>否决项点击 ＝ 触发 → 直接放弃</span>
+        <span><i class="sw nt"></i>进度自动保存于本机</span>
+      </div>
+    </header>
+
+    <div class="preface rv">
+      <b>凡例 · 使用说明</b>
+      本清单依据《手把手教你读财报》读书笔记整理，把全书散落的判断标准重排为一条可按顺序执行的读财报流水线：先排除性筛查，再逐表逐科目核查，然后算指标、读附注、做估值，最后过一遍造假信号。所有阈值与公式均为书中原始标准，多数判断强调「连续数年」而非单年。清单的作用是防止遗漏与自欺，不是把判断压缩成一个总分。
+    </div>
+
+    <div class="toolbar">
+      <div class="tb-bar"><u id="tbFill"></u></div>
+      <span id="tbText">已核查 0 / 0 项</span>
+      <span class="tb-veto" id="tbVeto">否决触发 0</span>
+      <input id="q" placeholder="搜索清单…（按 / 聚焦）">
+      <span id="qCount"></span>
+      <button id="reset">重置记录</button>
+    </div>
+    <div class="vbanner" id="vb">⛔ 已触发 <span id="vc">0</span> 项否决 —— 按清单原则：疑罪从有，事反必妖。直接放弃，后面全部不必看。</div>
+
+    <div id="content"></div>
+
+    <footer class="colophon">
+      <div class="seal">财报<small>· 手把手 ·</small></div>
+      <h3>通过全部检查之后的最后一问</h3>
+      <p class="big">「这家公司挣的是不是真金白银？利润能否变成口袋里的现金？」</p>
+      <p class="sub2">「出奇地好或坏都要找解释——疑罪从有，事反必妖。」</p>
+      <div class="rule"></div>
+      <p class="small">逐项打勾，方能安心下注 · 据《手把手教你读财报》读书笔记整理</p>
+    </footer>
+
+  </div></main>
+</div>
+
+<button id="toTop" title="回到封面">▲</button>
+
+<script>
+const CN=["壹","贰","叁","肆","伍","陆","柒","捌","玖","拾","拾壹","拾贰","拾叁","拾肆","拾伍","拾陆"];
+const ICON={warn:"⚠",tip:"✦",note:"✎"};
+
+/* ── 全部十二节数据（源自 books/读财报检查清单-手把手教你读财报.md）── */
+const SECTIONS=[
+{"id":"s1","t":"前置准备与整体框架","q":"动手翻报表之前，先把姿势摆对","src":"全书通则","b":[
+ ["h","1.1","开工前的六项约定"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["使用合并报表分析","母公司报表除个别科目外观察价值低；每股指标、盈余公积等仍看母公司口径"],
+  ["确认年报在次年 4 月 30 日前披露","未按时披露被停牌是警示信号"],
+  ["优先看资产负债表","高手更关注它；三表结合相互印证"],
+  ["牢记权责发生制是造假温床","未收的钱可能记为本期收入，未付的钱可能记为本期成本"],
+  ["纵向历史对比 + 横向同行业对比","观察周期至少 5 年"],
+  ["秉持「疑罪从有 / 事反必妖」","出奇地好或坏都要找解释，无可靠解释即回避"]]}],
+ ["co","tip","清单用法","按实际阅读顺序编排：先做排除性筛查，再逐表逐科目核查，然后算指标、读附注、做估值，最后过一遍造假信号。所有阈值 / 公式均为书中原始标准，多数判断强调「连续数年」而非单年。",""]
+]},
+{"id":"s2","t":"排除性筛查（审计意见 + 重要提示）","q":"这些关卡过不了，后面全部不必看","src":"审计意见 · 重要提示","b":[
+ ["p","三处查找审计意见：年报第 1 页《重要提示》、「财务会计报告」开头、审计报告「审计意见」部分。任一信号触发，直接放弃。"],
+ ["t",{"m":"veto","c":["否决信号","说明"],"r":[
+  ["审计意见非标准无保留","保留意见 / 无法表示意见 / 否定意见 → 直接排除"],
+  ["非标准审计报告的公司","立即丢弃，不做后续分析"],
+  ["控股股东及关联方非经营性资金占用","《重要提示》中应为「否」，答「是」即触发"],
+  ["违规决策程序对外提供担保","《重要提示》中应为「否」，答「是」即触发"],
+  ["独立董事 / 监事提出异议或特殊声明","任何异议、提醒都要重视——找不到可信解释即放弃"],
+  ["把「预计、计划、我们将……」当成承诺","前瞻性陈述不是承诺，当真即被公关话术带了节奏"]]}]
+]},
+{"id":"s3","t":"资产负债表 · 资产端科目","q":"每一个资产科目是否讲了真话？","src":"资产负债表","b":[
+ ["h","3.1","货币资金"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["核对现金及现金等价物与现金流量表期末余额对应","剔除受限资金后核对"],
+  ["确认货币资金与短期债务、经营需要相匹配","过小 → 偿债不足；过大 → 运用能力弱或性质有问题"],
+  ["反常信号：货币资金远小于短期负债","偿债危机"],
+  ["反常信号：存贷双高","资金充裕却借高息负债——大概率虚构 / 挪用 / 被冻结"],
+  ["反常信号：定期存款 / 其他货币资金巨大却缺可动用流动资金","资产受限或被质押的嫌疑"],
+  ["反常信号：其他货币资金巨大且无合理解释","先要解释，再谈估值"],
+  ["反常信号：利息收入显著低于存款利率","资金可能只在报表日短暂停留"],
+  ["警惕控股股东「集团资金管理协议」归集资金池","资金被归集 = 挪用与冻结的便利通道"],
+  ["检查货币冗余","账面留存数倍于投资支出及分红所需现金 → 运用能力低下，估值扣分"],
+  ["核对受限资金明细","准备金、冻结、质押、保证金——不能随时支取的不算现金等价物；股票不算"]]}],
+ ["h","3.2","应收票据 / 应收账款 / 应收款项融资"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["看应收票据占营收比例与构成","全为银票 = 强势；含大量商票 = 靠宽松销售政策；一贯银票突然大量商票 = 遭遇销售困境"],
+  ["收款条件优劣排序","现金 > 银票 > 商票 > 应收账款"],
+  ["检查应收账款是否异常增长","放宽信用或提前 / 虚构收入"],
+  ["计算应收账款周转率","营业收入 ÷ 应收账款平均余额〔(期初 + 期末) ÷ 2，建议含商票〕；营收增长而周转率下降 = 放松政策（警惕）"],
+  ["检查一年以上应收款占比","很大部分（如超三成）→ 质疑收入真实性"],
+  ["查坏账准备计提标准并与同行对比","常见：1 年内 5% / 2-3 年 30% / 5 年以上 100%；计提越严越可信"],
+  ["警惕计提政策变更","宽松突转严格（疑「洗大澡」备转回）；严格突转宽松（美化当年利润）"],
+  ["观察长期挂账大额应收款突然收回后的资金流向","若随后新增金额近似的异常支出，可疑"],
+  ["检查前五名应收账款单位","是否集中于关联企业、是否有持股 5% 以上股东欠款"]]}],
+ ["h","3.3","预付账款"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["判断产业地位","经常预付大量款 = 产业链地位低 / 信用差"],
+  ["数量异常","预付工程款 / 专利技术采购款大幅增长 → 疑资金流出再回流虚增利润"],
+  ["时间异常","长期挂账（超一年）→ 疑以采购名义挪用资金"],
+  ["跟踪历年预付款占营收 / 营业成本比例","大幅波动无解释需防雷"]]}],
+ ["h","3.4","其他应收款 / 长期应收款"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["检查「其他××」科目金额","优秀公司应很小甚至为零；金额大先按「经营不规范」看待"],
+  ["警惕隐藏用途","隐藏短期投资、转移资金给大股东、私设小金库、隐藏利润费用"],
+  ["企业自身缺钱却容忍大量其他应收款","直接怀疑造假"],
+  ["2018 年后的口径调整","先剔除并入的应收股利、应收利息再判断金额"]]}],
+ ["h","3.5","存货"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["确认按成本与可变现净值孰低计量","明显贬值存货是否故意不计提跌价准备"],
+  ["关注高贬值风险行业","生鲜、高科技制造、过期食品饮料"],
+  ["造假信号","存货增长大幅超过营业成本增长且账面价值显著高于同行（疑虚构采购流出资金）；靠加大产量 + 加权平均法降低单位成本欺诈性提升毛利率"],
+  ["计算存货周转率","营业成本 ÷ 存货平均余额；结合产品特性（易贬值应高周转，茅台可低周转）"]]}],
+ ["co","warn","最高优先级的逻辑矛盾","存货周转率明显下降 + 毛利率显著上升 = 高概率造假——滞销本应毛利率下降，两者同时出现，只剩一种解释。",""],
+ ["h","3.6","生产类资产"],
+ ["t",{"m":"check","c":["科目","核查要点"],"r":[
+  ["固定资产","查折旧政策，警惕突然变更；识别账面归零但实际增值资产（大坝、酒窖、城区房产）；警惕「先减值后出售」（成交价显著高于账面）；减值一经计提不可转回"],
+  ["在建工程 / 工程物资","警惕数额巨大持续多年不转固（避折旧或虚构工程转移资金）；投入增加但进度停滞"],
+  ["无形资产 / 开发支出","查研发资本化 / 费用化倾向（全费用化更可靠）；外购价格是否公平；减值不可转回"],
+  ["商誉","关注爆雷风险；商誉占收购对价超高（如 90% 以上）、仅笼统称「未减值」无详细信息——警惕；经常收购产生大额商誉时应还原重估"],
+  ["长期待摊费用","数字越大资产质量越差（无变现价值，用于减费增利）"],
+  ["生物资产","对农林渔牧格外警惕（蓝田案），警惕「先减值后转回」；造假高发行业共性：税收优惠多、产品难核查、无价格参照"]]}],
+ ["h","3.7","投资类资产"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["先看分类（决定对利润表影响）","交易性金融资产涨跌计入当期损益，可供出售 / 其他权益工具不计入"],
+  ["投资性房地产","确认成本模式 or 公允价值模式（后者「利润」不对应现金流）；跨市场对比需谨慎"],
+  ["查可供出售金融资产减值判断标准","常见自设：累计跌幅超成本 20%~50% 为「严重下跌」，连续跌超 12 个月为「非暂时」"],
+  ["长期股权投资","辨明控制 / 重大影响（持股 20%~50%）/ 无重大影响的分类"],
+  ["股权投资雷区（利益输送高发）","大额减值 + 次期卖出、伪装非同一控制收购创造利润、控制权临界点反复小额交易、金融资产↔联营临界点小额增持伴大额投资收益、拆分一揽子减持"],
+  ["递延所得税","对股东有利的是递延所得税负债（税务局无息贷款）；两者不能互抵"]]}]
+]},
+{"id":"s4","t":"资产负债表 · 负债与所有者权益","q":"借了谁的钱？欠了多少息？","src":"资产负债表","b":[
+ ["h","4.1","负债"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["对负债依次追问","为何借？向谁借？借多久？利息几何？"],
+  ["计算有息负债率","有息负债 ÷ 总资产；≥ 60% 属激进，只与同期同行比"],
+  ["区分负债性质","融资性负债（有息）与经营性 / 分配性负债（无息）"],
+  ["检查应交税费与经营规模匹配","可次年 5 月 31 日前汇算清缴属正常"],
+  ["预计负债","关注对外担保、未决诉讼、产品质保、亏损合同"],
+  ["测算工资敏感度","对净利率低、员工多的公司，测算工资上调多少比例会由盈转亏"]]}],
+ ["h","4.2","所有者权益"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["未分配利润 ≠ 可分配现金、≠ 现金余额","查现金看「货币资金」"],
+  ["分红上限","按合并与母公司报表中较小的未分配利润确定"],
+  ["法定盈余公积","按母公司净利润 10% 计提，累计超注册资本 50% 后可停提"],
+  ["辨析「其他权益工具」与「其他权益工具投资」","前者是本公司发行的权益，后者是投资他公司的资产"],
+  ["警惕大额现金分红陷阱","「先大额分红再巨额融资」——分红降净资产抬高 ROE 满足再融资 / 股权激励门槛"]]}]
+]},
+{"id":"s5","t":"资产负债表速读","q":"四个关键比值 + 三视角，给公司拍一张 X 光","src":"资产负债表速读","b":[
+ ["cd",4,[
+  ["比值 Ⅰ","生产资产 ÷ 总资产","判断轻 / 重公司，优选轻资产（生产资产 = 固定资产 + 在建工程 + 工程物资 + 无形资产中的土地）"],
+  ["比值 Ⅱ","应收款 ÷ 总资产","超 50% 明显有问题，超 30% 已属严重；增幅不应超过营收增幅"],
+  ["比值 Ⅲ","货币资金 ÷ 有息负债","应能覆盖；可放宽为货币资金 + 交易性金融资产 + 应收票据 ≥ 有息负债——刚性标准，无须与同行比"],
+  ["比值 Ⅳ","非主业资产 ÷ 总资产","判断是否专注主业"]]],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["轻重比值 = 税前利润总额 ÷ 生产资产","显著高于社会平均资本回报率（≈ 12%）为轻公司"],
+  ["观察各比值历史趋势与竞争对手同期","趋同 = 行业共识；迥异 = 战略分歧，藏机会或陷阱"]]}]
+]},
+{"id":"s6","t":"利润表","q":"利润是真挣到的，还是纸面上的？","src":"利润表","b":[
+ ["h","6.1","营业收入"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["确认呈「过去、现在、未来预计」三重增长","对比增速是否高于行业平均"],
+  ["判断增长来源可靠性","潜在需求增长（最可靠）＞市场份额扩大＞价格提升（最弱）"],
+  ["查收入确认原则","首读该公司时搜索「满足以下条件时确认」——核心：所有权风险报酬转移，与是否收款无关"],
+  ["对采用「完工百分比法」的劳务 / 建造企业提高警惕","成本估算掌握在公司手中"],
+  ["检查前五大客户营收占比","评估大客户依赖度"],
+  ["对主业涉猎特别广泛的公司打价值折扣","多元化易变「多元恶化」"]]}],
+ ["h","6.2","毛利率"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["计算毛利率","(营业收入 − 营业成本) ÷ 营业收入"],
+  ["按阈值评判","≥ 40%：通常有持续竞争优势，优先；20%~40%：高度竞争，谨慎；&lt; 20%：竞争激烈利润极薄"],
+  ["与同行比较","比同行高很多的，要么业内强者，要么造假骗子"],
+  ["毛利率变化先定位原因","成本下降 or 售价上升，判断是否可信、一次性还是持续；口径需前后一致"],
+  ["毛利率提升的交叉验证","本应伴随应收账款减少 + 应付账款增加；若反向 → 造假嫌疑"]]}],
+ ["h","6.3","费用（三费 / 四费）"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["计算费用率","财务费用为正时 = (销售 + 管理 + 财务) ÷ 营业总收入；为负时 = (销售 + 管理) ÷ 营业总收入"],
+  ["以费用占毛利润比例评判","≤ 30%：优秀；30%~70%：有一定优势；&gt; 70%：关注价值不大"],
+  ["检查管理费用增幅 ≤ 营收增幅","否则查明细"],
+  ["警惕管理费用调控利润","连续数年小额净利润的公司，用折旧、摊销、计提调控，累积后「洗大澡」"],
+  ["销售费用高意味着什么","产品缺拉力靠营销推力、扩张风险高"],
+  ["研发费用按风险偏好取舍","高研发有专利到期 / 技术替代风险"]]}],
+ ["h","6.4","营业成本 / 税金及附加"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["营业成本的实质","理解为本期从存货科目搬走的价值"],
+  ["搜索「税项」 / 「税率」确认主要税种","营改增后「营业税金及附加」改「税金及附加」、运输装卸费改计入营业成本"]]}],
+ ["h","6.5","资产减值损失（利润操纵重灾区）"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["视大额资产减值为「管理层自我打脸」","承认以前决策失误"],
+  ["警惕调节手法","不提 / 少提（增当期利润）、多提（备以后转回）、超额计提（降后期折旧摊销）"],
+  ["该科目总体应很小","经常出现或正或负大额数字 → 警惕报表调控"],
+  ["区分新准则科目","「信用减值损失」（应收款及债权投资）与「资产减值损失」（其他）"]]}],
+ ["h","6.6","营业利润与三块单独损益"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["以营业利润率的趋势为看利润表最重要指标","营业利润 ÷ 营业总收入，与同行对比"],
+  ["营业利润率上升时分析原因","售价 / 成本 / 费用，判断是否可持续、对手能否复制"],
+  ["关注「公允价值变动收益 + 投资收益 + 汇兑收益」三块","警惕主业外损益粉饰（可剔除后算「纯营业利润率」）"]]}],
+ ["h","6.7","营业外收支与净利润"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["净利润的构成","= 营业利润 + 营业外收支净额 − 所得税；营业外收支不可持续"],
+  ["营业外收支净额较大时","直接用营业利润的 75% 看待当年净利润"],
+  ["利润主要经常来自营业外收支","基本可断定打扮报表，远离"],
+  ["只看合并报表「归属于母公司所有者的净利润」","剔除少数股东损益"],
+  ["「其他综合收益」当作股东备忘录","与净利润相加得综合收益总额"]]}],
+ ["f","<b>现金含金量</b> ＝ 经营活动现金流净额 ÷ 净利润 <span class=\"fc\">持续 ≥ 1 为佳，长期 &lt; 0.8 需警惕</span><span class=\"fn\">净利润 ≠ 挣到钱——不产生现金却要实缴税款的「纸面利润」无法长久。例外：房地产行业不适用（卖期房必有大量预收款）</span>"]
+]},
+{"id":"s7","t":"现金流量表","q":"钱从哪来、到哪去？","src":"现金流量表","b":[
+ ["h","7.1","经营活动现金流"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["只看合并现金流量表","母公司口径不具观察价值"],
+  ["第一层：经营活动净额是否 &gt; 0","为负通常入不敷出，银行 / 控股公司除外"],
+  ["第二层：与折旧摊销比较","小于零（需筹钱度日）/ 等于零（勉强维持）/ 大于零但小于折旧摊销（无更新能力）/ 大于折旧摊销（有成长性，越多越好）"],
+  ["核对「销售商品、提供劳务收到的现金」","≈ 营业收入 × (1 + 增值税率)〔或加本期净增银承汇票〕；持续 ≥ 1 佳"],
+  ["警惕票据背书隐藏流量","大量收票据后既不到期也不贴现、直接背书支付上游——流入流出都不体现"],
+  ["用间接法观察净利润质量","与差异原因"]]}],
+ ["h","7.2","投资活动现金流"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["剔除短期理财滚动买入 / 到期干扰后判断趋势","为负 = 扩张；为正 = 收缩"],
+  ["评估三点","① 是否在能力范围（慎跨行业）；② 回报率是否显著高于社会平均（贷款基准利率两倍估算）；③ 资金来源是自产现金还是筹资（偏好自产）"],
+  ["估算自由现金流","≈ 经营活动现金流净额 − 购建固定资产 / 无形资产 / 其他长期资产支付的现金"]]}],
+ ["h","7.3","筹资活动现金流"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["区分权益性与债务性筹资","发行价反映价值预估；利率反映信用"],
+  ["警惕借债利率越高越危险","尤其货币资金充裕却仍高息借款者"]]}],
+ ["h","7.4","现金流肖像（8 种组合 · 顺序经 / 投 / 筹 · 须连续数年）"],
+ ["t",{"m":"check","c":["组合","类型与判读","要点"],"r":[
+  ["+ + +","妖精型","无大规模投资计划则远离"],
+  ["+ + −","老母鸡型","看是否低 PE、高股息率（值得拥有）"],
+  ["+ − +","蛮牛型","考量项目前景 + 资金能否支撑到产生现金"],
+  ["+ − −","奶牛型","经营流入 &gt; 投资流出 + 不含分红的筹资流出（正 = 优质成长；负 = 随时变蛮牛）"],
+  ["− − −","大出血型","坚决拒绝"],
+  ["− − +","赌徒型","看项目前景 + 管理层品性"],
+  ["− + − / − + +","混吃等死型 / 骗吃骗喝型","先辨投资流入靠变卖家当还是此前投资分红，再看现金净增加额；不建议投资"],
+  ["经营为负","A 股特例","除科创板未盈利外，经营现金流为负基本可认定处于衰退期"]]}],
+ ["h","7.5","优质企业五组数据（须数年持续 / 累计）"],
+ ["t",{"m":"check","c":["#","标准","放宽口径"],"r":[
+  ["①","经营活动现金流量净额 &gt; 净利润 &gt; 0","—"],
+  ["②","销售商品提供劳务收到的现金 ≥ 营业收入","—"],
+  ["③","投资活动现金流出 &gt; 流入","且主要用于扩张而非维持"],
+  ["④","现金及现金等价物净增加额 &gt; 0","可放宽为排除现金分红后仍 &gt; 0"],
+  ["⑤","期末现金及现金等价物余额 ≥ 有息负债","可放宽含可迅速变现金融资产"]]}],
+ ["f","<b>期末现金及现金等价物</b> ＝ 期初 + 经营净额 + 投资净额 + 筹资净额 + 汇率变动影响 <span class=\"fn\">勾稽验证：且等于资产负债表货币资金中的现金及现金等价物总额</span>"]
+]},
+{"id":"s8","t":"财务指标分析","q":"用哪几把尺子量？量出了什么？","src":"财务指标","b":[
+ ["h","8.1","安全性（偿债能力）"],
+ ["t",{"m":"check","c":["指标","口径与标准"],"r":[
+  ["流动比率","流动资产 ÷ 流动负债，理想值 ≈ 2"],
+  ["速动比率","(流动资产 − 存货) ÷ 流动负债，理想值 ≈ 1"],
+  ["资产负债率 / 净资产负债率","负债总额 ÷ 资产总额；负债总额 ÷ 所有者权益"],
+  ["利息保障倍数","(利息总额 + 利润总额) ÷ 利息总额，越高越好"],
+  ["核心把关——现金债务比","现金及现金等价物 ÷ 有息负债 ≥ 1（保守者只用此一项）；放宽版含可迅速变现金融资产，或对一年内到期有息负债 ≥ 1"]]}],
+ ["h","8.2","盈利能力"],
+ ["t",{"m":"check","c":["指标","口径与标准"],"r":[
+  ["营业利润率","营业利润 ÷ 营业收入——最重要指标"],
+  ["毛利率 / 净利率","(营业收入 − 营业成本) ÷ 营业收入；净利润 ÷ 营业收入"],
+  ["净资产收益率 ROE","净利润 ÷ 平均净资产〔(期末 + 期初) ÷ 2〕；巴菲特标准：只选 ROE 超过 20% 的企业，用 5 年以上历史观察"],
+  ["总资产收益率","净利润 ÷ 平均总资产；同 ROE 下更高者更优、风险更小"],
+  ["用 ROE 找经济商誉","ROE &gt; 无风险收益率 → 有经济商誉，反之价值损毁；注意 ROE 与买入价格无关"]]}],
+ ["h","8.3","成长性"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["计算四项增长率","营业收入 / 营业利润 / 资产 / 净资产增长率 = (本期 − 上期) ÷ 上期；区分同比与环比趋势"]]}],
+ ["h","8.4","营运能力（周转率）"],
+ ["t",{"m":"check","c":["指标","公式"],"r":[
+  ["应收账款周转率","营业收入 ÷ 平均应收账款"],
+  ["存货周转率","营业成本 ÷ 存货平均余额"],
+  ["固定资产周转率","营业收入 ÷ 固定资产净值"],
+  ["总资产周转率","营业收入 ÷ 平均总资产"]]}],
+ ["f","<b>ROE</b> ＝ 净利率 × 总资产周转率 × 权益乘数 <span class=\"fc\">高净利率（茅台模式，最优）· 高周转（沃尔玛模式，依赖管理层）· 高杠杆（银行模式，最脆弱）</span><span class=\"fn\">杜邦分解：识别驱动因素；用现金流量数据验证杜邦结果——杜邦体系不含现金流</span>"],
+ ["h","8.5","四步分析法（穿透式）"],
+ ["t",{"m":"check","c":["步骤","要点"],"r":[
+  ["第一步：浏览科目查异常","资产端看应收账款 / 应收票据 / 其他应收款 / 长期待摊费用是否超营收增长；负债端看应付票据 / 应付账款 / 其他应付款 / 短期借款；利润表看营业利润率、(公允价值变动 + 投资收益 + 资产减值损失) 占营业利润比重、营业利润与净利润比例是否稳定；异常必须在附注找到可信解释"],
+  ["第二步：历史分析","观察 ≥ 5 年 ROE；留意上市当年 ROE 通常较上市前 3 年均值下跌超 50% 且难恢复"],
+  ["第三步：利润与现金流趋势对比","理想状态经营活动现金流净额 ≥ 净利润"],
+  ["第四步：与竞争对手比较","营收增速、资产负债结构、收入费用占比"],
+  ["验证收入真实性钩稽","销售商品收到的现金 ≈ 含增值税营业收入 ± 应收 / 预收变动；偏差大时到附注搜「背书」，加回后仍不平且无解释则营收真实性存疑"],
+  ["记住","虚增利润必虚增资产（90%）或虚减负债（10%）"]]}]
+]},
+{"id":"s9","t":"附注 · 权益变动表 · 董事会报告 · 重要事项","q":"财报 70% 的信息藏在附注里","src":"附注与文字部分","b":[
+ ["h","9.1","附注（约占财报 70% 篇幅，必读）"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["重点细读两大项目解释","「合并报表项目解释」和「母公司财务报表主要项目解释」"],
+  ["会计政策 / 估计 / 前期差错","首次细读，后续关注变化；经常有差错的企业警惕"],
+  ["查合并范围及变动","可反推子公司净资产 = 少数股东权益 ÷ 少数股东持股比例"],
+  ["审查关联交易","价格是否公平、是否产生大额应收 / 高额预付、是否有风险巨大的关联担保、是否确有必要（占营收超 30% 重点核查）"],
+  ["查或有事项（尤其诉讼）、承诺事项、资产负债表日后事项","警惕负面信息藏于此"],
+  ["关注金融工具风险披露与公允价值披露","—"]]}],
+ ["h","9.2","所有者权益变动表"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["核对期末所有者权益","= 年初余额 + 净利润 + 其他综合收益 + 所有者投入 / 减少资本 − 分红"],
+  ["理解内部结转","盈余公积 / 一般风险准备 / 专项储备提取只改变内部存放不改变总量；只有分红真正流出"]]}],
+ ["h","9.3","董事会报告"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["细读经营情况讨论分析、未来发展讨论分析","可靠性高于券商研报"],
+  ["核对产销存数据","看客户集中度（前五名占比）"],
+  ["投资状况分析（宝藏）","重点看募集资金使用（项目变更、计划 vs 实际、进度逐年对比）；未来成长股常为当前投资活动现金流净额为负"],
+  ["读经营目标与 SWOT","做纵向（与往年表述比）横向（与对手比）对比，用历史数据验证管理层预判准确性"],
+  ["管理层对行业趋势的判断必读细读","但注意专家也会集体错判"]]}],
+ ["h","9.4","重要事项"],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["通读 11 项披露","重大诉讼、资金占用、破产重整、资产交易、股权激励、关联交易、合同履行、承诺履行、聘任解聘会计师、处罚整改等"],
+  ["改聘会计师事务所要格外警惕","往往是财报有问题先兆；仅两种正常：国资委强制轮换到期改聘、换所不换会计师"]]}]
+]},
+{"id":"s10","t":"估值","q":"它大概值多少钱？我该打几折买？","src":"估值","b":[
+ ["cd",4,[
+  ["方法 Ⅰ","现金流折现（DCF）","企业价值 = 剩余存在期自由现金流折现值：数年自由现金流 → 永续价值（= 自由现金流 ÷ (折现率 − 永续增长率)）→ 全部折现加总。仅适用现金流可预测的成熟企业，只求大致估算"],
+  ["方法 Ⅱ","清算价值（格雷厄姆，悲观）","锁定市值远低于有形资产账面净值的企业；有形资产净值 = 总资产 − 总负债 − 无形资产 − 商誉"],
+  ["方法 Ⅲ","股市价值法","选可比公司，按市盈率（每股收益）/ 净资产倍数（每股净资产）/ 收入倍数（每股销售收入）估值"],
+  ["方法 Ⅳ","面向未来快捷估值","预测第 3 年每股净利润 × 市盈率 → 未来股价 → 按回报要求（如 3 年翻倍）打折确定买入价"]]],
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["市价低于评估价值时回报更高","保守者按折扣（安全边际）买入"],
+  ["估算增长率 / 永续增长率防止过于乐观","茅台若年增 20%，到 2055 年营收将超全国 GDP，不现实"]]}]
+]},
+{"id":"s11","t":"造假识别（危险信号清单）","q":"事反必妖——这些信号出现，先想到欺诈","src":"危险信号","b":[
+ ["h","11.1","收入造假痕迹"],
+ ["t",{"m":"veto","c":["危险信号","说明"],"r":[
+  ["毛利率显著高于同行且同比大幅波动","排除「提价 / 降本」后仍无法解释"],
+  ["毛利率提升却应收增加、应付减少","与供应链地位不匹配"],
+  ["可疑交易对手","销售从未生产经销的产品、与从未出现的大客户大额交易、价格明显偏离市场"],
+  ["运费 / 装卸费增长显著低于收入增长且无解释","出口收入与海关费用反向变动"],
+  ["其他业务收入 / 营业外收入占比突然大幅提升且无解释","利润主要来自偶然营业外收入"],
+  ["提前确认收入","一次性确认多年服务款、义务未履行即确认、房地产未交房即确认、无条件退货期内确认、向无付款能力客户延长信用期发货"]]}],
+ ["h","11.2","费用造假痕迹"],
+ ["t",{"m":"veto","c":["危险信号","说明"],"r":[
+  ["销售 / 管理费用占营收比例同比大幅降低且显著低于对手","查费用去哪了"],
+  ["金额较大的「其他××」科目","「重组 / 资产清理 / 商誉清理」等罕见科目名称"],
+  ["「洗大澡」信号","减值损失同比大增而还原后利润波动不大"],
+  ["虚减费用手法","延长折旧摊销年限、漠视坏账、不当费用资本化、费用挂应收 / 预付、推迟在建工程转固"]]}],
+ ["h","11.3","现金流造假痕迹"],
+ ["t",{"m":"veto","c":["危险信号","说明"],"r":[
+  ["经营现金流净额持续优于同行但投资净额持续大额为负","疑将投资流出转为经营流入"],
+  ["「收到其他与经营活动有关的现金」突然增大且无可信解释","疑关联方打款美化"],
+  ["投资支出超年初预算很多","疑临时救急，可核对《年度财务预算方案》"],
+  ["借债利率偏高、高息借来资金却闲置","货币资金充足却高息借债"]]}],
+ ["h","11.4","资产负债表造假痕迹"],
+ ["t",{"m":"veto","c":["危险信号","说明"],"r":[
+  ["应收账款增幅超收入增幅","周转率低于同行且明显下降"],
+  ["其他应收款与销售无关却大额","越少越好，优秀公司近零"],
+  ["预付工程款 / 专利技术采购款大增","挂账超一年"],
+  ["应付账款 / 应付票据大增","辨别地位增强还是拖欠货款，可搜供应商讨债新闻"],
+  ["存货增幅超营业成本、周转率显著低于同行且下降","存货周转率下降 + 毛利率上升 = 高概率造假"],
+  ["在建工程异常","与经营规模不匹配大增、不按期转固、刚转固又大修"],
+  ["长期待摊费用大增、无形资产异常","尤其专利 / 非专利技术采购"],
+  ["商誉操纵","并购者压低可辨认资产做高商誉"],
+  ["应付职工薪酬余额波动大 + 递延所得税资产大增同时出现","疑用奖金预提平滑利润"],
+  ["坏账准备计提比例显著低于同行","不分账龄按固定比例统一计提；已知欠款方破产却未计提 100% 减值"]]}],
+ ["h","11.5","财报以外信号"],
+ ["t",{"m":"veto","c":["危险信号","说明"],"r":[
+  ["无法按时发布财报","更换（尤其再次更换）会计师事务所（国资委轮换除外）"],
+  ["控股大股东持续大量减持","财务总监频繁更换、独立董事集体辞职"],
+  ["主要供应商 / 客户可疑","执照未年审、注册地在居民楼、税务资料缺失"],
+  ["经常跨行业收购且主要靠发行股票支付","买家的钱不是自己的"]]}],
+ ["q","事反必妖：突然出奇地好或坏都要找解释，无可靠解释就从收入 / 费用 / 现金流三角度考虑欺诈可能。","核心心法",1]
+]},
+{"id":"s12","t":"辅助线索","q":"两条容易漏掉的衍生检查","src":"辅助分析","b":[
+ ["t",{"m":"check","c":["检查事项","要点"],"r":[
+  ["用「应付职工薪酬」附注估算人均薪酬","附注「本期增加」÷ 员工总数（含社保公积金福利），警惕异常低 / 高或与往年 / 同行偏离"],
+  ["衍生分析","人均营收、人均利润、薪酬占利润比"]]}]
+]}
+];
+
+/* ── 渲染 ── */
+let state={}; try{state=JSON.parse(localStorage.getItem("hshndcf-checklist")||"{}")}catch(e){}
+const save=()=>localStorage.setItem("hshndcf-checklist",JSON.stringify(state));
+const $=s=>document.querySelector(s);
+const content=$("#content"),nav=$("#nav");
+let TOTAL_CHECK=0,TOTAL_VETO=0;
+
+function renderBlock(b,sid,bi){
+  const T=b[0];
+  if(T==="h")return `<h3 class="sub"><span class="n">${b[1]}</span>${b[2]}</h3>`;
+  if(T==="p")return `<p class="lead">${b[1]}</p>`;
+  if(T==="q")return `<blockquote class="qt${b[3]?" big":""}"><p>${b[1]}</p>${b[2]?`<cite>—— ${b[2]}</cite>`:""}</blockquote>`;
+  if(T==="f")return `<div class="formula">${b[1]}</div>`;
+  if(T==="co")return `<aside class="co ${b[1]}"><b class="co-t">${ICON[b[1]]} ${b[2]}</b><p>${b[3]}</p>${b[4]?`<span class="src">—— ${b[4]}</span>`:""}</aside>`;
+  if(T==="cd")return `<div class="cards c${b[1]}">${b[2].map(c=>`<div class="card"><span class="cd-n">${c[0]}</span><b>${c[1]}</b><p>${c[2]}</p></div>`).join("")}</div>`;
+  if(T==="rl")return `<ol class="rules">${b[1].map(r=>`<li><div><b>${r[0]}</b><p>${r[1]}</p></div></li>`).join("")}</ol>`;
+  if(T==="t"){
+    const {c,r,m}=b[1],cls=m==="veto"?"vtable":"";
+    let h=`<div class="twrap"><table class="${cls}"><thead><tr>${m?`<th class="ckh">${m==="veto"?"否决":"核"}</th>`:""}${c.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>`;
+    r.forEach((row,ri)=>{
+      const id=`${sid}.${bi}.${ri}`;
+      const st=state[id]?(m==="veto"?" class=\"clickable veto-on\"":" class=\"clickable done\""):(m?" class=\"clickable\"":"");
+      h+=`<tr${st} data-id="${id}"${m?" title=\"点击切换状态\"":""}>${m?`<td class="ckc"><span class="ctl"></span></td>`:""}${row.map((cell,ci)=>{
+        const last=ci===row.length-1;
+        return `<td${last&&m==="veto"?" class=\"stc\"":""}>${cell}${last&&m==="veto"?"<span class=\"stamp\">触发 · 放弃</span>":""}</td>`;
+      }).join("")}</tr>`;
+    });
+    return h+"</tbody></table></div>";
+  }
+  return "";
+}
+
+SECTIONS.forEach((s,si)=>{
+  const cc=s.b.filter(b=>b[0]==="t"&&b[1].m==="check").reduce((a,b)=>a+b[1].r.length,0);
+  const vc=s.b.filter(b=>b[0]==="t"&&b[1].m==="veto").reduce((a,b)=>a+b[1].r.length,0);
+  TOTAL_CHECK+=cc;TOTAL_VETO+=vc;s.vc=vc;
+  nav.insertAdjacentHTML("beforeend",`<a class="nv" href="#${s.id}"><span class="nv-num">${CN[si]}</span><span><b>${s.t}</b><i class="mini"><u></u></i></span><span class="nv-ct">—</span></a>`);
+  const sec=document.createElement("section");
+  sec.className="sec rv";sec.id=s.id;
+  let h=`<header class="sec-head"><div class="sec-num">${CN[si]}</div><div><h2>${s.t}</h2><p class="sec-q">「${s.q}」</p></div><div class="sec-src">${s.src}</div></header>`;
+  if(cc)h+=`<div class="sp"><i><u></u></i><span class="sp-t">核查进度 0/${cc}</span></div>`;
+  if(vc)h+=`<div class="sp spv" data-vc="${vc}"><i><u></u></i><span class="sp-t">否决项 ${vc} · 任一触发即放弃</span></div>`;
+  h+='<div class="sec-body">'+s.b.map((b,bi)=>renderBlock(b,s.id,bi)).join("")+"</div>";
+  sec.innerHTML=h;content.appendChild(sec);
+  sec.querySelectorAll("tr.clickable").forEach(tr=>{
+    tr.addEventListener("click",()=>{
+      const isV=tr.closest("table").classList.contains("vtable");
+      tr.classList.toggle(isV?"veto-on":"done");
+      if(tr.classList.contains(isV?"veto-on":"done"))state[tr.dataset.id]=1;else delete state[tr.dataset.id];
+      save();refresh();
+    });
+  });
+});
+
+$("#mTotal").textContent=`${CN[SECTIONS.length-1]||SECTIONS.length}节 · ${TOTAL_CHECK} 项核查 · ${TOTAL_VETO} 项否决`;
+
+function refresh(){
+  let doneAll=0,vetoAll=0;
+  SECTIONS.forEach(s=>{
+    const sec=document.getElementById(s.id);
+    let done=0,total=0,v=0;
+    sec.querySelectorAll("table").forEach(tb=>{
+      const isV=tb.classList.contains("vtable");
+      tb.querySelectorAll("tbody tr").forEach(tr=>{
+        if(isV){if(tr.classList.contains("veto-on"))v++;}
+        else if(tr.classList.contains("clickable")){total++;if(tr.classList.contains("done"))done++;}
+      });
+    });
+    doneAll+=done;vetoAll+=v;
+    const spCheck=sec.querySelector(".sp:not(.spv)");
+    if(spCheck){
+      const u=spCheck.querySelector("u"),t=spCheck.querySelector(".sp-t");
+      u.style.width=total?(done/total*100)+"%":"0%";
+      t.textContent=`核查进度 ${done}/${total}`;
+    }
+    const spVeto=sec.querySelector(".sp.spv");
+    if(spVeto){
+      const u=spVeto.querySelector("u"),t=spVeto.querySelector(".sp-t");
+      u.style.width=v?"100%":"0%";
+      t.textContent=v?`已触发 ${v} / ${spVeto.dataset.vc} 项否决`:`否决项 ${spVeto.dataset.vc} · 任一触发即放弃`;
+    }
+    const nv=document.querySelector(`.nv[href="#${s.id}"]`);
+    if(nv){
+      nv.querySelector(".mini u").style.width=total?(done/total*100)+"%":"0%";
+      let ctText="—";
+      if(total&&v) ctText=`${done}/${total} ⛔${v}`;
+      else if(total) ctText=`${done}/${total}`;
+      else if(v) ctText=`⛔${v}`;
+      nv.querySelector(".nv-ct").textContent=ctText;
+      nv.querySelector(".nv-ct").style.color=v?"var(--red2)":"";
+    }
+  });
+  const pct=TOTAL_CHECK?Math.round(doneAll/TOTAL_CHECK*100):0;
+  $("#tbFill").style.width=pct+"%";
+  $("#tbText").textContent=`已核查 ${doneAll} / ${TOTAL_CHECK} 项 · ${pct}%`;
+  $("#ovBar").style.width=pct+"%";$("#ovPct").textContent=pct+"%";
+  const tv=$("#tbVeto");tv.textContent=`否决触发 ${vetoAll}`;tv.classList.toggle("hot",vetoAll>0);
+  $("#vb").classList.toggle("on",vetoAll>0);$("#vc").textContent=vetoAll;
+}
+refresh();
+
+/* ── 行情带 ── */
+const QUOTES=["权责发生制是造假温床","高手更关注资产负债表","疑罪从有，事反必妖","净利润 ≠ 挣到钱，现金含金量持续 ≥ 1 为佳","存货周转率下降 + 毛利率上升 = 高概率造假","虚增利润必虚增资产（90%）或虚减负债（10%）","应收款占总资产超 50% 明显有问题","有息负债率 ≥ 60% 属激进","先大额分红再巨额融资——抬高 ROE 的陷阱","改聘会计师事务所往往是财报有问题的先兆","只看归属于母公司所有者的净利润","出奇地好或坏都要找解释，无可靠解释即回避"];
+const line=QUOTES.map(q=>q+"<b>◆</b>").join("");
+$("#tk").innerHTML=line+line;
+
+/* ── 观察器 ── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}}),{threshold:.06});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+const io2=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    document.querySelectorAll(".nv").forEach(a=>a.classList.remove("act"));
+    const a=document.querySelector(`.nv[href="#${e.target.id}"]`);if(a)a.classList.add("act");
+  }
+}),{rootMargin:"-25% 0px -65% 0px"});
+document.querySelectorAll(".sec").forEach(s=>io2.observe(s));
+
+/* ── 交互 ── */
+const q=$("#q");
+q.addEventListener("input",()=>{
+  const v=q.value.trim().toLowerCase();let n=0;
+  document.querySelectorAll(".sec").forEach(sec=>{
+    const hit=!v||sec.textContent.toLowerCase().includes(v);
+    sec.classList.toggle("dim",!hit);if(hit)n++;
+  });
+  $("#qCount").textContent=v?`${n} 节匹配`:"";
+});
+addEventListener("keydown",e=>{if(e.key==="/"&&document.activeElement!==q){e.preventDefault();q.focus();}});
+$("#reset").addEventListener("click",()=>{
+  if(!confirm("清空全部核查与否决记录？"))return;
+  state={};save();
+  document.querySelectorAll("tr.done,tr.veto-on").forEach(tr=>tr.classList.remove("done","veto-on"));
+  refresh();
+});
+const toTop=$("#toTop");
+addEventListener("scroll",()=>toTop.classList.toggle("on",scrollY>600),{passive:true});
+toTop.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
+</script>
+</body>
+</html>
