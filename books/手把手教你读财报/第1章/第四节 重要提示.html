@@ -311,6 +311,18 @@
     .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
     .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
 
+    /* ===== 双列 Callout ===== */
+    .callout-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+    @media(max-width: 792px) {
+      .callout-grid { grid-template-columns: 1fr; }
+    }
+    .callout-grid .callout { margin: 0; }
+
     /* ===== Tables ===== */
     .article-table {
       width: 100%;
@@ -523,6 +535,10 @@
           <span class="toc-chapter-title">第二章 资产负债表</span>
           <ul class="toc-lectures">
             <li><a href="../第2章/第一节 生产类资产.html">第一节 生产类资产</a></li>
+            <li><a href="../第2章/第二节 经营类资产.html">第二节 经营类资产</a></li>
+            <li><a href="../第2章/第三节投资类资产（优化版）.html">第三节 投资类资产</a></li>
+            <li><a href="../第2章/第四节负债和所有者权益_优化版.html">第四节 负债和所有者权益</a></li>
+            <li><a href="../第2章/第五节快速阅读资产负债表_优化版.html">第五节 快速阅读资产负债表</a></li>
           </ul>
         </li>
         <li class="toc-chapter">
@@ -545,6 +561,8 @@
           <span class="toc-chapter-title">第五章 财务指标综合分析</span>
           <ul class="toc-lectures">
             <li><a href="../第5章/第一节鸟瞰三大表_优化版.html">第一节 鸟瞰三大表</a></li>
+            <li><a href="../第5章/第二节财务指标分析.html">第二节 财务指标分析</a></li>
+            <li><a href="../第5章/第三节使用财务数据估值.html">第三节 使用财务数据估值</a></li>
           </ul>
         </li>
         <li class="toc-chapter">
@@ -628,19 +646,21 @@
           <cite>— 上市公司年报标准表述</cite>
         </div>
 
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">关键提醒</div>
-            <p>这是监管要求的标准表述，但实际上：上市公司造假案例<strong>屡见不鲜</strong>，而因虚假年报承担法律责任的高管却<strong>极少</strong>。请始终保持怀疑态度。</p>
+        <div class="callout-grid">
+          <div class="callout warn">
+            <div class="callout-icon">⚠️</div>
+            <div class="callout-body">
+              <div class="callout-title">关键提醒</div>
+              <p>这是监管要求的标准表述，但实际上：上市公司造假案例<strong>屡见不鲜</strong>，而因虚假年报承担法律责任的高管却<strong>极少</strong>。请始终保持怀疑态度。</p>
+            </div>
           </div>
-        </div>
 
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">投资原则</div>
-            <p>财报是用来<strong>排除企业</strong>的工具。不要盲目相信这些保证——始终保持怀疑，用数据交叉验证。</p>
+          <div class="callout tip">
+            <div class="callout-icon">💡</div>
+            <div class="callout-body">
+              <div class="callout-title">投资原则</div>
+              <p>财报是用来<strong>排除企业</strong>的工具。不要盲目相信这些保证——始终保持怀疑，用数据交叉验证。</p>
+            </div>
           </div>
         </div>
       </section>
