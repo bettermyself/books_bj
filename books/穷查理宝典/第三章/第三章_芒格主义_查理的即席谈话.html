@@ -362,6 +362,17 @@
       margin-bottom: .6rem;
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
 
     .section-divider {
       display: flex;
@@ -658,7 +669,7 @@
 
         <h3 id="section-2-3">伯克希尔的文化</h3>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">老派传统</span>
             <h4>类似富兰克林与卡内基的文化</h4>
@@ -695,14 +706,6 @@
             <tr><td><strong>极度放权</strong></td><td>附属公司企业文化由其自决，权力分散到几乎全面退位</td></tr>
           </tbody>
         </table>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">芒格论"合力"</div>
-            <p>我们并不回避合力，只是回避那些对合力的宣称。</p>
-          </div>
-        </div>
 
         <h3 id="section-2-5">保险业务与接班人问题</h3>
 
@@ -782,7 +785,7 @@
 
         <p>成功投资者需要的不只是智商，更需要：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">特质一</span>
             <h4>耐心</h4>
@@ -873,7 +876,7 @@
 
         <h3>常识（非常识）</h3>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">要点一</span>
             <h4>常识是威力巨大的工具</h4>
