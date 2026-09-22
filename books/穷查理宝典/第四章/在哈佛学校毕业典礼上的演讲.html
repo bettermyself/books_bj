@@ -436,6 +436,15 @@
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
 
+    /* ===== Remedy Blocks（每味药纵向分组：药方卡片 + 例证/引文）===== */
+    .remedy-block { margin: 2rem 0; }
+    .remedy-block > * { margin: 0 0 1.15rem; }
+    .remedy-block > *:last-child { margin-bottom: 0; }
+    .remedy-block + .remedy-block {
+      padding-top: 2rem;
+      border-top: 1px dashed var(--border);
+    }
+
     /* ===== Poem ===== */
     .poem {
       background: var(--bg3);
@@ -684,8 +693,7 @@
         <h2>三、芒格的四味"反讽药"</h2>
         <p>芒格以<strong>反讽</strong>方式另开四味药，阐述如何避免痛苦——<strong>反其道而行之，即是解药</strong>。</p>
 
-        <div class="remedy-grid">
-
+        <div class="remedy-block">
           <div class="remedy-card" id="section-3-1">
             <span class="remedy-num">第一味 · 反复无常</span>
             <h4>要反复无常，不要虔诚地做你正在做的事。</h4>
@@ -699,33 +707,22 @@
               <p>芒格的大学室友患有严重阅读障碍，但他极其可靠，生活到目前为止很美满，拥有出色的太太和子女，掌管着某个数十亿美元的企业。<strong>如果坚持不懈地做到为人可靠，即使有其他再多缺点，也难以过上痛苦生活。</strong></p>
             </div>
           </div>
+        </div>
 
-          <div class="pull-quote">
-            "哎呀，我现在才想起历史学家梭伦说过的那句话——在生命没有结束之前，没有人的一生能够被称为是幸福的。"
-            <cite>— 克洛伊斯王，被活活烧死之前</cite>
-          </div>
-
+        <div class="remedy-block">
           <div class="remedy-card" id="section-3-2">
             <span class="remedy-num">第二味 · 拒绝借鉴</span>
             <h4>尽可能从自身经验获得知识，别从他人成败中吸取教训。</h4>
             <p>这味药能保证你们过上痛苦的生活，取得二流的成就。人类常见的灾难全都毫无创意——酒后驾车、性病、邪教洗脑、重蹈覆辙的生意失败，还有各种形式的集体疯狂。</p>
           </div>
 
-          <div class="callout warn">
-            <div class="callout-icon">📚</div>
-            <div class="callout-body">
-              <div class="callout-title">富兰克林论广泛学习</div>
-              <p>"如果你不听理性女神的话，她就会给你苦头吃。"</p>
-              <p>"听不进劝告的人得不到帮助。"</p>
-              <p>"经验是一所好学校，但傻瓜却不会从别人那里学到经验——<strong>我们可以提供建议，但无法提供行为。</strong>"</p>
-            </div>
-          </div>
-
           <div class="pull-quote">
             "如果说我比其他人看得更远，那是因为我站在巨人的肩膀上。"
             <cite>— 艾萨克·牛顿</cite>
           </div>
+        </div>
 
+        <div class="remedy-block">
           <div class="remedy-card" id="section-3-3">
             <span class="remedy-num">第三味 · 一蹶不振</span>
             <h4>遭遇严重失败时，就请意志消沉，从此一蹶不振吧。</h4>
@@ -739,13 +736,14 @@
               <p>"此处埋着爱比克泰德，一个奴隶，身体残疾，极其穷困，<strong>蒙受诸神的恩宠</strong>。"</p>
             </div>
           </div>
+        </div>
 
+        <div class="remedy-block">
           <div class="remedy-card" id="section-3-4">
             <span class="remedy-num">第四味 · 忽视反向</span>
             <h4>忽略那个乡下人的朴素智慧。</h4>
             <p>"要是知道我会死在哪里就好啦，那我将永远不去那个地方。" 大多数人嘲笑这个乡下人的无知，忽略他朴素的智慧。<strong>热爱痛苦生活的人应该不惜任何代价避免应用这个方法。</strong></p>
           </div>
-
         </div>
       </section>
 
