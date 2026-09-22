@@ -340,6 +340,12 @@
       gap: 1rem;
       margin: 1.5rem 0;
     }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
     .remedy-card {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -837,7 +843,7 @@
 
         <p><strong>具体实施：</strong></p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">决策 一</span>
             <h4>设计适合冷藏饮用的饮料</h4>
@@ -887,7 +893,7 @@
 
         <p>出于同样的巴甫洛夫原因，明智的做法是让我们的饮料：</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid cols-2">
           <div class="remedy-card">
             <span class="remedy-num">设计 一</span>
             <h4>看起来很像红酒，而不是糖水</h4>

@@ -379,6 +379,14 @@
     }
     .remedy-card p { font-size: .9rem; margin-bottom: 0; }
 
+    /* 两列卡片网格（如"细水长流"计划的四个优点） */
+    .remedy-grid.two-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.two-col { grid-template-columns: 1fr; }
+    }
+
     /* ===== Poem ===== */
     .poem {
       background: var(--bg3);
@@ -803,7 +811,7 @@
 
         <p>新管理层也认识到，用行使员工股票期权的利润来取代奖金的做法不能一蹴而就，应该在未来多年里逐渐实施。他们私下管这种谨慎的方法叫作<strong>"细水长流"</strong>计划。</p>
 
-        <div class="remedy-grid">
+        <div class="remedy-grid two-col">
           <div class="remedy-card">
             <span class="remedy-num">优点 一</span>
             <h4>降低被发现概率</h4>
