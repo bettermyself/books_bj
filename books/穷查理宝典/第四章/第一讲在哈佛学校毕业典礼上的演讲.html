@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>最新的普世智慧：查理答问录 · 穷查理宝典</title>
+  <title>在哈佛学校毕业典礼上的演讲 · 穷查理宝典</title>
   <link rel="stylesheet" href="../../../assets/style.css" />
   <style>
     /* ===== 110% Scale ===== */
@@ -340,6 +340,12 @@
       gap: 1rem;
       margin: 1.5rem 0;
     }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
     .remedy-card {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -497,7 +503,7 @@
         <li class="toc-chapter open">
           <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
           <ul class="toc-lectures">
-            <li><a href="第一讲在哈佛学校毕业典礼上的演讲.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="第一讲在哈佛学校毕业典礼上的演讲.html" class="active">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
             <li><a href="第二讲 论基本的、普世的智慧，及其与投资管理.html">第二讲 论基本的、普世的智慧</a></li>
             <li><a href="第三讲 论基本的、普世的智慧（修正稿）.html">第三讲 论基本的、普世的智慧（修正稿）</a></li>
             <li><a href="第四讲 关于现实思维的现实思考.html">第四讲 关于现实思维的现实思考</a></li>
@@ -509,10 +515,6 @@
             <li><a href="第十讲_在南加州大学古尔德法学院毕业典礼上的演讲.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
             <li><a href="第四章 查理十一讲 第十一讲 人类误判心理学.html">第十一讲 人类误判心理学</a></li>
             <li><a href="最新的普世智慧：查理答问录.html">最新的普世智慧：查理答问录</a></li>
-            <li><a href="查理的检查清单.html">查理的检查清单</a></li>
-            <li><a href="赛马即投资.html">赛马即投资</a></li>
-            <li><a href="事关信任.html">事关信任</a></li>
-            <li><a href="最新的普世智慧：查理答问录.html" class="active">最新的普世智慧：查理答问录</a></li>
             <li><a href="查理的检查清单.html">查理的检查清单</a></li>
             <li><a href="赛马即投资.html">赛马即投资</a></li>
             <li><a href="事关信任.html">事关信任</a></li>
@@ -529,11 +531,20 @@
       <!-- 本讲目录 -->
       <div class="sidebar-label sidebar-label-sub">本讲目录</div>
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li><a href="#section-1">一、企业评估</a></li>
-        <li><a href="#section-1-1" class="sub">1.1 如何评估待收购的企业？</a></li>
-        <li><a href="#section-2">二、对年轻人的建议</a></li>
-        <li><a href="#section-2-1" class="sub">2.1 工作中应追求什么？</a></li>
-        <li><a href="#section-2-2" class="sub">2.2 人生成长建议</a></li>
+        <li><a href="#section-1" class="active">一、开场：为什么邀请我，以及演讲要讲多久</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 主题的由来：从“最长的演讲”到“痛苦处方”</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 西塞罗：公共责任的例证</a></li>
+        <li><a href="#section-2">二、卡森的三味“痛苦药方”</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 化学依赖：毁灭常从细小习惯开始</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 妒忌：把别人的幸运变成自己的不幸</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 怨恨：让生活再吞下一层苦涩</a></li>
+        <li><a href="#section-3">三、芒格的四味“痛苦药方”</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 第一味：反复无常，拒绝成为可靠的人</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 第二味：只从自己身上学习，拒绝借鉴他人</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 第三味：遭遇失败就意志消沉</a></li>
+        <li><a href="#section-3-4" class="sub">3.4 第四味：拒绝逆向思考，尽量少保持客观</a></li>
+        <li><a href="#section-4">四、反话式祝福：愿你们每天都避开失败</a></li>
+        <li><a href="#section-5">五、2006 年重读第一讲：可靠是人人都能掌握的能力</a></li>
       </ul>
     </aside>
 
@@ -541,128 +552,250 @@
     <article class="chapter-article">
 
       <header class="article-header">
-        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲</div>
-        <h1 class="article-title">最新的普世智慧：查理答问录</h1>
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第一讲</div>
+        <h1 class="article-title">在哈佛学校毕业典礼上的演讲</h1>
         <div class="article-meta">
-          <span><strong>作者</strong>查理·芒格</span>
-          <span><strong>主题</strong>企业评估 · 人生建议</span>
+          <span><strong>时间</strong>1986 年 6 月 13 日</span>
+          <span><strong>演讲者</strong>查理·芒格</span>
+          <span><strong>主线</strong>用反向思考列出“保证痛苦人生”的处方，从反面说明可靠、学习、韧性与客观的重要性</span>
         </div>
       </header>
 
-      <div class="pull-quote large">
-        "你不必非常出色，只要在很长、很长的时间内保持比其他人聪明一点点就够了。"
-        <cite>— 查理·芒格</cite>
-      </div>
-
-      <!-- 一、企业评估 -->
+      <!-- 一、开场：为什么邀请我，以及演讲要讲多久 -->
       <section id="section-1">
-        <h2>一、企业评估</h2>
+        <h2>一、开场：为什么邀请我，以及演讲要讲多久</h2>
 
-        <h3 id="section-1-1">1.1 如何评估待收购的企业？</h3>
+        <p>贝里斯福德校长从学校董事中挑选出任职时间最长、年纪最大的董事来致辞，因此我先回答两个问题：</p>
 
-        <p>芒格与巴菲特在评估收购标的时，并不单纯依赖财务指标，而是将<strong>定量分析与定性判断</strong>结合使用。</p>
+        <ol>
+          <li><strong>为什么是我？</strong></li>
+          <li><strong>演讲会持续多久？</strong></li>
+        </ol>
 
-        <table class="article-table">
-          <thead>
-            <tr><th>评估维度</th><th>核心问题</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>管理层可信度</strong></td><td>我们能够信赖管理层吗？</td></tr>
-            <tr><td><strong>声誉风险</strong></td><td>收购行为会损害我们的声誉吗？</td></tr>
-            <tr><td><strong>潜在风险</strong></td><td>可能出现哪些问题？</td></tr>
-            <tr><td><strong>行业理解</strong></td><td>我们真正理解这个行业吗？</td></tr>
-            <tr><td><strong>资本需求</strong></td><td>企业是否需要持续注资才能运转？</td></tr>
-            <tr><td><strong>现金流预期</strong></td><td>预期的现金流是多少？</td></tr>
-          </tbody>
-        </table>
+        <p>凭借我与贝里斯福德多年的交往经验，第一个问题不难回答：这就像有人自豪地向别人展示一匹能数到七的马。马主人知道“会数到七”算不上数学成就，却仍希望得到认可，因为它值得炫耀。贝里斯福德选择我，也是为了给学校增添声誉。</p>
+
+        <p>至于演讲时长，我暂时不公布答案。现在各位脸上的好奇和期待，正是我最想看到的表情。</p>
+
+        <h3 id="section-1-1">1.1 主题的由来：从“最长的演讲”到“痛苦处方”</h3>
+
+        <p>接到邀请时，我有些飘飘然。虽然缺少在重要场合公开演讲的经验，但我胆量十足，立刻想效仿德摩斯梯尼和西塞罗。有人问西塞罗最喜欢德摩斯梯尼哪一次演讲，他回答：“<strong>最长的那次。</strong>”</p>
+
+        <p>不过，塞缪尔·约翰逊评价弥尔顿《失乐园》的话更适合毕业典礼：“<strong>没有谁希望它更长。</strong>”</p>
+
+        <p>我回想自己听过的 20 次哈佛毕业演讲，只有约翰尼·卡森的那次让我希望它再长一点。卡森没有承诺如何获得幸福，却根据亲身经历，讲了怎样<strong>确保自己过上痛苦的生活</strong>。于是，我决定沿用他的主题，规模更大一些，再加入自己的四味“药方”：我比卡森年长，失败更多，痛苦更多，经历痛苦的方式也更多，当然有资格继续发挥这个主题。</p>
 
         <div class="callout tip">
           <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <div class="callout-title">关键态度</div>
-            <p>不要求业绩直线增长——只要价格适中，周期性增长同样可以接受。</p>
+            <div class="callout-title">核心启示</div>
+            <p>演讲表面上是在开玩笑，实际上用“怎样获得痛苦”反向揭示了“怎样避免痛苦”。反向提问往往比空泛的成功口号更能暴露失败原因。</p>
           </div>
+        </div>
+
+        <h3 id="section-1-2">1.2 西塞罗：公共责任的例证</h3>
+
+        <p>西塞罗既是诗人、哲学家、修辞学家和幽默家，也是伟大的罗马演说家。他把公共服务视为罗马公民的最高义务，为遭独裁者迫害的人辩护，并促成腐败政府下台。生命末期，他领导元老院与安东尼斗争；战败后，于公元前 43 年付出生命代价。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、卡森的三味“痛苦药方” -->
+      <section id="section-2">
+        <h2>二、卡森的三味“痛苦药方”</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>药方</th><th>做法</th><th>造成的结果</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>化学物质</td>
+              <td>为改变心情或感觉而使用酒精等物质</td>
+              <td>逐步形成依赖，最终失去生活控制权</td>
+            </tr>
+            <tr>
+              <td>妒忌</td>
+              <td>把他人的优势当成自己的痛苦来源</td>
+              <td>永远无法安心拥有已经得到的东西</td>
+            </tr>
+            <tr>
+              <td>怨恨</td>
+              <td>反复回想伤害，把敌意留在心里</td>
+              <td>让原本艰难的生活更加苦涩</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>卡森以十分肯定的口吻说，他一次又一次试过这些方法，每次都变得更痛苦。</p>
+
+        <h3 id="section-2-1">2.1 化学依赖：毁灭常从细小习惯开始</h3>
+
+        <p>我年轻时最好的四位朋友都聪明、正直、幽默，个人条件和家庭背景也很出色。其中两人已经去世，酒精是导致他们早逝的因素之一；第三人仍在醉生梦死——如果那也算活着的话。</p>
+
+        <p><strong>问题是什么？</strong>成瘾并不总以明显失控开始。人的易感性虽有差异，但任何人都可能在一个起初难以察觉的过程中，逐渐走到无法挣脱的地步。</p>
+
+        <p><strong>分析过程：</strong>诱惑会积累，控制力却可能在不知不觉中被削弱。相反，我活了 60 年，从没见过谁因为害怕并避开这条毁灭之路，生活反而变得更糟。</p>
+
+        <p><strong>结论是什么？</strong>远离成瘾风险，是少数无需付出机会成本却能显著减少痛苦的选择。</p>
+
+        <p><strong>启示是什么？</strong>对会逐步夺走自主性的习惯，最有效的策略是从一开始就避开。</p>
+
+        <h3 id="section-2-2">2.2 妒忌：把别人的幸运变成自己的不幸</h3>
+
+        <p>妒忌和成瘾物质一样，足以赢得“痛苦生活大奖”。它在受到摩西戒律谴责之前，就已经制造了许多灾难。</p>
+
+        <p>如果你想保留妒忌带来的痛苦，最好别读塞缪尔·约翰逊的传记。作为虔诚的基督徒，约翰逊的一生展示了超越妒忌的可能与好处：一个人可以欣赏他人的成就，同时专注于自己的责任和成长。</p>
+
+        <h3 id="section-2-3">2.3 怨恨：让生活再吞下一层苦涩</h3>
+
+        <p>怨恨对我同样“灵验”。如果你渴望痛苦，我找不到比它更有效的处方。约翰逊说得好：生活已经艰难得难以下咽，何必再把它塞进怨恨的苦涩果皮里？</p>
+
+        <p><strong>问题是什么？</strong>受到伤害后，人很容易把复仇和反复回想当成正义，结果却让自己长期受困。</p>
+
+        <p><strong>分析过程：</strong>狄斯雷利学会不让复仇成为行动动机，却把敌人的名字写下来放进抽屉，偶尔翻出来，欣赏世界如何无需自己插手就让敌人垮掉。这个做法比直接报复温和，却仍在持续喂养怨恨。</p>
+
+        <p><strong>结论是什么？</strong>只要把敌人持续放在心里，怨恨就能在没有实际行动的情况下消耗自己。</p>
+
+        <p><strong>启示是什么？</strong>放下怨恨不是纵容对方，而是拒绝让对方继续占用自己的注意力和情绪。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、芒格的四味“痛苦药方” -->
+      <section id="section-3">
+        <h2>三、芒格的四味“痛苦药方”</h2>
+
+        <h3 id="section-3-1">3.1 第一味：反复无常，拒绝成为可靠的人</h3>
+
+        <p>请反复无常，不要稳定地做好正在做的事。只要养成这个习惯，就足以抵消你所有优点共同产生的效果。你会变得不受信任，并被排除在最能为人类作出贡献的群体之外。</p>
+
+        <p>你会永远扮演寓言里的兔子，只不过跑在你前面的不再是一只优秀的乌龟，而是一群又一群平庸的乌龟，甚至还有拄拐杖的平庸乌龟。</p>
+
+        <p>我有一位大学室友，患有严重的阅读障碍，至今仍然如此，却是我认识的人中最可靠的人之一。他拥有幸福的家庭，妻子和子女都很出色，还掌管着一家数十亿美元的企业。若想避开这种主流文化认可的成功，却又坚持可靠，愿望恐怕很难实现。</p>
+
+        <h3 id="section-3-2">3.2 第二味：只从自己身上学习，拒绝借鉴他人</h3>
+
+        <p>请尽量只从自身经验获得知识，不要广泛吸取古人和今人的成功或失败教训。这样既能保证痛苦，也容易取得二流成就。</p>
+
+        <p><strong>问题是什么？</strong>人类反复遭遇的灾难，往往早有前车之鉴，却仍有人拒绝学习。</p>
+
+        <p><strong>分析过程：</strong>常见灾难几乎没有新意，包括酒后驾车导致死亡、鲁莽驾驶造成残疾、无法治愈的性病、聪明大学生被毁灭性邪教洗脑、企业重蹈前人覆辙而失败，以及各种集体疯狂。现代谚语说得直白：“<strong>人生就像悬挂式滑翔，起步没有成功就完蛋啦。</strong>”</p>
+
+        <p><strong>结论是什么？</strong>不借鉴经验，会把本可避免的错误重新付出一遍代价。</p>
+
+        <p><strong>启示是什么？</strong>把他人的失败当作低成本教材，把他人的成功当作可检验的参考，不要把自己当成唯一的实验对象。</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .6rem;">3.2.1 站在巨人的肩膀上</h4>
+
+        <p>避免学习前人的最好成果，会让你得到尽可能少的教育。有人研究分析几何时基础并不好，起步十分吃力，却勤奋掌握前人的成果，最终取得举世瞩目的成就。他评价自己时说：</p>
+
+        <div class="pull-quote">
+          “如果说我比其他人看得更远，那是因为我站在巨人的肩膀上。”
+          <cite>— 艾萨克·牛顿</cite>
+        </div>
+
+        <p>他的骨灰埋在威斯敏斯特大教堂，墓碑上写着：“<strong>这里安葬着永垂不朽的艾萨克·牛顿爵士。</strong>”</p>
+
+        <h3 id="section-3-3">3.3 第三味：遭遇失败就意志消沉</h3>
+
+        <p>在人生战场上遭遇第一次、第二次或第三次严重失败后，请立刻一蹶不振。即使最幸运、最聪明的人，也会遇到许多失败；只要拒绝重新站起来，就能长期陷在痛苦里。</p>
+
+        <p><strong>问题是什么？</strong>把一次失败解释成永久性结论，导致人放弃行动和学习。</p>
+
+        <p><strong>分析过程：</strong>失败是现实的一部分，长期结果取决于能否复盘、调整并继续前进。爱比克泰德留下的墓志铭正好相反：</p>
+
+        <div class="pull-quote">
+          “此处埋着爱比克泰德，一个奴隶，身体残疾，极其穷困，蒙受诸神的恩宠。”
+          <cite>— 爱比克泰德墓志铭</cite>
+        </div>
+
+        <p><strong>结论是什么？</strong>处境艰难不等于人生没有价值，失败也不等于必须停止。</p>
+
+        <p><strong>启示是什么？</strong>把失败当作信息，修正方法后重新行动，不要让一次结果定义整个人生。</p>
+
+        <h3 id="section-3-4">3.4 第四味：拒绝逆向思考，尽量少保持客观</h3>
+
+        <p>小时候我听过一个乡下人的故事：</p>
+
+        <div class="pull-quote">
+          “要是知道我会死在哪里就好啦，那我将永远不去那个地方。”
+        </div>
+
+        <p>很多人嘲笑他的无知，却忽略了其中朴素而实用的智慧。若想获得失败，就把这种方法——也就是卡森采用的方法——贬低为愚蠢、无用的想法。</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .6rem;">3.4.1 先研究如何失败，再反推出成功路径</h4>
+
+        <p>卡森的研究方法是<strong>把问题反过来想</strong>：要解决“如何得到 X”，先研究“如何得到非 X”。伟大的代数学家卡尔·雅可比也反复强调：“<strong>反过来想，总是反过来想。</strong>”许多难题只有换一个方向才容易解决。</p>
+
+        <p>一个著名例子是电磁学。多数人试图修改麦克斯韦的电磁定律，让它符合牛顿三大运动定律；爱因斯坦却反过来修改牛顿定律，使其符合麦克斯韦定律，最终发现了相对论。</p>
+
+        <h4 style="font-size:1rem;color:var(--gold-dk);margin:1.5rem 0 .6rem;">3.4.2 达尔文：用证伪保护思考质量</h4>
+
+        <p>如果查尔斯·达尔文是 1986 届哈佛毕业生，他的成绩大概只能排在中等；然而他后来成为科学史上的巨人。达尔文成功的关键，是一种违背“痛苦法则”的工作方式：他不断寻找证据来否定自己已有的理论，无论那些理论多么珍爱、得来多么不易。</p>
+
+        <p>多数人早年取得成就后，会越来越拒绝可能证伪自己的信息，只为保护最初的结论。他们正如菲利普·威利所说：“<strong>固步自封，满足于已有的知识，永远不会去了解新的事物。</strong>”</p>
+
+        <p>达尔文说明，客观的乌龟也能跑到兔子前面；保持客观，就像在“蒙眼拼驴尾”游戏中成为唯一没有蒙住眼睛的人。</p>
+
+        <p>爱因斯坦说，自己的成功理论来自“<strong>好奇、专注、毅力和自省</strong>”。这里的自省，不是简单回顾，而是不断试验并推翻自己珍爱的想法。</p>
+
+        <p><strong>问题是什么？</strong>把“忠于自己”误解成永远不改变年轻时的观念。</p>
+
+        <p><strong>分析过程：</strong>新证据会迫使我们修正旧判断。拒绝修正，短期可能保住自尊，长期却会走向无知，也会放大事业失败带来的痛苦。</p>
+
+        <p><strong>结论是什么？</strong>客观性不只属于伟大的物理学家、生物学家，也能帮助伯米吉地区的管道维修工把工作做好。</p>
+
+        <p><strong>启示是什么？</strong>保持原则，同时允许事实改变观点；忠于事实，比忠于过去的自己更可靠。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、反话式祝福：愿你们每天都避开失败 -->
+      <section id="section-4">
+        <h2>四、反话式祝福：愿你们每天都避开失败</h2>
+
+        <p>这次反话式演讲，应以反话式祝福结束。灵感来自伊莱休·鲁特引用的儿歌《小狗去多佛》：</p>
+
+        <div class="poem">
+          “一步又一步，才能到多佛。”
+          <span class="poem-author">—— 儿歌《小狗去多佛》</span>
+        </div>
+
+        <p>我祝福 1986 届毕业生：</p>
+
+        <div class="pull-quote large">
+          愿你们在漫长的人生中，日日以避免失败为目标，并因此不断成长。
         </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- 二、对年轻人的建议 -->
-      <section id="section-2">
-        <h2>二、对年轻人的建议</h2>
+      <!-- 五、2006 年重读第一讲 -->
+      <section id="section-5">
+        <h2>五、2006 年重读第一讲：可靠是人人都能掌握的能力</h2>
 
-        <h3 id="section-2-1">2.1 工作中应追求什么？</h3>
-
-        <p>芒格给出三条基本工作原则，同时满足极为不易，但值得努力追求：</p>
+        <p>2006 年，我重读 1986 年的讲稿，发现没有需要修改的地方。如果说产生了新想法，那只是更加坚定地相信两件事：</p>
 
         <div class="remedy-grid">
           <div class="remedy-card">
-            <span class="remedy-num">原则一</span>
-            <h4>别兜售你自己不会购买的东西</h4>
-            <p>保持诚实，只推荐自己真正认可的产品和服务。</p>
+            <span class="remedy-num">信念 一</span>
+            <h4>可靠在生活中至关重要。</h4>
           </div>
           <div class="remedy-card">
-            <span class="remedy-num">原则二</span>
-            <h4>别为你不尊敬和钦佩的人工作</h4>
-            <p>选择你真心敬佩的老板和同事。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">原则三</span>
-            <h4>只跟你喜欢的人共事</h4>
-            <p>与志同道合的人一起工作，人生苦短。</p>
+            <span class="remedy-num">信念 二</span>
+            <h4>量子力学也许很难学会，但可靠几乎是每个人都能掌握的能力。</h4>
           </div>
         </div>
 
-        <div class="pull-quote">
-          "我这一生真是非常幸运：由于和沃伦共事，这三个原则我都做到了。"
-          <cite>— 查理·芒格</cite>
-        </div>
+        <p>我常因反复强调可靠而不受名牌大学学生欢迎。每当我说麦当劳是最值得尊敬的机构之一，周围的大学生往往露出震惊的表情。我的理由很简单：多年来，麦当劳为数百万年轻人提供了第一份工作，其中包括许多问题少年，并成功教会他们最需要的一课——承担工作责任，成为可靠的人。</p>
 
-        <h3 id="section-2-2">2.2 人生成长建议</h3>
+        <p>如果名牌大学也能像麦当劳一样提供有用的教育，世界会更美好。</p>
 
-        <p><strong>日常积累：</strong></p>
-
-        <div class="remedy-grid">
-          <div class="remedy-card">
-            <span class="remedy-num">每日</span>
-            <h4>每天起床，争取比前一天更聪明一点</h4>
-            <p>持续学习是最可靠的投资。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">执行</span>
-            <h4>认真、出色地完成每一项任务</h4>
-            <p>做事的态度决定了最终的高度。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">节奏</span>
-            <h4>进步不一定快，但要为快速进步打好基础</h4>
-            <p>厚积薄发，准备充分才能抓住机遇。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">耐心</span>
-            <h4>每天慢慢向前挪一点</h4>
-            <p>足够长寿的人，终将得到应得的东西。</p>
-          </div>
-        </div>
-
-        <p><strong>应对人生困境的三把钥匙：</strong></p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>原则</th><th>说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>期望别太高</strong></td><td>避免因落差产生过度挫败感</td></tr>
-            <tr><td><strong>拥有幽默感</strong></td><td>以轻松心态化解压力与困难</td></tr>
-            <tr><td><strong>置身于爱之中</strong></td><td>朋友与家人的支持是最重要的依托</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <div class="callout-title">最重要的一点</div>
-            <p>要适应生活的变化。"如果世界没有改变，我现在身上仍然会有12个缺陷。"</p>
+            <div class="callout-title">核心启示</div>
+            <p>可靠不需要天赋、名望或复杂理论，它体现在准时、守信、把事情做完和对结果负责。正因人人都能练习，它才是最值得长期培养的能力。</p>
           </div>
         </div>
       </section>
@@ -677,6 +810,7 @@
   </footer>
 
   <script>
+    // 侧边栏滚动高亮
     const links = document.querySelectorAll('#sidebar-nav a');
     const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
     let lastActive = null;
@@ -697,6 +831,7 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
 
+    // 平滑滚动
     links.forEach(a => {
       a.addEventListener('click', e => {
         const target = document.querySelector(a.getAttribute('href'));
@@ -707,6 +842,17 @@
       });
     });
 
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+
+    // ===== 阅读位置记忆 =====
     const BOOK_FOLDER = '穷查理宝典';
     const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
     const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
@@ -732,17 +878,6 @@
         }));
       }, 300);
     }, { passive: true });
-  
-    // ===== Accordion toggle for TOC chapters =====
-    document.querySelectorAll('.toc-chapter-title').forEach(title => {
-      title.addEventListener('click', () => {
-        const chapter = title.closest('.toc-chapter');
-        const isOpen = chapter.classList.contains('open');
-        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
-        if (!isOpen) chapter.classList.add('open');
-      });
-    });
-
   </script>
 
 </body>
