@@ -221,6 +221,20 @@
     }
     .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
     .chapter-article em { color: var(--text2); }
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
 
     /* ===== Pull Quote ===== */
     .pull-quote {
@@ -317,9 +331,21 @@
     /* ===== Remedy Cards ===== */
     .remedy-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1rem;
       margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2, .remedy-grid.cols-3 { grid-template-columns: 1fr; }
     }
     .remedy-card {
       background: var(--bg3);
@@ -460,29 +486,29 @@
         <li class="toc-chapter">
           <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title" style="text-decoration:none;">第1章 公司治理</a>
         </li>
-        <li class="toc-chapter open">
+        <li class="toc-chapter">
           <span class="toc-chapter-title current-chapter">第2章 财务与投资</span>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title">第3章 投资替代品</a>
+          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title" style="text-decoration:none;">第3章 投资替代品</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第4章：普通股投资.html" class="toc-chapter-title">第4章 普通股投资</a>
+          <a href="《巴菲特致股东的信》 第4章：普通股投资.html" class="toc-chapter-title" style="text-decoration:none;">第4章 普通股投资</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title">第5章 兼并与收购</a>
+          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title" style="text-decoration:none;">第5章 兼并与收购</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title">第6章 估值与会计</a>
+          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title" style="text-decoration:none;">第6章 估值与会计</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title">第7章 会计诡计</a>
+          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title" style="text-decoration:none;">第7章 会计诡计</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第8章：会计政策.html" class="toc-chapter-title">第8章 会计政策</a>
+          <a href="《巴菲特致股东的信》 第8章：会计政策.html" class="toc-chapter-title" style="text-decoration:none;">第8章 会计政策</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第9章：税务问题.html" class="toc-chapter-title">第9章 税务问题</a>
+          <a href="《巴菲特致股东的信》 第9章：税务问题.html" class="toc-chapter-title" style="text-decoration:none;">第9章 税务问题</a>
         </li>
         <li class="toc-chapter">
           <a href="《巴菲特致股东的信》 附录：投资检查清单.html" class="toc-chapter-title" style="text-decoration:none;">附录 投资检查清单</a>
@@ -533,8 +559,12 @@
     <article class="chapter-article">
 
       <header class="article-header">
-        <div class="article-eyebrow">巴菲特致股东的信 · 第2章</div>
+        <div class="article-eyebrow">巴菲特致股东的信 · 第2章 财务与投资</div>
         <h1 class="article-title">第2章　财务与投资</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>沃伦·巴菲特</span>
+          <span><strong>主题</strong>市场先生、套利、风险与集中、价值与现金流、长期持有、捡烟蒂与机构惯性、负债与信用</span>
+        </div>
       </header>
 
       <section id="section-a">
@@ -552,6 +582,9 @@
           </tbody>
         </table>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-b">
         <h2>一、把股票当作企业：市场先生与永久持有</h2>
         <h3 id="section-b1">1.1 价格低于价值时买入</h3>
@@ -572,7 +605,13 @@
           <li>他不介意被忽略；今天不交易，明天还会给出新报价。</li>
         </ul>
         <p>市场先生的作用是提供价格和机会，不是提供智慧。价格越受情绪摆布，理性投资者越可能买到便宜资产；但前提是投资者比市场先生更了解企业。如果分不清谁是牌桌上的“倒霉蛋”，往往自己就是。</p>
-        <p><strong>核心启示：</strong> 短期市场像投票机，反映资金和情绪；长期市场像称重机，最终会衡量企业真实经营成果。企业价值增长的速度比市场何时承认它更重要。</p>
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>短期市场像投票机，反映资金和情绪；长期市场像称重机，最终会衡量企业真实经营成果。企业价值增长的速度比市场何时承认它更重要。</p>
+          </div>
+        </div>
         <h3 id="section-b3">1.3 永久持有的条件</h3>
         <p>伯克希尔通常不会因为股价上涨、持有时间过长或出现账面利润就卖出。出售的理由主要有三类：</p>
         <table class="article-table">
@@ -589,6 +628,9 @@
         <p>低股价还会提高被投企业回购的效果。同样的回购资金，在价格低时能买回更多股份，伯克希尔的所有权比例也会提高。可口可乐、《华盛顿邮报》和富国银行在低迷时期的回购，长期价值高于高价回购。</p>
         <p>因此，看到“股市大跌，投资者亏损”的新闻时，应先区分撤资者和仍在积累资产的投资者：一个人的损失可能正是另一个人的低价机会。</p>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-c">
         <h2>二、套利：只在概率明显有利时下注</h2>
         <h3 id="section-c1">2.1 套利的用途和边界</h3>
@@ -623,26 +665,53 @@
         <h3 id="section-c5">2.5 套利与市场有效理论</h3>
         <p>市场有效理论认为公开信息已反映在股价中，随机投掷飞镖选出的组合也能胜过专业分析师。伯克希尔认为，“市场通常有效”不能推出“市场永远有效”。格雷厄姆—纽曼公司1926～1956年套利去杠杆后平均年化约20%；1956～1988年，巴菲特合伙公司和伯克希尔的套利平均回报也超过20%。63年间市场含分红的年化回报略低于10%，1000美元复利后约40.5万美元；若年化20%，则约9700万美元。</p>
         <p>要公平评价这段记录，必须满足四点：交易过数百种证券；结果没有被少数幸运事件扭曲；只使用公开事件信息；套利范围在事前就明确，不靠事后挑选样本。</p>
-        <p><strong>警告：</strong> 套利不保证每年20%的收益。超额回报来自认真评估事实和持续纪律，而不是某个投资风格的标签。很多看似容易的机会，价格已充分反映预期；只有胜券在握时才值得出手。</p>
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警告</div>
+            <p>套利不保证每年20%的收益。超额回报来自认真评估事实和持续纪律，而不是某个投资风格的标签。很多看似容易的机会，价格已充分反映预期；只有胜券在握时才值得出手。</p>
+          </div>
+        </div>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-d">
         <h2>2.6 RJR·纳贝斯克：公开信息与身份约束</h2>
         <p>伯克希尔曾持有334.2万股RJR·纳贝斯克，成本281.80美元/股，年末市值约3.045亿美元；次年1月增持至约400万股，2月全部出售。KKR接受其中约300万股，其余股份在市场上迅速卖出，伯克希尔税前获利6400万美元。</p>
         <p>这笔交易还说明了信息边界的重要性。芒格和巴菲特是所罗门公司的董事，通常会因董事身份被隔离于收购信息之外；在RJR交易中，所罗门允许所有董事获得完整信息并参与，伯克希尔因此只能在管理层公布收购计划后、以及RJR董事会接受KKR方案后两个时点买入。董事身份没有带来内幕优势，反而限制了交易时机和规模。</p>
         <p>1989年伯克希尔几乎没有开展套利。并购和杠杆收购过度繁荣，融资方和买家表现出的乐观可能不可持续。别人越不谨慎，伯克希尔越要谨慎；只有交易本身有清晰经济意义，而不是“谁是更傻的傻瓜”游戏时，才会出手。</p>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-e">
         <h2>三、风险不是波动：理解、集中与分散</h2>
         <h3 id="section-e1">3.1 不要把贝塔当成风险</h3>
         <p>学术定义常把风险等同于相对波动率（贝塔）。但对企业所有者而言，真正的风险是：在预期持有期内，税后现金流和出售所得无法维持初始购买力并获得合理回报。</p>
         <p>风险评估应关注：</p>
-        <ol>
-          <li>企业长期经济特征能否保持；</li>
-          <li>管理层能否实现企业潜力并合理配置现金；</li>
-          <li>管理层是否把股东利益置于个人利益之上；</li>
-          <li>买入价格；</li>
-          <li>通胀和税收对购买力的侵蚀。</li>
-        </ol>
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">评估 一</span>
+            <h4>企业长期经济特征能否保持</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">评估 二</span>
+            <h4>管理层能否实现企业潜力并合理配置现金</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">评估 三</span>
+            <h4>管理层是否把股东利益置于个人利益之上</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">评估 四</span>
+            <h4>买入价格</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">评估 五</span>
+            <h4>通胀和税收对购买力的侵蚀</h4>
+          </div>
+        </div>
         <p>股票下跌可能意味着风险下降：1973年《华盛顿邮报》跌得越多，以巨大折扣买入整家公司的人越安全。相反，在评估风险的时候，一个追求贝塔的纯粹主义者会不屑于调查公司的产品、竞争力如何或公司的负债情况，他所重视的不过是该公司股票的历史价格，股价越低时买入，按照贝塔理论"风险"竟变得更大。</p>
         <p>可口可乐约占全球软饮料市场44%，吉列按价值计占刀片市场超过60%；品牌、产品、分销构成护城河。它们的贝塔可能与普通公司相近，却不代表商业风险相同。</p>
         <h3 id="section-e2">3.2 何时集中，何时分散</h3>
@@ -658,6 +727,9 @@
         <p>约翰·梅纳德·凯恩斯在1934年给商业合伙人的信中写道：随着经验增加，他越来越确信，正确的投资方式是把相当分量的资金投向自己了解、并充分信任管理层的公司。广泛投资于知之甚少的企业，并不会自动降低风险；在任何时点，真正值得高度信任的公司可能只有两三家。</p>
         <p>集中持股会使少数明星资产贡献大部分收益，这并不是问题。若拥有一支大学篮球队20%的权益，少数球员进入NBA后自然会贡献大部分收入；因为明星得分多就把他们卖掉，等同于让公牛队卖掉迈克尔·乔丹。</p>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-f">
         <h2>四、价值、成长与现金流</h2>
         <h3 id="section-f1">4.1 “价值投资”并不是特殊类别</h3>
@@ -671,6 +743,9 @@
         <p>二级市场会被恐慌或强制卖出主导，偶尔把价值X的股票打到半价；IPO由控股股东和公司选择时机，卖方通常不会主动折价，市场高估时反而更愿意发行。伯克希尔曾以172.50美元/股认购300万股大都会/ABC，帮助其筹集35亿美元收购ABC。虽然ABC短期经济表现不激动人心，伯克希尔仍相信管理层并愿意等待。</p>
         <p>伯克希尔还允许汤姆·墨菲或丹·伯克代行投票权，并限制未经管理层同意向大买家出售股份。看似牺牲控制权溢价，实际换来管理层专注长期经营、减少“旋转门式”资本的干扰。1985年以172.50美元重新买入，也提醒投资者：企业质量和管理层可信度有时比过去的买卖价格更重要。</p>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-g">
         <h2>五、长期持有：变化中的不变因素</h2>
         <h3 id="section-g1">5.1 寻找可预测的竞争优势</h3>
@@ -679,21 +754,31 @@
         <p>可口可乐1938年售出2.07亿箱，1993年107亿箱，实体销量增长约50倍。1919年投入40美元，分红再投资到1938年约3277美元；即使1938年才投40美元，到1993年仍可增至约25,000美元。这说明优秀企业不必依靠频繁买卖就能复利。</p>
         <h3 id="section-g2">5.2 追高的代价与管理层失焦</h3>
         <p>好企业也可能因价格过高而需要很久才能产生相称价值；管理层若离开核心业务，收购平庸企业，损害会更持久。可口可乐曾养虾，吉列曾涉足石油，说明“伟大公司”不是免检标签。投资者应持续检查管理层是否保持专注、谦逊和股东导向。</p>
-        <p>大多数个人和机构投资者更适合低成本指数基金。若自行选股，只需掌握两门课：评估企业价值、正确对待市场价格。选定一家能看懂、未来5～20年盈利大概率增长的企业后，应在价格合理时大幅买入；如果不打算持有10年，就不必持有10分钟。</p>
+        <p>大多数个人和机构投资者更适合低成本指数基金。若自行选股，只需掌握两门课：评估企业价值、正确对待市场价格。选定一家能看懂、未来5～20年盈利大概率增长的企业后，应在价格合理时大幅买入。</p>
+        <div class="pull-quote">“如果不打算持有10年，就不必持有10分钟。”<cite>— 沃伦·巴菲特</cite></div>
         <p>投资表现不佳通常来自三项：高交易和管理成本；听信股评与市场潮流而不分析企业；牛市追入、熊市退出。亢奋与成本都是敌人。若必须择时，应在别人贪婪时谨慎、在别人恐惧时寻找机会。</p>
         <p>能力圈的边界比大小更重要。对高科技、专利、复杂制造或地质勘探没有判断力，就承认不知道；伯克希尔宁愿错过机会，也不愿用一厢情愿替代理性。</p>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-h">
         <h2>5.3 股市波动何时会伤害投资者</h2>
         <p>1987年道琼斯指数全年只上涨2.3%，但经历了先狂涨、后暴跌的过山车行情。许多职业投资者关注的不是企业未来几年如何经营，而是其他基金经理未来几天会做什么；股票被当成游戏筹码。</p>
         <p>“投资组合保险”就是这种思维的极端例子。1986～1987年，许多顾问要求养老基金和大学基金在股价下跌时不断卖出股票或指数期货，跌得越多卖得越多，反弹后再买回。根据《布雷迪报告》，1987年10月中约有600亿～900亿美元股票处于这种自动卖出状态。它把小投机者的止损单包装成复杂术语，却让巨量卖单在同一时点集中出现。</p>
         <p>市场波动不会天然伤害小投资者。只要投资者坚持自己的系统，机构被迫交易反而提供更多低价机会。真正受伤的是因财务压力或心理压力而被迫卖出的人，就像理性农场主不会因为邻近农场降价，就在不看自身价值的情况下出售自己的农场。</p>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-i">
         <h2>5.4 等待落在“最佳格子”的球</h2>
         <p>棒球名将泰德·威廉姆斯把击球区划成77个格子，只有击打落在最佳格子的球，才有机会取得0.400的成绩；对最差位置的球挥棒，成绩可能降至0.230。投资者也不必对每个机会挥棒：错过三次坏球不会被罚下场，但在没有好价格时强行投资，会把回报锁在低水平。</p>
         <p>伯克希尔不会预测下个月或下一年的市场。理想机会可能暂时不存在，等待也许令人无聊，但投资者拥有棒球运动员没有的优势：可以一直站在本垒，直到真正值得出手的价格出现。</p>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-j">
         <h2>六、从“捡烟蒂”到优秀企业：避免机构惯性</h2>
         <h3 id="section-j1">6.1 “捡烟蒂”为什么会失败</h3>
@@ -702,22 +787,39 @@
           <li>所谓便宜可能是错觉。困难企业往往一个问题接着一个问题，如厨房里有一只蟑螂，通常不会只有一只。</li>
           <li>时间会侵蚀初始折扣。800万美元买入、立即以1000万美元清算可能是好交易；若十年后才以1000万美元退出，即使期间有少量分红，回报也很差。</li>
         </ol>
-        <p>巴菲特收购霍克希尔德·科恩百货时，账面资产折价、员工优秀、还有未入账地产和LIFO存货，看似安全，三年后却只能按买入价卖出。<strong>时间是优秀企业的朋友，是平庸企业的敌人。</strong> 优秀骑手只有在良马上才能取得好成绩；再能干的管理层，也很难让经济特征糟糕的企业脱离流沙。</p>
+        <p>巴菲特收购霍克希尔德·科恩百货时，账面资产折价、员工优秀、还有未入账地产和LIFO存货，看似安全，三年后却只能按买入价卖出。</p>
+        <div class="pull-quote">“时间是优秀企业的朋友，是平庸企业的敌人。”<cite>— 沃伦·巴菲特</cite></div>
+        <p>优秀骑手只有在良马上才能取得好成绩；再能干的管理层，也很难让经济特征糟糕的企业脱离流沙。</p>
         <h3 id="section-j2">6.2 解决困难企业不如避开困难企业</h3>
         <p>25年的收购和管理经验只教会伯克希尔一件事：不要幻想自己能解决所有困难企业。寻找能跨过1英尺栏杆的机会，比证明自己能跨过7英尺栏杆更有价值。只有在一次性、可解决的问题压低优秀企业价格时，才值得例外出手；总体原则是避开怪兽，而不是试图杀死它。</p>
         <h3 id="section-j3">6.3 “机构强迫症”的四种表现</h3>
         <p>企业误入歧途往往不是因为腐败或愚蠢，而是惯性驱使：</p>
-        <ol>
-          <li>机构像受牛顿第一定律支配一样，抗拒改变既有方向；</li>
-          <li>项目和收购不断扩张，耗尽全部现金和管理注意力；</li>
-          <li>领导人想做的项目，无论多愚蠢，都会得到下属精心编写的回报论证；</li>
-          <li>同行扩张、并购、设计薪酬，企业便不加思考地照抄。</li>
-        </ol>
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">惯性 一</span>
+            <h4>机构像受牛顿第一定律支配一样，抗拒改变既有方向</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">惯性 二</span>
+            <h4>项目和收购不断扩张，耗尽全部现金和管理注意力</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">惯性 三</span>
+            <h4>领导人想做的项目，无论多愚蠢，都会得到下属精心编写的回报论证</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">惯性 四</span>
+            <h4>同行扩张、并购、设计薪酬，企业便不加思考地照抄</h4>
+          </div>
+        </div>
         <p>伯克希尔努力降低惯性影响，并选择对它保持警惕的管理层。管理层值得尊敬是必要条件，但不是充分条件：二流纺织厂不会因老板讨人喜欢就变成好企业；真正理想的组合是可靠的人与优秀的经济特征。与不值得尊敬的人做成一笔好生意，伯克希尔从未成功。</p>
         <h3 id="section-j4">6.4 错过机会与拒绝高杠杆</h3>
         <p>最昂贵的错误有时不是买错，而是看懂了却没有买。错过能力圈外的机会并不可耻，但错过眼前、自己完全理解的重大机会，代价极大。</p>
         <p>伯克希尔长期保守的财务政策，可能少赚一些钱，但避免了99%概率获得更高回报、同时承担1%概率走向违约的赌局。芒格和巴菲特不接受这种99∶1的风险，因为一次小概率灾难足以抹去长期复利。</p>
       </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
       <section id="section-k">
         <h2>七、生命、负债与信用</h2>
         <h3 id="section-k1">7.1 债务的有限用途</h3>
@@ -738,8 +840,16 @@
         <p>伯克希尔股东、董事、管理层、慈善机构和保险客户都把重大责任交给公司。保险赔偿可能持续50年甚至更久；公司还承保高额单次灾难风险。因此，为多赚几个百分点而危及整体安全是不负责任的。</p>
         <p>伯克希尔通常至少持有100亿美元现金，使命需要时保持约200亿美元；现金主要投资美国政府国债，而不是为多几个百分点去承担不透明的短期证券风险。公司不依赖银行信用额度，不签署需要担保的合同，除非金额相对于流动资产极小。</p>
         <p>过去40年，伯克希尔没有分红或回购股票，而是留存全部盈利，净资产从4800万美元增至1570亿美元，内在价值增长更多。稳健流动性让公司在别人被迫出售时拥有出击能力：2008年雷曼破产恐慌25天后，伯克希尔投资156亿美元。</p>
-        <p><strong>核心启示：</strong> 财务安全不是闲置资本，而是长期选择权。只有不被债务和流动性危机逼到墙角，投资者才能在真正便宜的机会出现时行动。</p>
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>财务安全不是闲置资本，而是长期选择权。只有不被债务和流动性危机逼到墙角，投资者才能在真正便宜的机会出现时行动。</p>
+          </div>
+        </div>
       </section>
+
+      <div class="article-footer">— 完 —</div>
 
     </article>
   </div>

@@ -237,11 +237,30 @@ window.addEventListener('scroll', () => {
 - 导航：`.sidebar-label`、`.sidebar-label-sub`、`.sidebar-nav`、`.breadcrumb`、`.crumb-sep`
 - 目录树：`.book-toc`、`.toc-chapter`、`.toc-chapter-title`、`.current-chapter`、`.toc-lectures`
 - 文章头：`.article-header`、`.article-eyebrow`、`.article-title`、`.article-meta`
-- 正文排版：`.chapter-article h2`、`.chapter-article h3`、`.chapter-article p`、`.chapter-article strong`、`.chapter-article em`
+- 正文排版：`.chapter-article h2`、`.chapter-article h3`、`.chapter-article p`、`.chapter-article strong`、`.chapter-article em`、列表样式（`.chapter-article ol/ul/li` + `li::marker`，见下方必加片段）
 - 引用：`.pull-quote`、`.pull-quote.large`、`.pull-quote cite`
 - 卡片：`.callout`、`.callout-icon`、`.callout-body`、`.callout-title`、`.callout.tip`、`.callout.warn`、`.callout.info`
 - 表格：`.article-table`、`thead`、`th`、`td`
-- 要点卡片：`.remedy-grid`、`.remedy-card`、`.remedy-num`、`.remedy-card h4`
+- 要点卡片：`.remedy-grid`（含 `auto-fit` 列及 `.cols-2`/`.cols-3` 列数类与其响应式）、`.remedy-card`、`.remedy-num`、`.remedy-card h4`
 - 诗歌：`.poem`、`.poem-author`
 - 分隔符：`.section-divider`
 - 页脚：`.article-footer`
+
+**列表样式必须显式添加**——旧参考文件（《穷查理宝典》各章节页）不含此段，"从参考文件复制"会遗漏；缺失时正文里的原生 `<ol>/<ul>` 会退回浏览器默认样式（编号悬挂缩进约 40px、与正文左边缘不对齐、无装饰），观感极差：
+
+```css
+.chapter-article ol, .chapter-article ul {
+  margin: 1rem 0 1.25rem;
+  padding-left: 1.75rem;
+}
+.chapter-article li {
+  font-size: .95rem;
+  color: var(--text);
+  line-height: 1.85;
+  margin-bottom: .5rem;
+}
+.chapter-article li::marker {
+  color: var(--gold);
+  font-weight: 700;
+}
+```

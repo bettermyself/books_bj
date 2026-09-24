@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>第4章：普通股投资 · 巴菲特致股东的信</title>
+  <title>第4章　普通股投资：把股东当作企业所有者 · 巴菲特致股东的信</title>
   <link rel="stylesheet" href="../../assets/style.css" />
   <style>
     /* ===== 110% Scale ===== */
@@ -221,6 +221,20 @@
     }
     .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
     .chapter-article em { color: var(--text2); }
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
 
     /* ===== Pull Quote ===== */
     .pull-quote {
@@ -317,9 +331,21 @@
     /* ===== Remedy Cards ===== */
     .remedy-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1rem;
       margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2, .remedy-grid.cols-3 { grid-template-columns: 1fr; }
     }
     .remedy-card {
       background: var(--bg3);
@@ -458,31 +484,31 @@
       <div class="sidebar-label">全书目录</div>
       <ul class="book-toc">
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title">第1章 公司治理</a>
+          <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title" style="text-decoration:none;">第1章 公司治理</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第2章：财务与投资.html" class="toc-chapter-title">第2章 财务与投资</a>
+          <a href="《巴菲特致股东的信》 第2章：财务与投资.html" class="toc-chapter-title" style="text-decoration:none;">第2章 财务与投资</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title">第3章 投资替代品</a>
+          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title" style="text-decoration:none;">第3章 投资替代品</a>
         </li>
-        <li class="toc-chapter open">
+        <li class="toc-chapter">
           <span class="toc-chapter-title current-chapter">第4章 普通股投资</span>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title">第5章 兼并与收购</a>
+          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title" style="text-decoration:none;">第5章 兼并与收购</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title">第6章 估值与会计</a>
+          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title" style="text-decoration:none;">第6章 估值与会计</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title">第7章 会计诡计</a>
+          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title" style="text-decoration:none;">第7章 会计诡计</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第8章：会计政策.html" class="toc-chapter-title">第8章 会计政策</a>
+          <a href="《巴菲特致股东的信》 第8章：会计政策.html" class="toc-chapter-title" style="text-decoration:none;">第8章 会计政策</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第9章：税务问题.html" class="toc-chapter-title">第9章 税务问题</a>
+          <a href="《巴菲特致股东的信》 第9章：税务问题.html" class="toc-chapter-title" style="text-decoration:none;">第9章 税务问题</a>
         </li>
         <li class="toc-chapter">
           <a href="《巴菲特致股东的信》 附录：投资检查清单.html" class="toc-chapter-title" style="text-decoration:none;">附录 投资检查清单</a>
@@ -492,32 +518,49 @@
       <!-- 本章目录 -->
       <div class="sidebar-label sidebar-label-sub">本章目录</div>
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li><a href="#section-a">A. 交易的祸害：交易成本</a></li>
-        <li><a href="#section-a1" class="sub">一、投资者的整体回报</a></li>
-        <li><a href="#section-a2" class="sub">二、摩擦成本的来源</a></li>
-        <li><a href="#section-a3" class="sub">三、牛顿的第四定律</a></li>
-        <li><a href="#section-a4" class="sub">四、伯克希尔在纽交所挂牌</a></li>
-        <li><a href="#section-a5" class="sub">五、理性股价与低成本</a></li>
-        <li><a href="#section-b">B. 吸引正确的投资者</a></li>
-        <li><a href="#section-b1" class="sub">一、上市基本信息</a></li>
-        <li><a href="#section-b2" class="sub">二、指定经纪商信息</a></li>
-        <li><a href="#section-b3" class="sub">三、公司股价与交易目标</a></li>
-        <li><a href="#section-b4" class="sub">四、对股东行为的立场</a></li>
-        <li><a href="#section-b5" class="sub">五、股东退出与新投资者引入</a></li>
-        <li><a href="#section-c">C. 分红政策与股票回购</a></li>
-        <li><a href="#section-c1" class="sub">一、收益的两种属性</a></li>
-        <li><a href="#section-c2" class="sub">二、非限定收益的配置法则</a></li>
-        <li><a href="#section-c3" class="sub">三、管理层思维的分裂与误区</a></li>
-        <li><a href="#section-c4" class="sub">四、股份回购</a></li>
-        <li><a href="#section-c5" class="sub">五、回购的执行原则</a></li>
-        <li><a href="#section-c6" class="sub">六、期望股价低迷的理由</a></li>
-        <li><a href="#section-d">D. 拆股与交易活动</a></li>
-        <li><a href="#section-d1" class="sub">一、为什么不进行股票分拆</a></li>
-        <li><a href="#section-d2" class="sub">二、过度活跃的股市</a></li>
-        <li><a href="#section-e">E. 股东策略与资本重构</a></li>
-        <li><a href="#section-e1" class="sub">一、股东策略（1992年）</a></li>
-        <li><a href="#section-e2" class="sub">二、伯克希尔资本重构与B类股票</a></li>
-        <li><a href="#section-e3" class="sub">三、核心投资理念总结</a></li>
+        <li><a href="#section-a">一、市场情绪与投资回报</a></li>
+        <li><a href="#section-a1" class="sub">1.1 恐惧和贪婪永远存在</a></li>
+        <li><a href="#section-a2" class="sub">1.2 投资者整体不可能战胜所持企业</a></li>
+        <li><a href="#section-b">二、股东整体视角：股票交易不会创造财富</a></li>
+        <li><a href="#section-b1" class="sub">2.1 100年指数上涨说明了什么</a></li>
+        <li><a href="#section-b2" class="sub">2.2 全体股东是一个整体</a></li>
+        <li><a href="#section-c">三、G家族寓言：摩擦成本如何吞噬财富</a></li>
+        <li><a href="#section-c1" class="sub">3.1 从和谐家族到“傻瓜家族”</a></li>
+        <li><a href="#section-c2" class="sub">3.2 不对称的业绩报酬</a></li>
+        <li><a href="#section-c3" class="sub">3.3 牛顿的“第四运动定律”</a></li>
+        <li><a href="#section-d">四、伯克希尔上市：让股价更接近内在价值</a></li>
+        <li><a href="#section-d1" class="sub">4.1 纽约证券交易所的挂牌安排</a></li>
+        <li><a href="#section-d2" class="sub">4.2 选择交易市场的两个标准</a></li>
+        <li><a href="#section-d3" class="sub">4.3 指定经纪商与价差</a></li>
+        <li><a href="#section-e">五、吸引正确的投资者</a></li>
+        <li><a href="#section-e1" class="sub">5.1 伯克希尔希望拥有怎样的股东</a></li>
+        <li><a href="#section-e2" class="sub">5.2 自我选择效应</a></li>
+        <li><a href="#section-f">六、分红政策：留存还是分配</a></li>
+        <li><a href="#section-f1" class="sub">6.1 分红不是固定比例问题</a></li>
+        <li><a href="#section-f2" class="sub">6.2 受限定收益与非限定收益</a></li>
+        <li><a href="#section-f3" class="sub">6.3 留存收益的唯一正当理由</a></li>
+        <li><a href="#section-f4" class="sub">6.4 10%永续债券类比</a></li>
+        <li><a href="#section-f5" class="sub">6.5 管理层的“旁观者清”</a></li>
+        <li><a href="#section-f6" class="sub">6.6 不要让核心业务掩盖资本配置失败</a></li>
+        <li><a href="#section-f7" class="sub">6.7 稳定、可预测的分红</a></li>
+        <li><a href="#section-g">七、股票回购：价格决定回购是否创造价值</a></li>
+        <li><a href="#section-g1" class="sub">7.1 回购的两个明确好处</a></li>
+        <li><a href="#section-g2" class="sub">7.2 理性回购必须满足两个条件</a></li>
+        <li><a href="#section-g3" class="sub">7.3 回购不是越多越好</a></li>
+        <li><a href="#section-g4" class="sub">7.4 伯克希尔的回购纪律</a></li>
+        <li><a href="#section-g5" class="sub">7.5 回购的公平性</a></li>
+        <li><a href="#section-h">八、IBM案例：长期股东有时希望股价低迷</a></li>
+        <li><a href="#section-i">九、为什么伯克希尔不拆股</a></li>
+        <li><a href="#section-i1" class="sub">9.1 拆股不会创造价值</a></li>
+        <li><a href="#section-i2" class="sub">9.2 活跃交易对股东是“税”</a></li>
+        <li><a href="#section-j">十、股东捐赠与税务安排提示</a></li>
+        <li><a href="#section-k">十一、伯克希尔的资本重构与B股</a></li>
+        <li><a href="#section-k1" class="sub">11.1 A股与B股的设计</a></li>
+        <li><a href="#section-k2" class="sub">11.2 为什么要发行B股</a></li>
+        <li><a href="#section-k3" class="sub">11.3 B股发行实践</a></li>
+        <li><a href="#section-l">十二、本章投资原则总结</a></li>
+        <li><a href="#section-l1" class="sub">12.1 对普通股投资者的检查清单</a></li>
+        <li><a href="#section-l2" class="sub">12.2 最重要的五条结论</a></li>
       </ul>
     </aside>
 
@@ -525,655 +568,394 @@
     <article class="chapter-article">
 
       <header class="article-header">
-        <div class="article-eyebrow">巴菲特致股东的信 · 第4章</div>
-        <h1 class="article-title">普通股投资</h1>
+        <div class="article-eyebrow">巴菲特致股东的信 · 第4章 普通股投资</div>
+        <h1 class="article-title">第4章　普通股投资：把股东当作企业所有者</h1>
         <div class="article-meta">
           <span><strong>作者</strong>沃伦·巴菲特</span>
-          <span><strong>主题</strong>交易成本、股东质量、分红政策、股票回购、拆股、资本重构</span>
+          <span><strong>主题</strong>市场情绪、摩擦成本、股东整体视角、伯克希尔上市、投资者结构、分红政策、股票回购、拆股与B股</span>
         </div>
       </header>
 
-      <!-- ===== A. 交易的祸害：交易成本 ===== -->
+      <div class="callout info">
+        <div class="callout-icon">📝</div>
+        <div class="callout-body">
+          <div class="callout-title">本章主旨</div>
+          <p>股票不是赌场筹码，而是企业所有权的凭证。长期投资者最终获得的回报，主要取决于企业创造的价值；频繁交易、过高费用和错误的资本配置，只会把本应属于股东的财富转移给金融中介。</p>
+        </div>
+      </div>
+
       <section id="section-a">
-        <h2>A. 交易的祸害：交易成本</h2>
-
-        <h3 id="section-a1">一、投资者的整体回报：一个基本事实</h3>
-
-        <div class="pull-quote large">
-          除极少数例外，<strong>股东作为一个整体，从公司获得的长期回报，等于该公司在其存续期内创造的全部收益</strong>。无论股价如何波动，所有上市公司股东作为一个整体的财富增量，不可能超过公司本身的盈利总和。
-        </div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">关键洞察</div>
-            <p>由于"摩擦成本"（交易费用、管理费、激励费等）的存在，投资者的实际回报会低于公司盈利。这意味着<strong>并非所有公司赚到的钱都能落入投资者口袋</strong>。</p>
-          </div>
-        </div>
-
-        <h3 id="section-a2">二、摩擦成本的来源：四个"帮手"</h3>
-        <p>巴菲特以"G家族"比喻所有上市公司股东的整体，描述了四类逐渐增加的"帮手"如何侵蚀投资者的收益。</p>
-
+        <h2>一、市场情绪与投资回报</h2>
+        <h3 id="section-a1">1.1 恐惧和贪婪永远存在</h3>
+        <p>恐惧与贪婪是资本市场上最具传染性的两种情绪。它们何时出现、持续多久、影响多广，都无法准确预测；由此引发的非理性行为同样无法预测。因此，投资者不应试图预测情绪拐点，而应坚持一条原则：</p>
+        <div class="pull-quote large">别人贪婪时保持谨慎，别人恐惧时寻找机会。</div>
+        <p>牛市令人兴奋，因为股价上涨的速度可能远快于企业经营改善的速度。但股票不可能永远脱离企业基本面上涨。长期而言，股东得到的回报终究受企业盈利能力约束。</p>
+        <h3 id="section-a2">1.2 投资者整体不可能战胜所持企业</h3>
+        <p>假设美国企业整体长期净资产收益率约为 <strong>12%</strong>。企业创造的财富属于全体股东；但投资者还要承担交易佣金、买卖价差、税费、基金管理费、顾问费等成本。因此，投资者整体获得的回报必然低于企业整体创造的回报。</p>
         <table class="article-table">
-          <thead>
-            <tr><th>帮手类型</th><th>角色说明</th><th>对投资者回报的影响</th></tr>
-          </thead>
+          <thead><tr><th>层面</th><th>财富来源或去向</th></tr></thead>
           <tbody>
-            <tr><td>经纪人</td><td>提供买卖服务，赚取手续费</td><td>增加交易成本，鼓励频繁交易</td></tr>
-            <tr><td>职业经理人</td><td>管理投资组合，频繁调整持仓</td><td>进一步放大交易费用</td></tr>
-            <tr><td>财务规划师/顾问</td><td>帮助选择经理人，收取咨询费</td><td>增加间接成本，无助于整体回报</td></tr>
-            <tr><td>对冲/私募基金</td><td>收取固定费用 + 高额业绩奖励</td><td>盈利时分走大部分，亏损时由投资者承担</td></tr>
+            <tr><td>企业整体</td><td>通过经营创造利润、留存收益并实现复利</td></tr>
+            <tr><td>全体股东</td><td>分享企业创造的全部财富，但不创造额外财富</td></tr>
+            <tr><td>金融中介</td><td>通过交易、管理、咨询和销售收取费用</td></tr>
+            <tr><td>投资者整体最终所得</td><td>企业创造的财富减去各种“摩擦成本”</td></tr>
           </tbody>
         </table>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">重要结论</div>
-            <p>上述"帮手"的摩擦成本已占美国全部公司盈利的 <strong>20%</strong>。也就是说，投资者最终只能拿到本应属于他们的 <strong>80%</strong> 的收益。</p>
-          </div>
-        </div>
-
-        <h3 id="section-a3">三、牛顿的第四定律（巴菲特调侃版）</h3>
-
-        <div class="pull-quote large">
-          "投资者的整体回报，随着交易频率的上升而减少。"
-        </div>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>时间段</th><th>指数点位变化</th><th>年化复合回报率（含分红）</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>1899年12月31日</td><td>65.73 → 11,497.12（1999年）</td><td>5.3%</td></tr>
-            <tr><td>2000年（预测起点）</td><td>为达同样回报，需升至 2,011,011.23 点</td><td>—</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout info">
-          <div class="callout-icon">📝</div>
-          <div class="callout-body">
-            <div class="callout-title">历史验证</div>
-            <p>21世纪最初六年，道指几乎原地未动。巴菲特以此说明：<strong>指望股市持续带来超额回报是不切实际的</strong>，而频繁交易只会加速侵蚀本已有限的收益。</p>
-          </div>
-        </div>
-
-        <h3 id="section-a4">四、伯克希尔在纽交所挂牌的意义</h3>
-
-        <p>纽交所原规定至少 2000 名股东，每人持有不少于 100 股。但伯克希尔总股本仅 1,146,642 股（1988年数据），股价极高，10 股已远超多数公司 100 股的市值。纽交所为此修改规则：</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>项目</th><th>原规则</th><th>新规则（为伯克希尔通过）</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>最小交易单位</td><td>100 股（一手）</td><td>10 股（一手）</td></tr>
-            <tr><td>股东人数要求</td><td>至少 2000 人（持股 ≥100 股）</td><td>至少 2000 人（持股 ≥10 股）</td></tr>
-          </tbody>
-        </table>
-
-        <p>伯克希尔顺利满足新标准，得以在纽交所挂牌。</p>
-
-        <h3 id="section-a5">五、伯克希尔的目标：理性股价与低成本</h3>
-
-        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
-          <div class="remedy-card">
-            <span class="remedy-num">目标 01</span>
-            <h4>股价持续反映内在价值</h4>
-            <p>使股东收益来源于公司实际运营成果，而非他人的愚蠢交易。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">目标 02</span>
-            <h4>吸引长期投资者</h4>
-            <p>过滤短线买家，减少股价非理性波动。</p>
-          </div>
-        </div>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>项目</th><th>说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>活跃股票的摩擦成本</td><td>常达公司净利润的 <strong>10% 或更多</strong></td></tr>
-            <tr><td>伯克希尔的摩擦成本</td><td><strong>大型上市公司中最低之一</strong></td></tr>
-            <tr><td>纽交所上市后的改进</td><td>做市商买卖差价缩小 → 进一步降低股东交易成本</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">核心原则</div>
-            <p>伯克希尔挂牌纽交所的目的 <strong>不是为了最大化股价</strong>，而是为了 <strong>降低股东交易成本</strong>。</p>
-          </div>
-        </div>
+        <p><strong>换句话说</strong>：牛市可以暂时掩盖数学规律，却不能消除它。投资者越频繁地互相买卖，整体回报越会被费用侵蚀。</p>
+        <div class="pull-quote"><strong>关键词：我们的目标</strong></div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- ===== B. 吸引正确的投资者 ===== -->
       <section id="section-b">
-        <h2>B. 吸引正确的投资者</h2>
-
-        <h3 id="section-b1">一、上市基本信息</h3>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>项目</th><th>说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>挂牌日期</td><td>1988年11月29日</td></tr>
-            <tr><td>挂牌地点</td><td>纽约证券交易所（NYSE）</td></tr>
-            <tr><td>交易单位</td><td>每10股为一手，<strong>支持1股起买卖</strong></td></tr>
-            <tr><td>上市主要目的</td><td>降低交易成本</td></tr>
-            <tr><td>交易成本对比</td><td>NYSE买卖差价通常低于柜台交易</td></tr>
-          </tbody>
-        </table>
-
-        <h3 id="section-b2">二、指定经纪商信息</h3>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>项目</th><th>内容</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>经纪商名称</td><td>亨德森兄弟公司（Henderson Brothers, Inc.）</td></tr>
-            <tr><td>历史背景</td><td>成立于1861年9月8日，为NYSE历史最悠久的特定经纪公司</td></tr>
-            <tr><td>初始席位成本</td><td>500美元</td></tr>
-            <tr><td>当前席位参考价</td><td>约625,000美元</td></tr>
-            <tr><td>指定交易数量排名</td><td>第2位（共54家特定经纪商，负责83家上市公司）</td></tr>
-            <tr><td>主要负责人</td><td>吉姆·马奎尔（Jim Maguire）亲自处理伯克希尔股票交易</td></tr>
-          </tbody>
-        </table>
-
-        <h3 id="section-b3">三、公司股价与交易目标</h3>
-        <p>伯克希尔在股价与交易活跃度方面的目标与传统上市公司存在显著差异：</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>目标维度</th><th>传统公司常见做法</th><th>伯克希尔的目标</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>股价追求</td><td>越高越好</td><td>以内在价值为中心，窄幅波动</td></tr>
-            <tr><td>股价过高或过低</td><td>可接受或忽视</td><td>不安，因会导致股东收益与企业运营结果脱节</td></tr>
-            <tr><td>交易活跃度偏好</td><td>鼓励交易，提升流动性</td><td>希望交易活动极少，吸引长期持有者</td></tr>
-            <tr><td>股东行为期望</td><td>接受短期进出</td><td>希望股东无卖出时间表，愿与公司休戚与共</td></tr>
-          </tbody>
-        </table>
-
-        <div class="pull-quote">
-          伯克希尔希望股价能像"镜子"一样反映企业价值，使股东的投资结果接近公司实际运营结果。
-        </div>
-
-        <h3 id="section-b4">四、对股东行为的立场</h3>
-
-        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
-          <div class="remedy-card">
-            <span class="remedy-num">目标股东</span>
-            <h4>长期投资者</h4>
-            <p>无明确卖出时间表或目标股价，与公司共同成长。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">对高交易活跃度</span>
-            <h4>无法理解</h4>
-            <p>认为活跃交易意味着"股东持续离去"。</p>
-          </div>
-        </div>
-
-        <div class="callout info">
-          <div class="callout-icon">📝</div>
+        <h2>二、股东整体视角：股票交易不会创造财富</h2>
+        <h3 id="section-b1">2.1 100年指数上涨说明了什么</h3>
+        <p>1899年12月31日至1999年12月31日，道琼斯指数从 <strong>66点左右升至11,497点</strong>。这项长期增长主要来自美国企业在一个世纪中持续发展，投资者也分享了企业繁荣带来的财富。</p>
+        <p>道琼斯指数的精确数据是从 <strong>65.73点升至11,497.12点</strong>，对应约 <strong>5.3%的年化复合回报率</strong>，此外投资者还获得了股息。若21世纪也要实现同样的100年回报，道琼斯指数到世纪末需要达到约 <strong>2,011,011.23点</strong>，也就是约200万点。世纪初前六年指数几乎没有变化，正好说明长期复利与短期市场表现不能混为一谈。</p>
+        <h3 id="section-b2">2.2 全体股东是一个整体</h3>
+        <p>除少数因公司破产等特殊情形外，从现在直到公司终结，所有股东获得的总回报，最终等于所持公司的总回报。投资者之间可以通过聪明或幸运的买卖，把收益从一个人转移给另一个人；但全体股东加总后，财富不会因此增加。</p>
+        <p>当股价上涨时，每个人账面上似乎都更富有。但如果有人想在高位套现，就必须有人在高位接盘。上市公司的股票只是在不同股东之间换手，买卖本身没有外部资金凭空进入，也没有创造新的企业价值。</p>
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <div class="callout-title">类比说明</div>
-            <p>学校、俱乐部、教堂等机构不会为成员离开而欢呼。只有依赖成员流动牟利的经纪商才会支持高换手率。</p>
+            <div class="callout-title">核心启示</div>
+            <p>交易可以重新分配财富，却不能让全体股东获得超过企业创造的财富。扣除交易和管理费用后，全体股东的实际所得反而更少。</p>
           </div>
-        </div>
-
-        <h3 id="section-b5">五、股东退出与新投资者引入策略</h3>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>场景</th><th>伯克希尔的处理方式</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>现有股东需要或打算卖出</td><td>希望后续投资者支付<strong>好且公平</strong>的价格</td></tr>
-            <tr><td>新投资者引入策略</td><td>通过政策、表现和沟通吸引理解公司运营、时间预期和自我衡量方式的长期投资者</td></tr>
-            <tr><td>长期目标</td><td>吸引并保留合适股东，同时<strong>让短期或有不现实预期的投资者自然失去兴趣</strong></td></tr>
-          </tbody>
-        </table>
-
-        <div class="pull-quote large">
-          伯克希尔股票始终以<strong>符合企业价值的合理价格</strong>进行交易。
         </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- ===== C. 分红政策与股票回购 ===== -->
       <section id="section-c">
-        <h2>C. 分红政策与股票回购</h2>
-
-        <h3 id="section-c1">一、收益的两种属性：受限定 vs. 非限定</h3>
-        <p>在进行分红决策前，首先需理解并非所有收益都具有同等性质。我们必须区分会被通胀侵蚀的"受限定收益"和可自由支配的"非限定收益"。</p>
-
+        <h2>三、G家族寓言：摩擦成本如何吞噬财富</h2>
+        <h3 id="section-c1">3.1 从和谐家族到“傻瓜家族”</h3>
+        <p>设想所有美国公司都由一个大家族持有，称为 <strong>G家族（Gotrocks）</strong>。家族在缴纳股息税后，每年从企业获得约 <strong>7,000亿美元</strong>利润；部分财富被消费，剩余部分留在企业中继续经营并复利增长。只要成员都持有整个企业，家族财富就会随着企业盈利同步增长。</p>
+        <p>随后，金融中介开始向家族成员推销各种“帮助”：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>属性</th><th>定义</th><th>特征与影响</th><th>处理原则</th></tr>
-          </thead>
+          <thead><tr><th>帮手</th><th>提供的服务</th><th>对家族整体的影响</th></tr></thead>
           <tbody>
-            <tr>
-              <td><strong>受限定收益</strong></td>
-              <td>因通货膨胀侵蚀，导致财报显示的部分甚至全部无法用于分红的收益</td>
-              <td>常见于<strong>高资产/利润比</strong>的公司。若用于分红，将损害公司维持销量、长期竞争力与财务实力的根基。持续派发此部分收益，若无新资本注入，企业注定衰落。</td>
-              <td><strong>必须留存</strong>，以保持企业经济竞争地位。无论其再投资回报多低，都不能用于分红。</td>
-            </tr>
-            <tr>
-              <td><strong>非限定收益</strong></td>
-              <td>超出维持公司竞争地位所需资本之外的、可自由支配的利润</td>
-              <td>具有可选择性，可留存也可分红。管理层应基于股东利益最大化做出选择。</td>
-              <td><strong>择优处理</strong>：是留存再投资，还是向股东分红。</td>
-            </tr>
+            <tr><td>经纪商</td><td>鼓励成员彼此买卖股票</td><td>交易越频繁，佣金和价差越多</td></tr>
+            <tr><td>职业经理人</td><td>代替成员选股、管理资产</td><td>继续交易，并收取管理费</td></tr>
+            <tr><td>财务规划师、机构顾问</td><td>帮助挑选经理人</td><td>增加一层费用，未必增加回报</td></tr>
+            <tr><td>“超级帮手”</td><td>以对冲基金、私募基金等新面貌销售高收费产品</td><td>固定费加业绩分成，损失却主要由家族承担</td></tr>
           </tbody>
         </table>
-
-        <div class="callout info">
-          <div class="callout-icon">📝</div>
-          <div class="callout-body">
-            <div class="callout-title">案例：联合爱迪生公司</div>
-            <p>曾因政策原因，股价跌至账面值的1/4。即便留存1美元的收益只能转化为0.25美元市值（"黄金变铅"的过程），大部分收益依然被用于再投资，而非分派给股东。</p>
-          </div>
-        </div>
-
-        <h3 id="section-c2">二、非限定收益的配置法则：一美元原则</h3>
-
-        <div class="pull-quote large">
-          每一美元的留存利润，必须至少为股东创造一美元的市值。
-        </div>
-
-        <p>当留存收益作为再投资资本，其产生的<strong>增量收益</strong>，等于或高于投资者通常可以自行在其他地方获得的收益时，留存才是合理的。</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">类比分析：一种特殊永续债的启示</div>
-            <p>假设持有一只 10% 票息的无风险永续债，每年可选择领取现金或按原利率 10% 再投资。若市场利率为 5%，应选择再投资（或再投资后卖出变现）；若市场利率为 15%，应选择收取现金。公司收益的决定与此类似：<strong>再投资的预期回报率高，就应留存；回报低下，就应分红。</strong></p>
-          </div>
-        </div>
-
-        <h3 id="section-c3">三、管理层思维的分裂与常见误区</h3>
-
-        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
-          <div class="remedy-card">
-            <span class="remedy-num">误区 01</span>
-            <h4>精神分裂式决策</h4>
-            <p>子公司层面：CEO会毫不犹豫地指令回报率仅 5% 的子公司A将所有收益上缴，投资于回报率 15% 的子公司B。母公司层面：当自身长期增量资本回报率仅 5%（低于 10% 的市场利率）时，仍可能拒绝向股东分红。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">误区 02</span>
-            <h4>核心业务光环的误导</h4>
-            <p>公司整体的净资产回报率可能看起来不错，但这可能掩盖了资产配置的失败。具有超级盈利能力的核心业务仅需少量资本便能产生超额回报和大量富余现金，管理层常将这些现金投入回报平平甚至很差的项目。</p>
-          </div>
-        </div>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">警示</div>
-            <p>核心业务的辉煌会掩盖其他领域资产配置的失败。管理层应持续将现金从低回报业务转移至高回报业务（包括分红或回购），而不应"生来就是为了寻找下一个失败"。就像职业与业余选手组合的高尔夫球队，整体得分不错，但主要靠职业选手贡献，而业余选手的糟糕表现被掩盖了。</p>
-          </div>
-        </div>
-
-        <h3 id="section-c4">四、股份回购：提升股东价值的利器</h3>
-        <p>当股价远低于内在价值时，回购是比很多并购都更优的资本配置方式。</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>好处</th><th>描述</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>即刻提升每股价值</td><td>以低于内在价值的价格回购（如用1美元换2美元），数学上直接增加了继续持有股东的每股价值。在并购中很难做到这一点。</td></tr>
-            <tr><td>信号效应与信心提升</td><td>回购向市场明确证明管理层<strong>关心提升股东财富</strong>，而非盲目扩张。推动股价更趋近于内在价值。</td></tr>
-          </tbody>
-        </table>
-
-        <h3 id="section-c5">五、回购的执行原则与伯克希尔的做法</h3>
-
-        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
-          <div class="remedy-card">
-            <span class="remedy-num">前提 01</span>
-            <h4>资金充足</h4>
-            <p>公司拥有满足日常运营与流动性需求之外的富余现金。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">前提 02</span>
-            <h4>价格低估</h4>
-            <p>公司股价远低于保守计算的内在价值。</p>
-          </div>
-        </div>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>项目</th><th>伯克希尔的做法</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>价格约束</td><td>仅在股价<strong>远低于保守计算的内在价值</strong>时才会考虑。过去曾以账面值 110% 的价格进行回购。</td></tr>
-            <tr><td>信息对称</td><td>提供充足信息给公众股东，帮助他们估算真实价值，避免内部人士利用信息优势。</td></tr>
-            <tr><td>不为托市</td><td><strong>永远不会为了阻止股价下跌而进行回购</strong>。只有认为回购是资金最有效的去处时才行动。</td></tr>
-            <tr><td>操作方式</td><td>通过场外直接询价方式进行，并且对小额交易和B股折价有具体规则。</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">驳斥错误动机</div>
-            <p><strong>为抵消期权稀释而回购</strong>：期权授予与股票回购均有其独立逻辑，不应混为一谈。不能因为要抵消期权稀释，就以高于内在价值的价格回购股票。<br/><strong>为推高或支撑股价而回购</strong>：这种做法让卖出股票的人受益，但让继续持有的股东受损（以1.1美元换取1美元价值），并非明智之举。</p>
-          </div>
-        </div>
-
-        <h3 id="section-c6">六、股东的思维实验：期望股价低迷的理由</h3>
-
-        <div class="pull-quote large">
-          当一家你投资的优秀公司打算长期大规模回购股票时，你作为长期股东应该希望<strong>股价在回购期间保持低迷</strong>。
-        </div>
-
-        <p>以IBM为例，假设伯克希尔持有IBM 5.5%的股份（约0.639亿股），IBM计划用500亿美元回购股票：</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>情景</th><th>假设回购均价</th><th>可回购股数</th><th>回购后总股本</th><th>伯克希尔持股比例</th><th>若第五年盈利200亿，伯克希尔的利润份额</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>情景一：低股价</strong></td><td>200美元/股</td><td>2.5亿股</td><td>9.1亿股</td><td><strong>7.0%</strong></td><td><strong>14.0亿美元</strong></td></tr>
-            <tr><td><strong>情景二：高股价</strong></td><td>300美元/股</td><td>1.67亿股</td><td>9.9亿股</td><td>6.5%</td><td>13.0亿美元</td></tr>
-            <tr><td><strong>差异</strong></td><td>—</td><td>—</td><td>—</td><td><strong>+0.5%</strong></td><td><strong>+1亿美元</strong></td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">数学结论</div>
-            <p>股价越低，同样的资金能回购并注销更多股份，继续留下的股东能拥有的公司权益比例就越高，未来享有的利润份额也越大。之后，持股价值将额外多出15亿美元。</p>
-          </div>
-        </div>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">情感与理性的冲突</div>
-            <p>大多数计划只买不卖的人，仍然会为股价上涨而感到开心。这如同一个日常通勤的人，为刚刚加满油后油价上涨而感到喜悦一样不合逻辑。对于长期净买入者，<strong>股价平平甚至是下跌才是对自身最有利的</strong>。</p>
-          </div>
-        </div>
+        <p>起初，成员只是相互买卖；后来每个人都雇佣经理人，之后又雇顾问挑选经理人，最后还支付高额业绩报酬。家族仍然拥有同一批企业，但财富流向发生了变化：企业利润不再全部留在家族，而是有越来越大的一部分流入金融中介。</p>
+        <p><strong>换句话说</strong>：所谓“更专业”并不会自动增加全体投资者的财富。如果所有人都在做同样的交易，新增的只是费用，而不是收益。</p>
+        <h3 id="section-c2">3.2 不对称的业绩报酬</h3>
+        <p>很多高收费产品采用“赢了分成、输了自担”的结构：</p>
+        <ul>
+          <li>中介因聪明或运气获得盈利时，拿走盈利的大部分；</li>
+          <li>中介判断错误、运气变差甚至欺骗客户导致亏损时，损失由投资者承担；</li>
+          <li>无论结果如何，投资者还要支付高额固定费用。</li>
+        </ul>
+        <p>这像一场抛硬币游戏：正面朝上时中介拿走大部分奖金，反面朝上时投资者承担亏损，并为参加游戏支付门票。讽刺地说，G家族最终更像 <strong>H家族（Hadrocks，傻瓜家族）</strong>。</p>
+        <p>当时类似的摩擦成本已接近美国企业盈利总和的 <strong>20%</strong>。也就是说，美国股市全体投资者最终只能得到企业本来创造的约 <strong>80%</strong>；如果投资者不交易、不听信各种推销，原本接近100%的企业盈利本应归他们所有。</p>
+        <h3 id="section-c3">3.3 牛顿的“第四运动定律”</h3>
+        <p>艾萨克·牛顿曾说：“我能计算出星体的运行，但无法计算出人类的疯狂。”他在南海泡沫中遭受重创，说明伟大的科学头脑也可能在投资中受情绪支配。</p>
+        <p>如果把投资经验总结成一条“第四运动定律”，可以表述为：</p>
+        <div class="pull-quote large">投资者整体的回报，通常随着交易频率上升而下降。</div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- ===== D. 拆股与交易活动 ===== -->
       <section id="section-d">
-        <h2>D. 拆股与交易活动</h2>
-
-        <h3 id="section-d1">一、为什么伯克希尔不进行股票分拆？</h3>
-
-        <div class="pull-quote large">
-          股东质量决定估值质量。躁郁症式的投资者群体，只会带来躁郁症式的股价波动。
-        </div>
-
-        <p>伯克希尔的股价策略建立在两个相互支撑的基础之上：</p>
-
-        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
-          <div class="remedy-card">
-            <span class="remedy-num">基础 01</span>
-            <h4>理性定价</h4>
-            <p>股价与内在商业价值相关联，在合理范围内波动（"理性相关"≠"完全一致"）。</p>
+        <h2>四、伯克希尔上市：让股价更接近内在价值</h2>
+        <h3 id="section-d1">4.1 纽约证券交易所的挂牌安排</h3>
+        <p>1988年，伯克希尔计划在纽约证券交易所（NYSE）挂牌。纽交所原规则要求每家上市公司至少拥有 <strong>2,000名持有不少于100股的股东</strong>，100股称为一手（round lot）。</p>
+        <p>由于伯克希尔当时发行在外的股份约 <strong>1,146,642股</strong>，且股价很高，持有10股已经代表很大金额，交易所同意把伯克希尔的“一手”设为 <strong>10股</strong>。新规则只需把“持有至少100股”改为“持有至少1手”，伯克希尔即可轻松满足要求。</p>
+        <p>1988年11月29日，伯克希尔股票正式在纽交所挂牌。虽然交易单位为10股，但投资者实际上可以 <strong>1股起买卖</strong>。</p>
+        <h3 id="section-d2">4.2 选择交易市场的两个标准</h3>
+        <p>伯克希尔希望上市带来两项好处：</p>
+        <ol>
+          <li><strong>股价以理性价格围绕内在价值波动</strong>，让股东的持有期回报尽量接近公司的经营成果；</li>
+          <li><strong>降低交易成本</strong>，尤其是买卖报价之间的价差。</li>
+        </ol>
+        <p>股价严重高估或低估，都会使股东得到与公司经营结果不相称的回报。伯克希尔不希望股东靠其他股东的愚蠢行为获利，而希望他们分享公司实际经营创造的价值。</p>
+        <p>这种结果不会自动出现。持续的理性股价，需要理性的长期股东支持。因此，公司通过政策、业绩和沟通吸引关注企业经营的投资者，尽量过滤只关心短期价格波动的人。</p>
+        <p>活跃股票的交易成本有时可达到上市公司净利润的 <strong>10%甚至更高</strong>，这相当于对股东征收重税，只不过收款方是金融机构，而不是政府。伯克希尔股东的低换手率已经使这项“税”大幅降低；上市后，做市商买卖价差进一步缩小，成本也有望继续下降。</p>
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>伯克希尔上市不是为了把股价推到最高，而是为了让股价在相似经济环境下，继续以合理价格反映企业价值。上市本身不是买卖股票的理由，它只是降低交易成本。</p>
           </div>
-          <div class="remedy-card">
-            <span class="remedy-num">基础 02</span>
-            <h4>高质量股东</h4>
-            <p>吸引以企业主人心态长期持股、关注企业价值而非股价波动的投资者。</p>
-          </div>
         </div>
+        <h3 id="section-d3">4.3 指定经纪商与价差</h3>
+        <p>伯克希尔的指定经纪商是 <strong>亨德森兄弟公司（Henderson Brothers, Inc.，HBI）</strong>。该公司历史可追溯至1861年9月8日，威廉·托马斯·亨德森以500美元购买交易所席位；当时席位价格约为625,000美元。</p>
+        <p>HBI在54家指定经纪商中承接的指定交易量排名第二，为83家上市公司提供服务。董事长吉姆·马奎尔（Jim Maguire）亲自处理伯克希尔股票交易。挂牌前，做市价差曾达到3%或更多；1989年，马奎尔把价差控制在50个点或更低，约相当于股价的1%甚至更少，显著降低了股东交易成本。</p>
+      </section>
 
-        <p>股东筛选无法像阿斯特夫人管理精英圈子那样直接设门槛，但可以通过<strong>持续、一致的理念传播</strong>实现"自我选择效应"——明确宣传商业哲学与股东理念，主动阻止不适合的投资者进入。</p>
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
+      <section id="section-e">
+        <h2>五、吸引正确的投资者</h2>
+        <h3 id="section-e1">5.1 伯克希尔希望拥有怎样的股东</h3>
+        <p>伯克希尔有两个与一般上市公司不同的目标：</p>
+        <ul>
+          <li><strong>不追求股价越高越好</strong>，而希望股价长期围绕内在价值窄幅波动；</li>
+          <li><strong>不追求交易越活跃越好</strong>，而希望股东买入时没有明确的短期卖出时间表或目标价，愿意长期与企业共同发展。</li>
+        </ul>
+        <p>一家企业不会因为合伙人不断离开而感到高兴；同理，上市公司也不应把股东持续流失当成成绩。经纪商可能从成员流动中获利，但企业所有者不应把金融中介的利益误认为自身利益。</p>
+        <p>股东确实可能因生活需要而出售股票。因此，公司要吸引能够理解企业运营、时间尺度和估值方法的新投资者，使买卖双方都能以公平价格完成交易。</p>
+        <h3 id="section-e2">5.2 自我选择效应</h3>
+        <p>股票市场无法像私人俱乐部那样按智力、情绪稳定性或道德标准筛选成员，但企业可以通过持续、一致的经营理念和沟通形成“自我选择效应”。</p>
+        <p>例如，同一场音乐活动，若宣传为歌剧，会吸引一类观众；若宣传为摇滚音乐会，则会吸引另一类观众。伯克希尔把自己的经营方式、股东哲学和长期预期公开说明，吸引认同企业所有者视角的人，同时让短线投机者失去兴趣。</p>
+        <p>据估计，伯克希尔约 <strong>90%至95%的股份</strong>由这类长期股东持有，其中许多人在五年前就已持有伯克希尔或蓝带印花公司股票；许多人的伯克希尔持仓市值至少是第二大持仓的两倍。对于一家市值超过10亿美元、股东人数以千计的上市公司而言，这样的股东结构非常少见。</p>
         <div class="callout tip">
           <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <div class="callout-title">类比</div>
-            <p>音乐会被包装为歌剧还是摇滚，自然吸引不同人群——即便任何人都可以买票入场。</p>
-          </div>
-        </div>
-
-        <p><strong>伯克希尔股东质量的实证：</strong></p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>指标</th><th>数据</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>长期持股比例</td><td>约 <strong>90%~95%</strong> 的股票由五年前就持股的长期投资者持有</td></tr>
-            <tr><td>持仓集中度</td><td>持有伯克希尔的市值，至少是其第二大持仓的 <strong>2倍以上</strong></td></tr>
-            <tr><td>行业地位</td><td>在市值超过10亿美元的上市公司中，"让持股者像主人一样思考和行动"方面<strong>几乎首屈一指</strong></td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">分拆的危害：稀释股东质量</div>
-            <p>分拆股份会引来逊于现有股东的新晋买家，稀释现有股东群体的质量。持有9张10元钞票，真的比持有1张100元钞票更富有吗？</p>
-          </div>
-        </div>
-
-        <h3 id="section-d2">二、过度活跃的股市：企业的扒手</h3>
-
-        <div class="pull-quote">
-          "对赌场管理员有利的事，未必对赌客也有利。"
-        </div>
-
-        <p>经纪商将高换手率美化为"市场性"与"流动性"，但投资者须清醒认识：摩擦成本是一种隐性税。</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>指标</th><th>数值</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>典型公司净资产收益率</td><td>12%</td></tr>
-            <tr><td>年换手率（假设）</td><td>100%</td></tr>
-            <tr><td>交易摩擦成本（占净资产）</td><td>~2%</td></tr>
-            <tr><td>利润损耗比例</td><td><strong>1/6</strong>（相当于额外征税 16.66%）</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">自我施加的税负</div>
-            <p>若政府新增 16.66% 的税种，必然引发强烈抗议——然而投资者通过市场"活跃"，正在<strong>自我施加</strong>同等税负。</p>
-          </div>
-        </div>
-
-        <p>部分观点认为高活跃度有助于资本配置理性化（"做大馅饼"论），巴菲特对此明确反驳：</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>观点</th><th>立场</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>活跃度提升资本配置效率</td><td>似是而非</td></tr>
-            <tr><td>过度活跃市场的实际效果</td><td><strong>破坏</strong>理性资本配置，是<strong>馅饼缩小机</strong></td></tr>
-          </tbody>
-        </table>
-
-        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
-          <div class="remedy-card">
-            <span class="remedy-num">无形之手</span>
-            <h4>亚当·斯密</h4>
-            <p>自由市场中非合谋行为引导经济最优化。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">无形之脚</span>
-            <h4>巴菲特</h4>
-            <p>赌场化市场中沉不住气的投资管理层，不断给经济进步使绊子。</p>
+            <div class="callout-title">核心启示</div>
+            <p>股东质量会影响股价质量。重视价值和长期经营的股东越多，股价越不容易被情绪和短期投机牵着走。</p>
           </div>
         </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- ===== E. 股东策略与资本重构 ===== -->
-      <section id="section-e">
-        <h2>E. 股东策略与资本重构</h2>
-
-        <h3 id="section-e1">一、股东策略（1992年）</h3>
-
-        <p>伯克希尔股价突破 <strong>10,000 美元/股</strong> 后，部分股东在年度捐赠中遭遇税务困境：</p>
-
+      <section id="section-f">
+        <h2>六、分红政策：留存还是分配</h2>
+        <h3 id="section-f1">6.1 分红不是固定比例问题</h3>
+        <p>公司常说“分红率为净利润的40%～50%，并至少与消费者价格指数（CPI）同步增长”，却很少解释为什么这种安排最有利于股东。实际上，分红与资本配置密切相关，公司管理层必须认真判断：<strong>哪些利润应留存，哪些利润应分配。</strong></p>
+        <h3 id="section-f2">6.2 受限定收益与非限定收益</h3>
+        <p>并非所有会计利润都具有同等经济价值。</p>
         <table class="article-table">
-          <thead>
-            <tr><th>捐赠金额</th><th>税务处理</th></tr>
-          </thead>
+          <thead><tr><th>收益类型</th><th>含义</th><th>合理处理</th></tr></thead>
           <tbody>
-            <tr><td>≤ $10,000</td><td>完全免税</td></tr>
-            <tr><td>> $10,000</td><td>占用捐赠者<strong>终身赠予税与遗产税免税额度</strong>；额度耗尽后须缴纳赠予税</td></tr>
+            <tr><td>受限定收益</td><td>通胀会侵蚀其中一部分，若分红可能削弱企业竞争地位、销量、财务实力或长期生存能力</td><td>应留在企业，用于维持经营基础</td></tr>
+            <tr><td>非限定收益</td><td>在不损害竞争力的前提下，可以留存，也可以分红</td><td>取决于再投资回报与股东可获得回报的比较</td></tr>
           </tbody>
         </table>
+        <p>高资产/利润比企业尤其容易出现受限定收益。若把这部分利润全部分掉，公司可能失去维持销量、竞争力或财务实力的根基，除非不断获得新的资本注入。</p>
+        <p>联合爱迪生公司曾出现极端例子：由于惩罚性政策，股价跌到账面值的四分之一，公司每留存1美元再投资，只能换来约0.25美元市值，却仍把大部分收益留在企业里。公司在工地上宣传“我们必须挖掘”，但真正的问题是：低回报的留存收益究竟在挖掘什么？</p>
+        <h3 id="section-f3">6.3 留存收益的唯一正当理由</h3>
+        <p>管理层保留非限定收益的唯一有效理由，是有充分历史证据或严谨分析表明：再投资能够获得合理回报。伯克希尔的标准是：</p>
+        <div class="pull-quote">公司每留存1美元，长期至少应为股东创造1美元市值。</div>
+        <p>只有当再投资的增量回报率等于或高于投资者通常能够获得的回报率时，才应留存利润；否则应通过分红或回购把资金返还给股东。</p>
+        <h3 id="section-f4">6.4 10%永续债券类比</h3>
+        <p>假设投资者持有一种年利率为10%的无风险永续债券，每年可以选择：</p>
+        <ol>
+          <li>收取10%的现金利息；</li>
+          <li>把利息滚入本金，继续以10%复利。</li>
+        </ol>
+        <p>若市场长期无风险利率只有5%，继续持有这只10%债券更划算。即使投资者需要现金，也可以让利息转为债券后出售，通常比直接收取10%现金得到更多价值。</p>
+        <p>若市场利率上升到15%，继续把钱投进10%债券就不划算，理性投资者会选择收取现金，再到市场购买收益率更高的资产。</p>
+        <p>公司处理非限定收益的逻辑相同：</p>
+        <ul>
+          <li>预计再投资回报较高：留存收益；</li>
+          <li>预计再投资回报较低：分红或回购。</li>
+        </ul>
+        <p>区别在于，债券利率是合同确定的，公司再投资回报只能根据信息做预测，因此更容易判断错误。但只要估计合理，决策原则并不复杂。</p>
+        <h3 id="section-f5">6.5 管理层的“旁观者清”</h3>
+        <p>集团公司管理层通常能够理性判断子公司是否应把利润上缴母公司：他们会要求只有5%回报预期的子公司A分红，再把资金投入预期回报15%的子公司B。然而，当轮到母公司决定是否把利润分给股东时，却常常不愿用同样的标准审视自己。</p>
+        <p>管理层也会要求子公司详细解释为什么要留存利润，却很少向母公司股东说明为什么应该留存利润。这正是“旁观者清，当局者迷”。</p>
+        <h3 id="section-f6">6.6 不要让核心业务掩盖资本配置失败</h3>
+        <p>不能只看公司近几年整体增量收益与增量资本的比值。高盈利核心业务可能只需少量新增资本，却持续创造超额回报；公司整体指标因此很好看，但管理层可能把大量剩余现金投入低回报项目或高价收购平庸企业。</p>
+        <p>这就像职业选手和业余选手组队打高尔夫：职业选手贡献了大部分得分，即使业余选手表现糟糕，团队总分仍可能不错。企业也可能被核心业务的优秀表现掩盖资产配置失败。</p>
+        <p><strong>管理层的责任</strong>是持续把现金从低回报业务转向高回报业务，必要时分红或回购，让股东增加对优秀业务的权益并避开平庸资产。</p>
+        <h3 id="section-f7">6.7 稳定、可预测的分红</h3>
+        <p>分红应反映长期盈利能力和增量资本回报率，而不应随着每个季度的偶然盈利或投资机会剧烈变化。公司长期前景通常不会频繁改变，分红模式也不应大幅波动。</p>
+        <p>如果管理层长期留存的利润最终证明没有产生合理价值，那么问题不只在资本配置，也在管理层的判断能力。</p>
+      </section>
 
-        <p><strong>三种股票捐赠避税方式：</strong></p>
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr 1fr;">
-          <div class="remedy-card">
-            <span class="remedy-num">方式一</span>
-            <h4>已婚夫妻联合捐赠</h4>
-            <p>适用对象：<strong>已婚股东</strong>。夫妻双方每年可向单一受赠人合计捐赠 <strong>$20,000</strong>。前提：报税时须有配偶签字，同意当年的捐赠行为。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">方式二</span>
-            <h4>部分出售 + 部分捐赠（有条件交易）</h4>
-            <p>适用对象：已婚或未婚均可。示例（假设伯克希尔股价为 $12,000）：将股票以 $2,000 出售给受赠人，差价部分作为捐赠，免税效果：捐赠部分 $10,000 仍在免税范围内。若出售价格超过税基，超出部分仍需纳税。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">方式三</span>
-            <h4>成立合伙企业，逐年让渡权益</h4>
-            <p>适用对象：已婚或未婚均可。与受赠人共同成立合伙企业，以伯克希尔股票出资，每年让渡不超过 <strong>$10,000</strong> 价值的合伙权益。优势：灵活控制每年让渡比例，长期免税捐赠。</p>
-          </div>
-        </div>
-
+      <section id="section-g">
+        <h2>七、股票回购：价格决定回购是否创造价值</h2>
+        <h3 id="section-g1">7.1 回购的两个明确好处</h3>
+        <p>当股价显著低于内在价值时，回购对继续持有的股东有两项好处：</p>
+        <ol>
+          <li><strong>数学上的增值</strong>：公司用1美元买入价值2美元的资产，剩余股东对企业的每股权益立即提高。外部并购很少能稳定实现这种“1美元买2美元价值”的效果；</li>
+          <li><strong>管理层行为的信号</strong>：回购表明管理层重视提升股东财富，而不是盲目扩张企业帝国。长期看，股东和潜在投资者会提高对企业的信心，股价也更可能接近内在价值。</li>
+        </ol>
+        <p>不过，第二项好处的前提是回购确实有利于股东。管理层嘴上说“股东财富最大化”，却在明显高于内在价值时回购，市场最终会给其资产和信誉打折。</p>
+        <h3 id="section-g2">7.2 理性回购必须满足两个条件</h3>
+        <p>公司只有同时满足以下条件，才应考虑回购：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>方式</th><th>适用人群</th><th>每年免税上限</th><th>操作复杂度</th></tr>
-          </thead>
+          <thead><tr><th>条件</th><th>具体要求</th></tr></thead>
           <tbody>
-            <tr><td>夫妻联合捐赠</td><td>已婚股东</td><td>$20,000</td><td>低</td></tr>
-            <tr><td>部分出售+捐赠</td><td>所有股东</td><td>$10,000</td><td>中</td></tr>
-            <tr><td>合伙企业让渡</td><td>所有股东</td><td>$10,000</td><td>高</td></tr>
+            <tr><td>资金条件</td><td>拥有日常运营和流动性所需之外的现金，以及合理的借款能力</td></tr>
+            <tr><td>估值条件</td><td>市场股价显著低于保守估算的内在价值</td></tr>
+            <tr><td>信息条件</td><td>公众股东拥有足够信息，可以大致估算企业真实价值</td></tr>
           </tbody>
         </table>
-
-        <p>巴菲特与伯克希尔坚持<strong>不分拆股份</strong>的一贯政策。高股价筛选出了理性、长期、具有企业主思维的优质股东群体，使伯克希尔股价能长期贴近内在价值运行。</p>
-
-        <h3 id="section-e2">二、伯克希尔资本重构与B类股票（1995—1996年）</h3>
-
-        <p>经股东年会批准，伯克希尔设立<strong>两类股票结构</strong>：</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>项目</th><th>A类普通股（A股）</th><th>B类普通股（B股）</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>来源</td><td>现有股票重新指定</td><td>新发行</td></tr>
-            <tr><td>经济权益</td><td>1股 = 1股</td><td>1股 = <strong>1/30</strong> A股</td></tr>
-            <tr><td>投票权</td><td>1股 = 1票</td><td>1股 = <strong>1/200</strong> A股投票权</td></tr>
-            <tr><td>慈善捐赠计划</td><td>可参与</td><td>不可参与</td></tr>
-            <tr><td>转换权</td><td>A → B：可随时转换为 30股B股</td><td>B → A：<strong>不可</strong>反向转换</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout info">
-          <div class="callout-icon">📝</div>
+        <p>第三项是保护股东的必要补充。若公众股东信息不足，内部人士可能利用信息优势，以极低价格从不知情的合伙人手中取得全部价值。</p>
+        <h3 id="section-g3">7.3 回购不是越多越好</h3>
+        <p>企业有两类资金需求：</p>
+        <ul>
+          <li><strong>维护性支出</strong>：维持竞争地位，例如赫尔茨伯格钻石公司改造店铺；</li>
+          <li><strong>成长性支出</strong>：管理层预期每投入1美元能够创造超过1美元价值，例如R.C.威利公司扩展到爱达荷州。</li>
+        </ul>
+        <p>当现金超过这些需求时，公司可以收购新业务或回购股票。如果股价远低于内在价值，回购通常更有意义。20世纪70年代中期，市场普遍低估，许多当时回购股票的公司为股东创造了更多财富；伯克希尔也曾专门寻找同时具备“股价低估”和“管理层以股东利益为导向”两项特征的公司。</p>
+        <p>如今回购很流行，但有些回购只是为了推高或支撑股价。以1.1美元买价值1美元的资产，会让出售股东受益，却损害留下来的股东。所谓“用回购抵消期权稀释”也不能成为无条件高价回购的理由：发行股票与回购股票应分别依据各自的价格和价值判断。</p>
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <div class="callout-title">B股IPO关键信息</div>
-            <p>上市交易所：纽约证券交易所（NYSE）。募资规模：至少 <strong>1亿美元</strong>。市场定价：由市场决定，预计约为A股价格的 <strong>1/30</strong>。套利机制：若B股价格高于A股的1/30，将触发A→B的套利转换，自动校正价格。</p>
+            <div class="callout-title">资本配置原则</div>
+            <p>在一个价格上是聪明的交易，在另一个价格上可能就是愚蠢的交易。现金足够，并不意味着任何价格回购都合理。</p>
           </div>
         </div>
+        <h3 id="section-g4">7.4 伯克希尔的回购纪律</h3>
+        <p>伯克希尔曾因估值过于保守，或过于热衷于其他投资而错过回购机会。即使以内在价值75折买入2%的股份，对每股价值的提升最多约为0.5%；如果资金有更高回报用途，回购的吸引力就更低。</p>
+        <p>伯克希尔不会为了阻止股价下跌而回购，也不会公开鼓动股东买卖。只有在公司认为回购是有吸引力的资金用途时才会行动。2011年9月，伯克希尔宣布以账面值110%的价格回购股票，约两天内回购了 <strong>6,700万美元</strong>，之后股价超过设定价格，回购停止。</p>
+        <p>伯克希尔还曾考虑在A股跌破 <strong>45,000美元/股</strong>时回购，但决定让股东先阅读报告，再判断回购是否确实有益。若回购，倾向于回应股东以不高于纽交所市价的价格直接询价；若B股价格至少低于市场价2%，也会考虑回购。不会参与少于10股A股或50股B股的交易。</p>
+        <p>伯克希尔还明确表示，在现金及现金等价物低于 <strong>200亿美元</strong>时不会回购，财务稳健优先于回购规模。</p>
+        <h3 id="section-g5">7.5 回购的公平性</h3>
+        <p>低价回购对存续股东很有利，但公司也不希望利用信息优势从不知情的离开股东手中廉价取得股份。理想状态是：出售者充分了解所出售资产的价值，留下者则因公司以低于保守内在价值的价格回购而受益。</p>
+        <p>董事曾用一个形象比喻说明低估回购的确定性：</p>
+        <div class="pull-quote">“这就像在水桶里捞鱼；水排干之后，鱼儿只能束手就擒。”</div>
+        <p>但伯克希尔仍不会把回购当作支撑股价的工具。回购价格越低、回购数量越大，留下来的股东通常越受益；价格越高，越可能把财富从留下者转给离开者。</p>
+      </section>
 
-        <p><strong>创立B股的核心动机：阻止"克隆伯克希尔"信托产品</strong></p>
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-        <p>市场上出现了一种收取管理费的单位信托产品，声称能"低成本复制伯克希尔"。巴菲特认为此类产品存在严重问题：</p>
-
+      <section id="section-h">
+        <h2>八、IBM案例：长期股东有时希望股价低迷</h2>
+        <p>伯克希尔持有IBM约 <strong>6,390万股</strong>，占当时总股本约 <strong>11.6亿股</strong>的5.5%。IBM计划未来五年用 <strong>500亿美元</strong>回购股票。很多人会以为长期股东应希望股价上涨，但如果伯克希尔未来不打算卖出而是通过IBM回购增加持股比例，低价反而更有利：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>对比维度</th><th>克隆信托产品</th><th>伯克希尔B股</th></tr>
-          </thead>
+          <thead><tr><th>IBM未来平均股价</th><th>500亿美元可回购股份</th><th>五年后总股本</th><th>伯克希尔持股比例</th></tr></thead>
           <tbody>
-            <tr><td>费用结构</td><td>高佣金、高管理费</td><td>发行佣金仅 <strong>1.5%</strong>（行业最低）</td></tr>
-            <tr><td>发行机制</td><td>限量炒作，制造短缺</td><td><strong>开放端口</strong>，压制短期炒作</td></tr>
-            <tr><td>目标投资者</td><td>追逐历史业绩的散户</td><td>眼光长远的长期投资者</td></tr>
-            <tr><td>与伯克希尔的关系</td><td>间接持有，隔离管理层</td><td>直接持股，与管理层目标一致</td></tr>
+            <tr><td>200美元/股</td><td>2.5亿股</td><td>9.1亿股</td><td>约7.0%</td></tr>
+            <tr><td>300美元/股</td><td>约1.67亿股</td><td>9.9亿股</td><td>约6.5%</td></tr>
           </tbody>
         </table>
+        <p>如果IBM第五年盈利为 <strong>200亿美元</strong>，低价回购会使伯克希尔分得的利润多约 <strong>1亿美元</strong>，并使其持股价值比高价回购情形多约 <strong>15亿美元</strong>。</p>
+        <p><strong>换句话说</strong>：对于持续买入的长期所有者，价格上涨会减少未来能买到的股份；价格低迷则允许企业用同样的现金回购更多股份。股价“买了就涨”未必是好事。</p>
+        <p>这就像每天开车的人刚加满油，随后却因油价上涨而高兴——如果未来还要继续买油，油价上涨显然不是好消息。巴菲特早年也曾为股价上涨高兴，直到阅读本·格雷厄姆《聪明的投资者》第8章，才理解低价对持续买入者的价值，并把股价低迷视为朋友。</p>
+        <p>IBM投资成败首先取决于未来盈利，其次取决于500亿美元能回购多少股份。若总股本最终减少到 <strong>6,390万股</strong>，将意味着伯克希尔拥有IBM全部股权；这也是一个带有幽默色彩的极端假设。</p>
+      </section>
 
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-i">
+        <h2>九、为什么伯克希尔不拆股</h2>
+        <h3 id="section-i1">9.1 拆股不会创造价值</h3>
+        <p>拆股只是把一张100美元钞票换成十张10美元钞票，不会让股东变得更富有。伯克希尔不拆股，是因为公司希望股票价格与内在商业价值理性相关，并吸引把自己当作企业主的长期股东。</p>
+        <p>如果投资者主要因情绪或非理性因素买入，他们也会因非理性因素卖出，导致股价更频繁地脱离企业价值。公司无法按智力或道德标准筛选股东，但通过一致的经营和沟通可以实现自我选择。</p>
+        <p>当伯克希尔股价约为 <strong>1,300美元/股</strong>时，能买得起一股的人可能更关注企业价值；如果把一股拆成100股，潜在买家未必更优秀，反而可能吸引更多只关注价格和短期上涨的人。因非价值因素买入的人，也会因非价值因素卖出，从而增加无关基本面的波动。</p>
+        <h3 id="section-i2">9.2 活跃交易对股东是“税”</h3>
+        <p>经纪商喜欢宣传“市场性”和“流动性”，但对股东而言，交易越活跃不一定越有利。假设一家净资产收益率为12%的公司，每年股票换手率达到100%，若交易成本合计约为净资产的2%，那么相当于每年有 <strong>1/6的经营回报</strong>被交易摩擦吞掉（尚未计入期权交易）。</p>
+        <table class="article-table">
+          <thead><tr><th>项目</th><th>对企业经营的贡献</th><th>对股东的结果</th></tr></thead>
+          <tbody>
+            <tr><td>高频换手</td><td>几乎不增加企业盈利</td><td>增加佣金、价差和税费</td></tr>
+            <tr><td>金融中介收入</td><td>与交易量正相关</td><td>转移自股东的财富</td></tr>
+            <tr><td>低换手、长期持有</td><td>更接近企业所有权本质</td><td>减少摩擦成本，保留更多回报</td></tr>
+          </tbody>
+        </table>
+        <p>这相当于投资者自行给自己增加一项约16.67%的“税”。所谓活跃交易能够扩大财富蛋糕的说法往往似是而非；过度活跃的市场可能反而缩小蛋糕。</p>
+        <p>亚当·斯密所说的“无形之手”有助于自由市场配置资源；在赌场式市场中，沉不住气的管理层和投资者却像一只“无形的脚”，不断绊住经济前进的步伐。</p>
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>流动性本身不是收益。对长期所有者而言，低换手和低成本往往比热闹的交易更有价值。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-j">
+        <h2>十、股东捐赠与税务安排提示</h2>
+        <p>当伯克希尔股价超过10,000美元/股时，股东捐赠股票面临税务门槛：个人每年向单一受赠人捐赠不超过10,000美元通常免税；超过部分会占用赠与税和遗产税的终身免税额度，额度用尽后可能产生赠与税。</p>
+        <p>原文提出三种可能的安排：</p>
+        <ol>
+          <li><strong>夫妻共同捐赠</strong>：已婚股东可在配偶同意并共同申报的前提下，将夫妻合计年度免税额度提高到20,000美元；</li>
+          <li><strong>有条件出售</strong>：例如股票每股12,000美元，而股东希望捐赠10,000美元，可将股票以2,000美元出售给受赠人；但若售价高于税基，超出部分仍可能纳税；</li>
+          <li><strong>设立合伙企业</strong>：与受赠人共同成立合伙企业，以伯克希尔股票出资，再逐年转让价值不超过年度免税额的合伙权益。</li>
+        </ol>
         <div class="callout warn">
           <div class="callout-icon">⚠️</div>
           <div class="callout-body">
-            <div class="callout-title">巴菲特的估值表态</div>
-            <p>写作本文时A股价格约为 $36,000，<strong>芒格和巴菲特均认为此价格并无低估</strong>，不在考虑买入价格范围内。本次发行不会稀释现有股份的内在价值。</p>
+            <div class="callout-title">税务提示</div>
+            <p>上述方式涉及具体税法、税基、申报和合伙安排，实际操作前必须咨询税务顾问，不应把本章内容当作个人税务建议。</p>
           </div>
         </div>
+      </section>
 
-        <p><strong>1996年两次重大股票发行：</strong></p>
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-        <div class="remedy-grid" style="grid-template-columns: 1fr 1fr;">
-          <div class="remedy-card">
-            <span class="remedy-num">第一次</span>
-            <h4>B类股票IPO（1996年5月）</h4>
-            <p>承销方：所罗门证券公司。发行股数：<strong>517,500股</strong> B类股票。净集资金额：<strong>5.65亿美元</strong>。发行佣金：<strong>1.5%</strong>（普通股发行中有史以来最低）。最终结果：新增约 <strong>40,000名股东</strong>，大多数理解公司并认同长期愿景。</p>
-          </div>
-          <div class="remedy-card">
-            <span class="remedy-num">第二次</span>
-            <h4>所罗门股票可转换票据（1996年下半年）</h4>
-            <p>承销方：所罗门证券公司。票据总面值：<strong>5亿美元</strong>（5年期）。实际募集：<strong>4.471亿美元</strong>。转换条件：每$1,000票据可转换为 <strong>17.65股</strong> 所罗门股票。到期持有收益率：约 <strong>3%</strong>。若转换为股票，期间利息成本约 <strong>1.1%</strong>。</p>
-          </div>
-        </div>
-
+      <section id="section-k">
+        <h2>十一、伯克希尔的资本重构与B股</h2>
+        <h3 id="section-k1">11.1 A股与B股的设计</h3>
+        <p>为方便小额投资、捐赠并应对高收费的“克隆伯克希尔”信托产品，伯克希尔提出发行B类普通股：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>维度</th><th>影响</th></tr>
-          </thead>
+          <thead><tr><th>项目</th><th>A类股票</th><th>B类股票</th></tr></thead>
           <tbody>
-            <tr><td>成本</td><td>股东人数增加带来更多行政处理成本</td></tr>
-            <tr><td>收益①</td><td>为有捐赠需求的股东提供更便捷的低面额操作工具</td></tr>
-            <tr><td>收益②</td><td>为希望"自行分拆"的股东提供解决方案</td></tr>
-            <tr><td>收益③</td><td>有效抑制克隆信托产品的商业化营销</td></tr>
+            <tr><td>经济权益基准</td><td>1股</td><td>约为1/30股A股</td></tr>
+            <tr><td>投票权</td><td>完整投票权</td><td>仅为A股的1/200，而非1/30</td></tr>
+            <tr><td>捐赠计划</td><td>可参与</td><td>不可参与伯克希尔指定慈善捐赠计划</td></tr>
+            <tr><td>转换权</td><td>1股A股可转换为30股B股</td><td>不可转换为A股</td></tr>
+            <tr><td>预期价格</td><td>—</td><td>约为A股价格的1/30</td></tr>
           </tbody>
         </table>
+        <p>B股计划在纽交所与A股共同交易，并通过IPO至少募集 <strong>1亿美元</strong>。市场决定B股价格，但理论上应接近A股价格的1/30。A股股东可以把1～2股A股转换为B股用于捐赠；若B股价格高于理论比例，会触发套利转换。</p>
+        <p>由于A股投票权更完整，A股地位更高，预计大多数长期股东仍会持有A股。巴菲特和芒格的家族也计划以持有A股为主，仅在捐赠时转换部分B股，因此A股可能比B股更具流动性。</p>
+        <h3 id="section-k2">11.2 为什么要发行B股</h3>
+        <p>伯克希尔不希望市场出现利用过去不可重复的业绩、以高费用销售“复制伯克希尔”信托的产品。此类产品可能：</p>
+        <ul>
+          <li>收取管理费和高额销售佣金；</li>
+          <li>吸引不了解企业、只被过去业绩吸引的投资者；</li>
+          <li>因大量资金不加区分地买入有限的伯克希尔股票而制造投机泡沫；</li>
+          <li>让退出的股东以高价获利，却把失望和声誉损害留给继续持有者。</li>
+        </ul>
+        <p>B股提供了低面额、低成本、直接持有伯克希尔的方式，既满足希望小额投资或捐赠的人，也削弱克隆产品的销售空间。</p>
+        <p>伯克希尔当时还希望每五年平均让每股内在价值翻一番，但随着资本基础越来越大，增长会越来越困难；公司不能承诺迅速把约 <strong>430亿美元</strong>市值变成 <strong>1,290亿美元</strong>。股东应了解企业运作、共同目标和资本规模带来的增长限制，而不是只被过去的辉煌业绩吸引。</p>
+        <h3 id="section-k3">11.3 B股发行实践</h3>
+        <p>1996年5月，伯克希尔发行 <strong>517,500股B股</strong>，净募集约 <strong>5.65亿美元</strong>。发行佣金仅为 <strong>1.5%</strong>，并采取开放式发行，以减少短期炒作。挂牌后的交易量远低于通常的新股，最终增加约 <strong>40,000名股东</strong>，公司相信其中大多数了解企业并认同长期理念。</p>
+        <p>所罗门证券公司充分理解伯克希尔的目标，主动放弃按通常惯例可获得的更高收入，使发行安排有利于长期股东。伯克希尔特别感谢主持项目的特里·菲茨杰拉德（Terry Fitzgerald）。</p>
+        <p>同年稍后，所罗门还协助发行伯克希尔可转换为所罗门股票的五年期票据：票面金额 <strong>5亿美元</strong>，实际筹资 <strong>4.471亿美元</strong>；每1,000美元票据可转换为17.65股股票，第三年起可连同利息赎回。考虑发行折扣和1%的票面利率，持有到期且不转换者的回报率约为3%；若最终转换，转换前的利息成本约为1.1%。</p>
+        <p>伯克希尔并非反对支付投行费用，而是要求费用与表现相称、真正物有所值。1996年通过所罗门完成的交易符合这一标准。</p>
+      </section>
 
-        <h3 id="section-e3">三、核心投资理念总结</h3>
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-        <div class="pull-quote large">
-          伯克希尔的目标是聚集一批"像主人一样思考、像主人一样行动"的长期理性股东，而非追求广泛持有和高换手率。<strong>股东政策比股东数量更重要。</strong>
-        </div>
-
+      <section id="section-l">
+        <h2>十二、本章投资原则总结</h2>
+        <h3 id="section-l1">12.1 对普通股投资者的检查清单</h3>
+        <table class="article-table">
+          <thead><tr><th>问题</th><th>理性答案</th></tr></thead>
+          <tbody>
+            <tr><td>股价上涨是否等于企业价值增加？</td><td>不一定；长期仍要回到企业盈利和内在价值</td></tr>
+            <tr><td>交易越多是否越专业？</td><td>不一定；交易会产生佣金、价差、税费和机会成本</td></tr>
+            <tr><td>基金、顾问和复杂产品是否必然增加回报？</td><td>不一定；应先扣除全部费用，再看是否创造了增量价值</td></tr>
+            <tr><td>公司是否应留存全部利润？</td><td>只有再投资回报足够高时才应留存</td></tr>
+            <tr><td>公司有现金是否就应回购？</td><td>还必须证明股价显著低于保守内在价值</td></tr>
+            <tr><td>股价下跌是否总是坏事？</td><td>对持续买入或公司回购而言，低价可能更有利</td></tr>
+            <tr><td>股票拆分是否增加财富？</td><td>不会；它只改变每股面额，不改变企业价值</td></tr>
+            <tr><td>高换手率是否对股东有利？</td><td>通常不利，因为摩擦成本会从股东回报中扣除</td></tr>
+          </tbody>
+        </table>
+        <h3 id="section-l2">12.2 最重要的五条结论</h3>
         <div class="remedy-grid">
           <div class="remedy-card">
-            <span class="remedy-num">关于增长预期</span>
-            <h4>理想与现实</h4>
-            <p><strong>理想目标</strong>：平均每五年使每股内在价值翻一番。<strong>现实约束</strong>：庞大的资本基础（写作时市值约 <strong>430亿美元</strong>）构成增长的天花板。不切实际的目标：从430亿美元增长至1,290亿美元（相当于GE的体量），短期内无法实现。</p>
+            <span class="remedy-num">结论 一</span>
+            <h4>股票代表企业所有权，不是短期价格竞猜。</h4>
           </div>
           <div class="remedy-card">
-            <span class="remedy-num">关于与所罗门的合作</span>
-            <h4>超越利益的合作精神</h4>
-            <p>所罗门证券公司在两次发行中的表现——其投资银行团队完全理解并支持伯克希尔的目标，<strong>主动放弃了按惯例可多赚约10倍的佣金收入</strong>，将客户利益置于自身利益之上。</p>
+            <span class="remedy-num">结论 二</span>
+            <h4>全体股东的总回报最终受企业创造的财富约束。</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">结论 三</span>
+            <h4>频繁交易和高额中介费用会缩小投资者的财富蛋糕。</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">结论 四</span>
+            <h4>资本配置必须比较“留存资金的预期回报”和股东可获得的替代回报。</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">结论 五</span>
+            <h4>理性股东、低换手和透明沟通，有助于让股价长期围绕内在价值运行。</h4>
           </div>
         </div>
       </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
       <div class="article-footer">— 完 —</div>
 
     </article>
   </div>
-
   <footer class="site-footer">
     <div class="footer-inner">
       <p>投资智慧 · 读书笔记</p>
@@ -1181,9 +963,10 @@
   </footer>
 
   <script>
-    // 侧边栏滚动高亮
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
     const links = document.querySelectorAll('#sidebar-nav a');
     const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
 
     function onScroll() {
       const scrollY = window.scrollY + 132;
@@ -1192,6 +975,12 @@
         if (sec.offsetTop <= scrollY) current = sec;
       }
       links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
 
