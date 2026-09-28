@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>第9章：税务问题 · 巴菲特致股东的信</title>
+  <title>第9章　税务问题 · 巴菲特致股东的信</title>
   <link rel="stylesheet" href="../../assets/style.css" />
   <style>
     /* ===== 110% Scale ===== */
@@ -214,10 +214,9 @@
       border-left: 3px solid var(--gold);
     }
     .chapter-article h4 {
-      font-size: .95rem;
+      font-size: 1rem;
       color: var(--text);
-      margin: 1.5rem 0 .7rem;
-      font-weight: 600;
+      margin: 1.6rem 0 .75rem;
     }
     .chapter-article p {
       font-size: .95rem;
@@ -227,14 +226,28 @@
     }
     .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
     .chapter-article em { color: var(--text2); }
-    .chapter-article ul {
+    .chapter-article code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: .85em;
+      background: rgba(201,168,76,.1);
+      padding: .1em .45em;
+      border-radius: 4px;
+      color: var(--gold-dk);
+    }
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
       font-size: .95rem;
       color: var(--text);
       line-height: 1.85;
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
+      margin-bottom: .5rem;
     }
-    .chapter-article li { margin-bottom: .35rem; }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
 
     /* ===== Pull Quote ===== */
     .pull-quote {
@@ -326,14 +339,27 @@
     }
     .article-table tbody tr:last-child td { border-bottom: none; }
     .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
-    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table td:first-child { font-weight: 600; color: var(--text); }
+    .article-table th.num, .article-table td.num { text-align: right; }
 
     /* ===== Remedy Cards ===== */
     .remedy-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1rem;
       margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2, .remedy-grid.cols-3 { grid-template-columns: 1fr; }
     }
     .remedy-card {
       background: var(--bg3);
@@ -436,6 +462,25 @@
       font-size: .82rem;
       letter-spacing: .08em;
     }
+
+    /* ===== Footnotes ===== */
+    .footnote {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    .footnote p {
+      font-size: .78rem;
+      color: var(--text3);
+      line-height: 1.7;
+      margin-bottom: .35rem;
+    }
+    .chapter-article sup.fn {
+      color: var(--gold);
+      font-size: .68em;
+      font-weight: 600;
+      margin-left: .05em;
+    }
   </style>
 </head>
 <body>
@@ -472,33 +517,35 @@
       <div class="sidebar-label">全书目录</div>
       <ul class="book-toc">
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title">第1章 公司治理</a>
+          <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title" style="text-decoration:none;">第1章 公司治理</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第2章：财务与投资.html" class="toc-chapter-title">第2章 财务与投资</a>
+          <a href="《巴菲特致股东的信》 第2章：财务与投资.html" class="toc-chapter-title" style="text-decoration:none;">第2章 财务与投资</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title">第3章 投资替代品</a>
+          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title" style="text-decoration:none;">第3章 投资替代品</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第4章：普通股投资.html" class="toc-chapter-title">第4章 普通股投资</a>
+          <a href="《巴菲特致股东的信》 第4章：普通股投资.html" class="toc-chapter-title" style="text-decoration:none;">第4章 普通股投资</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title">第5章 兼并与收购</a>
+          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title" style="text-decoration:none;">第5章 兼并与收购</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title">第6章 估值与会计</a>
+          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title" style="text-decoration:none;">第6章 估值与会计</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title">第7章 会计诡计</a>
+          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title" style="text-decoration:none;">第7章 会计诡计</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第8章：会计政策.html" class="toc-chapter-title">第8章 会计政策</a>
+          <a href="《巴菲特致股东的信》 第8章：会计政策.html" class="toc-chapter-title" style="text-decoration:none;">第8章 会计政策</a>
         </li>
-        <li class="toc-chapter open">
+        <li class="toc-chapter">
           <span class="toc-chapter-title current-chapter">第9章 税务问题</span>
         </li>
         <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 后记.html" class="toc-chapter-title">后记</a>
+        </li>        <li class="toc-chapter">
           <a href="《巴菲特致股东的信》 附录：投资检查清单.html" class="toc-chapter-title" style="text-decoration:none;">附录 投资检查清单</a>
         </li>
       </ul>
@@ -506,17 +553,30 @@
       <!-- 本章目录 -->
       <div class="sidebar-label sidebar-label-sub">本章目录</div>
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li><a href="#section-a">A. 公司税负的分配</a></li>
-        <li><a href="#section-a1" class="sub">一、新税法对股东的整体影响</a></li>
-        <li><a href="#section-a2" class="sub">二、公司税率降低收益的归属分析</a></li>
-        <li><a href="#section-a3" class="sub">三、新税法具体条款的影响</a></li>
-        <li><a href="#section-a4" class="sub">四、关于伯克希尔税务的常见误解</a></li>
-        <li><a href="#section-a5" class="sub">五、对未来税率走势的判断</a></li>
-        <li><a href="#section-b">B. 税务和投资的哲学</a></li>
-        <li><a href="#section-b1" class="sub">一、税务哲学与纳税贡献</a></li>
-        <li><a href="#section-b2" class="sub">二、税务结构与持股形式的影响</a></li>
-        <li><a href="#section-b3" class="sub">三、递延税务与复利：阿伯纳的故事</a></li>
-        <li><a href="#section-b4" class="sub">四、税务制度的宏观视角</a></li>
+        <li><a href="#section-1">一、公司税负的分配</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 1986年税改的总体影响</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 公司减税：究竟谁受益？</a></li>
+        <li><a href="#section-1-3" class="sub">1.3 对低税率可持续性的担忧</a></li>
+        <li><a href="#section-1-4" class="sub">1.4 公司资本利得税率提高</a></li>
+        <li><a href="#section-1-5" class="sub">1.5 保险公司的股息与利息税负增加</a></li>
+        <li><a href="#section-1-6" class="sub">1.6 提前缴税为何损害财富积累</a></li>
+        <li><a href="#section-1-7" class="sub">1.7 为什么保险业难以把新增税负转给客户</a></li>
+        <li><a href="#section-1-8" class="sub">1.8 “新起点”安排：一次性缓冲</a></li>
+        <li><a href="#section-1-9" class="sub">1.9 清算中的双重征税</a></li>
+        <li><a href="#section-1-10" class="sub">1.10 1998年补充：两个常见误解</a></li>
+        <li><a href="#section-2">二、税务与投资的哲学</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 纳税贡献与税收公平</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 长期持有：投资原则优先，税务优势其次</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 阿伯纳的故事：为什么缴税时间影响复利</a></li>
+        <li><a href="#section-2-4" class="sub">2.4 为什么偏好全资收购</a></li>
+        <li><a href="#section-2-5" class="sub">2.5 对“善于避税”指责的回应</a></li>
+        <li><a href="#section-2-6" class="sub">2.6 申报工作与纳税自豪感</a></li>
+        <li><a href="#section-2-7" class="sub">2.7 企业所得税占比下降与政策责任</a></li>
+        <li><a href="#section-2-8" class="sub">2.8 希望纳税额随企业繁荣共同增长</a></li>
+        <li><a href="#section-3">三、原文注释与补充资料</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 内容来源年份</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 原文补充的纳税数据</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 1998年信件：股东也在承担公共支出</a></li>
       </ul>
     </aside>
 
@@ -524,316 +584,330 @@
     <article class="chapter-article">
 
       <header class="article-header">
-        <div class="article-eyebrow">巴菲特致股东的信 · 第9章</div>
-        <h1 class="article-title">税务问题</h1>
+        <div class="article-eyebrow">巴菲特致股东的信 · 第9章 税务问题</div>
+        <h1 class="article-title">第9章　税务问题</h1>
         <div class="article-meta">
           <span><strong>作者</strong>沃伦·巴菲特</span>
-          <span><strong>主题</strong>公司税负、税务哲学、递延税务、复利效应</span>
+          <span><strong>主题</strong>公司税负的分配、税务与投资的哲学</span>
+          <span><strong>材料跨度</strong>1986—2003 年</span>
         </div>
       </header>
 
-      <!-- ===== A. 公司税负的分配 ===== -->
-      <section id="section-a">
-        <h2>A. 公司税负的分配</h2>
+      <section id="section-1">
+        <h2>一、公司税负的分配</h2>
 
-        <div class="pull-quote">
-          1986年税务改革法对伯克希尔的业务产生了重要且多方面的影响。总体而言，<strong>新法案对伯克希尔的财务影响是负面的</strong>，与旧法案相比，公司价值增长速度有所放缓。
-        </div>
-
-        <h3 id="section-a1">一、新税法对股东的整体影响</h3>
-        <p>在旧税法下，每股企业价值增长1美元，股东可获得税后收益 <strong>0.80 美元</strong>；新税法下，该数值降至 <strong>0.72 美元</strong>（反映个人资本税率从20%上调至28%的最高限）。</p>
-
-        <h3 id="section-a2">二、公司税率降低收益的归属分析</h3>
-
-        <h4>2.1 核心命题</h4>
-        <p>公司税率降低的受益方，取决于两个关键变量：<strong>商业特许权的强弱</strong>，以及<strong>特许权利润率是否受到监管</strong>。</p>
-
-        <h4>2.2 三类情形对比</h4>
-        <table class="article-table">
-          <thead>
-            <tr><th>企业类型</th><th>典型行业</th><th>税率降低的受益方</th><th>原因</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>受监管 + 强特许权</td><td>电力公司</td><td>消费者</td><td>监管机构要求降价回馈</td></tr>
-            <tr><td>价格充分竞争 + 弱特许权</td><td>铝业、汽车、百货</td><td>消费者</td><td>市场竞争发挥监管作用，税率变化最终体现于价格</td></tr>
-            <tr><td><strong>不受监管 + 强特许权</strong></td><td><strong>伯克希尔旗下多数企业</strong></td><td><strong>公司与股东</strong></td><td>无监管机制强制降价，税收红利全部留存</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
           <div class="callout-body">
-            <div class="callout-title">类比：脑科医生或律师</div>
-            <p>附近最优秀的脑科医生或律师，若最高个人税率从50%降至28%，他们真的会降低收费吗？答案显而易见——税收优惠进入了他们的口袋，而非消费者。</p>
+            <div class="callout-title">原文背景</div>
+            <p><strong>第9章：税务问题</strong>　本节内容来自1986年、1998年的相关论述。文中的税率、税法与预测均对应当时背景，不代表现行规定；“我们”指作者及伯克希尔管理层。</p>
           </div>
         </div>
-      </section>
 
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- ===== 三、新税法具体条款的影响 ===== -->
-      <section id="section-a3">
-        <h2>三、新税法具体条款的影响</h2>
-
-        <h4>3.1 公司普通收入税率调整</h4>
+        <h3 id="section-1-1">1.1 1986年税改的总体影响</h3>
+        <p>1986年税务改革法对伯克希尔的业务影响广泛。新法有不少值得肯定之处，但整体财务影响仍然偏负面：与旧法相比，伯克希尔价值增长的速度至少会放缓，股东受到的负面影响更大。</p>
+        <p>假设每股企业价值每增加1美元，股价也相应上涨1美元，并按个人资本利得的最高税率计算：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>指标</th><th>数据</th></tr>
-          </thead>
+          <thead><tr><th>项目</th><th class="num">旧税法</th><th class="num">新税法</th></tr></thead>
           <tbody>
-            <tr><td>税率变化</td><td>从 <strong>1986年的46%</strong> 降至 <strong>1988年的34%</strong></td></tr>
-            <tr><td>影响评级</td><td>✅ <strong>正面</strong></td></tr>
-            <tr><td>受益范围</td><td>伯克希尔本身，及大都会/ABC、华盛顿邮报等主要投资持股公司</td></tr>
+            <tr><td>个人资本利得最高税率</td><td class="num">20%</td><td class="num">28%</td></tr>
+            <tr><td>每1美元增值对应的股东税后收益</td><td class="num">0.80美元</td><td class="num">0.72美元</td></tr>
           </tbody>
         </table>
 
-        <h4>3.2 公司资本利得税率调整（1987年生效）</h4>
-        <p>税率从 <strong>28% 提高至 34%</strong>。影响评级：⚠️ <strong>重大负面</strong></p>
+        <h3 id="section-1-2">1.2 公司减税：究竟谁受益？</h3>
+        <p>新法将公司普通收入税率从<strong>1986年的46%降至1988年的34%</strong>。这对伯克希尔及其两大投资对象——大都会/ABC公司和《华盛顿邮报》公司——都有利。</p>
+        <p>公司税究竟由企业还是客户承担，多年来一直存在争论。争论通常围绕增税展开，但同样适用于减税。</p>
         <table class="article-table">
-          <thead>
-            <tr><th>项目</th><th>数据</th></tr>
-          </thead>
+          <thead><tr><th>观点</th><th>基本主张</th><th>对税率变化的推论</th></tr></thead>
           <tbody>
-            <tr><td>三大主要投资持股（大都会、盖可保险、华盛顿邮报）年末市值</td><td>超过 <strong>17亿美元</strong>（约占伯克希尔净资产75%）</td></tr>
-            <tr><td>上述三家公司年度贡献收入</td><td>仅 <strong>900万美元</strong></td></tr>
-            <tr><td>权益类投资未实现利润（年底）</td><td><strong>12亿美元</strong></td></tr>
-            <tr><td>因新税率调整导致GAAP净资产减少（递延税项变化）</td><td>约 <strong>7300万美元</strong></td></tr>
+            <tr><td>公司只是税负的“传递管道”</td><td>企业通过价格把税负转给客户，自身并不真正承担</td><td>增税导致涨价；减税导致降价，而不是利润增加</td></tr>
+            <tr><td>公司自行承担税负</td><td>企业吸收税收成本，客户不受影响</td><td>税率变化主要影响公司利润，不影响价格</td></tr>
+          </tbody>
+        </table>
+        <p>实际结果取决于<strong>企业的商业特许权有多强，以及利润率是否受到监管</strong>，不能一概而论。这不仅关系到投资者和管理层，也关系到政策制定者。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">术语说明：商业特许权</div>
+            <p>本文所说的“特许权”，不只是法律授予的经营许可，也包括品牌、专业能力、客户关系等带来的持久竞争优势。优势越强，企业通常越能维持定价，不必单靠降价争夺客户。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead><tr><th>企业所处环境</th><th>税率变化主要影响什么</th><th>原因</th></tr></thead>
+          <tbody>
+            <tr><td>特许权强，税后利润受到较精确监管，如电力公司</td><td>产品价格</td><td>税率下降，价格随之下降；税率上升，价格随之上升，尽管调整可能滞后</td></tr>
+            <tr><td>特许权弱，价格竞争激烈</td><td>产品价格多于公司利润</td><td>市场竞争相当于一种监管机制，虽然缓慢、无规则，却通常有效，其作用类似电力行业的公用事业监管委员会</td></tr>
+            <tr><td>特许权强，利润不受监管</td><td>公司及股东的收益</td><td>企业有能力维持价格，也没有监管者要求其把减税收益让给客户</td></tr>
+          </tbody>
+        </table>
+        <p>伯克希尔许多全资或部分持股的企业都属于第三类。因此，减税的好处大部分会留给我们，而不是消费者。这样说或许不讨喜，却是事实。</p>
+        <p>想想当地最优秀的脑科医生或律师：如果个人最高税率从50%降到28%，他们会因此主动降低收费吗？这些专业人士在自己的领域也拥有类似的竞争优势。</p>
+        <div class="pull-quote"><strong>核心启示</strong>：决定减税收益归属的，不只是税法，更是企业的定价能力和竞争环境。</div>
+
+        <h3 id="section-1-3">1.3 对低税率可持续性的担忧</h3>
+        <p>尽管降税有利于我们的业务和投资者，我们仍认为，计划于1988年实施的个人与公司税率并不现实。这样的税率很可能给联邦政府带来财政困难，并与稳定物价的目标相冲突。</p>
+        <p>我们当时判断，最终——例如五年之内——<strong>更高的税率或更高的通胀率几乎必然出现</strong>。即使两者同时出现，也不令人意外。</p>
+
+        <h3 id="section-1-4">1.4 公司资本利得税率提高</h3>
+        <p>公司资本利得税率自1987年起从<strong>28%提高至34%</strong>，对伯克希尔有重大负面影响，因为我们预计未来公司价值增长的重要来源是资本利得。</p>
+        <table class="article-table">
+          <thead><tr><th>项目</th><th>当时的情况</th></tr></thead>
+          <tbody>
+            <tr><td>三项主要投资</td><td>大都会/ABC、盖可保险、《华盛顿邮报》</td></tr>
+            <tr><td>年末合计市值</td><td>超过17亿美元</td></tr>
+            <tr><td>相当于伯克希尔净资产的比例</td><td>接近75%</td></tr>
+            <tr><td>每年给伯克希尔带来的收入</td><td>约900万美元</td></tr>
+            <tr><td>主要价值来源</td><td>三家公司保留很高比例的利润，我们预计这些留存利润最终会转化为伯克希尔的资本利得</td></tr>
+          </tbody>
+        </table>
+        <p>新税率适用于未来实现的资本利得，<strong>包括新法生效前已经积累、但尚未实现的收益</strong>。</p>
+        <p>当时年末，伯克希尔权益类投资约有12亿美元未实现收益。按当时的GAAP（公认会计原则），相关递延所得税负债仍以28%计提，而不是34%。预计会计规定很快会调整；届时约<strong>7300万美元</strong>将从GAAP净资产转入递延所得税负债，净资产相应减少。</p>
+
+        <h3 id="section-1-5">1.5 保险公司的股息与利息税负增加</h3>
+        <p>新税法提高了保险公司投资收入的税负。下表中的“应税比例”指收入中需要纳入计税的部分，<strong>不等于对整笔收入直接适用的税率</strong>。</p>
+        <table class="article-table">
+          <thead><tr><th>适用对象</th><th>新规定</th><th>与旧法相比的变化</th></tr></thead>
+          <tbody>
+            <tr><td>收到美国国内公司股息的公司</td><td>股息的20%计入应税收入</td><td>原先通常为15%</td></tr>
+            <tr><td>财产险与灾害险公司</td><td>对规定日期之后购入的股票，其股息剩余80%中的15%也须计税</td><td>进一步缩小股息免税范围</td></tr>
+            <tr><td>财产险与灾害险公司</td><td>1986年8月7日之后购入的免税债券，利息仅有85%免税</td><td>原本免税的利息中，15%须计税</td></tr>
           </tbody>
         </table>
 
         <div class="callout warn">
           <div class="callout-icon">⚠️</div>
           <div class="callout-body">
-            <div class="callout-title">注意</div>
-            <p>三大持股公司的价值主要以高比例留存利润形式存在，预计最终以资本利得形式贡献收益。资本利得税率的提升，将直接侵蚀未来这部分收益。GAAP目前对未实现利润递延所得税适用28%税率，该规定预计很快将更改为34%。</p>
+            <p><strong>原文日期待核：</strong>原文将股票购入的分界日期写作“1987年8月7日”，而债券写作“1986年8月7日”。此处保留两者差异，不擅自统一；如需用于税务研究，应核对原始信件或法条。</p>
           </div>
         </div>
 
-        <h4>3.3 保险公司分红与利息税负变化</h4>
-        <p>新税法对财产险/灾害险公司的投资收益征税大幅加重，具体变化如下：</p>
+        <p>后两项规定尤其重要，会使未来投资收入的税后收益明显低于旧法下的水平。与此前预期相比，我们最乐观的估计是：新税法最终会使保险公司的盈利能力<strong>至少下降10%</strong>。</p>
+
+        <h3 id="section-1-6">1.6 提前缴税为何损害财富积累</h3>
+        <p>新法还显著提前了财产险与灾害险公司的缴税时间。</p>
         <table class="article-table">
-          <thead>
-            <tr><th>变化项</th><th>旧税法</th><th>新税法</th><th>适用范围</th></tr>
-          </thead>
+          <thead><tr><th>规定</th><th>直接影响</th></tr></thead>
           <tbody>
-            <tr><td>国内公司分红不计入应税收入比例</td><td>85%（即15%课税）</td><td>80%（即20%课税）</td><td>所有公司</td></tr>
-            <tr><td>1987年8月7日后购入股票的剩余80%部分</td><td>无额外税负</td><td>其中15%需课税</td><td><strong>仅财产险/灾害险公司</strong></td></tr>
-            <tr><td>1986年8月7日后购入免税债券的付息</td><td>100%免税</td><td>仅85%免税</td><td><strong>仅财产险/灾害险公司</strong></td></tr>
+            <tr><td>税务申报中的损失准备金按折现基础计算</td><td>减少当期可抵扣金额，提高应税收入</td></tr>
+            <tr><td>分六年实施，将未到期保费准备金按新规定计入应税收入</td><td>提前确认应税收入，加快税款支付</td></tr>
           </tbody>
         </table>
+        <p>这些规定不改变股东报告中列示的年度所得税费用，却会大幅提前实际缴税。原本可以留在企业内使用的资金，需要更早交给政府，从而削弱企业的盈利和财富积累能力。</p>
+        <p>作者用一个极端比喻说明：假如一个人刚满21岁，就必须为一生的全部收入缴税，而不是等到去世时再缴，前一种安排下积累的财富和遗产，可能只有后一种的一小部分。</p>
+        <div class="pull-quote"><strong>换句话说</strong>：税收成本不仅取决于“交多少”，还取决于“何时交”。晚交的税款在交出之前仍可用于投资，继续产生收益；提前缴税则失去了这段时间的收益。</div>
 
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">综合影响</div>
-            <p>与旧税法相比，预计新税法将使伯克希尔保险公司的盈利能力<strong>至少下降10%</strong>。</p>
-          </div>
-        </div>
-
-        <h4>3.4 保险公司纳税时间加速</h4>
-        <p>新税法新增两项规定，不改变全年应税总额，但<strong>大幅加速税款支付节奏</strong>（前端化），等效于压缩了企业持有递延税款的时间价值：</p>
-        <ul>
-          <li><strong>损失准备金折扣规定</strong>：纳税申报时须对损失准备金打折扣，减少抵扣、提高应税收入。</li>
-          <li><strong>预收保费准备金并入规定</strong>：分期六年，将预收保费准备金并入应税收入。</li>
-        </ul>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">类比</div>
-            <p>若一名21岁的年轻人被要求立即为其一生全部收入缴税，而非到去世时再缴，其终身财富及遗产将大幅缩水——加速纳税的逻辑与此相同。</p>
-          </div>
-        </div>
-
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- ===== 四、关于伯克希尔税务的常见误解 ===== -->
-      <section id="section-a4">
-        <h2>四、关于伯克希尔税务的常见误解</h2>
-
-        <h4>4.1 资本利得并无特别优势</h4>
-        <p>伯克希尔应税收入统一适用<strong>35%税率</strong>，无论来源是资本利得还是运营收入。这意味着：</p>
-
-        <div class="pull-quote">
-          伯克希尔长期资本利得税率，<strong>比个人获得同等利得所适用的税率高出整整75%</strong>。
-        </div>
-
-        <h4>4.2 分红抵扣比例低于通常认知</h4>
+        <h3 id="section-1-7">1.7 为什么保险业难以把新增税负转给客户</h3>
+        <p>前文说，竞争激烈行业的税负变化通常会反映在价格中。那么，竞争同样激烈的财产险与灾害险行业，为什么还会遭受利润损失？</p>
+        <p>原因是：<strong>不同大型保险公司的税务处境差异很大，边际税率并不一致。</strong></p>
         <table class="article-table">
-          <thead>
-            <tr><th>持股主体</th><th>分红不计入应税收入比例</th></tr>
-          </thead>
+          <thead><tr><th>差异来源</th><th>对税负的影响</th></tr></thead>
           <tbody>
-            <tr><td>一般公司（含非保险类子公司）</td><td><strong>70%</strong></td></tr>
-            <tr><td>伯克希尔保险公司（持有绝大部分股票投资）</td><td><strong>59.5%</strong></td></tr>
+            <tr><td>新的替代性最低税制度</td><td>对部分公司影响重大，对另一些公司却没有影响</td></tr>
+            <tr><td>过去巨额亏损形成的税务抵扣额</td><td>使部分公司在随后至少几年内大幅减少税款</td></tr>
+            <tr><td>保险业务与非保险业务合并申报</td><td>使部分公司的整体税务结果不同于纯保险公司</td></tr>
           </tbody>
         </table>
+        <p>相比之下，铝业、汽车业和百货业等多数价格竞争激烈的行业，大型企业通常依据较一致的税务规则竞争。</p>
+        <div class="pull-quote"><strong>核心启示</strong>：如果同业普遍面临相同的税负增加，价格更可能随之调整。但如果部分竞争对手几乎不受影响，它们就没有同样的涨价压力，税负较重的保险公司也难以提价。结果是，保险公司必须自行承担新增负担，而不能像一般竞争性行业那样把税负传给消费者。</div>
+
+        <h3 id="section-1-8">1.8 “新起点”安排：一次性缓冲</h3>
+        <p>1987年1月1日生效的“新起点”安排，可以抵消部分新增税负。它将1986年12月31日税务口径下的损失准备金，转为新法要求的折现基础。</p>
+        <p>股东财务报告中的准备金则仍按原方式列示，不作折现，结构化和解赔付除外。</p>
+        <p>这项过渡安排带来一定的<strong>重复抵扣效益</strong>：相关损失已经在1986年及以前全额抵扣，转入新制度后，其中一部分还能在1987年及以后获得税务抵扣。</p>
 
         <div class="callout info">
           <div class="callout-icon">📝</div>
           <div class="callout-body">
-            <div class="callout-title">结论</div>
-            <p>对伯克希尔而言，1美元分红的税后价值高于1美元普通运营收入，但远未达到通常所假设的程度。</p>
+            <p><strong>理解提示：</strong>这里讨论的是旧有未付赔款准备金转换计税基础时的过渡优惠，并不是同一笔新发生的损失可以任意重复抵扣。原文“1987年及以后发生”与“1986年及以前已抵扣”的措辞容易混淆，应结合这一过渡背景理解。</p>
           </div>
         </div>
-      </section>
 
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+        <p>按当时的GAAP，这项收益不会立即一次性计入净资产，而会在随后几年通过降低所得税费用进入损益表，再增加净资产；相关会计规定未来也可能改变。</p>
+        <p>预计总收益为<strong>3000万至4000万美元</strong>。不过，它只是一次性优惠；其他保险税务变化会持续产生影响，而且许多不利影响将随时间推移加重。</p>
 
-      <!-- ===== 五、对未来税率走势的判断 ===== -->
-      <section id="section-a5">
-        <h2>五、对未来税率走势的判断</h2>
+        <h3 id="section-1-9">1.9 清算中的双重征税</h3>
+        <p>新税法废除了原文所称的《通用公用事业法案》。更准确地说，这里指的是<strong>General Utilities原则</strong>，即涉及公司分配增值资产时税务处理的一项旧原则，而不是公用事业行业的一部法规。</p>
+        <p>废除后，公司清算可能涉及两个层面的税款：</p>
+        <ol>
+          <li><strong>公司层面</strong>：对资产增值征税；</li>
+          <li><strong>股东层面</strong>：对股东取得的相关收益征税。</li>
+        </ol>
+        <p>旧制度下，公司层面的相关税款可以避免。原文以“税负翻番”形容变化，其核心是增加了一个征税层次，<strong>并不意味着所有情形下税额都恰好变为两倍</strong>。</p>
+        <p>假设伯克希尔清算——作者明确表示这不会发生——即使资产仍按相同价格出售，股东在新法下最终拿到的钱也会比旧法下少得多。</p>
+        <p>这对投资估值有现实意义。石油与天然气生产企业、相关媒体企业以及房地产企业等，即使经营状况没有恶化，若未来出售涉及这类税务安排，股东能够获得的净价值也可能大幅下降。作者认为，投资者和管理层当时尚未充分认识到这一变化。</p>
 
-        <div class="pull-quote large">
-          1988年规划税率（个人与公司）对我们而言完全不切实际。这些税率极可能给联邦财政带来麻烦，并与稳定价格的初衷相悖。我们预计，在五年内，将出现以下一种或两种情形：
-          <br/><br/>
-          更高的税率<br/>
-          更高的通货膨胀率
-        </div>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- ===== B. 税务和投资的哲学 ===== -->
-      <section id="section-b">
-        <h2>B. 税务和投资的哲学</h2>
-
-        <h3 id="section-b1">一、税务哲学与纳税贡献</h3>
-
-        <h4>1.1 联邦纳税规模</h4>
-        <p>伯克希尔是美国联邦政府的重要纳税人，历年直接纳税规模持续扩大：</p>
+        <h3 id="section-1-10">1.10 1998年补充：两个常见误解</h3>
+        <p>以下税率来自1998年的论述，与前文1986年税改背景下的税率不同。</p>
         <table class="article-table">
-          <thead>
-            <tr><th>年度</th><th>伯克希尔联邦所得税</th><th>全美公司所得税合计</th><th>伯克希尔占比</th></tr>
-          </thead>
+          <thead><tr><th>常见误解</th><th>实际情况</th><th>含义</th></tr></thead>
           <tbody>
-            <tr><td>1985</td><td>1.32 亿美元</td><td>610 亿美元</td><td>—</td></tr>
-            <tr><td>1993</td><td>3.90 亿美元（运营 2 亿 + 资本利得 1.9 亿）</td><td>—</td><td>约 0.5%</td></tr>
-            <tr><td>1995</td><td>2.86 亿美元</td><td>1,570 亿美元</td><td>—</td></tr>
-            <tr><td>2002</td><td>17.5 亿美元</td><td>—</td><td>—</td></tr>
-            <tr><td>2003</td><td>33 亿美元</td><td>1,320 亿美元</td><td>约 2.5%</td></tr>
+            <tr><td>资本利得对伯克希尔特别有税务吸引力</td><td>当时公司资本利得和经营收入均适用35%的税率；伯克希尔长期资本利得税率比取得同等收益的个人高75%</td><td>公司并没有个人投资者那样的长期资本利得税率优势</td></tr>
+            <tr><td>伯克希尔收到的股息都能按70%的比例免于计入应税收入</td><td>多数公司及伯克希尔非保险子公司适用70%的排除比例，但伯克希尔股票投资几乎都由保险公司持有，其排除比例为59.5%</td><td>1美元股息的税后价值确实高于1美元普通经营收入，但优势没有通常认为的那么大</td></tr>
           </tbody>
         </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-2">
+        <h2>二、税务与投资的哲学</h2>
 
         <div class="callout info">
           <div class="callout-icon">📝</div>
           <div class="callout-body">
-            <div class="callout-title">换算参考</div>
-            <p>1993 年，伯克希尔在被投资公司中持有的对应份额额外纳税超 <strong>4 亿美元</strong>（不体现于财务报表，但真实存在）。2003 财年联邦税收总计 1.782 万亿美元。若另有 540 个与伯克希尔同等规模的纳税主体，全美 2.9 亿公民及其他所有企业将无需再向联邦政府缴纳任何所得税、社会保障税、消费税或遗产税。</p>
+            <div class="callout-title">原文背景</div>
+            <p>本节内容来自1993年、2000年和2003年的相关论述，另附1998年信件的补充材料。金额与税务安排均应放在相应历史背景下理解。</p>
           </div>
         </div>
 
-        <h4>1.2 纳税合规情况</h4>
-        <ul>
-          <li>伯克希尔纳税规模<strong>长期位列全美前十</strong>；</li>
-          <li>2002 年联邦纳税申报单超 <strong>8,905 页</strong>，两份打印装订合计超 <strong>7 英尺</strong>；</li>
-          <li>总部仅 <strong>15.8 人</strong>的精干团队完成全部申报工作。</li>
-        </ul>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- ===== 二、税务结构与持股形式的影响 ===== -->
-      <section id="section-b2">
-        <h2>二、税务结构与持股形式的影响</h2>
-
-        <h4>2.1 持股比例与税负对比</h4>
-        <p>伯克希尔偏好<strong>100% 或 80% 以上控股</strong>，背后有强烈的税务逻辑：</p>
+        <h3 id="section-2-1">2.1 纳税贡献与税收公平</h3>
+        <p>伯克希尔是美国联邦政府的重要纳税人。1993年的直接和间接税负如下：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>持股场景</th><th>100% 控股子公司</th><th>持有可流通证券（如 10%）</th></tr>
-          </thead>
+          <thead><tr><th>纳税来源</th><th class="num">金额</th></tr></thead>
           <tbody>
-            <tr><td>子公司税后盈利 100 万元</td><td>全额归属伯克希尔，<strong>分红无需再缴税</strong></td><td>对应份额 100 万元</td></tr>
-            <tr><td>以分红形式获得</td><td>免税</td><td>缴纳 <strong>14 万美元</strong>（税率约 14%）</td></tr>
-            <tr><td>以资本利得形式实现</td><td>出售时"税务成本"含留存利润，<strong>无资本利得税</strong></td><td>缴纳 <strong>不低于 35 万美元</strong>（税率 35%～40%）</td></tr>
-            <tr><td>政府"合伙"次数</td><td><strong>1 次</strong></td><td><strong>2 次</strong></td></tr>
+            <tr><td>伯克希尔经营业务对应的联邦所得税</td><td class="num">2亿美元</td></tr>
+            <tr><td>已实现资本利得对应的联邦所得税</td><td class="num">1.9亿美元</td></tr>
+            <tr><td>伯克希尔直接缴纳合计</td><td class="num">3.9亿美元</td></tr>
+            <tr><td>被投资公司缴税中，按伯克希尔持股比例归属的份额</td><td class="num">超过4亿美元</td></tr>
           </tbody>
         </table>
+        <p>最后一项不会直接出现在伯克希尔的财务报表中，但确实存在。直接与间接税款合计，约占当年美国公司联邦税款总额的<strong>0.5%</strong>。</p>
+        <p>芒格和我对自己所持股份涉及的税负毫无怨言。市场经济给予我们的回报，远高于许多同样努力、甚至更努力的人。税收制度应当、也确实在一定程度上弥补这种不平等。即使纳税很多，我们仍然享有格外优厚的待遇。</p>
 
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">注意</div>
-            <p>持有可流通证券时，即便选择暂不实现资本利得以延迟纳税，该税款最终仍须缴纳。</p>
-          </div>
-        </div>
-      </section>
+        <h3 id="section-2-2">2.2 长期持有：投资原则优先，税务优势其次</h3>
+        <p>如果把伯克希尔和股东作为一个整体，改用合伙企业或S型公司等商业组织形式，税负可能更低。但出于多种原因，这些形式并不适合伯克希尔。</p>
+        <p>长期投资策略缓解了公司形式带来的税务劣势，但远未完全消除。我们坚持“买入并持有”，有三个原因：</p>
+        <ol>
+          <li><strong>投资判断</strong>：我们认为这是最稳健的方法，即使管理免税机构，也会这样做。</li>
+          <li><strong>性格契合</strong>：长期持有符合我们追求平和的性格。</li>
+          <li><strong>递延纳税</strong>：股票收益通常在出售、实现后才需缴税，持有期间可以推迟支付资本利得税。</li>
+        </ol>
 
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- ===== 三、递延税务与复利：阿伯纳的故事 ===== -->
-      <section id="section-b3">
-        <h2>三、递延税务与复利：阿伯纳的故事</h2>
-
-        <h4>3.1 核心思想</h4>
-        <p>《李尔·阿伯纳》漫画中的"老摩西建议"揭示了<strong>递延税务 × 复利</strong>的威力。以 1 美元为起点、每年翻番为假设，对比两种策略：</p>
+        <h3 id="section-2-3">2.3 阿伯纳的故事：为什么缴税时间影响复利</h3>
+        <p>年轻时，我喜欢读连环漫画《李尔·阿伯纳》（<em>Li'l Abner</em>）。其中一个故事本可以教会我递延纳税的价值，只是当时我没有领会。</p>
+        <p>阿伯纳住在多帕奇，生活快活，却邋遢而有些迟钝。他迷恋纽约女子爱普丝娜塔·范·克拉麦克斯（Appassionatta Van Climax），但自己只有一枚1美元银币，对方却只想嫁给百万富翁。</p>
+        <p>他向当地无所不知的老摩西求助。老摩西告诉他，只要把钱翻番20次，就能成为百万富翁：</p>
+        <div class="poem"><strong>1 → 2 → 4 → 8 → 16 → …… → 1,048,576美元。</strong></div>
+        <p>后来，阿伯纳在一家小客栈把1美元投进老虎机，意外赢得满地钞票。但他机械地执行“翻番”的指令，只捡起2美元，就出门寻找下一次翻番的机会。此后，我不再追看阿伯纳，转而阅读格雷厄姆。</p>
+        <p>老摩西的建议有两个漏洞：既没想到阿伯纳会如此死板，也没考虑税收。</p>
+        <p>假设初始本金为1美元，每年税前收益都能翻番，联邦所得税率为35%：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>策略</th><th>描述</th><th>27.5 年后税前金额</th><th>最终缴税</th><th>税后所得</th></tr>
-          </thead>
+          <thead><tr><th>投资与纳税方式</th><th>时间</th><th>结果</th></tr></thead>
           <tbody>
-            <tr><td><strong>频繁交易</strong>（每年翻番后纳税 35%）</td><td>每年实现收益并缴税，再以税后金额投入下一轮</td><td>—</td><td>分散缴纳</td><td>约 <strong>2.24 万美元</strong>（20 年）</td></tr>
-            <tr><td><strong>单笔持有</strong>（持有 27.5 年，仅末期纳税）</td><td>一次性投资，内部复利增长，仅在最终出售时缴税</td><td>约 <strong>2 亿美元</strong></td><td>约 7,000 万美元</td><td>约 <strong>1.3 亿美元</strong></td></tr>
+            <tr><td>每年实现收益并缴税，再将余额投入下一轮</td><td>20年</td><td>约22,370美元</td></tr>
+            <tr><td>继续每年实现收益并缴税</td><td>再约7.5年，合计约27.5年</td><td>才达到约100万美元</td></tr>
+            <tr><td>一次投资后长期持有，每年在内部翻番，最后才缴税</td><td>约27.5年</td><td>税前约2亿美元，最后缴税约7000万美元，税后仍约1.3亿美元</td></tr>
           </tbody>
         </table>
+        <p>作者以玩笑收尾：如果阿伯纳拥有这么多钱，对方恐怕会主动来求见；至于此时的阿伯纳还是否愿意接受对方，就是另一回事了。</p>
+        <div class="pull-quote"><strong>核心启示：递延纳税放大复利效果</strong><br/>每年收益翻番但立即缴纳35%的收益税，资金实际只能增至上一年的1.65倍；如果收益留在同一项投资内，暂不纳税，全部资金都能继续参与下一轮增长。在相同税前回报率下，一项内部持续复利的投资，可以比一连串同样成功、却不断实现收益并缴税的投资积累更多财富。<br/><br/>这是说明税收时点的极端算例，不是对现实投资回报的承诺。作者相信，许多伯克希尔股东早已理解这一点。</div>
 
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">关键结论</div>
-            <p>对于需缴税的投资者，在相同回报率下，<strong>单笔投资内部复利增长</strong>所积累的财富，远超<strong>频繁换手、多次纳税</strong>的策略。"买入并持有"不仅是投资哲学，也是合法、有效的税务优化路径。</p>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- ===== 四、税务制度的宏观视角 ===== -->
-      <section id="section-b4">
-        <h2>四、税务制度的宏观视角</h2>
-
-        <h4>4.1 公司所得税占联邦税收比重（历史趋势）</h4>
+        <h3 id="section-2-4">2.4 为什么偏好全资收购</h3>
+        <p>伯克希尔偏好购买一家公司的100%股权，而不只是少数权益，其中有重要的税务原因。按文中所述制度，<strong>持股达到80%及以上</strong>，比小比例持股更有利。</p>
+        <p>下表比较同样归属于伯克希尔的100万美元税后利润，在不同持股方式下的处理：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>年度</th><th>公司所得税占联邦税收比重</th></tr>
-          </thead>
+          <thead><tr><th>情形</th><th>利润分红给伯克希尔</th><th>利润留存后，通过出售实现增值</th></tr></thead>
           <tbody>
-            <tr><td>1952（历史峰值）</td><td><strong>32%</strong></td></tr>
-            <tr><td>1983</td><td>略高于 2003 年（唯一例外）</td></tr>
-            <tr><td>2003</td><td><strong>7.4%</strong>（1934 年有记录以来次低）</td></tr>
+            <tr><td>全资持有：子公司税后盈利100万美元</td><td>全部归伯克希尔，无须为该笔集团内分红再次缴税</td><td>在文中所述税务安排下，留存利润增加税务成本；若售价因此比原买入价高100万美元，该部分不再产生资本利得税</td></tr>
+            <tr><td>少数持股：被投资公司税后盈利1000万美元，伯克希尔持股10%</td><td>对应100万美元股息约需缴税14万美元，当时多数股息的税负约为14%</td><td>对应资本利得的州与联邦税负不低于35万美元；通常税率为35%，有时达到40%</td></tr>
           </tbody>
         </table>
+        <p>全资持有情形下，出售时的税务成本包括买入价及之后的留存利润。作者同时强调，出售这样的子公司只是说明税务机制的假设，伯克希尔并不打算这样做。</p>
+        <p>少数持股时，可以通过不出售股票推迟35万美元的税款，但最终实现收益时仍须缴纳。</p>
+        <div class="pull-quote"><strong>换句话说</strong>：政府做“两次合伙人”，指利润先在被投资公司层面纳税，之后又在伯克希尔收取股息或实现资本利得时纳税；持股达到文中所述门槛并适用相关安排时，可以避免这第二层税负。“合伙人”只是征税的比喻，并非政府实际持有股份。</div>
+
+        <h3 id="section-2-5">2.5 对“善于避税”指责的回应</h3>
+        <p>2003年5月，《华盛顿邮报》刊登了我批评布什税务法案的专栏。13天后，美国财政部负责税收政策的助理部长帕梅拉·奥尔森（Pamela Olson）在谈及新法时，影射一位“中西部圣贤”像熟练拉小提琴一样精通税法，可以继续安稳地保住全部财富。我想，她说的就是我。</p>
+        <p>我的回应是：我的“小提琴技艺”既没让我登上卡内基音乐厅，甚至没让我参加过高中音乐会。伯克希尔代表股东和我，在2003年缴税<strong>33亿美元</strong>：</p>
+        <table class="article-table">
+          <thead><tr><th>比较项目</th><th class="num">伯克希尔所占比例</th></tr></thead>
+          <tbody>
+            <tr><td>2003财政年度美国公司所得税总额</td><td class="num">约2.5%</td></tr>
+            <tr><td>美国所有公司市值</td><td class="num">约1%</td></tr>
+          </tbody>
+        </table>
+        <p>伯克希尔长期位居全美前十大纳税人之列。</p>
 
         <div class="callout info">
           <div class="callout-icon">📝</div>
           <div class="callout-body">
-            <div class="callout-title">背景</div>
-            <p>2002、2003 年的税改法案对企业及大额投资者实施了显著减税，大型企业实际税率普遍低于法定 35% 的联邦税率。</p>
+            <p><strong>比喻说明：</strong>“拉小提琴”在这里讽刺的是巧妙利用税法降低税负的本领，而不是音乐水平。作者用实际纳税额反驳伯克希尔擅长逃避税负的暗示。</p>
           </div>
         </div>
 
-        <h4>4.2 巴菲特的立场</h4>
-        <ul>
-          <li>芒格与巴菲特对伯克希尔的纳税义务<strong>毫无怨言</strong>，认为社会回馈已属慷慨，税制对不平等具有合理补偿作用；</li>
-          <li>巴菲特于 2003 年 5 月在《华盛顿邮报》发表专栏，<strong>批评布什减税法案</strong>；</li>
-          <li>他认为，若税务问题需追责，对象应是<strong>国会与行政部门</strong>，而非单个优秀纳税人。</li>
-        </ul>
+        <p>为了说明规模，作者提出：如果另外还有约540个纳税主体，各自像伯克希尔一样缴纳33亿美元，其他公司和约2.9亿美国人就不必再缴纳联邦所得税、社会保障税、消费税或遗产税。</p>
+        <p>计算依据是：<strong>540 × 33亿美元＝1.782万亿美元</strong>，相当于2003财年全部联邦税收。</p>
+        <p>这里是数量级比较。严格按等式计算，540个同等规模的纳税主体已经足以覆盖总额；如果理解为“另外540个，再加伯克希尔”，合计会略高于总额。</p>
 
-        <div class="pull-quote large">
-          我们毫无怨言地缴纳这些税款……社会对我们的回馈，已经比对我们中大多数人所做的慷慨得多。
-          <cite>— 巴菲特</cite>
-        </div>
+        <h3 id="section-2-6">2.6 申报工作与纳税自豪感</h3>
+        <p>2002年，伯克希尔纳税17.5亿美元，联邦纳税申报表超过8905页。按要求准备两份后，叠起来超过7英尺，约合2.13米。</p>
+        <p>当时总部团队按原文统计只有15.8人。工作有时令人筋疲力尽，但想到公司切实分担了国家财政支出，我们仍感到兴奋和自豪。</p>
+
+        <h3 id="section-2-7">2.7 企业所得税占比下降与政策责任</h3>
+        <p>我能理解财政部对美国公司纳税状况的失望，但它应向国会和行政部门寻求补救，而不是指责伯克希尔。</p>
+        <table class="article-table">
+          <thead><tr><th>时期</th><th class="num">公司所得税占联邦全部税收的比例</th></tr></thead>
+          <tbody>
+            <tr><td>1952年高峰</td><td class="num">32%</td></tr>
+            <tr><td>2003财年</td><td class="num">7.4%</td></tr>
+          </tbody>
+        </table>
+        <p>除1983年外，2003年的比例是自1934年开始公布这项数据以来的最低值。</p>
+        <p>尽管如此，2002年和2003年的政府政策仍把公司及其投资者——尤其是大型投资者——的减税优惠作为重要内容。作者以“如果存在阶级战争，我所在的阶级显然胜出”表达批评：政策优惠明显偏向富裕群体。</p>
+        <p>许多大型公司首席执行官在降低税负方面颇有“拉小提琴”的本领，公司的实际税负远低于35%的联邦法定税率，相比之下，伯克希尔董事长似乎相形见绌。</p>
+
+        <h3 id="section-2-8">2.8 希望纳税额随企业繁荣共同增长</h3>
+        <table class="article-table">
+          <thead><tr><th>年份</th><th class="num">伯克希尔联邦所得税</th><th class="num">美国所有公司联邦所得税</th></tr></thead>
+          <tbody>
+            <tr><td>1985年</td><td class="num">1.32亿美元</td><td class="num">610亿美元</td></tr>
+            <tr><td>1995年</td><td class="num">2.86亿美元</td><td class="num">1570亿美元</td></tr>
+            <tr><td>2003年</td><td class="num">33亿美元</td><td class="num">1320亿美元</td></tr>
+          </tbody>
+        </table>
+        <p>2003年的占比为<strong>33 ÷ 1320＝2.5%</strong>，与前文一致。</p>
+        <p>我们希望伯克希尔未来纳税更多，因为这意味着公司更加繁荣；也希望其他美国公司的纳税额同步增长。作者认为，这才是奥尔森应当推动的方向。</p>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-3">
+        <h2>三、原文注释与补充资料</h2>
+
+        <h3 id="section-3-1">3.1 内容来源年份</h3>
+        <table class="article-table">
+          <thead><tr><th>原文章节</th><th>原文标注年份</th></tr></thead>
+          <tbody>
+            <tr><td>A. 公司税负的分配</td><td>1986年、1998年</td></tr>
+            <tr><td>B. 税务和投资的哲学</td><td>1993年、2000年、2003年</td></tr>
+          </tbody>
+        </table>
+        <p>各年份的税率和制度不同，不能把全文视为同一年度的税务说明。</p>
+
+        <h3 id="section-3-2">3.2 原文补充的纳税数据</h3>
+        <table class="article-table">
+          <thead><tr><th>年份</th><th class="num">原文脚注所列纳税额</th></tr></thead>
+          <tbody>
+            <tr><td>1996年</td><td class="num">8.6亿美元</td></tr>
+            <tr><td>1998年</td><td class="num">27亿美元</td></tr>
+            <tr><td>2003年</td><td class="num">33亿美元</td></tr>
+          </tbody>
+        </table>
+        <p>原文脚注使用“累计纳税”的表述，但未进一步说明累计期间；此处保留金额与年份，不将其解释为跨年累计总额。</p>
+
+        <h3 id="section-3-3">3.3 1998年信件：股东也在承担公共支出</h3>
+        <p>1998年的信件指出，伯克希尔规模扩大，美国财政部也是受益者之一。当年，伯克希尔和通用再保险公司已缴及将缴的联邦所得税合计<strong>27亿美元</strong>，相当于承担美国联邦政府超过半天的运营费用。</p>
+        <p>作者进一步用数量级比较说明：如果再有625家公司缴纳同样多的税款，其他公司和约2.7亿美国公民便无须再缴纳联邦所得税，或社会保障税、遗产税等其他联邦税。</p>
+        <div class="pull-quote"><strong>换句话说</strong>：股东即使没有亲自参与日常经营，所持企业缴纳的税款也在支持公共支出。这就是作者所说的“默默地待在屋子里做贡献”。</div>
+      </section>
 
       <div class="article-footer">— 完 —</div>
 
     </article>
   </div>
-
   <footer class="site-footer">
     <div class="footer-inner">
       <p>投资智慧 · 读书笔记</p>
@@ -841,9 +915,10 @@
   </footer>
 
   <script>
-    // 侧边栏滚动高亮
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
     const links = document.querySelectorAll('#sidebar-nav a');
     const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
 
     function onScroll() {
       const scrollY = window.scrollY + 132;
@@ -852,6 +927,12 @@
         if (sec.offsetTop <= scrollY) current = sec;
       }
       links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
 

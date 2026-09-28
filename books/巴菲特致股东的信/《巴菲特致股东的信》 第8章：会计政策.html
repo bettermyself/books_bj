@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>第8章：会计政策 · 巴菲特致股东的信</title>
+  <title>第8章　会计政策 · 巴菲特致股东的信</title>
   <link rel="stylesheet" href="../../assets/style.css" />
   <style>
     /* ===== 110% Scale ===== */
@@ -214,10 +214,9 @@
       border-left: 3px solid var(--gold);
     }
     .chapter-article h4 {
-      font-size: .95rem;
-      color: var(--gold-dk);
-      margin: 1.5rem 0 .7rem;
-      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin: 1.6rem 0 .75rem;
     }
     .chapter-article p {
       font-size: .95rem;
@@ -227,6 +226,28 @@
     }
     .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
     .chapter-article em { color: var(--text2); }
+    .chapter-article code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: .85em;
+      background: rgba(201,168,76,.1);
+      padding: .1em .45em;
+      border-radius: 4px;
+      color: var(--gold-dk);
+    }
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
 
     /* ===== Pull Quote ===== */
     .pull-quote {
@@ -318,14 +339,27 @@
     }
     .article-table tbody tr:last-child td { border-bottom: none; }
     .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
-    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .article-table td:first-child { font-weight: 600; color: var(--text); }
+    .article-table th.num, .article-table td.num { text-align: right; }
 
     /* ===== Remedy Cards ===== */
     .remedy-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1rem;
       margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2, .remedy-grid.cols-3 { grid-template-columns: 1fr; }
     }
     .remedy-card {
       background: var(--bg3);
@@ -428,6 +462,25 @@
       font-size: .82rem;
       letter-spacing: .08em;
     }
+
+    /* ===== Footnotes ===== */
+    .footnote {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    .footnote p {
+      font-size: .78rem;
+      color: var(--text3);
+      line-height: 1.7;
+      margin-bottom: .35rem;
+    }
+    .chapter-article sup.fn {
+      color: var(--gold);
+      font-size: .68em;
+      font-weight: 600;
+      margin-left: .05em;
+    }
   </style>
 </head>
 <body>
@@ -453,71 +506,76 @@
 
     <!-- 左侧导航 -->
     <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
       <div class="breadcrumb">
         <a href="../../index.html">书架</a>
         <span class="crumb-sep">/</span>
         <a href="index.html">巴菲特致股东的信</a>
       </div>
 
+      <!-- 全书目录树 -->
       <div class="sidebar-label">全书目录</div>
       <ul class="book-toc">
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title">第1章 公司治理</a>
+          <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title" style="text-decoration:none;">第1章 公司治理</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第2章：财务与投资.html" class="toc-chapter-title">第2章 财务与投资</a>
+          <a href="《巴菲特致股东的信》 第2章：财务与投资.html" class="toc-chapter-title" style="text-decoration:none;">第2章 财务与投资</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title">第3章 投资替代品</a>
+          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title" style="text-decoration:none;">第3章 投资替代品</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第4章：普通股投资.html" class="toc-chapter-title">第4章 普通股投资</a>
+          <a href="《巴菲特致股东的信》 第4章：普通股投资.html" class="toc-chapter-title" style="text-decoration:none;">第4章 普通股投资</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title">第5章 兼并与收购</a>
+          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title" style="text-decoration:none;">第5章 兼并与收购</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title">第6章 估值与会计</a>
+          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title" style="text-decoration:none;">第6章 估值与会计</a>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title">第7章 会计诡计</a>
+          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title" style="text-decoration:none;">第7章 会计诡计</a>
         </li>
         <li class="toc-chapter">
           <span class="toc-chapter-title current-chapter">第8章 会计政策</span>
         </li>
         <li class="toc-chapter">
-          <a href="《巴菲特致股东的信》 第9章：税务问题.html" class="toc-chapter-title">第9章 税务问题</a>
+          <a href="《巴菲特致股东的信》 第9章：税务问题.html" class="toc-chapter-title" style="text-decoration:none;">第9章 税务问题</a>
         </li>
         <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 后记.html" class="toc-chapter-title" style="text-decoration:none;">后记</a>
+        </li>        <li class="toc-chapter">
           <a href="《巴菲特致股东的信》 附录：投资检查清单.html" class="toc-chapter-title" style="text-decoration:none;">附录 投资检查清单</a>
         </li>
       </ul>
 
+      <!-- 本章目录 -->
       <div class="sidebar-label sidebar-label-sub">本章目录</div>
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li><a href="#section-a">A. 并购</a></li>
-        <li><a href="#section-a1" class="sub">一、背景概述</a></li>
-        <li><a href="#section-a2" class="sub">二、两种会计处理方法对比</a></li>
-        <li><a href="#section-a3" class="sub">三、商誉摊销的争议</a></li>
-        <li><a href="#section-a4" class="sub">四、权益合并法的本质问题</a></li>
-        <li><a href="#section-a5" class="sub">五、改进方案建议</a></li>
-        <li><a href="#section-a6" class="sub">六、总结</a></li>
-        <li><a href="#section-b">B. 分部数据与会计合并</a></li>
-        <li><a href="#section-b1" class="sub">1.1 会计准则重大变化</a></li>
-        <li><a href="#section-b2" class="sub">1.2 新旧准则对比</a></li>
-        <li><a href="#section-b3" class="sub">1.3 管理层的立场</a></li>
-        <li><a href="#section-b4" class="sub">1.4 伯克希尔的应对</a></li>
-        <li><a href="#section-c">C. 递延税项</a></li>
-        <li><a href="#section-c1" class="sub">一、会计规则变动背景</a></li>
-        <li><a href="#section-c2" class="sub">二、核心影响</a></li>
-        <li><a href="#section-c3" class="sub">三、1993年规则进一步完善</a></li>
-        <li><a href="#section-c4" class="sub">四、递延税项的经济学本质</a></li>
-        <li><a href="#section-c5" class="sub">五、伯克希尔的立场</a></li>
-        <li><a href="#section-d">D. 退休福利</a></li>
-        <li><a href="#section-d1" class="sub">1. 会计规则重大变更</a></li>
-        <li><a href="#section-d2" class="sub">2. 伯克希尔的收购原则</a></li>
-        <li><a href="#section-d3" class="sub">3. 管理层失职的根源分析</a></li>
-        <li><a href="#section-d4" class="sub">4. 管理层的会计思维警示</a></li>
+        <li><a href="#section-1">一、并购会计：购买法、权益合并法与商誉</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 两种并购会计方法</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 为什么商誉摊销可能失真</a></li>
+        <li><a href="#section-1-3" class="sub">1.3 权益合并法掩盖了什么</a></li>
+        <li><a href="#section-1-4" class="sub">1.4 更接近经济现实的方案</a></li>
+        <li><a href="#section-2">二、分部数据与会计合并：合并报表不等于足够的信息</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 从投资权益法到全面合并</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 合并数字为什么仍然不够</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 用补充信息避免“数字淹没”</a></li>
+        <li><a href="#section-3">三、递延所得税：账面负债、经济负债与长期投资</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 规则变化与关键数字</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 递延税负债不是普通应付账款</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 “财政部的无息贷款”意味着什么</a></li>
+        <li><a href="#section-3-4" class="sub">3.4 “一动不如一静”：长期持有的复利优势</a></li>
+        <li><a href="#section-3-5" class="sub">3.5 税率变化如何影响账面净值</a></li>
+        <li><a href="#section-4">四、退休福利：把未来承诺如实放进今天的账</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 从现金发生制到确认未来负债</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 1982 年差点收购高福利负债公司的教训</a></li>
+        <li><a href="#section-4-3" class="sub">4.3 “没有上限的福利，就是没有上限的负债”</a></li>
+        <li><a href="#section-4-4" class="sub">4.4 林肯总统的谜语：尾巴不是腿</a></li>
+        <li><a href="#section-5">五、全章总结：用会计政策追问经济事实</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 四个主题的核心结论</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 投资者和管理层的检查清单</a></li>
       </ul>
     </aside>
 
@@ -525,450 +583,321 @@
     <article class="chapter-article">
 
       <header class="article-header">
-        <div class="article-eyebrow">巴菲特致股东的信 · 第8章</div>
-        <h1 class="article-title">会计政策</h1>
+        <div class="article-eyebrow">巴菲特致股东的信 · 第8章 会计政策</div>
+        <h1 class="article-title">第8章　会计政策</h1>
         <div class="article-meta">
           <span><strong>作者</strong>沃伦·巴菲特</span>
-          <span><strong>主题</strong>并购会计、分部数据合并、递延税项、退休福利会计准则</span>
+          <span><strong>主题</strong>并购会计、合并报表、递延所得税、退休福利</span>
+          <span><strong>材料跨度</strong>1982—1999 年</span>
         </div>
       </header>
 
-      <!-- ===== A. 并购 ===== -->
-      <section id="section-a">
-        <h2>A. 并购</h2>
+      <div class="pull-quote">本章整理自伯克希尔·哈撒韦历年致股东信，讨论并购会计、合并报表、递延所得税和退休福利四个主题。材料横跨 <strong>1982—1999 年</strong>，其中不少内容针对当时正在讨论或即将实施的会计规则。阅读时应区分：<strong>会计规则如何记录一项交易</strong>，以及<strong>这项交易在经济上究竟意味着什么</strong>。<br/><strong>核心判断：</strong>会计数字有用，但不能替代对企业价值、管理表现和未来负债的独立判断。改变分类方式，不会改变经济事实。</div>
 
-        <h3 id="section-a1">一、背景概述</h3>
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-        <p>并购的会计应用是当前极具争议的话题，相关讨论甚至可能引发国会介入。争议的核心在于：<strong>GAAP（一般公认会计原则）允许两种截然不同的会计处理方法</strong>，而两者在实际操作中的差异显著。</p>
-
-        <h3 id="section-a2">二、两种会计处理方法对比</h3>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>对比维度</th><th>购买法</th><th>权益合并法</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>支付方式</td><td>现金或股票均可</td><td>仅限股票交易</td></tr>
-            <tr><td>商誉处理</td><td>产生商誉，需分年摊销</td><td>无商誉科目，无摊销</td></tr>
-            <tr><td>对损益影响</td><td>每年提列大额摊销费用，减少账面利润</td><td>无摊销负担，账面损益更好看</td></tr>
-            <tr><td>管理层偏好</td><td>通常排斥</td><td>普遍偏好</td></tr>
-            <tr><td>反映交易实质</td><td>更接近真实交易</td><td>存在掩盖买卖关系之嫌</td></tr>
-          </tbody>
-        </table>
-
-        <h3 id="section-a3">三、商誉摊销的争议</h3>
-
-        <h4>3.1 强制摊销的问题</h4>
-
-        <p>大多数会计费用与实际状况相关联，虽不完全精确，但方向一致：</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>费用项目</th><th>反映的经济实质</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>折旧</td><td>实体资产价值的逐渐减损</td></tr>
-            <tr><td>存货跌价损失</td><td>库存价值下降</td></tr>
-            <tr><td>应收账款呆账</td><td>潜在坏账风险</td></tr>
-            <tr><td>保修准备</td><td>潜在售后成本</td></tr>
-          </tbody>
-        </table>
-
-        <p>然而，<strong>经济商誉与上述资产有本质区别</strong>——它在许多情况下不仅不会减损，反而会随时间增加。</p>
-
-        <h4>3.2 经济商誉的特殊性</h4>
-
-        <div class="pull-quote">
-          经济商誉类似土地，价值会上下波动，但整体趋势往往向上。
-        </div>
-
-        <p>以<strong>禧诗糖果</strong>为例：过去78年间，其品牌价值以不规则但快速的速度持续增长。只要经营得当，这种增长态势有望再延续78年。</p>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">会计数字与现实脱节</div>
-            <p><strong>强制摊销经济商誉，往往导致会计数字与现实严重脱节。</strong></p>
-          </div>
-        </div>
-
-        <h3 id="section-a4">四、权益合并法的本质问题</h3>
-
-        <p>权益合并法的理论基础是"两条河流汇流后不再分彼此"——被购并公司不算被"买下"，因此无商誉产生，也无需摊销。</p>
-
-        <p>然而，这与并购的真实情况大相径庭：</p>
-
-        <ol style="margin: .75rem 0 1rem 1.5rem; line-height: 2; color: var(--text); font-size: .95rem;">
-          <li><strong>交易必然存在买卖双方</strong>，不管交易结构如何设计</li>
-          <li><strong>员工最清楚谁是征服者、谁是被征服者</strong>，绝不会混淆</li>
-          <li>真正意义上"对等合并"的案例极为罕见</li>
-        </ol>
+      <section id="section-1">
+        <h2>一、并购会计：购买法、权益合并法与商誉</h2>
 
         <div class="callout info">
           <div class="callout-icon">📝</div>
           <div class="callout-body">
-            <div class="callout-title">FASB 的立场</div>
-            <p><strong>FASB坚持认为大多数并购案具有买卖性质，这一立场是正确的。</strong></p>
+            <div class="callout-title">原文背景</div>
+            <p><strong>原文背景：1999 年。</strong>当时美国普遍讨论是否取消权益合并法；以下观点属于该历史语境中的会计政策讨论，不应直接视为现行准则说明。</p>
           </div>
         </div>
 
-        <h3 id="section-a5">五、改进方案建议</h3>
-
-        <p>芒格与巴菲特认为，应存在一种<strong>兼顾真实性与合理性</strong>的会计处理方法，具体建议如下：</p>
-
-        <h4>5.1 核心原则</h4>
-
+        <h3 id="section-1-1">1.1 两种并购会计方法</h3>
+        <p>在当时的 GAAP（一般公认会计原则）下，并购主要有两种会计处理方式：<strong>购买法</strong>和<strong>权益合并法</strong>。</p>
         <table class="article-table">
-          <thead>
-            <tr><th>步骤</th><th>处理方式</th></tr>
-          </thead>
+          <thead><tr><th>比较项目</th><th>购买法</th><th>权益合并法</th></tr></thead>
           <tbody>
-            <tr><td>初始确认</td><td>以公平市价列出投资成本（无论支付现金还是股票）</td></tr>
-            <tr><td>商誉处理</td><td>将经济商誉保留在账上，<strong>不做分年摊销</strong></td></tr>
-            <tr><td>减值测试</td><td>若商誉确有减损，按资产减值的一般判断方式进行计减</td></tr>
+            <tr><td>交易形式</td><td>可以支付现金，也可以发行股票</td><td>交易标的必须是股票</td></tr>
+            <tr><td>交易性质</td><td>承认一方购买另一方</td><td>把双方视为合并成一个整体</td></tr>
+            <tr><td>商誉处理</td><td>通常产生商誉，并按规则分年摊销</td><td>通常不产生新的商誉摊销负担</td></tr>
+            <tr><td>对当期及未来利润的影响</td><td>商誉摊销会长期减少报告利润</td><td>避免确认这项摊销费用</td></tr>
+            <tr><td>管理层的通常偏好</td><td>往往不受欢迎</td><td>通常更受欢迎</td></tr>
           </tbody>
         </table>
+        <p>管理层排斥购买法，主要不是因为它改变了交易的现金流，而是因为并购完成后，资产负债表往往会出现一项新的“商誉”。按照当时的规则，商誉需要在未来数十年分期摊销，形成一笔持续冲减损益的费用。权益合并法则绕开了这项会计处理，因此更容易让合并后的利润数字保持好看。</p>
 
-        <h4>5.2 预期效果</h4>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>效果</th><th>说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>统一标准</td><td>追溯适用，消除当前并购会计处理的乱象</td></tr>
-            <tr><td>决策优化</td><td>管理层将更审慎评估并购，基于真实股东利益决定使用现金还是股票</td></tr>
-            <tr><td>回归本质</td><td>不再以合并后的账面损益为导向，而是关注实际经济价值</td></tr>
-          </tbody>
-        </table>
-
-        <h3 id="section-a6">六、总结</h3>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>核心观点</th><th>说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>购买法更真实</td><td>反映了并购的买卖本质，但商誉强制摊销不合理</td></tr>
-            <tr><td>权益合并法有缺陷</td><td>规避了商誉问题，但掩盖了交易实质</td></tr>
-            <tr><td>理想方案</td><td>保留商誉不摊销，仅在真实减损时计减</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">改革方向</div>
-            <p>在FASB推动取消权益合并法的背景下，建立一套<strong>既符合交易实质、又避免不当摊销</strong>的会计准则，是当前并购会计改革的关键所在。</p>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- ===== B. 分部数据与会计合并 ===== -->
-      <section id="section-b">
-        <h2>B. 分部数据与会计合并</h2>
-
-        <h3 id="section-b1">1.1 会计准则重大变化（1988年）</h3>
-
-        <p>1988年，<strong>一般公认会计原则（GAAP）</strong>发生重大转变：伯克希尔被要求将<strong>所有子公司</strong>的资产负债表与损益表进行全面合并。</p>
-
-        <h3 id="section-b2">1.2 新旧准则对比</h3>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>维度</th><th>旧准则（权益法）</th><th>新准则（全面合并法）</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>资产负债表呈现</td><td>仅按投资比例列示被投资公司净值（投资权益）</td><td>须将被投资公司<strong>全部资产与负债</strong>并入合并报表</td></tr>
-            <tr><td>损益表呈现</td><td>仅按投资比例列示被投资公司年度损益（投资损益）</td><td>须将被投资公司<strong>全部营收与费用</strong>并入合并报表</td></tr>
-            <tr><td>适用范围示例</td><td>互助储贷、斯科特·费泽金融¹</td><td>所有受控子公司</td></tr>
-          </tbody>
-        </table>
-
-        <p style="font-size: .82rem; color: var(--text3);">¹ 斯科特·费泽金融主要从事世界百科全书与 Kirby 吸尘器分期付款的信用业务。</p>
-
-        <h3 id="section-b3">1.3 管理层的立场</h3>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">伯克希尔的真实态度</div>
-            <p>伯克希尔编制合并数字的<strong>唯一原因</strong>是满足外部监管要求；芒格与巴菲特实际参考的是另一套内部信息。</p>
-          </div>
-        </div>
-
-        <p>企业形态越复杂，传统合并报表加总出的数字越难以回答以下核心投资问题：</p>
-
-        <ol style="margin: .75rem 0 1rem 1.5rem; line-height: 2; color: var(--text); font-size: .95rem;">
-          <li>企业盈利能力如何？</li>
-          <li>管理层表现如何？</li>
-          <li>企业将责任转移给债权人的能力如何？</li>
-        </ol>
-
-        <h3 id="section-b4">1.4 伯克希尔的应对：补充信息披露</h3>
-
-        <p>面对更多数字须合并入表的新要求，管理层决定<strong>主动公布更多补充信息</strong>，以协助投资者评估企业价值与管理表现。</p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>原则</th><th>说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>不拘泥于 GAAP</td><td>不一定按照一般公认会计原则</td></tr>
-            <tr><td>不以公司为单位</td><td>不按单一法律主体区分</td></tr>
-            <tr><td>同质业务归并</td><td>将性质相近的业务汇总呈现，便于分析</td></tr>
-            <tr><td>信息适度原则</td><td>避免用海量数据淹没读者</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">管理层的目标</div>
-            <p><strong>换位思考</strong>——以投资者希望获取的视角，呈现真正重要的信息。</p>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"><span>◆ ◆ ◆</span></div>
-
-      <!-- ===== C. 递延税项 ===== -->
-      <section id="section-c">
-        <h2>C. 递延税项</h2>
-
-        <h3 id="section-c1">一、会计规则变动背景</h3>
-
-        <p>1990年起，一项与<strong>递延税务计算</strong>相关的重大会计规则正式实施（原定1989年，因规则复杂且争议较大，延后一年执行）。</p>
-
-        <h3 id="section-c2">二、核心影响：未实现股票资本利得的税率统一</h3>
-
-        <p><strong>规则变动前：分层税率结构</strong></p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>未实现收益归属时段</th><th>未实现收益金额</th><th>适用税率</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>1986年以前</td><td>约 <strong>12亿美元</strong></td><td>28%</td></tr>
-            <tr><td>1986年以后</td><td>约 <strong>6亿美元</strong></td><td>34%</td></tr>
-          </tbody>
-        </table>
-
-        <p><strong>规则变动后：统一税率</strong></p>
-
-        <p>新规则要求自1990年起，<strong>所有未实现收益一律按34%税率</strong>计提递延所得税负债。</p>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">财务影响</div>
-            <p>此单项调整将使年度盈余及财报净值减少约 <strong>7,100万美元</strong>。</p>
-          </div>
-        </div>
-
-        <h3 id="section-c3">三、1993年规则进一步完善</h3>
-
-        <p>1993年新颁会计规则正式取消二分法，要求以<strong>现行税率统一估算所有递延税项</strong>。</p>
-
-        <p><strong>调整时的资产规模（以1992年底为基准）</strong></p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>类别</th><th>金额</th><th>适用税率</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>未实现收益（旧税率部分）</td><td>12亿美元</td><td>28%</td></tr>
-            <tr><td>未实现收益（新税率部分）</td><td>64亿美元</td><td>34%</td></tr>
-            <tr><td><strong>合计未实现收益</strong></td><td><strong>76亿美元</strong></td><td>—</td></tr>
-          </tbody>
-        </table>
-
-        <p><strong>调整效果</strong></p>
-
-        <ul style="margin: .75rem 0 1rem 1.5rem; line-height: 2; color: var(--text); font-size: .95rem;">
-          <li>自1993年第一季起，全部未实现股票收益统一按 <strong>34%</strong> 计税</li>
-          <li>所得税负债增加，净值相应减少约 <strong>7,000万美元</strong></li>
-          <li>未来若税率发生变动，递延所得税负债及净值须<strong>即时同步调整</strong></li>
+        <h3 id="section-1-2">1.2 为什么商誉摊销可能失真</h3>
+        <p>许多会计费用虽然不能精确反映经济现实，但至少与现实变化方向一致：</p>
+        <ul>
+          <li><strong>折旧</strong>不能准确描绘实体资产每年的实际价值损耗，但实体资产通常确实会逐步磨损；</li>
+          <li><strong>存货跌价损失</strong>反映存货可能贬值；</li>
+          <li><strong>呆账费用</strong>反映应收账款无法收回的风险；</li>
+          <li><strong>保修准备金</strong>反映企业未来可能承担的保修成本。</li>
         </ul>
+        <p>经济商誉却不一定遵循“随时间必然减少”的规律。它可能来自品牌、客户关系、分销网络、信任和优秀管理；这些优势有时不会消失，反而会随着经营积累而增强。从这个角度看，经济商誉更像土地：价值会波动，但不能预先假定它每年按固定比例消耗。</p>
+        <p>禧诗糖果就是一个例子：在过去 <strong>78 年</strong>里，其品牌价值虽然增长并不均匀，却总体上快速上升。如果经营得当，未来还可能继续保持另一个 <strong>78 年</strong>的增长。机械地把这类商誉按年摊销，可能会制造一项与企业实际状况相反的费用。</p>
+        <div class="pull-quote"><strong>核心启示：</strong>商誉是否需要减少，应由企业竞争优势是否真的受损来判断，而不能仅凭时间流逝就预设答案。</div>
+
+        <h3 id="section-1-3">1.3 权益合并法掩盖了什么</h3>
+        <p>正因为不愿接受商誉摊销，许多优秀管理层反而选择了同样不够真实的权益合并法。它背后的比喻是“两条河流汇流”：两家公司合并后，仿佛从一开始就是一个整体，因而没有谁买下谁，也就没有商誉和后续摊销。</p>
+        <p>但这种说法常常与交易实质不符。只要存在一项并购交易，通常就存在购买方和被购买方；即使支付方式是股票，也不改变双方的谈判关系。询问交易双方的员工，谁是“征服者”、谁是“被征服者”，往往比研究交易形式更能看清事实。真正平等、双方都没有明显买卖关系的合并确实存在，但比例很低。</p>
+        <div class="pull-quote"><strong>核心争议：</strong>购买法可能用不合理的摊销方式削弱利润，权益合并法却可能把真实的购买交易伪装成对等合并。两种方法都不能完整反映经济实质。</div>
+
+        <h3 id="section-1-4">1.4 更接近经济现实的方案</h3>
+        <p>芒格和作者认为，可以同时回应 FASB（财务会计准则委员会）记录真实交易的要求，以及管理层反对不当摊销的意见。建议方案包括：</p>
+        <ol>
+          <li><strong>无论支付现金还是股票，都按公平市价记录投资成本；</strong></li>
+          <li>并购产生的经济商誉继续留在资产负债表中，<strong>不按固定年限机械摊销；</strong></li>
+          <li>只有当经济商誉确实发生减损时，才按照资产减值的原则计减；</li>
+          <li>如果采用新方案，应追溯适用，使全国并购会计处理保持一致。</li>
+        </ol>
+        <p>这样的规则会迫使管理层更谨慎地评估交易。他们不能只看并购后报告利润是否好看，而必须认真比较：支付现金还是发行股票，对真实股东利益分别意味着什么。</p>
+        <div class="pull-quote"><strong>换句话说：</strong>并购会计应先如实承认“买了什么、付了多少”，再根据资产是否真的减值确认损失；不能通过改名或换一种记账形式消除交易的经济后果。</div>
+
+        <div class="footnote">
+          <p><strong>原文注释</strong></p>
+          <p>[1] 原文标注：1999 年。</p>
+          <p>[2] 参阅第 6 章 D 节“经济的商誉 vs. 会计的商誉”。</p>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-2">
+        <h2>二、分部数据与会计合并：合并报表不等于足够的信息</h2>
 
         <div class="callout info">
-          <div class="callout-icon">💡</div>
+          <div class="callout-icon">📝</div>
           <div class="callout-body">
-            <div class="callout-title">核心原则</div>
-            <p>真正重要的，是证券最终出售、资本利得由"未实现"转为"已实现"时，<strong>实际适用的税率</strong>。</p>
+            <div class="callout-title">原文背景</div>
+            <p><strong>原文背景：1988 年。</strong>本节记录当时一般公认会计原则发生重大变化后的披露问题。</p>
           </div>
         </div>
 
-        <h3 id="section-c4">四、递延税项的经济学本质</h3>
-
-        <p>递延所得税负债在经济上等同于<strong>美国财政部给予的无息贷款</strong>，具有以下独特特性：</p>
-
+        <h3 id="section-2-1">2.1 从投资权益法到全面合并</h3>
+        <p>1988 年的新规定要求伯克希尔将子公司的<strong>全部资产负债表和损益表</strong>纳入合并报表。此前，对互助储贷（Mutual Savings and Loan）和斯科特·费泽金融（Scott Fetzer Financial）的投资，只需按持股比例确认投资权益和投资损益：</p>
         <table class="article-table">
-          <thead>
-            <tr><th>特性</th><th>说明</th></tr>
-          </thead>
+          <thead><tr><th>项目</th><th>旧规定</th><th>新规定</th></tr></thead>
           <tbody>
-            <tr><td>利息</td><td>零利息</td></tr>
-            <tr><td>到期日</td><td>由借款方（企业）自行决定</td></tr>
-            <tr><td>资金用途限制</td><td>只能用于购买特定的、升值的股票</td></tr>
-            <tr><td>额度变动机制</td><td>随市场价格波动，亦随税率变动调整</td></tr>
+            <tr><td>资产负债表</td><td>按持股比例确认被投资公司的净值，即投资权益</td><td>纳入被投资公司的全部资产和负债</td></tr>
+            <tr><td>损益表</td><td>按持股比例确认年度损益，即投资损益</td><td>纳入被投资公司的全部营收和费用</td></tr>
+            <tr><td>斯科特·费泽金融的业务背景</td><td>仅以投资权益和投资损益反映</td><td>其业务明细随全部报表项目进入合并报表</td></tr>
           </tbody>
         </table>
+        <p>斯科特·费泽金融主要从事<strong>《世界百科全书》与 Kirby 吸尘器的分期付款信用业务</strong>。新规则并没有改变这些业务本身，却改变了它们在伯克希尔报表上的呈现方式。</p>
 
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">例外风险</div>
-            <p>若国会修法，将课税时点提前至未实现资本利得阶段，上述"无息"优势将不复存在。</p>
+        <h3 id="section-2-2">2.2 合并数字为什么仍然不够</h3>
+        <p>企业越复杂，传统财务报表把所有业务简单相加后，数字就越难直接帮助投资者判断企业状况。合并报表可以满足外部披露要求，却未必能回答投资者真正关心的问题：</p>
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">问题一</span>
+            <h4>这家公司大约值多少钱？</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题二</span>
+            <h4>它实现未来目标的可能性有多大？</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">问题三</span>
+            <h4>管理层在现有条件下表现如何？</h4>
           </div>
         </div>
+        <p>伯克希尔表示，准备合并数字的首要原因是遵守外部规定；芒格和作者在分析公司时，还会关注另一套能够揭示业务经济实质的信息。</p>
 
-        <h3 id="section-c5">五、伯克希尔的立场与投资哲学</h3>
+        <h3 id="section-2-3">2.3 用补充信息避免“数字淹没”</h3>
+        <p>既然报表必须合并更多数字，伯克希尔便决定同时公布更多补充资料，帮助读者评价企业价值和管理表现。补充信息不一定严格按照 GAAP，也不一定按法律上的公司边界排列；相反，可以把<strong>经济性质相近的企业归在一起</strong>，让读者看到真正重要的经营规律。</p>
+        <p>其中一个明确的判断维度，是伯克希尔把责任转移给债权人的能力；这正是前文提到的第三个问题。无论采用哪一种报表，这种能力都应当保持清晰可见。</p>
+        <div class="pull-quote"><strong>核心启示：</strong>合并报表是统一的会计底稿，不是分析企业的终点。对复杂集团而言，分部信息和按业务性质整理的补充数据，往往比一张更大的合并表更有解释力。</div>
 
-        <p><strong>对新规则的态度</strong></p>
-
-        <p>伯克希尔认为，无论28%还是34%，均<strong>无法真实反映公司实质</strong>——因为公司从未考虑出售具有庞大未实现收益的持股。</p>
-
-        <p><strong>长期持有的税务逻辑</strong></p>
-
-        <p>税法结构为长期投资者提供了显著的复利优势：</p>
-
-        <div class="pull-quote">
-          "瑞普·范·温克尔"式投资（长期持有、极少交易）相较频繁短线操作，具有<strong>重要的绝对税务优势</strong>。
-        </div>
-
-        <p>1989年仅出售少量持股，即产生 <strong>2.24亿美元</strong>资本利得，须缴纳 <strong>7,600万美元</strong>交易税。</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">投资原则</div>
-            <p>选择长期持有，并非单纯因税务算术，更因已与优秀的商业伙伴建立了深厚、可信赖的合作关系——这种关系本身即可带来令人满意的投资回报。</p>
-          </div>
-        </div>
-
-        <p><strong>对递延税项负债的定性判断</strong></p>
-
-        <table class="article-table">
-          <thead>
-            <tr><th>观点</th><th>结论</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>等同于15天内应付的贸易账款？</td><td>❌ 性质截然不同</td></tr>
-            <tr><td>因无出售意愿而可忽略不计？</td><td>❌ 负债客观存在且重大</td></tr>
-            <tr><td>经济实质</td><td>✅ 无息、自主决定到期日的"政府贷款"</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">账面提示</div>
-            <p>若年底按市价出售所有持有证券，应缴税款将超过 <strong>11亿美元</strong>——此为真实存在的或有负债，尽管在账面净值上与普通应付账款具有相同的扣减效果。</p>
-          </div>
+        <div class="footnote">
+          <p><strong>原文注释</strong></p>
+          <p>[1] 原文标注：1988 年。</p>
         </div>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
 
-      <!-- ===== D. 退休福利 ===== -->
-      <section id="section-d">
-        <h2>D. 退休福利</h2>
+      <section id="section-3">
+        <h2>三、递延所得税：账面负债、经济负债与长期投资</h2>
 
-        <h3 id="section-d1">1. 会计规则重大变更（1993年起）</h3>
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">原文背景</div>
+            <p><strong>原文背景：1988 年、1989 年和 1992 年。</strong>本节讨论当时拟议并陆续生效的递延税规则，金额和税率均属于原文所处历史时期。</p>
+          </div>
+        </div>
 
-        <p>1993年1月1日起，新会计准则正式生效，<strong>强制要求所有企业确认员工退休后健康福利负债的现值</strong>。</p>
-
+        <h3 id="section-3-1">3.1 规则变化与关键数字</h3>
+        <p>原文提到，另一项重大会计规则原定于 <strong>1989 年</strong>实施，但因为规则复杂且争议很大，推迟一年，最终从 <strong>1990 年</strong>起产生影响。最重要的变化之一，是重新计算保险公司持有的未实现股票资本利得，并据此确认递延所得税负债。</p>
         <table class="article-table">
-          <thead>
-            <tr><th>对比维度</th><th>旧准则（GAAP）</th><th>新准则（1993年起）</th></tr>
-          </thead>
+          <thead><tr><th>时间或项目</th><th class="num">未实现收益 / 税率</th><th>会计影响或说明</th></tr></thead>
           <tbody>
-            <tr><td>退休金负债</td><td>✅ 须确认</td><td>✅ 须确认</td></tr>
-            <tr><td>退休后健康保险成本</td><td>❌ 忽略</td><td>✅ 须确认</td></tr>
-            <tr><td>会计方法</td><td>现金发生制</td><td>负债现值法</td></tr>
+            <tr><td>1986 年以前的未实现收益</td><td class="num">约 <strong>12 亿美元</strong>，按 <strong>28%</strong>估算</td><td>适用较低的历史税率</td></tr>
+            <tr><td>1986 年以后的未实现收益</td><td class="num">约 <strong>6 亿美元</strong>，按 <strong>34%</strong>估算</td><td>反映 1987 年起税率调整</td></tr>
+            <tr><td>1990 年起的新规则</td><td class="num">所有未实现收益按 <strong>34%</strong>估算</td><td>预计使年度盈余和财报净值减少约 <strong>7,100 万美元</strong></td></tr>
+            <tr><td>1989 年实际出售部分持股</td><td class="num">资本利得 <strong>2.24 亿美元</strong></td><td>产生交易税 <strong>7,600 万美元</strong></td></tr>
+            <tr><td>1992 年年底的未实现收益</td><td class="num">合计约 <strong>76 亿美元</strong></td><td>其中 <strong>64 亿美元</strong>按34%，<strong>12 亿美元</strong>按28%计算</td></tr>
+            <tr><td>1993 年第一季度起的新规则</td><td class="num">所有递延税项按现行税率估算</td><td>增加所得税负债，使净值减少约 <strong>7,000 万美元</strong></td></tr>
           </tbody>
         </table>
+        <p>当时公司认为，单纯把所有未实现收益统一按 34% 估算，未必能反映伯克希尔的真实情况，因为公司通常不会出售那些已经产生巨大未实现收益的股票。规则后来要求以现行税率计量所有递延税项，伯克希尔也承认这种统一处理在一定程度上更合理；但税率变化对账面净值的影响，不能直接等同于当期现金流出。</p>
 
-        <p><strong>新准则的影响：</strong></p>
-
-        <ul style="margin: .75rem 0 1rem 1.5rem; line-height: 2; color: var(--text); font-size: .95rem;">
-          <li>资产负债表须确认一大笔新增负债，净值相应减少</li>
-          <li>往后年度利润因须确认此类成本而缩水</li>
-        </ul>
-
-        <h3 id="section-d2">2. 伯克希尔的收购原则</h3>
-
-        <p>芒格与巴菲特在并购决策中，<strong>主动回避背负高额退休金负债的企业</strong>。</p>
-
-        <p>尽管伯克希尔目前拥有数万名员工，退休金负债及退休后健康福利成本仍控制在合理范围内。</p>
-
-        <p><strong>1982年的险失案例：</strong></p>
-
-        <ul style="margin: .75rem 0 1rem 1.5rem; line-height: 2; color: var(--text); font-size: .95rem;">
-          <li>巴菲特曾几乎买入一家背负沉重退休福利负债的公司</li>
-          <li>交易因不可控因素告吹，事后形容："两大页空白的跨页插图，最足以代表当年度告吹的交易"</li>
-        </ul>
-
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">血的教训</div>
-            <p>后来另一买主接手，公司不久倒闭，数千名员工的健康福利承诺<strong>全部化为乌有</strong>。</p>
-          </div>
-        </div>
-
-        <h3 id="section-d3">3. 管理层失职的根源分析</h3>
-
-        <p><strong>问题本质：</strong></p>
-
+        <h3 id="section-3-2">3.2 递延税负债不是普通应付账款</h3>
+        <p>如果伯克希尔在年末按市场价格出售全部证券，需要缴纳的税项将超过 <strong>11 亿美元</strong>。这笔金额确实构成潜在负债，并会从审计净值中扣除；但它与年终后十五天内必须支付给贸易商的应付账款并不相同。</p>
         <table class="article-table">
-          <thead>
-            <tr><th>失职表现</th><th>后果</th></tr>
-          </thead>
+          <thead><tr><th>对比项目</th><th>递延所得税负债</th><th>短期贸易应付账款</th></tr></thead>
           <tbody>
-            <tr><td>CEO未向董事会揭示无上限福利计划的风险</td><td>负债失控</td></tr>
-            <tr><td>采用现金发生制掩盖累计负债</td><td>严重低估实际义务</td></tr>
-            <tr><td>管理层与会计师"眼不见为净"</td><td>股东承担血本无归的损失</td></tr>
+            <tr><td>触发条件</td><td>通常在相关资产出售、收益实现或税法改变时确认或结算</td><td>已经取得商品或服务，付款义务通常明确</td></tr>
+            <tr><td>支付时间</td><td>可能被长期推迟，取决于是否出售资产及税法变化</td><td>通常有约定的短期到期日</td></tr>
+            <tr><td>对企业的经济意义</td><td>保留了尚未缴税资金的使用权，同时代表未来税款</td><td>是已经发生的经营性付款义务</td></tr>
+            <tr><td>是否应忽视</td><td>不能忽视，潜在负债仍有价值</td><td>不能忽视，属于明确到期债务</td></tr>
           </tbody>
         </table>
+        <div class="pull-quote"><strong>换句话说：</strong>递延税负债不是“可以永远不用管的数字”，但也不能简单当成明天就必须付清的普通账款。</div>
 
-        <div class="callout warn">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body">
-            <div class="callout-title">无需专业医学知识亦能判断</div>
-            <p><strong>预期寿命延长 + 医疗成本上升 = 无上限承诺即无上限负债</strong></p>
-          </div>
+        <h3 id="section-3-3">3.3 “财政部的无息贷款”意味着什么</h3>
+        <p>从经济角度看，递延所得税负债像是<strong>美国财政部提供的无息贷款</strong>：税款暂时留在企业手中，企业可以把纳税时间推迟到自己出售证券或其他法定触发事件发生时。除非国会修改税法、把课税时间提前到未实现资本利得阶段，否则到期日很大程度上由企业决定。</p>
+        <p>这笔“贷款”有几个特殊之处：</p>
+        <ul>
+          <li>资金只能伴随特定的升值资产使用，不能简单视为无限制现金；</li>
+          <li>可用额度会随市场价格变化；</li>
+          <li>税率改变时，负债金额也会变化；</li>
+          <li>它有点像资产转移时才缴纳的交易税。</li>
+        </ul>
+        <p>因此，递延税既具有真实经济价值，也可能在市场价格或税率变化时造成账面净值的大幅波动。真正重要的问题，是证券最终出售并把资本利得从“未实现”变成“实现”时，适用的实际税率是多少。</p>
+
+        <h3 id="section-3-4">3.4 “一动不如一静”：长期持有的复利优势</h3>
+        <p>由于税法通常在出售、实现收益时征税，伯克希尔偏好一种可以称为 <strong>“瑞普·范·温克尔式”</strong> 的投资方式：只要商业基本面良好，就尽量少交易。与频繁买卖相比，长期持有能推迟纳税，让更多资金继续留在资产中复利增长。</p>
+        <table class="article-table">
+          <thead><tr><th>投资方式</th><th>纳税时点</th><th>资金复利效果</th><th>主要代价或前提</th></tr></thead>
+          <tbody>
+            <tr><td>长期持有、少交易</td><td>通常推迟到最终出售</td><td>较多资金留在资产中，复利更充分</td><td>必须持续持有值得信任的优秀企业</td></tr>
+            <tr><td>高频买卖</td><td>每次实现收益时可能触发纳税</td><td>税款和交易成本反复侵蚀复利</td><td>需要不断找到更好的机会，且容易误判</td></tr>
+          </tbody>
+        </table>
+        <p>伯克希尔强调，选择长期持有并不是因为一条简单算术就认定交易永远错误。早年芒格和作者也曾频繁变动投资，某些情况下这样做可能产生更高税后回报。如今更愿意“一动不如一静”，还有一个更重要的原因：他们已经找到难得、令人满意的商业合作关系，并珍惜与优秀管理者之间建立的信任。只要预期结果令人满意，就没有必要为了追求理论上的最佳回报，放弃熟悉而可靠的伙伴。</p>
+        <div class="pull-quote"><strong>核心启示：</strong>长期持有的优势不仅是少交一次税，更是让税款留在资本中继续复利；但它必须建立在企业质量和管理层可信度之上，而不是机械地拒绝所有出售。</div>
+
+        <h3 id="section-3-5">3.5 税率变化如何影响账面净值</h3>
+        <p>未来税率一旦改变，递延所得税负债和净值就必须相应调整，影响可能很大。以 1992 年年底为例，未实现收益约 <strong>76 亿美元</strong>，其中 64 亿美元按 34%计算、12 亿美元按 28%计算。1993 年新规则要求所有未实现股票收益按 34%估算，使所得税负债增加、净值减少约 <strong>7,000 万美元</strong>。</p>
+        <p>这些变化会影响报表，却不一定代表企业当天发生了同等规模的经济损失。投资者需要把三件事分开看：</p>
+        <ol>
+          <li>税率变化造成的账面重新计量；</li>
+          <li>递延税负债带来的资金使用价值；</li>
+          <li>证券最终出售时真正发生的现金纳税。</li>
+        </ol>
+
+        <div class="footnote">
+          <p><strong>原文注释</strong></p>
+          <p>[1] 原文标注：1988 年、1989 年、1992 年。</p>
         </div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <div class="callout-title">制度性讽刺</div>
-            <p>同样是这批批评国会"现金发生制思维不顾未来负债"的管理层，自身却对企业退休健康成本采取完全相同的处理方式。</p>
-          </div>
-        </div>
-
-        <h3 id="section-d4">4. 管理层的会计思维警示</h3>
-
-        <div class="pull-quote large">
-          "如果一只狗连尾巴也算在内的话，总共有几条腿？"<br/>
-          答案是四条腿——不论你是否把尾巴当作一条腿，尾巴永远都是尾巴。
-          <cite>— 亚伯拉罕·林肯</cite>
-        </div>
-
-        <p>就算会计师愿意证明"尾巴也是一条腿"，企业也不会因此多出一条腿。<strong>会计处理方式改变不了经济现实</strong>，管理层必须透过会计表象，直面真实的负债本质。</p>
       </section>
 
       <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-4">
+        <h2>四、退休福利：把未来承诺如实放进今天的账</h2>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">原文背景</div>
+            <p><strong>原文背景：1992 年；新规则自 1993 年 1 月 1 日起实施。</strong>本节关注退休金与退休后健康福利的确认问题。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-1">4.1 从现金发生制到确认未来负债</h3>
+        <p>新规定要求所有企业确认员工退休后健康福利负债的现值。此前的 GAAP 虽然要求企业确认未来应支付的退休金，却没有同样充分地确认退休后的健康保险成本，并允许企业采用现金发生制处理这类支出。</p>
+        <table class="article-table">
+          <thead><tr><th>项目</th><th>旧规则或旧做法</th><th>新规则或应关注的经济实质</th></tr></thead>
+          <tbody>
+            <tr><td>退休金</td><td>要求确认未来退休金义务</td><td>继续确认相关负债</td></tr>
+            <tr><td>退休后健康福利</td><td>往往等到现金支付时才反映</td><td>确认未来福利负债的现值</td></tr>
+            <tr><td>对资产负债表的影响</td><td>累计义务容易被低估</td><td>可能新增大额负债并减少净值</td></tr>
+            <tr><td>对未来利润的影响</td><td>当期看起来负担较轻</td><td>结算福利时必须确认相关成本，利润可能收缩</td></tr>
+          </tbody>
+        </table>
+        <div class="pull-quote"><strong>核心启示：</strong>只在现金支付时确认成本，会让今天的报表看起来轻松，却把已经形成的义务推迟给未来。负债不会因为尚未付款就不存在。</div>
+
+        <h3 id="section-4-2">4.2 1982 年差点收购高福利负债公司的教训</h3>
+        <p>在并购中，芒格和作者会尽量避开背负高额退休金和退休后福利负债的公司。虽然伯克希尔当时拥有数万名员工，但退休金及未来退休后福利负债并不严重；然而，作者承认自己在 <strong>1982 年</strong>差点犯下大错，险些买下一家福利负担沉重的公司。</p>
+        <p>交易后来因无法控制的因素告吹。作者在 1982 年年报中写道：</p>
+        <div class="pull-quote">如果在年报中我们要引用一些插图，用以展示过去一年有何令人觉得可喜的进展，那么两大页空白的跨页插图，可能最足以代表当年度告吹的交易。<cite>— 1982 年年报</cite></div>
+        <p>当时他还没有预料到情况会进一步恶化。另一家买主后来收购了这家公司，但公司不久便倒闭关门，数千名员工原本承诺的大笔健康福利也随之化为乌有。</p>
+        <p><strong>换句话说：</strong>并购尽职调查不能只看利润和资产，还必须追问企业对员工作出的长期承诺，以及这些承诺在最坏情况下会变成多大的现金负担。</p>
+
+        <h3 id="section-4-3">4.3 “没有上限的福利，就是没有上限的负债”</h3>
+        <p>退休后健康福利尤其危险，因为预期寿命延长、医疗费用上涨，而福利计划往往缺少明确上限。企业可能在多年后才真正支付大部分成本，期间管理层和投资者却容易因为现金尚未流出而低估风险。</p>
+        <p>没有哪位 CEO 会轻易向董事会提出一项“没有上限”的未来福利承诺；但现实中，许多管理层仍通过内部自保等方式把公司投入一个可能永远扩大的资金缺口。最终，成本会落到股东身上，甚至削弱美国大型企业的全球竞争力。</p>
+        <p>这种做法还有明显的讽刺性：管理层经常批评国会在社会保障等计划上采用现金发生制、忽略未来负债，却在自己的公司里采用同样的处理方式。会计规则没有要求他们把未来健康福利完整呈现在账上时，他们便选择“眼不见为净”。</p>
+
+        <h3 id="section-4-4">4.4 林肯总统的谜语：尾巴不是腿</h3>
+        <p>思考会计政策时，管理层应记住林肯总统喜欢的一个谜语：</p>
+        <div class="poem">
+          如果一只狗连尾巴也算在内的话，总共有几条腿？<br/>
+          四条腿。因为不论你是不是把尾巴当作一条腿，尾巴永远都是尾巴。
+        </div>
+        <p>这则谜语的含义很直白：<strong>改变名称或分类，不会改变事物的本质。</strong>即使会计师愿意证明尾巴算作一条腿，狗也不会因此多出一条腿；同样，即使报表暂时没有确认退休福利，企业也不会因此减少未来必须承担的福利义务。</p>
+        <div class="pull-quote"><strong>核心启示：</strong>会计处理应当帮助读者看见经济现实，而不是用形式上的分类掩盖已经存在的负债。</div>
+
+        <div class="footnote">
+          <p><strong>原文注释</strong></p>
+          <p>[1] 原文标注：1992 年。</p>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-5">
+        <h2>五、全章总结：用会计政策追问经济事实</h2>
+
+        <h3 id="section-5-1">5.1 四个主题的核心结论</h3>
+        <table class="article-table">
+          <thead><tr><th>主题</th><th>会计层面的表象</th><th>应追问的经济事实</th></tr></thead>
+          <tbody>
+            <tr><td>并购与商誉</td><td>选择不同方法会产生不同利润和商誉数字</td><td>谁购买了谁？支付了什么？商誉是否真的减值？</td></tr>
+            <tr><td>分部数据与合并</td><td>把更多资产、负债、收入和费用合并到一张报表</td><td>合并数字是否掩盖了性质不同的业务？是否需要补充分部信息？</td></tr>
+            <tr><td>递延所得税</td><td>税率变化会重新计量负债并改变账面净值</td><td>税款何时真正支付？递延期间的资金使用价值是什么？</td></tr>
+            <tr><td>退休福利</td><td>现金尚未支付，报表上的负债可能很小</td><td>企业已作出多大的未来承诺？承诺是否存在上限？</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-2">5.2 投资者和管理层的检查清单</h3>
+        <p>阅读企业的会计政策或财务报表时，可以依次追问：</p>
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">追问一</span>
+            <h4>会计方法是否如实反映交易实质，还是只是在选择更好看的利润数字？</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">追问二</span>
+            <h4>商誉、品牌和其他无形资产是真的减值了，还是仅仅因为规则要求而被机械摊销？</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">追问三</span>
+            <h4>合并报表是否把性质完全不同的业务混在一起，以至于投资者无法评价各分部？</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">追问四</span>
+            <h4>递延所得税负债是短期必须偿还的债务，还是可以长期推迟的税款？两者的经济价值有何不同？</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">追问五</span>
+            <h4>长期持有带来的税务优势，是否建立在真正优秀、值得长期持有的企业之上？</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">追问六</span>
+            <h4>退休金和退休后健康福利是否已按经济实质确认？是否存在“没有上限”的承诺？</h4>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">追问七</span>
+            <h4>改变名称、分类或确认时点，是否只是把尾巴说成腿，却没有改变真实负担？</h4>
+          </div>
+        </div>
+
+        <div class="pull-quote large"><strong>本章最重要的启示：</strong>会计政策可以改善信息，也可以制造错觉。专业的财务分析不能停留在“报表是否符合规则”，还必须判断：规则下的数字是否忠实呈现了交易、资产、税务和未来负债的经济实质。</div>
+      </section>
 
       <div class="article-footer">— 完 —</div>
 
     </article>
   </div>
-
   <footer class="site-footer">
     <div class="footer-inner">
       <p>投资智慧 · 读书笔记</p>
@@ -976,9 +905,10 @@
   </footer>
 
   <script>
-    // 侧边栏滚动高亮
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
     const links = document.querySelectorAll('#sidebar-nav a');
     const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
 
     function onScroll() {
       const scrollY = window.scrollY + 132;
@@ -987,6 +917,12 @@
         if (sec.offsetTop <= scrollY) current = sec;
       }
       links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
 

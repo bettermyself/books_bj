@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>后记：长期主义、资本配置与接班安排 · 巴菲特致股东的信</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    /* ===== 110% Scale ===== */
+    html { font-size: 17.6px; }
+
+    /* ===== Chapter Page Layout ===== */
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    /* ===== Sidebar ===== */
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub {
+      margin-top: 1.5rem;
+    }
+    .book-chapters { margin-bottom: .25rem; }
+    .book-chapters a { font-weight: 600; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    /* ===== Book TOC Tree ===== */
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title.current-chapter:hover {
+      color: var(--text);
+      background: rgba(201,168,76,.06);
+    }
+    .toc-lectures {
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== Article ===== */
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    /* ===== Article Body ===== */
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: 1rem;
+      color: var(--text);
+      margin: 1.6rem 0 .75rem;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+    .chapter-article code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: .85em;
+      background: rgba(201,168,76,.1);
+      padding: .1em .45em;
+      border-radius: 4px;
+      color: var(--gold-dk);
+    }
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ===== Pull Quote ===== */
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    /* ===== Callout Cards ===== */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    /* ===== Tables ===== */
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); }
+    .article-table th.num, .article-table td.num { text-align: right; }
+
+    /* ===== Remedy Cards ===== */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .remedy-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2, .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+
+    /* ===== Poem ===== */
+    .poem {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      font-style: italic;
+      line-height: 2.1;
+      color: var(--text);
+      font-size: .95rem;
+      text-align: center;
+      position: relative;
+    }
+    .poem::before, .poem::after {
+      content: '"';
+      position: absolute;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .25;
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem::before { top: .5rem; left: 1rem; }
+    .poem::after { bottom: -.5rem; right: 1rem; }
+    .poem-author {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .05em;
+    }
+
+    /* ===== Divider ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    /* ===== Article Footer ===== */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    /* ===== Footnotes ===== */
+    .footnote {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    .footnote p {
+      font-size: .78rem;
+      color: var(--text3);
+      line-height: 1.7;
+      margin-bottom: .35rem;
+    }
+    .chapter-article sup.fn {
+      color: var(--gold);
+      font-size: .68em;
+      font-weight: 600;
+      margin-left: .05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <!-- 左侧导航 -->
+    <aside class="chapter-sidebar">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="index.html">巴菲特致股东的信</a>
+      </div>
+
+      <!-- 全书目录树 -->
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第1章：公司治理.html" class="toc-chapter-title" style="text-decoration:none;">第1章 公司治理</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第2章：财务与投资.html" class="toc-chapter-title" style="text-decoration:none;">第2章 财务与投资</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第3章：投资替代品.html" class="toc-chapter-title" style="text-decoration:none;">第3章 投资替代品</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第4章：普通股投资.html" class="toc-chapter-title" style="text-decoration:none;">第4章 普通股投资</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第5章：兼并与收购.html" class="toc-chapter-title" style="text-decoration:none;">第5章 兼并与收购</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第6章：估值与会计.html" class="toc-chapter-title" style="text-decoration:none;">第6章 估值与会计</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第7章：会计诡计.html" class="toc-chapter-title" style="text-decoration:none;">第7章 会计诡计</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第8章：会计政策.html" class="toc-chapter-title" style="text-decoration:none;">第8章 会计政策</a>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 第9章：税务问题.html" class="toc-chapter-title" style="text-decoration:none;">第9章 税务问题</a>
+        </li>
+        <li class="toc-chapter">
+          <span class="toc-chapter-title current-chapter">后记</span>
+        </li>
+        <li class="toc-chapter">
+          <a href="《巴菲特致股东的信》 附录：投资检查清单.html" class="toc-chapter-title" style="text-decoration:none;">附录 投资检查清单</a>
+        </li>
+      </ul>
+
+      <!-- 本篇目录 -->
+      <div class="sidebar-label sidebar-label-sub">本篇目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、从“双重收益”回到“单重收益”</a></li>
+        <li><a href="#section-2">二、增长有边界：资本规模本身会成为约束</a></li>
+        <li><a href="#section-3">三、只在能力圈内挥棒</a></li>
+        <li><a href="#section-4">四、不预测宏观事件，只关注企业基本面</a></li>
+        <li><a href="#section-5">五、与股东利益保持一致</a></li>
+        <li><a href="#section-6">六、让优秀经理人创造价值</a></li>
+        <li><a href="#section-7">七、伯克希尔的管理方式</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 总部的两项主要职责</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 公平对待已实现财务自由的经理人</a></li>
+        <li><a href="#section-7-3" class="sub">7.3 继续发挥资本配置经验</a></li>
+        <li><a href="#section-8">八、接班安排：即使今晚发生意外，公司也能继续运转</a></li>
+        <li><a href="#section-8-1" class="sub">8.1 CEO 继任安排</a></li>
+        <li><a href="#section-8-2" class="sub">8.2 董事会必须承担监督责任</a></li>
+        <li><a href="#section-9">九、投资业务的接班安排</a></li>
+        <li><a href="#section-9-1" class="sub">9.1 必须识别并规避极端风险</a></li>
+        <li><a href="#section-9-2" class="sub">9.2 性格与能力同样重要</a></li>
+        <li><a href="#section-9-3" class="sub">9.3 留住优秀人才</a></li>
+        <li><a href="#section-10">十、慈善捐赠安排：让财富及时发挥作用</a></li>
+        <li><a href="#section-10-1" class="sub">10.1 为什么不把慈善基金永久保留</a></li>
+        <li><a href="#section-11">十一、结语：我仍然热爱伯克希尔</a></li>
+      </ul>
+    </aside>
+
+    <!-- 右侧正文 -->
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">巴菲特致股东的信 · 后记</div>
+        <h1 class="article-title">后记：长期主义、资本配置与接班安排</h1>
+        <div class="article-meta">
+          <span><strong>作者</strong>沃伦·巴菲特</span>
+          <span><strong>主题</strong>长期主义、资本配置与接班安排</span>
+        </div>
+      </header>
+
+      <div class="pull-quote"><strong>核心观点</strong>：伯克希尔过去的超额回报，既来自所持企业内在价值的增长，也来自市场价格向价值回归所带来的额外收益。今后，随着资本规模扩大和优质资产价格回归合理水平，前一种收益仍将持续，后一种收益却难以重复。面对这一变化，伯克希尔将继续坚持能力圈、理性投资和股东利益至上的原则，并为管理层与投资业务的顺利传承做好安排。</div>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-1">
+        <h2>一、从“双重收益”回到“单重收益”</h2>
+
+        <p>我们将继续持有目前的主要投资，无论市场价格与内在价值之间处于何种关系。由于这些股票如今已经不再处于折价状态，未来它们不太可能像过去那样，迅速推升伯克希尔的价值。</p>
+        <p>伯克希尔过去的表现，主要来自两层收益：</p>
+        <table class="article-table">
+          <thead><tr><th>收益来源</th><th>含义</th></tr></thead>
+          <tbody>
+            <tr><td><strong>第一重收益</strong></td><td>所投资企业持续提升内在价值，为伯克希尔创造真实的经营收益。</td></tr>
+            <tr><td><strong>第二重收益</strong></td><td>市场重新认识这些优秀企业，使其估值相对于平庸企业得到提升，价格逐渐追上价值。</td></tr>
+          </tbody>
+        </table>
+        <p>我们对投资组合中的每家公司都充满信心，相信它们仍会继续创造价值。不过，市场价格向内在价值靠拢所带来的收益已经基本实现。<strong>今后，我们更可能获得企业价值持续增长所带来的“单重收益”，而不是过去的“双重收益”。</strong></p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-2">
+        <h2>二、增长有边界：资本规模本身会成为约束</h2>
+
+        <p>在一个有限的世界里，极高的增长率不可能永远持续。企业规模较小时，高增长或许可以维持一段时间；但当基数不断扩大，增长最终会遇到资源、市场和竞争等限制。换句话说，<strong>高增长本身会逐渐建立起限制增长的边界。</strong></p>
+        <p>美国天文学家卡尔·萨根曾用细菌繁殖来说明指数增长的荒谬结果：</p>
+        <ul>
+          <li>如果细菌每 <strong>15 分钟</strong>分裂一次，1 小时就会翻 <strong>4 番</strong>；</li>
+          <li>按这一速度计算，1 天会翻 <strong>96 番</strong>；</li>
+          <li>即使一个细菌只有约一万亿分之一克，经过一天的繁殖，其后代总重量也会大得像一座山；</li>
+          <li>再过一天，重量甚至会超过太阳；</li>
+          <li>继续推演下去，宇宙很快就会被细菌占满。</li>
+        </ul>
+        <p>现实当然不会如此发展，因为增长会受到食物不足、环境约束、相互竞争，甚至彼此毒害等因素的限制。萨根还幽默地说，细菌可能只是“羞于在公众场合繁殖”，总之，总会有某种障碍阻止指数增长。</p>
+        <p>芒格和我从未把伯克希尔看作细菌。令人遗憾的是，我们至今也没有找到让伯克希尔净值每 15 分钟翻番的方法；不过，我们并不羞于在公众视野中创造财富。萨根所揭示的规律依然适用于伯克希尔：<strong>资本规模越大，继续获得超高投资回报就越困难。</strong></p>
+        <p>伯克希尔目前的净资产约为 <strong>119 亿美元</strong>，而芒格和我刚接手管理时只有 <strong>2,200 万美元</strong>。市场上仍然有许多优秀企业，但以伯克希尔如今的资本规模来看，许多机会即使不错，也不值得投入精力。我们现在通常只考虑至少能够投入 <strong>1 亿美元</strong>的机会，这一门槛大幅缩小了我们的投资空间。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-3">
+        <h2>三、只在能力圈内挥棒</h2>
+
+        <p>资本规模扩大并不意味着我们要降低标准。我们仍会坚持过去的道路，耐心等待真正值得出手的机会。</p>
+        <p>著名棒球选手泰德·威廉姆斯在《我的生活故事》中写道：</p>
+        <div class="pull-quote">要成为优秀的击球手，就必须等到好球出现时再挥棒。若总是去击打落在自己“幸运区”之外的球，就不可能保持 0.344 的优秀成绩，最终可能只会成为 0.250 的普通击球手。</div>
+        <p>芒格和我认同这一原则。投资不要求我们对每一个机会都采取行动，真正重要的是：<strong>只在自己理解、能够判断且值得下注的领域出手。</strong></p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-4">
+        <h2>四、不预测宏观事件，只关注企业基本面</h2>
+
+        <p>我们不会把时间花在预测政治和经济上。对许多投资者和企业家而言，这类预测只是代价高昂的消遣。</p>
+        <p>过去 30 年，几乎没有人能够准确预见以下事件：</p>
+        <ul>
+          <li>越南战争扩大；</li>
+          <li>工资管制和物价管制；</li>
+          <li>两次石油危机；</li>
+          <li>美国总统辞职；</li>
+          <li>苏联解体；</li>
+          <li>道琼斯指数单日暴跌 508 点；</li>
+          <li>美国国债收益率在 <strong>2.8% 至 17.4%</strong> 之间剧烈波动。</li>
+        </ul>
+        <p>然而，这些重大的意外事件都没有推翻本·格雷厄姆的投资原则，也没有动摇“以合理价格购买优秀企业”这一方法。</p>
+        <p>如果因为害怕未知事件而推迟或改变资本配置，我们可能会付出极高代价。事实上，<strong>当市场对宏观事件的担忧达到顶峰时，往往正是我做出最佳投资决策的时机。</strong></p>
+        <div class="pull-quote"><strong>换句话说</strong>：对追逐潮流的人而言，恐惧是敌人；对关注企业基本面的人而言，恐惧反而可能成为朋友。</div>
+        <p>未来 30 年，市场一定还会出现一批新的热门股票。我们既不会预测它们是谁，也不打算靠预测这些股票获利。只要能够找到类似过去所投资的优秀企业，外部世界出现什么意外，对我们的长期表现就不会造成太大影响。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-5">
+        <h2>五、与股东利益保持一致</h2>
+
+        <p>我们能够向股东承诺的是：<strong>股东获得的回报，将与其持股比例相匹配。</strong>在持有伯克希尔期间，股东的得失会与芒格和我一致：</p>
+        <ul>
+          <li>股东遭受损失，我们也会遭受损失；</li>
+          <li>股东获得财富，我们也会获得财富；</li>
+          <li>我们不会设置只在股市上涨时让管理层获得额外收益、而在下跌时却几乎不承担损失的报酬机制。</li>
+        </ul>
+        <p>我们还承诺，个人财富中的绝大部分将继续集中在伯克希尔股票上。我们不会要求股东把资金交给我们管理，自己却把财富配置到别处。</p>
+        <p>伯克希尔还承载着我们大多数家庭成员，以及从 20 世纪 60 年代起就追随芒格和我的伙伴、朋友们的投资。因此，我们没有任何理由不竭尽全力做好工作。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-6">
+        <h2>六、让优秀经理人创造价值</h2>
+
+        <p>伯克希尔创造收益，依靠的是一流经理人的努力。他们能够在看似普通的企业中，创造出不普通的利润。</p>
+        <p>著名棒球经理凯西·施滕格尔曾这样描述管理棒球队：</p>
+        <div class="pull-quote">他们负责击出本垒打，我们跟着受益。</div>
+        <p>这正是伯克希尔的管理方式。我们不必亲自经营每一家子公司，只要找到优秀的经理人、充分授权，并与他们共同分享长期成果，就能从他们创造的价值中受益。</p>
+        <p>拥有著名的“希望之星”钻石一部分，远胜于拥有一颗人造钻石的全部。优秀企业就是罕见的宝石，而伯克希尔的优势在于：我们拥有的不是一颗孤立的宝石，而是一组能够持续成长的优质企业。</p>
+        <p>股票价格仍会波动，有时波动幅度还会很大，经济也会经历起伏。但从长期看，我们持有的企业很可能继续以令人满意的速度提升内在价值。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-7">
+        <h2>七、伯克希尔的管理方式</h2>
+
+        <p>讨论伯克希尔今天和未来的管理方式，是一个合适的结尾。</p>
+        <p>《与所有者相关的企业原则》第一条指出，芒格和我是伯克希尔的管理合伙人，但我们把日常经营责任交给各子公司的经理人。</p>
+
+        <h3 id="section-7-1">7.1 总部的两项主要职责</h3>
+        <p>芒格和我的主要工作有两项：</p>
+        <ol>
+          <li><strong>进行资本配置</strong>；</li>
+          <li><strong>关注、培养并支持关键经理人。</strong></li>
+        </ol>
+        <p>大多数经理人都喜欢自主经营企业，这也正是我们赋予他们的管理方式。他们拥有经营决策的完整责任，并将运营中多余的现金交给伯克希尔总部。</p>
+        <p>这种安排有两项好处：</p>
+        <ul>
+          <li>子公司经理人不必因为手中积累了过多现金，而被各种未经审慎考虑的投资诱惑分散注意力；</li>
+          <li>相比只熟悉自身行业的经理人，芒格和我拥有更宽广的视野，可以在更大范围内寻找更好的资金用途。</li>
+        </ul>
+
+        <h3 id="section-7-2">7.2 公平对待已实现财务自由的经理人</h3>
+        <p>伯克希尔的大多数经理人已经实现财务自由。我们的责任，是营造一种让他们愿意继续工作、而不是去打高尔夫或钓鱼的环境。</p>
+        <p>这要求我们公平对待他们——<strong>就像角色互换后，我们希望别人公平对待自己一样。</strong></p>
+
+        <h3 id="section-7-3">7.3 继续发挥资本配置经验</h3>
+        <p>资产配置是芒格和我都喜欢的工作，我们也在这方面积累了不少经验。一般来说，头发灰白的人不会在这项运动中受伤：投资不要求手眼协调，不需要发达的肌肉，感谢上帝。</p>
+        <p>只要头脑仍能有效工作，芒格和我就会继续像过去一样做好资本配置。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-8">
+        <h2>八、接班安排：即使今晚发生意外，公司也能继续运转</h2>
+
+        <p>随着年纪增长，股东自然会关心我是否继续担任 CEO，也会想知道董事会将如何应对管理层变化；更直接的问题是：<strong>如果我今晚去世，伯克希尔会发生什么？</strong></p>
+
+        <h3 id="section-8-1">8.1 CEO 继任安排</h3>
+        <p>如果我突然离世，伯克希尔不会因此失去经营能力：</p>
+        <ul>
+          <li>伯克希尔旗下大多数企业拥有强大的竞争优势、充足的发展动力和杰出的管理团队；</li>
+          <li>伯克希尔的文化已经深深融入各子公司，即使我不在，企业也不会因此错失商业机会；</li>
+          <li>公司有三位年富力强的经理人，其中任何一位都能够胜任 CEO，并且在某些具体管理领域可能比我做得更好；</li>
+          <li>董事会已经详细讨论过每位 CEO 候选人，并一致认为，如果今天就需要交接，他们已经可以接任。</li>
+        </ul>
+        <p>这些候选人的不足在于，他们没有像我一样在众多行业积累交叉经验，因此未必能够同时在经营和投资领域像我一样游刃有余。</p>
+        <p>解决办法是：由专人负责可流通证券投资。伯克希尔会让新任 CEO 聘请一位有才能的投资负责人。盖可保险已经采用这种安排 26 年，结果非常出色。</p>
+        <p>董事会会持续关注继任问题，并随环境变化及时调整：新的管理人才可能出现，现有经理人也可能逐渐老去。但最重要的是，董事会现在和未来都清楚，一旦需要，他们应当采取什么行动。</p>
+
+        <h3 id="section-8-2">8.2 董事会必须承担监督责任</h3>
+        <p>每个人的衰老速度不同：</p>
+        <ul>
+          <li>有些人在 80 岁时仍然高效，例如 82 岁的芒格；</li>
+          <li>有些人在 60 岁时就已经明显衰退。</li>
+        </ul>
+        <p>随着年龄增长，人的能力和精力会下降，自我评估能力也可能同步减弱，因此需要他人及时提醒。</p>
+        <p>如果有一天我不再适合继续工作，董事会必须接手监督职责。从财务角度看，董事会成员通常并不愿意这样做。据我所知，全国没有一家公司的董事会成员，其家庭财富与公司股东财富之间有如此紧密的联系，甚至找不到接近的例子。</p>
+        <p>从个人情感角度看，尤其对朋友而言，告诉一个人“你已经不行了”非常困难。但如果我成为那个“不行的人”，伯克希尔董事会会负责告诉我。</p>
+        <p>我持有的每一股伯克希尔股票都将捐给慈善机构，我希望社会能够从这些捐赠中获得最大的利益。如果董事会成员逃避责任，没有履行监督义务，只因为情感而让我继续留任，那么我所持股份的价值潜力就可能缩水，慈善捐赠能够产生的社会价值也会随之减少。这将是一场悲剧。</p>
+        <p>不过，股东不必担心这种情况发生。伯克希尔拥有杰出的董事会，他们始终会按照<strong>“股东利益至上”</strong>的原则行事。</p>
+        <p>伯克希尔有三位 CEO 候选人可以替代我，董事会也已经知道，如果我今晚去世，谁能够履行我的职责。他们都比我年轻得多，而董事会认为，继任者拥有较长的任期十分重要。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-9">
+        <h2>九、投资业务的接班安排</h2>
+
+        <p>坦率地说，伯克希尔的投资业务尚未完全准备就绪。我们在 10 月董事会上充分讨论了这一问题，并制定了接班计划：</p>
+        <ol>
+          <li>聘用一位年轻、具有投资潜力的先生或女士；</li>
+          <li>让其管理伯克希尔庞大的投资组合；</li>
+          <li>从数位候选人中进行选择；</li>
+          <li>在未来真正需要时，由其接替我担任伯克希尔首席投资官。</li>
+        </ol>
+        <p>选对人并不容易。发现聪明人并不难，有些人的投资记录也非常亮眼。但长期投资成功所需要的，远不只是当下的聪明和短期的优秀业绩。</p>
+
+        <h3 id="section-9-1">9.1 必须识别并规避极端风险</h3>
+        <p>长期来看，市场一定会出现非同寻常、甚至离奇的事件。一次重大事件，就可能将多年积累的一连串成功全部抹去。</p>
+        <p>因此，我们需要的是能够从“基因层面”识别并避开风险的人，包括那些此前从未亲身遇到过的重大风险。某些潜藏在投资策略中的危险，无法通过今天金融机构普遍使用的模型发现。</p>
+
+        <h3 id="section-9-2">9.2 性格与能力同样重要</h3>
+        <p>成功的投资负责人还必须具备以下特质：</p>
+        <ul>
+          <li>独立思考；</li>
+          <li>情绪稳定；</li>
+          <li>深刻理解人性；</li>
+          <li>敏锐认识机构行为及其局限。</li>
+        </ul>
+        <p>这些品质对长期投资成功至关重要。我见过许多非常聪明的人，但他们并不具备这些美德。</p>
+
+        <h3 id="section-9-3">9.3 留住优秀人才</h3>
+        <p>人才留任也是必须解决的问题。成为伯克希尔的成员，会显著提高投资经理人的市场身价。因此，我们需要确认：即使他们可以离开并在其他地方赚取更多收入，我们仍然有能力留住他们。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-10">
+        <h2>十、慈善捐赠安排：让财富及时发挥作用</h2>
+
+        <p>我已经将自己持有的伯克希尔股票分别安排给五个慈善基金，由它们执行我一生的慈善计划，并最终实现我的捐赠目标。</p>
+        <p>我的遗嘱将规定：在我去世后的 <strong>10 年内</strong>，把这些股份变现所得用于慈善事业。由于我的后事并不复杂，相关事务大约需要 <strong>3 年</strong>处理完毕。再加上我预计尚有 <strong>12 年</strong>的寿命（当然，我希望活得更久），这意味着来自伯克希尔持股的慈善资金，大约会在未来 <strong>25 年</strong>左右逐步分配给社会。</p>
+
+        <h3 id="section-10-1">10.1 为什么不把慈善基金永久保留</h3>
+        <p>我这样安排，是因为希望这些钱能够相对迅速地交给我熟悉、信任且能力出众、精力充沛、积极进取的人使用。优秀的管理能力有时会随着机构老化而衰退，尤其是当机构不再受到市场力量约束时。</p>
+        <p>目前管理这五个基金的人都非常优秀。因此，在我离世后，让他们尽快、审慎地使用这些资金，是更合理的选择。</p>
+        <p>有人主张把慈善基金设为永久基金，因为未来社会也会遇到重大问题，需要持续的慈善捐赠。我同意未来仍会有重大问题，但到那时，社会上也会出现许多远比今天富有的个人和家庭，他们的慈善机构同样会提供捐助。</p>
+        <p>未来的捐赠者可以根据第一手信息，判断哪些机构仍然充满活力、真正专注于解决当时最重要的问题。这样一来，慈善机构的运作方式和实际效果就会接受市场检验：</p>
+        <ul>
+          <li>值得支持的机构，会得到更多资源；</li>
+          <li>表现不佳的机构，会逐渐失去支持；</li>
+          <li>现实中的决策者，通常比几十年前已经去世的人更有条件根据当下情况分配资金。</li>
+        </ul>
+        <p>即使活着的人也不可能做出完美决定，但他们总比一个埋在地下 6 英尺、早已无法了解现实的逝者，更有机会理性地安排慈善资金。</p>
+        <p>遗嘱当然可以修改，但我的基本想法不太可能发生实质变化。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <section id="section-11">
+        <h2>十一、结语：我仍然热爱伯克希尔</h2>
+
+        <p>为了不以过于沉重的语气结束这本书，我想告诉大家：<strong>我从未感觉如此良好。</strong></p>
+        <p>我热爱管理伯克希尔。如果享受生活真的能够延长寿命，那么《圣经》中传说活了 969 岁的玛士撒拉（Methuselah），长寿纪录恐怕也会受到威胁。</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>投资智慧 · 读书笔记</p>
+    </div>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '巴菲特致股东的信';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
