@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 扁平章节链接（单讲章）：隐藏折叠箭头 */
+    a.toc-chapter-title::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.6rem 0 .7rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.9;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      position: absolute;
+      top: -.2rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .3;
+      font-style: normal;
+    }
+    .poem-author {
+      display: block;
+      margin-top: .8rem;
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .poem-title {
+      font-weight: 700;
+      color: var(--text);
+      font-style: normal;
+      letter-spacing: .25em;
+      margin-bottom: 1rem;
+    }
+    .poem p { margin: 0 0 1rem; }
+    .poem p:last-of-type { margin-bottom: 0; }
+
+    .formula {
+      text-align: center;
+      font-family: Georgia, 'Noto Serif SC', serif;
+      font-size: 1.05rem;
+      color: var(--gold-dk);
+      letter-spacing: .04em;
+      margin: 1.25rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(201,168,76,.06);
+      border: 1px dashed rgba(201,168,76,.35);
+      border-radius: var(--radius);
+    }
+  </style>style
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第一章/查理芒格传略.html">第一章 查理·芒格传略</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第二章/第二章_芒格的生活_学习和决策方法.html">第二章 芒格的生活、学习和决策方法</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第三章/第三章_芒格主义_查理的即席谈话.html">第三章 芒格主义：查理的即席谈话</a>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/第一讲 在哈佛学校毕业典礼上的演讲（整理版）.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系（优化版）.html" class="active">第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（优化版）.html">第三讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考（优化版）.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲 专业人士需要更多的跨学科技能_优化版.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲 一流慈善基金的投资实践_优化版.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲 在慈善圆桌会议早餐会上的讲话_优化版.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲 2003年的金融大丑闻_优化版.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点_优化版.html">第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点</a></li>
+            <li><a href="../第四章/第十讲 在南加州大学古尔德法学院毕业典礼上的演讲_优化版.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第十一讲 人类误判心理学_优化版.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录_优化版.html">最新的普世智慧：查理答问录</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第五章/第五章　文章、报道与评论.html">第五章 文章、报道与评论</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-0">导读</a></li>
+        <li><a href="#section-1">一、什么是普世智慧</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 知识必须放进思维模型中</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 为什么必须使用多元模型</a></li>
+        <li><a href="#section-2">二、基础模型：数学、概率与决策</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 先掌握基本数学</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 人脑不会自动按概率思考</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 德梅雷骑士的赌博问题</a></li>
+        <li><a href="#section-2-4" class="sub">2.4 决策树：把代数用于现实</a></li>
+        <li><a href="#section-3">三、会计：商业的语言与它的边界</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 会计是起点，不是现实本身</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 卡尔·布劳恩的例子</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 会计分析时应追问的问题</a></li>
+        <li><a href="#section-4">四、工程学与硬科学：可靠模型的来源</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 质量控制与概率</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 后备系统、断裂点与临界质量</a></li>
+        <li><a href="#section-5">五、心理学：理解误判，也理解自己</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 人脑既强大又容易出错</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 误判心理学</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 双轨分析法</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 “五何”沟通原则</a></li>
+        <li><a href="#section-5-5" class="sub">5.5 巴甫洛夫联想与拒绝逆耳忠言</a></li>
+        <li><a href="#section-6">六、把市场看成生态系统：微观经济学的基本模型</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 专业化与生态位</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 规模优势</a></li>
+        <li><a href="#section-6-3" class="sub">6.3 赢家通吃与品牌认同</a></li>
+        <li><a href="#section-6-4" class="sub">6.4 专业化也可能战胜规模</a></li>
+        <li><a href="#section-6-5" class="sub">6.5 规模的代价：官僚主义与激励失灵</a></li>
+        <li><a href="#section-6-6" class="sub">6.6 连锁店、沃尔玛与集中采购</a></li>
+        <li><a href="#section-6-7" class="sub">6.7 市场竞争为什么有时创造财富、有时摧毁财富</a></li>
+        <li><a href="#section-7">七、技术、产权与竞争性毁灭</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 技术进步未必让企业受益</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 产权保护可以形成护城河</a></li>
+        <li><a href="#section-7-3" class="sub">7.3 竞争性毁灭</a></li>
+        <li><a href="#section-8">八、能力圈：只在自己真正理解的领域竞争</a></li>
+        <li><a href="#section-9">九、股市的本质：有效，但并不完美</a></li>
+        <li><a href="#section-9-1" class="sub">9.1 有效市场理论的正确部分</a></li>
+        <li><a href="#section-9-2" class="sub">9.2 用赛马彩池理解股票市场</a></li>
+        <li><a href="#section-9-3" class="sub">9.3 发现机会后重注，其余时间等待</a></li>
+        <li><a href="#section-10">十、三种选股思路</a></li>
+        <li><a href="#section-10-1" class="sub">10.1 行业轮换：听起来简单，长期很难</a></li>
+        <li><a href="#section-10-2" class="sub">10.2 格雷厄姆：以显著折价买入内在价值</a></li>
+        <li><a href="#section-10-3" class="sub">10.3 “市场先生”：利用市场情绪，而不是服从市场情绪</a></li>
+        <li><a href="#section-10-4" class="sub">10.4 从便宜股票转向优质企业</a></li>
+        <li><a href="#section-11">十一、怎样识别伟大企业</a></li>
+        <li><a href="#section-11-1" class="sub">11.1 企业质量优先于管理者天才</a></li>
+        <li><a href="#section-11-2" class="sub">11.2 定价权：不用增加销量也能提高利润</a></li>
+        <li><a href="#section-11-3" class="sub">11.3 品牌、渠道与技术护城河</a></li>
+        <li><a href="#section-11-4" class="sub">11.4 “癌症手术法”：剥离坏业务，保留健康核心</a></li>
+        <li><a href="#section-12">十二、管理者、激励机制与企业行为</a></li>
+        <li><a href="#section-12-1" class="sub">12.1 激励机制决定行为</a></li>
+        <li><a href="#section-12-2" class="sub">12.2 联邦快递的薪酬改革</a></li>
+        <li><a href="#section-12-3" class="sub">12.3 投资经理与客户利益并不总是一致</a></li>
+        <li><a href="#section-13">十三、集中投资、税收与长期持有</a></li>
+        <li><a href="#section-13-1" class="sub">13.1 少数看准的机会可以创造大部分财富</a></li>
+        <li><a href="#section-13-2" class="sub">13.2 延迟纳税的复利价值</a></li>
+        <li><a href="#section-13-3" class="sub">13.3 不要为了避税而破坏投资</a></li>
+        <li><a href="#section-14">十四、投资伟大企业的风险</a></li>
+        <li><a href="#section-15">十五、案例：华盛顿邮报</a></li>
+        <li><a href="#section-16">十六、投资管理行业的特殊困境</a></li>
+        <li><a href="#section-17">十七、关于退休储蓄的简单建议</a></li>
+        <li><a href="#section-18">十八、2006 年重读演讲：对哈佛、耶鲁投资成绩的补充</a></li>
+        <li><a href="#section-18-1" class="sub">18.1 不要盲目复制成功</a></li>
+        <li><a href="#section-18-2" class="sub">18.2 泰勒斯的橄榄压榨机故事</a></li>
+        <li><a href="#section-19">十九、全篇要点速查</a></li>
+        <li><a href="#section-20">二十、结语：把少数真正重要的事情做好</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第二讲</div>
+        <h1 class="article-title">论基本的、普世的智慧，及其与投资管理和商业的关系</h1>
+        <div class="article-meta">
+          <span><strong>演讲时间</strong>1994 年 4 月 14 日</span>
+          <span><strong>演讲地点</strong>南加州大学马歇尔商学院</span>
+          <span><strong>演讲者</strong>查理·芒格</span>
+          <span><strong>主题</strong>如何用跨学科的思维模型理解商业、投资与人的行为</span>
+        </div>
+      </header>
+
+      <div class="callout info">
+        <div class="callout-icon">📝</div>
+        <div class="callout-body">
+          <div class="callout-title">整理说明</div>
+          <p>本文按论证主题重组原稿，合并重复引文，区分 1994 年演讲、原书旁注与 2006 年补充。企业规模、市场地位、税率和行业判断均须结合当时背景理解，不代表当前情况。标为“理解辅助”的内容属于整理者补充，不是演讲原话。文中的集中投资与“重注”是作者的投资主张，不等于鼓励借债或投入无法承受损失的资金。</p>
+        </div>
+      </div>
+
+      <!-- 导读 -->
+      <section id="section-0">
+        <h2>导读</h2>
+
+        <p>查理·芒格把本次演讲比作“祖母的规矩”：<strong>先吃胡萝卜，再吃甜点</strong>。</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">胡萝卜</span>
+            <h4>基础思维模型</h4>
+            <p>学习构成普世智慧的基础思维模型，包括数学、概率、会计、工程学、心理学和微观经济学。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">甜点</span>
+            <h4>用于投资</h4>
+            <p>把这些模型用于投资，理解股票市场、企业质量、管理者、竞争优势、税收和投资管理行业。</p>
+          </div>
+        </div>
+
+        <p>芒格的核心观点可以概括为：</p>
+
+        <div class="pull-quote large">真正的智慧，不是记住一堆互不相干的事实，而是把来自不同学科的思维模型组织成一套能够解释现实、指导决策的框架。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、什么是普世智慧 -->
+      <section id="section-1">
+        <h2>一、什么是普世智慧</h2>
+
+        <h3 id="section-1-1">1.1 知识必须放进思维模型中</h3>
+
+        <p>孤立地记忆事实，无法形成真正的理解。只有把经验——无论是亲身经历，还是从他人那里间接获得的经验——挂在由多个思维模型组成的框架上，知识才有可能转化为判断力。</p>
+
+        <p>许多学生靠死记硬背应付考试，离开考场便不会使用所学知识。芒格认为，这种学习方式不仅会让人在学校里表现糟糕，也会让人在生活中持续犯错。</p>
+
+        <h3 id="section-1-2">1.2 为什么必须使用多元模型</h3>
+
+        <p>如果一个人手里只有一把锤子，眼里就容易把所有问题都看成钉子。只拥有一两个模型的人，往往会强行改造现实，让现实看起来符合自己熟悉的解释。</p>
+
+        <p>因此，思维模型必须来自多个学科，而不能局限在一个专业或一个院系。诗歌教授可能在诗歌领域非常优秀，但这并不意味着他们拥有足够广泛的模型来理解商业、心理和社会。</p>
+
+        <p>掌握约八九十个模型，通常就足以建立较完整的普世智慧；其中真正关键的模型，其实只有少数几个。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>不要追求知道一切，而要建立一套彼此连接、能够反复调用的基本模型。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、基础模型：数学、概率与决策 -->
+      <section id="section-2">
+        <h2>二、基础模型：数学、概率与决策</h2>
+
+        <h3 id="section-2-1">2.1 先掌握基本数学</h3>
+
+        <p>选股和商业判断首先离不开数字。除复利之外，<strong>排列组合、概率和决策树</strong>都是极其重要的工具。</p>
+
+        <p>这类知识本身并不难。费马与帕斯卡通过通信奠定概率理论基础，解决的正是日常决策中常见的“不确定性”问题。真正困难的地方，不是学会公式，而是养成在生活中持续使用它们的习惯。</p>
+
+        <p>哈佛商学院一年级学生学习的定量分析，实质上就是把高中代数用于现实决策；学生往往在这时才发现，基础数学原来可以直接解释生活。</p>
+
+        <h3 id="section-2-2">2.2 人脑不会自动按概率思考</h3>
+
+        <p>人类神经系统经过长期的基因和文化演化，擅长快速、粗略地估算，却不是一台严格遵循费马—帕斯卡体系运行的计算机。人们因此很容易：</p>
+
+        <ul>
+          <li>高估显眼但罕见的事件；</li>
+          <li>低估长期累积的小概率影响；</li>
+          <li>把一次偶然结果误认为稳定规律；</li>
+          <li>在面对复杂问题时，用直觉代替概率分析。</li>
+        </ul>
+
+        <p>要发挥潜力，就必须有意识地训练自己，用一套不那么自然、但更可靠的概率方法思考。</p>
+
+        <h3 id="section-2-3">2.3 德梅雷骑士的赌博问题</h3>
+
+        <p>17 世纪中期，法国贵族德梅雷骑士发现两种看似相近的赌博规则，结果却明显不同：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>赌博规则</th><th>下注内容</th><th>结果直觉</th><th>实际启示</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>规则一</td>
+              <td>掷四次骰子，至少出现一次 6</td>
+              <td>胜率较高</td>
+              <td>单次机会与重复试验的组合很重要</td>
+            </tr>
+            <tr>
+              <td>规则二</td>
+              <td>掷两枚骰子 24 次，至少出现一次双 6（总和为 12）</td>
+              <td>看起来相近</td>
+              <td>事件概率不能靠表面相似来判断</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>德梅雷请费马和帕斯卡解释其中原因，两人的通信由此推动了概率理论的发展。</p>
+
+        <p><strong>换句话说</strong>：当试验次数、成功条件或组合方式发生变化时，直觉可能完全失效。投资者面对收益概率、亏损概率和不同结果组合时，也必须采用同样的分析方法。</p>
+
+        <h3 id="section-2-4">2.4 决策树：把代数用于现实</h3>
+
+        <p>决策树并不神秘，它只是把不同选择、可能结果及其概率排列出来，再比较各条路径的预期收益与风险。</p>
+
+        <p>可用下面的步骤处理复杂决策：</p>
+
+        <ol>
+          <li>明确可选方案；</li>
+          <li>列出每个方案可能出现的结果；</li>
+          <li>估计各结果的概率；</li>
+          <li>计算结果的价值及预期值；</li>
+          <li>评估最坏情形，确认自己能否承受；</li>
+          <li>根据整体结果，而不是某个单一故事作决定。</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">技巧</div>
+            <p>在投资前先问“如果我错了，损失是什么；如果我对了，收益是什么；两种结果分别有多大概率”。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、会计 -->
+      <section id="section-3">
+        <h2>三、会计：商业的语言与它的边界</h2>
+
+        <h3 id="section-3-1">3.1 会计是起点，不是现实本身</h3>
+
+        <p>会计是商业活动的语言，复式簿记是人类文明的重要发明。任何商业判断都需要一定的会计基础，但会计报表只是一种对现实的粗略估算。</p>
+
+        <p>例如，一架喷气式飞机能够使用多少年，也许可以大致估计；但报表上写着一个漂亮的折旧数字，并不代表企业真正理解了飞机的实际寿命、维护状况或剩余经济价值。</p>
+
+        <h3 id="section-3-2">3.2 卡尔·布劳恩的例子</h3>
+
+        <p>C. F. 布劳恩公司设计和建造炼油厂。创始人卡尔·布劳恩能够按时建成炼油厂，并使其顺利、高效地投入生产，这需要极高的工程管理能力。</p>
+
+        <p>据说，布劳恩看过公司的标准会计报表后说：“这是狗屁。”他随即让会计人员离开，召集工程师，要求他们根据真实的生产流程重新设计会计系统。后来，炼油厂行业的会计工作吸收了不少他的思想。</p>
+
+        <p>这并不是说会计没有用，而是说明：<strong>标准会计必须服从真实的商业流程，不能取代对业务本身的理解。</strong></p>
+
+        <h3 id="section-3-3">3.3 会计分析时应追问的问题</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>问题</th><th>目的</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>数字对应的实际业务是什么？</td>
+              <td>防止只看报表表面</td>
+            </tr>
+            <tr>
+              <td>资产的真实寿命和经济价值是多少？</td>
+              <td>识别折旧与账面价值的偏差</td>
+            </tr>
+            <tr>
+              <td>报表中的成本是否真的会发生？</td>
+              <td>区分会计分类与现金流</td>
+            </tr>
+            <tr>
+              <td>员工、客户、品牌和组织能力是否得到充分反映？</td>
+              <td>识别无形资产</td>
+            </tr>
+            <tr>
+              <td>企业遇到困难时，哪些资产能够真正变现？</td>
+              <td>判断安全边际</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、工程学与硬科学 -->
+      <section id="section-4">
+        <h2>四、工程学与硬科学：可靠模型的来源</h2>
+
+        <p>芒格认为，来自硬科学和工程学的模型通常最可靠，因为它们建立在可检验的规律上。</p>
+
+        <h3 id="section-4-1">4.1 质量控制与概率</h3>
+
+        <p>工程项目成本高昂，任何人都不希望它轻易失败。质量控制理论本质上大量使用概率、统计和成本收益分析。戴明带到日本的质量管理思想，核心也离不开这些基础数学。</p>
+
+        <p>普通人不必成为统计学家，但至少应理解：</p>
+
+        <ul>
+          <li>高斯分布大致呈钟形；</li>
+          <li>很多自然和社会现象围绕平均值分布；</li>
+          <li>极端结果虽然罕见，却不能被完全忽略；</li>
+          <li>样本越小，结论越容易受偶然性影响。</li>
+        </ul>
+
+        <h3 id="section-4-2">4.2 后备系统、断裂点与临界质量</h3>
+
+        <p>工程学中的几个重要模型，也适用于企业和人生：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">模型一</span>
+            <h4>后备系统</h4>
+            <p>关键环节不能只有一个依赖点，要准备替代方案。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">模型二</span>
+            <h4>断裂点</h4>
+            <p>系统承受压力有上限，超过临界值后，结果可能突然恶化。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">模型三</span>
+            <h4>临界质量</h4>
+            <p>当某种资源、用户或支持达到一定规模后，系统会出现加速增长；在低于临界值时，努力可能无法产生同样效果。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>很多失败不是线性发生的。系统可能长时间看似正常，达到断裂点后却迅速崩溃；反过来，达到临界质量后，也可能突然形成强大的正反馈。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、心理学 -->
+      <section id="section-5">
+        <h2>五、心理学：理解误判，也理解自己</h2>
+
+        <h3 id="section-5-1">5.1 人脑既强大又容易出错</h3>
+
+        <p>人类的感知和认知系统并不完美：</p>
+
+        <ul>
+          <li>感知器官可能被外界刺激误导；</li>
+          <li>神经线路有限，大脑会使用快捷判断；</li>
+          <li>认知功能比感知功能更容易受到偏差影响；</li>
+          <li>他人可以像魔术师一样操纵注意力，让人看见不存在的东西，或忽略正在发生的事情。</li>
+        </ul>
+
+        <p>使用工具的人必须了解工具的局限；使用认知工具的人，也必须了解大脑的局限。掌握这些弱点不仅有助于避免受骗，也可能被用来影响、激励甚至操纵他人，因此更需要保持警惕。</p>
+
+        <h3 id="section-5-2">5.2 误判心理学</h3>
+
+        <p>芒格把心理学中最实用的部分称为“误判心理学”，大约包含二十个相互作用的小原则。聪明人也会因为忽视这些原则而犯下极其愚蠢的错误，甚至芒格自己也无法完全避免。</p>
+
+        <p>帕斯卡说：</p>
+
+        <div class="pull-quote">“人类的头脑既是宇宙的光荣，也是宇宙的耻辱。”</div>
+
+        <p>大脑既能创造复杂文明，也会在情绪、偏见和群体压力下做出荒谬判断。高明的心理操控甚至能够让大量受过教育的人参与明显错误的行动；历史上某些极端政治运动就是危险的例子。</p>
+
+        <h3 id="section-5-3">5.3 双轨分析法</h3>
+
+        <p>芒格习惯同时采用两条分析轨道：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>分析轨道</th><th>关注内容</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>理性轨道</td>
+              <td>真正控制利益的因素、事实、概率、价格和机会成本</td>
+            </tr>
+            <tr>
+              <td>潜意识轨道</td>
+              <td>大脑会自动形成什么结论，以及哪些心理捷径可能在当前情境中失灵</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>打桥牌时，人们会理性地判断牌面和利益；但在日常生活中，潜意识往往迅速给出结论，而且这些结论经常是错的。双轨分析要求我们先承认直觉的存在，再主动检查它是否可靠。</p>
+
+        <h3 id="section-5-4">5.4 “五何”沟通原则</h3>
+
+        <p>C. F. 布劳恩公司要求内部沟通回答五个问题：<strong>谁、为什么、何时、何地、做什么</strong>。没有说明原因的指令，可能导致严重误解；连续两次违反这一要求，甚至可能被解雇。</p>
+
+        <p>解释“为什么”有三重价值：</p>
+
+        <ol>
+          <li>帮助对方理解事情的逻辑；</li>
+          <li>让对方更重视信息；</li>
+          <li>即使对方暂时不理解，也更可能愿意配合。</li>
+        </ol>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>沟通时提供理由，不仅是礼貌，也是一种提高执行力的管理工具。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-5">5.5 巴甫洛夫联想与拒绝逆耳忠言</h3>
+
+        <p>人们听到让自己不舒服的话时，往往会本能地产生抵触。若不主动训练自己，就会把事实与负面情绪联系起来，进而排斥正确意见。</p>
+
+        <p>哥伦比亚广播公司创始人佩利是一个典型案例：下属发现他不愿听逆耳忠言，于是只告诉他喜欢听的内容。久而久之，他生活在谎言里，公司也随之腐败。即便是一家伟大的企业，也可能因为最高管理者隔绝真实信息而走向失败。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、微观经济学 -->
+      <section id="section-6">
+        <h2>六、把市场看成生态系统：微观经济学的基本模型</h2>
+
+        <h3 id="section-6-1">6.1 专业化与生态位</h3>
+
+        <p>自由市场或部分自由市场，可以看作一个生态系统：</p>
+
+        <ul>
+          <li>专注于狭窄领域的企业，可能在该领域形成极高效率；</li>
+          <li>企业必须找到适合自己的“生态位”；</li>
+          <li>适应环境的能力，比抽象意义上的“优秀”更重要；</li>
+          <li>市场结果并不自动证明成功者在所有方面都更有能力。</li>
+        </ul>
+
+        <p>财富最多的人不一定是“最优秀的人”；他们也可能只是占据了合适的生态位，并形成了持续的优势。</p>
+
+        <h3 id="section-6-2">6.2 规模优势</h3>
+
+        <p>规模优势的本质是：<strong>产量扩大后，企业能够更高效、更低成本地生产、采购、分销或传播产品。</strong>常见来源如下：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>规模优势来源</th><th>具体表现</th><th>典型例子</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>几何效应</td>
+              <td>容器扩大时，表面积按平方增长，容量按立方增长</td>
+              <td>大型储罐用相对更少的钢材获得更大容量</td>
+            </tr>
+            <tr>
+              <td>生产经验</td>
+              <td>产量越大，流程越熟练、单位成本越低</td>
+              <td>大规模制造</td>
+            </tr>
+            <tr>
+              <td>广告成本</td>
+              <td>固定广告投入由更多销量分摊</td>
+              <td>早期电视广告与宝洁</td>
+            </tr>
+            <tr>
+              <td>信息优势</td>
+              <td>消费者熟悉品牌，降低试错成本</td>
+              <td>绿箭口香糖相对陌生品牌</td>
+            </tr>
+            <tr>
+              <td>社会认同</td>
+              <td>人们倾向相信多数人正在购买的产品</td>
+              <td>大众品牌与流行商品</td>
+            </tr>
+            <tr>
+              <td>渠道优势</td>
+              <td>更大的销售网络覆盖更多地点</td>
+              <td>可口可乐的全球渠道</td>
+            </tr>
+            <tr>
+              <td>专业分工</td>
+              <td>大组织可以聘请专门人才处理专门工作</td>
+              <td>连锁店总部采购</td>
+            </tr>
+            <tr>
+              <td>网络与市场地位</td>
+              <td>领先者越大，越容易吸引广告、用户和供应商</td>
+              <td>地方日报的“赢家通吃”</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-6-3">6.3 赢家通吃与品牌认同</h3>
+
+        <p>美国多数城市通常只有一家主要日报。发行量大的报纸可以吸引更多广告；广告和发行量又使它能够提供更丰富的内容，从而进一步扩大优势。市场最终可能从竞争走向“赢家通吃”。</p>
+
+        <p>同样的社会认同也会推动品牌扩张。消费者面对不熟悉的商品时，往往愿意多花一点钱购买知名品牌，因为他们相信其他人的选择提供了信息。</p>
+
+        <h3 id="section-6-4">6.4 专业化也可能战胜规模</h3>
+
+        <p>规模并非永远有利。伯克希尔曾拥有多种刊物，其中一些被更专业的竞争对手击败。例如，专门面向企业差旅部门的杂志，可以把内容精准送达目标读者，不必浪费纸张和成本覆盖无关人群。</p>
+
+        <p>因此，企业有时应该缩小范围、加深专业化，而不是盲目扩大规模。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>真正重要的不是“大”或“小”，而是规模优势带来的效率，是否超过规模扩大后产生的官僚成本。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-5">6.5 规模的代价：官僚主义与激励失灵</h3>
+
+        <p>大型机构常见的问题包括：</p>
+
+        <ul>
+          <li>决策层级过多，反应迟缓；</li>
+          <li>工作在部门之间转交后，被误认为已经完成；</li>
+          <li>管理者互相保护，形成“你不找我麻烦，我也不找你麻烦”的潜规则；</li>
+          <li>不必要的岗位和流程不断增加；</li>
+          <li>员工与股东利益脱节；</li>
+          <li>组织越来越难以听到坏消息。</li>
+        </ul>
+
+        <p>政府部门往往最容易出现这些问题，但大型企业同样无法免疫。通用电气在杰克·韦尔奇领导下，通过分散经营、明确目标、严格考核和强激励与官僚主义抗衡；但这也说明，优秀领导者在大组织中十分重要且并不常见。</p>
+
+        <h3 id="section-6-6">6.6 连锁店、沃尔玛与集中采购</h3>
+
+        <p>连锁店同时拥有多个优势：</p>
+
+        <ul>
+          <li>集中采购，获得更低价格；</li>
+          <li>多家门店可以充当实验室，测试商品和经营方法；</li>
+          <li>总部能够聘请专门人才负责不同品类；</li>
+          <li>标准化制度明确每个人的职责。</li>
+        </ul>
+
+        <p>“小店老板什么都自己采购”容易受供应商推销影响。一个经典故事是：一家小店堆满了盐，陌生人称赞店主一定卖掉很多盐，店主却说：“没有，卖盐给我的人倒是卖掉很多盐。”</p>
+
+        <p>山姆·沃尔顿并没有发明所有零售方法，但他以极端认真、持续改进和高效率执行了许多已有的好方法。他先在小城镇中选择弱小对手，连续取得胜利，建立战绩和规模，再与更大的零售商竞争。</p>
+
+        <p>沃尔玛最终击败西尔斯的重要原因，不是西尔斯没有规模，而是西尔斯被冗员、僵化思维和官僚作风拖累。<strong>规模优势如果没有效率和激励支撑，最终会被组织成本抵消。</strong></p>
+
+        <h3 id="section-6-7">6.7 市场竞争为什么有时创造财富、有时摧毁财富</h3>
+
+        <p>许多行业最终只剩下两三家或五六家大型企业，但结果可能完全不同：有些行业的所有主要竞争者都能赚钱，有些行业却把股东财富全部消耗掉。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>行业特征</th><th>可能结果</th><th>原因</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>同质化商品、缺乏品牌差异</td>
+              <td>长期低利润甚至亏损</td>
+              <td>企业只能靠降价争夺订单</td>
+            </tr>
+            <tr>
+              <td>有品牌认同、产品差异明显</td>
+              <td>多家企业仍可获得高利润</td>
+              <td>消费者不只按最低价格选择</td>
+            </tr>
+            <tr>
+              <td>竞争者克制扩张</td>
+              <td>行业利润较稳定</td>
+              <td>企业避免以市场份额换取短期规模</td>
+            </tr>
+            <tr>
+              <td>竞争者疯狂抢份额</td>
+              <td>行业利润被摧毁</td>
+              <td>每家企业都把利润让给消费者</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>航空业是典型的低回报行业：安全旅行和全球流动带来巨大社会价值，但航空公司股东长期净收益却很差。相反，麦片行业虽然促销激烈、竞争者众多，却因品牌认同而普遍保持较高利润。瓶装饮料行业则会因不同市场中加盟商和竞争者的行为差异，出现截然不同的结果。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、技术、产权与竞争性毁灭 -->
+      <section id="section-7">
+        <h2>七、技术、产权与竞争性毁灭</h2>
+
+        <h3 id="section-7-1">7.1 技术进步未必让企业受益</h3>
+
+        <p>判断新技术时，不能只问“它能节省多少成本”，还要问：</p>
+
+        <div class="pull-quote large">节省下来的钱，最终有多少留在企业手里，有多少通过降价转给了消费者？</div>
+
+        <p>在低差异化、激烈竞争的行业里，效率提升通常会让产品更便宜，最终好处由消费者获得。企业即使花钱购买更高效的设备，也未必增加利润。</p>
+
+        <p>纺织业就是典型例子。若新纺织机的效率是旧机器的两倍，产品价格可能因竞争而下降，改善带来的收益最终流向买方。企业不断购买“三年即可收回成本”的设备，长期年均回报却可能低于 4%。</p>
+
+        <p>相反，若企业拥有当地唯一的报纸等稀缺地位，技术节省的成本更可能留在企业内部，因为竞争者无法迅速把收益竞争掉。</p>
+
+        <h3 id="section-7-2">7.2 产权保护可以形成护城河</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>权利</th><th>含义</th><th>可能形成的优势</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>专利权</td>
+              <td>在一定期限内独占制造、使用和销售发明</td>
+              <td>保护创新成果，限制模仿</td>
+            </tr>
+            <tr>
+              <td>商标权</td>
+              <td>对产品名称、符号或标识的法律保护</td>
+              <td>建立品牌认知和信任</td>
+            </tr>
+            <tr>
+              <td>特许经营权</td>
+              <td>授权他人使用商标、商号或经营体系</td>
+              <td>获得渠道、地点或模式优势</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>芒格早年认为专利诉讼成本高、法院常常否认专利，专利未必划算。后来专利案件由专门法庭处理，专利持有人得到更强保护，专利的经济价值也随之提高。机场中唯一的餐饮店、有线电视中的有限频道，都可能享有小型垄断优势。</p>
+
+        <h3 id="section-7-3">7.3 竞争性毁灭</h3>
+
+        <p>技术发展会不断淘汰原有行业。最好的马鞭厂也无法抵抗汽车出现；企业如果不能转型，就会被新技术摧毁。</p>
+
+        <p>当新行业出现时，先行者可能获得“冲浪”机会：</p>
+
+        <ul>
+          <li>成功站上浪尖，可能在很长时间里保持领先；</li>
+          <li>没能站上浪尖，就会被浪潮吞没；</li>
+          <li>领先企业必须不断改进，否则仍可能从浪尖跌落。</li>
+        </ul>
+
+        <p>国民收款机公司创始人约翰·帕特森就是一个典型先行者。他原本是小零售商，收款机解决了员工偷钱的问题；他没有满足于改善自己的商店，而是看到了整个行业的机会，创办了国民收款机公司。依靠销售体系、专利和持续技术改进，公司长期处在行业前沿。</p>
+
+        <p>IBM 后来则展示了“冲浪”的另一面：它在科技浪潮上领先约 60 年，但由于主流技术变化和市场地位下降，最终被新环境抛下。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、能力圈 -->
+      <section id="section-8">
+        <h2>八、能力圈：只在自己真正理解的领域竞争</h2>
+
+        <p>伯克希尔通常回避复杂的高科技行业，因为芒格和巴菲特承认自己并不真正理解软件、电脑芯片等领域的技术演进。他们把认识自己的知识边界看作优势，而不是缺点。</p>
+
+        <p><strong>能力圈</strong>不是“我知道多少”，而是“我能否持续、可靠地判断一个领域的经济规律”。扩大能力圈很难，因此应当：</p>
+
+        <ol>
+          <li>明确自己真正擅长的领域；</li>
+          <li>在领域内部持续积累经验；</li>
+          <li>不因别人赚钱就贸然进入陌生游戏；</li>
+          <li>让竞争对手在他们擅长的地方竞争，自己在擅长的地方竞争。</li>
+        </ol>
+
+        <p>世界顶尖网球选手极少，但经过训练，很多人都有机会成为本地区优秀的管道工程承包商。人生成功不只取决于天赋，也取决于是否选择了适合自己的赛道。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>不要问“哪个领域最热门”，要问“在哪个领域，我能够建立足够深的理解并长期保持优势”。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、股市的本质 -->
+      <section id="section-9">
+        <h2>九、股市的本质：有效，但并不完美</h2>
+
+        <h3 id="section-9-1">9.1 有效市场理论的正确部分</h3>
+
+        <p>市场整体非常有效，单凭聪明和勤奋，绝大多数选股者无法长期显著跑赢平均水平。平均结果必然接近平均值，因此不可能所有人都战胜市场。</p>
+
+        <p>但市场并非完全有效。极端的有效市场理论忽略了现实中的行为偏差、交易成本、能力差异和信息优势。芒格把把理论当成绝对真理、拒绝一切反例的人称为“神经病”——因为理论虽然逻辑自洽，却与现实并不完全相符。</p>
+
+        <h3 id="section-9-2">9.2 用赛马彩池理解股票市场</h3>
+
+        <p>彩池投注系统是理解股市的好模型：所有人下注，赔率会随着资金流向改变。热门马获胜的概率较高，但赔率低；冷门马获胜概率较低，但赔率高。真正的问题不是“哪匹马更可能获胜”，而是：</p>
+
+        <div class="pull-quote large">以当前赔率计算，哪匹马的预期回报更好？</div>
+
+        <p>赛马场还会收取约 17% 的管理费。即便一个赌客每个赛季能取得 10% 的毛利润，扣除费用后仍会亏损。只有少数真正理解比赛、耐心等待错误定价并控制下注次数的人，才能在扣除费用后仍赚钱。</p>
+
+        <p>股票市场的交易成本远低于赛马场，主要是买卖价差和佣金。因此，足够精明、投入且自律的投资者，仍可能取得比普通人更好的结果，但这绝不容易。</p>
+
+        <h3 id="section-9-3">9.3 发现机会后重注，其余时间等待</h3>
+
+        <p>赛马中的优秀赌客并不频繁下注，只在赔率明显错误时出手。投资也应如此：</p>
+
+        <ul>
+          <li>大多数时间观察和等待；</li>
+          <li>发现定价错误且把握较高的机会时，集中投入；</li>
+          <li>没有优势时，宁可不做；</li>
+          <li>不要因为“必须工作”或“必须持仓”而制造交易。</li>
+        </ul>
+
+        <p>芒格认为，伯克希尔的大部分财富来自大约十个最好的机会，并不是来自数千次普通决策。巴菲特曾用“20 格考勤卡”比喻投资生涯：如果一生只能打卡 20 次，人们会认真思考每一次投资，而不会轻率出手。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>投资质量通常比投资次数重要。耐心本身就是竞争优势。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、三种选股思路 -->
+      <section id="section-10">
+        <h2>十、三种选股思路</h2>
+
+        <h3 id="section-10-1">10.1 行业轮换：听起来简单，长期很难</h3>
+
+        <p>行业轮换要求投资者判断石油业何时优于零售业，再不断切换到最热门行业。理论上，这能带来超额收益；但芒格没有见过多少真正靠这种方法积累巨大财富的人。</p>
+
+        <p>这并不证明行业轮换绝对不可能成功，只说明它缺少稳定、可复制的长期证据。</p>
+
+        <h3 id="section-10-2">10.2 格雷厄姆：以显著折价买入内在价值</h3>
+
+        <p>本杰明·格雷厄姆提出“私人拥有价值”：如果整个企业出售给私人买家，它大约值多少钱？若股票总市值只有企业合理出售价值的三分之一或更低，即使企业质量一般，也可能提供巨大的安全边际。</p>
+
+        <p>格雷厄姆在大萧条后的废墟中寻找低于价值的股票。当时，流动资产更容易转化为股东价值；现代劳动法律和福利制度改变了这一点，企业在裁员、清算时不能像过去那样轻易把所有流动资产装进股东口袋。因此，旧式账面价值分析必须结合现实制度重新判断。</p>
+
+        <h3 id="section-10-3">10.3 “市场先生”：利用市场情绪，而不是服从市场情绪</h3>
+
+        <p>格雷厄姆把市场人格化为一位躁狂抑郁症患者：</p>
+
+        <ul>
+          <li>有时，他愿意以极低价格卖出股票；</li>
+          <li>有时，他愿意以极高价格买入股票；</li>
+          <li>每天都会给投资者新的报价，但不会强迫投资者交易。</li>
+        </ul>
+
+        <p>投资者的优势在于，可以选择接受报价，也可以什么都不做。市场波动不是命令，而是机会。</p>
+
+        <h3 id="section-10-4">10.4 从便宜股票转向优质企业</h3>
+
+        <p>芒格和巴菲特早期是格雷厄姆的信徒，靠寻找明显便宜的股票获得了不错的成绩。后来他们发现：</p>
+
+        <ul>
+          <li>有些企业股价是账面价值的两三倍，仍可能很便宜；</li>
+          <li>强大的市场地位能够产生增长惯性；</li>
+          <li>优秀管理者和优秀管理体系可以创造持久价值；</li>
+          <li>伟大企业往往比普通企业的低价折扣更值得重视。</li>
+        </ul>
+
+        <p>伯克希尔最早的几亿美元，部分来自“盖格探测器”式的便宜股票；但数千亿美元资产的大部分，来自长期持有优质企业。早期的美国运通和迪士尼，便是价格大幅下跌时买入优质企业的例子。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十一、怎样识别伟大企业 -->
+      <section id="section-11">
+        <h2>十一、怎样识别伟大企业</h2>
+
+        <h3 id="section-11-1">11.1 企业质量优先于管理者天才</h3>
+
+        <p>长期来看，股票回报率很难远高于企业本身的资本回报率：</p>
+
+        <ul>
+          <li>若企业 40 年的资本回报率只有 6%，低价买入也很难创造极高的长期回报；</li>
+          <li>若企业过去二三十年的资本回报率达到 18%，即使买入价格不低，长期结果仍可能非常可观。</li>
+        </ul>
+
+        <p>因此，投资的关键是买入能够长期高回报、具备竞争优势和增长惯性的企业。</p>
+
+        <p>优秀管理者当然重要。杰克·韦尔奇之于通用电气，艾斯纳与弗兰克·威尔斯之于迪士尼，西蒙·马克斯之于玛莎百货，帕特森之于国民收款机，以及山姆·沃尔顿之于沃尔玛，都说明管理者可能做出普通人无法做到的事情。</p>
+
+        <p>但如果必须二选一，通常应：</p>
+
+        <div class="pull-quote large">优先押注企业本身的经济质量，而不是押注管理者的个人天才。</div>
+
+        <p>只有在极少数情况下，非凡管理者才足以让平庸企业成为值得投资的对象。</p>
+
+        <h3 id="section-11-2">11.2 定价权：不用增加销量也能提高利润</h3>
+
+        <p>有些伟大企业拥有尚未充分使用的提价能力。管理者只要提高价格，利润就能明显增长，而客户仍愿意购买。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>企业</th><th>定价权来源</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>迪士尼</td>
+              <td>独特的主题公园体验、经典动画和家庭消费场景</td>
+            </tr>
+            <tr>
+              <td>喜诗糖果</td>
+              <td>品牌、口味、礼赠习惯和客户忠诚度</td>
+            </tr>
+            <tr>
+              <td>可口可乐</td>
+              <td>全球品牌、渠道覆盖和消费者习惯</td>
+            </tr>
+            <tr>
+              <td>吉列</td>
+              <td>高使用频率、产品习惯和技术领先</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>定价权比单纯提高销量更有价值，因为它不一定要求企业投入同等规模的新增资本。发现价格长期低于市场承受能力的企业，就像在路上发现钱；但投资者必须有勇气相信自己的判断。</p>
+
+        <h3 id="section-11-3">11.3 品牌、渠道与技术护城河</h3>
+
+        <p>吉列在许多国家的剃须刀市场占有率超过 90%，其技术并不复杂，却很难被竞争者复制。可口可乐拥有广泛的全球销售网络；迪士尼的特许经营不仅包括主题公园和电影，也包括图书、漫画和高利润的视频销售。</p>
+
+        <p>这些优势的共同点是：<strong>它们不容易被竞争者用一次性投入迅速复制，能够在较长时间里保护企业的利润。</strong></p>
+
+        <h3 id="section-11-4">11.4 “癌症手术法”：剥离坏业务，保留健康核心</h3>
+
+        <p>拯救混乱企业时，可以像外科医生处理癌症一样：</p>
+
+        <ol>
+          <li>识别仍然健康、能够创造价值的核心业务；</li>
+          <li>判断哪些业务只是拖累整体；</li>
+          <li>果断出售或关闭有害部分；</li>
+          <li>若没有可保留的健康核心，则接受破产或清算。</li>
+        </ol>
+
+        <p>政府雇员保险公司（GEICO）曾因成功而误以为什么都懂，扩张到许多愚蠢业务，遭受惨重损失。后来公司砍掉这些业务，回到直接面向特定客户、低成本经营的核心模式，并由优秀人才完成改革。对投资者而言，这是一种值得寻找的模式：<strong>好业务被坏业务掩盖，但坏业务可以被切除。</strong></p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十二、管理者、激励机制与企业行为 -->
+      <section id="section-12">
+        <h2>十二、管理者、激励机制与企业行为</h2>
+
+        <h3 id="section-12-1">12.1 激励机制决定行为</h3>
+
+        <p>人们通常会按照激励机制行动，而不是按照组织口号行动。投资者的目标、投资经理的目标和顾问的目标可能完全不同，必须先看清每个人“因为什么获得报酬”。</p>
+
+        <h3 id="section-12-2">12.2 联邦快递的薪酬改革</h3>
+
+        <p>联邦快递的核心承诺是按时送达。货物必须在深夜集中到一个地点，再分发到不同飞机；任何一个环节延误，整个系统就会失败。</p>
+
+        <p>早期，公司按小时支付工资，员工没有动力及时完成任务。管理层尝试劝说、威胁等方式都没有效果。后来，公司改为按班次计薪，并允许员工完成工作后回家。问题一夜之间解决了。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>与其反复要求员工“更努力”，不如重设计让正确行为得到回报的制度。</p>
+          </div>
+        </div>
+
+        <h3 id="section-12-3">12.3 投资经理与客户利益并不总是一致</h3>
+
+        <p>投资经理可能更在意：</p>
+
+        <ul>
+          <li>保持与基准相近，避免短期落后；</li>
+          <li>频繁交易，以证明自己在工作；</li>
+          <li>维持客户对服务的感知价值；</li>
+          <li>收取管理费，而非创造长期财富。</li>
+        </ul>
+
+        <p>这类似于卖鱼钩的人只关心把五颜六色的鱼钩卖出去，并不关心鱼是否真的会上钩。许多顾问卖的是“行动感”，而不是结果。</p>
+
+        <p>如果投资者采用伯克希尔式方法，买入少数优秀企业并长期持有，客户可能很快发现投资经理并没有频繁操作，于是质疑为什么要每年支付管理费。正因为如此，许多行业参与者更愿意销售复杂、频繁而显眼的服务。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十三、集中投资、税收与长期持有 -->
+      <section id="section-13">
+        <h2>十三、集中投资、税收与长期持有</h2>
+
+        <h3 id="section-13-1">13.1 少数看准的机会可以创造大部分财富</h3>
+
+        <p>投资管理界常要求投资组合看起来与市场相似，但这可能迫使管理者持有许多没有优势的资产。伯克希尔的做法不同：发现定价错误、胜率高且风险可承受的机会，就集中下注。</p>
+
+        <p>如果客户是期限 40 年的养老基金，最终结果足够好，过程偶尔波动、与市场不同，并不是问题。为了避免短期评价而强行贴近基准，反而可能损害长期回报。</p>
+
+        <h3 id="section-13-2">13.2 延迟纳税的复利价值</h3>
+
+        <p>假设一项投资期限 30 年、税前年均复合收益率为 15%，最终缴纳 35% 的所得税：税后年均复合收益率约为 13.3%。</p>
+
+        <p>如果每年获得 15% 后都立即缴纳 35% 的税，实际年复合收益率只有：</p>
+
+        <div class="formula">15% ×（1 - 35%）= 9.75%</div>
+
+        <p>两种方式相差超过 3.5 个百分点。长期复利下，这种差距极其巨大。</p>
+
+        <p>即使税前年均收益率只有 10%，最后一次纳税约对应 8.3% 的税后年均收益率；若每年纳税，年均收益率约降至 6.5%。因此，低分红、长期持有的优质企业，可能仅凭延迟纳税就多创造约 1%～3% 的年均回报。</p>
+
+        <h3 id="section-13-3">13.3 不要为了避税而破坏投资</h3>
+
+        <p>芒格见过很多企业为了减少税收而做出糟糕决策。巴菲特和芒格不钻油井，也不购买复杂的避税安排，而是依法纳税。</p>
+
+        <p>“芒格的规则”是：</p>
+
+        <div class="pull-quote large">如果有人拿着两百页计划书、收取高额佣金，向你推销一种复杂的避税方案，最好不要买。</div>
+
+        <p>这条规则偶尔会让人错过机会，但长期看能避开大量成本高昂、风险隐蔽且令人后悔的交易。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十四、投资伟大企业的风险 -->
+      <section id="section-14">
+        <h2>十四、投资伟大企业的风险</h2>
+
+        <p>投资优质企业并非没有风险。因为优质企业的价值太明显，市场有时会把它们的市盈率推到 50 倍、60 倍甚至 70 倍。20 世纪 50 年代的牛市中，许多人都知道哪些公司优秀，但高估值最终导致严重损失；IBM 从科技浪尖跌落，也说明优秀企业并不保证永远成功。</p>
+
+        <p>投资者需要同时关注：</p>
+
+        <ul>
+          <li>企业是否真的优秀；</li>
+          <li>竞争优势能持续多久；</li>
+          <li>技术、制度或消费者习惯是否正在改变；</li>
+          <li>当前价格是否已经透支多年增长；</li>
+          <li>即使判断错误，损失是否仍可承受。</li>
+        </ul>
+
+        <p>最理想的情形是：以合理价格买入伟大企业，然后耐心持有。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十五、案例：华盛顿邮报 -->
+      <section id="section-15">
+        <h2>十五、案例：华盛顿邮报</h2>
+
+        <p>伯克希尔曾在 1973～1974 年股灾期间买入《华盛顿邮报》。当时股价约为企业价值的 20%，符合格雷厄姆的深度价值思路；同时，投资者还看到了：</p>
+
+        <ul>
+          <li>两份报纸竞争的城市最终可能只剩一家；</li>
+          <li>《华盛顿邮报》很可能成为赢家；</li>
+          <li>管理层正直、聪明，且具有长期经营能力；</li>
+          <li>价格提供了极大的安全边际。</li>
+        </ul>
+
+        <p>这项投资到 1994 年演讲时取得约 50 倍收益。芒格提醒听众，这种机会可能是四十年一遇，不能把一生的投资计划建立在必然遇到下一次同等机会的幻想上。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十六、投资管理行业的特殊困境 -->
+      <section id="section-16">
+        <h2>十六、投资管理行业的特殊困境</h2>
+
+        <p>投资管理行业与水管安装、医疗服务不同：整个行业加总后，并不会为所有客户创造超额价值，因为客户整体就是市场本身。扣除管理费、交易成本和税收后，行业整体必然落后于市场平均水平。</p>
+
+        <p>少数投资经理能够创造附加值，但仅靠聪明远远不够，还需要：</p>
+
+        <ol>
+          <li>建立跨学科的思维模型；</li>
+          <li>在自己的能力圈内工作；</li>
+          <li>能够识别企业质量和价格之间的差距；</li>
+          <li>有耐心等待真正的机会；</li>
+          <li>一旦机会出现，敢于集中投入；</li>
+          <li>能够承受与市场不同的短期结果；</li>
+          <li>了解客户、管理者和自己的激励机制。</li>
+        </ol>
+
+        <p>许多投资经理像只会用一把锤子的脊椎按摩师，面对行业没有附加值这一事实时，选择从心理上否认它。芒格认为，承认限制，反而更有可能找到可行的方法。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十七、关于退休储蓄的简单建议 -->
+      <section id="section-17">
+        <h2>十七、关于退休储蓄的简单建议</h2>
+
+        <p>有人问，普通人怎样才能保证退休后有足够的钱。芒格通常会回避这类问题，但给出了一个朴素答案：</p>
+
+        <ol>
+          <li><strong>量入为出</strong>；</li>
+          <li><strong>养成持续储蓄的习惯</strong>；</li>
+          <li><strong>把储蓄投入延期纳税账户</strong>；</li>
+          <li><strong>让时间和复利逐渐积累财富</strong>。</li>
+        </ol>
+
+        <p>这并不复杂，却足以解决许多人的基本财务问题。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十八、2006 年重读演讲 -->
+      <section id="section-18">
+        <h2>十八、2006 年重读演讲：对哈佛、耶鲁投资成绩的补充</h2>
+
+        <p>芒格在 2006 年重读本篇演讲时，补充讨论了哈佛大学和耶鲁大学近年的投资成功，以及其他机构试图复制这种成功的风险。</p>
+
+        <p>他认为，两所大学的成绩可能同时受到以下因素影响：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>因素</th><th>具体说明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>债务杠杆</td>
+              <td>通过杠杆收购基金放大美国股票收益；在市场上涨时效果漂亮，但并非没有风险</td>
+            </tr>
+            <tr>
+              <td>优秀管理者</td>
+              <td>凭声望聘请或接触能力出众的投资经理，说明市场并非完全有效</td>
+            </tr>
+            <tr>
+              <td>独特准入</td>
+              <td>声望帮助其进入利润丰厚、普通投资者难以进入的高科技风险投资基金</td>
+            </tr>
+            <tr>
+              <td>逆向投资</td>
+              <td>及时投资低迷的美国公司债、高收益外国债券和固定收益套利等机会</td>
+            </tr>
+            <tr>
+              <td>有利环境</td>
+              <td>利率下降、股票市盈率上升，共同推高了投资结果</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-18-1">18.1 不要盲目复制成功</h3>
+
+        <p>其他大学出于嫉妒或推销者鼓动，纷纷模仿哈佛和耶鲁，但它们未必拥有同样的声誉、准入资格、管理人才和市场环境。</p>
+
+        <p>高科技泡沫时期，许多机构眼红早期风险投资者的成功，约 900 亿美元资金被推向低质量、不成熟项目，后续投资者截至当时承受了约 450 亿美元净亏损。</p>
+
+        <p><strong>过去成功的方法，不等于今天仍然有效。</strong>当环境变化时，减少欲望、降低风险，往往比为了满足欲望而继续加杠杆更明智。</p>
+
+        <h3 id="section-18-2">18.2 泰勒斯的橄榄压榨机故事</h3>
+
+        <p>古希腊思想家米利都的泰勒斯预见橄榄将大丰收，提前租下当地所有橄榄压榨机，随后因需求暴涨而获利。这说明学术知识也能转化为世俗成就，但前提是能看清现实、提前行动，而不是机械模仿旧经验。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十九、全篇要点速查 -->
+      <section id="section-19">
+        <h2>十九、全篇要点速查</h2>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>主题</th><th>芒格的核心结论</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>学习</td><td>不要堆积孤立事实，要建立多元思维模型</td></tr>
+            <tr><td>数学</td><td>掌握概率、排列组合、复利和决策树</td></tr>
+            <tr><td>会计</td><td>会计是商业语言，但报表不等于现实</td></tr>
+            <tr><td>工程</td><td>关注质量控制、后备系统、断裂点和临界质量</td></tr>
+            <tr><td>心理学</td><td>先理解误判，再判断他人和自己</td></tr>
+            <tr><td>沟通</td><td>说明谁、为什么、何时、何地、做什么</td></tr>
+            <tr><td>经济学</td><td>把市场看成生态系统，寻找合适生态位</td></tr>
+            <tr><td>规模</td><td>规模能产生优势，也会带来官僚成本</td></tr>
+            <tr><td>专业化</td><td>小而专的企业可能击败大而泛的企业</td></tr>
+            <tr><td>技术</td><td>先判断效率收益最终落到谁手里</td></tr>
+            <tr><td>竞争</td><td>技术会不断摧毁旧行业，先行者要持续冲浪</td></tr>
+            <tr><td>能力圈</td><td>只在自己真正理解的领域竞争</td></tr>
+            <tr><td>市场</td><td>市场有效但不完美，价格比故事更重要</td></tr>
+            <tr><td>投资</td><td>少做决策，等待高确定性机会并集中投入</td></tr>
+            <tr><td>价值投资</td><td>安全边际来自价格低于内在价值</td></tr>
+            <tr><td>优质企业</td><td>长期高资本回报、品牌、渠道、定价权更重要</td></tr>
+            <tr><td>管理者</td><td>企业质量通常比管理者个人天才更可靠</td></tr>
+            <tr><td>激励</td><td>人会按照激励机制行动，制度比口号重要</td></tr>
+            <tr><td>税收</td><td>延迟纳税能显著增强长期复利</td></tr>
+            <tr><td>风险</td><td>伟大企业也可能被高估或被技术浪潮淘汰</td></tr>
+            <tr><td>个人理财</td><td>量入为出、持续储蓄、长期复利</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二十、结语 -->
+      <section id="section-20">
+        <h2>二十、结语：把少数真正重要的事情做好</h2>
+
+        <p>芒格并不主张掌握所有知识，也不认为每个人都能在每个领域成为天才。他的建议更朴素，也更严格：</p>
+
+        <ul>
+          <li>用跨学科模型理解现实；</li>
+          <li>主动识别大脑的偏差；</li>
+          <li>尊重概率、激励和复利；</li>
+          <li>认识自己的能力边界；</li>
+          <li>选择拥有长期竞争优势的企业；</li>
+          <li>不因市场噪声而频繁行动；</li>
+          <li>在真正看准的少数机会出现时，勇敢而集中地下注。</li>
+        </ul>
+
+        <div class="pull-quote large">最终的投资智慧，不是永远显得很忙，也不是假装什么都懂，而是在漫长的等待之后，认出少数真正值得行动的机会。</div>
+
+        <p>生活中最重要的成果，往往不是来自 56 次正确判断，而是来自两三次甚至更少的关键选择。适应变化、持续学习、控制欲望，并把有限的注意力放在最重要的事情上，才是普世智慧与投资实践的共同底层逻辑。</p>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+  </script>script
+
+</body>
+</html>

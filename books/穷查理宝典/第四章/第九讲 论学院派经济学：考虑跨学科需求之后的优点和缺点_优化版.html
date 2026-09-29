@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 扁平章节链接（单讲章）：隐藏折叠箭头 */
+    a.toc-chapter-title::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.6rem 0 .7rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.9;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      position: absolute;
+      top: -.2rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .3;
+      font-style: normal;
+    }
+    .poem-author {
+      display: block;
+      margin-top: .8rem;
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .poem-title {
+      font-weight: 700;
+      color: var(--text);
+      font-style: normal;
+      letter-spacing: .25em;
+      margin-bottom: 1rem;
+    }
+    .poem p { margin: 0 0 1rem; }
+    .poem p:last-of-type { margin-bottom: 0; }
+
+    .formula {
+      text-align: center;
+      font-family: Georgia, 'Noto Serif SC', serif;
+      font-size: 1.05rem;
+      color: var(--gold-dk);
+      letter-spacing: .04em;
+      margin: 1.25rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(201,168,76,.06);
+      border: 1px dashed rgba(201,168,76,.35);
+      border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第一章/查理芒格传略.html">第一章 查理·芒格传略</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第二章/第二章_芒格的生活_学习和决策方法.html">第二章 芒格的生活、学习和决策方法</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第三章/第三章_芒格主义_查理的即席谈话.html">第三章 芒格主义：查理的即席谈话</a>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/第一讲 在哈佛学校毕业典礼上的演讲（整理版）.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系（优化版）.html">第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（优化版）.html">第三讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考（优化版）.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲 专业人士需要更多的跨学科技能_优化版.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲 一流慈善基金的投资实践_优化版.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲 在慈善圆桌会议早餐会上的讲话_优化版.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲 2003年的金融大丑闻_优化版.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点_优化版.html" class="active">第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点</a></li>
+            <li><a href="../第四章/第十讲 在南加州大学古尔德法学院毕业典礼上的演讲_优化版.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第十一讲 人类误判心理学_优化版.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录_优化版.html">最新的普世智慧：查理答问录</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第五章/第五章　文章、报道与评论.html">第五章 文章、报道与评论</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-0">开场白：一个局外人的勇气</a></li>
+        <li><a href="#section-0-1" class="sub">我的两种特殊经验</a></li>
+        <li><a href="#section-1">一、学院派经济学的优点</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 生逢其时，顺势而生</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 重视跨学科研究</a></li>
+        <li><a href="#section-1-3" class="sub">1.3 吸引顶尖人才</a></li>
+        <li><a href="#section-1-4" class="sub">1.4 拥有伟大作家</a></li>
+        <li><a href="#section-2">二、学院派经济学的九大缺陷</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 致命的自闭：铁锤人综合征</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 没有采用硬科学的全归因治学方法</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 物理学妒忌</a></li>
+        <li><a href="#section-2-4" class="sub">2.4 太过强调宏观经济学</a></li>
+        <li><a href="#section-2-5" class="sub">2.5 经济学的综合太少</a></li>
+        <li><a href="#section-2-6" class="sub">2.6 对心理学的极度无知</a></li>
+        <li><a href="#section-2-7" class="sub">2.7 对二级或更高级别的效应关注太少</a></li>
+        <li><a href="#section-2-8" class="sub">2.8 对"捞灰金"的概念关注太少</a></li>
+        <li><a href="#section-2-9" class="sub">2.9 对美德效应和恶行效应不够重视</a></li>
+        <li><a href="#section-3">三、核心思考：悖论与智慧</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 数学中的不完备性</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 利伯维茨铁钉厂的故事</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 如何摧毁错误观念</a></li>
+        <li><a href="#section-4">四、总结：大教训与呼吁</a></li>
+        <li><a href="#section-5">问答环节精选</a></li>
+        <li><a href="#section-6">附录：补充问答</a></li>
+        <li><a href="#section-7">重读第九讲（2007 年补充）</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第九讲</div>
+        <h1 class="article-title">论学院派经济学：考虑跨学科需求之后的优点和缺点</h1>
+        <div class="article-meta">
+          <span><strong>演讲者</strong>查理·芒格</span>
+          <span><strong>地点</strong>加州大学圣塔巴巴拉分校经济学系</span>
+          <span><strong>时间</strong>2003 年 10 月 3 日</span>
+          <span><strong>场合</strong>赫伯·卡伊本科生讲座</span>
+        </div>
+      </header>
+
+      <!-- 开场白 -->
+      <section id="section-0">
+        <h2>开场白：一个局外人的勇气</h2>
+
+        <p>我已列好演讲提纲，讲完后会回答提问，只要你们愿意听，我会一直讲下去。几十年来，我对软科学学科之间如何更好对话这个主题非常感兴趣。经济学是软科学中的皇后，理应比其他软科学更出色。虽然经济学在跨学科研究方面已经做得不错，但我认为还远远不够。</p>
+
+        <p>你们有权知道一个有趣的事实：<strong>我从来没有上过一节经济学课</strong>。你们可能会问，既然毫无资格，我怎么还敢发表这次演讲？答案很简单——我在胆量方面是黑带水平，天生胆大。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>真正的洞察力不一定来自学院派训练，而是来自实践经验和跨学科思考能力。</p>
+          </div>
+        </div>
+
+        <h3 id="section-0-1">我的两种特殊经验</h3>
+
+        <p>让我拥有经济洞察力的来源有二：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>经验来源</th><th>具体内容</th><th>核心价值</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>伯克希尔·哈撒韦</td>
+              <td>40 多年间市值从 1000 万增长到 1000 亿美元，增长一万倍</td>
+              <td>实战中验证微观经济学规律</td>
+            </tr>
+            <tr>
+              <td>个人教育经历</td>
+              <td>多学科思维模式、硬科学训练背景</td>
+              <td>形成跨学科思考框架</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、学院派经济学的优点 -->
+      <section id="section-1">
+        <h2>一、学院派经济学的优点</h2>
+
+        <h3 id="section-1-1">1.1 生逢其时，顺势而生</h3>
+
+        <p>过去两百年，技术发展和文明制度推动下，文明世界人均产值年均复合增长率达到 2%。而在此之前的几千年里，增长率几乎为零。经济学在这种巨大成功中成长起来，既推动了这种成功，也解释了它。</p>
+
+        <p>所有计划经济都崩溃了，自由市场经济和半自由市场经济则蓬勃发展，这进一步增加了经济学的声望。</p>
+
+        <h3 id="section-1-2">1.2 重视跨学科研究</h3>
+
+        <p>经济学总是比其他软科学更强调跨学科研究，不断从其他学科吸取养分。格里高利·曼昆的教材就是典型例子，书中列举了许多经济学原理：</p>
+
+        <ul>
+          <li><strong>机会成本</strong> — 希望获得正确答案的人都可以使用的超级力量</li>
+          <li><strong>激励机制</strong> — 另一种超级力量</li>
+          <li><strong>公用品悲剧</strong> — 贾雷特·哈丁教授提出，引入了与亚当·斯密"无形之手"相提并论的"邪恶的无形之脚"</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>曼昆借鉴其他学科、吸取哈丁理论的做法是正确的，这种开放态度让经济学不断完善。</p>
+          </div>
+        </div>
+
+        <h3 id="section-1-3">1.3 吸引顶尖人才</h3>
+
+        <p>经济学从一开始就吸引了软科学领域最优秀的人才。经济学家入世更深，对社会产生巨大影响：</p>
+
+        <ul>
+          <li>乔治·舒尔茨博士曾三次进入美国内阁</li>
+          <li>拉里·萨默斯曾被委任为内阁大臣</li>
+        </ul>
+
+        <h3 id="section-1-4">1.4 拥有伟大作家</h3>
+
+        <p>经济学从很早就吸引了人类历史上一些最杰出的作家：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>经济学家</th><th>突出贡献</th><th>影响力</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>亚当·斯密</td>
+              <td>极其出色的思想家和作家</td>
+              <td>康德称德国无人能及，伏尔泰称法国无人可比</td>
+            </tr>
+            <tr>
+              <td>约翰·梅纳德·凯恩斯</td>
+              <td>说过许多妙语，对生活有大启发</td>
+              <td>理论和文字双重影响力</td>
+            </tr>
+            <tr>
+              <td>保罗·克鲁格曼</td>
+              <td>文笔流畅，当今最优秀的杂文家之一</td>
+              <td>影响力远超经济学学科范畴</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、学院派经济学的九大缺陷 -->
+      <section id="section-2">
+        <h2>二、学院派经济学的九大缺陷</h2>
+
+        <h3 id="section-2-1">2.1 致命的自闭：铁锤人综合征</h3>
+
+        <h4>核心问题</h4>
+
+        <p>怀特海曾指出，学科各自孤立的情况是致命的。每个教授甚至不了解其他学科的思维模型，更别提融会贯通。这种做法有个现代名字——<strong>神经研究法</strong>，非常神经。</p>
+
+        <div class="pull-quote">铁锤人综合征：在只有铁锤的人看来，每个问题都非常像一颗钉子。</div>
+
+        <p>这种综合征会把人变成彻底的白痴，唯一的治疗良方是<strong>拥有全套工具</strong>。你们不能只拥有一把铁锤，必须拥有所有工具。使用时应该把它们列成检查清单，否则会错过很多好机会。</p>
+
+        <h4>商业领域的恶果</h4>
+
+        <p>商业领域的"铁锤人综合征"尤其可怕：</p>
+
+        <ol>
+          <li><strong>过度强调可量化因素</strong> — 因为有数据，有机会使用统计学技巧</li>
+          <li><strong>忽视无法量化的重要因素</strong> — 可能更重要，但没有相关数据</li>
+        </ol>
+
+        <h4>托马斯·汉特·摩根的智慧</h4>
+
+        <p>已故的伟大生物学家托马斯·汉特·摩根在加州理工学院任教时，<strong>禁止使用弗莱登计算器</strong>（当时的电脑代替品）。</p>
+
+        <p>他说："我就像 1849 年在萨克拉门托河边寻找黄金的人。虽然才智有限，但我能够弯腰捡起大金块。只要能够捡到大金块，我就不会让我系里的人浪费稀缺资源，用矿金开采的方法去找金子。"</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>不要为了使用复杂工具而使用工具。只要掌握几种管用的思维窍门，用"弯腰捡大金块"的方法，就能取得惊人成就。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-2">2.2 没有采用硬科学的全归因治学方法</h3>
+
+        <h4>什么是全归因治学方法？</h4>
+
+        <p>这是我在空军兵团接受气象学培训时，在加州理工学院学到的硬科学基本方法：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>核心要求</th><th>具体做法</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>掌握基础学科</td>
+              <td>必须领悟所有比自己学科更基础的学科的重要思想</td>
+            </tr>
+            <tr>
+              <td>清晰解释问题</td>
+              <td>只有掌握最基础的知识和原理，才能清清楚楚地解释问题</td>
+            </tr>
+            <tr>
+              <td>标明知识来源</td>
+              <td>使用物理学时说使用物理学，使用生物学时说使用生物学</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>曼昆方法的不足</h4>
+
+        <p>曼昆吸收了其他学科的知识，却没有指出来源，没有给借鉴的知识贴上所属学科的标签。这就像经营企业时使用了糟糕的文档归类方法，削弱了能力。</p>
+
+        <p>我给这种方法起了两个名字：</p>
+
+        <ul>
+          <li><strong>拿来主义</strong></li>
+          <li><strong>吉卜林主义</strong> — 源自吉卜林的诗："当荷马拨弄他灿烂的竖琴时，他早已听过人们沿着陆地和海洋的歌唱；凡他所需用的思想，他便采撷自己用，和我一样！"</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">关键区别</div>
+            <p>拿来用比不拿好得多，但比吸取所有学科精华、指出借鉴内容来源并尽可能化繁为简地使用所有知识的方法差得多。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-3">2.3 物理学妒忌</h3>
+
+        <p>这个名称参考了弗洛伊德的"阴茎妒忌"概念。采用有效市场理论教条就是物理学妒忌给经济学造成的恶果之一。</p>
+
+        <h4>《华盛顿邮报》的案例</h4>
+
+        <p>麦肯锡有个合伙人，他念的商学院教给他有效市场理论。后来他被《华盛顿邮报》聘为顾问。当时《华盛顿邮报》股价特别低，连大猩猩也能算出每股价格只有其价值的五分之一。</p>
+
+        <p>但他深信学到的理论，认为《华盛顿邮报》不该购买自己的股票，因为按理论说法，股价是完全有效的，不可能有便宜可占。</p>
+
+        <p>幸运的是，沃伦·巴菲特是董事会成员，他说服董事会回购了超过一半的流通股，<strong>这给剩下的股东带来了超过十亿美元的财富</strong>。</p>
+
+        <h4>我的建议</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>应该做的</th><th>不应该做的</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>采用硬科学的基本治学方法</td>
+              <td>追求物理学那样的精确度</td>
+            </tr>
+            <tr>
+              <td>养成指明借鉴知识来源的习惯</td>
+              <td>渴望包括波尔茨曼常数在内的精确公式</td>
+            </tr>
+            <tr>
+              <td>关注爱因斯坦的话："一切应该尽可能简单，但不能过于简单"</td>
+              <td>追求虚假的精确</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>爱因斯坦的话有点同义反复，但非常有用。赫伯·斯坦因也说过一句同义反复的话："如果一件事情无法永远延续下去，它最后就会停下来。"</p>
+
+        <h3 id="section-2-4">2.4 太过强调宏观经济学</h3>
+
+        <p>经济学界太过强调宏观经济学，对微观经济学重视不够。这是错误的，就像不懂解剖学和化学却想掌握医学一样。</p>
+
+        <p><strong>微观经济学的优势：</strong></p>
+
+        <ul>
+          <li>很好玩，像耍杂技那么有趣</li>
+          <li>能帮助正确理解宏观经济学</li>
+          <li>更少犯错，因为宏观经济涉及的系统太复杂</li>
+        </ul>
+
+        <h4>微观经济学案例一：内布拉斯加家具城</h4>
+
+        <p>伯克希尔在堪萨斯市开了一家新的家具和电器商店。从营业那天起，3200 个停车位总是满的，年销售额高达 5 亿美元，超过了世界上其他所有家具和电器商店。</p>
+
+        <p><strong>问题：</strong>这家新商店迅速获得成功的原因？</p>
+
+        <p><strong>推理过程：</strong></p>
+
+        <ol>
+          <li>在陌生城市开高价商店不会马上成功，所以必定是<strong>低价商店</strong></li>
+          <li>年流转 5 亿美元，必定是<strong>硕大无朋的商店</strong>（家具体积庞大）</li>
+          <li>大型商店的特点是提供<strong>大量选择</strong></li>
+        </ol>
+
+        <p><strong>答案：</strong>一家提供大量选择的低价商店。</p>
+
+        <p><strong>为什么以前没人开？</strong>开这么大的商店需要一大笔钱。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>只要懂得一些基本道理，看起来很难的微观经济学问题就能迎刃而解。</p>
+          </div>
+        </div>
+
+        <h4>微观经济学案例二：勒斯·施瓦伯轮胎店</h4>
+
+        <p>中西部地区有一家轮胎连锁店，过去 50 年慢慢取得成功，能够与大型轮胎公司直营店竞争，还面临罗巴克·西尔斯、好市多和山姆会员店等折扣商店的竞争。现在销售额达到几亿美元。</p>
+
+        <p>勒斯·施瓦伯先生 80 多岁，没受过教育，他是怎么做到的？</p>
+
+        <p><strong>我的解题方法：</strong></p>
+
+        <p>利用大脑里的搜索引擎，核对检查清单，运用在大量复杂系统中都非常有用的近似运算法则。</p>
+
+        <p><strong>极度成功的共同因素：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>因素类型</th><th>具体说明</th><th>案例</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>最大化/最小化</td>
+              <td>将一到两个因素最大化或最小化</td>
+              <td>好市多、我们的家具电器商店</td>
+            </tr>
+            <tr>
+              <td>Lollapalooza 效应</td>
+              <td>增加成功因素，提高成效（通常非线性）</td>
+              <td>临界点理论</td>
+            </tr>
+            <tr>
+              <td>多重优点</td>
+              <td>将几个优点发挥得淋漓尽致</td>
+              <td>丰田、勒斯·施瓦伯</td>
+            </tr>
+            <tr>
+              <td>顺应潮流</td>
+              <td>顺应重大潮流</td>
+              <td>甲骨文</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>施瓦伯的成功要素：</strong></p>
+
+        <ol>
+          <li>赶上卖日本轮胎的潮流（日本人从无到有做大）</li>
+          <li>出色的激励机制驱动员工</li>
+          <li>很好的员工选择系统</li>
+          <li>善于做广告（是个艺术家）</li>
+          <li>率先出售日本轮胎</li>
+        </ol>
+
+        <h3 id="section-2-5">2.5 经济学的综合太少</h3>
+
+        <h4>提高价格反而增加销量？</h4>
+
+        <p>我向两个商学院班级提出这个问题："你们已经学习了供给和需求曲线。现在向我举几个例子，说明要是想提高销量，正确的做法是提高价格。"</p>
+
+        <p>结果：50 个人里面只有一个人能举出例子（其中一所还是斯坦福商学院），而且没有一个人能给出我欣赏的主要答案。</p>
+
+        <p><strong>四类正确答案：</strong></p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>类别</th><th>解释</th><th>案例</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>奢侈品效应</td>
+              <td>提高价格改善"炫耀"功能，价格高=质量好</td>
+              <td>高端品牌</td>
+            </tr>
+            <tr>
+              <td>非奢侈品质量信号</td>
+              <td>消费者认为更高价格意味着更好质量</td>
+              <td>耐用工业品</td>
+            </tr>
+            <tr>
+              <td>合法再投资</td>
+              <td>把额外利润用于改善产品性能或销售系统</td>
+              <td>贝克曼仪器公司</td>
+            </tr>
+            <tr>
+              <td>非法/不道德促销</td>
+              <td>用额外利润贿赂采购经纪人</td>
+              <td>共同基金高佣金</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>投资管理行业的典型例子</h4>
+
+        <p>假如你们是开放式基金经理，想卖出更多份额。你们提高佣金，最终买家所得基金份额自然降低——等于出卖最终客户。但可以利用额外收取的佣金贿赂客户的交易经纪人，让经纪人背叛客户，用客户的钱购买高佣金产品。</p>
+
+        <p><strong>这种做法至少为共同基金增加了一万亿美元的销量。</strong></p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">我的立场</div>
+            <p>我这辈子非常彻底地避开了这种策略。我认为你们在生活中没有必要去推销那些自己永远不会购买的东西。</p>
+          </div>
+        </div>
+
+        <h4>为什么会这样？</h4>
+
+        <p>那些人上过四门经济学课程，入读商学院，智商都很高，写了许多论文，但一点综合能力都没有。这不是因为教授知道如何综合却不传授，而是因为<strong>教授本身也没有好好掌握综合能力</strong>。</p>
+
+        <p>凯恩斯或加尔布雷思说过："经济学教授的思想是最经济的。他们终身使用的是他们在研究生院学到的一点点知识。"</p>
+
+        <h3 id="section-2-6">2.6 对心理学的极度无知</h3>
+
+        <h4>拉斯维加斯老虎机问题</h4>
+
+        <p>假如你们在拉斯维加斯拥有一家小赌场，有 50 台外表和功能相同的标准老虎机，返还率一模一样。但其中有一台无论摆在哪里，每天营业结束检查时，这台机器赢的硬币总是比其他机器多 25%。</p>
+
+        <p><strong>问题：</strong>这台赢更多钱的机器有什么特别之处？</p>
+
+        <p><strong>答案：</strong>利用现代电子技术，使这台机器的"近似中奖"率更高。与正常机器相比，这台机器会更多出现 bar、bar、柠檬，bar、bar、葡萄的情况，促使玩家下注下得更重。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>明显存在一个心理因素：那台机器能够引发某种基本的心理反应。</p>
+          </div>
+        </div>
+
+        <p>如果了解各种心理因素，在头脑中把它们列成检查清单，只要核对清单，就肯定会找出能够解释这种现象的因素。</p>
+
+        <p><strong>没有掌握这些方法的人不会得到答案。</strong>生活就像踢屁股比赛，如果你们想成为独腿人，欢迎来找我玩。但如果想要像两条腿的壮汉那样成功，就必须掌握这些方法，包括在了解心理学的前提下对宏观和微观经济学进行研究。</p>
+
+        <h4>拉丁美洲国家的经济整顿</h4>
+
+        <p>某个拉丁美洲小国，偷盗成风，所有人都喜欢行窃。他们挪用公司公款，偷走社区一切能弄到手的东西。经济自然停滞不前。</p>
+
+        <p><strong>但这个问题被解决了。</strong>我在哪里看到这个案例？不在经济学刊物上，而是在<strong>心理学刊物</strong>上。那个国家出现了一些聪明人，使用了心理学方法，问题就解决了。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">塞缪尔·约翰逊的极端指令</div>
+            <p>如果一个学者能够通过少量工作轻松去掉自己的一个无知，却不去做，那么这个学者的行为就等于<strong>背叛</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-7">2.7 对二级或更高级别的效应关注太少</h3>
+
+        <p>结果会产生结果，而结果的结果也会产生结果。这变得非常复杂。</p>
+
+        <h4>医疗保险法成本预测的失败</h4>
+
+        <p>当年有些专家，包括拥有博士学位的经济学家，对最早的医疗保险法成本进行预测。他们的表现极其无知，只是把以往成本相加。</p>
+
+        <p><strong>预测误差达到 1000%。</strong>计划成本还不到实际发生成本的 10%。</p>
+
+        <p>他们实行新的激励机制后，人们的行为根据激励机制发生变化，实际发生的医疗费用与预测完全不同。一大群专家为什么犯如此愚蠢的错误？</p>
+
+        <p><strong>答案：</strong>他们为了轻松得到结果而把问题过度简化，就像把圆周率改为 3.2 一样！他们选择不去关注后果的后果的后果。</p>
+
+        <h4>纺织厂的陷阱</h4>
+
+        <p>假设你们拥有一家纺织厂，有人找上门说："我们发明了新型纺织机，能极大提高生产效率，只要纺织品价格维持不变，只需三年就可以收回成本。"</p>
+
+        <p>于是你在 20 年间不停地买进新型纺织机，而利润率依然只有 4%，什么好处也没得到。</p>
+
+        <p><strong>答案：</strong>不是新技术没有发挥作用，而是经济规律决定了，新纺织机带来的好处只会落到购买纺织品的人手里，而不是落进拥有纺织厂的家伙口袋。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">反思</div>
+            <p>一个人选修过大一经济学课程或上过商学院，怎么可能不明白这个道理？我认为教育机构是在误人子弟。</p>
+          </div>
+        </div>
+
+        <h4>制度设计的漏洞</h4>
+
+        <p>基于深层心理学原因，所有人类制度都会被钻空子，人们在钻空子的博弈游戏中表现出高超技巧。设计制度的人不懂如何防止钻营。</p>
+
+        <p><strong>加州工伤赔偿制度案例：</strong></p>
+
+        <p>我有个朋友，家族控制了约 8% 的货柜拖车市场。他关掉了加州的最后一家工厂。在得克萨斯州工厂，工伤赔偿成本占总薪酬支出的 10% 以上。</p>
+
+        <p>他把工厂迁到犹他州奥格登市。那里生活着大量需要养活一大家子的虔诚摩门教徒，他们从来不钻工伤赔偿制度漏洞。现在工伤赔偿成本只占总薪酬支出的 2%。</p>
+
+        <p><strong>罪魁祸首是那些立法机构。</strong>他们通过了鼓励欺骗的法律，不认为自己的所作所为对文明社会有极大破坏作用，因为他们没有考虑到说谎和欺骗造成的二级或三级后果。</p>
+
+        <h4>李嘉图比较优势的二级后果</h4>
+
+        <p>李嘉图证明，比较优势能让贸易双方都得益。经济学界每个人都知道，如果只考虑初始优势，比较优势能够让贸易双方获得非常大的利益。</p>
+
+        <p><strong>但假如进行更深入的思考：</strong></p>
+
+        <p>如果美国和中国进行贸易，美国人的生活水平会得到改善，这是李嘉图证明的。<strong>但哪个国家的经济会发展得更快？</strong>那显然是中国。</p>
+
+        <p>在自由贸易推动下，他们吸收了世界上各种现代科技，很快就会走到前面。看看香港、台湾和早年的日本。</p>
+
+        <p>最开始时，和你们进行贸易的是一个有十几亿落后农民的弱小国家，但到最后，这个国家变得比你们的国家更加强大，甚至可能还拥有更多和更好的原子弹。</p>
+
+        <p><strong>李嘉图并没有证明原来领先的国家会得到美好下场。</strong>他没有试图去确定二级和更高级别的后果。</p>
+
+        <p><strong>乔治·舒尔茨的回答：</strong></p>
+
+        <div class="pull-quote">"查理，我认为，就算我们停止和中国进行贸易，其他发达国家也会继续的，我们无法抑制中国相对我们的上升势头，而且我们将会失去李嘉图提出的贸易优势。"</div>
+
+        <p>这当然是正确的。我说："好吧，乔治。你刚刚创造了一种新的公用品悲剧。"</p>
+
+        <h3 id="section-2-8">2.8 对"捞灰金"的概念关注太少</h3>
+
+        <h4>加尔布雷思的"捞黑金"理论</h4>
+
+        <p>加尔布雷思认为，尚未败露的贪污行为会对经济产生很大的凯恩斯刺激效应：</p>
+
+        <ul>
+          <li>钱被贪污的家伙以为仍像从前那么富裕，延续原来的消费方式</li>
+          <li>贪污的家伙则增加了购买力</li>
+        </ul>
+
+        <p><strong>问题：</strong>一旦贪污行为败露（迟早会败露），效应很快会扭转，所以效应很快就消失了。</p>
+
+        <h4>我的"捞灰金"概念</h4>
+
+        <p>如果关注数学问题，就会想到基本数学定理："如果 A 等于 B，B 等于 C，那么 A 等于 C。"</p>
+
+        <div class="formula">如果 A 等于 B，B 等于 C，那么 A 等于 C</div>
+
+        <p>于是会努力寻找功能相等的东西，问："<strong>经济学中有跟'捞黑金'相同的行为吗？</strong>"</p>
+
+        <p>加尔布雷思生造了"黑金"（尚未败露的贪污中涉及的金额），所以我生造了"<strong>捞灰金</strong>"——起到的作用跟捞黑金相同的行为。</p>
+
+        <p><strong>投资管理业的例子：</strong></p>
+
+        <p>美国股东在投资普通股的过程中，总共有数十亿美元被浪费了。只要股市继续上涨，浪费掉这些钱的投资者就没有感觉，因为看到股价正在稳定上升。</p>
+
+        <p>而在投资顾问看来，这些钱是正当收入，因为确实是出售有害投资建议换来的。<strong>这种行为无异于尚未败露的贪污。</strong></p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">研究机会</div>
+            <p>如果在经济生活中寻找其作用跟"捞黑金"相同的"捞灰金"行为，将会发现一些非常强大的因素，创造出比原来"财富效应"更为强大的新型"财富效应"。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-9">2.9 对美德效应和恶行效应不够重视</h3>
+
+        <p>经济生活中有巨大的美德效应，也有巨大的恶行效应。但如果跟经济学家谈起美德和恶行，他们会感到浑身不自在，因为美德和恶行无法用数据图表来表示。</p>
+
+        <h4>美德效应的例子</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>美德机制</th><th>具体作用</th><th>经济影响</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>复式簿记法</td>
+              <td>修道士卢卡·帕乔利发明</td>
+              <td>让商业更容易掌握，也更加诚实</td>
+            </tr>
+            <tr>
+              <td>收款机</td>
+              <td>让人很难钻空子的系统</td>
+              <td>对人类道德的贡献比公理教会还要多</td>
+            </tr>
+            <tr>
+              <td>宗教诚信精神</td>
+              <td>灌输负罪感</td>
+              <td>极大推动诚信精神发展，提高经济产出</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心观点</div>
+            <p>极端的诚信精神能够让经济系统运转得更好。容易被钻空子的系统对文明社会有破坏作用；让人很难钻空子的系统可以通过减少恶行而让文明社会的经济有更好表现。</p>
+          </div>
+        </div>
+
+        <h4>公司高管薪酬问题</h4>
+
+        <p>每个人都对美国公司高层管理人员拿那么多薪水感到气愤，人们应该感到气愤。许多律师和教授就如何解决薪酬不公平提出了各种疯狂的管理办法，但毫无用处。</p>
+
+        <p><strong>好办法就在眼前：</strong>如果董事会成员都是不领薪水的大股东，那么我们将会吃惊地发现，由于降低了互惠倾向引发的影响，公司高层管理人员领取太多薪酬的现象将会消失。</p>
+
+        <h4>英国地方刑事法庭的智慧</h4>
+
+        <p>英国地方刑事法庭有一些非专职的治安法官，有判处犯人入狱一年或拘禁数月的权力。每个地方刑事法庭有三名法官，<strong>他们不领取薪水</strong>（开支可以报销，但有限制）。</p>
+
+        <p>他们每年作为志愿者工作大约 40 个半天。这种制度很漂亮地运转了大概七百年。有能力而且诚实的人争先恐后地想成为法官，履行义务，但没有报酬。</p>
+
+        <p>这也是本杰明·富兰克林在晚年时希望美国政府采用的制度。他认为政府高官不应该领取薪水。</p>
+
+        <h4>公平与效率的悖论</h4>
+
+        <p>人们往往没有认识到，人世间大多数结果都是不公平的，而且<strong>道德规范有时候必须不公平，才能取得最好的效果</strong>。</p>
+
+        <p>过于追求公平，会给社会制度带来严重的功能障碍。有些制度应该故意制定得对个体不公平，因为这样整体上对我们大家会更加公平。</p>
+
+        <p><strong>海军的例子：</strong></p>
+
+        <p>在海军，如果你的船搁浅了，即使那不是你的错，你的军旅生涯也会终结。我认为，与追求对每个人都公平的制度相比，对那个没有犯错的家伙不公平的制度更能让每艘舰艇的船长呕心沥血地确保他负责的舰艇不会搁浅。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">推荐模式</div>
+            <p>容忍对某些人有一点不公平，以便对所有人更为公平。</p>
+          </div>
+        </div>
+
+        <h4>恶行效应：南海泡沫事件</h4>
+
+        <p>欺诈与愚蠢造成的经济泡沫无所不在。历史上最早的大泡沫是英国那次可怕的南海大泡沫，它引发的余波非常有意思。</p>
+
+        <p><strong>泡沫破裂后的政策：</strong></p>
+
+        <p>在随后的数十年里，除了少数特例，英国当局禁止企业公开交易股票。议会通过法律说你们可以和几位合伙人成立合伙制公司，但不能公开交易股份。</p>
+
+        <p><strong>尽管没有公开的股票交易，但英国经济也仍然有所发展。</strong>长时间禁止股票公开交易的做法并没有让英国衰落。</p>
+
+        <h4>妒忌的悖论</h4>
+
+        <p>妒忌在摩西律法中饱受指责。古代犹太人知道妒忌的人们是什么德性，也知道这些人会惹出什么麻烦。他们对妒忌真的绝不姑息。</p>
+
+        <p><strong>但曼德维尔令人信服地证明，妒忌会极大地推动消费意欲。</strong></p>
+
+        <p>所以，妒忌既是摩西十诫严厉禁止的糟糕恶行，却又是促使经济增长的驱动力。经济学中总有一些人们无法解决的悖论。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、核心思考：悖论与智慧 -->
+      <section id="section-3">
+        <h2>三、核心思考：悖论与智慧</h2>
+
+        <h3 id="section-3-1">3.1 数学中的不完备性</h3>
+
+        <p>库尔特·哥德尔证明了数学系统必定有许多不完备之处。自那以后，优秀的数学家都说他们在数学中发现了更多无法消除的缺陷，他们终于明白，<strong>数学中如果没有悖论，就不成其为数学了</strong>。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>如果连数学家都无法在他们自己创造的系统中消除悖论，那么可怜的经济学家将永远无法摆脱悖论，我们这些人就更别说了。</p>
+          </div>
+        </div>
+
+        <p><strong>那没有关系。生活有悖论才有趣。</strong>每当遇到悖论时，我就会想：</p>
+
+        <ol>
+          <li>要么我是一个彻头彻尾的白痴，所以才觉得这是悖论</li>
+          <li>要么我的研究已经很有成果，已到达这个领域的前沿</li>
+        </ol>
+
+        <p>光是弄清楚我到底属于哪一类就能给生活增添很多乐趣。</p>
+
+        <h3 id="section-3-2">3.2 利伯维茨铁钉厂的故事</h3>
+
+        <p>海曼·利伯维茨从外国移民到美国，继续家族的铁钉厂生意。他奋斗多年，铁钉厂取得巨大成功。后来他去佛罗里达享受生活，把工厂交给儿子。</p>
+
+        <p>不久，财务报告急转直下，很糟糕。他登上飞机，回到新泽西。离开机场、前往工厂的路上，他看到一块巨大的户外灯箱广告牌，上面是被钉在十字架上的耶稣，下面有一行文字："他们使用了利伯维茨牌铁钉。"</p>
+
+        <p>他气急败坏地赶到工厂对儿子说："你这个白痴！你知不知道你在干什么？这家工厂花了我 50 年的心血！"</p>
+
+        <p>"爸爸，"儿子说，"相信我。我会解决这个问题的。"</p>
+
+        <p>他回到佛罗里达。期间收到更多财务报告，经营业绩继续恶化。于是他又登上飞机。离开机场、路过那块广告牌时，他抬起头，看着这块巨大的灯箱广告牌，现在上面是一个空的十字架。</p>
+
+        <p>耶稣就趴在十字架下面的地上，广告语写着："<strong>他们没有用利伯维茨牌铁钉。</strong>"</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">深刻教训</div>
+            <p>这个故事很荒唐，但人们执迷不悟地坚持错误观念的做法也同样荒唐。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-3">3.3 如何摧毁错误观念</h3>
+
+        <p><strong>凯恩斯说：</strong>"介绍新观念倒不是很难，难的是清除那些旧观念。"</p>
+
+        <p><strong>爱因斯坦说得更好：</strong>他把那些成功的理论归功于"好奇、专注、毅力和自省"。他说的自省就是<strong>摧毁你们自己最热爱、最辛苦才得到的观念</strong>。</p>
+
+        <p>如果你们确实能够善于摧毁自己的错误观念，那是一种了不起的才华。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、总结：大教训与呼吁 -->
+      <section id="section-4">
+        <h2>四、总结：大教训与呼吁</h2>
+
+        <h3>核心呼吁</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>呼吁内容</th><th>具体要求</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>熟练掌握跨学科知识</td>
+              <td>更好地理解经济生活和其他一切</td>
+            </tr>
+            <tr>
+              <td>别因复杂性和悖论丧气</td>
+              <td>那只会增加问题的乐趣</td>
+            </tr>
+            <tr>
+              <td>粗略的正确好过精确的错误</td>
+              <td>来自凯恩斯的灵感</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>最后的话</h3>
+
+        <p>如果你轻车熟路地走上跨学科的途径，<strong>你将永远不想往回走，因为那就像砍断你的双手</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 问答环节精选 -->
+      <section id="section-5">
+        <h2>问答环节精选</h2>
+
+        <h3>Q1：衍生品合同交易会引发金融灾难吗？</h3>
+
+        <p><strong>芒格的回答：</strong></p>
+
+        <p>成功地对未来灾难进行预言向来很难。但我自信地预测，<strong>大麻烦就要来了</strong>。</p>
+
+        <p>衍生品系统简直是神经病，是完全不负责任的：</p>
+
+        <ul>
+          <li>涉及金额达到几万亿美元</li>
+          <li>极其复杂</li>
+          <li>会计工作非常困难</li>
+          <li>激励机制让人们对衍生品的价值和清算能力产生一厢情愿的想法</li>
+        </ul>
+
+        <p>在美国的衍生品账本上，有许多从来没有被赚到的披露利润和许多从来不曾存在的资产。</p>
+
+        <p>衍生品交易产生了大规模的"捞灰金"效应和一些普通的"捞黑金"效应。<strong>这些效应一旦被逆转，将会引起极大的痛苦。</strong></p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">建议</div>
+            <p>如果你是个头脑正常的人，曾经用一个月认真钻研大型衍生品业务，你肯定会感到恶心。</p>
+          </div>
+        </div>
+
+        <p>去看《诚信的背后：华尔街圈钱游戏的真相》那本书，作者是做过衍生品交易员的法学教授弗兰克·帕特诺伊，他揭露了华尔街规模最大、声望最佳的公司之一的衍生品交易黑幕。这本书会让你想吐。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 附录：补充问答 -->
+      <section id="section-6">
+        <h2>附录：补充问答</h2>
+
+        <h3>"我没有什么要补充的"第六篇</h3>
+
+        <p><strong>原问题回顾：</strong>举几个例子，说明要是想提高销量，正确做法是提高价格。</p>
+
+        <h4>四类完整答案</h4>
+
+        <ol>
+          <li><strong>奢侈品</strong> — 提高价格能够改善奢侈品的"炫耀"功能，在某些存在炫耀心理的消费者看来，性能也随之改善。此外，人们往往认为价格高等于质量好，这有时也能促进销量增加。</li>
+          <li><strong>非奢侈品</strong> — 与上面第二个因素相同，消费者看到价格更高的商品，往往不是认为它卖贵了，而是认为更高的价格意味着更好的质量。这种办法对耐用性工业品尤为适用。</li>
+          <li><strong>合法再投资</strong> — 提高价格，把额外利润以合法方式用于改善产品性能或改善销售系统。</li>
+          <li><strong>非法/不道德促销</strong> — 提高价格，把额外利润以非法或不道德方式来促进销售，比如贿赂交易经纪人，或者其他对终端消费者有害的做法（例如开放式基金的销售回扣）。<strong>这是我最喜欢的答案，但我从来没有听到。</strong></li>
+        </ol>
+
+        <h3>"我没有什么要补充的"第七篇</h3>
+
+        <p><strong>问：</strong>你曾经说过，在加州大学圣塔巴巴拉分校演讲时，你故意漏掉了"神秘的第十个缺陷"。那是什么？</p>
+
+        <p><strong>答：</strong>第十个缺点就是我说的<strong>"在微观经济学层面对嵌入性庞氏骗局的效应不够重视"</strong>。</p>
+
+        <p>这很容易证明：有些大型律师事务所用在职员工缴纳的养老金来支付退休员工的养老金，他们明明知道这样做将会造成可怕的后果，但还是这么做了——而且是很高兴地这么做了。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 重读第九讲（2007年补充） -->
+      <section id="section-7">
+        <h2>重读第九讲（2007 年补充）</h2>
+
+        <p>这次关于经济学的俏皮演讲发表于 2003 年，写它的时候给我带来了很多乐趣。但我希望它提供的不仅仅是没有恶意的玩笑，我甚至希望我的某些思想最终能够进入学院派经济学，不是因为我想要被认可，而是因为<strong>我觉得学院派经济学需要一些改善</strong>。</p>
+
+        <p>发表过这次演讲之后，我看到一本书，是阿尔弗雷德·诺普夫出版社在 2005 年出版的，作者是杰出的哈佛大学经济学教授本杰明·弗里德曼，书名是《经济增长的道德意义》。</p>
+
+        <p>如我在演讲中所希望的那样，这本书讨论了经济学和道德之间的相互关系：</p>
+
+        <ul>
+          <li>弗里德曼教授尤其感兴趣的是<strong>经济增长对道德的影响</strong></li>
+          <li>我感兴趣的则与此相反，主要是<strong>道德对经济增长的影响</strong></li>
+        </ul>
+
+        <p>这个区别关系不大，因为任何受过教育的人都能明白这两者会相互产生或好或坏的影响，造成通常所说的"良性循环"或"恶性循环"。</p>
+
+        <p>弗里德曼教授给这个主题增添了一句来自艾利沙·本·阿萨里亚拉比的名言：</p>
+
+        <div class="pull-quote large">"没有面包就没有法律，没有法律就没有面包。"</div>
+      </section>
+
+      <div class="article-footer">— 完 —<br/>文档优化完成于 2024 年 · 基于查理·芒格 2003 年在加州大学圣塔巴巴拉分校的演讲整理</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第三讲 论基本的、普世的智慧 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 扁平章节链接（单讲章）：隐藏折叠箭头 */
+    a.toc-chapter-title::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.6rem 0 .7rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.9;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      position: absolute;
+      top: -.2rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .3;
+      font-style: normal;
+    }
+    .poem-author {
+      display: block;
+      margin-top: .8rem;
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .poem-title {
+      font-weight: 700;
+      color: var(--text);
+      font-style: normal;
+      letter-spacing: .25em;
+      margin-bottom: 1rem;
+    }
+    .poem p { margin: 0 0 1rem; }
+    .poem p:last-of-type { margin-bottom: 0; }
+
+    .formula {
+      text-align: center;
+      font-family: Georgia, 'Noto Serif SC', serif;
+      font-size: 1.05rem;
+      color: var(--gold-dk);
+      letter-spacing: .04em;
+      margin: 1.25rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(201,168,76,.06);
+      border: 1px dashed rgba(201,168,76,.35);
+      border-radius: var(--radius);
+    }
+  </style>style
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第一章/查理芒格传略.html">第一章 查理·芒格传略</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第二章/第二章_芒格的生活_学习和决策方法.html">第二章 芒格的生活、学习和决策方法</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第三章/第三章_芒格主义_查理的即席谈话.html">第三章 芒格主义：查理的即席谈话</a>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/第一讲 在哈佛学校毕业典礼上的演讲（整理版）.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系（优化版）.html">第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（优化版）.html" class="active">第三讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考（优化版）.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲 专业人士需要更多的跨学科技能_优化版.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲 一流慈善基金的投资实践_优化版.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲 在慈善圆桌会议早餐会上的讲话_优化版.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲 2003年的金融大丑闻_优化版.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点_优化版.html">第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点</a></li>
+            <li><a href="../第四章/第十讲 在南加州大学古尔德法学院毕业典礼上的演讲_优化版.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第十一讲 人类误判心理学_优化版.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录_优化版.html">最新的普世智慧：查理答问录</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第五章/第五章　文章、报道与评论.html">第五章 文章、报道与评论</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-0">导读</a></li>
+        <li><a href="#section-1">一、为什么必须建立跨学科的思维模型</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 学习不能在毕业时停止</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 专业化的价值与危险</a></li>
+        <li><a href="#section-1-3" class="sub">1.3 用定约桥牌理解“模型组合”</a></li>
+        <li><a href="#section-1-4" class="sub">1.4 学习不应受学科边界限制</a></li>
+        <li><a href="#section-2">二、从商业案例看基本模型如何发挥作用</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 好时巧克力：味道是难以复制的竞争优势</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 国际香料香精公司：没有专利也能拥有持续收费能力</a></li>
+        <li><a href="#section-2-3" class="sub">2.3 价值线公司的图表：用视觉工具弥补数字直觉的缺陷</a></li>
+        <li><a href="#section-2-4" class="sub">2.4 商标与质量激励：卡奈森的故事</a></li>
+        <li><a href="#section-2-5" class="sub">2.5 可口可乐：产品价值来自多个模型的叠加</a></li>
+        <li><a href="#section-3">三、心理学：最重要、也最容易被忽视的模型</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 遗传与语言能力</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 意识形态偏见</a></li>
+        <li><a href="#section-3-3" class="sub">3.3 “一个人想要什么，就会相信什么”</a></li>
+        <li><a href="#section-3-4" class="sub">3.4 心理否认</a></li>
+        <li><a href="#section-3-5" class="sub">3.5 心理学教材的缺陷</a></li>
+        <li><a href="#section-3-6" class="sub">3.6 米尔格拉姆实验：权威不是唯一解释</a></li>
+        <li><a href="#section-3-7" class="sub">3.7 检查清单思维</a></li>
+        <li><a href="#section-4">四、把心理学用于改善现实，而不是操纵他人</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 库克船长与坏血病</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 消费品推广中的心理效应</a></li>
+        <li><a href="#section-5">五、制度、激励与道德：改变行为必须改变动机</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 偷窃为何会扩散</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 工伤赔偿欺诈</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 “谢皮科效应”与吹哨者困境</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 法律制度不能只看善意</a></li>
+        <li><a href="#section-6">六、投资：等待少数简单而明确的机会</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 大多数时候保持不可知</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 跨不过七英尺的栏</a></li>
+        <li><a href="#section-6-3" class="sub">6.3 能力圈与错误纠正</a></li>
+        <li><a href="#section-6-4" class="sub">6.4 沉没成本与“剥夺性超级反应综合征”</a></li>
+        <li><a href="#section-6-5" class="sub">6.5 迪士尼与自我催化</a></li>
+        <li><a href="#section-7">七、知道能力边界，也要有勇气否定专家</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 如何评价专家意见</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 苹果问题与“我没有足够能力回答”</a></li>
+        <li><a href="#section-8">八、律师、管理者与说服：从对方的利益出发</a></li>
+        <li><a href="#section-8-1" class="sub">8.1 父亲教给芒格的两种做人方式</a></li>
+        <li><a href="#section-8-2" class="sub">8.2 用比喻提高沟通效率</a></li>
+        <li><a href="#section-8-3" class="sub">8.3 劝阻客户逃税</a></li>
+        <li><a href="#section-8-4" class="sub">8.4 所罗门兄弟公司的教训</a></li>
+        <li><a href="#section-9">九、法律复杂性、风险与制度设计</a></li>
+        <li><a href="#section-9-1" class="sub">9.1 企业会适应法律环境</a></li>
+        <li><a href="#section-9-2" class="sub">9.2 更好的警察头盔为何没有被生产</a></li>
+        <li><a href="#section-9-3" class="sub">9.3 医疗责任保险的扭曲</a></li>
+        <li><a href="#section-9-4" class="sub">9.4 简化问题，但不要过度简化</a></li>
+        <li><a href="#section-10">十、海军规则与结果导向的责任制度</a></li>
+        <li><a href="#section-11">十一、复利、增长与规模的限制</a></li>
+        <li><a href="#section-11-1" class="sub">11.1 复利是最重要的模型之一</a></li>
+        <li><a href="#section-11-2" class="sub">11.2 高回报不可能无限持续</a></li>
+        <li><a href="#section-11-3" class="sub">11.3 面对前所未有的估值保持谦逊</a></li>
+        <li><a href="#section-12">十二、投资与生活应匹配个人条件</a></li>
+        <li><a href="#section-13">十三、教育为何需要“补救式普世智慧”</a></li>
+        <li><a href="#section-13-1" class="sub">13.1 学院教育的结构性问题</a></li>
+        <li><a href="#section-13-2" class="sub">13.2 课程设想</a></li>
+        <li><a href="#section-13-3" class="sub">13.3 先讲理由，再讲规则</a></li>
+        <li><a href="#section-13-4" class="sub">13.4 现代达尔文主义</a></li>
+        <li><a href="#section-14">十四、心理学为何难以形成完整体系</a></li>
+        <li><a href="#section-15">十五、怎样安排生活与工作</a></li>
+        <li><a href="#section-16">十六、为人师表的责任与演讲后的回顾</a></li>
+        <li><a href="#section-17">十七、人物与概念速查</a></li>
+        <li><a href="#section-17-1" class="sub">17.1 重要人物</a></li>
+        <li><a href="#section-17-2" class="sub">17.2 核心模型</a></li>
+        <li><a href="#section-18">十八、结语：把知识变成判断力</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第三讲</div>
+        <h1 class="article-title">论基本的、普世的智慧</h1>
+        <div class="article-meta">
+          <span><strong>演讲者</strong>查理·芒格</span>
+          <span><strong>演讲地点</strong>斯坦福大学法学院，胡佛大楼</span>
+          <span><strong>演讲时间</strong>1996 年 4 月 19 日</span>
+          <span><strong>主题</strong>用跨学科思维模型理解现实，减少认知错误，作出更好的判断。</span>
+        </div>
+      </header>
+
+      <!-- 导读 -->
+      <section id="section-0">
+        <h2>导读</h2>
+
+        <p>查理·芒格在这场演讲中讨论的并不是某一项具体的投资技巧，而是一套更通用的思考方法：<strong>把不同学科中最有用的基本原理，组织成一张相互连接的思维模型网络，再用它检查复杂问题。</strong></p>
+
+        <p>他反复强调三点：</p>
+
+        <ol>
+          <li><strong>不要把现实切割成彼此隔绝的学科。</strong> 商业、法律、心理学、经济学、生物学、工程学和历史往往共同决定同一个结果。</li>
+          <li><strong>不要只掌握几个熟悉的模型。</strong> 重要模型应当像飞行员的检查清单一样，在面对复杂问题时逐项核对；多个模型同时发挥作用，常会产生巨大的叠加效应，即“lollapalooza 效应”。</li>
+          <li><strong>要知道自己知道什么，也要知道自己不知道什么。</strong> 在能力圈内耐心等待简单而明确的机会；在能力圈外，不要用自信掩盖无知。</li>
+        </ol>
+
+        <p>芒格还特别提醒：心理偏见、错误激励和强烈意识形态会扭曲判断。理解心理学，不是为了任意操纵他人，而是为了识别这些力量，并用合乎道德的方式改善制度、管理组织和解决问题。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、为什么必须建立跨学科的思维模型 -->
+      <section id="section-1">
+        <h2>一、为什么必须建立跨学科的思维模型</h2>
+
+        <h3 id="section-1-1">1.1 学习不能在毕业时停止</h3>
+
+        <p>沃伦·巴菲特从哥伦比亚大学商学院毕业后，如果不再学习，凭借本杰明·格雷厄姆传授的知识，或许仍能成为富人；但他不可能建立今天的伯克希尔·哈撒韦。</p>
+
+        <p><strong>真正的能力来自持续吸收新知识，并把知识整合起来。</strong> 芒格建议人们在头脑中搭建一副由各种思维模型构成的“框架”，再把亲身经历和通过阅读获得的间接经验挂到这副框架上。知识一旦彼此连接，人们就能更准确地理解现实，而不是把每个问题当成孤立事件处理。</p>
+
+        <h3 id="section-1-2">1.2 专业化的价值与危险</h3>
+
+        <p>加拿大医生威廉·奥斯勒爵士被称为“现代医学之父”。他博览群书，去世时藏书约 8000 册，著有影响深远的《医学的原理和实践》。他反对过度专业化，曾提醒人们：</p>
+
+        <div class="pull-quote">不断把注意力集中在同一个学科，无论这个学科多么有趣，都会把人的思想禁锢在狭窄的领域里。</div>
+
+        <p>奥斯勒最受芒格喜爱的一句话是：</p>
+
+        <div class="pull-quote">在任何行业取得成功的第一步，是对这个行业产生兴趣。</div>
+
+        <p>专业知识当然重要，但如果只会用本专业的工具，人们就可能看不见决定结果的其他因素。芒格认为，学术界、企业和大型组织常把现实分割成各自为政的部门，这种人为边界会制造严重的功能失调。</p>
+
+        <h3 id="section-1-3">1.3 用定约桥牌理解“模型组合”</h3>
+
+        <p>假设要成为定约桥牌高手，仅仅知道手里有大牌还不够。面对短套、缺少关键牌墩等局面，牌手还要掌握多种打法，例如：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>桥牌方法</th><th>解决的问题</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>做长套花牌</td><td>让一门花色积累足够的赢墩</td></tr>
+            <tr><td>飞牌</td><td>通过概率和位置取得关键赢墩</td></tr>
+            <tr><td>扔牌</td><td>用无用牌保护更重要的花色</td></tr>
+            <tr><td>交叉将吃</td><td>让双方的将牌互相配合</td></tr>
+            <tr><td>挤牌</td><td>迫使防守方在多个威胁之间作出取舍</td></tr>
+            <tr><td>误导防守方</td><td>让对手主动犯错</td></tr>
+          </tbody>
+        </table>
+
+        <p>只懂其中一两种方法，牌手就会在复杂牌局中失去选择。更重要的是，这些方法还会相互影响，因此不能只背诵名词，必须理解它们何时组合、何时冲突。</p>
+
+        <p>优秀牌手既会问“怎样才能赢得这副牌”，也会反过来问“哪些错误会让我输掉这副牌”。这正是生活中的重要原则：<strong>既要寻找成功条件，也要主动排查失败路径。</strong></p>
+
+        <h3 id="section-1-4">1.4 学习不应受学科边界限制</h3>
+
+        <p>不需要掌握每个领域的全部细节，但必须掌握各学科中最有用、最可靠的核心模型，并理解它们之间的联系。若教授只坚持使用自己的专业模型，忽略其他学科的重要原理，学习者就应当自行补足，而不能把教授的局限变成自己的局限。</p>
+
+        <div class="pull-quote">一个人不必比所有人都聪明；只要比别人更客观，掌握更多有用模型，也可能作出比聪明人更好的判断。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、从商业案例看基本模型如何发挥作用 -->
+      <section id="section-2">
+        <h2>二、从商业案例看基本模型如何发挥作用</h2>
+
+        <h3 id="section-2-1">2.1 好时巧克力：味道是难以复制的竞争优势</h3>
+
+        <p>好时巧克力拥有独特风味。原因之一，是公司长期使用十九世纪沿用下来的古老石磨，生产过程中保留了少量可可豆外皮。这种味道得到消费者喜爱，逐渐成为品牌的重要资产。</p>
+
+        <p>当好时准备拓展加拿大市场时，公司没有贸然改变配方，而是按照原样复制石磨。为了尽可能还原原来的风味，复制工作花了整整五年。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <ul>
+              <li>顾客体验中的细微差异，可能是企业最重要的护城河。</li>
+              <li>不要轻易改动已经被市场验证的关键要素。</li>
+              <li>竞争优势未必写在专利文件里，也可能藏在工艺、习惯和长期积累中。</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 id="section-2-2">2.2 国际香料香精公司：没有专利也能拥有持续收费能力</h3>
+
+        <p>国际香料香精公司为许多品牌产品提供香味，例如给剃须膏添加淡淡的香气。香味本身通常不能像专利技术一样被永久垄断，但它会显著影响消费者的购买和使用体验。</p>
+
+        <p>公司因此能够不断为客户创造价值，并获得持续的授权或服务收入。这个案例说明，<strong>消费者感知到的价值，不一定来自产品最显眼的功能；气味、口感和使用感受同样可能决定商业成败。</strong></p>
+
+        <h3 id="section-2-3">2.3 价值线公司的图表：用视觉工具弥补数字直觉的缺陷</h3>
+
+        <p>人类天生不擅长处理抽象数字。我们的祖先首先需要的是投掷长矛、逃离危险和寻找食物，直到很晚的时候才需要理解复杂的概率、复利和加减乘除。</p>
+
+        <p>图表弥补了这种先天限制。价值线公司以可靠、客观、独立和准确著称，其对数坐标图能帮助投资者观察长期增长和复利关系。芒格并不完全依赖价值线公司的预测系统，但高度重视其图表和数据。</p>
+
+        <p>在对数图表上用直线连接数据点，可以直观显示长期复合增长率。<strong>好的可视化不是装饰，而是把数字转换成神经系统更容易理解的形式。</strong></p>
+
+        <h3 id="section-2-4">2.4 商标与质量激励：卡奈森的故事</h3>
+
+        <p>曾有一位鱼肉生产者使用“卡奈森”这一商标。卡奈森公司多次尝试购买该商标，但双方始终在价格上无法达成一致。最后，公司提出派质量检查员到他的工厂，免费帮助他保证产品质量；生产者欣然接受。</p>
+
+        <p>这一安排的价值不在于商标本身，而在于商标会让持有人承担声誉责任。如果一个人拥有能够保护的品牌，他就有动力维护产品质量；品牌受损，未来收益也会受损。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>制度安排</th><th>产生的激励</th><th>社会效果</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>品牌归生产者所有</td>
+              <td>生产者在意长期声誉</td>
+              <td>主动维护质量</td>
+            </tr>
+            <tr>
+              <td>消费者能识别品牌</td>
+              <td>质量差异可以被市场反馈</td>
+              <td>劣质产品更难长期隐藏</td>
+            </tr>
+            <tr>
+              <td>品牌受法律保护</td>
+              <td>投入质量的收益不会轻易被他人夺走</td>
+              <td>鼓励长期投资与诚信经营</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>即使在不实行资本主义的国家，保护商标也有充分理由，因为商标把声誉和行为后果联系起来，能够形成有利于社会的激励机制。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-5">2.5 可口可乐：产品价值来自多个模型的叠加</h3>
+
+        <p>芒格多次以可口可乐为例，说明企业成功很少由单一因素决定。品牌、口味、商标、消费习惯、分销、包装、心理联想和外部技术变化，可能共同形成极强的复合优势。</p>
+
+        <p>例如，冰箱的普及扩大了可口可乐的消费场景；品牌认知降低了消费者的选择成本；稳定口味和广泛分销又进一步强化了消费习惯。<strong>当多个有利因素同时作用时，企业会出现远超单个因素之和的结果。</strong></p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、心理学 -->
+      <section id="section-3">
+        <h2>三、心理学：最重要、也最容易被忽视的模型</h2>
+
+        <h3 id="section-3-1">3.1 遗传与语言能力</h3>
+
+        <p>史蒂芬·平克在《语言本能》中主张，人类的语言能力不只是后天教育的结果，也有重要的遗传基础。儿童需要学习具体语言，但人类具备语言能力的倾向，很大程度上来自生物进化。</p>
+
+        <p>芒格认为，平克对这一点的论证很有说服力；他同时指出，诺姆·乔姆斯基虽然是杰出的语言学家，却对语言能力是否具有遗传基础保持犹豫。芒格把这种分歧当作一个提醒：<strong>即使天才也会被意识形态和先入之见影响。</strong></p>
+
+        <h3 id="section-3-2">3.2 意识形态偏见</h3>
+
+        <p>强烈意识形态会让人把某个立场当成不可动摇的真理，并主动忽略不符合立场的证据。它既可能来自左翼，也可能来自右翼、宗教或其他群体认同。</p>
+
+        <p>沃伦·巴菲特从小观察到父亲交往圈中的强烈右翼偏见，因此有意远离意识形态；芒格也从父亲那里学到对意识形态保持警惕。两人认为，这种距离感提高了自己认识现实的准确性。</p>
+
+        <p>讨论最低工资时，可以基于经济学和社会政策分析提高或降低最低工资的利弊；但如果一个人因为政治立场而确信某一答案“神圣且不容质疑”，就不再是在分析复杂系统，而是在服从意识形态。</p>
+
+        <div class="pull-quote">可以有价值判断，但不要把价值判断伪装成不容检验的事实。</div>
+
+        <h3 id="section-3-3">3.3 “一个人想要什么，就会相信什么”</h3>
+
+        <p>古希腊演说家德摩斯梯尼说：</p>
+
+        <div class="pull-quote large">一个人想要什么，就会相信什么。</div>
+
+        <p>这句话概括了心理否认和激励机制引起的偏见。人们往往先形成愿望，再寻找支持愿望的理由；投入越多、利益越大，越容易拒绝不利事实。</p>
+
+        <h3 id="section-3-4">3.4 心理否认</h3>
+
+        <p>芒格举了一个家庭悲剧的例子：一位母亲失去溺水的儿子，却因无法承受痛苦而相信儿子仍然活着，甚至出现仿佛儿子就在身边的精神状态。</p>
+
+        <p>心理否认的程度因人而异，但它会把人从现实中隔离出来。许多心理学教材没有充分讨论这一现象，也没有将它与投资、管理和日常决策中的自我欺骗联系起来。</p>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>当事实过于痛苦时，人并不总是修改自己的计划；他们可能先修改自己对事实的解释。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-5">3.5 心理学教材的缺陷</h3>
+
+        <p>芒格认为，许多心理学教材虽然包含闪光内容，但整体上缺少正确的综合。他特别指出，教材往往没有充分讨论：</p>
+
+        <ul>
+          <li>妒忌；</li>
+          <li>心理否认；</li>
+          <li>激励机制引起的偏见；</li>
+          <li>多个心理因素叠加造成的巨大结果；</li>
+          <li>痛苦如何导致精神失常；</li>
+          <li>社会认同和权威服从之间的共同作用。</li>
+        </ul>
+
+        <p>他把当时的心理学比作法拉第之后、麦克斯韦之前的电磁学：已经发现许多重要现象，却还没有人把它们组织成一个完整、清晰的体系。</p>
+
+        <h3 id="section-3-6">3.6 米尔格拉姆实验：权威不是唯一解释</h3>
+
+        <p>斯坦利·米尔格拉姆研究普通人如何服从权威命令。实验中，受试者被要求向一名发出抗议的“受害者”施加越来越强的电击；约 65% 的受试者最终服从了实验主持人的命令。</p>
+
+        <p>实验常被简单解释为“权威能够让好人做坏事”。芒格认为，这只说中了部分原因。至少还有以下因素共同发挥作用：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>心理因素</th><th>可能产生的影响</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>权威服从</td><td>把责任转移给发号施令者</td></tr>
+            <tr><td>逐步升级</td><td>每一步只比上一步略严重，降低警觉</td></tr>
+            <tr><td>承诺与一致性</td><td>已经开始后，不愿承认不该继续</td></tr>
+            <tr><td>社会认同</td><td>看到他人继续，便认为自己继续也正常</td></tr>
+            <tr><td>角色与环境</td><td>实验场景让行为显得“合理”</td></tr>
+            <tr><td>责任分散</td><td>个人觉得后果不完全由自己承担</td></tr>
+          </tbody>
+        </table>
+
+        <p>这些因素同时作用，才会形成强大的 <strong>lollapalooza 效应</strong>。因此，分析复杂行为时，不能只抓住一个最醒目的解释。</p>
+
+        <h3 id="section-3-7">3.7 检查清单思维</h3>
+
+        <p>飞行员起飞前会逐项检查，桥牌手需要关键牌墩时也会回顾可用打法。复杂决策同样需要心理模型清单。</p>
+
+        <p>如果掌握了 20 个重要模型，就应该检查 20 个，而不能只使用最熟悉的 10 个。人的聪明程度不足以保证在压力、利益和复杂环境下不遗漏关键因素。</p>
+
+        <div class="pull-quote">检查清单不是承认自己愚笨，而是承认复杂现实不允许人只靠临场直觉。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、把心理学用于改善现实 -->
+      <section id="section-4">
+        <h2>四、把心理学用于改善现实，而不是操纵他人</h2>
+
+        <h3 id="section-4-1">4.1 库克船长与坏血病</h3>
+
+        <p>远洋航行时代，坏血病会让水手牙龈溃烂、身体衰弱，甚至死亡。英国水手当时不了解维生素 C，且不喜欢酸泡菜；库克船长却发现，荷兰船上的坏血病较少，而荷兰船上储存了大量酸泡菜。</p>
+
+        <p>库克没有直接告诉英国水手“吃泡菜是为了预防坏血病”，因为水手可能因此意识到远航的危险并发动叛乱。他让军官当着普通水手的面吃泡菜，过了一段时间后，再规定普通水手每周可以吃一天泡菜，最终让全船人都接受了这种食物。</p>
+
+        <p>这是一种利用示范、稀缺性、身份差异和逐步改变习惯的心理策略。它的目的不是欺骗水手牟利，而是让他们接受有益健康的行为，挽救许多生命。</p>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">道德边界</div>
+            <p>懂得心理学不等于可以随意操纵他人。手段必须服务于正当目的，并尊重他人的基本利益。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">4.2 消费品推广中的心理效应</h3>
+
+        <p>可口可乐、宝洁和特百惠等企业的市场推广，都说明产品功能只是成功的一部分。品牌联想、社会示范、熟悉感、使用仪式和消费场景，会共同影响购买行为。企业如果能识别这些因素，便能更好地设计产品和传播方式；消费者则应警惕自己是否只是因为熟悉、从众或身份认同而购买。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、制度、激励与道德 -->
+      <section id="section-5">
+        <h2>五、制度、激励与道德：改变行为必须改变动机</h2>
+
+        <h3 id="section-5-1">5.1 偷窃为何会扩散</h3>
+
+        <p>如果偷窃很容易，且被抓住后不受惩罚，更多人就会开始偷窃。一旦形成习惯，一贯性原则、社会认同和激励机制会互相强化：人们会告诉自己“大家都这么做”“这不算真正的错误”。</p>
+
+        <p>因此，公司管理者若放任财产被轻易盗取，不只是损失金钱，还会给员工造成道德伤害，逐渐把坏行为变成正常行为。</p>
+
+        <h3 id="section-5-2">5.2 工伤赔偿欺诈</h3>
+
+        <p>加利福尼亚州工伤赔偿制度的一个问题，是难以有效防止虚假索赔。员工、律师、医生和工会可能共同参与诈伤骗保，常见手段包括虚构难以诊断的背痛、虚假治疗、重复收费、不必要护理和过度检查。</p>
+
+        <p>芒格的朋友经营一家制造厂，工厂本身并不危险，但每年工伤赔偿支出超过总工资的 10%。后来他把工厂迁到一个摩门教徒聚居的社区，赔偿支出降到工资总额的 2%。</p>
+
+        <p>差异并不只来自宗教身份，更来自社会规范和预期后果：在原制度中，欺诈容易获利且少受惩罚；在新环境中，诚实更受重视，欺诈也不再被普遍合理化。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>条件</th><th>行为后果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>欺诈容易实施</td><td>更多人愿意尝试</td></tr>
+            <tr><td>欺诈收益明确</td><td>形成激励机制偏见</td></tr>
+            <tr><td>惩罚概率低</td><td>风险被低估</td></tr>
+            <tr><td>“人人都这样做”</td><td>社会认同为坏行为背书</td></tr>
+            <tr><td>组织不及时制止</td><td>坏习惯持续扩张</td></tr>
+          </tbody>
+        </table>
+
+        <div class="pull-quote large">如果想改变行为，就必须改变动机和后果，而不能只靠道德训诫。</div>
+
+        <h3 id="section-5-3">5.3 “谢皮科效应”与吹哨者困境</h3>
+
+        <p>当整体社会风气已经败坏，许多人又从坏制度中获利时，指出问题的人可能被视为敌人。腐败群体会共同抵制吹哨者，因为吹哨会威胁每个人的利益。</p>
+
+        <p>这就是芒格所说的“谢皮科效应”：正直的人揭露不法行为，反而可能受到同事和既得利益者的排斥，甚至面临人身和职业风险。制度设计必须为揭露问题的人提供保护，否则坏行为会获得集体免疫。</p>
+
+        <h3 id="section-5-4">5.4 法律制度不能只看善意</h3>
+
+        <p>法律制定者往往出于帮助受害者的善意，但如果制度漏洞太大，诈骗者就会利用它。以工伤赔偿为例，一项原本为了帮助真正受伤者的制度，可能因为无法区分真假索赔而引发大规模欺诈，最终让整个社会付出更高代价。</p>
+
+        <p>分析公共政策时，应同时问：</p>
+
+        <ol>
+          <li>制度想鼓励什么行为？</li>
+          <li>它是否会奖励虚假申报？</li>
+          <li>谁最有能力利用漏洞？</li>
+          <li>好心人和投机者会受到同样的待遇吗？</li>
+          <li>坏行为一旦形成风气，能否逆转？</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、投资 -->
+      <section id="section-6">
+        <h2>六、投资：等待少数简单而明确的机会</h2>
+
+        <h3 id="section-6-1">6.1 大多数时候保持不可知</h3>
+
+        <p>投资困难，不是因为看不出哪些企业更好，而是因为好企业的股票价格可能已经高到不值得购买。芒格和巴菲特在约 98% 的时间里对市场保持不可知态度：他们不知道通用汽车与福特的股价谁更合理，也不假装知道市场短期方向。</p>
+
+        <p>他们寻找的是少数自己真正理解、价格明显低于内在价值的机会，通常一年只有一两次。机会不需要频繁出现；只要少数几次判断正确，长期结果就足够好。</p>
+
+        <h3 id="section-6-2">6.2 跨不过七英尺的栏</h3>
+
+        <div class="pull-quote large">我们不寻找必须跨过七英尺高的栏，而寻找只有一英尺高、另一边却有丰厚回报的栏。</div>
+
+        <p>这不是鼓励懒惰，而是强调：在竞争激烈的领域，不必通过解决最难的问题证明聪明。应优先选择自己能看懂、风险可控、成功条件清楚的机会。</p>
+
+        <h3 id="section-6-3">6.3 能力圈与错误纠正</h3>
+
+        <p>芒格并不承诺一套能让人永远不犯错的方法。伯克希尔投资美国航空优先股时，原本判断公司能维持经营并偿还本金，结果公司很快接近破产。后来伯克希尔收回了全部本金和利息，但这并不能改变决策本身是错误的事实。</p>
+
+        <p>成熟的投资者并非从不犯错，而是：</p>
+
+        <ul>
+          <li>犯错次数较少；</li>
+          <li>能及时承认错误；</li>
+          <li>不因已经投入大量时间和金钱而继续加码；</li>
+          <li>能在情况变化后放弃原先喜欢的牌。</li>
+        </ul>
+
+        <h3 id="section-6-4">6.4 沉没成本与“剥夺性超级反应综合征”</h3>
+
+        <p>当人们已经投入大量精力、金钱和情感时，一贯性原则会让他们相信“再投入一点，它就会成功”。如果停止投入，就好像此前的一切都白费了，于是他们继续追逐损失，最终破产。</p>
+
+        <p>在扑克、投资和企业经营中，正确做法可能是放弃一手曾经很喜欢的牌，从头开始。<strong>过去的投入不能成为继续投入的理由，未来的收益和风险才是判断依据。</strong></p>
+
+        <h3 id="section-6-5">6.5 迪士尼与自我催化</h3>
+
+        <p>迪士尼是“自我催化”的例子。公司拍摄电影并保有版权；录像带出现后，公司无需创造新的内容，只需把已有电影转录成录像带。家庭生活方式又推动父母和祖父母购买这些录像带，形成内容、版权、技术和消费场景的循环增强。</p>
+
+        <p>迪士尼的管理者艾斯纳和弗兰克·威尔斯确实作出了许多正确决定，也创造了《风中奇缘》《狮子王》等成功产品；但他们接手时，旧电影录像带带来的增长动力已经存在。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>优质资产如果能随着时间、技术和用户习惯自行扩大价值，企业就可能“坐在池塘里，让水位上升”。管理能力重要，但应分辨哪些成果来自管理，哪些来自环境和既有资产的自我强化。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、知道能力边界 -->
+      <section id="section-7">
+        <h2>七、知道能力边界，也要有勇气否定专家</h2>
+
+        <h3 id="section-7-1">7.1 如何评价专家意见</h3>
+
+        <p>芒格曾面对两组工程师提出的方案。两组工程师的结论都明显符合自身利益，因此他对结论保持怀疑。他随后找到第三位工程师，第三个方案更安全、成本也更低；其中一位原先的工程师后来承认：“我怎么没想到呢？”</p>
+
+        <p>面对专家意见，可以使用以下检查方法：</p>
+
+        <ul>
+          <li>专家的结论是否直接增加了他们的收入、权力或项目规模？</li>
+          <li>他们是否解释了不利证据？</li>
+          <li>是否存在独立的第三方方案？</li>
+          <li>自己是否有足够的专业知识发现明显矛盾？</li>
+          <li>如果没有能力判断，是否应坦率依赖可信专家？</li>
+        </ul>
+
+        <p><strong>既不能盲目服从专家，也不能在完全无知时自以为是。</strong></p>
+
+        <h3 id="section-7-2">7.2 苹果问题与“我没有足够能力回答”</h3>
+
+        <p>有人问杰克·韦尔奇：苹果究竟做错了什么？韦尔奇回答：“我没有足够的能力来回答这个问题。”芒格借此提醒听众：不了解一个领域时，最诚实、最专业的答案可能就是承认自己不了解。</p>
+
+        <p>蜜蜂发现了很高的蜜源后，回到蜂巢，却没有遗传程序告诉它如何表达“蜜源高于既有范围”。它只能跳出一种无意义的舞蹈。人类也常像这只蜜蜂：面对超出经验的问题，不是承认不知道，而是编造一个看似有答案的解释。</p>
+
+        <div class="pull-quote">没有人要求你什么都懂；真正危险的是，在不知道时仍然装作知道。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、律师、管理者与说服 -->
+      <section id="section-8">
+        <h2>八、律师、管理者与说服：从对方的利益出发</h2>
+
+        <h3 id="section-8-1">8.1 父亲教给芒格的两种做人方式</h3>
+
+        <p>芒格的父亲曾为两类客户提供法律服务：一位是正直、聪明、善待员工和客户的福特经销商格兰特·麦克费登；另一位则是自大、吹嘘、难相处、经常卷入法律纠纷的人。</p>
+
+        <p>芒格问父亲，为什么不把更多精力放在麦克费登身上。父亲回答：麦克费登做事正确，遇到麻烦会及时避开，因此很少需要律师；另一位客户不断制造纠纷，律师才有足够工作养家糊口。</p>
+
+        <p>芒格从中学到：为了生活，偶尔可以为难相处的人提供服务，但做人应当努力成为麦克费登那样的人——正确对待员工、客户和问题，尽量远离制造混乱的人。</p>
+
+        <p>父亲没有直接训诫，而是让芒格自己思考出结论。这种间接教育方式让道理记得更牢，也体现了承诺与一致性原则：人们自己推导出的观点，往往比别人灌输的观点更持久。</p>
+
+        <h3 id="section-8-2">8.2 用比喻提高沟通效率</h3>
+
+        <p>芒格的老同学乔伊·弗洛姆是一名成功律师，擅长用精妙、幽默的比喻传达复杂观点。比喻能把抽象问题转换成听众熟悉的画面，因此在服务客户、说服他人和教育孩子时尤其有效。</p>
+
+        <p>好的比喻不是哗众取宠，而是帮助听众抓住结构：谁承担风险、什么会触发后果、为什么某种选择不值得。</p>
+
+        <h3 id="section-8-3">8.3 劝阻客户逃税</h3>
+
+        <p>如果客户非常想钻税法漏洞，直接说“我的道德比你高尚”通常只会激怒对方。更有效的说法，是从客户自身利益出发：逃税会让员工知情，容易引发敲诈勒索，也会危及声誉、家庭和财富。</p>
+
+        <p>这种劝说并不是降低道德标准，而是选择对方最能听懂的理由。真正的目标是阻止错误行为，不能为了表现自己的高尚而牺牲说服效果。</p>
+
+        <h3 id="section-8-4">8.4 所罗门兄弟公司的教训</h3>
+
+        <p>所罗门兄弟公司的交易员曾非法买入 32 亿美元美国国债。管理层得知后，没有及时向监管机构披露，CEO 约翰·古特福伦德隐瞒了三个多月。事情曝光后，他的职业生涯濒临终点，只能请求外部董事沃伦·巴菲特帮助挽救公司声誉。巴菲特最终帮助公司渡过危机，所罗门后来以 90 亿美元出售给旅行者集团。</p>
+
+        <p>公司总法律顾问曾劝 CEO 说出真相，但只是诉诸抽象道德，没有明确告诉他继续拖延会毁掉自己的生活和声誉。由于总法律顾问的职业也依附于 CEO，他没有从 CEO 的切身利益出发进行劝说，最终自己也丢掉了工作。</p>
+
+        <p><strong>说服原则：</strong>在道德底线明确的前提下，若要让一个人做正确的事，就应说明这件事如何符合他自己的长期利益。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、法律复杂性、风险与制度设计 -->
+      <section id="section-9">
+        <h2>九、法律复杂性、风险与制度设计</h2>
+
+        <h3 id="section-9-1">9.1 企业会适应法律环境</h3>
+
+        <p>大型企业普遍抱怨诉讼费用、规章制度、公司事务复杂和集体诉讼，但法律服务需求增加也让律师事务所业务增长。企业会建立更大的法务部门，逐渐适应变化的司法环境。</p>
+
+        <p>法律复杂性会消耗资源，其中有些规则确实愚蠢，有些则不可缺少。关键不是抱怨复杂，而是理解复杂规则如何改变行为和行业结构。</p>
+
+        <h3 id="section-9-2">9.2 更好的警察头盔为何没有被生产</h3>
+
+        <p>芒格所在的一家子公司发明了更安全的警察头盔，但公司拒绝自己生产。原因不是不支持警察，而是担心作为最有钱的制造商，一旦发生事故，会成为最有吸引力的诉讼对象。</p>
+
+        <p>类似问题也存在于橄榄球头盔行业：球员受伤后，最有钱、最容易承担赔偿的制造商会成为首要被告。即使产品确实更安全，法律责任的不确定性也可能让资本退出重要创新领域。</p>
+
+        <p>制度若希望社会获得更安全的产品，就必须同时考虑创新收益、事故责任和诉讼风险；只要求企业承担全部不可预测风险，可能反而减少安全产品的供给。</p>
+
+        <h3 id="section-9-3">9.3 医疗责任保险的扭曲</h3>
+
+        <p>芒格认识的两位医生婚姻原本都很稳定，但医疗责任保险费用上涨后，两人都把大部分财产转移给配偶，继续执业却不再投保。这是个人对制度风险的适应，也说明规则会改变人们的财产安排和职业选择。</p>
+
+        <h3 id="section-9-4">9.4 简化问题，但不要过度简化</h3>
+
+        <p>巴菲特和芒格喜欢“别忘了戴头盔”的思维方式：先确保不会犯明显而致命的错误，再追求更复杂的优化。</p>
+
+        <p>但简化不等于否认复杂性。爱因斯坦的原则是：</p>
+
+        <div class="pull-quote">一切应该尽可能简单，但不能过于简单。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、海军规则 -->
+      <section id="section-10">
+        <h2>十、海军规则与结果导向的责任制度</h2>
+
+        <p>英国海军封锁法国海岸时，恶劣海况会让战舰搁浅。按照海军规则，即使船长因为连续工作 24 小时而把船交给能力很强的大副，只要战舰搁浅，船长的海军生涯就会结束；若是明显失职，还可能接受军事法庭审判。</p>
+
+        <p>芒格认为，这种规则虽然可能让个别人觉得不公平，却能让所有船长在恶劣环境下保持高度警惕。它关注的是减少船只触礁，而不是为每次事故寻找可以免责的原因。</p>
+
+        <p>这不是主张任意惩罚，而是强调制度目标：如果一个岗位必须对结果负责，就应明确、可预期地承担后果；同时，处罚也应与损失相称，不必把每次失败都变成刑事灾难。</p>
+
+        <p>拿破仑喜欢“幸运的将领”，因为战争结果最终取决于真实后果，而不是将领为失败准备的解释。组织制度也应认真考虑：究竟是在奖励合理过程，还是在奖励漂亮的辩解。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十一、复利、增长与规模的限制 -->
+      <section id="section-11">
+        <h2>十一、复利、增长与规模的限制</h2>
+
+        <h3 id="section-11-1">11.1 复利是最重要的模型之一</h3>
+
+        <p>荷兰人曾以 24 美元买下曼哈顿岛。若按今天约 3 万亿美元的估值计算，378 年间的年复合回报率约为 7%。这个例子说明，长期复利即使看起来不高，也能产生惊人结果。</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>起点</th><th>终点</th><th>期间</th><th>年复合回报率（约）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>24 美元</td><td>约 3 万亿美元</td><td>378 年</td><td>7%</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-11-2">11.2 高回报不可能无限持续</h3>
+
+        <p>芒格不相信扣除通胀后股票长期平均年回报率能永远维持 10% 至 11%。世界财富不可能无限期以同样速度增长。过去十五年可能是投资者的黄金时期，但异常繁荣不可能永远持续。</p>
+
+        <p>伯克希尔规模扩大后，投资机会会减少，规模会拖累未来表现。芒格强调，未来股东财富的复合增长率下降不是临时观点，而是对股东的承诺。即使账面价值未来能以约 15% 的年率复合增长，也已经是相当不错的结果；他并没有保证一定达到这一数字。</p>
+
+        <h3 id="section-11-3">11.3 面对前所未有的估值保持谦逊</h3>
+
+        <p>当估值很高、资本规模空前时，芒格和巴菲特也没有现成答案。他们没有经历过这种环境，只能继续学习。与喜欢预测整体市场的格雷厄姆不同，他们更倾向于认为市场整体走势不可知，只在少数理解清楚的企业和价格上采取行动。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十二、投资与生活应匹配个人条件 -->
+      <section id="section-12">
+        <h2>十二、投资与生活应匹配个人条件</h2>
+
+        <p>每个人都必须根据自己的资金状况、心理承受力和能力来选择投资策略。如果亏损会让自己陷入困境，就应采用保守策略并增加储蓄；如果能承受波动、亏损次数又少，集中投资少数好机会可能更适合。</p>
+
+        <p>没有适合所有人的“万能投资策略”。重要的是：</p>
+
+        <ul>
+          <li>了解自己能承受多大损失；</li>
+          <li>只在自己理解的领域下注；</li>
+          <li>认识到好机会很少；</li>
+          <li>在机会出现时有足够资金和勇气；</li>
+          <li>接受错误不可避免，并迅速纠正。</li>
+        </ul>
+
+        <p>芒格不喜欢赌场中庄家永久占优的机械赌博，却喜欢与朋友进行小额社交性赌博，也喜欢和高水平桥牌手娱乐。他区分了<strong>有判断优势的下注</strong>与<strong>明知长期处于劣势仍下注</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十三、教育为何需要"补救式普世智慧" -->
+      <section id="section-13">
+        <h2>十三、教育为何需要“补救式普世智慧”</h2>
+
+        <h3 id="section-13-1">13.1 学院教育的结构性问题</h3>
+
+        <p>芒格认为，教育体系的缺陷部分来自学科之间彼此隔绝。心理学只有与历史、经济学、生物学、统计学和其他学科结合，才能解释真实行为；但精通多个学科的人未必容易在单一学科的学术体系中获得职位，因为跨界者可能会激怒同行和上级。</p>
+
+        <p>他批评一些企业金融和现代组合投资理论课程脱离现实，却肯定自然科学和工程学在许多方面的严谨性。</p>
+
+        <h3 id="section-13-2">13.2 课程设想</h3>
+
+        <p>如果由芒格设计法学院课程，他会开设“补救式普世智慧”，集中讲授被各专业忽略、却人人应该知道的基本原理。课程可包括：</p>
+
+        <ul>
+          <li>数学、物理学、化学和工程学四门基础学科；</li>
+          <li>会计学；</li>
+          <li>历史学；</li>
+          <li>心理学；</li>
+          <li>哲学；</li>
+          <li>统计学；</li>
+          <li>生物学；</li>
+          <li>经济学。</li>
+        </ul>
+
+        <p>课程不应只是罗列定义，而应通过生动案例说明原理为什么成立、与哪些原理相互作用，以及忽视它会造成什么后果。</p>
+
+        <h3 id="section-13-3">13.3 先讲理由，再讲规则</h3>
+
+        <p>法学院会教学生，法官不应评论尚未审理的案件，但往往不解释这条规则与公正、公众信任和制度权威之间的关系。芒格认为，人脑需要理由才能稳固地理解知识；只有把事实挂在带有因果解释的理论结构上，学习者才能真正掌握它。</p>
+
+        <p>优秀文学作品也常让读者自己补足部分含义。读者经过思考才得出的结论，往往比直接灌输的结论更深刻、更持久。</p>
+
+        <h3 id="section-13-4">13.4 现代达尔文主义</h3>
+
+        <p>芒格晚年意识到自己没有系统阅读现代达尔文主义，于是借助理查德·道金斯等人的著作补课。他认为现代达尔文综合理论十分优美，一旦理解其基本结构，就会发现它并不难。</p>
+
+        <p>这说明终身学习没有年龄限制：即使已经七十多岁，也可以承认知识缺口，并为填补缺口感到快乐。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十四、心理学为何难以形成完整体系 -->
+      <section id="section-14">
+        <h2>十四、心理学为何难以形成完整体系</h2>
+
+        <p>芒格提出，心理学至少面临两个特殊困难：</p>
+
+        <ol>
+          <li>在社会心理学中，人们一旦知道某种心理倾向，可能会有意识地抵抗它，使研究对象发生变化。</li>
+          <li>在临床心理学中，相信某些虚幻的东西有时能提高幸福感，研究者很难简单地把“更真实”与“更幸福”等同起来。</li>
+        </ol>
+
+        <p>因此，心理学可能不像物理学那样容易形成统一理论，也不容易吸引能够整合多个领域的顶尖人才。芒格并非否定心理学研究，而是主张更诚实地承认其局限，并用多学科模型加以补强。</p>
+
+        <p>他提到的代表人物包括：</p>
+
+        <ul>
+          <li><strong>罗伯特·西奥迪尼</strong>：对说服、影响和社会心理学的研究给芒格很大启发。</li>
+          <li><strong>B. F. 斯金纳</strong>：通过操作性条件反射研究行为。其核心表述是：<strong>行为产生的后果，以及后果的性质，会决定有机体未来重复该行为的倾向。</strong></li>
+          <li><strong>马克斯·普朗克</strong>：芒格用他不愿研究经济学的例子，说明不同领域的问题结构并不相同。</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十五、怎样安排生活与工作 -->
+      <section id="section-15">
+        <h2>十五、怎样安排生活与工作</h2>
+
+        <p>有人愿意每周工作 70 小时，连续十年成为大型律师事务所合伙人，再继续投入更多时间；也有人不愿支付这种代价。两种选择都可能合理，关键在于是否符合自己的价值观、能力和生活目标。</p>
+
+        <p>芒格本人会把相当一部分时间用于钓鱼、桥牌和高尔夫。他认为，掌握普世智慧并不意味着放弃所有兴趣，而是让人更好地服务别人、服务自己，并获得更多生活乐趣。</p>
+
+        <div class="pull-quote large">如果有能力掌握基本的普世智慧，却因为懒惰或自满而拒绝学习，是一种严重浪费。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十六、为人师表的责任与演讲后的回顾 -->
+      <section id="section-16">
+        <h2>十六、为人师表的责任与演讲后的回顾</h2>
+
+        <p>芒格和巴菲特都把优秀教师视为高尚职业。巴菲特通过年报、演讲和与商学院学生交流建立“讲台”；芒格则通过演讲和书籍分享自己长期积累的经验。他们认为，教育应传授世界上最有用的知识和道理，而不是只追求名望或金钱。</p>
+
+        <p>芒格承认自己并非完全不受任何偏好影响。他说自己真正着迷的是智慧、准确性和好奇心，也可能只是借此自我吹嘘。重要的不是宣称自己绝对客观，而是持续检查自己的动机和偏见。</p>
+
+        <p>2006 年重读这篇演讲时，他仍然认可几项核心观点：</p>
+
+        <ul>
+          <li>应尽可能设计防止欺诈的制度，即使少数真实受害者因此得不到补偿；</li>
+          <li>允许欺诈获利的制度会把坏行为变成可模仿的榜样，并形成难以消除的社会风气；</li>
+          <li>应从格兰特·麦克费登身上学习正确做人、正确对待员工和客户；</li>
+          <li>应学习芒格父亲的间接教育方式，让人通过思考自己得出结论；</li>
+          <li>面对失望，幽默是很好的应对方式。</li>
+        </ul>
+
+        <p>他为自己设定的两个低调目标是：</p>
+
+        <ol>
+          <li>向比自己优秀的人学习有用的思维方法，避免自己这个年龄段常犯的大错；</li>
+          <li>把这些方法传给少数真正愿意理解并能从中受益的人。</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十七、人物与概念速查 -->
+      <section id="section-17">
+        <h2>十七、人物与概念速查</h2>
+
+        <h3 id="section-17-1">17.1 重要人物</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>人物</th><th>身份或贡献</th><th>在本讲中的意义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>沃伦·巴菲特</td><td>伯克希尔·哈撒韦董事长</td><td>终身学习、能力圈与长期复利的实践者</td></tr>
+            <tr><td>本杰明·格雷厄姆</td><td>投资思想家、巴菲特导师</td><td>价值投资、市场先生与安全边际</td></tr>
+            <tr><td>威廉·奥斯勒</td><td>加拿大医生，“现代医学之父”</td><td>反对专业壁垒，提倡广泛学习</td></tr>
+            <tr><td>亚当·斯密</td><td>经济学家、哲学家</td><td>经济学与普世智慧的重要来源</td></tr>
+            <tr><td>史蒂芬·平克</td><td>语言与认知研究者</td><td>语言本能、遗传与意识形态偏见的讨论</td></tr>
+            <tr><td>诺姆·乔姆斯基</td><td>语言学家</td><td>天才也可能受立场影响</td></tr>
+            <tr><td>斯坦利·米尔格拉姆</td><td>社会心理学家</td><td>权威服从与多因素叠加</td></tr>
+            <tr><td>詹姆斯·库克</td><td>英国航海家</td><td>用示范和渐进策略推广有益行为</td></tr>
+            <tr><td>杰克·韦尔奇</td><td>通用电气 CEO</td><td>知道自己的能力边界</td></tr>
+            <tr><td>安迪·格鲁夫</td><td>英特尔领导者</td><td>与伯克希尔不同的企业文化和管理模式</td></tr>
+            <tr><td>弗兰克·威尔斯</td><td>迪士尼总裁</td><td>谦逊、管理与资产自我催化</td></tr>
+            <tr><td>乔伊·弗洛姆</td><td>律师</td><td>用比喻传达复杂观点</td></tr>
+            <tr><td>约翰·古特福伦德</td><td>所罗门兄弟公司 CEO</td><td>延迟披露与说服失败的教训</td></tr>
+            <tr><td>B. F. 斯金纳</td><td>心理学家</td><td>操作性条件反射与行为后果</td></tr>
+            <tr><td>马克斯·普朗克</td><td>物理学家</td><td>学科边界与科学思维</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-17-2">17.2 核心模型</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>模型</th><th>一句话说明</th><th>应用提醒</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>跨学科思维</td><td>用多个学科共同解释现实</td><td>不要让专业边界遮蔽关键因素</td></tr>
+            <tr><td>激励机制引起的偏见</td><td>人会倾向于相信有利于自己的结论</td><td>先检查利益，再评价论证</td></tr>
+            <tr><td>心理否认</td><td>为逃避痛苦而拒绝承认事实</td><td>及时面对损失，避免继续加码</td></tr>
+            <tr><td>社会认同</td><td>看到别人这样做，就认为这样做正常</td><td>警惕“大家都这么做”</td></tr>
+            <tr><td>权威服从</td><td>把判断责任交给权威</td><td>即使服从命令，也要保留道德判断</td></tr>
+            <tr><td>一贯性原则</td><td>人倾向于坚持过去的选择</td><td>不要让沉没成本决定未来</td></tr>
+            <tr><td>操作性条件反射</td><td>后果会塑造未来行为</td><td>想改变行为，先改变后果</td></tr>
+            <tr><td>lollapalooza 效应</td><td>多个因素同向叠加，产生巨大结果</td><td>使用检查清单，寻找组合效应</td></tr>
+            <tr><td>能力圈</td><td>只在真正理解的范围内行动</td><td>不懂时坦率承认并求助</td></tr>
+            <tr><td>复利</td><td>小幅持续增长会累积成巨大结果</td><td>重视时间，避免不必要中断</td></tr>
+            <tr><td>安全边际</td><td>为估计错误和意外留下缓冲</td><td>不要按最乐观情景下注</td></tr>
+            <tr><td>逆向思考</td><td>先问怎样会失败，再设计方案</td><td>主动寻找会毁掉计划的因素</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十八、结语 -->
+      <section id="section-18">
+        <h2>十八、结语：把知识变成判断力</h2>
+
+        <p>普世智慧并不神秘。它不是一套能解答所有问题的教条，也不是快速致富的捷径，而是由许多基本模型组成的判断系统。</p>
+
+        <p>要把这套系统真正用起来，需要做到：</p>
+
+        <ol>
+          <li><strong>持续学习</strong>，尤其学习自己专业之外的重要原理；</li>
+          <li><strong>理解模型之间的联系</strong>，而不是机械背诵术语；</li>
+          <li><strong>在决策前使用检查清单</strong>，避免遗漏关键因素；</li>
+          <li><strong>反向思考失败路径</strong>，提前拆除会导致灾难的条件；</li>
+          <li><strong>识别利益、意识形态和心理否认造成的偏见</strong>；</li>
+          <li><strong>尊重能力边界</strong>，知道何时应独立判断，何时应信任专家；</li>
+          <li><strong>等待简单、明确、自己真正理解的机会</strong>；</li>
+          <li><strong>及时承认错误，避免被沉没成本绑架</strong>；</li>
+          <li><strong>用制度塑造行为，而不是只寄希望于个人自觉</strong>；</li>
+          <li><strong>在运用心理学影响他人时守住道德边界</strong>。</li>
+        </ol>
+
+        <p>最后，芒格并没有承诺一种“既富足又从不犯错”的人生。相反，他认为错误不可避免，真正重要的是减少错误、尽快纠正错误，并在复杂世界中保持谦逊、好奇、勤奋和客观。</p>
+
+        <div class="pull-quote">一切应该尽可能简单，但不能过于简单。</div>
+
+        <div class="pull-quote large">当你掌握了足够多的正确模型，并愿意在行动前逐项检查，你就能更好地服务他人，也更好地服务自己。</div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+  </script>script
+
+</body>
+</html>

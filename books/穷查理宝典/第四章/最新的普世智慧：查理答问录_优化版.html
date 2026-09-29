@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>最新的普世智慧：查理·芒格答问录 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 扁平章节链接（单讲章）：隐藏折叠箭头 */
+    a.toc-chapter-title::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.6rem 0 .7rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.9;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      position: absolute;
+      top: -.2rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .3;
+      font-style: normal;
+    }
+    .poem-author {
+      display: block;
+      margin-top: .8rem;
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .poem-title {
+      font-weight: 700;
+      color: var(--text);
+      font-style: normal;
+      letter-spacing: .25em;
+      margin-bottom: 1rem;
+    }
+    .poem p { margin: 0 0 1rem; }
+    .poem p:last-of-type { margin-bottom: 0; }
+
+    .formula {
+      text-align: center;
+      font-family: Georgia, 'Noto Serif SC', serif;
+      font-size: 1.05rem;
+      color: var(--gold-dk);
+      letter-spacing: .04em;
+      margin: 1.25rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(201,168,76,.06);
+      border: 1px dashed rgba(201,168,76,.35);
+      border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第一章/查理芒格传略.html">第一章 查理·芒格传略</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第二章/第二章_芒格的生活_学习和决策方法.html">第二章 芒格的生活、学习和决策方法</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第三章/第三章_芒格主义_查理的即席谈话.html">第三章 芒格主义：查理的即席谈话</a>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/第一讲 在哈佛学校毕业典礼上的演讲（整理版）.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系（优化版）.html">第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（优化版）.html">第三讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考（优化版）.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲 专业人士需要更多的跨学科技能_优化版.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲 一流慈善基金的投资实践_优化版.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲 在慈善圆桌会议早餐会上的讲话_优化版.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲 2003年的金融大丑闻_优化版.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点_优化版.html">第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点</a></li>
+            <li><a href="../第四章/第十讲 在南加州大学古尔德法学院毕业典礼上的演讲_优化版.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第十一讲 人类误判心理学_优化版.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录_优化版.html" class="active">最新的普世智慧：查理答问录</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第五章/第五章　文章、报道与评论.html">第五章 文章、报道与评论</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">企业评估：超越财务数据的智慧</a></li>
+        <li><a href="#section-1-1" class="sub">如何评估待收购企业？</a></li>
+        <li><a href="#section-2">职业选择的三大原则</a></li>
+        <li><a href="#section-2-1" class="sub">年轻人在工作中应该追求什么？</a></li>
+        <li><a href="#section-3">人生建议：持续进步的哲学</a></li>
+        <li><a href="#section-3-1" class="sub">每日精进策略</a></li>
+        <li><a href="#section-3-2" class="sub">应对人生难题的三大法宝</a></li>
+        <li><a href="#section-4">查理的检查清单</a></li>
+        <li><a href="#section-4-1" class="sub">芒格的自信来源</a></li>
+        <li><a href="#section-4-2" class="sub">四种核心检查清单</a></li>
+        <li><a href="#section-5">赛马与投资的共通之道</a></li>
+        <li><a href="#section-5-1" class="sub">为什么拿赛马比喻投资？</a></li>
+        <li><a href="#section-5-2" class="sub">速度派 vs 旅途派</a></li>
+        <li><a href="#section-5-3" class="sub">经典案例</a></li>
+        <li><a href="#section-6">信任：资本主义的基石</a></li>
+        <li><a href="#section-6-1" class="sub">信任的重要性</a></li>
+        <li><a href="#section-6-2" class="sub">本杰明·格雷厄姆的信任测验</a></li>
+        <li><a href="#section-6-3" class="sub">芒格与巴菲特的信任关系</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 附录</div>
+        <h1 class="article-title">最新的普世智慧：查理·芒格答问录</h1>
+        <div class="article-meta">
+          <span><strong>体裁</strong>答问录（优化整理版）</span>
+        </div>
+      </header>
+
+      <div class="pull-quote large">你不必非常出色，只要在很长、很长的时间内保持比其他人聪明一点点就够了。<cite>—— 查理·芒格</cite></div>
+
+      <!-- 一、企业评估 -->
+      <section id="section-1">
+        <h2>企业评估：超越财务数据的智慧</h2>
+
+        <h3 id="section-1-1">如何评估待收购企业？</h3>
+
+        <p>芒格和巴菲特的评估体系并非单纯依赖财务指标，而是采用多维度的主观判断标准：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>评估维度</th><th>核心关注点</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>管理层信誉</strong></td>
+              <td>能否完全信任管理团队？</td>
+            </tr>
+            <tr>
+              <td><strong>声誉风险</strong></td>
+              <td>这笔交易会损害我们的声誉吗？</td>
+            </tr>
+            <tr>
+              <td><strong>风险预判</strong></td>
+              <td>可能出现哪些问题？</td>
+            </tr>
+            <tr>
+              <td><strong>行业理解</strong></td>
+              <td>我们真正理解这个行业吗？</td>
+            </tr>
+            <tr>
+              <td><strong>资本需求</strong></td>
+              <td>企业是否需要持续注资才能维持运转？</td>
+            </tr>
+            <tr>
+              <td><strong>现金流预期</strong></td>
+              <td>未来现金流如何？</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>他们不追求直线增长，只要价格合理，能够接受周期性增长的企业。这体现了对商业本质的深刻理解——真实世界中，企业增长本就有起伏。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、职业选择的三大原则 -->
+      <section id="section-2">
+        <h2>职业选择的三大原则</h2>
+
+        <h3 id="section-2-1">年轻人在工作中应该追求什么？</h3>
+
+        <p>芒格提出了三个基本原则，虽然同时满足很难，但值得努力追求：</p>
+
+        <div class="remedy-grid cols-3">
+          <div class="remedy-card">
+            <span class="remedy-num">原则一 · 诚信底线</span>
+            <h4>别兜售你自己不会购买的东西</h4>
+            <p>换句话说：不要推销连自己都不相信的产品或服务。这是职业道德的基石。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则二 · 选择雇主</span>
+            <h4>别为你不尊敬和钦佩的人工作</h4>
+            <p>工作不仅是谋生手段，更是学习和成长的过程。跟随值得尊敬的人，你才能真正成长。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">原则三 · 团队氛围</span>
+            <h4>只跟你喜欢的人共事</h4>
+            <p>生命中大部分时间都在工作，与喜欢的人共事，工作本身就成了一种享受。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">芒格的幸运</div>
+            <p>因为与沃伦·巴菲特共事，这三个原则他全都做到了。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、人生建议 -->
+      <section id="section-3">
+        <h2>人生建议：持续进步的哲学</h2>
+
+        <h3 id="section-3-1">每日精进策略</h3>
+
+        <p><strong>核心理念</strong>：每天起床时，争取变得比昨天更聪明一点。</p>
+
+        <h4>实践路径</h4>
+
+        <ol>
+          <li><strong>认真完成任务</strong>——出色地做好每一件事；</li>
+          <li><strong>循序渐进</strong>——进步也许缓慢，但在为快速突破打基础；</li>
+          <li><strong>长期主义</strong>——每天向前挪一点，时间会给你应得的回报。</li>
+        </ol>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>这不是鸡汤，而是复利思维在人生中的应用。每天 1% 的进步，一年后你将是原来的 37 倍（1.01<sup>365</sup>≈37.8）。</p>
+          </div>
+        </div>
+
+        <h3 id="section-3-2">应对人生难题的三大法宝</h3>
+
+        <p>人生不同阶段会遇到各种棘手难题，以下三点能帮助你更好应对：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>法宝</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>降低期望</strong></td>
+              <td>期望过高是痛苦的主要来源</td>
+            </tr>
+            <tr>
+              <td><strong>保持幽默感</strong></td>
+              <td>用幽默化解困境和压力</td>
+            </tr>
+            <tr>
+              <td><strong>珍惜亲情友情</strong></td>
+              <td>让自己置身于爱之中</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">最重要的能力</div>
+            <p>适应生活的变化。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote">芒格的自我调侃："如果世界没有改变，我现在身上仍然会有 12 个缺陷。"这说明改变和适应让我们不断修正缺点。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、查理的检查清单 -->
+      <section id="section-4">
+        <h2>查理的检查清单</h2>
+
+        <div class="pull-quote">聪明人怎么会经常犯错呢？他们并没有做到我让你们做的事情：使用一张检查清单，确保你们掌握了所有的主要模型，并以一种多元的方式使用它们。<cite>—— 查理·芒格</cite></div>
+
+        <h3 id="section-4-1">芒格的自信来源</h3>
+
+        <p><strong>狄克·艾斯本思赫德</strong>（芒格 1956 年以来的朋友和生意合伙人）的观察：</p>
+
+        <p>查理的自信源于他异乎寻常的精力投入到研究、分析、评估和决策的全过程。他知道自己不会永远正确，但<strong>正确概率很高</strong>，因为整个过程极其严谨、极其现实。正因如此，他决策时从不犹豫，且会坚定执行。</p>
+
+        <h3 id="section-4-2">四种核心检查清单</h3>
+
+        <h4>1️⃣ 双轨分析</h4>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">理性轨道</span>
+            <h4>哪些因素真正主导了相关利益？</h4>
+            <p>宏观和微观经济因素是什么？</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">潜意识轨道</span>
+            <h4>有哪些潜意识因素在自动形成结论？</h4>
+            <p>本能、情绪、贪婪等如何影响判断？</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>人是理性与感性的结合体，决策时必须同时审视这两条轨道，才能避免盲点。</p>
+          </div>
+        </div>
+
+        <h4>2️⃣ 投资和决策检查清单</h4>
+
+        <p>这是芒格的非正式清单，详细列出了各种值得考虑的因素。这个清单因人而异，需要根据自己的经验不断完善。</p>
+
+        <h4>3️⃣ 超级简单的普通观念</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>原则</th><th>应用</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>先解决显而易见的问题</strong></td>
+              <td>不要把简单问题复杂化</td>
+            </tr>
+            <tr>
+              <td><strong>利用数学运算能力</strong></td>
+              <td>用数据说话，量化思考</td>
+            </tr>
+            <tr>
+              <td><strong>逆向思考</strong></td>
+              <td>反过来看问题，往往豁然开朗</td>
+            </tr>
+            <tr>
+              <td><strong>跨学科智慧</strong></td>
+              <td>永远不要完全依赖他人</td>
+            </tr>
+            <tr>
+              <td><strong>注意 Lollapalooza 效应</strong></td>
+              <td>多种因素共同作用产生的巨大影响</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">Lollapalooza 效应解释</div>
+            <p>多个因素在同一方向上共同发力时，会产生远超各因素简单相加的巨大效应。就像多米诺骨牌，不是 1+1=2，而是产生指数级的连锁反应。</p>
+          </div>
+        </div>
+
+        <h4>4️⃣ 基于心理学的倾向</h4>
+
+        <p>芒格总结的<strong>人类误判的 25 个标准原因</strong>，这是他著名的心理学框架，帮助识别和避免常见的认知偏误。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、赛马与投资 -->
+      <section id="section-5">
+        <h2>赛马与投资的共通之道</h2>
+
+        <div class="pull-quote">我们要寻找一匹获胜几率是 1/2、赔率是一赔三的马。<cite>—— 查理·芒格</cite></div>
+
+        <h3 id="section-5-1">为什么拿赛马比喻投资？</h3>
+
+        <p>芒格和巴菲特都喜欢用赛马的彩池投注系统来类比股票市场，因为两者有惊人的相似性：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>共同特征</th><th>赛马</th><th>股票投资</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>大量数据</strong></td>
+              <td>体重、速度、步速、血统</td>
+              <td>财务报表、市场数据</td>
+            </tr>
+            <tr>
+              <td><strong>已知与未知变量</strong></td>
+              <td>赛道状况、马匹状态</td>
+              <td>宏观环境、公司经营</td>
+            </tr>
+            <tr>
+              <td><strong>评估学派</strong></td>
+              <td>速度派 vs 旅途派</td>
+              <td>价值投资 vs 技术分析</td>
+            </tr>
+            <tr>
+              <td><strong>定错价的机会</strong></td>
+              <td>冷门马低赔率</td>
+              <td>被低估的优质股</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-2">速度派 vs 旅途派</h3>
+
+        <p><strong>速度派</strong>：</p>
+
+        <ul>
+          <li>类似股市的动量投资者；</li>
+          <li>认为跑最快的马能赢（追逐短期表现）。</li>
+        </ul>
+
+        <p><strong>旅途派</strong>（巴菲特自称）：</p>
+
+        <ul>
+          <li>关注"旅途"中的各种细节；</li>
+          <li>当天赛道对什么类型的马有利？</li>
+          <li>那匹马排位如何？</li>
+          <li>赛道有多少直道？</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>巴菲特的投资风格是"旅途派"——不只看表面数据，更关注企业成长过程中的各种细节和环境因素。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-3">经典案例</h3>
+
+        <p>1993 年《莱斯赛马年报》预测肯塔基赛马大会冠军是"海洋豪杰"（Sea Hero），结果它真的赢了。那些花 2 美元买它获胜的人，拿到了 27.8 美元的回报——<strong>投资回报率 1290%</strong>！</p>
+
+        <p>这正是芒格所说的："寻找定错价格的赌局"——找到被市场低估的机会。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、信任 -->
+      <section id="section-6">
+        <h2>信任：资本主义的基石</h2>
+
+        <div class="pull-quote">信任能让资本主义运转得更好。<cite>—— 查理·芒格</cite></div>
+
+        <h3 id="section-6-1">信任的重要性</h3>
+
+        <p>这本书最重要的主题就是<strong>信任</strong>：我们需要信得过那些与我们共同生活、共同工作的人的性格、价值观和人品。</p>
+
+        <p>查理·芒格和沃伦·巴菲特向来以<strong>道德高尚、品行端正</strong>著称。他们信奉艾伯特·盖瑞（美国钢铁公司前董事长）的理念：</p>
+
+        <div class="pull-quote large">正直的行为是好的，并不是因为它们能够带来好处；它们能够带来好处，是因为它们是好的。</div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>正直不是手段，而是目的本身。好处只是正直行为的自然结果，而非追求正直的理由。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-2">本杰明·格雷厄姆的信任测验</h3>
+
+        <p>多年前，芒格在圣地亚哥参加"本杰明·格雷厄姆小组"会议。格雷厄姆给追随者做了一次"认知评估测验"，题目设计巧妙，极容易让人上当。</p>
+
+        <p>果然，这些聪明人纷纷中招。格雷厄姆借此发表了一番深刻的讲话：</p>
+
+        <div class="pull-quote">无论你们多么聪明，总有一些更聪明的人。如果他们真的想骗你们，你们就会上当。所以，要确定与你们共事的聪明人值得你们信赖。</div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">核心警示</div>
+            <p>智力可以保护你免受愚蠢的伤害，但无法保护你免受欺骗。唯一的防护就是选择值得信任的合作伙伴。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-3">芒格与巴菲特的信任关系</h3>
+
+        <div class="pull-quote">查理和我是在 1959 年由戴维斯一家介绍认识的。我们是两个倾向于掌握主导权的人。然而我们自从认识到现在从来没有争吵过。<cite>—— 沃伦·巴菲特</cite></div>
+
+        <p>这段话揭示了<strong>真正信任关系的特征</strong>：</p>
+
+        <ul>
+          <li>两个强势的人能够和谐共事 60 多年；</li>
+          <li>从未发生争吵；</li>
+          <li>相互尊重，彼此信任。</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">这说明什么</div>
+            <p>当双方都以诚信为基础，即使性格强势，也能实现完美合作。信任消除了权力斗争，让合作聚焦于共同目标。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

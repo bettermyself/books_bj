@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第八讲 2003年的金融大丑闻 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 扁平章节链接（单讲章）：隐藏折叠箭头 */
+    a.toc-chapter-title::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.6rem 0 .7rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.9;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      position: absolute;
+      top: -.2rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .3;
+      font-style: normal;
+    }
+    .poem-author {
+      display: block;
+      margin-top: .8rem;
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .poem-title {
+      font-weight: 700;
+      color: var(--text);
+      font-style: normal;
+      letter-spacing: .25em;
+      margin-bottom: 1rem;
+    }
+    .poem p { margin: 0 0 1rem; }
+    .poem p:last-of-type { margin-bottom: 0; }
+
+    .formula {
+      text-align: center;
+      font-family: Georgia, 'Noto Serif SC', serif;
+      font-size: 1.05rem;
+      color: var(--gold-dk);
+      letter-spacing: .04em;
+      margin: 1.25rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(201,168,76,.06);
+      border: 1px dashed rgba(201,168,76,.35);
+      border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第一章/查理芒格传略.html">第一章 查理·芒格传略</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第二章/第二章_芒格的生活_学习和决策方法.html">第二章 芒格的生活、学习和决策方法</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第三章/第三章_芒格主义_查理的即席谈话.html">第三章 芒格主义：查理的即席谈话</a>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/第一讲 在哈佛学校毕业典礼上的演讲（整理版）.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系（优化版）.html">第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（优化版）.html">第三讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考（优化版）.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲 专业人士需要更多的跨学科技能_优化版.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲 一流慈善基金的投资实践_优化版.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲 在慈善圆桌会议早餐会上的讲话_优化版.html">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲 2003年的金融大丑闻_优化版.html" class="active">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点_优化版.html">第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点</a></li>
+            <li><a href="../第四章/第十讲 在南加州大学古尔德法学院毕业典礼上的演讲_优化版.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第十一讲 人类误判心理学_优化版.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录_优化版.html">最新的普世智慧：查理答问录</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第五章/第五章　文章、报道与评论.html">第五章 文章、报道与评论</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">引言：一场预言中的悲剧</a></li>
+        <li><a href="#section-2">一、黄金时代：创始人的遗产（1982年前）</a></li>
+        <li><a href="#section-2-1" class="sub">1.1 卓越的商业模式</a></li>
+        <li><a href="#section-2-2" class="sub">1.2 1982年的财务状况</a></li>
+        <li><a href="#section-2-3" class="sub">1.3 创始人的薪酬哲学</a></li>
+        <li><a href="#section-2-4" class="sub">1.4 稳健的财务策略</a></li>
+        <li><a href="#section-2-5" class="sub">1.5 光明的未来预期</a></li>
+        <li><a href="#section-3">二、转折点：新管理层的"现代金融工程术"（1982年后）</a></li>
+        <li><a href="#section-3-1" class="sub">2.1 董事会的决策失误</a></li>
+        <li><a href="#section-3-2" class="sub">2.2 股票期权的会计漏洞</a></li>
+        <li><a href="#section-3-3" class="sub">2.3 新管理层的发现</a></li>
+        <li><a href="#section-4">三、"细水长流"计划：精心设计的骗局</a></li>
+        <li><a href="#section-4-1" class="sub">3.1 计划的基本原理</a></li>
+        <li><a href="#section-4-2" class="sub">3.2 "明智的克制型造假"</a></li>
+        <li><a href="#section-4-3" class="sub">3.3 "细水长流"的四大优势</a></li>
+        <li><a href="#section-4-4" class="sub">3.4 计划的三个关键条件</a></li>
+        <li><a href="#section-5">四、骗局的完善与升级</a></li>
+        <li><a href="#section-5-1" class="sub">4.1 巴甫洛夫效应的加持</a></li>
+        <li><a href="#section-5-2" class="sub">4.2 庞氏骗局效应</a></li>
+        <li><a href="#section-5-3" class="sub">4.3 税率漏洞的修补</a></li>
+        <li><a href="#section-5-4" class="sub">4.4 几何级数增长的陷阱</a></li>
+        <li><a href="#section-6">五、崩塌：不可持续的增长神话</a></li>
+        <li><a href="#section-6-1" class="sub">5.1 2002年的虚假繁荣</a></li>
+        <li><a href="#section-6-2" class="sub">5.2 2003年：双重失败</a></li>
+        <li><a href="#section-7">六、余波：全社会的伤痛</a></li>
+        <li><a href="#section-7-1" class="sub">6.1 公众的愤怒</a></li>
+        <li><a href="#section-7-2" class="sub">6.2 专业人士的信任危机</a></li>
+        <li><a href="#section-8">七、天庭的审判</a></li>
+        <li><a href="#section-8-1" class="sub">7.1 上帝的调查</a></li>
+        <li><a href="#section-8-2" class="sub">7.2 四轮问询</a></li>
+        <li><a href="#section-9">八、作者后记</a></li>
+        <li><a href="#section-9-1" class="sub">8.1 写作初衷</a></li>
+        <li><a href="#section-9-2" class="sub">8.2 做假账的严重性</a></li>
+        <li><a href="#section-9-3" class="sub">8.3 改善与遗憾</a></li>
+        <li><a href="#section-10">九、深层思考</a></li>
+        <li><a href="#section-10-1" class="sub">9.1 能给人带来好处的罪恶很难消除</a></li>
+        <li><a href="#section-10-2" class="sub">9.2 邓肯·利托菲尔牧师的警告</a></li>
+        <li><a href="#section-11">十、延伸知识</a></li>
+        <li><a href="#section-11-1" class="sub">10.1 索福克勒斯（公元前496-406）</a></li>
+        <li><a href="#section-11-2" class="sub">10.2 厄普顿·辛克莱（1878-1968）</a></li>
+        <li><a href="#section-11-3" class="sub">10.3 1940年塔科马海峡吊桥垮塌</a></li>
+        <li><a href="#section-12">总结：芒格方法的综合展示</a></li>
+        <li><a href="#section-13">附录：查理的演讲日</a></li>
+        <li><a href="#section-14">关键要点回顾</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第八讲</div>
+        <h1 class="article-title">2003年的金融大丑闻</h1>
+        <div class="article-meta">
+          <span><strong>演讲者</strong>查理·芒格</span>
+          <span><strong>记录时间</strong>2000 年夏天</span>
+          <span><strong>核心主题</strong>以虚构的宽特科技公司，剖析股票期权会计造假的完整机制与深层教训</span>
+        </div>
+      </header>
+
+      <!-- 引言 -->
+      <section id="section-1">
+        <h2>引言：一场预言中的悲剧</h2>
+
+        <p>2003年爆发的金融大丑闻让宽特科技公司（Quant Tech）瞬间声名扫地。这家全国最大的纯工程企业，由传奇创始人阿尔伯特·贝索格·宽特工程师苦心经营多年建成。丑闻曝光后，人们把宽特科技的历史分成了两幕道德剧：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">第一幕</span>
+            <h4>创始人宽特的时代</h4>
+            <p>道德高尚的黄金时代。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">第二幕</span>
+            <h4>继任者的时代</h4>
+            <p>道德沦丧，公司最终沦为索多玛般的存在。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>这场悲剧并非始于1982年创始人去世之后。事实上，1982年后公司仍保留了许多优良传统，但早在创始人在世时，整个金融文化环境就已埋下隐患。<strong>宽特科技的故事，本质上是一出索福克勒斯式的古希腊悲剧</strong>——仅因一个致命漏洞（职工股票期权的会计处理），就遭到了命运女神的惩罚。</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">说明</div>
+            <p>宽特科技是虚构公司，但它经历的弊端——特别是未在会计报表中正确反映股票期权成本——在真实世界中普遍存在。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 一、黄金时代 -->
+      <section id="section-2">
+        <h2>一、黄金时代：创始人的遗产（1982年前）</h2>
+
+        <h3 id="section-2-1">1.1 卓越的商业模式</h3>
+
+        <p><strong>业务核心</strong>：设计新型发电厂</p>
+
+        <ul>
+          <li>小型化，改善电力供应</li>
+          <li>超级清洁、超级节能</li>
+          <li>备受世界各国欢迎</li>
+        </ul>
+
+        <h3 id="section-2-2">1.2 1982年的财务状况</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>财务指标</th><th>数据</th><th>占比/说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>营业收入</td><td>10亿美元</td><td>行业龙头地位</td></tr>
+            <tr><td>净利润</td><td>1亿美元</td><td>利润率10%</td></tr>
+            <tr><td>员工薪酬成本</td><td>7亿美元</td><td>占收入70%</td></tr>
+            <tr><td>└ 基本工资</td><td>3亿美元</td><td>占收入30%</td></tr>
+            <tr><td>└ 绩效奖金</td><td>4亿美元</td><td>占收入40%</td></tr>
+            <tr><td>现金储备</td><td>5亿美元</td><td>相当于年收入50%</td></tr>
+            <tr><td>负债</td><td>0</td><td>完全零债务</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-2-3">1.3 创始人的薪酬哲学</h3>
+
+        <p><strong>坚决拒绝股票期权。</strong>创始人宽特认为，股票期权的法定会计处理方式"软弱、腐败和令人鄙视"。他的理念是：</p>
+
+        <ul>
+          <li><strong>全部现金支付</strong>：基本工资+绩效奖金</li>
+          <li><strong>严格业绩标准</strong>：依据复杂方法计算个人或小组的巨额激励奖金</li>
+          <li><strong>员工自主投资</strong>：建议员工用自己的钱从市场购买公司股票</li>
+        </ul>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>创始人相信，聪明到能设计发电厂的工程师，自然懂得如何为自己理财。他只是建议，不搞家长式干预。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-4">1.4 稳健的财务策略</h3>
+
+        <p><strong>富兰克林名言的实践者。</strong>创始人信奉本杰明·富兰克林的名言："空袋子很难竖起来。"因此：</p>
+
+        <ul>
+          <li>持有大量现金应对不测</li>
+          <li>为抓住机会做好准备</li>
+          <li>从不派发红利，所有利润转为现金储备</li>
+        </ul>
+
+        <h3 id="section-2-5">1.5 光明的未来预期</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">未来20年（1982-2002）预测</span>
+            <h4>高增长时代</h4>
+            <p>年收入增长率：20%；利润率：保持10%；关键技术：在快速增长的行业中占据核心地位。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">2003年之后预测</span>
+            <h4>增速回落</h4>
+            <p>年收入增长率：降至4%；利润率：继续保持10%。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、转折点 -->
+      <section id="section-3">
+        <h2>二、转折点：新管理层的"现代金融工程术"（1982年后）</h2>
+
+        <h3 id="section-3-1">2.1 董事会的决策失误</h3>
+
+        <p><strong>1982年的市场环境</strong>：</p>
+
+        <ul>
+          <li>宽特科技市盈率：仅15倍</li>
+          <li>市值：15亿美元（尽管前景极好）</li>
+          <li>原因：当时利率高，整体股市低迷</li>
+        </ul>
+
+        <p><strong>董事会的选择</strong>：没有选择利用现金+贷款大量回购股票（明智之举），而是从外部聘请新CEO和CFO——来自采用股票期权制度的公司。</p>
+
+        <p><strong>新管理层背景</strong>：</p>
+
+        <ul>
+          <li>所在公司市盈率：20倍</li>
+          <li>但资产负债表更差</li>
+          <li>利润增长速度更慢</li>
+          <li><strong>唯一优势</strong>：股价更高</li>
+        </ul>
+
+        <p><strong>董事会意图</strong>：尽快提高公司市值。</p>
+
+        <h3 id="section-3-2">2.2 股票期权的会计漏洞</h3>
+
+        <h4>美国会计准则的致命缺陷</h4>
+
+        <p><strong>正常逻辑</strong>：给员工低价卖股票 = 给员工现金，应计入薪酬成本，减少利润。</p>
+
+        <p><strong>实际会计处理</strong>：</p>
+
+        <ul>
+          <li>股票期权折让部分<strong>不计入薪酬成本</strong></li>
+          <li><strong>不影响年报披露的利润</strong></li>
+          <li>但税务部门有常识：<strong>计算所得税时可以抵扣</strong></li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>会计上装作没花钱，税务上承认花了钱。这个双重标准创造了巨大的造假空间。</p>
+          </div>
+        </div>
+
+        <h4>会计行业的堕落</h4>
+
+        <div class="pull-quote">"谁给我面包吃，我就给谁唱歌。"</div>
+
+        <p>尽管最聪明正直的会计师反对这种处理方法，但会计行业还是屈服于企业管理层的压力。毕竟：</p>
+
+        <ul>
+          <li>管理层不愿看到利润下降</li>
+          <li>会计师事务所的收入来自这些管理层</li>
+          <li>结果：采纳了这种荒谬的记账方法</li>
+        </ul>
+
+        <p><strong>引用</strong>：厄普顿·辛克莱（1878-1968）</p>
+
+        <div class="pull-quote">"让人们去理解那些跟他们的利益冲突的事情是很难的。"<cite>— 厄普顿·辛克莱</cite></div>
+
+        <h3 id="section-3-3">2.3 新管理层的发现</h3>
+
+        <p><strong>他们很快意识到三点</strong>：</p>
+
+        <ol>
+          <li><strong>无法改善业务本质</strong>：创始人已把收入增长和利润率做到极致</li>
+          <li><strong>不敢改变企业文化</strong>：运作得太好，动不得</li>
+          <li><strong>唯一出路</strong>："现代金融工程术"——用合法但存在争议的手段虚增报表利润</li>
+        </ol>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、"细水长流"计划 -->
+      <section id="section-4">
+        <h2>三、"细水长流"计划：精心设计的骗局</h2>
+
+        <h3 id="section-4-1">3.1 计划的基本原理</h3>
+
+        <p><strong>简单计算</strong>。假设1982年宽特科技：</p>
+
+        <ul>
+          <li>用股票期权利润<strong>替代</strong>4亿美元现金奖金</li>
+          <li>用省下的奖金+员工支付的期权费<strong>回购</strong>增发的股份</li>
+          <li>保持其他一切不变</li>
+        </ul>
+
+        <p><strong>结果</strong>：</p>
+
+        <ul>
+          <li>年报利润：从1亿美元 → <strong>5亿美元</strong>（增长400%）</li>
+          <li>流通股数量：<strong>保持不变</strong></li>
+          <li>实际经济效益：<strong>零</strong>（纯粹会计游戏）</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>这不是创造价值，而是把真实利润和虚假利润相加，就像虚报期末存货一样。</p>
+          </div>
+        </div>
+
+        <h3 id="section-4-2">3.2 "明智的克制型造假"</h3>
+
+        <p><strong>管理层的担忧</strong>：</p>
+
+        <ul>
+          <li>一次性造假太多 → 引起会计师抗议</li>
+          <li>杀死会下金蛋的鹅</li>
+        </ul>
+
+        <p><strong>解决方案</strong>：CEO私下称之为"明智的克制型造假"——逐年缓慢实施。</p>
+
+        <h3 id="section-4-3">3.3 "细水长流"的四大优势</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>优势</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>隐蔽性</td><td>每年只虚报一点，被发现概率低</td></tr>
+            <tr><td>累积效应</td><td>多年后产生巨大长期效应，但不易察觉</td></tr>
+            <tr><td>道德绑架</td><td>会计师一旦包庇几年，就很难中途停止</td></tr>
+            <tr><td>合理借口</td><td>其他公司期权更慷慨，可以"吸引人才"为由辩护</td></tr>
+          </tbody>
+        </table>
+
+        <p>CFO的粗俗比喻：</p>
+
+        <div class="pull-quote">"如果我们每年只在葡萄干里掺入一点点大便，最后就算出现了一大堆大便，可能也不会有人发现。"<cite>— 宽特科技 CFO</cite></div>
+
+        <h3 id="section-4-4">3.4 计划的三个关键条件</h3>
+
+        <p><strong>管理层设定的目标</strong>：</p>
+
+        <ol>
+          <li><strong>持续时间</strong>：计划实施20年</li>
+          <li><strong>稳定增长</strong>：每年利润增长幅度一致（分析师喜欢稳定性，会给更高估值）</li>
+          <li><strong>可信度上限</strong>：第20年利润率不超过40%（避免引起怀疑）</li>
+        </ol>
+
+        <p><strong>计算结果</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>真实增长</th><th>虚报增长</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>年收入增长率</td><td>20%</td><td>20%</td></tr>
+            <tr><td>年利润增长率</td><td>20%</td><td><strong>28%</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>用8%的虚假增长，制造持续的高增长假象。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、骗局的完善与升级 -->
+      <section id="section-5">
+        <h2>四、骗局的完善与升级</h2>
+
+        <h3 id="section-5-1">4.1 巴甫洛夫效应的加持</h3>
+
+        <p><strong>心理学陷阱</strong>。几年后，人们形成了条件反射：</p>
+
+        <ul>
+          <li>看到大量现金储备 → 相信高利润是真实的</li>
+          <li>不派发红利 → 更加相信利润确实存在</li>
+          <li><strong>没人怀疑</strong>年报披露的利润有造假成分</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">注意</div>
+            <p>这就是巴甫洛夫联想反射效应——破坏了人们的现实认知能力。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-2">4.2 庞氏骗局效应</h3>
+
+        <p><strong>进一步完善</strong>。当股价因虚高利润而飙升后，管理层发现：</p>
+
+        <ul>
+          <li>高市盈率意味着股票更值钱</li>
+          <li>可以<strong>逐步减少现金奖金回购股票的力度</strong></li>
+          <li>让现金储备<strong>加速增长</strong></li>
+        </ul>
+
+        <p><strong>两大好处</strong>：</p>
+
+        <ol>
+          <li>现金快速增长让虚报利润更难被察觉</li>
+          <li>引入<strong>庞氏骗局效应</strong>或<strong>连锁信效应</strong>，给现有股东（包括管理层）带来实际好处</li>
+        </ol>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">庞氏骗局小知识</div>
+            <p><strong>历史案例</strong>：1919年波士顿的卡尔洛·"查理"·庞兹。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>要素</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>承诺</td><td>利用国际邮政票据套利，90天获利50%</td></tr>
+            <tr><td>手法</td><td>用新投资者的钱作为利润返给旧投资者</td></tr>
+            <tr><td>结果</td><td>1920年被《波士顿邮报》揭露，投资者平均只收回37%资金</td></tr>
+            <tr><td>教训</td><td>庞兹出狱后死不悔改，又兜售佛罗里达无价值土地</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-3">4.3 税率漏洞的修补</h3>
+
+        <p><strong>新问题出现</strong>：</p>
+
+        <ul>
+          <li>虚报利润以28%速度增长</li>
+          <li>但税前利润对应的<strong>所得税率却逐年下降</strong></li>
+          <li>这会引起质疑</li>
+        </ul>
+
+        <p><strong>解决方案</strong>：说服外国政府（很多发电厂由政府所有）：</p>
+
+        <ul>
+          <li>支付更高的设计费</li>
+          <li>宽特科技向这些外国政府多交所得税</li>
+          <li>只要多交的税比增加的设计费稍多一点即可</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">查证企业利润真实性的方法</div>
+            <p><strong>比对年报利润与实际缴税</strong>：对比这两项数据是识破财务造假的有效手段——Trust, but verify（信任，但要核实）。</p>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>数据来源</th><th>可信度</th><th>原因</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>年报披露利润</td><td>低</td><td>可能注水</td></tr>
+            <tr><td>10K表格"支付所得税的现金"栏</td><td>高</td><td>管理层不敢给税务局看假账</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-5-4">4.4 几何级数增长的陷阱</h3>
+
+        <h4>复利魔力的教学案例</h4>
+
+        <p><strong>老师给学生两个选择（30天）</strong>：</p>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">选择一</span>
+            <h4>每天1000美元</h4>
+            <p>每天给1000美元，可随时花用。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">选择二</span>
+            <h4>每天翻倍</h4>
+            <p>第1天1美分，第2天2美分，第3天4美分……每天翻倍，30天后才能用。</p>
+          </div>
+        </div>
+
+        <p><strong>大多数年轻人的选择</strong>：选择一（每天有1000美元多爽啊）。</p>
+
+        <p><strong>实际结果</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>选择</th><th>总金额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>选择一</td><td>3万美元</td></tr>
+            <tr><td>选择二</td><td><strong>536万美元</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>人类直觉无法理解指数增长的威力。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、崩塌 -->
+      <section id="section-6">
+        <h2>五、崩塌：不可持续的增长神话</h2>
+
+        <h3 id="section-6-1">5.1 2002年的虚假繁荣</h3>
+
+        <p><strong>年报数据</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>金额</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>披露利润</td><td>160亿美元</td></tr>
+            <tr><td>营业收入</td><td>470亿美元（含大量利息收入）</td></tr>
+            <tr><td>现金储备</td><td><strong>850亿美元</strong></td></tr>
+            <tr><td>市值（2003年初）</td><td><strong>14000亿美元</strong>（市盈率90倍）</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>投资者心态</strong>：拥有850亿现金的公司，年赚160亿美元不是不可能的……</p>
+
+        <div class="pull-quote large">"如果让人选择增长速度，所有人会选几何级数。可惜地球上的资源是有限的。所有人类对几何级数增长的过度追求，在有限的地球上，最终都以惨痛收场。"</div>
+
+        <h3 id="section-6-2">5.2 2003年：双重失败</h3>
+
+        <h4>现实1：增长放缓</h4>
+
+        <ul>
+          <li>真实收入增长率降至：<strong>4%</strong></li>
+          <li>真实利润增长率：<strong>4%</strong></li>
+          <li>无法继续维持28%的虚假增长</li>
+        </ul>
+
+        <h4>现实2：股东失望</h4>
+
+        <p><strong>连锁反应</strong>：</p>
+
+        <ol>
+          <li>增长放缓 → 股东（主要是机构投资者）失望</li>
+          <li>股价暴跌50%</li>
+          <li>人们重新审视财务报告</li>
+          <li>真相大白：<strong>绝大部分利润都是伪造的，且持续多年</strong></li>
+        </ol>
+
+        <p><strong>最终结果</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>时间点</th><th>市值</th><th>跌幅</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2003年初</td><td>14000亿美元</td><td>-</td></tr>
+            <tr><td>2003年中</td><td>1400亿美元</td><td><strong>下跌90%</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>损失</strong>：13000亿美元市值蒸发。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、余波 -->
+      <section id="section-7">
+        <h2>六、余波：全社会的伤痛</h2>
+
+        <h3 id="section-7-1">6.1 公众的愤怒</h3>
+
+        <p><strong>直接受害者</strong>：</p>
+
+        <ul>
+          <li>大量投资者血本无归</li>
+          <li>一家备受推崇的重要公司信誉扫地</li>
+          <li>优秀工程师的工作成果被玷污</li>
+        </ul>
+
+        <p><strong>蔓延效应</strong>：</p>
+
+        <ul>
+          <li>怒火烧向其他犯了类似错误的公司（程度不同）</li>
+          <li>引发严重经济衰退（类似20世纪90年代日本长期做假账后的萧条）</li>
+        </ul>
+
+        <h3 id="section-7-2">6.2 专业人士的信任危机</h3>
+
+        <h4>会计师：首当其冲</h4>
+
+        <p><strong>F.A.S.B.（Financial Accounting Standard Board，金融会计标准委员会）</strong>。人们嘲讽说这四个字母代表：</p>
+
+        <div class="pull-quote"><strong>"Financial Accounts Still Bogus"</strong>（金融会计还在做假）</div>
+
+        <h4>经济学家：未能预警</h4>
+
+        <p><strong>传统经济学家的失职</strong>：</p>
+
+        <ul>
+          <li>没有敲响警钟</li>
+          <li>未提醒公众广泛做假账会带来宏观经济灾难</li>
+        </ul>
+
+        <p><strong>讽刺的是</strong>：约翰·肯尼斯·加尔布雷思获得了诺贝尔经济学奖——</p>
+
+        <ul>
+          <li>因为他曾预言：大规模、尚未败露的公司舞弊会极大刺激经济</li>
+          <li>随后这种刺激会导致经济大衰退</li>
+          <li>2003年前后的情况验证了他的预测</li>
+        </ul>
+
+        <div class="poem">
+          <div class="poem-title">加尔布雷思名言集锦</div>
+          <p>"我们都认为悲观是智力超群的标志。"</p>
+          <p>"如果你什么都不想做，那么你就去开会吧。"</p>
+          <p>"经济预测的唯一功能是让占星学变得令人尊敬。"</p>
+          <p>"现代的保守主义者从事的是道德哲学中最古老的活动，也就是说，他们要为自私寻找一个超级漂亮的道德借口。"</p>
+          <p>"当面临要么改变想法、要么证明无需这么做的选择时，绝大多数人都会忙于寻找证据。"</p>
+          <p>"在任何大型组织里面，和多数人一起错比一个人对安全得多。"</p>
+          <p>"有权势的人总是宁愿拿全副身家去冒险，也不肯舍弃一点利益。"</p>
+          <span class="poem-author">—— 约翰·肯尼斯·加尔布雷思</span>
+        </div>
+
+        <h4>律师：成为笑柄</h4>
+
+        <p><strong>原因</strong>：</p>
+
+        <ul>
+          <li>美国国会和SEC许多成员是律师</li>
+          <li>他们起草的财务披露法规漏洞百出</li>
+        </ul>
+
+        <p><strong>流行笑话</strong>：</p>
+
+        <div class="pull-quote">肉贩："律师的声誉最近下跌了好多啊。"<br/>收银员："他们的声誉本来就只有薄饼那么点，哪有好多可以跌啊。"</div>
+
+        <h4>无辜的专业人士：池鱼之殃</h4>
+
+        <p>连工程师这样洁身自好、根本不懂金融诈骗的专业人士，声誉也遭受牵连。</p>
+
+        <p><strong>最终</strong>：许多对国家有益、未来福祉所需的行业都遭到了广泛的、不明智的仇视。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、天庭的审判 -->
+      <section id="section-8">
+        <h2>七、天庭的审判</h2>
+
+        <h3 id="section-8-1">7.1 上帝的调查</h3>
+
+        <p><strong>场景</strong>：上帝决定提前审判2003年金融大丑闻案件。</p>
+
+        <div class="pull-quote">"史密斯，我要公正严明地处理这件事，你去把那些最应该为此负责的罪人带进来。"</div>
+
+        <h3 id="section-8-2">7.2 四轮问询</h3>
+
+        <h4>第一轮：证券分析专家</h4>
+
+        <p><strong>史密斯带来</strong>：多年为宽特科技股票摇旗呐喊的分析师。</p>
+
+        <p><strong>上帝的判断</strong>：</p>
+
+        <div class="pull-quote">"我不能对低级的认知错误进行最严厉的处罚，这些错误大部分由俗世的标准激励制度引起，是在下意识的情况下发生的。"</div>
+
+        <h4>第二轮：SEC委员和政治家</h4>
+
+        <p><strong>史密斯带来</strong>：美国证券交易委员会委员和位高权重的政治家。</p>
+
+        <p><strong>上帝的判断</strong>：</p>
+
+        <div class="pull-quote">"这些人受到许多令人遗憾的力量的左右，他们也是身不由己，你指望他们遵守正确的行为规范是不合理的。"</div>
+
+        <h4>第三轮：宽特科技高管</h4>
+
+        <p><strong>史密斯带来</strong>：推行"现代金融工程"的管理层。</p>
+
+        <p><strong>上帝的判断</strong>：</p>
+
+        <div class="pull-quote">"你差不多抓对了，但我要你带来的是造孽最深的罪人。这些管理人员当然会遭到严厉的处罚，因为他们作奸犯科，毁掉了那位伟大工程师的遗产。但我要你抓的是那些很快会被打入地狱最底层的混蛋，那些<strong>本来可以轻而易举地阻止这次大灾难的人</strong>。"</div>
+
+        <h4>第四轮：会计师事务所合伙人</h4>
+
+        <p><strong>史密斯的顿悟</strong>：地狱最底层是为<strong>背叛者</strong>准备的。</p>
+
+        <p><strong>带来</strong>：各大会计师事务所杰出的老合伙人。</p>
+
+        <p><strong>史密斯的陈词</strong>：</p>
+
+        <div class="pull-quote">"这就是你要的背叛者。他们在处理员工股票期权时采用了错误的记账方法。他们在一个高尚的行业中身居高位，那个行业的职责和你差不多，都是通过设定正确的规则，来帮助社会正确地运转。<br/><br/>才华出众、锦衣玉食的他们居然故意造成如此明显可预测的谎言和欺骗，真是罪无可赦。他们<strong>完全知道</strong>他们的所作所为是极其错误的，然而他们还是执迷不悟。<br/><br/>由于司法系统受到商界的影响，你开始误将他们判得很轻。但现在你可以把他们送到地狱的最底层啦。"</div>
+
+        <p><strong>上帝的回应</strong>：沉默片刻后，安静地说：</p>
+
+        <div class="pull-quote large">"干得好，你是我忠诚的好仆人。"</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示：责任层级</div>
+          </div>
+        </div>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>群体</th><th>责任程度</th><th>原因</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>证券分析师</td><td>轻</td><td>认知错误，受激励制度影响</td></tr>
+            <tr><td>政治家/SEC</td><td>中</td><td>身不由己，受多方力量左右</td></tr>
+            <tr><td>公司高管</td><td>重</td><td>主动作恶，毁掉伟大遗产</td></tr>
+            <tr><td><strong>会计师高层</strong></td><td><strong>极重</strong></td><td><strong>背叛者</strong>——有能力阻止却选择纵容</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、作者后记 -->
+      <section id="section-9">
+        <h2>八、作者后记</h2>
+
+        <h3 id="section-9-1">8.1 写作初衷</h3>
+
+        <div class="pull-quote">"我写这篇文章的初衷并非为了预言2003年的情况。它是一篇虚构作品。除了有关加尔布雷思教授的内容，任何与真实的人物或企业雷同的情节均属巧合。这篇文章的用意是<strong>提醒人们留意现代社会中的某些行为和信念系统</strong>。"<cite>— 查理·芒格</cite></div>
+
+        <p><strong>写作背景</strong>：2000年夏天，查理在明尼苏达度假时完成。</p>
+
+        <p><strong>写作心情</strong>：得到很多乐趣，但也很认真地想证明：</p>
+
+        <div class="pull-quote">对股票期权的标准记账方法与那些更广为人知的简单欺诈作假手段<strong>本质上没有什么区别</strong>。</div>
+
+        <h3 id="section-9-2">8.2 做假账的严重性</h3>
+
+        <p><strong>查理的比喻</strong>：</p>
+
+        <div class="pull-quote">"在我看来，做假账无异于<strong>在盖高层公寓楼的时候把钢筋从水泥中抽走</strong>，允许这么做的行业和国家必将学到惨痛的教训。"<cite>— 查理·芒格</cite></div>
+
+        <p><strong>更严重的破坏性</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>对比项</th><th>豆腐渣工程</th><th>会计造假</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>危害范围</td><td>害死人</td><td>危害更大</td></tr>
+            <tr><td>正当理由</td><td>很难找到</td><td>容易找到借口</td></tr>
+            <tr><td>扩散速度</td><td>较慢</td><td><strong>极快</strong></td></tr>
+            <tr><td>现状</td><td>局部问题</td><td><strong>无处不在</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>无良建筑商知道自己在作恶，但无良会计可以堂而皇之地说"符合准则"。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">警示案例：台湾地震</div>
+            <p><strong>台湾里氏7.6级地震</strong>：大多数建筑物毁坏原因是混凝土结构里没有足够的钢筋。这与会计造假的本质完全一致——<strong>抽走了支撑结构的核心要素</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-9-3">8.3 改善与遗憾</h3>
+
+        <h4>有所改善</h4>
+
+        <p><strong>目前美国会计准则</strong>：要求职员股票期权的<strong>部分真实成本</strong>在损益表中记为支出。</p>
+
+        <h4>仍然存在问题</h4>
+
+        <div class="pull-quote">"然而，等到股票期权被行使时，账目上记录的总成本往往比实际发生的总成本低很多。此外，那部分记到盈利下面的成本通常被故意用不正当的办法降低了。"</div>
+
+        <p><strong>查理的告诫</strong>：</p>
+
+        <div class="pull-quote large">"这种事情是很难杜绝的。正确的做法是<strong>永远别让错误的会计开始</strong>。"</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、深层思考 -->
+      <section id="section-10">
+        <h2>九、深层思考</h2>
+
+        <h3 id="section-10-1">9.1 能给人带来好处的罪恶很难消除</h3>
+
+        <div class="pull-quote">"这篇关于会计的寓言是一个令人悲伤的例子，它再次证明<strong>能给人们带来好处的罪恶很难被消除</strong>，因为大量的人认为，一件事只要能给他们带来利润，就不可能是罪恶的。"</div>
+
+        <p><strong>柏拉图的洞察</strong>：</p>
+
+        <div class="pull-quote">"享乐是罪恶的最大动因。"<cite>— 柏拉图</cite></div>
+
+        <h3 id="section-10-2">9.2 邓肯·利托菲尔牧师的警告</h3>
+
+        <p><strong>在阿瑟·安达信葬礼上的讲话（1947年1月13日）</strong>：</p>
+
+        <div class="pull-quote">"你们必须遵守他为这家事务所设定的原则，必须维护他的声誉。你们不能打着他的旗号去做坏事。我敢保证，如果你们不遵守他的原则，他宁愿这家事务所倒闭。他给你们留下了巨大的信誉。你们的机会很好，你们的责任也很重大。"<cite>— 邓肯·利托菲尔牧师</cite></div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">历史的讽刺</div>
+            <p>安达信会计师事务所最终在2002年安然丑闻中倒闭，验证了牧师的预言。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、延伸知识 -->
+      <section id="section-11">
+        <h2>十、延伸知识</h2>
+
+        <h3 id="section-11-1">10.1 索福克勒斯（公元前496-406）</h3>
+
+        <p><strong>古希腊三大悲剧作家之一</strong>：</p>
+
+        <ul>
+          <li>与埃斯库罗斯、欧里庇得斯齐名</li>
+          <li>创作剧本超过100部</li>
+          <li>最著名作品：《俄狄浦斯王》《安提戈涅》</li>
+          <li>亚里士多德等学者认为他是古希腊戏剧史上最伟大的编剧</li>
+        </ul>
+
+        <p><strong>悲剧的核心要素</strong>：</p>
+
+        <ul>
+          <li>一个微小的缺陷</li>
+          <li>命运女神的惩罚</li>
+          <li>不可逆转的毁灭</li>
+        </ul>
+
+        <h3 id="section-11-2">10.2 厄普顿·辛克莱（1878-1968）</h3>
+
+        <p><strong>著名作家和社会活动家</strong>。</p>
+
+        <p><strong>核心观点</strong>：</p>
+
+        <div class="pull-quote">"让人们去理解那些跟他们的利益冲突的事情是很难的。"<cite>— 厄普顿·辛克莱</cite></div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>这句话完美解释了为什么会计行业屈服于企业管理层的压力。</p>
+          </div>
+        </div>
+
+        <h3 id="section-11-3">10.3 1940年塔科马海峡吊桥垮塌</h3>
+
+        <ul>
+          <li><strong>事件</strong>：1940年11月7日，华盛顿州塔科马湾吊桥垮塌</li>
+          <li><strong>原因</strong>：施工不合格，设计时未正确考虑当地常年大风的影响</li>
+          <li><strong>时间</strong>：通车仅几个月</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">隐喻</div>
+            <p>就像桥梁设计忽视了风的因素，会计准则忽视了人性的贪婪。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 总结 -->
+      <section id="section-12">
+        <h2>总结：芒格方法的综合展示</h2>
+
+        <h3>查理在本讲中整合的思想</h3>
+
+        <p><strong>跨学科思维模型</strong>：</p>
+
+        <ul>
+          <li>心理学：巴甫洛夫联想反射效应</li>
+          <li>经济学：庞氏骗局、几何级数增长</li>
+          <li>伦理学：责任层级、背叛的本质</li>
+          <li>工程学：结构完整性的类比</li>
+        </ul>
+
+        <p><strong>核心警示</strong>：</p>
+
+        <ol>
+          <li><strong>制度设计的重要性</strong>：错误的会计准则会毁掉整个国家</li>
+          <li><strong>激励机制的力量</strong>："谁给我面包吃，我就给谁唱歌"</li>
+          <li><strong>几何级数的陷阱</strong>：不可持续的增长最终必然崩塌</li>
+          <li><strong>责任的真正归属</strong>：有能力阻止却选择纵容的人罪责最重</li>
+        </ol>
+
+        <h3>给经济学教育的启示</h3>
+
+        <p><strong>查理当天的听众</strong>：加州大学圣塔巴巴拉分校经济系师生。</p>
+
+        <p><strong>演讲主题</strong>：</p>
+
+        <ul>
+          <li>对软科学中缺乏跨学科研究现状的惋惜</li>
+          <li>呼吁改进的方案</li>
+          <li>展示了跨学科思维如何解决复杂问题</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 附录 -->
+      <section id="section-13">
+        <h2>附录：查理的演讲日</h2>
+
+        <p><strong>编辑的记录</strong>：</p>
+
+        <div class="pull-quote">"查理在加州大学圣塔巴巴拉分校发表这次演讲那天，本书的编辑连续12个小时跟他在一起。"</div>
+
+        <p><strong>当天行程</strong>：</p>
+
+        <ul>
+          <li>从洛杉矶驱车2小时</li>
+          <li>午饭</li>
+          <li>演讲前会议</li>
+          <li>演讲</li>
+          <li>演讲后招待会</li>
+          <li>到甲骨文财务总监（现任董事会主席）杰夫·亨利家吃饭</li>
+        </ul>
+
+        <p><strong>编辑的感叹</strong>：</p>
+
+        <div class="pull-quote">"查理当时尽管离80岁生日只有几个月，但还是表现得像个不知疲惫的大师。他在那天表现出来的犀利、耐力和幽默令人惊叹和敬佩。"</div>
+
+        <p><strong>本讲的意义</strong>：</p>
+
+        <div class="pull-quote large">"查理这次演讲的内容可以被当成<strong>芒格方法的综合理论</strong>。查理在演讲中整合了许多他从前讲过的思想，有条有理地将它们糅合成一种连贯的哲学，奉献给他的听众。"</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 关键要点回顾 -->
+      <section id="section-14">
+        <h2>关键要点回顾</h2>
+
+        <div class="remedy-grid">
+          <div class="remedy-card">
+            <span class="remedy-num">要点一</span>
+            <h4>会计准则的致命缺陷</h4>
+            <p>股票期权不计入成本 = 制度性造假通道。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点二</span>
+            <h4>"细水长流"的智慧（恶的智慧）</h4>
+            <p>每年掺一点假，最终积累成大谎言而不被察觉。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点三</span>
+            <h4>几何级数增长的不可持续性</h4>
+            <p>地球资源有限，所有过度追求指数增长的行为最终惨痛收场。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点四</span>
+            <h4>责任的真正归属</h4>
+            <p>有能力制定规则的人选择纵容，罪责最重。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">要点五</span>
+            <h4>改革的艰难</h4>
+            <p>能给人带来利益的罪恶最难消除。</p>
+          </div>
+        </div>
+
+        <div class="pull-quote large">"正确的做法是永远别让错误的会计开始。"<cite>— 查理·芒格</cite></div>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第七讲 在慈善圆桌会议早餐会上的讲话 · 穷查理宝典</title>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    html { font-size: 17.6px; }
+
+    .chapter-layout {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 352px 1fr;
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+    @media(max-width: 1056px) {
+      .chapter-layout { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+    }
+
+    .chapter-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      height: calc(100vh - 106px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .chapter-sidebar::-webkit-scrollbar { display: none; }
+    @media(max-width: 1056px) {
+      .chapter-sidebar { position: static; height: auto; }
+    }
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label-sub { margin-top: 1.5rem; }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .sidebar-nav a {
+      display: block;
+      font-size: .85rem;
+      color: var(--text2);
+      padding: .45rem .65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .sidebar-nav a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav .sub {
+      font-size: .8rem;
+      padding-left: 1.4rem;
+      color: var(--text3);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--text3);
+      margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--text2); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .crumb-sep { color: var(--text3); opacity: .6; }
+
+    .book-toc { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .toc-chapter { font-size: .85rem; }
+    .toc-chapter-title {
+      display: block;
+      padding: .4rem .65rem;
+      color: var(--text3);
+      border-radius: 6px;
+      line-height: 1.45;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toc-chapter-title:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-chapter-title.current-chapter {
+      color: var(--text);
+      font-weight: 700;
+      background: rgba(201,168,76,.06);
+    }
+    .toc-chapter-title::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text3);
+      border-bottom: 1.5px solid var(--text3);
+      transform: rotate(-45deg);
+      transition: transform .25s, border-color .25s;
+      float: right;
+      margin-top: .4rem;
+    }
+    .toc-chapter.open > .toc-chapter-title::after {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+    }
+    .toc-chapter-title:hover::after {
+      border-color: var(--gold);
+    }
+    /* 扁平章节链接（单讲章）：隐藏折叠箭头 */
+    a.toc-chapter-title::after { display: none; }
+    .toc-lectures {
+      display: none;
+      list-style: none;
+      margin: .15rem 0 .35rem .5rem;
+      padding-left: .65rem;
+      border-left: 1px dashed var(--border);
+      flex-direction: column;
+      gap: .1rem;
+    }
+    .toc-chapter.open > .toc-lectures {
+      display: flex;
+    }
+    .toc-lectures a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+      line-height: 1.45;
+    }
+    .toc-lectures a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+    .toc-lectures a.active {
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .chapter-article {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    }
+    @media(max-width: 792px) {
+      .chapter-article { padding: 2rem 1.5rem; }
+    }
+
+    .article-header {
+      padding-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .article-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: .82rem;
+      color: var(--text2);
+    }
+    .article-meta span strong {
+      color: var(--gold);
+      margin-right: .35rem;
+      font-weight: 600;
+    }
+
+    .chapter-article h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .chapter-article h2:first-of-type { margin-top: 0; }
+    .chapter-article h3 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 2rem 0 .9rem;
+      padding-left: .85rem;
+      border-left: 3px solid var(--gold);
+    }
+    .chapter-article h4 {
+      font-size: .98rem;
+      color: var(--gold-dk);
+      margin: 1.6rem 0 .7rem;
+      font-weight: 700;
+    }
+    .chapter-article p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .chapter-article strong { color: var(--gold-dk); font-weight: 700; }
+    .chapter-article em { color: var(--text2); }
+
+    .chapter-article ol, .chapter-article ul {
+      margin: 1rem 0 1.25rem;
+      padding-left: 1.75rem;
+    }
+    .chapter-article li {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: .5rem;
+    }
+    .chapter-article li::marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pull-quote {
+      background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .pull-quote.large {
+      font-size: 1.15rem;
+      padding: 1.5rem 1.75rem;
+      text-align: center;
+      font-weight: 600;
+      border-left: none;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      border-radius: 0;
+      background: rgba(201,168,76,.05);
+    }
+    .pull-quote cite {
+      display: block;
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: .6rem;
+      letter-spacing: .04em;
+    }
+
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+    .callout-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .callout-body { flex: 1; }
+    .callout-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .callout-body p { margin-bottom: 0; font-size: .9rem; }
+    .callout.tip { border-left: 4px solid var(--gold); }
+    .callout.warn { border-left: 4px solid #c87a2c; background: rgba(200,122,44,.04); }
+    .callout.info { border-left: 4px solid #4a78b0; background: rgba(74,120,176,.04); }
+
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .article-table thead {
+      background: rgba(201,168,76,.1);
+    }
+    .article-table th {
+      text-align: left;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      color: var(--gold-dk);
+      font-size: .82rem;
+      letter-spacing: .05em;
+      border-bottom: 2px solid var(--gold);
+    }
+    .article-table td {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .article-table tbody tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: rgba(201,168,76,.04); }
+    .article-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .remedy-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .remedy-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold);
+    }
+    .remedy-card:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(2px);
+    }
+    .remedy-num {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      background: rgba(201,168,76,.1);
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,.25);
+      margin-bottom: .65rem;
+    }
+    .remedy-card h4 {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: .6rem;
+    }
+    .remedy-card p { font-size: .9rem; margin-bottom: 0; }
+    .remedy-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+    .remedy-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 1056px) {
+      .remedy-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 792px) {
+      .remedy-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+      color: var(--gold);
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .section-divider span { font-size: 1rem; letter-spacing: .3em; }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text3);
+      font-size: .82rem;
+      letter-spacing: .08em;
+    }
+
+    .poem {
+      text-align: center;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.9;
+      margin: 1.5rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201,168,76,.04);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .poem::before {
+      content: '"';
+      position: absolute;
+      top: -.2rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .3;
+      font-style: normal;
+    }
+    .poem-author {
+      display: block;
+      margin-top: .8rem;
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .poem-title {
+      font-weight: 700;
+      color: var(--text);
+      font-style: normal;
+      letter-spacing: .25em;
+      margin-bottom: 1rem;
+    }
+    .poem p { margin: 0 0 1rem; }
+    .poem p:last-of-type { margin-bottom: 0; }
+
+    .formula {
+      text-align: center;
+      font-family: Georgia, 'Noto Serif SC', serif;
+      font-size: 1.05rem;
+      color: var(--gold-dk);
+      letter-spacing: .04em;
+      margin: 1.25rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(201,168,76,.06);
+      border: 1px dashed rgba(201,168,76,.35);
+      border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">投资智慧</div>
+          <div class="logo-sub">Reading &amp; Reflection</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="../../../index.html" class="nav-home">⌂ 首页</a>
+        <a href="../../../index.html" class="nav-home">← 返回书架</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="chapter-layout">
+
+    <aside class="chapter-sidebar">
+      <div class="breadcrumb">
+        <a href="../../../index.html">书架</a>
+        <span class="crumb-sep">/</span>
+        <a href="../../../index.html">穷查理宝典</a>
+      </div>
+
+      <div class="sidebar-label">全书目录</div>
+      <ul class="book-toc">
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第一章/查理芒格传略.html">第一章 查理·芒格传略</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第二章/第二章_芒格的生活_学习和决策方法.html">第二章 芒格的生活、学习和决策方法</a>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第三章/第三章_芒格主义_查理的即席谈话.html">第三章 芒格主义：查理的即席谈话</a>
+        </li>
+        <li class="toc-chapter open">
+          <span class="toc-chapter-title current-chapter">第四章 查理十一讲</span>
+          <ul class="toc-lectures">
+            <li><a href="../第四章/第一讲 在哈佛学校毕业典礼上的演讲（整理版）.html">第一讲 在哈佛学校毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系（优化版）.html">第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系</a></li>
+            <li><a href="../第四章/第三讲 论基本的、普世的智慧（优化版）.html">第三讲 论基本的、普世的智慧</a></li>
+            <li><a href="../第四章/第四讲 关于现实思维的现实思考（优化版）.html">第四讲 关于现实思维的现实思考</a></li>
+            <li><a href="../第四章/第五讲 专业人士需要更多的跨学科技能_优化版.html">第五讲 专业人士需要更多的跨学科技能</a></li>
+            <li><a href="../第四章/第六讲 一流慈善基金的投资实践_优化版.html">第六讲 一流慈善基金的投资实践</a></li>
+            <li><a href="../第四章/第七讲 在慈善圆桌会议早餐会上的讲话_优化版.html" class="active">第七讲 在慈善圆桌会议早餐会上的讲话</a></li>
+            <li><a href="../第四章/第八讲 2003年的金融大丑闻_优化版.html">第八讲 2003年的金融大丑闻</a></li>
+            <li><a href="../第四章/第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点_优化版.html">第九讲 论学院派经济学：考虑跨学科需求之后的优点和缺点</a></li>
+            <li><a href="../第四章/第十讲 在南加州大学古尔德法学院毕业典礼上的演讲_优化版.html">第十讲 在南加州大学古尔德法学院毕业典礼上的演讲</a></li>
+            <li><a href="../第四章/第十一讲 人类误判心理学_优化版.html">第十一讲 人类误判心理学</a></li>
+            <li><a href="../第四章/最新的普世智慧：查理答问录_优化版.html">最新的普世智慧：查理答问录</a></li>
+          </ul>
+        </li>
+        <li class="toc-chapter">
+          <a class="toc-chapter-title" style="text-decoration:none;" href="../第五章/第五章　文章、报道与评论.html">第五章 文章、报道与评论</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-label sidebar-label-sub">本讲目录</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1">一、开场白：一个门外汉的经济学观察</a></li>
+        <li><a href="#section-1-1" class="sub">1.1 坦诚的自我介绍</a></li>
+        <li><a href="#section-1-2" class="sub">1.2 核心观点</a></li>
+        <li><a href="#section-2">二、股市财富效应的两大特殊性</a></li>
+        <li><a href="#section-2-1" class="sub">2.1 什么是财富效应？</a></li>
+        <li><a href="#section-2-2" class="sub">2.2 当前情况的两大特殊之处</a></li>
+        <li><a href="#section-3">三、日本的前车之鉴</a></li>
+        <li><a href="#section-3-1" class="sub">3.1 日本泡沫经济的轨迹</a></li>
+        <li><a href="#section-3-2" class="sub">3.2 日本案例的启示</a></li>
+        <li><a href="#section-4">四、传统经济学分析的局限</a></li>
+        <li><a href="#section-4-1" class="sub">4.1 专业经济学家的分析框架</a></li>
+        <li><a href="#section-4-2" class="sub">4.2 这种分析的根本缺陷</a></li>
+        <li><a href="#section-5">五、加尔布雷思的"黑金"理论</a></li>
+        <li><a href="#section-5-1" class="sub">5.1 "黑金"概念的提出</a></li>
+        <li><a href="#section-5-2" class="sub">5.2 黑金的消费刺激作用</a></li>
+        <li><a href="#section-5-3" class="sub">5.3 凯恩斯乘数效应</a></li>
+        <li><a href="#section-5-4" class="sub">5.4 加尔布雷思的局限</a></li>
+        <li><a href="#section-6">六、创新概念："灰金"与投资浪费</a></li>
+        <li><a href="#section-6-1" class="sub">6.1 三个新造词</a></li>
+        <li><a href="#section-6-2" class="sub">6.2 灰金的重要来源</a></li>
+        <li><a href="#section-6-3" class="sub">6.3 灰金的自我维持特性</a></li>
+        <li><a href="#section-6-4" class="sub">6.4 对老派价值观的冲击</a></li>
+        <li><a href="#section-7">七、投资管理中的惊人数据</a></li>
+        <li><a href="#section-7-1" class="sub">7.1 浪费远超 3%</a></li>
+        <li><a href="#section-7-2" class="sub">7.2 共同基金研究的惊人发现</a></li>
+        <li><a href="#section-7-3" class="sub">7.3 收益差的根源</a></li>
+        <li><a href="#section-7-4" class="sub">7.4 个人困扰</a></li>
+        <li><a href="#section-8">八、股票期权：另一个灰金源头</a></li>
+        <li><a href="#section-8-1" class="sub">8.1 股票期权的规模</a></li>
+        <li><a href="#section-8-2" class="sub">8.2 会计腐败助长灰金</a></li>
+        <li><a href="#section-8-3" class="sub">8.3 财富效应的真实规模</a></li>
+        <li><a href="#section-9">九、市场非理性与集体疯狂</a></li>
+        <li><a href="#section-9-1" class="sub">9.1 股票的双重属性</a></li>
+        <li><a href="#section-9-2" class="sub">9.2 对"有效市场"理论的批判</a></li>
+        <li><a href="#section-9-3" class="sub">9.3 机构投资者的可悲现状</a></li>
+        <li><a href="#section-10">十、道德责任与谨慎原则</a></li>
+        <li><a href="#section-10-1" class="sub">10.1 演讲的真正目的</a></li>
+        <li><a href="#section-10-2" class="sub">10.2 一个粗略但重要的道理</a></li>
+        <li><a href="#section-10-3" class="sub">10.3 两个古老法则</a></li>
+        <li><a href="#section-11">十一、后记：理论的延伸思考</a></li>
+        <li><a href="#section-11-1" class="sub">11.1 演讲后的反馈</a></li>
+        <li><a href="#section-11-2" class="sub">11.2 思想实验：2006 年的极端场景</a></li>
+        <li><a href="#section-11-3" class="sub">11.3 不同视角的解读</a></li>
+        <li><a href="#section-11-4" class="sub">11.4 对社会文明的威胁</a></li>
+        <li><a href="#section-11-5" class="sub">11.5 苏格拉底的忠告</a></li>
+        <li><a href="#section-12">全文核心要点总结</a></li>
+      </ul>
+    </aside>
+
+    <article class="chapter-article">
+
+      <header class="article-header">
+        <div class="article-eyebrow">穷查理宝典 · 第四章 查理十一讲 · 第七讲</div>
+        <h1 class="article-title">在慈善圆桌会议早餐会上的讲话</h1>
+        <div class="article-meta">
+          <span><strong>时间</strong>2000年11月10日</span>
+          <span><strong>核心主题</strong>股市财富效应、灰金理论与投资管理的深层问题</span>
+        </div>
+      </header>
+
+      <!-- 一、开场白 -->
+      <section id="section-1">
+        <h2>一、开场白：一个门外汉的经济学观察</h2>
+
+        <h3 id="section-1-1">1.1 坦诚的自我介绍</h3>
+
+        <p>今天我要谈的是美国股市上涨带来的"财富效应"。</p>
+
+        <p>首先坦白三点：</p>
+
+        <ul>
+          <li>我从未上过任何经济学课程</li>
+          <li>我不是学院派经济学家</li>
+          <li>我从未通过预测宏观经济赚到一分钱</li>
+        </ul>
+
+        <h3 id="section-1-2">1.2 核心观点</h3>
+
+        <p><strong>尽管如此，我认为</strong>：那些拥有博士学位的经济学家<strong>严重低估了</strong>股市财富效应在当前极端情况下的威力。</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>有时候，门外汉的视角反而能看到专家忽略的盲点。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 二、股市财富效应的两大特殊性 -->
+      <section id="section-2">
+        <h2>二、股市财富效应的两大特殊性</h2>
+
+        <h3 id="section-2-1">2.1 什么是财富效应？</h3>
+
+        <p>目前所有人都同意两个基本观点：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>观点</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>观点一</td>
+              <td>股价上涨 → 消费意愿上升<br>股价下跌 → 消费意愿下降</td>
+            </tr>
+            <tr>
+              <td>观点二</td>
+              <td>消费意愿对宏观经济至关重要</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>但专家们存在分歧的地方</strong>：</p>
+
+        <ul>
+          <li>财富效应的具体规模有多大？</li>
+          <li>作用时机如何把握？</li>
+          <li>与其他经济因素如何互动？</li>
+          <li>股价上涨 → 消费增加 → 股价进一步上涨，这种循环如何量化？</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">复杂性</div>
+            <p>这些问题涉及复杂的数学谜题，远未像物理学理论那样被清晰解释。</p>
+          </div>
+        </div>
+
+        <h3 id="section-2-2">2.2 当前情况的两大特殊之处</h3>
+
+        <h4>特殊性一：史无前例的涨幅</h4>
+
+        <p><strong>现象描述</strong>：</p>
+
+        <ul>
+          <li>大量上市公司股价飞速上涨</li>
+          <li>股价上涨速度<strong>远超</strong>国民生产总值增速</li>
+          <li>这种情况前所未有</li>
+        </ul>
+
+        <p><strong>结论</strong>：相关财富效应必然同样惊人。</p>
+
+        <h4>特殊性二：日本的警示</h4>
+
+        <p><strong>日本案例的冲击</strong>：</p>
+
+        <ul>
+          <li>过去10年日本经济的崩溃震惊了经济学界</li>
+          <li>人们极度担心财富效应反向作用引发的经济衰退</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 三、日本的前车之鉴 -->
+      <section id="section-3">
+        <h2>三、日本的前车之鉴</h2>
+
+        <h3 id="section-3-1">3.1 日本泡沫经济的轨迹</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>阶段</th><th>表现</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>上升期</td>
+              <td>• 金融界腐败严重<br>• 股票和地产价格长期大幅上涨<br>• 实体经济增长强劲</td>
+            </tr>
+            <tr>
+              <td>破裂期</td>
+              <td>• 资产价格急剧下跌<br>• 经济一蹶不振</td>
+            </tr>
+            <tr>
+              <td>应对期</td>
+              <td>• 巨额财政赤字<br>• 利率接近零<br>• 各种凯恩斯政策和货币政策轮番上阵</td>
+            </tr>
+            <tr>
+              <td>结果</td>
+              <td><strong>年复一年经济依然没有起色</strong><br>消费意愿对任何政策都无动于衷</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-3-2">3.2 日本案例的启示</h3>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>当资产泡沫破裂后，即使动用所有经济学教科书上的工具，也可能无法让经济恢复活力。消费者信心一旦崩溃，重建极其困难。</p>
+          </div>
+        </div>
+
+        <p><strong>对慈善基金会的影响</strong>：如果类似情况在美国发生，财富大幅缩水的慈善基金将会抱怨生不逢时。</p>
+
+        <p><strong>一线希望</strong>：有人认为日本的糟糕局面主要由其特殊的社会心理和腐败造成。我们应该希望这种说法正确，这样美国经济才有安全保障。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 四、传统经济学分析的局限 -->
+      <section id="section-4">
+        <h2>四、传统经济学分析的局限</h2>
+
+        <h3 id="section-4-1">4.1 专业经济学家的分析框架</h3>
+
+        <p>基于美联储数据，专家们会这样分析：</p>
+
+        <h4>数据基础</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>数值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>家庭净资产增长(10年)</td><td>不到100%</td></tr>
+            <tr><td>股票市值占家庭净资产比例</td><td>不到1/3(扣除退休金后)</td></tr>
+            <tr><td>最富1%家庭持股占比</td><td>约50%</td></tr>
+            <tr><td>最穷80%家庭持股占比</td><td>仅4%</td></tr>
+          </tbody>
+        </table>
+
+        <h4>专家结论</h4>
+
+        <p>假设每个家庭将其股票资产的3%用于消费：</p>
+
+        <ul>
+          <li>过去10年持续的史无前例股价上涨</li>
+          <li>每年对消费支出的拉动<strong>不到0.5%</strong></li>
+        </ul>
+
+        <h3 id="section-4-2">4.2 这种分析的根本缺陷</h3>
+
+        <p><strong>我的判断</strong>：这种经济学思考与现实严重脱节。</p>
+
+        <p><strong>两大错误</strong>：</p>
+
+        <ol>
+          <li>使用的数据不对</li>
+          <li>提出的问题不对</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>有时候，提错问题比算错答案更致命。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 五、加尔布雷思的"黑金"理论 -->
+      <section id="section-5">
+        <h2>五、加尔布雷思的"黑金"理论</h2>
+
+        <h3 id="section-5-1">5.1 "黑金"概念的提出</h3>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">人物介绍</div>
+            <p>约翰·肯尼斯·加尔布雷思(1908—2006)</p>
+            <ul>
+              <li>哈佛大学经济学系教授</li>
+              <li>肯尼迪总统好友</li>
+              <li>曾任美国驻印度大使</li>
+              <li>著有《美国资本主义》《富裕社会》等经典著作</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>"黑金"(bezzle)的定义</strong>：</p>
+
+        <ul>
+          <li>尚未败露的贪污中得到的金钱</li>
+          <li>与贪污相关的概念</li>
+        </ul>
+
+        <h3 id="section-5-2">5.2 黑金的消费刺激作用</h3>
+
+        <h4>作用机制</h4>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">普通交易</span>
+            <h4>零和游戏</h4>
+            <p>女裁缝卖衣服给鞋匠(20美元)<br/>→ 鞋匠少了20美元可消费<br/>→ 女裁缝多了20美元可消费<br/>→ 总消费支出不变(零和游戏)</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">黑金</span>
+            <h4>双赢假象</h4>
+            <p>贪污者得到20美元<br/>→ 贪污者花钱更大手大脚(因为钱来得容易)<br/>→ 雇主支出一如既往(尚不知钱被偷)<br/>→ 总消费支出增加(双赢假象)</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>黑金创造了一种虚假繁荣——两方都觉得自己有钱花，但实际上只有一份钱存在。</p>
+          </div>
+        </div>
+
+        <h3 id="section-5-3">5.3 凯恩斯乘数效应</h3>
+
+        <p>类似政府印钞票购物：</p>
+
+        <ul>
+          <li>卖家多得钱</li>
+          <li>没人觉得自己钱变少</li>
+          <li>产生乘数效应刺激消费</li>
+        </ul>
+
+        <p><strong>结论</strong>：尚未败露的贪污所得，对消费的刺激效应大于同等规模的诚实交易。</p>
+
+        <h3 id="section-5-4">5.4 加尔布雷思的局限</h3>
+
+        <p><strong>他停下的地方</strong>：</p>
+
+        <ul>
+          <li>认为黑金不可能增长太大</li>
+          <li>大规模贪污迟早败露</li>
+          <li>吞掉的钱迟早要吐出来</li>
+          <li>私人黑金无法长期驱动经济</li>
+        </ul>
+
+        <p><strong>他没有追问的关键问题</strong>：</p>
+
+        <div class="pull-quote large">是否存在某种东西，起到与黑金相同的作用，但数额足够大，也不会短期内自我消亡？</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 六、创新概念："灰金"与投资浪费 -->
+      <section id="section-6">
+        <h2>六、创新概念："灰金"与投资浪费</h2>
+
+        <h3 id="section-6-1">6.1 三个新造词</h3>
+
+        <p>我像加尔布雷思那样生造几个词：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>新词</th><th>含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>灰金</td><td>作用与黑金相同的东西</td></tr>
+            <tr><td>捞灰金</td><td>创造灰金的过程</td></tr>
+            <tr><td>灰金客</td><td>从事捞灰金的人</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-6-2">6.2 灰金的重要来源</h3>
+
+        <p><strong>震撼性结论</strong>：一个重要的灰金来源就在这个房间里——<strong>你们这些慈善基金会</strong>。</p>
+
+        <h4>灰金产生机制</h4>
+
+        <p><strong>假设场景</strong>：</p>
+
+        <ol>
+          <li>某基金持有大量普通股</li>
+          <li>采用不明智的投资管理措施</li>
+          <li>每年浪费3%资产在多余的、不带来收益的管理成本上</li>
+          <li>股票投资组合正处于急速上涨阶段</li>
+          <li>基金仍觉得自己变富裕了</li>
+          <li>得到这3%的人(灰金客)认为钱是正当赚来的</li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>这种情况起到的作用与尚未败露的挪用公款几乎一样。</p>
+          </div>
+        </div>
+
+        <h3 id="section-6-3">6.3 灰金的自我维持特性</h3>
+
+        <p><strong>关键特点</strong>：</p>
+
+        <ul>
+          <li>可以自我维持很长时间</li>
+          <li>灰金客貌似消费自己赚来的钱</li>
+          <li>实际是来自股价上涨带来的隐蔽"财富效应"</li>
+        </ul>
+
+        <h3 id="section-6-4">6.4 对老派价值观的冲击</h3>
+
+        <div class="remedy-grid cols-2">
+          <div class="remedy-card">
+            <span class="remedy-num">传统观念</span>
+            <h4>勤俭是美德</h4>
+            <p>勤俭节约、避免浪费是美德。</p>
+          </div>
+          <div class="remedy-card">
+            <span class="remedy-num">经济学现实</span>
+            <h4>浪费是必要部分</h4>
+            <p>非理性花销是成功经济的必要部分。</p>
+          </div>
+        </div>
+
+        <p>这让老派价值观持有者既困惑又不安。</p>
+
+        <p><strong>术语引入</strong>：</p>
+
+        <ul>
+          <li><strong>傻子消费</strong>：非理性花销</li>
+          <li><strong>捞灰金</strong>：与挪用公款起相同作用的行为</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">重要声明</div>
+            <p>我不喜欢捞灰金，但我认为：</p>
+            <ul>
+              <li>现在捞灰金行为很普遍</li>
+              <li>给经济造成重大影响</li>
+              <li>人们应该认清现实，即使不喜欢它</li>
+              <li><strong>当不喜欢时，更应该认识清楚</strong></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 七、投资管理中的惊人数据 -->
+      <section id="section-7">
+        <h2>七、投资管理中的惊人数据</h2>
+
+        <h3 id="section-7-1">7.1 浪费远超3%</h3>
+
+        <p>很多机构浪费的<strong>远不止3%</strong>。</p>
+
+        <h3 id="section-7-2">7.2 共同基金研究的惊人发现</h3>
+
+        <p><strong>研究数据</strong>(15年期)：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>指标</th><th>数值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>股票基金年均回报率</td><td>12.8%(扣除成本后)</td></tr>
+            <tr><td>基金投资者实际年均回报率</td><td>7.2%</td></tr>
+            <tr><td>差距</td><td><strong>5.6%</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>基金本身已经跑输市场，而投资者拿到手的收益又比基金本身少了5.6个百分点！</p>
+          </div>
+        </div>
+
+        <h3 id="section-7-3">7.3 收益差的根源</h3>
+
+        <p><strong>罪魁祸首</strong>：频繁更换投资经理</p>
+
+        <h4>恶性循环</h4>
+
+        <ol>
+          <li>解雇业绩落后的投资经理</li>
+          <li>彻底清仓他们选中的股票</li>
+          <li>聘请新投资经理</li>
+          <li>给新经理施加巨大压力</li>
+          <li>要求重新买进股票</li>
+          <li>超快速卖出买进</li>
+          <li>投资结果恶化</li>
+        </ol>
+
+        <h3 id="section-7-4">7.4 个人困扰</h3>
+
+        <p><strong>我的烦恼</strong>：</p>
+
+        <ul>
+          <li>如实描述的现象太过可怕</li>
+          <li>人们往往认为我言过其实</li>
+          <li>新出现的情况比我描述的更可怕</li>
+        </ul>
+
+        <div class="pull-quote">怪不得芒格对现实的看法总是不受欢迎。这也许是我最后一次受邀向慈善基金会演讲。</div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 八、股票期权：另一个灰金源头 -->
+      <section id="section-8">
+        <h2>八、股票期权：另一个灰金源头</h2>
+
+        <h3 id="section-8-1">8.1 股票期权的规模</h3>
+
+        <p><strong>当前数据</strong>：</p>
+
+        <ul>
+          <li>美国所有公司职工股票期权总额：<strong>7500亿美元</strong></li>
+          <li>总数不固定，但不停增长</li>
+          <li>旧期权不断变现，新期权不断加入</li>
+        </ul>
+
+        <h3 id="section-8-2">8.2 会计腐败助长灰金</h3>
+
+        <p><strong>问题所在</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>现象</th><th>影响</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>标准会计规则不把股票期权当作公司成本</td>
+              <td>这是腐败的会计行为</td>
+            </tr>
+            <tr>
+              <td>职工股票期权引起的"财富效应"</td>
+              <td>实际上是"灰金"效应</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-8-3">8.3 财富效应的真实规模</h3>
+
+        <p><strong>计算基础</strong>：</p>
+
+        <ul>
+          <li>标准普尔指数每上涨100点</li>
+          <li>股市总值增加1万亿美元</li>
+          <li>再加上所有捞灰金行为的凯恩斯乘数效应</li>
+        </ul>
+
+        <p><strong>结论</strong>：宏观经济的财富效应<strong>比普遍认为的大得多</strong>。</p>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 九、市场非理性与集体疯狂 -->
+      <section id="section-9">
+        <h2>九、市场非理性与集体疯狂</h2>
+
+        <h3 id="section-9-1">9.1 股票的双重属性</h3>
+
+        <p><strong>思考实验</strong>：退休金基金投资古代艺术品</p>
+
+        <h4>历史案例</h4>
+
+        <p>英国某大型退休金基金：</p>
+
+        <ul>
+          <li>买进许多古代艺术品</li>
+          <li>计划10年后抛售</li>
+          <li>10年后确实抛售，利润过得去</li>
+        </ul>
+
+        <h4>极端假设</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>假设情景</th><th>后果</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>所有退休金基金全部资产购买古代艺术品</td>
+              <td>给宏观经济带来糟糕结果</td>
+            </tr>
+            <tr>
+              <td>一半退休金基金投资古代艺术品</td>
+              <td>结果同样很糟糕</td>
+            </tr>
+            <tr>
+              <td><strong>股票价值有一半是疯狂哄抬的结果</strong></td>
+              <td><strong>与上述情况一样可怕</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>股票既有理性的一面(基于未来现金流估值)，也有投机的一面(因为价格一直在涨而买入)。当投机属性占主导，危险就来了。</p>
+          </div>
+        </div>
+
+        <h3 id="section-9-2">9.2 对"有效市场"理论的批判</h3>
+
+        <p><strong>误人子弟的教授们</strong>：</p>
+
+        <ul>
+          <li>过度信奉"理性人"假设</li>
+          <li>对心理学的"非理性人"理论所知甚少</li>
+          <li>缺乏实际生活经验</li>
+        </ul>
+
+        <p><strong>现实真相</strong>：</p>
+
+        <div class="pull-quote">人类与旅鼠一样，在某些情况下都有"集体非理性"倾向。</div>
+
+        <p>这种倾向导致：</p>
+
+        <ul>
+          <li>聪明人产生不理智想法</li>
+          <li>做出不理智行为</li>
+          <li>比如许多基金会的投资管理实践</li>
+        </ul>
+
+        <h3 id="section-9-3">9.3 机构投资者的可悲现状</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">当今最可悲的事</div>
+            <p>每个机构投资者最害怕的，就是自己的投资实践与大家不同。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十、道德责任与谨慎原则 -->
+      <section id="section-10">
+        <h2>十、道德责任与谨慎原则</h2>
+
+        <h3 id="section-10-1">10.1 演讲的真正目的</h3>
+
+        <p><strong>我的演讲并非为了</strong>：</p>
+
+        <ul>
+          <li>让慈善基金会掌握投资技巧</li>
+        </ul>
+
+        <p><strong>我的真实目的</strong>：</p>
+
+        <ul>
+          <li>让基金会理解自身投资运作与大环境的密切关系</li>
+        </ul>
+
+        <h3 id="section-10-2">10.2 一个粗略但重要的道理</h3>
+
+        <div class="pull-quote large">如果一个机构在复杂大环境中有一方面做得不够好，那么它其他方面也<strong>极有可能</strong>做得不够好。</div>
+
+        <p><strong>推论</strong>：</p>
+
+        <ul>
+          <li>需要改善基金投资实践</li>
+          <li>也要提高基金捐赠智慧</li>
+        </ul>
+
+        <h3 id="section-10-3">10.3 两个古老法则</h3>
+
+        <h4>道德法则：塞缪尔·约翰逊的教诲</h4>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">人物背景</div>
+            <p>詹姆斯·博斯韦尔(1740—1795)</p>
+            <ul>
+              <li>苏格兰律师和杂文家</li>
+              <li>1791年出版《塞缪尔·约翰逊传》而声名大噪</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>约翰逊的道德法则</strong>：</p>
+
+        <div class="pull-quote">对于身居要位的官员而言，保持可以轻易消除的无知，就是在道德责任上的渎职。</div>
+
+        <div class="callout info">
+          <div class="callout-icon">📝</div>
+          <div class="callout-body">
+            <div class="callout-title">换句话说</div>
+            <p>当你有能力、有责任了解真相时，选择无知就是失职。</p>
+          </div>
+        </div>
+
+        <h4>谨慎法则：华纳及史瓦塞公司的智慧</h4>
+
+        <p><strong>广告语启示</strong>：</p>
+
+        <div class="pull-quote">"需要新机器而尚未购买的公司，其实已经在为它花钱了。"</div>
+
+        <p><strong>应用到思想工具</strong>：</p>
+
+        <ul>
+          <li>如果缺乏正确的思想工具</li>
+          <li>你和你试图帮助的人</li>
+          <li>已经深受这种<strong>可以轻松消除的无知</strong>的毒害</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 十一、后记：理论的延伸思考 -->
+      <section id="section-11">
+        <h2>十一、后记：理论的延伸思考</h2>
+
+        <h3 id="section-11-1">11.1 演讲后的反馈</h3>
+
+        <p><strong>令人失望的现实</strong>：</p>
+
+        <ul>
+          <li>听过或看过讲稿的人</li>
+          <li><strong>完全没有人</strong>作出理论回应</li>
+          <li>没有任何受过经济学训练的人试图探讨</li>
+        </ul>
+
+        <p><strong>我的态度</strong>：</p>
+
+        <ul>
+          <li>这种漠视没有让我灰心</li>
+          <li>我打算进一步发挥理论</li>
+        </ul>
+
+        <h3 id="section-11-2">11.2 思想实验：2006年的极端场景</h3>
+
+        <h4>假设条件</h4>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>变化项</th><th>数值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>股票价格上涨</td><td>200%</td></tr>
+            <tr><td>企业盈利增长</td><td>0%</td></tr>
+          </tbody>
+        </table>
+
+        <h4>推演结果</h4>
+
+        <ol>
+          <li><strong>第一步</strong>：全部美国企业所有可合理分配的利润，<strong>还没有</strong>股票持有者的投资成本多。<br/><strong>原因</strong>：投资成本上涨比例与股价相同。</li>
+          <li><strong>第二步</strong>：扣除投资成本后，全部企业所有者<strong>得不到一分钱</strong>。</li>
+          <li><strong>第三步</strong>：摩擦成本制造者所得，<strong>超过</strong>全部可合理分配的企业利润。</li>
+          <li><strong>第四步</strong>：企业所有者想赚钱，只能将股份卖给"新资金"提供者。</li>
+          <li><strong>第五步</strong>：新资金提供者：
+            <ul>
+              <li>付出持续高涨的投资成本</li>
+              <li>只能指望股价无休止上涨</li>
+              <li>得不到任何净利润</li>
+              <li>除非再卖给又一批新资金提供者</li>
+            </ul>
+          </li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">核心启示</div>
+            <p>这就是典型的<strong>庞氏骗局结构</strong>。</p>
+          </div>
+        </div>
+
+        <h3 id="section-11-3">11.3 不同视角的解读</h3>
+
+        <h4>摩擦成本制造者的观点</h4>
+
+        <p>最理想状态：</p>
+
+        <ul>
+          <li>企业可合理分配利润100%落到他们手里</li>
+          <li>这是天经地义的</li>
+          <li>落到股东手里才是浪费</li>
+        </ul>
+
+        <h4>某些经济学家的观点</h4>
+
+        <p>这样的结果很好：</p>
+
+        <ul>
+          <li>因为这是自由市场的结果</li>
+        </ul>
+
+        <h4>我的观点</h4>
+
+        <p>这种怪异现象是<strong>三种东西的结合体</strong>：</p>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>比喻</th><th>本质</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>贪婪收取不合理手续费的赌场</td>
+              <td>剥削投资者</td>
+            </tr>
+            <tr>
+              <td>天价艺术品市场般的庞氏骗局</td>
+              <td>明显不适合养老基金参与</td>
+            </tr>
+            <tr>
+              <td>终将破裂的投机泡沫</td>
+              <td>可能给宏观经济造成恶果</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-11-4">11.4 对社会文明的威胁</h3>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">严重警告</div>
+            <ul>
+              <li>这种情况极有可能给社会文明制度带来巨大破坏</li>
+              <li>美国的声誉会受到伤害</li>
+              <li>而且理所当然</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 id="section-11-5">11.5 苏格拉底的忠告</h3>
+
+        <div class="pull-quote">
+          请爱护你的声誉，像珍惜最贵重的珠宝那样——因为信誉就像火焰，点着之后可以轻松让它燃烧，可是一旦扑灭，必须很费力才能再次点燃它。<br/>
+          获取好声誉的办法是：努力成为你想要成为的人。
+          <cite>—— 苏格拉底</cite>
+        </div>
+      </section>
+
+      <div class="section-divider"><span>◆ ◆ ◆</span></div>
+
+      <!-- 全文核心要点总结 -->
+      <section id="section-12">
+        <h2>全文核心要点总结</h2>
+
+        <h3 id="section-12-1">财富效应被低估的原因</h3>
+
+        <ol>
+          <li><strong>退休金账户影响未被正确统计</strong></li>
+          <li><strong>"灰金"效应被完全忽略</strong></li>
+          <li><strong>股票期权的会计腐败</strong></li>
+          <li><strong>凯恩斯乘数效应被忽视</strong></li>
+        </ol>
+
+        <h3 id="section-12-2">投资管理的三大浪费</h3>
+
+        <table class="article-table">
+          <thead>
+            <tr><th>浪费来源</th><th>规模</th><th>后果</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>过高管理费用</td>
+              <td>每年3%以上</td>
+              <td>创造灰金效应</td>
+            </tr>
+            <tr>
+              <td>频繁更换经理</td>
+              <td>额外5.6%收益损失</td>
+              <td>严重损害投资者利益</td>
+            </tr>
+            <tr>
+              <td>股票期权会计</td>
+              <td>7500亿美元规模</td>
+              <td>虚假繁荣</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="section-12-3">市场非理性的表现</h3>
+
+        <ul>
+          <li>集体疯狂心理</li>
+          <li>羊群效应</li>
+          <li>害怕与众不同</li>
+          <li>投机属性压倒投资属性</li>
+        </ul>
+
+        <h3 id="section-12-4">日本教训的启示</h3>
+
+        <p>泡沫破裂后：</p>
+
+        <ul>
+          <li>所有政策工具可能失效</li>
+          <li>消费信心极难恢复</li>
+          <li>经济可能长期停滞</li>
+        </ul>
+
+        <h3 id="section-12-5">道德责任</h3>
+
+        <ul>
+          <li>身居要位者不应保持可轻易消除的无知</li>
+          <li>缺乏正确思想工具本身就是在付出代价</li>
+          <li>声誉如火焰，失去后极难重建</li>
+        </ul>
+      </section>
+
+      <div class="article-footer">— 完 —</div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <p>投资智慧·读书感悟 &nbsp;|&nbsp; 本地私人书房</p>
+  </footer>
+
+  <script>
+    // 侧边栏滚动高亮（激活项切换时自动滚入视野）
+    const links = document.querySelectorAll('#sidebar-nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    let lastActive = null;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 132;
+      let current = sections[0];
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) current = sec;
+      }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+
+      const activeLink = document.querySelector('#sidebar-nav a.active');
+      if (activeLink && activeLink !== lastActive) {
+        lastActive = activeLink;
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 平滑滚动
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 阅读位置记忆
+    const BOOK_FOLDER = '穷查理宝典';
+    const PAGE_KEY = 'reading_last_page_' + BOOK_FOLDER;
+    const SCROLL_KEY = 'reading_scroll_' + BOOK_FOLDER;
+    const relativePath = 'books/' + BOOK_FOLDER + '/第四章/' + location.pathname.split('/').pop();
+    localStorage.setItem(PAGE_KEY, relativePath);
+
+    const savedScroll = localStorage.getItem(SCROLL_KEY);
+    if (savedScroll && document.referrer.includes('index.html')) {
+      const pos = JSON.parse(savedScroll);
+      if (pos.page === relativePath) window.scrollTo(0, pos.y);
+    }
+
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        localStorage.setItem(SCROLL_KEY, JSON.stringify({ page: relativePath, y: window.scrollY }));
+      }, 300);
+    }, { passive: true });
+
+    // ===== Accordion toggle for TOC chapters =====
+    document.querySelectorAll('.toc-chapter-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const chapter = title.closest('.toc-chapter');
+        const isOpen = chapter.classList.contains('open');
+        document.querySelectorAll('.toc-chapter.open').forEach(c => c.classList.remove('open'));
+        if (!isOpen) chapter.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
