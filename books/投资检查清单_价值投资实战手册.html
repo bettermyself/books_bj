@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投资检查清单 · 价值投资实战手册</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   金色纸张账本风 —— 忠实提取自
+   books/《巴菲特致股东的信》 附录：投资检查清单_Qwen.html
+   调色板与项目阅读页设计令牌一致（--gold:#a07828 / --paper:#f5f2ec）
+   除标注 [模板修正] 的两处外，CSS 与源文件逐字一致，勿改动
+   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#f5f2ec; --paper2:#faf8f4; --paper3:#f0ece3;
+  --ink:#2c2416; --ink2:#6b5e4a; --ink3:#a89880;
+  --gold:#a07828; --gold2:#c9a84c; --gold3:#7a5a10;
+  --red:#a63a2e; --red2:#c04a3c;
+  --green:#1c5c43; --gdeep:#123f2e;
+  --line:#e0d8cc;
+  --serif:'Noto Serif SC',serif;
+  --sans:'Noto Sans SC',sans-serif;
+  --mono:'IBM Plex Mono','Noto Sans SC',monospace;
+  --disp:'Fraunces','Noto Serif SC',serif;
+  --bg2:#203026; --text2:#efe8d2; /* [模板修正] 源文件遗漏此二变量致页脚浅字浅底，按子元素 rgba 值反推补齐 */
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);font-size:14.5px;color:var(--ink);
+  background:#f5f2ec;
+  background-attachment:fixed;
+}
+::selection{background:var(--gold2);color:#2c2416}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#f5f2ec}
+::-webkit-scrollbar-thumb{background:#e0d8cc;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+
+/* ── 顶部行情带 ── */
+.ticker{overflow:hidden;white-space:nowrap;background:#faf8f4;border-bottom:1px solid #e0d8cc}
+.tk{display:inline-block;padding:9px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--gold);animation:tick 80s linear infinite}
+.ticker:hover .tk{animation-play-state:paused}
+.tk b{color:#a89880;margin:0 22px;font-weight:400}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ── 骨架 ── */
+.shell{display:grid;grid-template-columns:284px 1fr;max-width:1460px;margin:0 auto;box-shadow:0 0 80px rgba(0,0,0,.4)}
+.side{position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 30px;background:#ffffff;border-right:1px solid #e0d8cc}
+.side::-webkit-scrollbar{width:5px}
+.brand{display:flex;gap:12px;align-items:center;padding-bottom:18px;border-bottom:1px solid #e0d8cc;margin-bottom:16px}
+.mc{width:46px;height:46px;flex:0 0 46px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-family:var(--disp);font-weight:900;color:var(--gold);font-size:13px;position:relative}
+.mc::before{content:"";position:absolute;inset:4px;border:1px dashed rgba(160,120,40,.5);border-radius:50%;animation:spin 50s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.brand b{color:#2c2416;font-family:var(--serif);font-size:14.5px;display:block}
+.brand i{color:#a07828;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em}
+.ov{margin-bottom:14px}
+.lab{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:#a07828;margin-bottom:7px;display:flex;justify-content:space-between}
+.bar{height:6px;background:#f0ece3;position:relative}
+.bar u{position:absolute;inset:0;right:auto;width:0;background:var(--gold);transition:width .6s cubic-bezier(.3,1,.3,1)}
+nav a.nv{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:9px 10px;text-decoration:none;color:#6b5e4a;border-left:2px solid transparent;transition:.2s}
+.nv:hover{background:rgba(160,120,40,.09);color:#2c2416}
+.nv.act{border-left-color:var(--gold);background:rgba(160,120,40,.13);color:#2c2416}
+.nv-num{font-family:var(--serif);font-weight:900;font-size:15px;color:var(--gold);text-align:center}
+.nv b{font-size:12.5px;font-weight:500;display:block;line-height:1.4}
+.mini{display:block;height:2px;background:#f0ece3;margin-top:5px;position:relative}
+.mini u{position:absolute;inset:0;right:auto;background:var(--gold);width:0;transition:width .4s}
+.nv-ct{font-family:var(--mono);font-size:10px;color:#a07828;white-space:nowrap}
+.side-foot{margin-top:18px;padding:13px;border:1px dashed #e0d8cc;font-size:11.5px;color:#6b5e4a;line-height:1.8;font-family:var(--serif)}
+
+/* ── 纸面 ── */
+main{min-width:0}
+.page{min-height:100vh;background:var(--paper);
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0"/></filter><rect width="140" height="140" filter="url(%23n)"/></svg>');
+  box-shadow:inset 0 0 0 1px #e0d8cc}
+
+/* ── 证书式刊头 ── */
+.masthead{margin:34px 48px 0;padding:32px 40px 26px;border:2px solid var(--gold3);position:relative;outline:1px solid rgba(184,147,63,.4);outline-offset:5px;
+  background:
+   repeating-radial-gradient(circle at 115% -30%, transparent 0 10px, rgba(184,147,63,.055) 10px 11px),
+   repeating-radial-gradient(circle at -15% 130%, transparent 0 10px, rgba(184,147,63,.055) 10px 11px),
+   rgba(255,255,255,.45)}
+.cnr{position:absolute;width:20px;height:20px;border:2px solid var(--gold)}
+.c1{top:9px;left:9px;border-right:none;border-bottom:none}
+.c2{top:9px;right:9px;border-left:none;border-bottom:none}
+.c3{bottom:9px;left:9px;border-right:none;border-top:none}
+.c4{bottom:9px;right:9px;border-left:none;border-top:none}
+.mh-top{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--gold3);border-bottom:1px solid rgba(184,147,63,.4);padding-bottom:12px;margin-bottom:24px}
+.mh-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:center}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(42px,5.4vw,66px);line-height:1.15;letter-spacing:.07em;color:var(--ink)}
+.mh-eng{font-family:var(--disp);font-weight:600;font-size:11.5px;letter-spacing:.44em;color:var(--gold3);margin-top:12px}
+.mh-motto{margin-top:20px;font-family:var(--serif);font-size:15px;color:var(--ink2);line-height:1.95;border-left:3px solid var(--gold);padding-left:14px;max-width:54ch}
+.mh-meta{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.mh-meta span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1px solid var(--line);padding:5px 11px;color:var(--ink2);background:rgba(255,255,255,.55)}
+.mh-side{display:flex;flex-direction:column;gap:18px}
+.pipeline{border:1px solid rgba(184,147,63,.5);background:rgba(255,255,255,.5);padding:16px 18px}
+.pl-label{font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--gold3);margin-bottom:12px}
+.pl-steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-family:var(--serif);font-weight:700;font-size:13.5px}
+.pl-steps span{border:1.5px solid var(--gold3);color:var(--gold3);padding:6px 10px;background:rgba(160,120,40,.06);transition:.2s}
+.pl-steps span:hover{background:var(--gold3);color:var(--paper)}
+.pl-steps i{color:var(--gold);font-style:normal}
+.pipeline p{margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.75}
+.mh-stamp{align-self:flex-end;transform:rotate(-6deg);border:3px double var(--red);color:var(--red);padding:11px 18px;font-family:var(--serif);font-weight:900;font-size:16px;letter-spacing:.2em;line-height:1.7;text-align:center;background:rgba(166,58,46,.045);animation:stampIn .7s cubic-bezier(.3,1.6,.4,1) .6s both}
+@keyframes stampIn{from{opacity:0;transform:rotate(-6deg) scale(2.2)}to{opacity:1;transform:rotate(-6deg) scale(1)}}
+.mh-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:26px;padding-top:14px;border-top:1px dashed rgba(184,147,63,.55);font-size:11.5px;color:var(--ink2);font-family:var(--mono)}
+.sw{display:inline-block;width:11px;height:11px;border:2px solid var(--ink2);background:#fff;vertical-align:-1px;margin-right:7px}
+.sw.ck{background:var(--gold);border-color:var(--gold)}
+.sw.vt{background:var(--red);border-color:var(--red)}
+.sw.nt{border-color:var(--gold);background:rgba(184,147,63,.2)}
+
+/* ── 凡例 ── */
+.preface{margin:26px 48px 0;padding:18px 24px;border:1px dashed rgba(184,147,63,.6);background:rgba(255,255,255,.42);font-size:13.5px;color:var(--ink2);line-height:1.95}
+.preface b{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--gold3);display:block;margin-bottom:8px}
+
+/* ── 工具条 ── */
+.toolbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 48px;background:var(--paper);border-bottom:3px double var(--gold3)}
+.tb-bar{width:170px;height:9px;background:var(--paper3);border:1px solid var(--line);position:relative}
+.tb-bar u{position:absolute;inset:0;right:auto;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .6s cubic-bezier(.3,1,.3,1)}
+#tbText{font-family:var(--mono);font-size:11.5px;color:var(--ink2);white-space:nowrap}
+.tb-veto{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:5px 11px;border:1.5px solid var(--gold);color:var(--gold);white-space:nowrap;transition:.3s}
+.tb-veto.hot{border-color:var(--red);color:#fff;background:var(--red);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(166,58,46,.14)}}
+#q{flex:1;min-width:150px;max-width:250px;margin-left:auto;background:#fff;border:1px solid var(--line);padding:8px 12px;font-family:var(--sans);font-size:13px;color:var(--ink);outline:none;transition:.2s}
+#q:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,147,63,.16)}
+#qCount{font-family:var(--mono);font-size:10.5px;color:var(--gold3);white-space:nowrap}
+#reset{background:none;border:1px solid var(--line);padding:8px 14px;font-family:var(--mono);font-size:11.5px;color:var(--ink2);cursor:pointer;transition:.2s}
+#reset:hover{border-color:var(--red);color:var(--red)}
+.vbanner{display:none;position:sticky;top:51px;z-index:55;background:var(--red);color:#fdf6ec;padding:10px 48px;font-size:13.5px;font-family:var(--serif);font-weight:700;letter-spacing:.05em;box-shadow:0 8px 20px -8px rgba(166,58,46,.55)}
+.vbanner.on{display:block}
+
+/* ── 章节 ── */
+.sec{padding:54px 56px 42px;border-bottom:1px solid var(--line);scroll-margin-top:78px;transition:opacity .3s,filter .3s}
+.sec.dim{opacity:.12;filter:grayscale(.7)}
+.sec-head{display:grid;grid-template-columns:88px 1fr auto;gap:20px;align-items:start;border-bottom:4px double var(--ink);padding-bottom:18px}
+.sec-num{font-family:var(--serif);font-weight:900;font-size:56px;line-height:1;color:rgba(184,147,63,.13);-webkit-text-stroke:1.2px rgba(184,147,63,.55)}
+h2{font-family:var(--serif);font-weight:900;font-size:29px;letter-spacing:.03em}
+.sec-q{font-family:var(--serif);font-size:15px;color:var(--ink2);margin-top:7px}
+.sec-src{font-family:var(--mono);font-size:10.5px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);padding:5px 10px;letter-spacing:.1em;background:rgba(184,147,63,.07);white-space:nowrap}
+.sp{display:flex;align-items:center;gap:12px;margin:16px 0 2px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.sp i{flex:0 0 150px;height:5px;background:var(--paper3);position:relative}
+.sp i u{position:absolute;inset:0;right:auto;background:var(--gold);width:0;transition:width .5s}
+.sp.spv i u{background:var(--red)}
+
+.sub{display:flex;align-items:center;gap:12px;margin:36px 0 14px;font-family:var(--serif);font-weight:700;font-size:19px}
+.sub::before{content:"";width:9px;height:9px;background:var(--gold);transform:rotate(45deg);flex:0 0 9px}
+.sub .n{font-family:var(--mono);font-size:11.5px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);padding:2px 8px;letter-spacing:.06em;font-weight:500}
+.lead{font-size:14px;color:var(--ink2);line-height:1.95;margin:12px 0}
+
+/* ── 账本表格 ── */
+.twrap{overflow-x:auto;margin:8px 0 12px;border:1px solid var(--line);background:rgba(255,255,255,.4);transition:box-shadow .25s}
+.twrap:hover{box-shadow:0 10px 28px -20px rgba(32,48,42,.7)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:600px}
+thead th{background:var(--gold);color:#ffffff;font-size:11.5px;letter-spacing:.14em;font-weight:600;padding:10px 14px;text-align:left;border-bottom:2px solid var(--gold3)}
+thead th.ckh{width:52px;text-align:center;background:var(--gold3);color:#ffffff}
+.vtable thead th.ckh{background:var(--red)}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.8}
+tbody tr:last-child td{border-bottom:none}
+tbody td:first-child{font-weight:700;font-family:var(--serif)}
+tbody tr:nth-child(even){background:rgba(32,48,42,.03)}
+td.ckc{text-align:center;width:52px}
+.ctl{width:16px;height:16px;border:2px solid var(--ink2);display:inline-block;position:relative;background:#fff;vertical-align:middle;transition:.2s}
+.ctl::after{content:"✓";position:absolute;left:1px;top:-5px;font-size:14px;font-weight:900;color:#fff;opacity:0;transform:scale(.3);transition:.22s cubic-bezier(.5,1.9,.4,1)}
+.vtable .ctl{border-color:var(--red)}
+.vtable .ctl::after{content:"✕"}
+tr.clickable{cursor:pointer;transition:background .18s,box-shadow .18s}
+tr.clickable:hover{background:rgba(184,147,63,.11);box-shadow:inset 3px 0 0 var(--gold)}
+tr.done{background:rgba(28,92,67,.09)!important}
+tr.done td{color:var(--ink2)}
+tr.done .ctl{background:var(--gold);border-color:var(--gold)}
+tr.done .ctl::after{opacity:1;transform:scale(1)}
+tr.veto-on{background:rgba(166,58,46,.09)!important}
+tr.veto-on td:first-child{color:var(--red)}
+tr.veto-on .ctl{background:var(--red);border-color:var(--red)}
+tr.veto-on .ctl::after{opacity:1;transform:scale(1)}
+td.stc{position:relative;padding-right:112px}
+.stamp{position:absolute;right:10px;top:50%;transform:translateY(-50%) rotate(-8deg) scale(2.3);opacity:0;border:2.5px solid var(--red);color:var(--red);font-family:var(--serif);font-weight:900;font-size:11.5px;letter-spacing:.18em;padding:3px 8px;pointer-events:none;white-space:nowrap;background:rgba(245,240,225,.75);transition:.25s cubic-bezier(.4,1.6,.4,1)}
+tr.veto-on .stamp{opacity:.92;transform:translateY(-50%) rotate(-8deg) scale(1)}
+
+/* ── 卡片 / 箴言 / 准则 ── */
+.cards{display:grid;gap:14px;margin:16px 0}
+.c2{grid-template-columns:repeat(2,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);background:rgba(255,255,255,.42);padding:18px 18px 16px;position:relative;transition:.25s}
+.card::before{content:"";position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 26px -16px rgba(32,48,42,.6);background:rgba(255,255,255,.65)}
+.cd-n{font-family:var(--disp);font-weight:900;font-size:13px;color:var(--gold3);letter-spacing:.16em;display:block;margin-bottom:9px}
+.card b{font-family:var(--serif);font-size:16px;display:block;margin-bottom:7px;line-height:1.5}
+.card p{font-size:12.5px;color:var(--ink2);line-height:1.75}
+.qt{margin:24px 0;padding:4px 0 4px 26px;border-left:3px solid var(--gold);position:relative}
+.qt::before{content:"「";position:absolute;left:-4px;top:-30px;font-family:var(--serif);font-size:54px;color:rgba(184,147,63,.28)}
+.qt p{font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.95}
+.qt.big p{font-size:22px}
+.qt cite{display:block;margin-top:9px;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--gold3);letter-spacing:.12em}
+.co{margin:18px 0;padding:16px 18px 14px;border-left:4px solid;background:rgba(255,255,255,.35)}
+.co.warn{border-color:var(--red);background:linear-gradient(90deg,rgba(166,58,46,.08),rgba(255,255,255,.35) 68%)}
+.co.tip{border-color:var(--gold);background:linear-gradient(90deg,rgba(184,147,63,.13),rgba(255,255,255,.35) 68%)}
+.co.note{border-color:#4a7296;background:linear-gradient(90deg,rgba(74,114,150,.1),rgba(255,255,255,.35) 68%)}
+.co-t{font-family:var(--serif);font-weight:900;font-size:15px;display:block;margin-bottom:7px}
+.co.warn .co-t{color:var(--red)}.co.tip .co-t{color:var(--gold3)}.co.note .co-t{color:#3d6285}
+.co p{font-size:13.5px;line-height:1.85}
+.co .src{display:block;margin-top:9px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink3)}
+.formula{margin:18px 0;border:1px solid rgba(160,120,40,.55);background:var(--gold3);color:#ffffff;padding:22px 24px;font-family:var(--mono);font-size:13.5px;line-height:2.1;position:relative;overflow:hidden}
+.formula::after{content:"§";position:absolute;right:14px;bottom:8px;font-size:10px;letter-spacing:.24em;color:rgba(217,185,104,.6)}
+.formula b{color:var(--gold2);font-size:15px}
+.formula .fc{color:#eba08f}
+.formula .fn{display:block;font-size:11px;color:rgba(239,232,210,.65);margin-top:8px;letter-spacing:.05em}
+.rules{list-style:none;counter-reset:r;margin:14px 0}
+.rules li{counter-increment:r;display:grid;grid-template-columns:44px 1fr;gap:16px;padding:15px 0;border-bottom:1px dashed var(--line)}
+.rules li::before{content:counter(r,decimal-leading-zero);font-family:var(--disp);font-weight:900;font-size:19px;color:var(--gold3);border:1px solid rgba(184,147,63,.45);width:42px;height:42px;display:grid;place-items:center;background:rgba(184,147,63,.06)}
+.rules b{font-family:var(--serif);font-size:15.5px;display:block;margin-bottom:5px}
+.rules p{font-size:13px;color:var(--ink2);line-height:1.8}
+
+/* ── 尾章 ── */
+.colophon{background:var(--bg2);color:var(--text2);padding:72px 56px 60px;text-align:center;border-top:3px double var(--gold)}
+.seal{width:96px;height:96px;margin:0 auto 28px;border:2px solid var(--gold2);border-radius:50%;display:grid;place-items:center;font-family:var(--disp);font-weight:900;font-size:20px;color:var(--gold2);position:relative}
+.seal::before{content:"";position:absolute;inset:6px;border:1px dashed var(--gold2);border-radius:50%;animation:spin 40s linear infinite}
+.seal small{position:absolute;bottom:16px;font-size:8px;letter-spacing:.3em;font-family:var(--mono);font-weight:400}
+.colophon h3{font-family:var(--mono);font-size:11px;letter-spacing:.4em;color:var(--gold2);margin-bottom:20px;font-weight:500}
+.colophon .big{font-family:var(--serif);font-weight:900;font-size:clamp(21px,2.8vw,30px);line-height:1.75;max-width:26em;margin:0 auto 16px}
+.colophon .sub2{font-family:var(--serif);color:rgba(239,232,210,.75);font-size:15px;line-height:1.9}
+.colophon .rule{width:64px;height:2px;background:var(--gold2);margin:28px auto}
+.colophon .small{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:rgba(217,185,104,.6)}
+
+#toTop{position:fixed;right:26px;bottom:26px;width:46px;height:46px;background:var(--gold3);color:#ffffff;border:1px solid var(--gold);font-size:15px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:80;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+#toTop.on{opacity:1;pointer-events:auto}
+#toTop:hover{background:var(--gold);color:#ffffff}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+@media(max-width:1100px){
+  .shell{grid-template-columns:1fr}
+  .side{display:none}
+  .sec{padding:44px 24px}
+  .toolbar,.vbanner{padding-left:20px;padding-right:20px}
+  .masthead{margin:22px 14px 0;padding:26px 22px 22px}
+  .preface{margin:20px 14px 0}
+  .mh-grid{grid-template-columns:1fr}
+  .sec-head{grid-template-columns:1fr;gap:8px}
+  .sec-num{font-size:40px}
+  .sec-src{justify-self:start}
+}
+@media(max-width:820px){.c3,.c4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.c2,.c3,.c4{grid-template-columns:1fr}#q{max-width:none;flex-basis:100%}td.stc{padding-right:14px}.stamp{position:static;display:inline-block;margin-left:8px;transform:rotate(-4deg)}}
+@media print{
+  .ticker,.side,.toolbar,#toTop,.vbanner{display:none}
+  body{background:#fff}.page{box-shadow:none}
+  .rv{opacity:1;transform:none}
+  .shell{display:block}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker"><div class="tk" id="tk"></div></div>
+
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mc">价投</span><div><b>价值投资实战手册 · 投资检查清单</b><i>VALUE INVESTMENT PLAYBOOK</i></div></div>
+    <div class="ov">
+      <div class="lab"><span>总核查进度</span><span id="ovPct">0%</span></div>
+      <div class="bar"><u id="ovBar"></u></div>
+    </div>
+    <nav id="nav"></nav>
+    <div class="side-foot">All cash is equal.<br>估值不是计算，而是比较——<br>永远持有收益率明显较高的资产。</div>
+  </aside>
+
+  <main><div class="page">
+
+    <header class="masthead rv">
+      <i class="cnr c1"></i><i class="cnr c2"></i><i class="cnr c3"></i><i class="cnr c4"></i>
+      <div class="mh-top"><span>据《价值投资实战手册》（唐朝）全书 23 章笔记整理</span><span>EST. 2026 · 23 CHAPTERS · 511 ITEMS</span></div>
+      <div class="mh-grid">
+        <div>
+          <h1>价值投资检查清单</h1>
+          <div class="mh-eng">VALUE INVESTMENT CHECKLIST</div>
+          <p class="mh-motto">估值不是计算，而是比较：把能力圈内能理解的资产摆上天平，永远持有收益率明显较高的那个——买点买入，卖点卖出，中间呆坐不动。</p>
+          <div class="mh-meta"><span id="mTotal"></span><span>8 节 · 认知 → 企业 → 估值 → 纪律</span><span>全部数字为书中原始标准</span></div>
+        </div>
+        <div class="mh-side">
+          <div class="pipeline">
+            <div class="pl-label">执行顺序</div>
+            <div class="pl-steps"><span>① 正认知</span><i>→</i><span>② 明收益</span><i>→</i><span>③ 识企业</span><i>→</i><span>④ 估价值</span><i>→</i><span>⑤ 守纪律</span></div>
+            <p>红色否决项为书中明确「不碰 / 回避 / 剔除」的信号：触发即放弃该企业，后面全部不必看。第伍节（老唐估值法）是全书核心。</p>
+          </div>
+          <div class="mh-stamp">估即是比<br>呆坐收租</div>
+        </div>
+      </div>
+      <div class="mh-legend">
+        <span><i class="sw ck"></i>点击行 ＝ 已核查</span>
+        <span><i class="sw vt"></i>否决项点击 ＝ 触发 → 直接放弃</span>
+        <span><i class="sw nt"></i>进度自动保存于本机</span>
+      </div>
+    </header>
+
+    <div class="preface rv">
+      <b>凡例 · 使用说明</b>
+      依据《价值投资实战手册》（唐朝）全书 23 章读书笔记整理，按投资实践流程编排为八节：正投资认知（壹）→ 明收益来源与道路（贰）→ 识别优质企业（叁）→ 溯源大师体系（肆）→ 掌握老唐估值法（伍 · 全书核心）→ 企业分析实战（陆）→ 估值算例与操作复盘（柒）→ 周期股与从零研究框架（捌）。所有公式、阈值、数字均为书中原始标准；估值均强调「三年」与「区间 ±10%」而非精确预测。点击行打勾记录核查进度，自动保存于本机。
+    </div>
+
+    <div class="toolbar">
+      <div class="tb-bar"><u id="tbFill"></u></div>
+      <span id="tbText">已核查 0 / 0 项</span>
+      <span class="tb-veto" id="tbVeto">否决触发 0</span>
+      <input id="q" placeholder="搜索清单…（按 / 聚焦）">
+      <span id="qCount"></span>
+      <button id="reset">重置记录</button>
+    </div>
+    <div class="vbanner" id="vb">⛔ 已触发 <span id="vc">0</span> 项否决 —— 这类企业归入「太难」，视而不见、听而不闻。直接放弃，后面全部不必看。</div>
+
+    <div id="content"></div>
+
+    <footer class="colophon">
+      <div class="seal">价投<small>· 价值投资实战手册 ·</small></div>
+      <h3>通过全部检查之后的最后一问</h3>
+      <p class="big">别瞅傻子，瞅地——这家企业三年后能赚多少钱，你想清楚了吗？</p>
+      <p class="sub2">如果无法估算它的自由现金流，说明你尚未理解它——回到能力圈内，忽略它；股市从来不会因为你没有行动而惩罚你。</p>
+      <div class="rule"></div>
+      <p class="small">逐项打勾，方能安心下注 · 据《价值投资实战手册》整理</p>
+    </footer>
+
+  </div></main>
+</div>
+
+<button id="toTop" title="回到封面">▲</button>
+
+<script>
+const CN=["壹","贰","叁","肆","伍","陆","柒","捌","玖","拾","拾壹","拾贰","拾叁","拾肆","拾伍","拾陆"];
+const ICON={warn:"⚠",tip:"✦",note:"✎"};
+
+/* ── 清单内容数据（块类型见 SKILL.md：h/p/q/f/co/cd/rl/t）──
+   写好后务必保持为合法 JSON（键与字符串都用双引号），便于校验 */
+const SECTIONS=[{"id":"s1","t":"投资认知与心性修炼","q":"你是在投资，还是在投机？","src":"第 1-3 章","b":[["p","全书从「什么是投资」出发：先分清股模式与票模式、投资者与投机者，再用两百年数据确立「股票是长期收益率最高的资产」。心性不过关，后面全部作废。"],["q","投资是为了在未来更有能力消费而放弃今天的消费。","—— 沃伦·巴菲特 · 本书开篇定义",1],["h","h1","第1章 什么是投资"],["t",{"m":"check","c":["检查事项","要点"],"r":[["用巴菲特定义检验每一笔投入","<b>投资是为了在未来更有能力消费而放弃今天的消费</b>——核心判断标准：今天的付出会在未来为你换来更多的购买力吗？"],["区分同一行为的投资/消费属性（买车跑滴滴营运…","区分同一行为的投资/消费属性（买车跑滴滴营运＝投资；买劳斯莱斯展示实力促成交易＝投资；纯为开出去玩＝消费——购买力再也回不来）"],["记住投资≠必然获利","投资只是\"意图\"获取更多购买力，意图能否实现受多种因素限制（跑滴滴、买幻影、养儿防老都不必然成功），不能用结果反推行为属性"],["警惕新手入市三阶段的心理陷阱","初入市场（跟风心热）→ 初尝甜头（误以为财富来自屏幕跳动数字，见什么涨追什么）→ 梦醒时分（缺乏新资金推动时下跌无可避免）"],["拒绝对股市简单标签化","（骗局/赌场/碎钞机）\"珍爱生命远离股市\"与盲目入市一样，都不是对\"普通人能否参与股市、怎样参与\"这一问题的严肃回答"]]}],["h","h2","第2章 股票和股市的本质"],["t",{"m":"check","c":["检查事项","要点"],"r":[["理解\"股\"的起源逻辑","拥有 10 艘船各 10% 优于拥有 1 艘船的 100%（1×100% ＝ 10×10%，但拥有 1 艘船的 100% 是血本无归或赚百倍，拥有 10 艘船各 10% 是确定赚数十倍）——以出资额为上限承担风险，靠分散获取确定性收益"],["区分股票两种属性对应两种获利模式","<b>股模式</b>（以返航回报即企业经营回报为主要获利来源）vs <b>票模式</b>（追求买卖价差）"],["记住股模式是正和博弈的三个逻辑","①上市公司整体属于国民经济中相对较好的部分；②公司创造财富、拥有公司的人拥有这些财富；③不依赖交易、仅靠长期持有股权，就能获得超过银行理财/信托/债券等类现金资产的收益率"],["股模式的风险应对三原则","尽可能多地了解行业和企业；入股作价时尽可能保守；适度分散到多个企业乃至多个行业"],["巴菲特\"猴子掷飞镖\"结论四要素","获得生产性资产回报所需要的只是<b>时间的流逝、内心的平静、充足的多元化、交易和费用的最小化</b>"],["认清票模式的定价机制","作为交易票据时价格由短期供求决定，供求由市场参与者的预期决定（看涨预期→需求→上涨；看跌预期→供给→下跌）"],["识别市场先生可利用的两个极端","投机情绪聚合下，<b>悲观时市值可能远低于重置成本</b>（低于新建同样企业所需资金）；<b>乐观时可高到让企业家发现卖掉企业、把钱存银行的利息收入轻松超过每年辛苦经营利润的数倍甚至数十倍</b>"],["记住凯恩斯选美比赛理论","票模式获利的重点不是自己认为谁最美，而是预测大多数人认为谁最美——每个人预测并影响叠加结果又被结果影响，构成<b>无解的死循环</b>"],["以牛顿南海泡沫惨败为鉴","（\"我可以计算出天体运行的轨迹，却无法预测人性的疯狂\"）人类智商天花板也无法靠预测他人想法获利"],["格雷厄姆对投资者与投机者的判别标准","<b>对待股市波动的态度</b>——投资者兴趣在按合适价格购买并持有合适证券，投机者兴趣在预测股价波动赚差价；\"投机并不犯法，也不缺德，它的主要问题只是发不了财\""],["记住大师共识","彼得·林奇——《福布斯》400 大富豪中没有一位靠预测市场起家；巴菲特——从未见过能预测市场走势的人，投机需要非常多运气；成功需要两种能力结合——判断优秀企业的能力＋将自己的思维和行为与市场传染性情绪隔离的能力"],["理解\"七亏两平一个赚\"的成因","票模式你买我卖是零和游戏，加上原始股东套现、政府征税、交易所收费、券商抽佣、投行会计师律师分账，零和变负和，必然赔多赢少"],["普通投资者只有两条路","①珍爱生命，远离股市；②放弃猜测他人想法的\"票\"模式投机，做大概率能成功的\"股\"模式投资——不存在第三条中间道路"]]}],["h","h3","第3章 投资是一件持续终身的事"],["t",{"m":"check","c":["检查事项","要点"],"r":[["破除\"退出股市＝不投资\"的幻觉","退出股市只是将财富投资了股票之外的其他资产（存款、货基、债券、房产、贵金属、保险、外汇等），<b>投资是每个人都无法躲避的游戏</b>"],["检视自己的收入结构","睡前收入（干活才有）vs 睡后收入（股息、房租、利息、版税）；睡后收入占比越高，可自由支配时间越多；全部由睡后收入构成＝财务自由"],["消费剩余必须配置在能产生\"睡后收入\"的资产上","且不应停留在认知链低端（活期 0.35% → 定期 1-2% → 货基 2-3% → 理财 3-5%——仍低于社会平均财富增长率，等于无偿送财富给别人）"],["记住通胀的量级","中国 M2 从 1990 年末 1.53 万亿元增至 2020 年末 218.7 万亿元（143 倍）；法币时代<b>现金是 100% 确定亏损的资产</b>"],["用复利表校准对收益率差异的认知","1 单位本金 50 年——3%→4.38、5%→11.47、7%→29.46、10%→117.39、12%→289、15%→1083.66、20%→9100.44、25%→70064.92"],["记住甲乙丙模拟（22 岁起 1 万元＋每年投…","记住甲乙丙模拟（22 岁起 1 万元＋每年投 3 万，60 岁退休后年支 100 万）：3% 者甲 60 岁 207.6 万、63 岁破产；10% 者乙 60 岁 1126.5 万、80 岁 1278.5 万；15% 者丙 60 岁 4230.4 万、80 岁 57456.2 万——差异不在于工作时赚多少，而在于财富配置在哪儿"],["认识时间的决定性","投资持续时间对财富终值的影响比本金和收益率更大（10 万本金 25% 年化 20 年不到 900 万；10 万本金 15% 年化 50 年超过 1 亿）"],["抛弃错误思想\"进入股市是开始投资，退出股市是…","抛弃错误思想\"进入股市是开始投资，退出股市是停止投资\"：从拥有第一笔消费剩余时投资就开始，365 天×24 小时不休息，持续到离开人世，区别只是投了哪类资产"],["以权威数据确立\"股票是长期收益率最高的资产\"信念","西格尔美国 1802-2012（210 年）——股票终值 1348 万美元/年化 8.09%，长期国债 5.07%，短期国债 4.16%，黄金 2.14%；扣除通胀后股票 6.59%、黄金 0.72%、美元现金 -1.41%"],["排除幸存者偏差后再验证","伦敦商学院 19 国 1900-2012（112 年，剔除幸存者偏差）——所有主要国家无一例外股票长期收益率超过长短国债；股票相对长期国债收益溢价平均 3.7%、相对短期国债溢价 4.5%"],["用百年复利差距感受收益溢价的威力","（19 国数据，100 年期，未扣通胀）澳大利亚（收益差最大）1 元投股票变 777,249.7 元 vs 长期债券 252 元、短期债券 80.7 元；瑞士（收益差最小）股票 1,136.7 元 vs 长债 73.2 元、短债 25.8 元"],["记住全球大类资产长期回报排序","（1964-2013 年均）<b>股票 ＞ 房地产 ＞ 债券 ＞ 黄金 ＞ 现金</b>（来源 BIS/Bloomberg/IMF/WB/兴业证券研究所）"],["理解\"幸存者偏差\"修正的量级","伦敦商学院对英国 1900-1954 年股市收益率的研究，过往权威结论年化 9.7%，剔除幸存者偏差后修正为 6.2%，<b>降幅超过 1/3，更接近真实</b>"],["记住研究隐含前提","国家及资本市场会存续超过百年——投资者是且只能是理性乐观派，以资本市场存续为前提思考（可用沪港通/深港通/沪伦通等分散单一市场风险）"],["记住\"不需要买在低点\"的证据","（拉斯科布案例）1929 年顶部的每月 15 美元定投——不到 4 年收益超过短期国债；1949 年（20 年）累计 9000 美元、年化 7.86%；30 年后超 6 万美元、年化 12.72%（超长债 8 倍以上）"],["警告自己不要做避险者","从不购买股票并以大崩盘为自己辩护的人，最终收益远低于坚持投资股票的投资者"],["对\"美林投资时钟\"式大类资产择时理论保持警惕","其创始机构美林证券在 2008 年次贷危机中损失惨重卖身求生存"]]}]]},{"id":"s2","t":"收益来源与道路选择","q":"你赚的到底是哪一部分钱？","src":"第 4-6 章","b":[["p","先赢后大赢：指数基金打底，再学挖掘优质企业。市值 ＝ 市盈率 × 净利润，九宫格中来钱之处只有①②④三个格子。"],["q","门外汉只需少许的努力和能力，便可以取得令人敬佩的结果；若试图超越这唾手可得的成就，便需要付出无比的智慧与无数的精力。","—— 本杰明·格雷厄姆"],["h","h1","第4章 股票收益的来源"],["t",{"m":"check","c":["检查事项","要点"],"r":[["记住格雷厄姆双重身份","持有上市公司股份者既有非上市企业少数股东身份（回报完全取决于企业利润或资产价值变化），又拥有一份可随时按市价卖掉的证书（价格常大幅偏离账面净资产）"],["检查自己赚的是三种收益来源中的哪一种","①企业经营增值（确定获利）②融资增值（确定获利）③股价无序波动（零和博弈，扣费后负和）——前两项是资产本身的变动，第三项是参与者之间的博弈"],["记住确定性收益的逻辑链","所有企业平均盈利能力 ≥ GDP 增速 → 上市公司平均盈利 &gt; 全社会企业平均 → 优秀上市公司（ROE&gt;12%）&gt; 上市公司平均 → 投资优秀企业组合长期收益率超越社会平均财富增长速度"],["记住逻辑链的分配基础","GDP 由资本（企业利润）、劳动者（工资报酬）、政府（类干股合伙人，税收分成）三者分享；企业因深化分工、专业化协作、交易费用更低（科斯《企业的性质》），<b>长期盈利能力 ≥ 劳动力回报</b>"],["用 ROE≈12% 锚定企业盈利水平认知","巴菲特 1977 年《财富》文章——道指 ROE 各期 12.8%/10.1%/10.9%，财富 500 强 11.2%/11.8%，无论高通胀低通胀基本维持 12% 左右；中国 1995-2014 全部企业年均 ROE 约 10%、上市公司大于 12%"],["别小看 2% 的 ROE 差距","20 年后 12% 收益率资产赚到的利润是 10% 收益率资产的 150% 以上"],["复制巴菲特体系时只取前三条","①优秀企业跑赢平均 ②合理乃至偏低价格参股 ③利用市场先生的错误定价；第四条保险浮存金杠杆普通投资者难以复制，不学"],["辨析融资增值的真伪","只有<b>明显高于企业内在价值</b>的融资才真正对老股东有利；高于净资产或高于市价的融资不一定有利（茅台假设案例：120 元/股增发 3 亿股隐含估值 1605.6 亿，2020 年末市值 25752 亿，新股东 360 亿换回超 6000 亿——只因其买入价远低于内在价值）"],["放弃预测短期波动","假如每月高抛低吸赚 10%，10 万元 10 年零 1 个月变成 101.98 亿（10 万×1.1¹²¹）——几百年无任何有效证据证明有人靠此发家；格雷厄姆《证券分析》《聪明的投资者》50 年经验不曾见过跟踪趋势者持续成功；凯恩斯——利用经济周期大规模买卖者不是卖得太迟就是买得太迟"],["确立收益来源底线目标","投资收益率 &gt; 全体企业平均收益率 &gt; GDP 增长率（如同位于水面不断上升的池塘里，只需平均水平的智商、知识和运气即可确定获得）"],["记住中国数据验证","1991-2014 年化——深市股票 11.2%、沪市股票 10.1%、黄金 2.9%、人民币现金 -4.1%；易方达沪深300（510310）2013.3-2021.12 扣费后年化 9.83%"],["看指数时核对口径","上证综指、深证综指、沪深 300 等对成分股现金分红按自然下跌处理，指数本身无法反映真实长期回报，应看含分红的口径（如万得全A）"],["用十年期限消除择时焦虑","万得全A 1994-2021 共 18 个滚动十年期，18/18 全部盈利（最低年化 1.60%，2007-2017；最高 21.88%，2005-2015 十年 7.2 倍）——以十年为期限从任何一年开始投资中国股市都不亏钱"],["记住持有期限与胜率关系","（西格尔 1871-2012，140 年）股票优于长债概率——1 年 61.3%、5 年 69.0%、10 年 78.2%、20 年 95.8%、30 年 99.3%（优于短债 20 年 99.3%、30 年 100%）——投资时间越长股票胜率越高"]]}],["h","h2","第5章 最简单的投资方法"],["t",{"m":"check","c":["检查事项","要点"],"r":[["记住格雷厄姆的门外汉智慧","\"门外汉只需少许的努力和能力，便可以取得令人敬佩的结果；若试图超越这唾手可得的成就，便需要付出无比的智慧与无数的精力\"——先确保拿到唾手可得的结果"],["格雷厄姆选股清单","（普通投资者版）选择 <b>10～30 家大型的、杰出的、资产负债率低、具有长期股息发放记录</b>的企业持有，即可获得满意回报（指数基金即此思想的工程化）"],["了解常见指数基金类型及代表","沪深 300（A 股大中型优质企业）、中证 500（中小型成长企业）、标普 500（美国市场主要上市公司）"],["用成本结构对比做决策","指数基金管理费极低、无业绩提成、交易佣金与印花税极少；主动型基金管理费 1%～2%/年＋利润提成 10%～50%——\"Performance comes, performance goes. Fees never falter\""],["记住彼得·林奇统计","至少 75% 的基金经理连市场平均业绩都达不到"],["记住巴菲特百万赌局结果","（2007-2017）5 家知名 FOF（可在 200 家主动基金中任选）最高年化 6.5%/十年累计 87.71%、最低 0.3%/3.04%，全部输给标普 500 指数（年化 8.5%、累计 125.8%）"],["背下\"先赢\"收益率逻辑链","沪深 300 指数基金收益率 &gt; 全部上市公司平均收益率 &gt; 全国所有企业平均收益率 ≥ 名义 GDP 增长率 &gt; 实际 GDP 增长率 &gt; 类现金资产收益率"],["基础策略","以长期视角、定时定额方式将\"睡前收入\"的剩余投资于沪深 300 指数基金；在此基础上再学习投资、挖掘优质企业进一步提升收益率（立足先赢，再求大赢）"],["用复利数字激励学习","100 万本金 50 年——10%→1.17 亿、11%→1.85 亿（+6800 万）、12%→2.89 亿（+1.72 亿）；收益率提升 1-2 个百分点值得付出精力学习"],["斯文森资产配置模型","（普通投资者版）美国股票 30%＋国外发达市场股票 15%＋国外新兴市场股票 5%＋房地产 20%＋美国长期国债 15%＋美国通胀保值国债 15%，并定时（季度/半年度/年度）动态再平衡恢复初始比例"],["用巴菲特投资品三分类给资产定性","①类现金资产（存款/货基/债券）——最危险，购买力确定不断减少，\"输\"是确定的；②不产生收益的资产（黄金/艺术品/收藏品/古董<b>及我国股市绝大部分上市公司</b>）——庞氏骗局特征，唯一期望是有人更高价接盘；③有生产力的资产（农地、公司股票）——通胀时产出保持购买力，长期收益轻松超前两类"],["记住黄金比喻校准资产价值观","全球 17 万吨黄金（2011 年价约 9.6 万亿美元）＝美国所有农田＋16 家埃克森美孚＋1 万亿美元零花钱——前者不会膨胀不创造任何产品，后者每年产出大量作物与上千亿美元分红"],["投资前自问庞氏问题","你有何能力抢在众人之前进入、并在假象被公众认识之前退出？答不出就是垫脚石的命——远离不产生收益、只博转手的资产"],["对照投资的三个层次选择路径","入门级＝定投沪深 300（预期 ≥ 名义 GDP 增长率）；进阶级＝斯文森资产配置；高级＝自建优质股票组合（巴菲特模式，需深度学习）"]]}],["h","h3","第6章 普通投资者的道路"],["t",{"m":"check","c":["检查事项","要点"],"r":[["记住市值公式这一思考工具","<b>股价 P ＝ 市盈率 PE × 每股盈利 EPS</b>（总量口径：公司市值 ＝ 市盈率 × 净利润）——市值变化只有两个源头：市盈率变化和净利润变化"],["用九宫格定位自己的获利模式，来钱之处只有①②④","①净利润↑＋市盈率↑＝戴维斯双击（最理想）；②净利润↑＋市盈率→＝赚净利润的钱；④净利润→＋市盈率↑＝赚市盈率的钱；⑥⑧为纯估值损失，⑨净利润↓＋市盈率↓＝戴维斯双杀（最惨，送财童子）"],["每次投资前自问两个问题","钱从哪里来？我有能力获取哪部分利润？"],["自查是否\"类型一\"","（花钱打发时间）无自己的投资体系、不知在哪里安身立命、视股市为赌场、依赖别人分享代码或跟着感觉走、信息来自亲友/网络神人/电视股评家/券商员工/媒体写手——输赢听天由命"],["了解类型二（赚市盈率变化的钱，持股以月/日为…","了解类型二（赚市盈率变化的钱，持股以月/日为单位）的两个子型：A 型低估值回归（选市盈率远低于市场/历史平均的公司博回归，代表：格雷厄姆、施洛斯、邓普顿、网格交易、PE 百分位仓位派——依赖低估、分散和常识，乐意承受概率损失换取总体回归利润）；B 型预测市盈率提升（不在意当前估值、赌未来市盈率升高，代表：技术图表派、赛道派、新闻联播派、宏观牛熊派——网络上最受追捧、传奇故事最多的类型）"],["了解类型三的两个子型","C 型伴随企业成长（目标①②区间，收获市盈率变化只是意外；注重行业前景、企业财报、同行竞争三方面深度研究；细分：价值投资者选低市盈率强调安全边际、成长投资者重未来成长对市盈率放得松）；D 型重组/逆转投资（以利润水平将发生根本性逆转为前提，需专业预判或灵通消息——后者每一桩重组案都有内部人吃肉的机会，自问是否有资源换消息、能否承担交换后果）"],["记住获利概率排序","<b>A 型 &gt; C 型 &gt; D 型 &gt; B 型 &gt; 类型一</b>；学习难度排序：类型一 &lt; D 型 &lt; A 型 &lt; C 型 &lt; B 型"],["以历史经验与逻辑推理为据选择道路","成功者主要集中在 A 型和 C 型"],["投资道路选择前花时间想透四个问题","兴趣爱好（爱好与优劣势是什么）／努力方向（乐意在哪方面付出努力）／竞争优势（哪方面可能取得对其他人的局部优势）／生存之道（哪种方法能支撑自己在这个市场生存）——这比几个涨停板代码重要一百倍"],["参考作者本人的选择","唐朝走 C 路线（伴随企业成长策略）"]]}]]},{"id":"s3","t":"股权思维与优质企业识别","q":"这家企业凭什么持续赚钱？","src":"第 7-9 章","b":[["p","买股票就是买企业的一部分。ROE 是路标，顺着它找「没记录在报表里的特殊资源」，再用波特五力验证竞争优势能否守住。"],["co","warn","⚠ 市场会重奖错误行为","逻辑破成筛子的行为可能大把赚钱——888 元买必涨代码、数波浪、追题材暴涨。绝大部分亏损者都是没抵挡住这种诱惑：手持火把穿过炸药库，即使毫发无损，也改变不了你是蠢货的事实。","第 9 章"],["h","h1","第7章 投资无须\"接盘侠\""],["t",{"m":"check","c":["检查事项","要点"],"r":[["牢记根本认知","第三类资产（优质企业股权）<b>不依赖\"接盘侠\"获利</b>——长期收益的根本来源是企业盈利增长，而非后来者推高价格"],["理解\"金钱永不眠（Money never s…","理解\"金钱永不眠（Money never sleeps）\"规律：盈利能力相同而价格不同的两项资产，资本必然买入便宜的、卖出昂贵的，最终缩小价差——这是不以人的意志为转移的经济规律"],["因果不可颠倒","第三类资产是因为具有较高回报才被抬高价格，<b>并非因为价格被抬高才产生较高回报</b>"],["学习泸州老窖经典推演结论","1994 年 9 月以 20 元/股（几乎年度最高点）投入 20 万元，不逃顶不抄底、分红全部再投资，截至 2021 年末持有 221,090 股、市值约 5,612.8 万元，27 年 3 个月年化收益率约 23%（280.64 倍），比巴菲特长期年化还高约 3 个百分点"],["会做长期回报分解","截至 2018 年 6 月底年化 18.97% 中，企业净利润年化增长贡献 17.09%（净利润从 1994 年 0.58 亿增至 2017 年 25.58 亿），市盈率提升仅贡献 1.88%——长期回报主要来自企业盈利增长"],["掌握分红再投资推演公式","股息＝上期持股量 ÷ 10 × 每 10 股派息 × (1 − 10% 股息税)；股息买入股数＝本期实收股息 × (1 − 0.5% 交易费) ÷ 本期收盘价；期末持股量＝上期持股量 ＋ 送转股 ＋ 股息买入量"],["理解超级大熊市推演结论","买入后股价从 11.9 元起每半年稳定下跌 5%（2021 年末仅 0.75 元），持有人 27 年年化反而约 31%（约 1,573 倍）、持股 4.2 亿股占总股本 28.65% 成为第二大股东——对持续盈利+分红的企业，股价下跌提高分红再投资效率，长期回报反而更高"],["记住大熊市推演的市值/分红对比","截至 2021 年末持仓市值仅约 3.15 亿元（419,740,062 股 × 0.75 元），而按 2020 年净利 60 亿元、分红 30 亿元保守计算，持 28.65% 股份一年可收现金分红 30 亿 × 28.65% ≈ 8.6 亿元——一年分红远超总市值，这样的股份不可能以 3.15 亿元出售"],["若每半年跌幅扩大至 10% 的更极端推演","2009 年上半年持股将超 10 亿股成为控股股东；2014 年上半年买下全部股份（仍有 4 亿多元分红款无处再投资），此后每年数十亿元净利润全部归投资者所有"],["大熊市推演的中途截面","持续 24 年熊市后持股 1,953.4 万股、市值 2,090 万元，年化 21.62%，反而比真实市场（1,292 万、18.97%）多 798 万元；最近一年税后分红达 1,073 万元（持股超一年免税则约 1,192 万元）"],["明白极端熊市为何不会真实发生","企业盈利持续增长而股价持续下跌的情形无法长期存在——资本逐利必然抢购，这正是真正赚钱的企业股价长期必然上涨的根本原因"],["辩证看待涨跌","股价上涨→账面回报上升但再投资成本提高、长期回报下降；股价下跌→账面回报下降但同额分红可买更多股份、长期回报上升"],["认清与接盘侠的真实关系","逐利资本抬高股价反而<b>降低了</b>原持有者的长期回报（抬高了再投资成本）；优质股权持有者并不欢迎接盘侠过早到来"],["明确投资真正重要的任务","寻找未来长期利润增长能接近甚至超过泸州老窖的企业，逐步建立自己的能力圈"],["⚠ 保持清醒","寻找未来长期增长的优秀企业极其困难，理解商业模式并确认利润持续确定增长不是点鼠标看几个指标能完成的，需要终身深入学习、日拱一卒"],["估值时注意","泸州老窖上市以来至少 7 次腰斩（平均约三年一次）——用\"经历过全部腰斩、不具备抄底逃顶能力\"的保守口径检验长期回报结论的稳健性"]]}],["h","h2","第8章 股权与其他投资品的对比"],["t",{"m":"check","c":["检查事项","要点"],"r":[["用数据对比检验资产配置认知","（1994 年 20 万元、27 年期限）股权投资 5,612.8 万元（年化 23%、280 倍）＞ 按揭购房 1,800 万元（18%、90 倍）＞ 全款购房 550 万元（13%、27.5 倍）＞ 理财产品 75 万元（5%、3.75 倍）＞ 黄金 65.9 万元（4.5%、3.3 倍）"],["记住反直觉结论","黄金（1994 年约 112 元/克 → 2021 年末约 369 元/克）长期年化仅 4.5%，即使刚经历全球金价大涨也跑不赢理财，传说中\"抗通胀\"的黄金实际收益率少得可怜"],["理解\"股票是一种特殊债券\"","全部上市公司整体拥有约 10%～12% 的净资产收益率，类似债券的\"票面利率\"，远高于普通债券约 4% 的利率"],["区分特殊债券与普通债券的三点不同","① 永不到期、投资者整体无权退出；② 无法重新议定\"利率\"（ROE）；③ 收益仅部分以现金分红，剩余留存用于扩大再生产"],["理解留存收益的三重回报机制","① 享受远超真实债券利率的经营回报；② 留存收益以相当于净资产值的价格\"特权认购\"高息债券（他人需溢价购买）；③ 前两点被广泛认知后资本追捧推升股价"],["用伯克希尔案例验证留存价值","57 年仅分红一次，股价从 1964 年约 13 美元涨至 2021 年末 450,662 美元（34,665 倍以上，年化约 20%）——前提是留存再投入持续产生高于真实债券息率的回报"],["应对\"铁公鸡\"策略一 · 质疑利润真实性","公司无合理理由不分红/低分红时，怀疑利润真实性及管理层诚信，<b>作为估值扣分项</b>"],["应对\"铁公鸡\"策略二 · 控股股东动力机制","很赚钱且无短期资金需求的公司，控股股东本身有动力推动分红，对管理层形成制约"],["应对\"铁公鸡\"策略三 · 资本市场博弈","收银机里钱太多，总有资本想办法取出来（如 2015—2017 年宝能收购万科之战），博弈会纠正公司对待股东的态度或直接推升股价"],["应对\"铁公鸡\"策略四 · 监管制度保障","证监会对现金分红有强制要求；绝大部分优秀公司有股东回报规划与年度分红比例承诺"],["选股实操","<b>有意识地给历史分红记录及分红率更多权重</b>"],["建立核心理念","买入股票不是买入一张计划未来转手卖出的票据，而是<b>买入一家企业的部分所有权</b>（巴菲特\"不介意买入后股市关门\"）"],["保持适度清醒","上市超 20 年的公司中盈利增长达泸州老窖水平并不罕见，但<b>优质企业永远是珍稀品种</b>，挖掘和研究优质企业才是长期持续盈利的正事"]]}],["h","h3","第9章 优质企业的特征"],["t",{"m":"check","c":["检查事项","要点"],"r":[["掌握寻找优质企业的两条路径","<b>自上而下</b>（先选国家→选未来发展空间大的行业→选行业内具优势企业，要求高商业前瞻能力）与<b>自下而上</b>（从企业本身出发）"],["记住格雷厄姆给普通投资者的四条股票投资建议","（《聪明的投资者》第五章第二节）① 充分但不过度分散，资金分散在少则 10 只、多则 30 只股票；② 只选大型、杰出且举债保守的公司；③ 购买对象有长期持续的股息发放记录；④ 只买低市盈率股票——市值不超过过去 7 年平均净利润的 25 倍，若用最近四个季度净利润则买入上限为 20 倍市盈率"],["理解格雷厄姆体系本质","构建一个<b>低估值指数</b>——用分散规避财报造假风险、利用市场情绪、相信悲观过后必有乐观"],["参照施洛斯战绩建立信心","严格坚守格雷厄姆原则 47 年，累计 1 变 5456，年化 20.1%"],["巴菲特体系选股起点","<b>从净资产收益率（ROE＝净利润 ÷ 净资产）指标开始</b>——巴菲特称若只能挑一个指标选股就选 ROE"],["理解高 ROE 的含义","长时间维持较高 ROE 意味着赚同样利润用了更少资本（或同样资本赚更多利润），且<b>这与股价高低无关</b>（股价是股东间交易，不改变公司掌控的资源）"],["学会关键追问一","同等投入获取更多利润违反资本逐利天性——<b>凭什么同行或其他资本不参与竞争抢走它的超额利润？</b> 顺此追问一定能发现某种\"没有被计算在报表净资产里的特殊资源\""],["对照\"特殊资源\"九类清单","优秀管理层 / 独特产品 / 品牌及无形资产 / 成本优势 / 规模门槛 / 转换成本 / 网络效应 / 行政管制 / 特殊关系"],["学会关键追问二","<b>这种带来超额利润的资源，未来能保持甚至越来越强，还是可能被同行或其他行业削弱？</b> 答案为前者才是具有竞争优势的企业"],["用三特性检验竞争优势企业产品/服务","① 被<b>需要</b>；② <b>很难被替代</b>（同质化产品结局必然是价格战，不死也只能苟活）；③ <b>价格不受管制</b>（管制下难获高额利润）"],["会用茅台 / 国投电力 / 民生银行三维度对比法","茅台（被需要✓＋替代难度最高＋无价格管制）优势远大于国投电力（火电近乎无差异化＋价格几乎完全管制）与民生银行（服务可替代性中等＋部分管制）"],["掌握波特五力模型","（迈克尔·波特《竞争战略》）潜在竞争者进入壁垒 / 替代品威胁 / 买方议价能力 / 卖方议价能力 / 现存竞争者竞争——寻找在五个方面<b>尽可能多占优势</b>的企业"],["用茅台案例练习五力分析","① 进入壁垒四大项——白酒生产许可证（已不批，2020 年取消审批）、茅台镇环境与土地（金钱无法复制）、酱香生产周期长资金量大需熟练酒师、数十年老酒储备（无法买到足量）；② 供应商（高粱小麦农民）议价能力非常弱——播种前签长期合同；③ 购买者（经销商）议价能力近于零——缴保证金、提前打款、按配额拿货，公司可灵活调出厂价；④ 替代品：同档次无完全替代品，五粮液/国窖 1573/梦之蓝 M9/青花郎只是退而求其次的备选；⑤ 行业内为差异化竞争，各自锁定忠实客户、全行业高毛利"],["记住茅台壁垒形成的\"两难困局\"","追求茅台质量就无法形成有威胁的数量，追求数量就无法比肩质量——根本无法形成有威胁的竞争"],["理解五力模型的实操价值","新接触企业时按模型\"生搬硬套\"多练，会发现世界存在少数\"结果必然如此\"的企业——数量稀少且多数时候不便宜，提前研究并确定买点后，罕见的大跌就可能带来良机"],["掌握 81 种可能矩阵","企业分优质/普通/垃圾三类 × 高估/合理/低估三种状态，共 81 种买卖组合，其中 21 种导致亏损、11 种与优质企业相关"],["记住市盈率硬约束","<b>凡是市盈率高于市场无风险收益率倒数的，一律不碰</b>（如无风险收益率 4% 时，市盈率高于 25 倍的一律不碰）——加上这条约束后亏损可能从 11 种降到 6 种，且全部由企业变质引起"],["无风险收益率的取值口径","长期国债与 AAA 级企业债券收益率<b>二者中的较大值</b>"],["两条简单规则躲过 21 种赔钱姿势中的 15 种","① 只买具有某种或某几种显著竞争优势的公司；② 市盈率高于无风险收益率倒数的一律不买"],["以\"求不败\"三原则入手","① 择企业——只与五力模型显示具备竞争优势的企业为伍，拒绝垃圾股、题材股击鼓传花的暴利诱惑；② 择价格——拒绝在市盈率高于无风险收益率倒数时买入；③ 持续跟踪——对竞争优势受损、可能变质的动态保持敏感"],["目标企业画像","净利润含金量高、被替代可能性小的\"<b>印钞机</b>\"，在贵得不明显的价格以下分散各入一小股，让复利发挥威力，不为股价波动紧张"],["⚠ 警惕市场重奖错误行为","逻辑破成筛子的行为可能大把赚钱（888 元买必涨代码、数波浪、追题材暴涨），绝大部分亏损者都是没抵挡住这种诱惑——\"手持火把穿过炸药库，即使毫发无损，也改变不了你是蠢货的事实\""],["理解越晚踩雷危害越大","投资额越大损失越大；复利的绝密武器——<b>时间</b>——被浪费越多"],["分清投资的道与术","道＝坚持做且只做正确的事，并<b>愿意为此放弃市场颁发给错误行为的奖金</b>；术＝研究公司、财务估值——道才是长久盈利的核心秘诀"],["坚信正确的事","可持续的投资收益主要来自<b>企业成长</b>，而不是市场参与者之间互摸腰包"],["正确理解巴菲特\"绝对不要亏损\"两条规则","亏损 ≠ 股价低于买入价；巴菲特定义的亏损＝<b>企业创造的自由现金流低于同等资本投入次优选择所能带来的现金流</b>"],["富国银行案例校准心态","巴菲特 1989 年约 70 美元买入（约 7 倍 PE、1.5 倍 PB），浮亏超 20% 长达三年仍持续在 70 美元以下加仓，1993 年才转盈——特别有把握的投资也会长期浮亏"],["德克斯特鞋业教训","1993 年 4.33 亿美元（约 15 倍 PE）收购，致命错误是<b>用 25,203 股伯克希尔股票而非现金支付</b>，股票后来升值至 113.58 亿美元——好公司股权支付收购对价会放大错误；竞争优势也可能\"短短几年内消失\"，巴菲特称之为其最糟糕的决策"],["德克斯特经营恶化轨迹数据","收购后净利润持续下滑，1999 年仅 1,100 万美元（约为 1993 年的 40%）、2001 年爆出 4,500 万美元亏损；巴菲特 2007 年致股东信自评——\"这次收购花掉的不是 4 亿美元，而是 35 亿美元。实际上，我是用一个优秀公司（现价值 2,200 亿美元）的 1.6%，换来一个毫无价值的烂公司\""],["Tesco 案例教训","2012 年前 23 亿美元买 4.15 亿股，2014 年清仓亏 4.44 亿美元（近 20%）——\"厨房里发现一只蟑螂，一定会继续遇到它的亲戚们\"，尽快认错离场"],["用小饭馆模型理解盈亏","饭馆是否亏损不由隔壁饭馆转让价决定，而由每天营业额−人工−房租−材料−税收−折旧后的<b>现金剩余（自由现金流）</b>决定；投资意义上的盈利＝企业自由现金流 <b>＞</b> 资本投入次优选择（存银行/买理财）带来的现金流，与他人以什么价格交易股权完全无关"],["要点一 · 摆脱股价波动影响","股市的存在是<b>为了服务你而不是左右你的决定</b>（\"股市只是观察愚蠢行为的地方\"）；学农场主比喻——邻居（市场先生）报价低得可笑且有闲钱就买入，高得离谱就卖给他或不予理会、继续种自己的地"],["要点二 · 关注企业未来产出","决策取决于对企业未来产出及成本的判断；倾向选稳定行业中具长期竞争优势的企业以便估算价值；<b>无法估算大概价值的企业，远离</b>——无法确认出价瞬间是否已形成亏损"],["要点三 · 判断错误时亏损已经发生","竞争优势消失或企业本质变化→未来自由现金流与预测产生巨大偏差→按新判断估算的价值低于当下市值→无论市价高于还是低于买入价，亏损都已出现，须<b>尽快认错</b>（\"陷在烂泥里，最重要的是尽快不再下陷\"）"],["记住投资的两大难点","① 摆脱股价干扰（本能用股价差衡量赚赔，要求关注企业内在价值、\"利用\"而非承受波动）；② 计算内在价值（只有明确内在价值才能判断交易是否应该发生）"]]}],["t",{"m":"veto","c":["否决信号","书中依据"],"r":[["市盈率高于无风险收益率倒数","第9章：如无风险收益率 4% 时高于 25 倍的一律不碰——加上此约束，81 种组合中亏损可能从 11 种降至 6 种"],["产品同质化，只能靠价格战竞争","第9章：同质化产品结局必然是价格战，不死也只能苟活"],["产品或服务价格受管制","第9章：管制下难获高额利润"],["无法估算大概价值的企业","第9章：远离——无法确认出价瞬间是否已形成亏损"],["管理层有欺瞒记录 / 与烂人做生意","第11/15章：厨房里有蟑螂就不止一只；老窖「放卫星」黑历史；芒格：你不可能通过和烂人打交道做成一笔好生意"]]}]]},{"id":"s4","t":"大师体系的演进","q":"你的估值规则从哪里来？","src":"第 10-12 章","b":[["p","从格雷厄姆的烟蒂与安全边际，到巴菲特把股权调整为「未来收益索取权」，再到芒格与费雪推动的经济商誉突破——老唐估值法的每一条规则都有出处。"],["q","时间是好公司的朋友，但却是烂公司的敌人。","—— 沃伦·巴菲特 · 1989 年致股东信"],["h","h1","第10章 格雷厄姆奠定的理论基石"],["t",{"m":"check","c":["检查事项","要点"],"r":[["建立\"内在价值\"视角","股票除股价外，还有一个与股价<b>不完全同步</b>的\"内在价值\"；内在价值大致等于公司作为非上市公司出售给私人产业投资者的价格（不确定的概念，但有可估算范围）"],["接受格雷厄姆核心命题","<b>股票是一种债券，只不过票面利率不固定</b>——可通过科学方法找到安全性媲美债券、收益率更高的股票"],["理解组合投资的理论根基","<b>个体的风险与总体（群体）的风险存在根本性差异</b>——单只股票风险高于债券，但充分分散的股票组合整体具有向上动力（经济增长＋未分配利润再投资＋通胀）"],["记住茅台案例结论","2001 年 20 亿元投资获取 26% 股权，20 年仅现金股息即超 315 亿元（公司累计分配超 1213 亿元）——高收益建立在\"总体或群体\"基础上，不是对个体公司的判断"],["掌握<b>安全边际定义</b>","买入价明显低于股票内在价值的状况；估算区间不必精确——内在价值 30～110 美元的结论，只在股价低于 30 或高于 110 时才有用"],["记住格雷厄姆买入标准","每只股票买入价<b>低于有形资产净值的 2/3</b>，最好<b>低于净流动资产的 2/3</b>（有形资产净值＝总资产−总负债−商誉专利等无形资产；净流动资产＝有形资产净值−固定资产）"],["理解兜底价值逻辑","股票代码是企业部分所有权的法律凭证——经营良好时有收益分配权，破产清算时有偿债后剩余资产分配权；格雷厄姆把未来经营良好看作\"额外的馈赠\"，体系主要锚定清算兜底价值"],["理解烟蒂买入的实际退出方式","由于资本的逐利天性，低于重置价值或清算价值的公司股票，市价经常会大幅上涨，绝大部分无须真的等待破产清算即可获利退出"],["格雷厄姆资产配置规则","最多 <b>75% 投股票</b>、<b>25% 以上买国债</b>、至少分散 <b>30 家公司</b>（格雷厄姆本人经常持有超过 75 只个股）"],["会用<b>市场先生寓言</b>","市场先生每天报价，情绪在贪婪恐惧间摇摆——铁律：他是为你服务的而不是指导你；<b>对你有用的是他的口袋，不是他的脑袋</b>；如果他表现得特别愚蠢，可以忽视他或利用他；<b>如果你受到他的影响，那将是一场灾难</b>"],["用巴菲特农场比喻自检","正确做法是计算这片地能产多少粮食、根据土地产出判断价值、报价低时买入高时卖出；错误做法是预测邻居明天报什么价、被报价牵着鼻子走——\"股票代表公司所有权的一部分，不是 K 线图上的红绿蜡烛\""],["记住格雷厄姆业绩基准","基金存续 33 年跨越大萧条，<b>年化收益率超过 20%</b>（1956 年退休时道指 400～500 点）"],["**格雷厄姆晚年标准操作流程（1976 年…","<b>格雷厄姆晚年标准操作流程（1976 年 9 月，可直接执行）</b>：① 找出所有 TTM 市盈率小于 X 倍的股票（TTM 市盈率＝市值÷最近四个季度净利润）② X＝1÷(2×无风险收益率)，无风险收益率取<b>十年期国债利率与 AAA 级企业债券利率二者较大值</b>（例：4% 时 X＝12.5）③ 筛出其中<b>资产负债率&lt;50%</b> 的 ④ 选<b>至少 30 只</b>、每只投入<b>不超过总资金 2.5%</b>、股票投入上限<b>不超过总资金 75%</b> ⑤ 剩余 25% 及选股不足的剩余资金买国债 ⑥ 任何个股上涨 <b>50%</b> 后卖出，换入新对象或国债 ⑦ 第二年年底前涨幅不到 50% 的也卖出（例外：仍在新的可选名单里则放弃卖出）⑧ 周而复始"],["该流程预期收益","长期<b>超过 15%</b>；特点：对商业能力基本无要求、关注兜底价值与已存在的资产负债、只看已有记录的盈利分红、几乎不涉及对前景的判断"],["格雷厄姆体系的使用门槛","始终建立在使用者\"没有什么商业能力\"的假设上，本质是统计学＋对价值投资基本原理的信赖；投资者只要具备<b>足够的耐心</b>和<b>一点点阅读财报的基础知识</b>就足够了"],["参照施洛斯验证体系有效性","47 年 5456 倍、年化 20.1%；方法＝只阅读和统计财报数据、几乎不做企业调研、买下等待价值回归卖出、周而复始"],["牢记《证券分析》三大原则","① <b>股票是企业部分所有权的凭证</b> ② <b>无情地利用市场先生的报价</b> ③ <b>坚持买入时的安全边际原则</b>"],["从 GEICO 案例学习\"例外与运气\"","该笔投资违背格雷厄姆体系四项标准（按账面净资产作价、尽调不足、占基金 20%～25% 仓位、触碰投资公司持保险公司 10% 上限的法律红线），却以 71.25 万美元买下 50% 股权后上涨 200 多倍、获利超过其他所有投资总和（去掉它年化从 20%+ 降为约 17%）——一次幸运机会的结果可能超过熟悉业务者一辈子的努力，但前提是已打下足够基础并具备手段、判断力和勇气"],["记住格雷厄姆对成长股的保留态度","\"成长股投资者不知道应对成长股支付多少价钱、买多少股票、价格会怎样变化……人们根本不可能应用成长股那套理论获得合理和可靠的收益\""],["注意 GEICO 重仓理由隐含的进化线索","\"人们离不开的业务\"（护城河雏形）＋成长会让暂时的高价回落为合理甚至低估"]]}],["h","h2","第11章 巴菲特的继承与思考"],["t",{"m":"check","c":["检查事项","要点"],"r":[["破除\"价值投资老了才有钱\"的谣传——用数据校…","破除\"价值投资老了才有钱\"的谣传——用数据校准信心：巴菲特 26 岁自有资金 14 万美元（≈今天 355 万美元/约 2400 万人民币）、31 岁破 100 万美元、39 岁达 2650 万美元；合伙基金 1956—1969 存续 13 年累计约 28 倍、<b>基金年化 29.5%、客户扣提成后年化 23.8%</b>"],["记住早期 GEICO 教训的双面性","21 岁巴菲特投入 10,282 美元（占全部身家 50%～75%）<b>违背老师的分散原则</b>；涨近 50% 清仓则是<b>严格遵循</b>格雷厄姆卖出准则——教条执行卖出后股价不停上涨，成为质疑的种子"],["理解推动分叉的时代环境","1941—1969 年道指涨幅 736% 的大牛市＋美元 1971 年与黄金脱钩进入法币时代，<b>资本从债类资产向股权资产转移不可逆转</b>"],["记住\"两把剪刀\"","符合格雷厄姆标准的股票因（资本涌入、信息渠道快速发展、SEC 信息披露规则）而<b>大规模减少</b>；资金规模却不断变大（1968 年超 1 亿美元）——大资金买烟蒂会被迫成为\"推动价值实现的人\"（进董事会、换管理层、卖资产、解雇员工）"],["理解师徒分歧的钥匙","<b>格雷厄姆的分散原则是写给\"普通\"投资者的</b>（假设不具备分析企业能力）；对能看见成长的高阶投资者偏向集中——巴菲特原话：能发现 5～10 家具长期竞争优势且价格合理的企业时，\"传统的分散投资就毫无意义，反而会损害你的投资成果并增加你的投资风险\""],["吸收伯克希尔-哈撒韦（最烂投资）的教训","（1979 年致股东信）所谓有\"转机\"的公司最后鲜有成功，<b>与其把时间精力花在购买廉价的烂公司上，不如以合理的价格投资一些优质企业</b>"],["背下烟蒂投资法两大警告","（1989 年致股东信）① <b>看似便宜的价格可能最终根本不便宜</b>——处境艰难的公司解决一个难题后会冒出另一个难题，\"厨房里如果有蟑螂，就不可能只有一只\" ② <b>价差优势很快会被低回报侵蚀</b>——800 万美元买清算价值 1000 万的公司，若十年后才处理掉，即便收回 1000 万加几个点分红也非常令人失望；<b>时间是好公司的朋友，但却是烂公司的敌人</b>"],["记住\"骑手与马\"原则","优秀的骑手只有在良马上才会出色，在劣马上只能毫无作为——能干忠诚的管理层在具竞争优势的公司里创佳绩，\"在流沙中奔跑不会有任何成果\""],["记住芒格的忠告并用作筛选","\"<b>你不可能通过和烂人打交道做成一笔好生意</b>\"——巴菲特最终原则：只与那些我喜欢、信任和尊敬的人做生意（注意：好管理层本身不保证成功，竞争优势公司＋优秀管理层才能成就奇迹）"],["掌握费雪的三条卖出情形","① 最初买入所犯的错误情况越来越明显 ② 公司营运每况愈下 ③ 发现另一家更好的公司——仅因市场波动或盈利多少决定卖出是荒谬的；费雪立场：<b>过度分散可能比集中更危险，只有最好的股票才值得持有</b>"],["记住喜诗糖果的分叉意义","2500 万美元收购账面净资产仅约 800 万美元的公司——<b>买下显而易见的好业务并陪伴它成长，远比买个烂生意整日想着怎么清理掉愉快得多</b>；世界上确有\"注定如此\"的生意（不需处理设备、清空存货、解雇员工，反而要增加员工加薪水）"],["记住巴菲特自述","\"如果我只学习格雷厄姆一个人的思想，就不会像今天这么富有\"——格雷厄姆体系收益率高但有三重代价：生活狼狈、可管理资金规模受限、财富总值大大缩小"],["用施洛斯 vs 巴菲特的规模对比印证三重代价","两人同样以 10 万美元起步，施洛斯客户扣提成后年化 15.25%，但基金规模最大仅 1.3 亿美元（92 名客户、连秘书都不请，5,456 倍总回报中大量资金未参与复利）；巴菲特 2002 年个人资产已达 350 亿美元——格雷厄姆体系\"可管理资金规模受限、财富总值大大缩小\"的实证"],["**烟蒂股估值模板（邓普斯特 1961，折扣…","<b>烟蒂股估值模板（邓普斯特 1961，折扣率可直接套用）</b>：现金类资产按 100%、应收账款按 85%、预付费用按 25%、存货按 60%、工厂及设备按 60% 折价估算，负债按 100% 全额确认——净资产 460 万美元估为 214 万（47%）；最高买价 30.25 美元/股（约为账面净资产 4 折、自身估值的 78% 以下），占净流动资产 57%（严格执行低于净流动资产 2/3 的门槛）"],["掌握控股烟蒂后的价值实现三步","积极回收应收账款 → 低于账面值变卖存货和设备收回现金（同时产生可抵扣亏损、降低以后纳税基数）→ 将变现现金配置于低价证券——邓普斯特案例账面净资产缩水 12% 的同时内在价值反增 40%，1963 年以每股 80 美元退出获利约 230 万美元"],["<b>格雷厄姆大型企业估值标准</b>","道指/标普成分股收益率<b>至少应相当于 AAA 级债券收益率的 4/3 倍</b>（例：AAA 利率 4.5% → 股票应有收益率 6% 以上 → 市盈率低于 16.6 倍才合理）；理由：\"股票投资应比债券投资多要求至少 1/3 的收益，因为股票投资比债券投资麻烦得多\""],["<b>格雷厄姆清晰买点</b>","当前 AAA 级债券利率水平的 2 倍为收益率起点，同时市盈率不超过 7～10 倍——AAA 利率低于 5% 时买入最高市盈率设为 <b>10 倍</b>；高于 7% 时设为 <b>7 倍</b>"],["理解买点背后的估值公式","道指合理价值＝<b>过去十年平均盈利 ÷（2×AAA 级债券利率）</b>（即以 AAA 利率 2 倍为比例将十年平均盈利资本化；假设过去十年平均盈利可保守模拟未来盈利、双倍资本化比例足以补偿股票风险）——已基本正确反映 1881 年以来道指合理价值"],["买点公式的数值化示例","（老唐\"中翻中\"）AAA 债券利率 4%（即债券市盈率 25 倍）时，<b>道指合理价值 = 成分股过去十年平均盈利 × 12.5 倍</b>（十年平均盈利 ÷ 8%）"],["<b>格雷厄姆卖点</b>","投资者应在主要指数（道指/标普）<b>收益率低于优质债券收益率时离开股票市场</b>——债券收益率 4% 时，道指市盈率大于 25 倍即应清仓"],["理解该体系的现代形态","本质是<b>宽基指数基金的加强版雏形</b>——用格雷厄姆估值技巧操作宽基指数基金（沪深 300、中证 500、恒生、沪深港 500、标普 500 等），估值便宜时多买、昂贵时少买不买乃至卖出"],["记住分散度的差别待遇","大型杰出企业（大型、杰出、资产负债率保守、有良好股息记录）分散 <b>10 只以上、最多不超过 30 只</b>；烟蒂股<b>最少 30 只</b>"],["记住师徒分歧的两个具体焦点","格雷厄姆认为\"优秀企业\"章节对一般读者太艰深（拒绝写入《聪明的投资者》修订版，巴菲特为此放弃合著者身份）；股票占个人总资产比例上限 75% vs 巴菲特\"价钱合适会押上全部家当\""],["芒格的复盘","（突破的实质）\"有的股票价格是账面净资产价值的两三倍，但仍然是非常便宜的，因为该公司的市场地位隐含着<b>成长惯性</b>……用那些可能吓坏格雷厄姆的标准来定义便宜\"——伯克希尔数千亿美元资产大部分来自这些优质企业"],["掌握老唐总结的根本调整","巴菲特把\"股权代表企业（<b>现有资产所有权</b>）的一部分\"调整为\"股权代表企业（<b>未来收益索取权</b>）的一部分\"——关注点从资产真实性和变现价值，转向\"靠什么赚钱、今后能赚多少钱、其中多少可供股东分配\"；今天账面拥有多少资产没那么重要"],["理解格雷厄姆剔除商誉/无形资产的原因","不是认为它们不是资产，而是<b>无法变现或变现非常困难</b>（含固定资产及非通用设备）——不能变现的资产只能当作安全边际对待，<b>不能为它出钱</b>"]]}],["h","h3","第12章 芒格与费雪推动的突破"],["t",{"m":"check","c":["检查事项","要点"],"r":[["记住平行实验数据","1962—1969 芒格基金年化 35.6% vs 巴菲特 30.2%（8 年中 5 年跑赢；1 万美元分别变 11.46 万与 8.25 万）——芒格\"伴随优质企业成长\"路线更优且<b>没有处理资产、更换管理层、解雇员工的烦心事</b>"],["掌握<b>经济商誉</b>概念","没有被记录在一家公司资产负债表里、但却实实在在能够为企业带来利润的<b>隐藏资产</b>（区别于会计商誉＝收购成交价超过可辨认净资产公允价值的部分）；最简例子——面馆做面的手艺"],["记住巴菲特 1983/1985 年致股东信要旨","特别倾向于<b>拥有可持续经济商誉而对有形资产需求很小</b>的企业；喜诗糖果、布法罗晚报、内布拉斯加家具商城只需少量增量资金便大幅提高盈利——对比美国公司平均<b>每创造 1 美元税前利润约需投入 5 美元新资本</b>"],["理解\"矛盾\"表述","（1990 年斯坦福演讲）其他条件相等，企业赚取一定利润，<b>资产越少价值越高</b>；真正让人期待的是<b>无须提供任何资本便能运作</b>的企业——仅靠金钱无法在与它的竞争中获得优势，这样的企业才是伟大的企业"],["铭记护城河判定铁律","<b>仅靠金钱就可以填平的护城河，一定会被金钱填平</b>；拥有金钱无法购买的经济商誉，企业才有成为伟大企业的可能性"],["顺着 ROE 找经济商誉","巴菲特选的公司都是<b>净资产收益率超过 20%</b> 的企业"],["<b>ROE 要倒过来看</b>","观察到高 ROE → 追问\"这家公司有什么资产没有记录在账面上\"；观察到低 ROE → 追问\"什么资产已经损毁或减值却还没从账面上抹去\""],["会用经济商誉方程式","设无风险收益率 N、账面净资产 A、经济商誉 G、ROE=R，由 (A+G)×N＝净利润＝A×R 推出 <b>G＝(R÷N−1)×A</b>——ROE 越大 G 越大；<b>ROE 低于无风险收益率时 G 为负</b>（有形资产的实际盈利能力连国债都不如）"],["方程式的推导前提","由于资本每时每刻逐利，<b>当下所有资产的实际收益率是一致的，全部等于常数 N（无风险收益率）</b>，否则会引发套利行为，直至收益一致或差异小于套利成本"],["掌握<b>能力圈原则</b>","将自己对企业的估值和投资决策，限定于自己<b>能够理解</b>的企业——核心不在于看懂多少企业，而在于<b>无法确定自己能够理解该企业，就坚决不去投资，哪怕为此将所有企业均排除在外</b>"],["会用棒球甜蜜区比喻","企业如棒球一个个飞过来，只在\"买入区\"和\"卖出区\"出手，其他一律放过——<b>股市从来不会因为你没有行动而惩罚你</b>，你有绝对权力只在最有把握时才出手击球"],["<b>\"看得懂\"四问</b>","① 这家公司通过销售什么商品或服务获取利润？② 它的客户为何从它这里购买，而不选其他机构？③ 资本天性逐利，为什么其他资本没有提供更高性价比（同质同量＋更低售价，或同售价＋更高质量/数量）的商品或服务抢占它的市场份额？④ 假设同行或产业巨头挟巨资参与竞争，公司能否保住乃至扩大市场份额？"],["前三问＝找护城河，对照常见护城河类型清单","差异化的产品或服务／更低的成本和售价／受法规保护的专利或资质／秘不外传的技术／更高的转换成本／优越的特殊地理位置／网络效应——总得有一样或几样东西，是竞争对手<b>付出非常高代价才能获得、甚至无论付出多高代价都无法获得</b>的"],["第四问＝检验河能否被填平","竞争者未来有没有办法<b>填平</b>这条河、<b>搭上桥</b>、或用<b>空降</b>方式绕过护城河直取用户？能逻辑清晰回答四问题＝基本看懂；无法清晰回答＝归入看不懂，<b>直接排除</b>或列为待学习对象"],["从相当小的能力圈开始","在能理解并能给出估值的企业中寻找价格低于内在价值的；无法给出估值的公司<b>忽略它们</b>"],["能力圈内没有对象时的出路","先赢后大赢——沪深 300（或沪深港 500）指数基金收益率 &gt; 全部上市公司平均 &gt; 全国所有企业平均 ≥ 名义 GDP 增长率 &gt; 实际 GDP 增长率 &gt; 类现金资产收益率"],["对照巴菲特偏爱/回避企业特质清单","偏爱简单易懂变量少、未来 10～20 年变化不大、确定的好结果（<b>宁愿要确定的好结果，也不要\"有可能\"的伟大结果</b>）、有宽广护城河、管理层德才兼备（\"守护城堡的公爵\"）；回避复杂多变、快速变化产业（搞不懂甲骨文/莲花/微软护城河十年后会怎样）、门槛低的生意（容易招来竞争对手）"],["记住巴菲特的名言","\"投资成绩与奥运跳水比赛的计分方式并不相同，<b>高难度并不能得到加分</b>\"——偏爱变化不大的公司与产业，宁愿要确定的好结果"],["会用\"10 亿美元测试\"检验护城河","给我 10 亿美元去做口香糖生意，挫得了箭牌的威风吗？给我 100 亿美元在全球和可口可乐竞争，能伤着它吗？——做不到的才是好生意"],["记住时点观","一门心思琢磨生意<b>将来会怎么样，别太纠结什么时候</b>——把将来能怎么样看透了，什么时候实现没多大关系；<b>择时很容易掉坑里</b>；好生意不管新闻热点、不考虑今年明年"],["破除公式幻想","<b>巴菲特从来没有给过估值公式，只说了原则</b>——任何股票、债券或企业的价值，都取决于将资产剩余年限自由现金流以适当利率折现后的数值，这是评估生意或投资是否具有吸引力的<b>唯一合理方法</b>"],["掌握自由现金流三个层次的理解","学术定义（现金流入减去所有支出含工厂设备营运资本投资后的净额，可分配给投资者）／简化理解（经营现金减去维持生意运转必需的资本投入）／通俗说法（<b>企业每年的利润中可以分掉、且分掉后不会影响企业经营的那部分现金</b>）——注意是\"可以分\"的量，是否真的分了不影响数值"],["记住股东回报的唯一来源","企业经营获利 − 维持企业运转必需的投入，剩下的那部分现金——<b>股东买入企业，本质上是买入企业未来能创造的全部自由现金流</b>"],["警惕\"假钱\"三类利润","（用净利润估值会高估企业价值）① 利润主要来自应收账款（只是欠条数字）② 靠变卖资产或资产重估获得（不可持续/只见数字不见钱）③ 某些金融企业利润依赖一大堆参数假设（长期既无法证实也无法证伪）"],["记住芒格的两种生意论","\"第一种可以每年赚 12%，年底股东可以拿走所有利润；第二种也每年赚 12%，但你不得不把赚来的钱重新投资，然后指着所有的厂房设备对股东们说：这就是你们的利润。<b>我讨厌第二种生意</b>\""],["会用保守模拟公式","<b>自由现金流 ≈ 经营活动产生的现金流量净额 − 购建固定资产、无形资产和其他长期资产支付的现金</b>（保守是因为后者含部分扩张性资本再投入）；判断标准：<b>对于你能理解的公司，你必然能估出一个大致的自由现金流数字；如果无法估算，足以证明你尚未理解这家公司</b>"],["理解折现概念与两种简化模型","折现＝把未来钱按折现率换算成今天的钱（10% 折现率下一年后 110 万＝今天 100 万）；两段式＝前段 3 或 5 年逐年估算＋后段\"自由现金流÷(折现率−永续增长率)\"分别折现加总；三段式＝前段再拆高速/低速增长期"],["记住老唐判断","自由现金流折现的精确计算<b>可靠程度几乎为零，更像一种精确的错误</b>——调整三个变量（每年自由现金流估算值、折现率、永续增长率）中的一个、两个或全部，几乎可以得到想要的任何数据"],["正确用法","自由现金流折现法只是<b>一种思考方法/筛选工具</b>，用于筛选满足以下条件的企业——商业模式在可见未来<b>没有毁灭性危险</b>、产业链地位<b>强势</b>、竞争优势预计<b>保持强大甚至越来越强</b>、能<b>持续产生现金利润且不依赖大量增量资本投入</b>——至于精确计算的公式，忘了它（\"只要掌握小学二年级的数学，就可以在华尔街生存了\"）"],["记住巴菲特 2002 年股东大会的估值观","看<b>净资产收益率和增量资本收益率</b>，与标普 500 相比孰优；<b>PE、PB、PS 这些指标不能告诉你什么有价值的信息</b>；估值需要知道生意从现在直到永远的自由现金流量，以合理折扣率折现回来；<b>金钱都是一样的（All cash is equal）</b>，你需要评估的是<b>这门生意的竞争优势</b>"]]}]]},{"id":"s5","t":"老唐估值法与操作纪律","q":"三年后的自由现金流是多少？","src":"第 13 章 · 全书核心","b":[["p","估值不是计算，而是比较：把能力圈内能理解的资产摆上天平，永远持有收益率明显较高的那个。本节是全书核心，逐条核过等于把方法内化一遍。"],["f","<b>老唐估值法</b>：三年后合理估值 ＝ 第三年预计自由现金流 ×（1 ÷ 无风险收益率）<br>理想买点 ＝ 三年后合理估值 × 50%　　一年内卖点 ＝ min(三年后合理估值 × 150%，当年预计净利润 × 50)<span class=\"fc\">高杠杆企业：三年后合理估值打七折</span><span class=\"fn\">无风险收益率取十年期国债与 AAA 级企业债利率较大值 · 3%~4% 对应 25~30 倍 · 下限不低于 2% · 买点买入，卖点卖出，中间呆坐不动</span>"],["cd",3,[["前提①","利润为真","排除赚假钱企业：应收账款、变卖资产或资产重估、金融企业参数假设"],["前提②","利润可持续","产品或服务被需要、很难被替代、价格不受管制"],["前提③","维持盈利无须大量投入","折旧摊销足够满足维持性投入；扩张性投入不计入——芒格：我讨厌第二种生意"]]],["q","别瞅傻子，瞅地。","—— 沃伦·巴菲特 · 农地案例",1],["h","h1","长期/永恒视角与估值总纲"],["t",{"m":"check","c":["检查事项","要点"],"r":[["牢记估值大法只有一句","<b>\"金钱都是一样的\"（All cash is equal）——估值不是计算，而是比较</b>：把能力圈内能理解的目标资产摆上天平，永远持有收益率明显较高的那个（如同在两个苹果中选较大者，<b>不需要知道各自重量是多少克</b>）"],["长期/永恒视角 ≠ 持股数十年","哪怕三五年以内的投资，也要以\"<b>永远放置财富</b>\"的思想对待；在股市赚到 <b>8 位数乃至 9 位数以前，主要扮演把财富放进股市的净买家</b>"],["市值是资产盈利能力的<b>资本化</b>","短期市场是<b>投票机</b>（由恐惧与贪婪决定），长期是<b>称重器</b>（由真实盈利能力决定）；资本逐利天性必将推动股价反映盈利能力差异（如同利率 5% 的债券价格必然涨到 4% 债券之上）"],["<b>价值投资 ≠ 长期持股</b>","本质是利用市场先生癫狂产生的市值与内在价值差异；钟摆围绕内在价值摆动才是本质，摆动时长无定数；即便最彻底的价值投资者也期望价值回归过程<b>越短越好</b>"],["投入股市的资金至少保证 **三到五年不被迫变…","投入股市的资金至少保证 <b>三到五年不被迫变现</b>，避免被迫在股价严重低于内在价值时用股票换现金"],["确立这种视角后，<b>关注短期股价就失去了意义</b>","卖出任何投资品后仍需买入其他投资品，永远只是比较过程"]]}],["h","h2","估值就是比较"],["t",{"m":"check","c":["检查事项","要点"],"r":[["用<b>农田比喻</b>判断卖出","市场先生出价若不\"明显较高\"（卖地所得存银行/买无风险产品的年利息 &gt; 辛苦种地的产出），就是<b>噪声，不去管它</b>"],["操作三步","①市场平静或悲观时依赖高盈利资产获取高于平均的回报；②收益<b>继续投入</b>高盈利资产做大财富；③直到市场亢奋、以明显较高的现金出价收购时<b>才卖给他</b>"],["\"明显较高\"的量化标准——巴菲特","<b>\"如果国债收益率为 2%，那么收益率低于 4% 的企业我们是不会投的\"</b>（源自格雷厄姆\"股票买点收益率高于无风险收益率两倍\"）；<b>没有一倍以上空间就算不上\"明显\"</b>，估值是个区间且可能错"],["交换决策示例","持有 5% 收益率品种，交换对象预期 <b>10%</b> → 值得交换；<b>6%～7%</b> → 容错空间不够，不换；<b>吸引力不够就不换，少做少错</b>"],["没有任何能力圈时，天平一端是保本理财、国债、…","没有任何能力圈时，天平一端是保本理财、国债、货币基金等<b>类现金资产</b>；理解指数后可把<b>约 11 倍市盈率的沪深 300 指数基金</b>作为备选，赚两件事叠加的钱：①成分股盈利总额提升；②市场先生推动收益率从 9.1% 降至无风险收益率（市盈率 11 倍→约 25 倍）"],["当年测算示例","名义 GDP 增速 8%（GDP 6%+CPI 2%），三年后利润 1×1.08³≈<b>1.26</b>，市盈率 11→16.7 倍，预期回报 (16.7×1.26)÷(11×1)≈<b>191%（赚 91%）</b>；三年后真实复盘 510300 约 63%～71.7%、510310 约 67%～76%，未达预期因市盈率只升到 <b>14.5 倍</b>"],["市盈率迟迟不上升就<b>凉拌</b>","14.5 倍对应收益率约 <b>6.9%</b> 仍高于无风险收益率，继续拿着，一边坐等盈利增加一边等待回归；期间仅两种调换：①发现某品种收益率<b>明显高于</b>沪深 300 → 换入；②指数收益率<b>明显低于</b>货币基金 → 换入货币基金"],["由此<b>不需要满仓/半仓/空仓概念</b>","股票、债券、货币基金、存款纳入同一思维框架，永远选收益率明显较高的那个"],["芒格：\"我们没有固定的规则和精确公式","只是知道<b>与其他机会比起来，这些机会稍微好那么一些</b>\"——这就是估值的全部"],["《财富》印证","（巴菲特 1987 年信引用）1977-1986 年每 1000 家企业仅 25 家通过\"<b>10 年平均 ROE ≥ 20% 且无一年低于 15%</b>\"测试，其中 <b>24 家股价跑赢标普 500</b>"]]}],["h","h3","老唐估值法三句话总纲"],["t",{"m":"check","c":["检查事项","要点"],"r":[["<b>① 合理估值</b>","符合三大前提的企业，<b>三年后合理估值 = 第三年预计自由现金流 ×（1 ÷ 无风险收益率）</b>，高杠杆企业<b>打七折</b>（\"1 ÷ 无风险收益率\"称\"合理市盈率\"）"],["<b>② 买点与卖点</b>","三年后合理估值的 <b>50%</b> 为目前<b>理想买点</b>；三年后合理估值 × <b>150%</b> 或<b>当年 50 倍动态市盈率</b>，二者中<b>较低值</b>为<b>一年内卖点</b>"],["<b>③ 操作纪律</b>","<b>买点买入，卖点卖出，中间呆坐不动</b>"],["合理市盈率对应表","无风险收益率 <b>3%～4% → 25～30 倍</b>；<b>5%～6% → 15～20 倍</b>；以此类推，随无风险收益率显著变化而调整"]]}],["h","h4","合理估值：三大前提与自由现金流"],["t",{"m":"check","c":["检查事项","要点"],"r":[["先估算出内在价值（数值或区间），**才能谈便…","先估算出内在价值（数值或区间），<b>才能谈便宜或昂贵</b>；否则就是被市场先生牵着走的木偶"],["成熟投资者是**从千万投资对象中选符合自己估…","成熟投资者是<b>从千万投资对象中选符合自己估值标准的目标</b>，而不是根据每只股票特殊情况修正估值方法；不符合标准的企业，十倍百倍涨幅一律<b>视而不见、听而不闻</b>"],["**三大前提①","利润为真<b>——排除三种赚\"假\"钱企业：㊀利润主要来自</b>应收账款<b>（只是欠条数字）；㊁利润靠</b>变卖资产或资产重估<b>（不可持续/只见数字不见钱）；㊂</b>金融企业**报表利润依赖参数假设（长期无法证实也无法证伪）"],["**三大前提②","利润可持续<b>——产品或服务</b>被需要、很难被替代、价格不受管制**"],["**三大前提③","维持当前盈利能力不需要大量资本投入<b>——可理解为每年折旧摊销足够满足维持性资本投入；\"维持当前盈利\"指净利润保持当下</b>购买力<b>（与通胀同水平提升）；</b>为份额或更高盈利的扩张性资本投入不计入**（芒格：\"第二种生意每年赚 12% 却必须全部重新投回厂房设备，我讨厌第二种生意\"）"],["不符合三大前提 = \"<b>太难</b>\"","直接避开（此类企业可用风险投资、赛道投资、可比估值、清算/重置价值、分红折现法等其他思路，但\"不是我们的菜\"）"],["自由现金流**没有财务指标可查、不能从财报直…","自由现金流<b>没有财务指标可查、不能从财报直接提取</b>，是深入理解企业后的大致判断——<b>老唐估值法唯一的未知数</b>；若无特别注明，净利润一律指<b>归属于上市公司股东的净利润</b>"],["<b>自由现金流取值规则</b>","完全符合三大前提 → 直接把<b>报表净利润视为自由现金流</b>；基本符合仅因特殊原因现金流不够完美（如高信用强势客户的大额应收基本确定可收回、管理层股权激励过于大方）→ 净利润<b>打八折</b>；打八折后仍不放心 → <b>归入\"太难\"，剔除</b>"],["<b>无风险收益率取值</b>","主要取<b>十年期国债收益率与 AAA 级企业债券利率二者中的较大值</b>，参考银行短期低风险理财产品年化收益率（如\"天天增利\"3.17% → 视无风险收益率为 3%～4%）"],["理解公式含义","将企业股权\"<b>可能</b>较高增长\"的优势与\"收益确定性不如类现金\"的劣势<b>模糊对冲</b>——100 元现金每年产 4 元现金流（4%）时，三年后每年产 4 元自由现金流的企业股权合理估值 100 元；合理估值看上去精确，<b>实际是多种假设下的模糊值</b>"],["算例一","三年后净利润 100 亿、完全符合前提、无风险收益率 4% → 合理估值 100×25=<b>2500 亿</b>（三年后 25 倍市盈率）；算例二：略有瑕疵打八折 → 100×80%×25=<b>2000 亿</b>；⚠ 此时<b>市盈率没有调低</b>（仍=1÷4%），实际调低的是\"自由现金流占净利润比例\"的判断"],["**合理市盈率不区分行业、不参考个股历史市盈…","<b>合理市盈率不区分行业、不参考个股历史市盈率波动区间</b>：无论过去波动于 50～200 倍还是 2～10 倍，那都是市场先生的出价，无逻辑支撑；是\"<b>现金平等</b>\"而非报表净利润平等——卖茅台酒、卖煤炭、卖房子、存银行赚到的现金不分高低贵贱"],["成长预期通过<b>两个途径</b>进入估值","㊀在无风险收益率区间内取<b>上限/中值/下限</b>（如茅台、腾讯取 <b>30 倍</b>上限，因现金流长期优于报表净利润、成长确定性高；其他个股取中值 <b>27.5</b> 或下限 <b>25 倍</b>）；㊁<b>\"三年\"跨度本身就是容器</b>——对竞争环境、确定性、成长性的看法全部落实在对三年后净利润的预判里"],["<b>为什么是三年</b>","①巴菲特\"三年绝对是评判投资绩效的最短周期\"（隔离短期情绪的最短期限）；②避免估算误差被复利放大（三年内的预测误差往往能被市盈率无序波动弥补）；③匹配<b>年化 25%</b> 目标——按合理估值一半买入=目标三年翻倍，折合<b>年化 26%</b>"],["25% 目标的依据","顶级投资大师长期费前年化基本在 <b>20%～30%</b>（巴菲特/伯克希尔 57 年 <b>20.2%</b>、施洛斯 47 年 <b>20.1%</b>、林奇/麦哲伦 13 年 <b>29.2%</b>）"],["**高杠杆企业","三年后合理估值打七折<b>；负债率分级：负债总额/资产总额 </b>≥60% 为激进<b>，</b>≥70% 划为高杠杆**（30% 净资产撬动两倍以上杠杆，放大利润亏损、对宏观/信贷/竞争环境更敏感，需更保守估值+更大安全边际）"],["<b>经营占款 ≠ 有息负债</b>","强势企业延缓付上游款、预收下游款形成的负债率提升不应与付息借款同等对待；有息负债通常出现在合并资产负债表<b>短期借款、交易性金融负债、一年内到期的非流动负债、长期借款、应付债券、其他非流动负债</b>科目（金融类公司还需含向央行借款、拆入资金）"],["高杠杆两种筛选口径","<b>方法一（老唐习惯）</b>剔除经营占款，只将\"<b>有息负债/资产总额 ≥ 70%</b>\"视为高杠杆；<b>方法二</b>将负债率的分子分母同时剔除<b>应付账款、应付票据</b>（占上游）与<b>预收账款、合同负债</b>（占下游）后计算调整负债率"],["**零利率环境规则","无论当下无风险收益率多低，合理市盈率不能超过 50 倍——无风险收益率最低不能采用低于 2% 的数据<b>；理由：①央行零利率是给银行放款的宏观政策，市场无风险收益率不会为零（零利率国家通常也约 1%）；巴菲特\"我们心中对利率有最低门槛，肯定比现在的利率高得多\"（2003 年股东大会，当时短期利率 1.25% 也不认可给 3%~4% 收益率资产 100 倍估值）；②无外汇管制下无风险收益率应取</b>能自由投资的任何国家/地区中的较高值**；③法币天然有通胀属性，2% 左右通胀被视为良性目标（英/日/欧央行表态），无风险收益率应高于\"好的\"通胀率"]]}],["h","h5","买点与卖点"],["t",{"m":"check","c":["检查事项","要点"],"r":[["理想买点 = 三年后合理估值 × 50%","（三年后合理估值 1000 亿 → 当前 500 亿市值为理想买点）；差距即安全边际：净利润低于预判时防大幅亏损，等于或大于预判时占到市场先生便宜——价值在于判断错误时<b>少亏、不亏甚至依然有赚</b>；该设定源自格雷厄姆\"买点=AAA 级债券利率的两倍\"与巴菲特\"国债 2% 时收益率低于 4% 不投\""],["理想买点本质是<b>两段式自由现金流折现的简化</b>","标准算法三步——①近三年自由现金流逐年折现加总（第一段）；②三年后合理估值折现到今天（第二段）；③两段相加得今天价值。完整算例：无风险收益率 4%、当年净利 100 亿、未来三年 120/140/180 亿 → 三年后合理估值 180×25=<b>4500 亿</b>；今天价值=120÷1.04+140÷1.04²+180÷1.04³+4500÷1.04³≈115.4+129.4+160+4000≈<b>4404.8 亿</b>"],["<b>不能按算出的当前价值直接买入</b>","那等于预期假设 100% 正确且只满足于折现率水平的回报；观摩大师经验，买入出价一般是企业价值的<b>四到七折</b>；安全边际大小取决于风险——巴菲特桥的比喻：距地 6 英寸承重 1 万磅的桥可开 9800 磅卡车，大峡谷上的桥只开 4000 磅"],["为什么可省略折现","严格折现五折=4404.8÷2=<b>2202.4 亿</b>，老唐简化法=4500×50%=<b>2250 亿</b>（相当于折现值的 <b>51%</b>），相差不大却利于口算；简化法潜在目标年化约 <b>26%</b>，含安全边际，保证部分对象偏差较大时仍超过市场平均回报（老唐将 <b>10%±2%</b> 视为市场平均回报水平）——\"努力目标 100 分，实际得分 80 也挺好\""],["理想买点**不意味着股价一定能到、也不意味着…","理想买点<b>不意味着股价一定能到、也不意味着到了就不会再跌</b>；它只是内心的比较（用现金换股权划算），<b>完全不涉及对股价的判断</b>；牢记：<b>股价不能预测，只能利用</b>——建立在预测股价上的投资体系都不可靠"],["买点后继续下跌的处理","只要确信<b>真实盈利能力没有恶化</b>，四折三折毫无疑问更划算——有钱就继续买，没钱就把机会留给别人；巴顿·比格斯：\"只有自大狂和傻瓜才幻想抓住顶部和底部\"；<b>不需要也不应该预期自己恰好买在最低点</b>"],["手里有钱但价格未到理想买点","<b>没有标准答案</b>——只要在合理估值之下用现金换股权逻辑上都正确；对波动无感求高收益者可在合理估值之下考虑买入（风险：买点到来时已无钱）；不愿承受大幅波动者等到理想买点再动手（风险：一直等不到）；关键是<b>提前想明白决策依据和利弊并坦然接受结果</b>，真正要克服的是走势与选择不同时的后悔、惊慌与割肉"],["<b>\"永不卖出\"是严重误解</b>","巴菲特多次承认未在 1998 年（可口可乐 85.5 美元、市盈率超 50 倍、持股市值超 170 亿美元）卖出可口可乐是<b>应该反省的错误</b>；此后 23.5 年仅收分红不买卖，2021 年末市值 236.84 亿+累计分红 87.16 亿=<b>324 亿美元，累计约 90%、年化约 2.8%</b>（低于部分债类产品）；若当年卖出 170 亿美元投 S&amp;P500（23.5 年年化略高于 8%）可变 <b>1000 亿美元以上</b>；巴菲特 2000 年后再也没说过任何上市公司持股是\"永远不卖\"的非卖品——<b>50 倍以上不卖可口可乐是错误案例，不是成功榜样</b>"],["<b>应考虑卖出的三种情况</b>","①<b>企业基本面恶化</b>（看漏条件或环境变化致竞争优势/盈利能力减弱或丧失）→ 及时认错卖出；②<b>出现更具性价比的投资对象</b>（内在价值 100 市价 40 vs 持有的 100 市价 90）→ ⚠ 务必慎重：股比股既要比收益率还要比确定性和成长，难度远高于股票 vs 类现金；③<b>估值过高</b>——买入要市值\"显著\"低于合理估值，卖出要市值\"显著\"高于合理估值，否则呆坐不动拒绝交易"],["<b>必须利用过度贪婪</b>","资本市场疯狂从不会恰到好处地在合理位置停下，钟摆总在过度恐惧与过度贪婪间摇摆——利用过度恐惧买入，也别放过过度贪婪，在钟摆荡向另一边卖出"],["**一年内卖点 = 当年动态市盈率超 50 倍","或市值超三年后合理估值 ×150%，二者取较低值<b>；50 倍的推演：假设未来三年年化增长 25%（今年净利 1 元 → 三年后 1.95 元），今天 50 倍卖出得款 50 元按 4% 理财三年后 ≈56.2 元，三年后估值若回落至 25 倍则股价=25×1.95=48.75 元，</b>按合理水平买回可多买回约 15% 股份**；概率判断：三年内回落且保持 25% 增长→占到便宜（概率偏高）；回落更短或增长更低→占更多便宜（概率偏高）；持续高估超三年或增长持续超 25%→卖出也可能吃亏（概率偏低）"],["记住 50 倍卖点的经验前提","股市估值水平通常会在<b>三到五年内形成一个起落</b>；无风险收益率 4% 左右时，股权估值达到 50 倍市盈率后（收益率低于 2%），一般来说<b>三年内出现估值回落是大概率事件</b>，值得用股权交换类现金资产"],["<b>150% 卖点与 50 倍基本等价的条件</b>","假设增长率为两倍无风险收益率（如 8%）时两者数值基本等价——今年净利 1、50 倍卖得 50 元买 4% 理财三年后 56.24 元；三年后净利 1.26、合理估值 31.5～37.8、上限 150%≈56.7～57.1，两者基本等价；老唐实盘周记表格习惯写\"<b>34.6±10%</b>\"以强调<b>估值是区间不是精确数值</b>"],["预计增长率高于 8% 的企业","卖点基本就是<b>当年 50 倍市盈率</b>（预计 12% 增长的企业：三年后 1.4×30×150%=63 &gt; 50，50 倍就是\"孰低\"的那个）；<b>150% 规则真正容纳两种情况</b>：㊀无风险收益率较高时（5%～6% → 合理市盈率仅 15～20 倍；年增 15% 的企业：1×1.15³×20×150%≈45.6，先于 50 倍触发——高利率下估值中枢本应更低，<b>提前卖出正是我想要的</b>）；㊁预计增长极低的企业（年增 1%：1.03×30×150%≈46.35 先触发——市场肯给年增 1% 的企业 46 倍市盈率，要么严重高估、要么我对增长的判断有问题，无论哪种都不支持继续持有）"]]}],["h","h6","持有：中间呆坐不动"],["t",{"m":"check","c":["检查事项","要点"],"r":[["<b>估值与预测股价毫无关系</b>","取 25～30 倍为合理市盈率、50 倍卖出，\"绝对不是\"判断股价会涨到 25/30/50 倍；三年后跌到 5 倍或涨到 200 倍都不奇怪——<b>市场先生是癫的，出价只能在他出价后无情地利用，不能在他出价前预测并据此行动</b>；若以\"三年后会涨到 25 倍\"为前提，整个体系就坍塌了"],["完整表述","预计三年后净利润 X，无风险收益率 4% 时按 25 倍市盈率，合理估值 25X，其 50% 为买点；暗含假设是企业股权\"<b>可能</b>\"继续超越无风险收益率的增长 vs 类现金 100% 确定的收益相互对冲——⚠ <b>三年后不再增长的企业用此法估值可能潜藏一定程度高估</b>，这也是所选企业必须具有长期竞争优势（至少保持明显超越无风险收益率的回报）的原因"],["25 倍只是内心活动","\"三年后自由现金流 4 元的企业股权等价于 100 元现金资产，若售价 50 元而手头恰有 50 元现金，我愿意交换\"——<b>市场给多少倍市盈率与我无关</b>，我唯一的优势是享有\"<b>是否交易</b>\"的决策权；这也是投资需要<b>长期资金、尽量规避杠杆</b>的原因（短期资金/杠杆可能在不合适时机被迫与市场先生交易，丧失决策权）"],["理性投资者的决策只有三种","合理估值 100 元的企业，市价 50 元且有现金 → 用现金换股权（<b>赚</b>）；市价超 150 元且持股 → 用股权换现金（<b>赚</b>）；两者之间 → 呆坐，笑纳企业一天天经营换回的真金白银（<b>躺赚</b>）"],["情形③的经营获利去向","年度分红落袋 / 变成扩大再生产资本赚更多自由现金 / ⚠ 少数痛心情况——不分红的钱在企业账上连 4% 收益都没产生，<b>价值毁灭</b>"],["只在合理估值打折的基础上与市场先生交易的三条理由","<b>①估值是一个区间；②投资者的判断一定会出错；③不占便宜不交易</b>"],["⚠ 怕就怕投资者太\"聪明\"，根据情况\"实时…","⚠ 怕就怕投资者太\"聪明\"，根据情况\"实时、灵活、机动\"调整——瞬间从市场先生的交易对手变成他的<b>提线木偶</b>；<b>经过分析计算出明确的估值数据非常重要，坚持呆板不变的交易规则非常重要</b>"],["具体幅度可以自定","50 倍还是 49/51 倍、150% 还是 140/160% 都可以，只要明显有便宜可占；<b>但必须有规则</b>，且规则须：①在<b>很早以前市场平静时</b>制定；②经过<b>理性思考</b>、在<b>同一逻辑体系</b>下制定；③针对<b>所有持股</b>的明确规则；④<b>不因近期市场波动而临时改变</b>"],["褚时健树坑尺寸的启示","坑大一点小一点都没问题，\"<b>但如果没个标准，农民可能会错得很离谱</b>\"——买入卖出标准必须规定成准确的、呆板的、不知变通的；没有明确规则，投资者大概率在近因效应下相机决策，错得很离谱；<b>千万不要过于相信自己的定力</b>"],["现金是最垃圾的资产","（日常生活所需的钱根本不应成为投资资本）买入股权的<b>本来目的就是\"尽可能不卖\"</b>：①优秀企业的增长已足够满意，不需要浪费生命高抛低吸；②高抛低吸做不成——不可能准确预见傻子的癫狂程度，寻底找顶会导致后悔和\"优化\"，最终变成市场先生的牵线木偶"],["只有市场出价<b>实在太过离谱</b>、不需要思考…","只有市场出价<b>实在太过离谱</b>、不需要思考就能看见明显高估时，才很不乐意地、被迫将股权交给他<b>短暂保管</b>——到手的现金只是未来获取更多优质股权的<b>中转工具</b>"],["解决\"49 倍就差一点点\"的思维方式","把市场短时间严重高估奉送的盈利看成<b>市场先生的额外馈赠</b>——好比市盈率永远固定在 25 倍：企业利润增长带来的财富增长是<b>必须确保赚到的核心目标</b>；低于 25 倍参股（20/15 倍甚至更低）与 50 倍以上卖出都是<b>意外之财</b>——得到了锦上添花，错过了不影响良好收益"],["高估卖出后继续飙升（博傻游戏）的原理","理性参与者基本已离场，剩余持股者只有永不卖出的产业资本和\"因为涨所以看涨\"的投机者，缺卖出力量使价格易被微小买入推升，直到被小卖单偶然捅破泡沫转入暴跌——所以暴涨暴跌的往往是数百数千倍市盈率或亏损股；⚠ 这是<b>举着火把穿越火药库</b>的游戏，是市场先生钓鱼的鱼饵，<b>放弃\"吞饵吐钩\"的幻想是避免悲惨命运最可靠的路径</b>"]]}],["h","h7","投资者的日常"],["t",{"m":"check","c":["检查事项","要点"],"r":[["呆坐之外的日常两件事","①<b>跟踪持股企业经营动态</b>——重大事件或新财报发布时，根据最新信息<b>检查并调整</b>合理估值、买点、卖点；②<b>不断学习和研究新企业</b>——扩大有能力估值的企业数量，与持股、指数基金或类现金资产对比收益率；看不出明显更高→继续呆坐，发现明显差异→实施调换"],["调换对象若是债券/货基/理财等类现金资产","日常表现为\"减仓卖出\"，但<b>这不是清仓退出投资，只是此时类现金更值得投——我们是卖出股权、买入类现金资产</b>"],["**任何投资对象最终只会有一个结局","被其他更高收益率的资产替换**；替换原因两种：价格上涨导致收益率下降 / 有证据证明之前的估值错误；如此持续直到永远"],["巴菲特能力圈升级路径","（2009 年股东大会）不需要分析 4000 家甚至 40 家公司，<b>待在能力圈里</b>专注能看懂的企业，无法给出估值的公司<b>忽略它们</b>；学 enough 的会计学（商业语言）但认清其巨大局限，判定哪些会计信息有用哪些要忽略；必须理解竞争优势是<b>持久的还是短暂的</b>（\"呼啦圈公司和可口可乐之间的区别\"）；理解<b>市场是为你服务而不是指导你</b>；智商 150 可以卖掉 30 分（高智商反而起反作用）；必须有<b>稳定的情绪</b>和<b>独立思考</b>——\"这很简单，但并不容易\""],["老唐更激进的结论","只要真正理解如何对待市场波动、能保持相对平静的情绪，<b>会不会给企业估值都不影响你在股市捡钱</b>"],["<b>无脑\"捡钱法\"第一步——分散选股</b>","资金分散到<b>三五个行业、七八家企业</b>；选股四标准：①<b>业务简单</b>（你能明白它靠卖啥赚钱，防止研究员不懂装懂说天书）；②<b>利润含金量高</b>（不靠应收账款、处理家当、公允价值波动、说不清的关联交易）；③<b>历史净资产收益率高</b>（证明过去至今有某种竞争优势——优势是什么、会否消失\"别瞎操心，反正你也搞不懂\"）；④<b>低负债</b>（防止黑天鹅时突然归零——前面赚再多，归一次零结局都是零）"],["仓位规则","（巴菲特运作基金准则）<b>单只企业股票买入时占比最高不超过 40%</b>（上涨导致的超配不需要降下来）；更胆小可提升为<b>单个行业不超过 40%</b>；碰到未来优势消失的就<b>认输</b>；既然用笨办法就<b>别碰高难度企业</b>（高负债企业通常都不简单）"],["<b>无脑\"捡钱法\"第二步——抄研究员数据</b>","三年后合理估值 = 券商研究员预测的三年后净利润 × <b>80%</b> ×（1 ÷ 无风险收益率），<b>拦腰一刀（×50%）</b>就是可买入的市值；信不过单个研究员就多找几位覆盖同一家企业的报告<b>加总取平均</b>（简单企业的研究员预测不会全错到天上去）"],["笨办法成立的四层保护","①净利润打八折（低负债简单企业按无风险收益率估值基本是保守中枢）；②再拦腰一刀才买入；③企业中一定还有被研究员低估的；④届时市盈率远大于\"1÷无风险收益率\"的无序波动机会（市场先生额外馈赠）——<b>就算有错也很难影响我们赚到钱</b>"]]}],["h","h8","第13章总结：准备出发"],["t",{"m":"check","c":["检查事项","要点"],"r":[["投资的两门核心课程","<b>①正确面对股价波动；②如何估算内在价值</b>"],["巴菲特 1986 年农地案例全程要点","28 万美元买 400 英亩农地，按玉米大豆产量和运营成本估算年净收益率约 <b>10%</b>（农业知识一窍不通，仅从儿子处了解产量成本）；不考虑宏观经济、天气等不可预测因素；28 年后年利润翻 3 倍、农地价格为买价 5 倍；决策核心：<b>不迫于压力出售，让时间发挥复利效应</b>"],["估值就是比较","农地净回报 10% vs 持有现金约 3%～4% → 买地；<b>与农地价格是否处于底部无关</b>（选大苹果不需要称重）"],["确立<b>永续投资思维</b>","永远只在两个可以理解的投资对象之间选择产出更高的那个——是<b>比较与选择</b>，不是精确计算；资产市值提升只是资本逐利推动下的<b>被动结果</b>"],["<b>宏观预测是废纸</b>","巴菲特\"我不看宏观经济预测，所有宏观预测类文章对我而言都是废纸\"；\"30 年来没有人预测到越战扩大、石油危机、总统辞职、苏联解体、道指一天跌 508 点\"；\"因忧虑短期不可控的经济或股市变量，放弃买进一家长期前景可预期的好公司，是非常愚蠢的事\"；\"1890 年可口可乐以 2000 美元出售，今天市值 500 多亿——等待的代价太昂贵了\""],["两种应对宏观的策略","<b>拉长周期让宏观因素相互对冲</b>（⭐⭐，无数大师成功）vs <b>掌握周期利用宏观获利</b>（⭐⭐⭐⭐⭐，凯恩斯受挫、长期资本 LTCM 破产清零——2 位诺奖得主+美联储副主席的团队照样归零）"],["增长的三大来源","（都不需要高深知识）<b>①产量提高</b>（技术进步）；<b>②价格上涨</b>（法币时代必然通胀）；<b>③利润再投资</b>（《用普通股进行长期投资》：公司保留盈利以同样收益率再投资）；优质资产特征：给投资者贡献大量资金+资金可再投资——优于需要大量资金投入才能增长却不能提供高回报的企业"],["投资者真正只需关心两件事","①企业经营收益（农地产出）是否<b>持续令人满意</b>；②留存利润再投资的<b>预计收益率</b>如何（再投资时有没有买贵）——<b>完全不需要猜测市场如何报价</b>"],["股票市场相对农地市场的巨大优势","<b>有傻子</b>——农地市场很少人 28 万买入就有人出 128 万，股票市场傻子亢奋时真会拿 128 万甚至更多买你的资产"],["<b>三种市场状态的应对</b>","㊀高估（傻子出 128 万）→ 卖出存银行年息 5.12 万 &gt; 种地 2.8 万，可卖出；㊁合理（傻子最多出 70 万）→ 70 万×4%=2.8 万与种地相当，没便宜占，不搭理傻子继续持有；㊂低估（傻子间以 14 万甚至 7 万交易）→ 只要不是借钱买入、没有追加保证金压力、不被迫出售，报价<b>丝毫不影响农地产出</b>；可用产出再买年收益 20% 甚至 40% 的地——<b>傻子间的交易价格越低，你的收益越高</b>"],["⚠ 衡量市场报价是否合理的标尺","<b>对比两种资产的产出能力，而不是用买入成本和市场报价对比</b>"],["巴菲特两大投资原则","<b>第一条绝不亏损；第二条不要忘了第一条</b>——买下农地瞬间起只有两种选择：持有获高于持币的收益（赚），或傻子出价太高卖给他获更高无风险收益（更赚）"],["两种可能的失误及应对","<b>计算失误</b>（产出比预计低，收益不如存银行）与<b>资产恶化</b>（农地突然盐碱化，产出大幅下降）→ 应对：不断学习提高研究能力、<b>专注研究资产产出而非市场情绪</b>、让错误的机会越来越少、让单次错误的损失越来越小（\"股神\"也不能保证百发百中）"],["投资真谛六字真言","<b>别瞅傻子，瞅地</b>——研究企业（地）比研究市场情绪（傻子）容易多了，研究越深入判断越准，能捡到的钱越多"],["格雷厄姆警示与两条路","门外汉只需少许努力和能力便可达到令人敬佩的结果，试图超越这唾手可得的成就需要无比的智慧与无数的精力——<b>基础路径</b>（理解本书内容）→ 令人敬佩的结果；<b>进阶路径</b>（逐个行业、逐个企业深度学习）→ 更进一步；无捷径、无统一答案，是一生的课题，也是投资路上最大的乐趣"]]}],["t",{"m":"veto","c":["否决信号","书中依据"],"r":[["利润主要来自应收账款","第13章三大前提①：只是欠条数字——赚假钱第㊀类"],["利润靠变卖资产或资产重估","第13章三大前提①：不可持续，只见数字不见钱——赚假钱第㊁类"],["金融企业利润依赖参数假设","第13章三大前提①：长期无法证实也无法证伪——赚假钱第㊂类"],["净利润打八折后仍不放心","第13章：归入「太难」，直接剔除；有息负债/总资产 ≥70% 的高杠杆企业未按七折处理"]]}]]},{"id":"s6","t":"企业分析实战","q":"确定性从哪里来？","src":"第 14-16 章","b":[["p","腾讯分板块拆解、白酒盯基酒与窖池——确定性来自业务结构、供给格局与管理层诚信记录；管理层的大话目标要白纸黑字记录等验证。"],["h","h1","第14章 腾讯控股的确定性"],["t",{"m":"check","c":["检查事项","要点"],"r":[["判断企业投资价值时","<b>分业务板块逐一评估增长的确定性</b>（腾讯拆为游戏、金融科技、广告、对外投资四块，每块单独下结论），不要笼统看整体"],["评估游戏业务","看新游戏上线节奏与流水（如近期三个月腾讯\"吃鸡\"系手游《和平精英》+《PUBG》流水合计已超《王者荣耀》）、看游戏矩阵是否有梯队（经典产品 + 新兴产品）"],["评估处于<b>战略扩张期</b>的业务","（如金融科技）此阶段<b>规模和市占率远比利润更重要</b>，不为\"暂时没有利润贡献\"扣分"],["评估广告业务","宏观缩减、竞品挤压（头条系对腾讯形成碾压式领先）时<b>主动降低预期</b>，只求长期稳定的中速增长；注意\"流量巨大而广告收入偏低\"可能源于公司<b>更看重用户体验</b>，属于可填充的潜力而非缺陷"],["分析投资资产占半壁江山的公司（腾讯总…","分析投资资产占半壁江山的公司（腾讯总资产约 8000 亿 = 投资 4000 亿(50%) + 类现金 2000 亿(25%) + 经营资产 2000 亿(25%)）：把全部投资看作<b>一只专注于移动互联网的风险投资基金</b>整体评估，不纠结单个项目成败"],["检验\"VC 基金\"质量四要素","① 有无零成本可输出的流量优势；② 所投行业空间是否巨大；③ 操盘团队是否最懂行业；④ 团队利益是否与基金深度绑定（身家投在里面）"],["核对投资业务的利润构成口径","腾讯 2019 上半年经营资产产生税前利润约 <b>450 亿元</b>，投资部分另贡献约 <b>150 亿元税前利润 + 约 150 亿元公允价值增长</b>（后者未计入利润表）——评估\"半个伯克希尔\"时须把公允价值变动与经营利润分开看"],["评估金融科技板块增速时剔除政策性因素","2019 上半年金融科技及企业服务同比增长 37%，<b>不计算备付金利息收入政策性影响则为 57%</b>——还原真实增速再下判断"],["用<b>资金成本视角</b>给投资业务估值","腾讯以平均不到 2%~3% 的成本（2000 亿有息负债利率约 3%，其中借款 &lt;2%、票据 2.9%~4.8%，无抵押）撬动长期资金杠杆，类比伯克希尔，长期回报必然远高于名义 GDP 增速"],["估值判断参照无风险收益率","预计 2019 年净利 1000 亿、市值 2.8 万亿、约 28 倍市盈率 vs 无风险收益率 3%~4% → <b>处于合理估值位置，占不到估值便宜，只能获取企业成长收益</b>（不为合理价位的股票支付成长溢价以外的期待）"],["预测未来三年用<b>悲观/乐观双场景</b>","悲观年均增速 20% → 2022 年净利 1700 亿 / 合理市值 5 万亿；乐观 30% → 2200 亿 / 6 万亿；市场届时给 15 倍还是 50 倍市盈率<b>不在考虑范围内</b>——考虑了也没有用"],["持仓行为示范","2017 年 1 月 197.3 港元首次买入，此后<b>只有买入从无卖出</b>，借 2021-2022 年行业大跌加仓至约 465 港元成本、38% 仓位第一重仓"]]}],["h","h2","第15章 聊聊高端白酒产能"],["t",{"m":"check","c":["检查事项","要点"],"r":[["投资茅台<b>只需盯住基础数据表</b>","逐年记录基酒产量与商品酒销量（2015 年 32179 吨/19798 吨 → 2019 年 49900 吨/34562 吨 → 2020 年基酒 56000 吨），新数据随年报披露自己补充"],["核心算式","<b>当年净增基酒库存 ≈ 当年基酒产量 − 当年商品酒销量</b>（2018 年末基酒库存约 236527 吨）"],["记住茅台生产时间线","端午踩曲 → 重阳下沙 → 九次蒸煮八次发酵七次取酒 → 基酒存 3 年勾兑成商品酒 → 再存 0.5~1 年出厂（<b>2016 年基酒 → 2019 年勾兑 → 2020 年出厂</b>）"],["关键对应关系","<b>当年商品酒可供应量 ≈ 四年前基酒产量的 75%~85%</b>；若这 10% 的差异会导致你作出不同投资决策，说明<b>过于执着精确的错误，或预留的安全边际不够</b>"],["运用基酒数据前先接受<b>三个无法确定的因素</b>","① 基酒产量随人工/天气/未知因素波动且方向数量无法预测（实例：2014 年 38745 吨、2015 年却缩水为 32179 吨，至今无人能给出可信解释）；② 勾兑<b>不存在公式或配方</b>，凭勾兑师舌头勾调；③ 基酒与商品酒的数量对应不固定（每年用量随基酒特色微调）"],["记住高端白酒行情的起点背景","茅台终端零售价从 2015 年最低时<b>出厂价 819 元上下几十元</b>，涨至 2020 年春节前<b>普遍 2400 元以上，五年大约翻了三倍</b>——政务消费转商务消费引发的价格重估带动整个高端白酒市场"],["茅台未来基酒产量**大致视为围绕 5.6 万…","茅台未来基酒产量<b>大致视为围绕 5.6 万吨波动</b>即可；深度挖掘设计产能、茅台镇产能上限<b>没有什么价值，容易被误导</b>"],["了解酱香酒四类工艺分层（坤沙=茅台","碎沙、翻沙=迎宾、串沙=低劣酒）及投入产出（1 吨基酒耗粮 5 吨：小麦 2.6 吨 + 高粱 2.4 吨；基酒合格率约 96%）——用于识别\"四五十元以下酱香酒大部分是串沙\"的产品格局"],["记住高端酒市场容量格局","<b>总容量约 6 万吨，茅台 3.3 万吨(约 55%)、五粮液 2.0 万吨(约 33%)、国窖 1573 约 0.5 万吨(约 8%)</b>；茅台放量将挤压其他高端酒生存空间，对手只有扩市场或抢份额两条路"],["浓香酒产能核心逻辑","<b>酒窖越老优质基酒产出率越高</b>（人工老熟技术约可使新窖达 20~30 年窖池水平），优质基酒产量 = 窖池数量 × 优品率——分析浓香酒企必先盘窖池资产"],["五粮液优品率全景测算","（用于估算其高端产能上限）501 车间(明代古窖) 450 吨×75%、503 车间 700 吨×50%、1979-1986 年窖 1 万吨×25%、1992-1994 年窖 9 万吨×15%、2000-2004 年窖 13 万吨×5% → <b>总产能约 23.2 万吨，五粮液级基酒约 2.32 万吨</b>；注意 2020 年年报口径改为 72 度折算 10.38 万吨，但高端基酒产能基本不变"],["承接茅台溢出需求的排序","<b>五粮液优势最大</b>（有产能、有渠道、有行动）；老窖和梦之蓝因产能不够\"暂时不在一个竞争级别上\""],["泸州老窖硬数据核对","百年以上窖池 1619 口（无新挖过一口窖）、单窖年产基酒约 5 吨、5 万吨/年总产能；官方口径国窖 1573 基酒产能约 <b>3000 吨/年</b>（百年以上窖池生产）"],["<b>管理层诚信记录纳入检查清单</b>","老窖有 2014 年\"放卫星\"欺骗股东黑历史；账上大量用不到的现金却低价增发融资损害中小股东利益"],["<b>对照管理层的承诺与兑现</b>","2018 年 5 月承诺\"国窖 1573 当年销售超 100 亿\"（全年实际不到 64 亿，差 1/3）；\"2020 年超 200 亿\"（2020 年 1 月改口 3~5 年内）；\"三年重回行业前三\"未兑现——大话目标一律白纸黑字记录等验证"],["浓香酒行业通病","<b>想保证品质，放量只能慢慢来；要迅速放量，必然伴随品质下降</b>——\"理解不了公司如何处理这个矛盾的，就赚不到这笔钱\"（放弃）"],["对国窖 1573 放量的两种解释（消…","对国窖 1573 放量的两种解释（消化滞销库存最多 6000 吨难支长期增长 / 调剂特曲基酒则品质存疑）都站不住时，<b>回避而非强行给出乐观解释</b>"]]}],["h","h3","第16章 高端白酒产能补充篇"],["t",{"m":"check","c":["检查事项","要点"],"r":[["给酒企定位时先分清档次本质","<b>洋河本质是中高端酒</b>，梦之蓝 M9 及以上才算高端但产能太小（不构成对茅五泸的威胁）；不能因营销成功就按高端酒企估值"],["用<b>微生物群逻辑</b>检验浓香窖池成色","窖泥中微生物群决定出酒率与品质，长期中断酿造的窖池\"和新挖一个土坑的区别越来越小\"——洋河 2020 口明清窖池因地处抗战拉锯区<b>几乎可以断定都中断过酿造</b>，不构成对川酒的优势"],["浓香窖池是\"时间雕琢的艺术品\"，独一无二无法…","浓香窖池是\"时间雕琢的艺术品\"，独一无二无法严格复制——窖池资产的真实性与连续性是浓香酒企护城河的核验点"],["洋河产能结构","基酒总产能 16 万吨，可满足 M9 品质约 5%（8000 吨）、手工班约 2%（3000 吨）、仅 M9 级 5000 吨；<b>放量时点取决于存放期限</b>（10/15/20 年 → 2023/2028/2033 年以后才具备放量能力）"],["对产能 locked 在库的资产保持耐心","\"<b>存在那儿就跑不了</b>，具体啥时候能卖，等能卖的时候再说\"——不为不确定的放量时点支付估值"],["老窖优品率反推法","（芒格\"反过来想\"）官方 3000 吨国窖产能 ÷（1619 口 × 5 吨）≈ <b>37% 为百年以上窖池优品率</b>；再假设剩余 63% 中 50% 够特曲级 → 百年以上窖贡献特曲基酒约 4000 吨"],["基酒→商品酒 1:1.3 换算的由来","68% 基酒加水降度至 52%（68÷130≈52%），即 100 毫升基酒加约 30 毫升水——商品酒规划产能按基酒 ÷ 1.3 折算"],["反推百年以下窖池特曲优品率","特曲 2 万吨商品酒需基酒 20000÷1.3≈1.54 万吨，扣除百年以上窖贡献 4000 吨 → 11400÷(8467×5)≈<b>27%</b>"],["茅台三处生产基地分工","茅台镇产茅台酒基酒，二合镇、习酒镇产系列酒基酒——核对产能时不可混计"],["茅台产品树","53 度普茅（飞天/五星品质一样）+ 43 度 + 陈年（15/30/50/80 年）；系列酒\"一曲三茅四酱\"（贵州大曲 / 赖茅、华茅、王茅 / 汉酱、仁酒、王子、迎宾）；王子酒是第二大单品（2019 年销售约 40 亿），基酒来自习酒镇、只存 2 年"],["理解茅台的产品哲学","<b>顾客不是\"上帝\"是\"上级\"，可以不赚钱但绝不能将不合格产品装瓶</b>——品质底线是其品牌护城河的制度来源"],["白酒品质判断常识","98% 以上是乙醇和水，<b>决定品质的是不到 2% 的其他成分</b>（类比人与猩猩 DNA 相似 98.5%）——用于反驳\"茅台二锅头都是乙醇+水\"论"],["了解主流白酒定为 52/53 度的原因","据称此比例酒精与水分子结合最紧密（实验：53.94 毫升乙醇＋49.83 毫升水混合后体积恰为 100 毫升而非 103.77 毫升）；带来<b>口感顺滑、不易口渴、易于长期保存</b>三个好处；低度酒（45/42/38/32 度）降度科技含量高、饮用各有特色，只是<b>不适合长期保存</b>——不要轻视低度酒"],["用贵州大曲的由来印证茅台产品哲学","1958—1963 年\"大跃进\"提产量致品质下降，共产出低品质基酒 1750 吨，1965 年以\"红粮窖酒\"名义按 <b>1.4 元/斤</b> 甩卖，1976 年更名\"贵州大曲\"——连不达标的酒都远胜其他白酒，映射\"不合格产品绝不装瓶\"的制度底线"],["记账时区分\"历史推演\"与\"实盘操作\"","本文 2020 年持 40% 茅台 + 12% 洋河；2021 年初 2366 元减仓茅台至 3%，年内 1730 元加回至 19%、159 元加洋河至 22%——<b>减仓后按计划回补</b>是完整操作闭环"]]}]]},{"id":"s7","t":"估值算例与操作复盘","q":"规则定好后，能否呆板执行？","src":"第 17-19 章","b":[["p","第 17 章是老唐估值法的完整算例（2013 与 2020 两轮全公式）；第 18-19 章是复盘：运气与能力的边界、卖点执行与买入计划的纪律。"],["h","h1","第17章 贵州茅台估值、买点及卖点计算过程演示（老唐估值法完整算例）"],["h","h2","2013 年案例：把握机会所需的两个知识点"],["t",{"m":"check","c":["检查事项","要点"],"r":[["知识点①","茅台<b>当年可销售量上限与四年前基酒产量成正比</b>（2012 年销量 15200 吨 ÷ 2008 年基酒 20431 吨 ≈ 74%）"],["知识点②","反腐压力下，茅台的<b>需求不会消失，只会换一群消费者</b>——资源分配规则改变（地位优先→出价优先），不是需求消失"],["需求判断三问","（\"腐败酒\"质疑）腐败分子喝茅台是因为腐败臭味相投还是喜欢好东西？非腐败分子会不会也喜欢？严打夺下来的酒是倒掉还是被其他人拿走？——三问问通，下注与否不难决定"],["推算链条示范","2016 年可售量 = 2012 年基酒 33600 × 74% ≈ 2.5 万吨（较 2012 年销量 +64%）→ 2016 年营收 265 × 1.64 ≈ 435 亿、净利 133 × 1.64 ≈ 218 亿"],["老唐估值体系三前提","<b>无风险收益率 4%（估值取其倒数 25 倍）、所有利润均为真金白银、维持当前盈利无须额外大额资本投入</b> → 合理估值 = 218 ÷ 4% = 5450 亿；<b>理想买点 = 5450 ÷ 2 = 2725 亿</b>；实际低点 1225 亿"],["低于理想买点均为<b>市场送钱</b>，低得越多送…","低于理想买点均为<b>市场送钱</b>，低得越多送钱越狠；2725 亿跌到 1225 亿的过程就是市场先生一次次强行塞钱"],["中间年份利润不达预期不影响结论","2016 年实际仅 167 亿，但 167 × 25 = 4175 亿 vs 当时不到 1900 亿市值，<b>依然满足\"三年翻倍\"要求</b>——买点标准是\"三年后合理估值的一半\"而非精确预测"],["承认\"从来不具备抄底能力\"","下狠手的 180 元之后又跌到 118.01 元——买点之上越跌越买即可，不苛求买在最低"],["记住第17章自己的实盘注脚","2014 年 1 月公开实盘时茅台市值低点 1225 亿 → 2020 年 4 月本文发表时 1.6 万亿，期间现金分红近 600 亿，<b>股东回报超 12 倍、年化超 50%</b>；老唐全部财富中<b>超过 1/3 来自茅台</b>——\"幸存者偏差\"质疑的实证回应"],["方法可滚动复用","（2014 年依葫芦画瓢）由 2013 年基酒 38452 吨推 2017 年可售超 2.8 万吨、净利润约 264 亿、合理估值不低于 6600 亿；2017 年实际报表利润 271 亿（2016 年股权激励推迟确认的利润在此释放）——<b>同一套推算每年都能重做一遍</b>"],["厘清茅台酒净利率基数再算提价弹性","2019 年归母净利 412 亿中扣除系列酒约 20 亿与财务公司约 13 亿，茅台酒净利 <b>412−33=379 亿</b>，净利率 379÷758≈<b>50%</b>——提价前后的净利率对照基准"],["事后复盘须警惕\"幸存者偏差\"式归因，更要远离…","事后复盘须警惕\"幸存者偏差\"式归因，更要远离以\"还不是因为×××\"嗤之以鼻的人——这种心态是滋生失败者的温床"]]}],["h","h3","2020 年算例：分业务板块估值"],["t",{"m":"check","c":["检查事项","要点"],"r":[["估值前先收集新增公开信息","出厂价 969 元 vs 一批价 2000 元以上（供不应求、渠道利润畸形 → 提价确定）；系列酒产量 2.5 万吨/销量 3 万吨/营收 95 亿/净利约 20 亿"],["分三块估值","（从小到大）财务公司、酱香系列酒、茅台酒——复杂公司拆板块估算再汇总，每块单独列假设"],["财务公司估算法","利息收入 33 亿 × 75%（所得税）× 51%（少数股东折算）≈ <b>13 亿</b>，金额不大直接按收支两抵固定估算"],["系列酒推算","2021 年基酒 5.6 万吨（存 2 年）→ 2023 年可售 5.6 × 80% ≈ 4.3 万吨（年化销量增幅 9.4%）→ 营收 4.3÷3×95 ≈ 136 亿 → 净利 136 × 20% ≈ <b>27 亿</b>（系列酒公司 100% 控股无少数股东，赖茅除外）"],["茅台酒\"量\"的推算","基酒库存已约 23 万吨、无扩存意义 → 可售按四年前基酒的 <b>80%~85%</b> 预估：2019 年基酒 4.99 万吨 → 2023 年可售 4 万~4.25 万吨，量增 <b>16%~23%</b>"],["茅台酒\"价\"的推算","一批价 2000 元以上渠道利润过于畸形 → 未来三年提价是确定的事，只不确定幅度与时点；提价后出厂价区间 <b>1269~1519 元（约 +30%~56%）</b>"],["营收汇总","（以 2019 年茅台酒营收 758 亿为基数）保守 = 758×130% + 758×16%×130% ≈ <b>1143 亿</b>；乐观 = 758×156% + 758×23%×156% ≈ <b>1454 亿</b>"],["提价的利润分配链条","（提价 300 元为例）增值税消费税及附加约 75 元 → 剩营业利润 → 25% 所得税 → 少数股东约 6% → <b>约 50% 成为归母净利</b>；提价后净利率毛估 51.5%+：(969÷1.13×50%+150)÷(1269÷1.13) ≈ 51.5%"],["茅台酒净利","保守 1143×51.5% ≈ <b>588 亿</b>，乐观 1454×51.5% ≈ <b>748 亿</b>；三块合计 <b>628~788 亿，记作\"700 亿 ± 10%\"</b>"]]}],["h","h4","买点与卖点"],["t",{"m":"check","c":["检查事项","要点"],"r":[["给 25~30 倍市盈率（取中值 27.5…","给 25~30 倍市盈率（取中值 27.5 倍）的两项事实依据：① 无风险收益率<b>持续下降</b>；② 茅台一贯<b>自由现金流大于利润</b>"],["三年后合理估值 = 27.5 × 7…","三年后合理估值 = 27.5 × 700 ± 10% = <b>19000 亿 ± 10%</b>；<b>理想买点 = 三年后合理估值的一半 ≈ 9500 亿 ± 10%</b>"],["当年净利预估","（用于一年内卖点）2020 年不增量投放 3.45 万吨、营收 +10%，通过调产品结构（降普茅占比增陈年/小批量）和增直销（直销出厂均价较批发高约 27%）实现 → 净利增幅略高于营收：412 × 110% ≈ 453 亿，保守视为 <b>460 亿</b>"],["**一年内卖点 = min(三年后合理估值…","<b>一年内卖点 = min(三年后合理估值 × 150%，当年预计净利 × 50)</b>：min(19000×110%×150% = 31350 亿，460×50 = 23000 亿) = <b>23000 亿</b>"],["<b>操作纪律表</b>","市值 &lt; 9500 亿 → 买入；9500~23000 亿 → 持股不动；&gt; 23000 亿 → 卖出"],["卖点随新数据滚动修正","本文发布后随新财报将卖点从 2.3 万亿调高至 2.7 万亿，并于 2021 年 1-2 月完成卖出——<b>卖点是\"一年内\"口径，过期重算</b>"]]}],["h","h5","第18章 回顾对洋河股份的投资决策"],["t",{"m":"check","c":["检查事项","要点"],"r":[["复盘换股决策时算\"机会成本总账\"","2015 年 8 月 31 日卖 5% 茅台（约 195 元）买洋河（约 53 元），五年后洋河 2.93 倍（年化 24%）vs 茅台 9.36 倍（年化 56.4%）、五粮液 8.5 倍、老窖 4.5 倍——每 100 股茅台换洋河少赚 12.54 万"],["用<b>未来视角审视而非后视镜视角</b>","\"酱香赢、高端赢\"是走出来的结果，平行空间完全可能浓香赢、中端赢——不能因结果对自己有利就认定当时的判断错了"],["判断行业拐点的方法","<b>确认复苏的标志性事件是五粮液出厂价从 609 元上调至 659 元（2015 年 8 月）</b>——用价格行为而非口号确认供求逆转"],["善用\"行业里最顶尖的免费研究员\"","<b>阅读年报的\"董事会报告/经营分析\"章节</b>，理解最贴近一线的顶尖专业人士对市场状况和未来趋势的判断"],["教训一","<b>市场变化很难预测、发展存在很多偶然性</b>——2015 年四大名酒管理层（茅台/五粮液/洋河/老窖年报原文）集体错判（共识：依然很困难、供大于求、中低速增长、年轻化、大众性价比消费），实际却是高端酒供不应求的高速增长；连一线专家都会错，谁自称当时已看清必然前途，大概率是\"选择性地记住了正确面，将蒙对阐述成看对\""],["收录老唐自己的错判实例作为\"教训一\"的注脚","2016 年初白纸黑字写下\"若五粮液不尽快在股权结构及管理机制上作出重大改革，<b>洋河很可能会在未来三五年内从营收和净利润上全面超越五粮液，成为中国白酒业浓香老大</b>\"——结果完全落空；一线专家与深度研究者同样会错，印证市场不可预测"],["教训二","<b>优秀的商业模式具有强大的容错性</b>——即使管理层判断错了，具备以下特性的企业仍有动态调整的时间和空间：产品差异化（难以替代）、产品自带提价增量属性（无须扩产也能增长）、行业变化缓慢（留出纠错时间窗口）、存货不贬值（判断失误不造成硬损失）"],["商业模式容错性的实证","错判的中端酒企洋河五年也实现年化 24%，超过绝大多数\"股神\"的长期记录——<b>买对商业模式，即使判断平庸也有厚回报</b>"],["教训三","<b>投资的关键是理性、逻辑：事前尽可能多思考各种可能，在确定性和赔率之间，作出符合自己性格特点的选择</b>（索普买可转债同时卖空股票：无论企业变好、破产、维持原样都确保赚钱——决策质量与单次结果无关）"],["管理层观点到 2017 年初才陆续转变","用连续多年的年报观点序列跟踪预期修正，不据单年报告下死结论"],["业绩之外的操盘纪律示范","2015 年 8 月 31 日首次介入洋河后<b>只有买入没有卖出</b>，截至 2022 年 2 月底持有 22% 仓位（实盘第二大持股）"]]}],["h","h6","第19章 读史可以明智——对贵州茅台的全面回顾和展望"],["t",{"m":"check","c":["检查事项","要点"],"r":[["卖点执行记录","2021 年 1 月 8 日（2.7 万亿）、2 月 8 日（2.97 万亿）、2 月 10 日（3.24 万亿）三次减仓至仅剩 3% <b>纪念性观察仓</b>，加权平均略低于 3 万亿——<b>到达预设卖点分批执行，不因继续上涨而推翻计划</b>"],["每笔大收益必须做<b>收益来源拆解</b>","（7.11 年 22 倍 = 三因子乘积）① 净利增长 153.5→540 亿 ≈ <b>3.5 倍（研究的功劳）</b>；② 市盈率从严重低估 8.7 倍回到无风险收益率对应中枢 <b>30 倍 ≈ 3.5 倍（研究的功劳）</b>；③ 中枢 30 倍到高估 55 倍 ≈ <b>1.8 倍（市场先生的馈赠/风落之财）</b>"],["补充两组估值锚点数据","2014 年初买入时市值约 <b>1330 亿元</b>（127.99 元 × 10.3818 亿股），静态约 8.8 倍/动态约 8.7 倍；2021 年初卖出时近 3 万亿元，静态约 65 倍/动态约 55 倍——22 倍 = 3.5 × 3.5 × 1.8 的完整起止区间"],["①+②≈12 倍是深度研究者**有能力赚到、…","①+②≈12 倍是深度研究者<b>有能力赚到、也应该赚到</b>的钱；最后的 1.8 倍是运气——<b>把运气当能力，是投资中最危险的自我欺骗</b>"],["对高估值的判断不含糊","（静态 71 倍/动态 60 倍 → \"高了\"）但<b>\"高了就会跌\"不成立</b>：若市盈率高了就跌、低了就涨，世上就不会有穷人——判断估值与预测走势是两回事"],["<b>市场先生的情绪只能利用，无法预测</b>","投资最重要的基本法则；历史不会简单重复，却会踏着相同的韵律走来（读史是为了展望未来）"],["用历史极值校准想象空间","2007 年超级牛市中茅台静态市盈率 52~145 倍、动态 28~77 倍（当年 +163.97%），2008 年崩至静态 28 倍/动态 21 倍（−52.57%）——即使按 2007 年极值测算 2021 年目标市值也仅 4.16 万亿~6.67 万亿（+27%~104%）"],["**能力圈的真正含义","不是知道什么能赚，而是知道什么自己赚不到**——明知可能再涨 27%~104% 也不赚（\"我不敢\"），不羡慕别人赚自己能力之外的钱"],["只赚两种钱","（第一种）无超级牛市 → 等回归 30 倍以下买入：2021 年 540 亿×30 = 16200 亿、2022 年 675 亿×30 = 20250 亿、2023 年 845 亿×30 = 25350 亿、千亿净利×30 = 30000 亿；经验性认为<b>三年之内机会很大</b>"],["只赚两种钱","（第二种）真有超级牛市 → 等它后面必然伴随的超级熊市，<b>不需要等 21 倍，30 倍就大方买入</b>；牛市中所有持股陆续触碰卖点、甚至指数基金也被迫清仓，逐步变为满仓债券/货币基金等待——\"收入是一连串事件，等待是其中重要的一环\""],["熊市买入的承诺纪律","对夺路而逃的卖家心怀感激，<b>不杀价、不等底</b>，慷慨给予高达 30 倍的买入价"],["经营判断","（逻辑一）茅台经营利润增长是<b>高确定性</b>的（供不应求 + 出厂价与一批价巨大价差）；对\"十四五\"末利润翻番比管理层更乐观，2023-2024 年即可能实现千亿净利（对应年化 22%~30%）"],["估值判断","（逻辑二）静态 71 倍/动态 60 倍下\"<b>我的认识和能力不足以支持我继续持股</b>\"——认识不足就退出，不硬撑观点"],["**决策的对错要用决策当时的信息和逻辑来评判","而不是用后续无关事件的结果**（卖出后资金投资他处亏损，这个锅不应由卖出决策背）"],["买入计划<b>提前设定并公开披露、逐档执行</b>","1810 元加至 8%、1685 元加至 16%、1560 元加至 32%、1320 元补齐至单只持仓上限 40%——前两档足额执行，第三档资金不足仅买到 18%，第四档未触发"],["\"三年内有机会\"之类的时点判断要自我标注","<b>纯拍脑袋、没逻辑</b>——区分逻辑推断与直觉猜测，不为直觉押注"]]}]]},{"id":"s8","t":"周期股与从零研究框架","q":"从零开始，如何研究一家企业？","src":"第 20-23 章","b":[["p","周期股借用当年合理估值：七折买入、上限 150% 卖出；从零研究一家企业＝四问＋估值第五问，福寿园与上海机场给出全套示范。"],["f","<b>周期股估值（格雷厄姆「正常产出」× 席勒市盈率落地）</b>：合理估值 ＝ 十年平均净利润 × 25~30 倍<br>买点 ＝ 当年合理估值 × 70%　　卖点 ＝ 合理估值上限 × 110% × 150%<span class=\"fn\">分众实例：十年年均 30 亿 × 25~30 ＝ 750~900 亿 · 600 亿以下买、1400 亿以上卖、其间呆坐 · 当年七折＝年化 12% 假设下三年后五折的简化（100×70% ＝ 140×50% ＝ 70）</span>"],["h","h1","第20章 分众传媒投资回顾及周期股估值方法的尝试"],["h","h2","周期股识别与错判防范（反面教训）"],["t",{"m":"check","c":["检查事项","要点"],"r":[["识别企业盈利是否<b>随宏观周期波动</b>","把周期股误当稳定增长型企业估值，是分众亏损的根源"],["对周期股<b>不得以当年净利润为起点</b>估值","必须考虑净利润<b>向下波动</b>的可能（原预期 2021-2022 净利润百亿元，实际恢复到 50 亿元已相当可观）"],["广告客户行为特点","宏观不景气时，<b>品牌展示类广告是客户支出首选的削减对象</b>——不能假设企业会逆势增加广告预算"],["客户结构需核查","广告主结构与宏观周期的关联度，是判断广告企业波动性的关键变量"],["对照错判起点与重估结论","2018 年 8 月首次介入时的结论是\"<b>三年后合理估值 2100 亿~2500 亿元，对折买入，目标配置 10%~15% 仓位</b>\"——以当年净利润为起点的高估值直接导致错误（2020 年重估：恢复到 50 亿元净利润已相当可观）"]]}],["h","h3","发现认知错误后的处理纪律"],["t",{"m":"check","c":["检查事项","要点"],"r":[["发现错误后**是否卖出没有标准答案","取决于发现错误时的公司市值**"],["已支付的代价（浮亏）是**沉没成本，无须再纳…","已支付的代价（浮亏）是<b>沉没成本，无须再纳入考虑</b>——分众从 1090 亿跌到 830 亿的 260 亿跌幅是学费，决策时不再考虑"],["决策唯一标准","把<b>确定错误时的股票市值与等值现金摆上天平两端</b>，比较哪个更划算；合理估值的股权换等价货币没有道理 → 呆坐"],["**浮盈浮亏","耗费过的时间精力均不构成买卖依据**"],["若发现错误时市值在合理估值之上","（如千亿元以上）或许就卖掉了"],["理解\"等价交换\"是错误的经济学概念","真实世界里所有自愿交易，都是在<b>交易双方均认为自己获益</b>的情况下实现的——故\"合理估值的股权换等价货币没有道理\"才成立"]]}],["h","h4","周期股估值方法（格雷厄姆\"正常产出\" + 席勒市盈率）"],["t",{"m":"check","c":["检查事项","要点"],"r":[["理论依据","格雷厄姆《证券分析》——周期性波动企业盈利采用 <b>10 年平均利润</b>模拟近似\"正常\"收益；<b>大多数情况下应利用 5～10 年的年平均收益</b>计算普通股投资价值"],["席勒市盈率","（CAPE，1998 年《估值比率和股票市场长期前景》）<b>十年平均盈利</b>与股价对比；股市长期收益率与 CAPE 显著<b>负相关</b>"],["<b>周期股估值六步法</b>","（分众实例）① 统计十年净利润（2010-2018 实际 + 2019 预估，累计约 303 亿）→ ② 求年均\"正常产出\"（303÷10 ≈ 30 亿/年）→ ③ 无风险收益率 3%~4% 时取合理市盈率 25~30 倍 → ④ 合理估值 = 30 亿 × 25~30 = <b>750 亿~900 亿元（即 825±10%）</b> → ⑤ 买点 = 当年合理估值 × 70% ≈ <b>578 亿元</b> → ⑥ 卖点 = 合理估值上限 × 110% × 150% ≈ <b>1360 亿元</b>"],["周期股买卖点规则","<b>借用当年合理估值</b>（判断不了三年），按<b>当年合理估值七折买入、合理估值上限的 150% 卖出</b>；实际执行简化为\"600 亿以下买、1400 亿以上卖、其间呆坐\""],["<b>数据陷阱核查</b>","借壳上市公司（分众 2015 年借壳七喜）股票软件里 2014 年及以前净利润<b>不对</b>，须查其美国上市期间披露数据并按当时汇率折算"]]}],["h","h5","\"当年七折\"与\"三年后五折\"的等价关系"],["t",{"m":"check","c":["检查事项","要点"],"r":[["**当年合理估值七折 = 假设年化 12%…","<b>当年合理估值七折 = 假设年化 12% 增长下三年后合理估值五折的简化计算</b>：当前净利润 100 → 年化 12% 三年后 140 → 100×70% = 140×50% = 70"],["12% 取值依据一","巴菲特 1977 年《财富》杂志文——道琼斯与《财富》500 强各期净资产收益率<b>回归至 12% 左右</b>（各十年区间 9.5%~14.1%）"],["12% 取值依据二","芒格\"刺猬原则\"——寻找<b>利率低于 3% 的浮存金</b>投向能产生 <b>13% 回报</b>的企业（13% = 比 12% 的普通优质企业还好一点点）"],["12% 取值依据三","沪深 300 全收益指数 2004-12-31（1000 点）至 2020 年中（6139.26 点，15.65 年）折合<b>年化 12.29%</b>"]]}],["h","h6","心态与执行纪律（分众案例补充）"],["t",{"m":"check","c":["检查事项","要点"],"r":[["**财富是思考的副产品。如果思想滑了坡，黄金…","<b>财富是思考的副产品。如果思想滑了坡，黄金奉上也不敢摸</b>——2020 年 4 月分众最低 565 亿元（600 亿以下停留三天）未买入，主因是犯错后的自我怀疑动摇了信心"],["<b>再少的金钱也值得被尊重</b>","预设卖点触发的卖出纪律要执行——分众 2021 年 1-2 月按预设卖点卖出（11.26 元减 3%、12.39 元减 4%），2021 年 7 月 7.25 元买回 3%"],["剩余仓位的卖点计划同样预设并执行（原…","剩余仓位的卖点计划同样预设并执行（原计划 1980 亿元市值卖出剩余 4%，实际最高 1936 亿元未触发即转头下跌——预设点位未到不追高）"]]}],["h","h7","第21章 如何从零开始研究一家企业——以福寿园为例"],["h","h8","研究总框架：看懂一家企业的四个问题（+估值第五问）"],["t",{"m":"check","c":["检查事项","要点"],"r":[["问题①","这家公司<b>靠销售什么商品和服务获取利润</b>？（业务与利润来源）"],["问题②","它的客户<b>为何从它这里采购</b>，而不选其他机构的商品或服务？"],["问题③","资本天性逐利，为何其他资本没有提供<b>更高性价比</b>（同质同量+更低价格，或同价+更高质量/数量）的商品或服务来抢占它的市场份额、逼迫它降低利润？（护城河是否存在）"],["问题④","假设同行或产业巨头<b>挟巨资参与竞争</b>，该公司能否保住甚至扩大市场份额？（护城河能否持续）"],["四问能回答后即进入第五步","<b>估值</b>——研究框架就是回答①②③④⑤，万变不离其宗"]]}],["h","h9","第一道筛子：ROE 及其口径核查"],["t",{"m":"check","c":["检查事项","要点"],"r":[["用 <b>ROE 作为筛选企业的第一项标准</b>","投\"过去已被证明能赚钱 + 经分析未来将继续赚更丰厚利润\"的企业，不投\"现在不赚钱但未来可能美好\"的\"梦想窒息\"类企业"],["高 ROE 的真正用处","<b>路标和指示牌</b>——指引发现某种未记录在资产负债表、却能带来收入的\"<b>经济商誉</b>\"资产"],["<b>分三个口径核查 ROE</b>","（全部/归母/少数股东）福寿园 2019 年全部口径约 16%、归母约 15%、<b>少数股东约 30%</b>"],["**少数股东 ROE 显著高于归母 ROE（…","<b>少数股东 ROE 显著高于归母 ROE（约两倍）是疑点信号</b>：要么关联人掏公司腰包，要么少数股东带有未体现在财报上的特殊资源——存疑待查"]]}],["h","h10","简化资产负债表：五个特征与三个疑问"],["t",{"m":"check","c":["检查事项","要点"],"r":[["经验丰富的投资者<b>首先看资产负债表</b>","利润表和现金流量表仅作印证"],["分析任何企业第一步","<b>做简化资产负债表</b>（合并同类项、数字改为亿元量级），避免迷失在数字细节"],["从简化表核查<b>五个企业特征</b>","① 有息负债仅 0.8 亿→几乎无有息负债；② 应付 6 亿+预收 3.8 亿→上下游通吃、产业链强势；③ 应收仅 1 亿（营收 18.5 亿）→预收或现款现货；④ 类现金 25 亿→超过净资产一半；⑤ 商誉 4.4 亿→发生过溢价收购"],["核查<b>利润结构与应收的匹配</b>","福寿园创造年度营业利润 97% 的墓地业务几乎不产生应收账款，应收来自火化机、设计等次要业务"],["沿特征展开<b>三个疑问驱动研究</b>","① 类房地产生意为何无杠杆？② 高回报现金生意为何囤钱不借款不扩张？③ 为何靠溢价收购扩张、少数股东为何回报更高？——<b>解疑问的过程就是企业研究</b>"],["供应端分析","寻找与类似行业（房地产）的<b>本质差异</b>（五大区别：土地权属租不卖断/后续黏性不可选择/捂地被政策要求/划拨拿地低成本/土地供应一次锁定）"],["核查\"<b>明收益 vs 暗收益</b>\"结构","福寿园买 100 单位土地只卖 5 份，95 份捂地的增值不进利润表但全部成本计入 ROE 分母——<b>账面 ROE 不高的真实原因</b>"],["核查拿地成本证据","招股书披露上市时土地成本最低 <b>44 元/平方米</b>、最高 <b>562 元/平方米</b>——区域购买力和土地等级解释不了的价差，只能归结为拿地模式差异"]]}],["h","h11","需求端分析：增长途径与业务聚焦"],["t",{"m":"check","c":["检查事项","要点"],"r":[["收入增长三途径<b>可靠性排序</b>","<b>潜在需求增长（最高，无受损者）＞市场份额扩大（中，须评估对手反击力度与可持续性）＞价格提升（较低，须评估替代性强弱）</b>"],["首选\"过去增长","现在增长、可见未来仍增长\"的营业收入持续增长企业"],["业务收入构成定位","从财报\"<b>管理层讨论与分析</b>\"查收入构成——福寿园墓园服务贡献营业利润约 <b>97%</b>（研究重点），殡仪服务利润率低（引流配套），火化机/设计业务占比极小"],["次要业务的处理","火化机（进口 300-1000 万元/台，福寿园约 200 万元/台）等增长期望值不应高，<b>直接视为安全边际的组成部分，估值时不予考虑</b>"],["需求空间四层面核查","（福寿园示例）<b>老龄化</b>（2019 年 60 岁以上 18.1%、65 岁以上 12.6%，去世人数 998 万/年→2025-2030 预测 1293 万）＋<b>城镇化</b>（2019 年破 60%）＋<b>人均收入提升</b>＋<b>公益性供应约束</b>（民政公墓 1598→1431 个缩减；骨灰安置总量 = 常住人口×死亡率×20 年×50%）"],["<b>量化行业增速用历史数据外推</b>","2006-2018 墓穴销量年化 2.7% + 价格年化约 6% ≈ <b>行业整体年化 8.8%</b>，看不到改变因素即可采信"],["识别经营性公墓的产品本质","卖的是\"<b>舒坦、体面和差异化</b>\"；行业特殊消费心理——人们几乎不提前了解价格与产品规格，刚需出现后在<b>支付承受力内仓促选择</b>，叠加孝道文化、歉疚心理、\"反正就这一次\"，客户倾向在<b>支付能力之内尽可能选较高价位</b>产品"],["关注<b>生前契约业务</b>","签约人数 2017 年 1174 → 2018 年 2485（+112%）→ 2019 年 4873（+96%）；性质类似<b>保险浮存金</b>（美国 SCI 账面沉淀数十亿美元预收款）"]]}],["h","h12","竞争分析：分流口不等于竞争"],["t",{"m":"check","c":["检查事项","要点"],"r":[["<b>分流口 ≠ 竞争</b>","被分流走的人群本就不是目标客户（\"被散酒抢走的，本就不是茅台的客户\"）"],["潜在客户须<b>同时满足三个条件</b>才轮到考虑竞争","① 公司在当地有经营 presence；② 属中高收入家庭；③ 愿为更好的环境和管理支付溢价"],["核查区域垄断结构","公墓以<b>区县为单位</b>，进入即对本地中高收入家庭构成事实垄断——同业是\"一串并排的佛龛\"，区域隔离 + 定位错位"],["会做<b>目标客户分流推演</b>","（以全国死亡 1000 人为基点）火化约 505 人（火化率 50.5%）→ 进公墓约 163 人（占火化 32%）→ 购买墓穴约 70 人 → 所在省市有福寿园业务约 47 人 → <b>最终成为福寿园客户约 2 人</b>；福寿园墓穴占其覆盖 13 省市总销量比例<b>不到 4.5%</b>（20912/467170）"],["学习福寿园的定位纪律","<b>坚持将环境、品质、价格和定位持续瞄准那 2‰ 的家庭，用价格隔离非目标客户</b>，静静等待目标客户在无次优选择时作出选择"],["核查竞争对手量级","行业平均一家机构年收入不到 692 万元；福成股份殡葬收入仅福寿园 10%——\"竞争对手的弱小\"本身是竞争优势证据"],["核查企业在行业中的角色","行业培训者（全国公墓建设培训班办到第 40/41 期）、规则编制者（京津冀《骨灰节地生态安葬规范》由其总工主持编写）= 降维打击"]]}],["h","h13","风险分析框架：六假三真"],["t",{"m":"check","c":["检查事项","要点"],"r":[["对每个可见风险先分类","<b>假风险</b>（概率极小或影响可忽略）与<b>真风险</b>（确实存在且无解，只能承受）——福寿园\"六假三真\"共九种"],["假风险清单","（福寿园示例）① 客户不续费 ② 灵骨塔/海葬抢市场 ③ 暴利舆论 ④ 价格管制 ⑤ 审批放开供应增加 ⑥ 土地续期"],["识别假风险的论证方法","逐层推演（不续费者付费能力概率→墓穴开发后期处置阶梯：缴费提醒→空白墓碑→骨灰入库→重新出售，成本仅一间库房）；\"客户群本就不同\"；政府定价无必要无普遍性无可行性（价格会从材质/做工/风水等环节重新体现）；审批需规划+民政+国土三部门合力、方向是控制而非放开"],["用三佐证判断<b>土地续期是假风险</b>","①招股书披露已售墓地约 <b>19%</b> 服务合同期限超过土地使用权期限，法律顾问与地方民政部门均确认不违法（卖的是\"挖坑存放骨灰\"的服务，不是地）②若到期不续，被动的民政部门而非公墓经营者 ③行业实例：济南 1640 亩公墓转让资料写明\"到期继续延续 30 年，<b>土地款同为 188.5 万元</b>（原价续期）\""],["真风险清单","（福寿园示例）① <b>异地扩张风险</b>（收购的公墓可能附带台面下的或有债务成毒资产——福成股份收购被骗已刑事立案；福寿园收购婺源万寿山陵园涉数十起民间借贷诉讼、三宗未决索赔 5230 万元）② <b>政商关系过于紧密风险</b> ③ <b>利益输送风险</b>"],["核查扩张模式与风险匹配","福寿园扩张三模式——①<b>收购已有经营性公墓</b>（最可靠的主动扩张，风险集中于此）②部分城市政府<b>招标改造</b>殡葬设施（风险可控但可遇不可求）③<b>PPP、BOT 及混改</b>与当地政府合作"],["利益输送风险三角度核查","<b>历史</b>（实控人白晓江 2003 年因挪用 6000 万贷款被捕后无罪释放；控制链经两家 NGO→鸿福→中福）、<b>现实</b>（股权激励综合认购价 4.63 港元/股、管理层额外所得约 7.3 亿港元，对比二级股东七年所得 7.5 亿元净利润——激励偏多）、<b>未来</b>（8 亿并购基金中管理人临信出资仅 100 万却分 20% 收益、永赢优先级保 8.5% 且福寿园兜底；\"独立第三方\"表述与工商资料矛盾）"],["无答案的疑点处理","<b>只能作为观察点持续观察</b>（并购基金是否让上市公司当高价接盘侠尚无事实）"],["风险分析总结论应用","<b>真风险不足以排除企业时，通过给合理估值更大的折扣来应对</b>——福寿园结论：\"值得关注、价格合适可以持有的企业\""]]}],["h","h14","定性四步法与深度研究作业"],["t",{"m":"check","c":["检查事项","要点"],"r":[["给企业\"定性\"四步","① 分析企业特性（简化资产负债表切入）→ ② 分析市场需求变化趋势 → ③ 分析供应与竞争 → ④ 逐项分析真假风险"],["<b>不刻意区分定性与定量</b>","没有脱离经营数据的拍脑袋定性，也没有不考虑行业环境的单纯数字定量，二者相辅相成缺一不可"],["理解特性、需求、供应竞争、风险之后","<b>估值是件不太重要也没什么难度的事情</b>"],["深度研究\"枯燥作业\"","统计每一块墓地的数据——所处城市/面积/单位成本、已售/可开发面积、收购前营收净利/收购作价/对应估值、收购后三年营收净利变化/收购价相对第三年净利润的估值——<b>做完这家企业就进入你的能力圈</b>"],["观察仓操作纪律示范","老唐以均价 <b>6.92 港元</b>买入 <b>1 万股观察仓</b>；2021-12-16 触及预设买点 <b>5.70 港元</b>但手中无现金未买入，截至 2022 年 2 月底仍持有——买点预设与执行记录一致"],["研究结论不等于买入建议","市值小交投清淡的企业（福寿园）可暂不披露个人估值买卖点，超过 0.5% 比例买入时在周记估值表披露"]]}],["h","h15","第22章 上海机场研究纲要"],["h","h16","抓住企业基本特点的方法：先做两张表"],["t",{"m":"check","c":["检查事项","要点"],"r":[["拿到一家企业先做<b>两张表</b>","第一张<b>简化资产负债表</b>（合并同类项、量级改为亿元，避免迷失细节）、第二张<b>百分比利润表</b>（以营业收入为 100，标出各分项占比，观察营收到净利润的主要影响因素及权重）"],["百分比利润表数据选用正常年份","（如 2018/2019 年）<b>避开疫情等异常年份</b>"],["\"特\"点 = <b>不同点</b>","只看过一家企业无法发现特点，<b>必须看过多家</b>才能迅速发现不同"],["财报阅读提不出有价值的问题时","<b>把研究纲要式的问题全部回答了，估值和买卖点自然就出来了</b>"]]}],["h","h17","核心特征识别（上海机场三特征示范）"],["t",{"m":"check","c":["检查事项","要点"],"r":[["核查企业核心特征并一句话概括","（上海机场示例）① 区位和定位优势（国际枢纽、大飞机为主→单人单机收费更高）② 利润及增长主要来自<b>非航收入</b>（免税店销售提成为大头，航空收入/油料/广告为辅）③ 新增非航收入<b>有合同保底</b>（免税分成有保底、场地出租有保底，有合同数据+历史记录）"],["核查收费标准的制度依据","民航局标准<b>国际航班高于国内航班、大飞机高于小飞机</b>——同等资源投入带来更高收入"],["收入可预测性判断","三个前提（区位优势/非航为主/合同保底）成立且无不可抗力时，<b>未来五年收入利润都不难预测</b>——这是研究该企业的优势"]]}],["h","h18","投资者结构与动态跟踪"],["t",{"m":"check","c":["检查事项","要点"],"r":[["核查重大分歧点（上海机场示例","国际航线受疫情和国际冲突影响较大），<b>不可知的问题承认不可知</b>（疫情何时可控没人知道）"],["个人投资者相对机构的优势三条件","① <b>自有闲余资金</b> ② <b>没有业绩评比压力</b> ③ <b>能够承受股价波动</b>——满足者可<b>直接跳过短期年份，一眼看到正常化年份去</b>"],["概率问题没有 100% 确定证据时**只能靠…","概率问题没有 100% 确定证据时<b>只能靠信念下判断</b>，且两种判断对应两种结论：认为无法恢复→不适宜下注（不可抗力下<b>保底合同依然可以不执行，这是商业惯例</b>）；反之→可以试试"],["警惕<b>双刃剑效应</b>","疫苗利好降低了不确定性，但也<b>使获得理想价格的可能性降低</b>"]]}],["h","h19","投资者必须解决的五个问题（研究纲要核心）"],["t",{"m":"check","c":["检查事项","要点"],"r":[["问题① <b>免税牌照政策走向</b>","趋向批更多牌照还是维持现状？多到什么程度？对机场免税销售影响多大？"],["问题② <b>免税市场整体容量</b>","增长、维持还是缩水？"],["问题③ <b>替代渠道竞争</b>","跨境电商能否抢走免税店市场？市内/岛内免税店对机场免税店竞争多大？是否导致丧失竞争优势？"],["问题④ <b>关联交易与失血风险</b>","机场土地为何都租自大股东？巨额关联交易（场地租赁+委托建设）是否隐藏失血通道？"],["问题⑤ <b>持续资本投入</b>","如何看待机场的持续资本投入？是否影响投资决策？"],["对每个问题的判断**追加同一句拷问","\"你作出上述判断的依据是什么？\"——这是研究工作与主观猜测的分界线**"],["核查持续资本投入的内在驱动力","扩建成本由上市公司承担、收益由地方各行各业分享→<b>政府始终有要求机场扩大吞吐能力的强烈愿望</b>，客货流量接近饱和甚至不等饱和就启动新基建（上海机场三期扩建中、市政府已规划 T3 航站楼 2025 年前建成）"]]}],["h","h20","从问题到估值：三步估算"],["t",{"m":"check","c":["检查事项","要点"],"r":[["目标年利润估算三步法","（上海机场 2023 年示例）① 考虑 2023 相对 2019 年至少增加多少<b>非航收入</b> ② 减去 2019 年新增固定资产带来的<b>年度折旧成本</b> ③ 依照 2019 年财报数据结构估算目标年利润"],["可选增长的处理","航空/油料/广告收入的增长<b>愿意估就估，不愿意估的直接按安全边际看待</b>"],["老唐估值法是<b>死公式</b>，唯一未知数是**…","老唐估值法是<b>死公式</b>，唯一未知数是<b>三年后预计利润</b>——未知数解决后，小学三年级数学水平即可算出合理估值及买卖点"]]}],["h","h21","第23章 对上海机场补充协议的理解和判断"],["h","h22","情景判断框架与应对纪律"],["t",{"m":"check","c":["检查事项","要点"],"r":[["投资情景四象限判断","（上海机场示例）疫情受控+股价未涨→<b>可下手</b>；疫情不受控+悲观情绪跌得很便宜→<b>可下手</b>；受控+股价已上去→无法下手；不受控+股价不下来→无法下手"],["**不可抗力下非航保底收入合同依然可以不执行…","<b>不可抗力下非航保底收入合同依然可以不执行，这是商业惯例</b>——合同保底不是绝对保险"],["跟踪企业时发现**经营环境/核心合同发生变化…","跟踪企业时发现<b>经营环境/核心合同发生变化，要重新评估投资逻辑</b>：补充协议将\"下有保底上不封顶\"改为（老唐判断）\"下不保底上有封顶\"——即便疫情受控向上空间也被锁死，只能在股价被悲观情绪摧毁时才可投资"],["判断依据要落到条款证据","① 协议只按国际客流量分两种情况（≤/&gt;2019 年月均的 80%，即 256.76 万人次），哪怕 500% 也属\"大于 80%\"，法律意义无歧义 ② 重大信息公告出错可能性很小"],["<b>投资逻辑被破坏时果断执行</b>","周一开盘卖出观察仓 1000 股——\"<b>再少的金钱也值得被尊重</b>\"；实际 2021-02-01 早 9:13 以跌停价 71.1 元委托、9:25 抢跑成交"]]}],["h","h23","合同条款解读方法（补充协议详解）"],["t",{"m":"check","c":["检查事项","要点"],"r":[["读懂分成合同的模式","原协议=月实际销售提成与月保底销售提成<b>两者取其高</b>（下有保底上不封顶）；2019-2025 保底提成逐年 35.25/41.58/45.59/62.88/68.59/74.64/81.48 亿元、合计 410 亿元"],["保底合同下估算最坏情况","每年最坏净利润可大致算出，<b>最好情况当作安全边际对待</b>"],["补充协议核心分界线","当月国际客流量（含港澳台）<b>≤ 256.76 万人次</b>（2019 年月均的 80%，2019 年全年国际客流 3851.36 万、占比 50.6%）→原保底失效，改按人头计费：<b>135.28 元 × 月实际国际客流量 × 客流调节系数 × 面积调节系数</b>（客流系数挂钩 2019 年<b>同月</b>实际值、30%~120% 递减；面积系数按开业面积比例、&lt;10% 至 &gt;70% 递减；系数未披露）"],["递减系数的设计意图","客流量越少、单个客人提取比例越高；极端情形（日上关门停业）机场不收钱，双方共渡难关"],["<b>对投资者而言系数准确数字并不重要</b>","真正用到该系数时企业必然负增长、净利润少得可怜，对投资价值和股价都是向下推动力"],["情况二","（客流 &gt; 256.76 万）费用 = <b>对应年度保底销售提成 ÷ 12</b>；\"对应年度\"由当年实际国际客流量落入的区间决定（X≤4172 万→35.25 亿；4172-4404→41.58；4404-4636→45.59；4636-4868→62.88；4868-5100→68.59；5100-5360→74.64；&gt;5360→81.48），<b>与自然年份无关</b>"],["会用\"绕口令\"实例演算验证理解","2021 年 3 月客流 260 万（&gt;256.76 万），月费用仍取决于<b>全年</b>客流落区——全年 4500 万→45.59÷12≈3.8 亿；4300 万→41.58÷12≈3.5 亿；4100 万→35.25÷12≈2.9 亿（当月超标不决定费用）"],["2022-2025 年追加规则","实际客流若落在 2019-2021 年区间，分成 = 对应保底 × <b>1.2411</b>（T1 航站楼 3286 ㎡ 续约使合同面积较 13629 ㎡ 增加 24.11%）"],["理解\"上有封顶\"的含义与原合同提成比例","原合同超额部分＝实际销售额 × 提成比例 <b>42.5%</b>；补充协议后 2021 年哪怕有 1 亿国际旅客飞到浦东，年度销售提成也只能按对应年度保底 <b>45.59 亿</b>封顶计算"],["警惕<b>披露不清楚/易引发误解</b>的条款","补充协议未提\"实际销售提成高于保底时怎么算\"——此时要依据条款结构自行判断（老唐判断为\"下不保底上有封顶\"，年度提成上限即对应年度保底）"],["判断协议利弊的方向性结论","补充协议<b>利空上海机场、利多中国中免</b>——上海机场未来五年确定性丧失，<b>投资逻辑需要推倒重来</b>"]]}],["h","h24","跟踪决策与独立判断"],["t",{"m":"check","c":["检查事项","要点"],"r":[["核查<b>信息暴露时点与市场反应的背离</b>","协议信息周三在中信券商调研记录已暴露、股价从周三中午开始上涨（机构视为利好）——与老唐判断（利空）相反时，<b>独立思考按自己的逻辑执行卖出</b>"],["引用外部专业判断作参考系","民航界对国际客流恢复至 2019 年水平的判断——<b>中性 2023 年、悲观 2025 年</b>；据此重新估算后再考虑投资"],["免责声明的态度","个人观点<b>不保证正确</b>，请独立思考、自主决策、承担决策后果"]]}]]}];
+
+/* ── 渲染 ── */
+let state={}; try{state=JSON.parse(localStorage.getItem("jztzsssc-checklist")||"{}")}catch(e){}
+const save=()=>localStorage.setItem("jztzsssc-checklist",JSON.stringify(state));
+const $=s=>document.querySelector(s);
+const content=$("#content"),nav=$("#nav");
+let TOTAL_CHECK=0,TOTAL_VETO=0;
+
+function renderBlock(b,sid,bi){
+  const T=b[0];
+  if(T==="h")return `<h3 class="sub"><span class="n">${b[1]}</span>${b[2]}</h3>`;
+  if(T==="p")return `<p class="lead">${b[1]}</p>`;
+  if(T==="q")return `<blockquote class="qt${b[3]?" big":""}"><p>${b[1]}</p>${b[2]?`<cite>—— ${b[2]}</cite>`:""}</blockquote>`;
+  if(T==="f")return `<div class="formula">${b[1]}</div>`;
+  if(T==="co")return `<aside class="co ${b[1]}"><b class="co-t">${ICON[b[1]]} ${b[2]}</b><p>${b[3]}</p>${b[4]?`<span class="src">—— ${b[4]}</span>`:""}</aside>`;
+  if(T==="cd")return `<div class="cards c${b[1]}">${b[2].map(c=>`<div class="card"><span class="cd-n">${c[0]}</span><b>${c[1]}</b><p>${c[2]}</p></div>`).join("")}</div>`;
+  if(T==="rl")return `<ol class="rules">${b[1].map(r=>`<li><div><b>${r[0]}</b><p>${r[1]}</p></div></li>`).join("")}</ol>`;
+  if(T==="t"){
+    const {c,r,m}=b[1],cls=m==="veto"?"vtable":"";
+    let h=`<div class="twrap"><table class="${cls}"><thead><tr>${m?`<th class="ckh">${m==="veto"?"否决":"核"}</th>`:""}${c.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>`;
+    r.forEach((row,ri)=>{
+      const id=`${sid}.${bi}.${ri}`;
+      const st=state[id]?(m==="veto"?" class=\"clickable veto-on\"":" class=\"clickable done\""):(m?" class=\"clickable\"":"");
+      h+=`<tr${st} data-id="${id}"${m?" title=\"点击切换状态\"":""}>${m?`<td class="ckc"><span class="ctl"></span></td>`:""}${row.map((cell,ci)=>{
+        const last=ci===row.length-1;
+        return `<td${last&&m==="veto"?" class=\"stc\"":""}>${cell}${last&&m==="veto"?"<span class=\"stamp\">触发 · 放弃</span>":""}</td>`;
+      }).join("")}</tr>`;
+    });
+    return h+"</tbody></table></div>";
+  }
+  return "";
+}
+
+SECTIONS.forEach((s,si)=>{
+  const cc=s.b.filter(b=>b[0]==="t"&&b[1].m==="check").reduce((a,b)=>a+b[1].r.length,0);
+  const vc=s.b.filter(b=>b[0]==="t"&&b[1].m==="veto").reduce((a,b)=>a+b[1].r.length,0);
+  TOTAL_CHECK+=cc;TOTAL_VETO+=vc;s.vc=vc;
+  nav.insertAdjacentHTML("beforeend",`<a class="nv" href="#${s.id}"><span class="nv-num">${CN[si]}</span><span><b>${s.t}</b><i class="mini"><u></u></i></span><span class="nv-ct">—</span></a>`);
+  const sec=document.createElement("section");
+  sec.className="sec rv";sec.id=s.id;
+  let h=`<header class="sec-head"><div class="sec-num">${CN[si]}</div><div><h2>${s.t}</h2><p class="sec-q">「${s.q}」</p></div><div class="sec-src">${s.src}</div></header>`;
+  if(cc)h+=`<div class="sp"><i><u></u></i><span class="sp-t">核查进度 0/${cc}</span></div>`;
+  if(vc)h+=`<div class="sp spv" data-vc="${vc}"><i><u></u></i><span class="sp-t">否决项 ${vc} · 任一触发即放弃</span></div>`;
+  h+='<div class="sec-body">'+s.b.map((b,bi)=>renderBlock(b,s.id,bi)).join("")+"</div>";
+  sec.innerHTML=h;content.appendChild(sec);
+  sec.querySelectorAll("tr.clickable").forEach(tr=>{
+    tr.addEventListener("click",()=>{
+      const isV=tr.closest("table").classList.contains("vtable");
+      tr.classList.toggle(isV?"veto-on":"done");
+      if(tr.classList.contains(isV?"veto-on":"done"))state[tr.dataset.id]=1;else delete state[tr.dataset.id];
+      save();refresh();
+    });
+  });
+});
+
+$("#mTotal").textContent=`${CN[SECTIONS.length-1]||SECTIONS.length}节 · ${TOTAL_CHECK} 项核查 · ${TOTAL_VETO} 项否决`;
+
+function refresh(){
+  let doneAll=0,vetoAll=0;
+  SECTIONS.forEach(s=>{
+    const sec=document.getElementById(s.id);
+    let done=0,total=0,v=0;
+    sec.querySelectorAll("table").forEach(tb=>{
+      const isV=tb.classList.contains("vtable");
+      tb.querySelectorAll("tbody tr").forEach(tr=>{
+        if(isV){if(tr.classList.contains("veto-on"))v++;}
+        else if(tr.classList.contains("clickable")){total++;if(tr.classList.contains("done"))done++;}
+      });
+    });
+    doneAll+=done;vetoAll+=v;
+    const spCheck=sec.querySelector(".sp:not(.spv)");
+    if(spCheck){
+      const u=spCheck.querySelector("u"),t=spCheck.querySelector(".sp-t");
+      u.style.width=total?(done/total*100)+"%":"0%";
+      t.textContent=`核查进度 ${done}/${total}`;
+    }
+    const spVeto=sec.querySelector(".sp.spv");
+    if(spVeto){
+      const u=spVeto.querySelector("u"),t=spVeto.querySelector(".sp-t");
+      u.style.width=v?"100%":"0%";
+      t.textContent=v?`已触发 ${v} / ${spVeto.dataset.vc} 项否决`:`否决项 ${spVeto.dataset.vc} · 任一触发即放弃`;
+    }
+    const nv=document.querySelector(`.nv[href="#${s.id}"]`);
+    if(nv){
+      nv.querySelector(".mini u").style.width=total?(done/total*100)+"%":"0%";
+      let ctText="—";
+      if(total&&v) ctText=`${done}/${total} ⛔${v}`;
+      else if(total) ctText=`${done}/${total}`;
+      else if(v) ctText=`⛔${v}`;
+      nv.querySelector(".nv-ct").textContent=ctText;
+      nv.querySelector(".nv-ct").style.color=v?"var(--red2)":"";
+    }
+  });
+  const pct=TOTAL_CHECK?Math.round(doneAll/TOTAL_CHECK*100):0;
+  $("#tbFill").style.width=pct+"%";
+  $("#tbText").textContent=`已核查 ${doneAll} / ${TOTAL_CHECK} 项 · ${pct}%`;
+  $("#ovBar").style.width=pct+"%";$("#ovPct").textContent=pct+"%";
+  const tv=$("#tbVeto");tv.textContent=`否决触发 ${vetoAll}`;tv.classList.toggle("hot",vetoAll>0);
+  $("#vb").classList.toggle("on",vetoAll>0);$("#vc").textContent=vetoAll;
+}
+refresh();
+
+/* ── 行情带：放 10~14 条与本书心法相关的短句 ── */
+const QUOTES=["All cash is equal —— 金钱都是一样的，估值只是比较","股价不能预测，只能利用","别瞅傻子，瞅地","买点买入，卖点卖出，中间呆坐不动","市场先生是为你服务的，不是指导你的","时间是好公司的朋友，却是烂公司的敌人","手持火把穿过炸药库，即使毫发无损，也改变不了你是蠢货的事实","厨房里如果有蟑螂，就不可能只有一只","投机并不犯法，也不缺德，它的主要问题只是发不了财","仅靠金钱可以填平的护城河，一定会被金钱填平","把运气当能力，是投资中最危险的自我欺骗","财富是思考的副产品","再少的金钱也值得被尊重","股市从来不会因为你没有行动而惩罚你"];
+const line=QUOTES.map(q=>q+"<b>◆</b>").join("");
+$("#tk").innerHTML=line+line;
+
+/* ── 观察器 ── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}}),{threshold:.06});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+const io2=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    document.querySelectorAll(".nv").forEach(a=>a.classList.remove("act"));
+    const a=document.querySelector(`.nv[href="#${e.target.id}"]`);if(a)a.classList.add("act");
+  }
+}),{rootMargin:"-25% 0px -65% 0px"});
+document.querySelectorAll(".sec").forEach(s=>io2.observe(s));
+
+/* ── 交互 ── */
+const q=$("#q");
+q.addEventListener("input",()=>{
+  const v=q.value.trim().toLowerCase();let n=0;
+  document.querySelectorAll(".sec").forEach(sec=>{
+    const hit=!v||sec.textContent.toLowerCase().includes(v);
+    sec.classList.toggle("dim",!hit);if(hit)n++;
+  });
+  $("#qCount").textContent=v?`${n} 节匹配`:"";
+});
+addEventListener("keydown",e=>{if(e.key==="/"&&document.activeElement!==q){e.preventDefault();q.focus();}});
+$("#reset").addEventListener("click",()=>{
+  if(!confirm("清空全部核查与否决记录？"))return;
+  state={};save();
+  document.querySelectorAll("tr.done,tr.veto-on").forEach(tr=>tr.classList.remove("done","veto-on"));
+  refresh();
+});
+const toTop=$("#toTop");
+addEventListener("scroll",()=>toTop.classList.toggle("on",scrollY>600),{passive:true});
+toTop.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
+</script>
+</body>
+</html>
