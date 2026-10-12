@@ -8,11 +8,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 python server.py   # 启动本地服务，自动打开 http://localhost:8000
 ```
 
-`server.py` 仅使用 Python 3 标准库（`http.server`、`socketserver`），无需安装依赖。启动后自动打开浏览器。它提供静态文件服务并暴露四个 API 端点：
+`server.py` 仅使用 Python 3 标准库（`http.server`、`socketserver`），无需安装依赖。启动后自动打开浏览器。它提供静态文件服务并暴露六个 API 端点：
 - `GET /api/books` — 从 `data/books.json` 读取全量书籍数据
 - `POST /api/save-books` — 将全量数据写入 `data/books.json`（前端每次增删改后自动调用）
 - `POST /api/create-book-folder` — 新增书籍时在磁盘创建 `books/<书名>/index.html`（使用内置 `BOOK_TEMPLATE`）
 - `POST /api/delete-book-folder` — 删除书籍时调用 `shutil.rmtree()` 删除 `books/<书名>/` 整个文件夹
+- `GET /api/checklist-progress` — 读取全部检查清单勾选进度（`data/checklist-progress/*.json` 合成 `{键名: {条目id: {v, t}}}`）
+- `POST /api/checklist-progress` — 将单个清单的进度写入 `data/checklist-progress/<键名>.json`（条目级存储、每条目独立行块，不同条目改动 git 可自动合并）
 
 设置 `SERVER_LOG=1` 环境变量可将输出重定向到 `server.log`（后台静默运行模式）。日志中只打印 `/api/` 路径的请求，静态文件请求不记录。
 
@@ -33,7 +35,8 @@ Windows 下后台运维使用 `启动服务.bat`（静默启动、自动开浏�
 │   ├── book.js             # 遗留死代码，未被引用
 │   └── style.css           # 共享样式 + CSS 自定义属性
 ├── data/
-│   └── books.json          # 服务端持久化数据（权威数据源）
+│   ├── books.json          # 服务端持久化数据（权威数据源）
+│   └── checklist-progress/ # 检查清单勾选进度（每清单一文件，随 git 跨设备同步）
 ├── img/                    # 封面图片（jpg/png），通过相对路径引用
 ├── books/                  # 每本书一个子文件夹，含独立 HTML 章节页
 │   ├── <书名>/
@@ -91,6 +94,7 @@ Windows 下后台运维使用 `启动服务.bat`（静默启动、自动开浏�
 ## 关键模式
 
 - **双层持久化**：数据同时写入 `data/books.json`（服务端，权威源）和 `localStorage`（离线缓存）。`initDB()` 优先从服务端加载，`persistDB()` 同时写入两处。服务端不可用时自动回退到 localStorage，并在恢复连接后尝试上传本地数据。
+- **清单进度双层持久化（条目级合并）**：检查清单页的勾选进度以条目为单位存储 `{条目id: {v: 勾选值(0=已取消墓碑), t: 该条目最后变更时间}}`，localStorage 与 `data/checklist-progress/<键名>.json` 两处同构；每次勾选 / 取消 / 重置经 `stamp()` 打时间戳并同时 POST。页面加载时本地与服务端做**条目级合并——不同条目的改动取并集，同条目冲突以 `t` 在后为准**（取消以 v=0 墓碑参与合并，防止对方设备已取消的条目复活），合并结果写回两处。**跨设备同步通道即 git 工作流**：文件按 indent=2 每条目独立行块落盘，两台设备改不同条目时 git 自动合并出并集；同条目冲突需手工解决时保留 `t` 较大的一块（或随便选一边——另一台的条目仍在它的 localStorage，打开页面后会重新合并上传）。`file://` 直接打开时 fetch 静默失败，退化为纯 localStorage。
 - **封面图片**：书籍数据中的 `cover` 字段存储相对路径（如 `img/穷查理宝典.jpg`）或 base64 data URL（用户上传的自定义图片经前端压缩至 400px 宽后内嵌）。封面图片文件存放在 `img/` 目录，`migrateCoverImages()` 在页面加载时自动将已知书名映射到对应封面路径。
 - **书籍文件夹创建回退**：`createBookFolder()` 首先尝试通过 `POST /api/create-book-folder` 让服务端创建，失败时降级为客户端 `downloadBookTemplate()` 生成 HTML 文件供用户手动放置。`deleteBookFolder()` 同理调用 `/api/delete-book-folder`，失败时静默忽略。
 - **书籍文件夹命名**：`server.py` 中的 `safe_dirname()` 和 `app.js` 中的 `.replace(/[\\/:*?"<>|]/g, '_')` 必须保持同步——两者剔除相同的非法文件名字符。

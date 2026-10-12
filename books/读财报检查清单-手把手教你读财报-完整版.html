@@ -772,18 +772,26 @@ const SECTIONS=[
 ];
 
 /* ── 渲染 ── */
-let state={}; try{state=JSON.parse(localStorage.getItem("hshndcf-checklist-v2")||"{}")}catch(e){}
-const save=()=>localStorage.setItem("hshndcf-checklist-v2",JSON.stringify(state));
+const CKEY="hshndcf-checklist-v2";
+/* 存储层 ent：<条目id> → {v:勾选值(1=触发,2=已核查,0=已取消墓碑), t:该条目最后变更时间}；
+   渲染层 state 只保留 v≠0 的条目。旧版扁平格式 {id:数字} 自动转换（t=0 时间未知） */
+let ent={}; try{const raw=JSON.parse(localStorage.getItem(CKEY)||"{}");for(const k in raw){const v=raw[k];ent[k]=typeof v==="number"?{v,t:0}:v}}catch(e){}
+localStorage.removeItem(CKEY+"::ts");
+const stamp=(id,v)=>{ent[id]={v,t:Date.now()};if(v)state[id]=v;else delete state[id]};
+const save=()=>{
+  localStorage.setItem(CKEY,JSON.stringify(ent));
+  fetch("/api/checklist-progress",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:CKEY,entries:ent})}).catch(()=>{});
+};
 
 /* ── 2026-10 结构重组迁移（一次性）：伍节聚合为完整速读三步节，原散于壹 / 肆的条目归位，勾选 id 按下表改写 ── */
 (function(){
   if(localStorage.getItem("hshndcf-checklist-v2-migrated"))return;
   const M={"s1.1.11":"s5.7.0","s1.1.12":"s5.7.1","s4.1.0":"s5.2.1","s4.1.1":"s5.2.3","s4.1.4":"s5.2.2","s4.1.2":"s4.1.0","s4.1.3":"s4.1.1","s4.1.5":"s4.1.2","s4.1.6":"s4.1.3","s4.1.7":"s4.1.4","s4.1.8":"s4.1.5","s4.1.9":"s4.1.6","s5.1.0":"s5.5.0","s5.1.1":"s5.5.1","s5.1.2":"s5.5.2"};
-  const snap=Object.assign({},state);
+  const snap=Object.assign({},ent);
   const touched=new Set([...Object.keys(M),...Object.values(M)]);
-  touched.forEach(k=>delete state[k]);
+  touched.forEach(k=>delete ent[k]);
   let dirty=false;
-  Object.keys(snap).forEach(k=>{if(snap[k]&&M[k]){state[M[k]]=1;dirty=true}});
+  Object.keys(snap).forEach(k=>{if(snap[k]&&snap[k].v&&M[k]){ent[M[k]]=snap[k];dirty=true}});
   if(dirty)save();
   localStorage.setItem("hshndcf-checklist-v2-migrated","1");
 })();
@@ -794,14 +802,15 @@ const save=()=>localStorage.setItem("hshndcf-checklist-v2",JSON.stringify(state)
   const M={"s8.7.0":"s8.8.4","s8.7.1":"s8.8.5","s8.7.2":"s8.8.1","s8.7.3":"s8.8.6",
            "s8.10.0":"s8.11.0","s8.10.1":"s8.11.1","s8.10.2":"s8.11.2","s8.10.3":"s8.11.3",
            "s8.10.4":"s8.11.4","s8.10.5":"s8.11.5","s8.10.6":"s8.11.6","s8.10.7":"s8.11.7"};
-  const snap=Object.assign({},state);
+  const snap=Object.assign({},ent);
   const touched=new Set([...Object.keys(M),...Object.values(M)]);
-  touched.forEach(k=>delete state[k]);
+  touched.forEach(k=>delete ent[k]);
   let dirty=false;
-  Object.keys(snap).forEach(k=>{if(snap[k]&&M[k]){state[M[k]]=1;dirty=true}});
+  Object.keys(snap).forEach(k=>{if(snap[k]&&snap[k].v&&M[k]){ent[M[k]]=snap[k];dirty=true}});
   if(dirty)save();
   localStorage.setItem("hshndcf-checklist-v2-mig84","1");
 })();
+let state={}; for(const k in ent){if(ent[k].v)state[k]=ent[k].v}
 const $=s=>document.querySelector(s);
 const content=$("#content"),nav=$("#nav");
 let TOTAL_CHECK=0,TOTAL_VETO=0;
@@ -852,7 +861,7 @@ SECTIONS.forEach((s,si)=>{
     if(!isV){
       tr.addEventListener("click",()=>{
         tr.classList.toggle("done");
-        if(tr.classList.contains("done"))state[tr.dataset.id]=1;else delete state[tr.dataset.id];
+        stamp(tr.dataset.id,tr.classList.contains("done")?1:0);
         commit();
       });
     }else{
@@ -861,17 +870,17 @@ SECTIONS.forEach((s,si)=>{
         e.stopPropagation();
         if(tr.classList.contains("veto-on"))return; /* 触发蕴含已核查，✓ 不可单独取消 */
         tr.classList.toggle("done");
-        if(tr.classList.contains("done"))state[tr.dataset.id]=2;else delete state[tr.dataset.id];
+        stamp(tr.dataset.id,tr.classList.contains("done")?2:0);
         commit();
       });
       bad.addEventListener("click",e=>{
         e.stopPropagation();
         if(tr.classList.contains("veto-on")){ /* 取消触发 → 退回已核查 */
           tr.classList.replace("veto-on","done");
-          state[tr.dataset.id]=2;
+          stamp(tr.dataset.id,2);
         }else{
           tr.classList.remove("done");tr.classList.add("veto-on");
-          state[tr.dataset.id]=1;
+          stamp(tr.dataset.id,1);
         }
         commit();
       });
@@ -944,6 +953,38 @@ function applyFilter(){
 $("#flt").addEventListener("change",applyFilter);
 refresh();
 
+/* ── 跨设备同步：条目级合并——不同条目的改动取并集，同条目冲突以时间在后为准；
+     服务端文件（data/checklist-progress/，每条目独立行块）随 git 同步，合并结果写回两处 ── */
+function applyState(){
+  document.querySelectorAll("tr.clickable").forEach(tr=>{
+    const isV=tr.closest("table").classList.contains("vtable");
+    const sv=state[tr.dataset.id];
+    tr.classList.remove("done","veto-on");
+    if(isV){if(sv===1)tr.classList.add("veto-on");else if(sv===2)tr.classList.add("done")}
+    else if(sv)tr.classList.add("done");
+  });
+  refresh();
+}
+fetch("/api/checklist-progress").then(r=>r.json()).then(all=>{
+  const rem=all&&all[CKEY];let dirty=false;
+  if(rem&&typeof rem==="object"){
+    for(const k in rem){
+      const r=rem[k];
+      if(!r||typeof r!=="object"||typeof r.v!=="number")continue;
+      const l=ent[k];
+      if(!l||r.t>l.t){if(!l||r.v!==l.v)dirty=true;ent[k]=r}
+    }
+  }
+  let need=false;
+  for(const k in ent){const r=rem&&rem[k];if(!r||r.t<ent[k].t||r.v!==ent[k].v)need=true}
+  if(need)save();       /* 本地有服务端缺失或落后的条目 → 上传合并结果（并集） */
+  if(dirty){            /* 采纳了服务端较新条目 → 重建渲染层并重刷 DOM */
+    state={};for(const k in ent){if(ent[k].v)state[k]=ent[k].v}
+    localStorage.setItem(CKEY,JSON.stringify(ent));
+    applyState();
+  }
+}).catch(()=>{});
+
 /* ── 行情带 ── */
 const QUOTES=["权责发生制是造假温床","高手更关注资产负债表","疑罪从有，事反必妖","净利润 ≠ 挣到钱，现金含金量持续 ≥ 1 为佳","存货周转率下降 + 毛利率上升 = 高概率造假","虚增利润必虚增资产（90%）或虚减负债（10%）","应收款占总资产超 50% 明显有问题","有息负债率 ≥ 60% 属激进","先大额分红再巨额融资——抬高 ROE 的陷阱","改聘会计师事务所往往是财报有问题的先兆","只看归属于母公司所有者的净利润","出奇地好或坏都要找解释，无可靠解释即回避"];
 const line=QUOTES.map(q=>q+"<b>◆</b>").join("");
@@ -973,6 +1014,8 @@ q.addEventListener("input",()=>{
 addEventListener("keydown",e=>{if(e.key==="/"&&document.activeElement!==q){e.preventDefault();q.focus();}});
 $("#reset").addEventListener("click",()=>{
   if(!confirm("清空全部核查与否决记录？"))return;
+  const now=Date.now();
+  Object.keys(ent).forEach(k=>ent[k]={v:0,t:now}); /* 全部墓碑化：防止其他设备的旧勾选在下次合并时复活 */
   state={};save();
   document.querySelectorAll("tr.done,tr.veto-on").forEach(tr=>tr.classList.remove("done","veto-on"));
   refresh();

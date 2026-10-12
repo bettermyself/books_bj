@@ -18,6 +18,7 @@ from pathlib import Path
 PORT = 8000
 BASE_DIR = Path(__file__).parent
 DATA_FILE = BASE_DIR / 'data' / 'books.json'
+PROGRESS_DIR = BASE_DIR / 'data' / 'checklist-progress'
 
 
 BOOK_TEMPLATE = """\
@@ -105,6 +106,29 @@ def save_data(db):
     DATA_FILE.write_text(json.dumps(db, ensure_ascii=False, indent=2), encoding='utf-8')
 
 
+def load_progress():
+    """读取全部检查清单勾选进度：data/checklist-progress/<键名>.json → {键名: {条目id: {v, t}}}"""
+    result = {}
+    if PROGRESS_DIR.is_dir():
+        for f in PROGRESS_DIR.glob('*.json'):
+            try:
+                rec = json.loads(f.read_text(encoding='utf-8'))
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                continue
+            if isinstance(rec, dict):
+                result[f.stem] = rec
+    return result
+
+
+def save_progress(key, entries):
+    """将单个清单的勾选进度写入 data/checklist-progress/<键名>.json
+    条目级存储 {条目id: {v: 勾选值(0=已取消墓碑), t: 该条目最后变更时间}}，indent=2 使每条目独立成块——
+    两台设备各自改动不同条目时，git 对不同行块的修改可自动合并；同条目冲突时手工保留 t 较大者。"""
+    PROGRESS_DIR.mkdir(parents=True, exist_ok=True)
+    (PROGRESS_DIR / f'{key}.json').write_text(
+        json.dumps(entries, ensure_ascii=False, indent=2), encoding='utf-8')
+
+
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(BASE_DIR), **kwargs)
@@ -112,6 +136,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/api/books':
             self._handle_get_books()
+        elif self.path == '/api/checklist-progress':
+            self._handle_get_progress()
         else:
             super().do_GET()
 
@@ -122,6 +148,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._handle_delete_book_folder()
         elif self.path == '/api/save-books':
             self._handle_save_books()
+        elif self.path == '/api/checklist-progress':
+            self._handle_save_progress()
         else:
             self.send_error(404)
 
@@ -207,6 +235,37 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return
         try:
             save_data(db)
+            self._json(200, {'ok': True})
+        except Exception as e:
+            self._json(500, {'ok': False, 'error': str(e)})
+
+    def _handle_get_progress(self):
+        self._json(200, load_progress())
+
+    def _handle_save_progress(self):
+        length = int(self.headers.get('Content-Length', 0))
+        body = self.rfile.read(length)
+        try:
+            data = json.loads(body.decode('utf-8'))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            self._json(400, {'ok': False, 'error': 'invalid JSON'})
+            return
+        key = data.get('key') if isinstance(data, dict) else None
+        entries = data.get('entries') if isinstance(data, dict) else None
+        if not isinstance(key, str) or not re.fullmatch(r'[\w.-]+', key):
+            self._json(400, {'ok': False, 'error': 'invalid key'})
+            return
+        if not isinstance(entries, dict):
+            self._json(400, {'ok': False, 'error': 'invalid data structure'})
+            return
+        for v in entries.values():
+            if (not isinstance(v, dict)
+                    or not isinstance(v.get('v'), (int, float))
+                    or not isinstance(v.get('t'), (int, float))):
+                self._json(400, {'ok': False, 'error': 'invalid data structure'})
+                return
+        try:
+            save_progress(key, entries)
             self._json(200, {'ok': True})
         except Exception as e:
             self._json(500, {'ok': False, 'error': str(e)})

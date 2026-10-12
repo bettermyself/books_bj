@@ -16,7 +16,7 @@ tags: [investment, checklist, template]
 2. **复制** `assets/template.html` 到目标路径（如 `books/<清单名>.html`）
 3. **把内容编码为 `SECTIONS` 数据**（块类型见下表），填入模板中 `const SECTIONS=[]`
 4. **填写所有【占位】**：标题、刊头、印章、执行顺序、凡例、名言 `QUOTES`（10~14 条）、页脚最后一问
-5. **设置唯一的 localStorage 键**：替换两处 `__STORAGE_KEY__`（如 `"brk-checklist"`、`"hshndcf-checklist"`）。**每份清单键必须不同**，否则勾选进度互相覆盖
+5. **设置唯一的 localStorage 键**：替换 `const CKEY="__STORAGE_KEY__"` 一处（如 `"brk-checklist"`、`"hshndcf-checklist-v2"`）。**每份清单键必须不同**，否则勾选进度互相覆盖。勾选进度自动双层持久化：每次勾选 / 取消同时写本机 localStorage 与 `POST /api/checklist-progress`（服务端存 `data/checklist-progress/<键名>.json`，条目级 `{条目id: {v, t}}`，v=0 为已取消墓碑）；页面加载时本地与服务端条目级合并——不同条目的改动取并集，同条目冲突以时间在后为准，合并结果写回两处。跨设备靠 git 同步 `data/checklist-progress/` 目录
 6. 浏览器打开验证：节数、核查/否决计数、搜索、点击行打勾
 
 ## 数据结构 SECTIONS
@@ -53,5 +53,6 @@ tags: [investment, checklist, template]
 
 ## 已有实例
 
-- `books/《巴菲特致股东的信》 附录：投资检查清单_Qwen.html`（样式源文件，16 节）
-- `books/读财报检查清单-手把手教你读财报.html`（12 节，键 `"hshndcf-checklist"`）
+- `books/《巴菲特致股东的信》 附录：投资检查清单_Qwen.html`（样式源文件，16 节，键 `"brk-checklist"`；`books/巴菲特致股东的信/` 下有逐字节相同的副本，共用同键）
+- `books/读财报检查清单-手把手教你读财报-完整版.html`（12 节，键 `"hshndcf-checklist-v2"`；增强分支：双控件否决（✓已核查/✕触发，state 值 2=已核查、1=触发）、状态筛选、两个一次性迁移脚本）
+- `books/投资检查清单_价值投资实战手册.html`（8 节，键 `"jztzsssc-checklist"`）

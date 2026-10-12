@@ -818,8 +818,17 @@ const SECTIONS=[
 ];
 
 /* ── 渲染 ── */
-let state={}; try{state=JSON.parse(localStorage.getItem("brk-checklist")||"{}")}catch(e){}
-const save=()=>localStorage.setItem("brk-checklist",JSON.stringify(state));
+const CKEY="brk-checklist";
+/* 存储层 ent：<条目id> → {v:勾选值(1=勾选/触发,0=已取消墓碑), t:该条目最后变更时间}；
+   渲染层 state 只保留 v≠0 的条目。旧版扁平格式 {id:数字} 自动转换（t=0 时间未知） */
+let ent={}; try{const raw=JSON.parse(localStorage.getItem(CKEY)||"{}");for(const k in raw){const v=raw[k];ent[k]=typeof v==="number"?{v,t:0}:v}}catch(e){}
+localStorage.removeItem(CKEY+"::ts");
+const stamp=(id,v)=>{ent[id]={v,t:Date.now()};if(v)state[id]=v;else delete state[id]};
+const save=()=>{
+  localStorage.setItem(CKEY,JSON.stringify(ent));
+  fetch("/api/checklist-progress",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:CKEY,entries:ent})}).catch(()=>{});
+};
+let state={}; for(const k in ent){if(ent[k].v)state[k]=ent[k].v}
 const $=s=>document.querySelector(s);
 const content=$("#content"),nav=$("#nav");
 let TOTAL_CHECK=0,TOTAL_VETO=0;
@@ -865,7 +874,7 @@ SECTIONS.forEach((s,si)=>{
     tr.addEventListener("click",()=>{
       const isV=tr.closest("table").classList.contains("vtable");
       tr.classList.toggle(isV?"veto-on":"done");
-      if(tr.classList.contains(isV?"veto-on":"done"))state[tr.dataset.id]=1;else delete state[tr.dataset.id];
+      stamp(tr.dataset.id,tr.classList.contains(isV?"veto-on":"done")?1:0);
       save();refresh();
     });
   });
@@ -918,6 +927,38 @@ function refresh(){
 }
 refresh();
 
+/* ── 跨设备同步：条目级合并——不同条目的改动取并集，同条目冲突以时间在后为准；
+     服务端文件（data/checklist-progress/，每条目独立行块）随 git 同步，合并结果写回两处 ── */
+function applyState(){
+  document.querySelectorAll("tr.clickable").forEach(tr=>{
+    const isV=tr.closest("table").classList.contains("vtable");
+    const sv=state[tr.dataset.id];
+    tr.classList.remove("done","veto-on");
+    if(isV){if(sv===1)tr.classList.add("veto-on");else if(sv===2)tr.classList.add("done")}
+    else if(sv)tr.classList.add("done");
+  });
+  refresh();
+}
+fetch("/api/checklist-progress").then(r=>r.json()).then(all=>{
+  const rem=all&&all[CKEY];let dirty=false;
+  if(rem&&typeof rem==="object"){
+    for(const k in rem){
+      const r=rem[k];
+      if(!r||typeof r!=="object"||typeof r.v!=="number")continue;
+      const l=ent[k];
+      if(!l||r.t>l.t){if(!l||r.v!==l.v)dirty=true;ent[k]=r}
+    }
+  }
+  let need=false;
+  for(const k in ent){const r=rem&&rem[k];if(!r||r.t<ent[k].t||r.v!==ent[k].v)need=true}
+  if(need)save();       /* 本地有服务端缺失或落后的条目 → 上传合并结果（并集） */
+  if(dirty){            /* 采纳了服务端较新条目 → 重建渲染层并重刷 DOM */
+    state={};for(const k in ent){if(ent[k].v)state[k]=ent[k].v}
+    localStorage.setItem(CKEY,JSON.stringify(ent));
+    applyState();
+  }
+}).catch(()=>{});
+
 /* ── 行情带 ── */
 const QUOTES=["回避问题，而非解决问题","宁要模糊的正确，不要精确的错误","时间是优秀企业的朋友，是平庸企业的敌人","一鸟在手，胜过两鸟在林","厨房里如果有蟑螂，绝不可能只有一只","吃谁的面包，唱谁的歌","信用就像氧气——充足时没人注意，消失时一切窒息","空麻袋难以直立","你上了什么样的船，比你划船的效率更重要","寻找可以跨越的1英尺跨栏，而非挑战7英尺跨栏","别人贪婪时恐惧，别人恐惧时贪婪","当一个「傻」钱承认自己的局限，它就不再傻了"];
 const line=QUOTES.map(q=>q+"<b>◆</b>").join("");
@@ -947,6 +988,8 @@ q.addEventListener("input",()=>{
 addEventListener("keydown",e=>{if(e.key==="/"&&document.activeElement!==q){e.preventDefault();q.focus();}});
 $("#reset").addEventListener("click",()=>{
   if(!confirm("清空全部核查与否决记录？"))return;
+  const now=Date.now();
+  Object.keys(ent).forEach(k=>ent[k]={v:0,t:now}); /* 全部墓碑化：防止其他设备的旧勾选在下次合并时复活 */
   state={};save();
   document.querySelectorAll("tr.done,tr.veto-on").forEach(tr=>tr.classList.remove("done","veto-on"));
   refresh();
