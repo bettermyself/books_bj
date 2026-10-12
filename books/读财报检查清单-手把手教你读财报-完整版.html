@@ -122,6 +122,10 @@ h1{font-family:var(--serif);font-weight:900;font-size:clamp(42px,5.4vw,66px);lin
 #qCount{font-family:var(--mono);font-size:10.5px;color:var(--gold3);white-space:nowrap}
 #reset{background:none;border:1px solid var(--line);padding:8px 14px;font-family:var(--mono);font-size:11.5px;color:var(--ink2);cursor:pointer;transition:.2s}
 #reset:hover{border-color:var(--red);color:var(--red)}
+#flt{background:#fff;border:1px solid var(--line);padding:8px 10px;font-family:var(--sans);font-size:13px;color:var(--ink);outline:none;transition:.2s;cursor:pointer}
+#flt:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,147,63,.16)}
+tr.hide{display:none}
+.twrap.gone{display:none}
 .vbanner{display:none;position:sticky;top:51px;z-index:55;background:var(--red);color:#fdf6ec;padding:10px 48px;font-size:13.5px;font-family:var(--serif);font-weight:700;letter-spacing:.05em;box-shadow:0 8px 20px -8px rgba(166,58,46,.55)}
 .vbanner.on{display:block}
 
@@ -136,7 +140,6 @@ h2{font-family:var(--serif);font-weight:900;font-size:29px;letter-spacing:.03em}
 .sp{display:flex;align-items:center;gap:12px;margin:16px 0 2px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
 .sp i{flex:0 0 150px;height:5px;background:var(--paper3);position:relative}
 .sp i u{position:absolute;inset:0;right:auto;background:var(--gold);width:0;transition:width .5s}
-.sp.spv i u{background:var(--red)}
 
 .sub{display:flex;align-items:center;gap:12px;margin:36px 0 14px;font-family:var(--serif);font-weight:700;font-size:19px}
 .sub::before{content:"";width:9px;height:9px;background:var(--gold);transform:rotate(45deg);flex:0 0 9px}
@@ -153,26 +156,31 @@ table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:600px}
 .vwrap table{min-width:0}
 thead th{background:var(--gold);color:#ffffff;font-size:11.5px;letter-spacing:.14em;font-weight:600;padding:10px 14px;text-align:left;border-bottom:2px solid var(--gold3)}
 thead th.ckh{width:52px;text-align:center;background:var(--gold3);color:#ffffff}
-.vtable thead th.ckh{background:var(--red)}
+.vtable thead th.ckh{background:var(--red);width:64px}
 tbody td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.8}
 tbody tr:last-child td{border-bottom:none}
 tbody td:first-child{font-weight:700;font-family:var(--serif)}
 tbody tr:nth-child(even){background:rgba(32,48,42,.03)}
 td.ckc{text-align:center;width:52px}
-.ctl{width:16px;height:16px;border:2px solid var(--ink2);display:inline-block;position:relative;background:#fff;vertical-align:middle;transition:.2s}
+.vtable td.ckc{width:66px;white-space:nowrap}
+.ctl{width:16px;height:16px;border:2px solid var(--ink2);display:inline-block;position:relative;background:#fff;vertical-align:middle;transition:.2s;cursor:pointer}
 .ctl::after{content:"✓";position:absolute;left:1px;top:-5px;font-size:14px;font-weight:900;color:#fff;opacity:0;transform:scale(.3);transition:.22s cubic-bezier(.5,1.9,.4,1)}
-.vtable .ctl{border-color:var(--red)}
-.vtable .ctl::after{content:"✕"}
+.vtable tr.clickable{cursor:default}
+.vtable .ctl.ok{border-color:var(--gold3);margin-right:4px}
+.vtable .ctl.bad{border-color:var(--red)}
+.vtable .ctl.bad::after{content:"✕"}
 tr.clickable{cursor:pointer;transition:background .18s,box-shadow .18s}
 tr.clickable:hover{background:rgba(184,147,63,.11);box-shadow:inset 3px 0 0 var(--gold)}
 tr.done{background:rgba(28,92,67,.09)!important}
 tr.done td{color:var(--ink2)}
-tr.done .ctl{background:var(--gold);border-color:var(--gold)}
-tr.done .ctl::after{opacity:1;transform:scale(1)}
+table:not(.vtable) tr.done .ctl{background:var(--gold);border-color:var(--gold)}
+table:not(.vtable) tr.done .ctl::after{opacity:1;transform:scale(1)}
+.vtable tr.done .ctl.ok,.vtable tr.veto-on .ctl.ok{background:var(--gold);border-color:var(--gold)}
+.vtable tr.done .ctl.ok::after,.vtable tr.veto-on .ctl.ok::after{opacity:1;transform:scale(1)}
 tr.veto-on{background:rgba(166,58,46,.09)!important}
-tr.veto-on td:first-child{color:var(--red)}
-tr.veto-on .ctl{background:var(--red);border-color:var(--red)}
-tr.veto-on .ctl::after{opacity:1;transform:scale(1)}
+.vtable tr.veto-on td:nth-child(2){color:var(--red)}
+tr.veto-on .ctl.bad{background:var(--red);border-color:var(--red)}
+tr.veto-on .ctl.bad::after{opacity:1;transform:scale(1)}
 td.stc{position:relative;padding-right:112px}
 .stamp{position:absolute;right:10px;top:50%;transform:translateY(-50%) rotate(-8deg) scale(2.3);opacity:0;border:2.5px solid var(--red);color:var(--red);font-family:var(--serif);font-weight:900;font-size:11.5px;letter-spacing:.18em;padding:3px 8px;pointer-events:none;white-space:nowrap;background:rgba(245,240,225,.75);transition:.25s cubic-bezier(.4,1.6,.4,1)}
 tr.veto-on .stamp{opacity:.92;transform:translateY(-50%) rotate(-8deg) scale(1)}
@@ -287,8 +295,8 @@ tr.veto-on .stamp{opacity:.92;transform:translateY(-50%) rotate(-8deg) scale(1)}
         </div>
       </div>
       <div class="mh-legend">
-        <span><i class="sw ck"></i>点击行 ＝ 已核查</span>
-        <span><i class="sw vt"></i>否决项点击 ＝ 触发 → 直接放弃</span>
+        <span><i class="sw ck"></i>点击行 / 点 ✓ ＝ 已核查</span>
+        <span><i class="sw vt"></i>否决项点 ✕ ＝ 触发 → 直接放弃</span>
         <span><i class="sw nt"></i>进度自动保存于本机</span>
       </div>
     </header>
@@ -303,6 +311,12 @@ tr.veto-on .stamp{opacity:.92;transform:translateY(-50%) rotate(-8deg) scale(1)}
       <span id="tbText">已核查 0 / 0 项</span>
       <span class="tb-veto" id="tbVeto">否决触发 0</span>
       <input id="q" placeholder="搜索清单…（按 / 聚焦）">
+      <select id="flt" title="按核查状态筛选">
+        <option value="all">全部状态</option>
+        <option value="todo">未核查</option>
+        <option value="done">已核查</option>
+        <option value="veto">已触发</option>
+      </select>
       <span id="qCount"></span>
       <button id="reset">重置记录</button>
     </div>
@@ -763,11 +777,14 @@ function renderBlock(b,sid,bi){
   if(T==="rl")return `<ol class="rules">${b[1].map(r=>`<li><div><b>${r[0]}</b><p>${r[1]}</p></div></li>`).join("")}</ol>`;
   if(T==="t"){
     const {c,r,m}=b[1],cls=m==="veto"?"vtable":"";
-    let h=`<div class="twrap${m==="veto"?" vwrap":""}"><table class="${cls}"><thead><tr>${m?`<th class="ckh">${m==="veto"?"否决":"核"}</th>`:""}${c.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>`;
+    let h=`<div class="twrap${m==="veto"?" vwrap":""}"><table class="${cls}"><thead><tr>${m?`<th class="ckh">${m==="veto"?"✓ ✕":"核"}</th>`:""}${c.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>`;
     r.forEach((row,ri)=>{
-      const id=`${sid}.${bi}.${ri}`;
-      const st=state[id]?(m==="veto"?" class=\"clickable veto-on\"":" class=\"clickable done\""):(m?" class=\"clickable\"":"");
-      h+=`<tr${st} data-id="${id}"${m?" title=\"点击切换状态\"":""}>${m?`<td class="ckc"><span class="ctl"></span></td>`:""}${row.map((cell,ci)=>{
+      const id=`${sid}.${bi}.${ri}`,sv=state[id];
+      let rc="clickable";
+      if(m==="veto"){if(sv===1)rc+=" veto-on";else if(sv===2)rc+=" done";}
+      else if(sv)rc+=" done";
+      const tip=m==="veto"?"✓ 已核查未触发 · ✕ 触发否决":"点击标记已核查";
+      h+=`<tr class="${rc}" data-id="${id}" title="${tip}">${m?`<td class="ckc">${m==="veto"?`<span class="ctl ok" title="已核查"></span><span class="ctl bad" title="触发否决"></span>`:`<span class="ctl"></span>`}</td>`:""}${row.map((cell,ci)=>{
         const last=ci===row.length-1;
         return `<td${last&&m==="veto"?" class=\"stc\"":""}>${cell}${last&&m==="veto"?"<span class=\"stamp\">触发 · 放弃</span>":""}</td>`;
       }).join("")}</tr>`;
@@ -790,30 +807,53 @@ SECTIONS.forEach((s,si)=>{
   h+='<div class="sec-body">'+s.b.map((b,bi)=>renderBlock(b,s.id,bi)).join("")+"</div>";
   sec.innerHTML=h;content.appendChild(sec);
   sec.querySelectorAll("tr.clickable").forEach(tr=>{
-    tr.addEventListener("click",()=>{
-      const isV=tr.closest("table").classList.contains("vtable");
-      tr.classList.toggle(isV?"veto-on":"done");
-      if(tr.classList.contains(isV?"veto-on":"done"))state[tr.dataset.id]=1;else delete state[tr.dataset.id];
-      save();refresh();
-    });
+    const isV=tr.closest("table").classList.contains("vtable");
+    const commit=()=>{save();refresh();};
+    if(!isV){
+      tr.addEventListener("click",()=>{
+        tr.classList.toggle("done");
+        if(tr.classList.contains("done"))state[tr.dataset.id]=1;else delete state[tr.dataset.id];
+        commit();
+      });
+    }else{
+      const ok=tr.querySelector(".ctl.ok"),bad=tr.querySelector(".ctl.bad");
+      ok.addEventListener("click",e=>{
+        e.stopPropagation();
+        if(tr.classList.contains("veto-on"))return; /* 触发蕴含已核查，✓ 不可单独取消 */
+        tr.classList.toggle("done");
+        if(tr.classList.contains("done"))state[tr.dataset.id]=2;else delete state[tr.dataset.id];
+        commit();
+      });
+      bad.addEventListener("click",e=>{
+        e.stopPropagation();
+        if(tr.classList.contains("veto-on")){ /* 取消触发 → 退回已核查 */
+          tr.classList.replace("veto-on","done");
+          state[tr.dataset.id]=2;
+        }else{
+          tr.classList.remove("done");tr.classList.add("veto-on");
+          state[tr.dataset.id]=1;
+        }
+        commit();
+      });
+    }
   });
 });
 
 $("#mTotal").textContent=`${CN[SECTIONS.length-1]||SECTIONS.length}节 · ${TOTAL_CHECK} 项核查 · ${TOTAL_VETO} 项否决`;
 
 function refresh(){
-  let doneAll=0,vetoAll=0;
+  let doneAll=0,vetoAll=0,vDoneAll=0;
   SECTIONS.forEach(s=>{
     const sec=document.getElementById(s.id);
-    let done=0,total=0,v=0;
+    let done=0,total=0,v=0,vd=0,vt=0;
     sec.querySelectorAll("table").forEach(tb=>{
       const isV=tb.classList.contains("vtable");
       tb.querySelectorAll("tbody tr").forEach(tr=>{
-        if(isV){if(tr.classList.contains("veto-on"))v++;}
+        if(isV){vt++;if(tr.classList.contains("veto-on")){v++;vd++;}else if(tr.classList.contains("done"))vd++;}
         else if(tr.classList.contains("clickable")){total++;if(tr.classList.contains("done"))done++;}
       });
     });
-    doneAll+=done;vetoAll+=v;
+    doneAll+=done;vetoAll+=v;vDoneAll+=vd;
     const spCheck=sec.querySelector(".sp:not(.spv)");
     if(spCheck){
       const u=spCheck.querySelector("u"),t=spCheck.querySelector(".sp-t");
@@ -823,27 +863,45 @@ function refresh(){
     const spVeto=sec.querySelector(".sp.spv");
     if(spVeto){
       const u=spVeto.querySelector("u"),t=spVeto.querySelector(".sp-t");
-      u.style.width=v?"100%":"0%";
-      t.textContent=v?`已触发 ${v} / ${spVeto.dataset.vc} 项否决`:`否决项 ${spVeto.dataset.vc} · 任一触发即放弃`;
+      u.style.width=vt?(vd/vt*100)+"%":"0%";
+      u.style.background=v?"var(--red)":"";
+      t.style.color=v?"var(--red2)":"";
+      t.textContent=v?`已核查 ${vd}/${vt} · 触发 ${v} ⛔`:`否决项 ${vd}/${vt} · 任一触发即放弃`;
     }
     const nv=document.querySelector(`.nv[href="#${s.id}"]`);
     if(nv){
-      nv.querySelector(".mini u").style.width=total?(done/total*100)+"%":"0%";
+      const ratio=total?done/total:(vt?vd/vt:0);
+      nv.querySelector(".mini u").style.width=ratio?ratio*100+"%":"0%";
       let ctText="—";
-      if(total&&v) ctText=`${done}/${total} ⛔${v}`;
-      else if(total) ctText=`${done}/${total}`;
-      else if(v) ctText=`⛔${v}`;
+      if(total) ctText=`${done}/${total}`;
+      if(vt) ctText=v?`${vd}/${vt} ⛔${v}`:`${vd}/${vt}`;
       nv.querySelector(".nv-ct").textContent=ctText;
       nv.querySelector(".nv-ct").style.color=v?"var(--red2)":"";
     }
   });
   const pct=TOTAL_CHECK?Math.round(doneAll/TOTAL_CHECK*100):0;
   $("#tbFill").style.width=pct+"%";
-  $("#tbText").textContent=`已核查 ${doneAll} / ${TOTAL_CHECK} 项 · ${pct}%`;
+  $("#tbText").textContent=`已核查 ${doneAll} / ${TOTAL_CHECK} · 否决筛过 ${vDoneAll} / ${TOTAL_VETO} · 触发 ${vetoAll} · ${pct}%`;
   $("#ovBar").style.width=pct+"%";$("#ovPct").textContent=pct+"%";
   const tv=$("#tbVeto");tv.textContent=`否决触发 ${vetoAll}`;tv.classList.toggle("hot",vetoAll>0);
   $("#vb").classList.toggle("on",vetoAll>0);$("#vc").textContent=vetoAll;
+  applyFilter();
 }
+
+/* ── 状态筛选：全部 / 未核查 / 已核查 / 已触发 ── */
+function applyFilter(){
+  const f=$("#flt").value;
+  document.querySelectorAll("tr.clickable").forEach(tr=>{
+    const veto=tr.classList.contains("veto-on"),checked=veto||tr.classList.contains("done");
+    const show=f==="all"||(f==="todo"&&!checked)||(f==="done"&&checked)||(f==="veto"&&veto);
+    tr.classList.toggle("hide",!show);
+  });
+  document.querySelectorAll(".twrap").forEach(w=>{
+    const rows=[...w.querySelectorAll("tbody tr")];
+    w.classList.toggle("gone",rows.length>0&&rows.every(tr=>tr.classList.contains("hide")));
+  });
+}
+$("#flt").addEventListener("change",applyFilter);
 refresh();
 
 /* ── 行情带 ── */
